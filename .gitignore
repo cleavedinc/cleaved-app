@@ -1,0 +1,11 @@
+*.log
+**/**/.env
+**/**/node_modules/
+**/**/.next
+coverage
+node_modules/
+.DS_Store
+.vscode/
+build/
+**/**/neo-data
+**/**/neo-plugins
