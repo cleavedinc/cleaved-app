@@ -1,0 +1,28 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+    commands:
+      - curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
+      - yum install -y yarn && yarn --version
+  pre_build:
+    commands:
+      - yarn install
+      - BRANCH="${BRANCH:-$(echo ${CODEBUILD_WEBHOOK_HEAD_REF##*/})}"
+      - '[[ -z "${BRANCH}" ]] && echo "BRANCH variable should be provided" && exit 0 || echo $BRANCH'
+      - "[[ $BRANCH = master ]] && CONFIG=prod:us || CONFIG=stage:us"
+      - echo $CONFIG
+  build:
+    commands:
+      - cd apps/cleaved-app
+      - yarn run $CONFIG
+      - cd ../public-website
+      - yarn run $CONFIG
+      - cd ..
+  post_build:
+    commands:
+      - aws s3 sync cleaved-app/build s3://$Bucket/cleaved-app/$BRANCH --delete
+      - aws s3 sync cleaved-app/public s3://$Bucket/cleaved-app/$BRANCH/public --delete
+      - aws s3 sync public-website/build s3://$Bucket/public-website/$BRANCH --delete
+      - aws s3 sync public-website/public s3://$Bucket/public-website/$BRANCH/public --delete

@@ -1,0 +1,248 @@
+{
+  "alerts": {
+    "copiedTextToClipboard": "Copied!"
+  },
+  "buttonLabels": {
+    "giveFeedback": "Give feedback",
+    "goHome": "Go home",
+    "logOut": "Log out",
+    "signUpLogIn": "Sign up / Log in"
+  },
+  "comment": {
+    "leaveCommentPlaceholder": "Write a comment",
+    "reply": "Reply"
+  },
+  "companyName": "Cleaved",
+  "data": {
+    "loadingData": "Loading...",
+    "loadMoreComments": "Load more comments",
+    "noData": "No data"
+  },
+  "errorMessages": {
+    "notLoggedIn": "You are not logged in. We'll bring you to the login page in a moment.",
+    "pageNotFound": "Sorry, but we couldn't find that page right now. We'll bring you back to the home page in a moment.",
+    "somethingWentWrongSorryAboutThat": "Something went wrong, sorry about that. If this continues, please let us know."
+  },
+  "files": {
+    "avatarImageSizeRecommendation": "Suggested 200px square",
+    "fileSizeExceeded": "The file size must be smaller than 1MB",
+    "selectAnImageToUpload": "Select an image/gif to upload"
+  },
+  "formLabels": {
+    "about": "About",
+    "aboutPlaceholder": "Tell everyone a litle about you",
+    "firstName": "First name",
+    "firstNamePlaceholder": "First name",
+    "lastName": "Last name",
+    "lastNamePlaceholder": "Last name",
+    "middleName": "Middle",
+    "middleNamePlaceholder": "Middle",
+    "professionalEmail": "Professional email",
+    "professionalEmailPlaceholder": "Professional email",
+    "professionalTitle": "Professional title",
+    "professionalTitlePlaceholder": "Professional title"
+  },
+  "formValidationMessages": {
+    "aboutProfessionalCharactorLimit": "About has a maximum limit of 250 characters",
+    "firstNameIsRequired": "First name is required",
+    "lastNameIsRequired": "Last name is required",
+    "youMustHaveAValidEmailAddress": "You must have a valid email address"
+  },
+  "helperInformationBoxes": {
+    "collaborativeTimelineAlt": "Person pointing to a chart with some information on it",
+    "collaborativeTimelineHeader": "Collaborative Timeline",
+    "collaborativeTimelineText": "Get project insights and provide feedback, all in one place.",
+    "homePageEmptyStateAlt": "Whiteboard with two people working in front of it",
+    "homePageEmptyStateHeader": "We know you are working hard",
+    "homePageEmptyStateText": "When you have a minute, post your update or idea to your project. Getting feedback and keeping people updated is important.",
+    "inviteProfessionalToOrganizationAlt": "Arrow pointing to the invite professional form",
+    "inviteProfessionalToOrganizationHeader": "Invite people to your organization",
+    "inviteProfessionalToOrganizationText": "People make it happen. Invite your teammates to come join you on all your projects.",
+    "organizationsAlt": "Three buildings in a row of various sizes",
+    "organizationsHeader": "Organizations, companies or clients",
+    "organizationsText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "organizationRegisterAlt": "Arrows pointing to the register an organization form",
+    "organizationRegisterHeader": "Register an organization",
+    "organizationRegisterText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "professionalOnboardingAlt": "Three buildings in a row of various sizes",
+    "professionalOnboardingHeader": "Before you run, we walk",
+    "professionalOnboardingText": "Just a few set up steps first. It will only take a couple minutes, promise.",
+    "professionalShareLinkRegistrationAlt": "Two people standing, holding a large red circle with two link symbols about to connect.",
+    "professionalShareLinkRegistrationHeader": "Welcome to cleaved",
+    "professionalShareLinkRegistrationText": "You are lucky enough to be invited by someone who values you. Be sure to pay it forward.",
+    "projectListEmptyStateAlt": "Arrow pointing up and to the right, turning slightly left.",
+    "projectListEmptyStateHeader": "Create your first post",
+    "projectListEmptyStateText": "Share a decision, update or idea with your team about this project. Get feedback and keep everything together.",    
+    "projectslistImageAlt": "Professionals collaborating on a project together",
+    "projectslistHeader": "Projects are where magic happens with your team",
+    "projectslistText": "Creating a new project provides you with a platform to share decisions, receive feedback, and demonstrate progress to your team, other teams, and management.",
+    "projectStartNewImageAlt": "Arrow pointing to the start a new project form",
+    "projectStartNewHeader": "Start a new project",
+    "projectStartNewText": "Creating a new project provides you with a platform to share decisions, receive feedback, and demonstrate progress to your team, other teams, and management.",
+    "teamsAlt": "Two people holding pieces of a project",
+    "teamsHeader": "People make it all happen",
+    "teamsText": "Invite your colleagues to provide feedback and share their opinions on crucial decisions, and keep them informed about key project milestones and deadlines."
+  },
+  "hTags": {
+    "personalInformation": "Personal information",
+    "professionalInformation": "Professional information"
+  },
+  "loginPage": {
+    "loginHelperHeader": "Stay informed",
+    "loginHelperImageTopAlt": "Person sitting at a desk, using cleaved on a desktop computer",
+    "loginHelperText": "Your teams post project updates, solicit feedback and build better products.",
+    "valuePropositionFirstLine": "Get Valuable Feedback,",
+    "valuePropositionLoginImageAlt": "Arrows pointing to the login button",
+    "valuePropositionSecondLine": "Make Better Decisions",
+    "valuePropositionSupportingText": "We enhance transparency, foster collaboration, and keep you informed about your project's progress in one centralized location."
+  },
+  "organizations": {
+    "dateCreated": "Date created",
+    "owner": "Owner",
+    "posts": "Posts",
+    "edit": "Edit",
+    "manageOrganizations": "Manage organizations",
+    "organizations": "Organizations",
+    "organizationName": "Organization",
+    "organizationNamePlaceholder": "Organization name",
+    "organizationRegister": "Register a new organization",
+    "removeOrganization": "Remove organization",
+    "setDefaultOrganization": "Set as active organization"
+  },
+  "organizationsStartNew": {
+    "registerNewOrganization": "Register an organization"
+  },
+  "people": {
+    "addPerson": "Add Teammate",
+    "teamListHeader": "Active Teammates",
+    "viewAllPeople": "View all"
+  },
+  "pleaseWaitDots": "Please wait...",
+  "post": {
+    "areYouSureRemovePostModalHeader": "Are you sure?",
+    "areYouSureRemovePostModalText": "If you remove this post, it will be gone forever. No turning back.",
+    "areYouSureRemoveButtonText": "Remove post",
+    "areYouSureKeepButtonText": "Keep my post",
+    "comment": "Comment",
+    "comments": "Comments",
+    "createProjectPostWithNamePlaceholder": "Create a post {{name}}",
+    "editPost": "Edit post",
+    "endOfPostList": "You are all caught up!",
+    "imageUploadTooltip": "photo/gif",
+    "notContainOnlyBlankSpaces": "This field can not be empty",
+    "createProjectPostWithName": "Create a post {{name}}",
+    "createProjectPost": "Create post",
+    "editProjectPost": "Edit post",
+    "photoViewerToolbarMessage": "Posted by {{firstName}} {{lastName}} on ",
+    "post": "Post",
+    "postImageBasicAlt": "Post iImage",
+    "removePost": "Remove Post",
+    "submitPost": "Post"
+  },
+  "postFileUpload": {
+    "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",
+    "errorFileIncorrectType": "One file is not an accepted file type.",
+    "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
+  },
+  "professionalOnboarding": {
+    "finishOnboarding": "Take me to my new project",
+    "registerOrganizationCelebrateImageAlt": "Two people high-fiving with fireworks around them",
+    "registerOrganizationHelperInfoImageAlt": "A single building",
+    "registerOrganizationHelperInfoText": "Organizations are how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "registerOrganizationFormHeader": "Register your organization",
+    "registerOrganizationFormHeaderOrgCreated": "Organization created",
+    "startNewProjectCelebrateImageAlt": "Two people jumping and high-fiving with fireworks around them",
+    "startNewProjectHelperInfoImageAlt": "Whiteboard with two people working in front of it",
+    "startNewProjectHelperInfoText": "Projects provides you with a platform to share decisions, receive feedback, and demonstrate progress.",
+    "startNewProjectFormHeader": "Start your first project",
+    "startNewProjectFormHeaderProjectCreated": "Project Created",
+    "invitePeopleHelperInfoImageAlt": "Two people holding project cards with a plus sign between them",
+    "invitePeopleHelperInfoText": "People make it happen. Invite your teammates to come join you on all your projects.",
+    "invitePeopleFormHeader": "Invite your team",
+    "mailtoLinkEmailSubjectText": "Invitation to join Cleaved",
+    "mailtoLinkEmailBodyText": "I just joined Cleaved and set up a new project called Temp Project Name. Come join me if you are able. %0D%0A %0D%0A Join my team on Cleaved: ",
+    "mailtoLink": "Invite your team",
+    "navigateBackwardStep": "Previous",
+    "navigateForwardStep": "Next"
+  },
+  "professionalShareLinkRegistration": {
+    "header": "We're so glad someone invited you!",
+    "logInButtonLabel": "Log in",
+    "shareLinkButtonLabel": "Invite your team",
+    "shareLinkButtonText": "Share link",
+    "shareLinkText": "We believe in you and want you to be successful. Invite your team to help them succeed with you."
+  },
+  "project": {
+    "projectName": "Project name",
+    "dateCreated": "Date created",
+    "owner": "Owner",
+    "posts": "Posts",
+    "edit": "Edit",
+    "stateActive": "Active",
+    "stateInactive": "Inactive",
+    "stateArchive": "Archive"
+  },
+  "projectStartNew": {
+    "addNewProjectHelperText": "It's a great feeling when you start something new.",
+    "startNewProject": "Start a new project",
+    "projectName": "Project name",
+    "projectNamePlaceholder": "Project name...",
+    "projectNameRequired": "Project name required",
+    "projectDetails": "Project details",
+    "projectDetailsRequired": "Project details required",
+    "projectDetailsPlaceholder": "Project details..."
+  },
+  "projects": {
+    "active": "Active",
+    "archive": "Archive",
+    "inactive": "Inactive"
+  },
+  "reactions": {
+    "celebrate": "Celebrate",
+    "like": "Like",
+    "noReaction": "Like",
+    "reviewed": "Reviewed",
+    "thanks": "Thanks"
+  },
+  "shareLinks": {
+    "createAdminShareLink": "Create admin link",
+    "createReadShareLink": "Create read only link",
+    "createWriteShareLink": "Create read/write link",
+    "editMenuGenerateNewShareLink": "Generate a new {{shareLinkPermission}} share link",
+    "editMenuRemoveShareLink": "Remove {{shareLinkPermission}} share link",
+    "manage": "Manage",
+    "permissionLevel": "Role",
+    "shareLink": "Share link"
+  },
+  "submit": "Submit",
+  "teams": {
+    "addNewTeamMember": "Invite a teammate",
+    "addNewTeamMemberHelperText": "It's always better with more people.",
+    "areYouSureKeepButtonText": "Keep this user",
+    "areYouSureRemoveButtonText": "Remove this user from organization",
+    "areYouSureRemoveMemberModalHeader": "Are you sure?",
+    "areYouSureRemoveMemberModalText": "If you remove this team member from your organization, they will not be able to access any of your projects again. Just remember, you can always invite tehm back.",
+    "edit": "Edit",
+    "professionalCompany": "Company",
+    "professionalName": "Name",
+    "professionalTitle": "Job title",
+    "removeProfessional": "Remove professional"
+  },
+  "termsOfService": {
+    "acceptTermsOfService": "I accept the terms of service",
+    "acceptTermsOfServiceIsRequired": "Accept Terms & Conditions is required",
+    "agreementHeader": "User Agreement",
+    "firstParagraph": "Before you are able to use our services, you must agree to our",
+    "acceptTermsHeader": "Welcome aboard!",
+    "acceptTermsImageAlt": "Picture about accepting terms and conditions",
+    "acceptTermsText": "First things first, you need to accept the terms, then you can get down to business."
+  },
+  "tryAgain": "Try again",
+  "widget": {
+    "projectDetailsEdit": "Edit project",
+    "projectsList": "Projects List",
+    "projectsListEmptyListText": "Awe shucks, no project yet. Let's go create one!",
+    "projectsListMenuCreateProjectLink": "Create a project",
+    "projectListSeeMore": "See more"
+  }
+}

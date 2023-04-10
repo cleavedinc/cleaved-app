@@ -1,0 +1,6 @@
+**/**/.env
+**/**/node_modules
+**/**/.next
+**/**/__test__
+coverage
+node_modules

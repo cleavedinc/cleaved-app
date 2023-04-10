@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
+    "jsx": "react",
+    "module": "commonjs",
+    "outDir": "./build",
+    "target": "es6"
+  }
+}
