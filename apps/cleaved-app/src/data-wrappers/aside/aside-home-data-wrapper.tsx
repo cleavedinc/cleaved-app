@@ -14,7 +14,7 @@ export const AsideHomeDataWrapper: FunctionComponent = () => {
   return (
     <ProjectsContextProvider>
       <StickUnderHeaderDesktopOnly>
-        {/* AsideHelperInfoHeaderTextImageBox also on the main home page, but only shows for mobile width */}
+        {/* Something like this is also on the main home page, but only shows for mobile width */}
         {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 50 && (
           <AsideHelperInfoHeaderTextImageBox
             helperInfoImageAltText={t("helperInformationBoxes.collaborativeTimelineAlt")}
