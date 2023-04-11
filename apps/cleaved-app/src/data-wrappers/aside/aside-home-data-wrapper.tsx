@@ -14,7 +14,8 @@ export const AsideHomeDataWrapper: FunctionComponent = () => {
   return (
     <ProjectsContextProvider>
       <StickUnderHeaderDesktopOnly>
-        {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 100 && (
+        {/* AsideHelperInfoHeaderTextImageBox also on the main home page, but only shows for mobile width */}
+        {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 50 && (
           <AsideHelperInfoHeaderTextImageBox
             helperInfoImageAltText={t("helperInformationBoxes.collaborativeTimelineAlt")}
             helperInfoImageUrl={"/helper-info/decisions-helper-image.svg"}
