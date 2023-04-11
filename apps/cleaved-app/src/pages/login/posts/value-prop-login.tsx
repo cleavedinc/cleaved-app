@@ -6,7 +6,7 @@ import { Box, COLORS, FONT_SIZES, HeroValuePropositionByline, mediaQueries, SPAC
 import { GoogleLoginWrapper } from "../../../components/login/google-login";
 import { useTranslator } from "../../../hooks";
 
-const StyledHeroValueProposition = styled(HeroValuePropositionByline)`
+const StyledCompanyName = styled(HeroValuePropositionByline)`
   font-size: 1.8rem;
   margin-bottom: ${SPACING.MEDIUM};
   text-align: center;
@@ -16,7 +16,7 @@ const StyledHeroValueProposition = styled(HeroValuePropositionByline)`
   }
 `;
 
-const StyledHeroValuePropositionByline = styled(HeroValuePropositionByline)`
+const StyledSignInMessage = styled(HeroValuePropositionByline)`
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.XXLARGE};
   text-align: center;
@@ -26,56 +26,25 @@ const StyledHeroValuePropositionByline = styled(HeroValuePropositionByline)`
   }
 `;
 
-const StyledLoginButtonHelperText = styled.div`
-  font-size: ${FONT_SIZES.SMALL};
-  font-style: italic;
-  margin-top: ${SPACING.SMALL};
-  text-align: center;
-
-  ${mediaQueries.SM} {
-    /* font-size: ${FONT_SIZES.LARGE}; */
-  }
-`;
-
-const StyledPostImage = styled.img`
-  cursor: pointer;
-  height: 100%;
-  margin-top: ${SPACING.LARGE};
-  object-position: top left;
-  object-fit: cover;
-  width: 100%;
-`;
-
-const StyledValuePropLogInWrapper = styled(Box)`
+const StyledLogInWrapper = styled(Box)`
   align-items: center;
   background: ${COLORS.WHITE};
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: ${SPACING.XXLARGE};
 `;
 
 export const ValuePropLogin: FunctionComponent = () => {
   const { t } = useTranslator();
-  const valuePropositionLoginImageAlt = t("loginPage.valuePropositionLoginImageAlt")
-    ? t("loginPage.valuePropositionLoginImageAlt")
-    : "";
 
   return (
-    <StyledValuePropLogInWrapper>
-      <StyledHeroValueProposition>
-        {t("loginPage.valuePropositionFirstLine")}
-        <br />
-        {t("loginPage.valuePropositionSecondLine")}
-      </StyledHeroValueProposition>
+    <StyledLogInWrapper>
+      <StyledCompanyName>{t("companyName")}</StyledCompanyName>
 
-      <StyledHeroValuePropositionByline>
-        {t("loginPage.valuePropositionSupportingText")}
-      </StyledHeroValuePropositionByline>
+      <StyledSignInMessage>{t("loginPage.signInMessage")}</StyledSignInMessage>
 
       <GoogleLoginWrapper />
-      <StyledLoginButtonHelperText>(no credit card needed)</StyledLoginButtonHelperText>
-
-      <StyledPostImage src={"/helper-info/sign-up-arrows.svg"} alt={valuePropositionLoginImageAlt} />
-    </StyledValuePropLogInWrapper>
+    </StyledLogInWrapper>
   );
 };

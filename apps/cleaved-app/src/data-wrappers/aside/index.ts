@@ -1,7 +1,5 @@
 export * from "./aside-account-data-wrapper";
 export * from "./aside-data-wrapper";
-export * from "./aside-login-page-data-wrapper";
-export * from "./aside-login-page-members-data-wrapper";
 export * from "./aside-home-data-wrapper";
 export * from "./aside-organization-members-data-wrapper";
 export * from "./aside-organization-register-data-wrapper";

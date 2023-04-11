@@ -110,7 +110,6 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
           {t("post.removePost")}
         </StyledBasicItemRed>
-        {/* <StyledBasicItemRed onClick={() => handlePostProjectRemove(postId)}>{t("post.removePost")}</StyledBasicItemRed> */}
       </StyledBasicMenu>
 
       <Modal
@@ -129,7 +128,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
         <StyledActionText>{t("post.areYouSureRemovePostModalText")}</StyledActionText>
 
         <StyledActionWrapper>
-          <ButtonSecondary type="button" onClick={() => alert("NOT HOOKED UP YET")}>
+          <ButtonSecondary type="button" onClick={() => handlePostProjectRemove(postId)}>
             {t("post.areYouSureRemoveButtonText")}
           </ButtonSecondary>
 

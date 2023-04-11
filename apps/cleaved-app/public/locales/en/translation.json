@@ -88,13 +88,7 @@
     "professionalInformation": "Professional information"
   },
   "loginPage": {
-    "loginHelperHeader": "Stay informed",
-    "loginHelperImageTopAlt": "Person sitting at a desk, using cleaved on a desktop computer",
-    "loginHelperText": "Your teams post project updates, solicit feedback and build better products.",
-    "valuePropositionFirstLine": "Get Valuable Feedback,",
-    "valuePropositionLoginImageAlt": "Arrows pointing to the login button",
-    "valuePropositionSecondLine": "Make Better Decisions",
-    "valuePropositionSupportingText": "We enhance transparency, foster collaboration, and keep you informed about your project's progress in one centralized location."
+    "signInMessage": "Create a new account, or log in to an existing one."
   },
   "organizations": {
     "dateCreated": "Date created",
