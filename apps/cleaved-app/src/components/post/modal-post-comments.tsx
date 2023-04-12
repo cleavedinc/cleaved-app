@@ -4,13 +4,14 @@ import { Portal } from "react-portal";
 
 import {
   BORDERS,
+  CloseIcon,
+  CircleEditButtonSmall,
   COLORS,
   FONT_SIZES,
   mediaQueries,
   OnOutsideClick,
   RADIUS,
   ScrollLock,
-  SHADOWS,
   SPACING,
 } from "@cleaved/ui";
 
@@ -25,6 +26,7 @@ type ModalPostCommentsBackgroundProps = {
 
 type ModalPostCommentsHeaderProps = ModalPostCommentsBackgroundProps & {
   hidden: boolean;
+  onCloseRequested?: () => void;
   title?: string;
 };
 
@@ -39,13 +41,20 @@ type ModalPostCommentsProps = ModalPostCommentsBackgroundProps & {
   useOnOutsideClick?: boolean;
 };
 
+const StyledCircleEditButtonSmall = styled(CircleEditButtonSmall)`
+  margin-left: auto;
+`;
+
 const StyledCommentForm = styled(CommentForm)``;
 
 const StyledContentWrapper = styled.div`
   min-height: 100px;
-  max-height: 550px;
   overflow-y: auto;
   padding: 0 ${SPACING.MEDIUM};
+
+  ${mediaQueries.SM} {
+    max-height: 550px;
+  }
 `;
 
 const StyledModalPostCommentsContentWrapper = styled.div<ModalPostCommentsBackgroundProps>`
@@ -113,7 +122,11 @@ const StyledScrollLock = styled(ScrollLock)`
   display: flex;
 `;
 
-const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> = ({ hidden, title }) => {
+const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> = ({
+  hidden,
+  onCloseRequested,
+  title,
+}) => {
   const { t } = useTranslator();
 
   if (hidden) {
@@ -123,6 +136,9 @@ const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> =
   return (
     <StyledModalPostCommentsHeaderWrapper>
       <StyledModalPostCommentsTitle>{`${title}'s ${t("post.post")}`}</StyledModalPostCommentsTitle>
+      <StyledCircleEditButtonSmall onClick={() => onCloseRequested && onCloseRequested()} type="button">
+        <CloseIcon color={COLORS.GRAY_500} iconSize={FONT_SIZES.LARGE} />
+      </StyledCircleEditButtonSmall>
     </StyledModalPostCommentsHeaderWrapper>
   );
 };
@@ -145,7 +161,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
 
   const content = (
     <>
-      <ModalPostCommentsHeader hidden={forceOpen} title={title} />
+      <ModalPostCommentsHeader hidden={forceOpen} onCloseRequested={onCloseRequested} title={title} />
       <StyledContentWrapper>{children}</StyledContentWrapper>
       <StyledPostCommentFormWrapper>
         <PostCommentAvatar account={accountData} />

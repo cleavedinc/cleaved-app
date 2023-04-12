@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { Box, COLORS, FONT_SIZES, SectionHeader, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { Box, COLORS, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideAccountAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
@@ -12,9 +12,10 @@ const StyledAsideAccountWrapper = styled.div`
   text-align: center;
 `;
 
-const StyledJobTitle = styled.p`
+const StyledJobTitle = styled.div`
   color: ${COLORS.GRAY_500};
   font-size: ${FONT_SIZES.SMALL};
+  margin-bottom: ${SPACING.MEDIUM};
 `;
 
 const StyledProfileName = styled(SectionHeader)`
@@ -24,6 +25,11 @@ const StyledProfileName = styled(SectionHeader)`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const StyledProfessionalAbout = styled.div`
+  color: ${COLORS.GRAY_500};
+  white-space: pre-line;
 `;
 
 export const AsideAccountDataWrapper: FunctionComponent = () => {
@@ -44,6 +50,8 @@ export const AsideAccountDataWrapper: FunctionComponent = () => {
             </Link>
 
             <StyledJobTitle>{accountData?.professionals[0].jobTitle}</StyledJobTitle>
+
+            <StyledProfessionalAbout>{accountData?.professionals[0].about}</StyledProfessionalAbout>
           </StyledAsideAccountWrapper>
         </Box>
       </StickUnderHeaderDesktopOnly>

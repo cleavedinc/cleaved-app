@@ -17,10 +17,15 @@ type OnboardingProjectStartNewFormProps = {
   projectsInOrgSeekRefetch?: (() => void) | undefined;
 };
 
-type OnboardingProjectStartNewFormType = {
+type ProjectNameType = {
   projectName: string;
+};
+
+type ProjectDetailsType = {
   projectDetails: string;
 };
+
+type OnboardingProjectStartNewFormType = ProjectNameType & ProjectDetailsType;
 
 const StyledButtonPrimaryWrapper = styled.div`
   display: flex;
@@ -37,6 +42,7 @@ const StyledField = styled(Field)`
 
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
   margin-top: ${SPACING_PX.ONE};
 `;
 
@@ -88,7 +94,7 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof ProjectNameType, yup.AnySchema>>({
           projectName: yup.string().required(),
         })}
       >

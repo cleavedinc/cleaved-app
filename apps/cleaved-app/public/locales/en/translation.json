@@ -8,6 +8,7 @@
     "logOut": "Log out",
     "signUpLogIn": "Sign up / Log in"
   },
+  "cancel": "Cancel",
   "comment": {
     "leaveCommentPlaceholder": "Write a comment",
     "reply": "Reply"
@@ -88,13 +89,8 @@
     "professionalInformation": "Professional information"
   },
   "loginPage": {
-    "loginHelperHeader": "Stay informed",
-    "loginHelperImageTopAlt": "Person sitting at a desk, using cleaved on a desktop computer",
-    "loginHelperText": "Your teams post project updates, solicit feedback and build better products.",
-    "valuePropositionFirstLine": "Get Valuable Feedback,",
-    "valuePropositionLoginImageAlt": "Arrows pointing to the login button",
-    "valuePropositionSecondLine": "Make Better Decisions",
-    "valuePropositionSupportingText": "We enhance transparency, foster collaboration, and keep you informed about your project's progress in one centralized location."
+    "signInHeader": "Sign up / Log in",
+    "signInMessage": "Create a new account, or log in to an existing one."
   },
   "organizations": {
     "dateCreated": "Date created",
@@ -145,6 +141,8 @@
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
   },
   "professionalOnboarding": {
+    "alreadyHasOrganizationLink": "Skip onboarding",
+    "alreadyHasOrganizationText": "I already have an organization I am a part of. ",
     "finishOnboarding": "Take me to my new project",
     "registerOrganizationCelebrateImageAlt": "Two people high-fiving with fireworks around them",
     "registerOrganizationHelperInfoImageAlt": "A single building",
@@ -164,6 +162,13 @@
     "mailtoLink": "Invite your team",
     "navigateBackwardStep": "Previous",
     "navigateForwardStep": "Next"
+  },
+  "professionalOnboardingHasOrganization": {
+    "hasOrganizationHeader": "Reach out to your admin to be invited",
+    "hasOrganizationGetInviteImageAlt": "Man and woman holding pieces of mail. Text that reads: Get invited",
+    "hasOrganizationMessage": "If your company already uses our service, you are lucky to work there. 🙂 Ask your admin to invite you.",
+    "goBackToOnboardingLink": "go back to onboarding",
+    "goBackToOnboardingText": "I made a mistake and want to "
   },
   "professionalShareLinkRegistration": {
     "header": "We're so glad someone invited you!",

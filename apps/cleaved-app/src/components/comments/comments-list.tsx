@@ -93,17 +93,19 @@ export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
           );
         })}
 
-      {!postProjectRepliesDataLoading && postProjectRepliesData && postProjectRepliesData.length >= commentPageSize && (
-        <StyledLoadMoreButton
-          isHidden={hideLoadMoreButton}
-          type="button"
-          onClick={() => {
-            handleLoadMoreCommentData(lastCommentId);
-          }}
-        >
-          {t("data.loadMoreComments")} total count: {commentRepliesCount}: state total shown: xxxxx
-        </StyledLoadMoreButton>
-      )}
+      {!postProjectRepliesDataLoading &&
+        postProjectRepliesData &&
+        postProjectRepliesData.length !== Number(commentRepliesCount) && (
+          <StyledLoadMoreButton
+            isHidden={hideLoadMoreButton}
+            type="button"
+            onClick={() => {
+              handleLoadMoreCommentData(lastCommentId);
+            }}
+          >
+            {t("data.loadMoreComments")}
+          </StyledLoadMoreButton>
+        )}
     </StyledCommentListWrapper>
   );
 };

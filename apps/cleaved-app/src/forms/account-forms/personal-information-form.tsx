@@ -91,7 +91,7 @@ export const PersonalInformationForm: FunctionComponent = () => {
         });
         resetForm({ values });
       }}
-      validationSchema={yup.object().shape<any>({
+      validationSchema={yup.object().shape<Record<keyof PersonalInformationFormType, yup.AnySchema>>({
         firstName: yup.string().required(firstNameIsRequired),
         lastName: yup.string().required(lastNameIsRequired),
         middleName: yup.string(),

@@ -6,7 +6,6 @@ import { ButtonLinkLoadMore, COLORS, SPACING } from "@cleaved/ui";
 import { PostCommentAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 import { CommentForm } from "../../forms";
-import { ProjectPost } from "../../generated-types/graphql";
 
 import { Comment } from "../comments/comment";
 import { CommentsList } from "../comments/comments-list";
@@ -14,7 +13,7 @@ import { CommentsList } from "../comments/comments-list";
 type CommentsListItemProps = {
   commentLevel: number;
   postProjectRepliesDataRefetch?: () => void;
-  postReply: ProjectPost;
+  postReply: any;
 };
 
 const StyledCommentWrapper = styled.div`

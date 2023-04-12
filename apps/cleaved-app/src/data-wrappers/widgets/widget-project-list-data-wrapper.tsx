@@ -85,12 +85,17 @@ const StyledSeeAllProjectsLink = styled(Link)`
 export const WidgetProjectListDataWrapper: FunctionComponent = () => {
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
-  const { projectsInOrgSeek, projectsInOrgSeekDataLoading, setProjectPageSize } = useContext(ProjectsContext);
+  const { projectsInOrgSeek, projectsInOrgSeekDataLoading, projectsInOrgSeekRefetch, setProjectPageSize } =
+    useContext(ProjectsContext);
 
   useEffect(() => {
     if (setProjectPageSize) {
       setProjectPageSize(5);
     }
+
+    // if (projectsInOrgSeekRefetch) {
+    //   projectsInOrgSeekRefetch(); // TODO: ASK Jeremy if this is the way... I'm refreshing on project create and doens' tseem to retrigger state on the home page without a use effect
+    // }
   }, []); // eslint-disable-line
 
   return (
@@ -116,22 +121,23 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
 
       {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
         <StyledProjectList>
-          {projectsInOrgSeek?.map((project) => {
-            return (
-              <StyledProjectListItem key={project.id}>
-                <StyledProjectLink
-                  to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
-                  title={project.name}
-                >
-                  <StyledProjectName>{project.name}</StyledProjectName>
-                  <StyledCommentInfoWrapper>
-                    <StyledCommentCount>{project.totalResponseCount}</StyledCommentCount>
-                    <StyledCommentIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
-                  </StyledCommentInfoWrapper>
-                </StyledProjectLink>
-              </StyledProjectListItem>
-            );
-          })}
+          {projectsInOrgSeek &&
+            projectsInOrgSeek?.map((project) => {
+              return (
+                <StyledProjectListItem key={project.id}>
+                  <StyledProjectLink
+                    to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
+                    title={project.name}
+                  >
+                    <StyledProjectName>{project.name}</StyledProjectName>
+                    <StyledCommentInfoWrapper>
+                      <StyledCommentCount>{project.totalResponseCount}</StyledCommentCount>
+                      <StyledCommentIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
+                    </StyledCommentInfoWrapper>
+                  </StyledProjectLink>
+                </StyledProjectListItem>
+              );
+            })}
         </StyledProjectList>
       )}
 

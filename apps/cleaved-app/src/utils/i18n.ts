@@ -18,9 +18,6 @@ i18n // eslint-disable-line import/no-named-as-default-member
       allowMultiLoading: false,
       loadPath: "/locales/{{lng}}/{{ns}}.json",
     },
-    react: {
-      useSuspense: false,
-    },
   });
 
 export default i18n;

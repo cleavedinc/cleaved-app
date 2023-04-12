@@ -6,7 +6,7 @@ import { Box, COLORS, FONT_SIZES, SectionHeader, StickUnderHeaderDesktopOnly } f
 import { AsideAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 
-const StyledJobTitle = styled.p`
+const StyledJobTitle = styled.div`
   color: ${COLORS.GRAY_500};
   font-size: ${FONT_SIZES.SMALL};
 `;

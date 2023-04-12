@@ -133,7 +133,7 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
           },
         });
       } else {
-        console.log("double tap refresh");
+        // console.log("double tap refresh");
       }
     },
   };

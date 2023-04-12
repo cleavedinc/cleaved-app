@@ -32,6 +32,7 @@ const StyledField = styled(Field)`
 
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
   margin-top: ${SPACING_PX.ONE};
 `;
 
@@ -88,7 +89,7 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof OnboardingOrganizationRegisterFormType, yup.AnySchema>>({
           organizationName: yup.string().required(),
         })}
       >

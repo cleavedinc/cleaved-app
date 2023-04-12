@@ -73,7 +73,7 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
   return (
     <StyledBasicMenu
       menuButton={
-        <CircleEditButtonSmall>
+        <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon />
         </CircleEditButtonSmall>
       }

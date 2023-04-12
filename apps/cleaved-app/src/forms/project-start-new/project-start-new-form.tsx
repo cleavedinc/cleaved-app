@@ -25,10 +25,15 @@ import { routeConstantsCleavedApp } from "../../router";
 import { ProjectStartNewFormFormikTextarea } from "./components";
 import { PROJECT_START_NEW } from "./gql";
 
-type ProjectStartNewFormType = {
+type ProjectNameType = {
   projectName: string;
+};
+
+type ProjectDetailsType = {
   projectDetails: string;
 };
+
+type ProjectStartNewFormType = ProjectNameType & ProjectDetailsType;
 
 const StyledButtonLink = styled(ButtonLink)`
   color: ${COLORS.GRAY_500};
@@ -103,7 +108,7 @@ export const ProjectStartNewForm: FunctionComponent = () => {
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof ProjectNameType, yup.AnySchema>>({
           projectName: yup.string().required(),
         })}
       >
@@ -135,7 +140,9 @@ export const ProjectStartNewForm: FunctionComponent = () => {
               </StyledProjectFormWrapper>
 
               <StyledButtonPrimaryWrapper>
-                <StyledButtonLink onClick={() => navigate(-1)}>Cancel</StyledButtonLink>
+                <StyledButtonLink onClick={() => navigate(-1)} type="button">
+                  Cancel
+                </StyledButtonLink>
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("projectStartNew.startNewProject")}

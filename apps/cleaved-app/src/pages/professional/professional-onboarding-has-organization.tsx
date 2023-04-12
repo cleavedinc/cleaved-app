@@ -2,13 +2,13 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, MainColumnWrapperMaxWidth } from "@cleaved/ui";
 
-import { LoginDataWrapper } from "../../data-wrappers";
+import { ProfessionalOnboardingHasOrganizationDataWrapper } from "../../data-wrappers";
 
-export const Login: FunctionComponent = () => {
+export const ProfessionalOnboardingHasOrganization: FunctionComponent = () => {
   return (
     <ContentWrapper>
       <MainColumnWrapperMaxWidth>
-        <LoginDataWrapper />
+        <ProfessionalOnboardingHasOrganizationDataWrapper />
       </MainColumnWrapperMaxWidth>
     </ContentWrapper>
   );

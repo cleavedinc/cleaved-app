@@ -34,7 +34,7 @@ export const WidgetProjectDetailsMenu: FunctionComponent = () => {
   return (
     <StyledBasicMenu
       menuButton={
-        <CircleEditButtonSmall>
+        <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon />
         </CircleEditButtonSmall>
       }

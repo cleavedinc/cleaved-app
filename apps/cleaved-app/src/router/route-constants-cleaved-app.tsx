@@ -43,6 +43,10 @@ export const routeConstantsCleavedApp = {
     name: "Professional onboarding",
     route: "/professional-onboarding",
   },
+  professionalOnboardingHasOrganization: {
+    name: "Professional onboarding has organization",
+    route: "/professional-onboarding-has-organization",
+  },
   organizationList: {
     name: "Organization list",
     route: "/organization-list",

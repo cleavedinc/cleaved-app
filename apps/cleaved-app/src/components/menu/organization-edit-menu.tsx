@@ -62,7 +62,7 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
   return (
     <StyledBasicMenu
       menuButton={
-        <CircleEditButtonSmall>
+        <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon />
         </CircleEditButtonSmall>
       }
