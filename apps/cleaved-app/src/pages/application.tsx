@@ -22,6 +22,7 @@ export const Application: FunctionComponent = () => {
     <>
       {loggedIn &&
       currentPath !== routeConstantsCleavedApp.professionalOnboarding.route &&
+      currentPath !== routeConstantsCleavedApp.professionalOnboardingHasOrganization.route &&
       currentPath !== routeConstantsCleavedApp.termsOfServiceAgreement.route ? (
         <Header />
       ) : (

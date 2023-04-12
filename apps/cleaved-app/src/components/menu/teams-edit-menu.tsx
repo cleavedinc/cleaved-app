@@ -86,7 +86,7 @@ export const TeamsEditMenu: FunctionComponent<TeamsEditMenuProps> = (props) => {
     <>
       <StyledBasicMenu
         menuButton={
-          <CircleEditButtonSmall>
+          <CircleEditButtonSmall type="button">
             <EllipsisHorizontalIcon />
           </CircleEditButtonSmall>
         }

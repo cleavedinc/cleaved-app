@@ -64,7 +64,9 @@ export const ProfessionalShareLinkDataWrapper: FunctionComponent = () => {
             text={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${shareLink}`}
             onCopy={() => handleAlertCopied(t("alerts.copiedTextToClipboard"))}
           >
-            <StyledButtonPrimary>{t("professionalShareLinkRegistration.shareLinkButtonText")}</StyledButtonPrimary>
+            <StyledButtonPrimary type="button">
+              {t("professionalShareLinkRegistration.shareLinkButtonText")}
+            </StyledButtonPrimary>
           </CopyToClipboard>
         </StyledShareButtonWrapper>
 

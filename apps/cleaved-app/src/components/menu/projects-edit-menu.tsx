@@ -27,7 +27,7 @@ export const ProjectsEditMenu: FunctionComponent = () => {
   return (
     <StyledBasicMenu
       menuButton={
-        <CircleEditButtonSmall>
+        <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon />
         </CircleEditButtonSmall>
       }

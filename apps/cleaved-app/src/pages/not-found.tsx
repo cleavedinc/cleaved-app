@@ -121,8 +121,8 @@ export const NotFound: FunctionComponent<NotFoundProps> = () => {
         />
         <StyledErrorPageButtonsWrapper>
           <StyledButtonPrimary
-            type="button"
             onClick={() => navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`)}
+            type="button"
           >
             {t("buttonLabels.goHome")}
           </StyledButtonPrimary>

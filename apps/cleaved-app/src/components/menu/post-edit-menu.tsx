@@ -97,7 +97,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
     <>
       <StyledBasicMenu
         menuButton={
-          <CircleEditButtonSmall>
+          <CircleEditButtonSmall type="button">
             <EllipsisHorizontalIcon />
           </CircleEditButtonSmall>
         }

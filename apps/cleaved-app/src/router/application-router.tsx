@@ -16,6 +16,7 @@ import { NotFound } from "../pages/not-found";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
 import { Professional } from "../pages/professional/professional";
 import { ProfessionalOnboarding } from "../pages/professional/professional-onboarding";
+import { ProfessionalOnboardingHasOrganization } from "../pages/professional/professional-onboarding-has-organization";
 import { Project } from "../pages/project/project";
 import { ProjectList } from "../pages/project/project-list";
 import { ProjectStartNew } from "../pages/project/project-start-new";
@@ -52,6 +53,10 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector
       path={routeConstantsCleavedApp.professionalOnboarding.route}
       renderedPage={<ProfessionalOnboarding />}
+    />
+    <PageProtector
+      path={routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}
+      renderedPage={<ProfessionalOnboardingHasOrganization />}
     />
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.project.route}/:projectId${routeConstantsCleavedApp.projectBoard.route}`}

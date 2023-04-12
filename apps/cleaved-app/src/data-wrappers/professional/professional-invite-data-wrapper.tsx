@@ -173,6 +173,7 @@ export const ProfessionalInviteDataWrapper: FunctionComponent = () => {
                 },
               })
             }
+            type="button"
           >
             {t("shareLinks.createReadShareLink")}
           </StyledButtonPrimary>
@@ -188,6 +189,7 @@ export const ProfessionalInviteDataWrapper: FunctionComponent = () => {
                 },
               })
             }
+            type="button"
           >
             {t("shareLinks.createWriteShareLink")}
           </StyledButtonPrimary>

@@ -97,7 +97,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ hidden, onCloseReque
   return (
     <StyledModalHeaderWrapper>
       <StyledModalTitle>{title}</StyledModalTitle>
-      <StyledModalCloseButton onClick={onCloseRequested}>
+      <StyledModalCloseButton onClick={onCloseRequested} type="button">
         <CloseIcon color={COLORS.GRAY_500} iconSize={FONT_SIZES.LARGE} />
       </StyledModalCloseButton>
     </StyledModalHeaderWrapper>

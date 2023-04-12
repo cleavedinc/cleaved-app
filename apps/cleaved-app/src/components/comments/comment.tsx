@@ -41,6 +41,7 @@ const StyledCommentDateTime = styled.div`
 const StyledCommentFooterWrapper = styled.div`
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
+  min-height: 16px;
 `;
 
 const StyledCommentBody = styled.div`
@@ -124,12 +125,16 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
           postProjectRepliesDataRefetch={postProjectRepliesDataRefetch}
         />
 
-        <SeparatorDot />
+        {reply.reactionTotalCount !== "0" && (
+          <>
+            <SeparatorDot />
 
-        <ReactionTypesAndTotalCount
-          reactionsExpressed={reply.reactionsExpressed}
-          reactionTotalCount={reply.reactionTotalCount}
-        />
+            <ReactionTypesAndTotalCount
+              reactionsExpressed={reply.reactionsExpressed}
+              reactionTotalCount={reply.reactionTotalCount}
+            />
+          </>
+        )}
 
         {commentLevel <= 1 && (
           <>

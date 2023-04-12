@@ -32,6 +32,7 @@ const StyledField = styled(Field)`
 
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
   margin-top: ${SPACING_PX.ONE};
 `;
 

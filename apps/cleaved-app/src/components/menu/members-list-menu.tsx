@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext } from "react";
 import { navigate } from "@reach/router";
-import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
+import { Menu, MenuItem } from "@szhsin/react-menu";
 import styled from "styled-components";
 
 import { CircleEditButtonSmall, COLORS, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
@@ -42,7 +42,7 @@ export const MembersListMenu: FunctionComponent = () => {
   return (
     <StyledBasicMenu
       menuButton={
-        <CircleEditButtonSmall>
+        <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon />
         </CircleEditButtonSmall>
       }

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
-import { navigate } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { debounce } from "ts-debounce";
@@ -44,6 +44,13 @@ const StyledButtonPrimaryWrapper = styled.div`
 
 const StyledFinishOnboardingButton = styled(ButtonPrimary)`
   margin-left: auto;
+`;
+
+const StyledHasOrganizationSkipOnboarding = styled.div`
+  font-size: ${FONT_SIZES.SMALL};
+  font-style: italic;
+  margin-top: ${SPACING.XXLARGE};
+  text-align: center;
 `;
 
 const StyledHelperInfoHeaderTextImageRightBox = styled(HelperInfoHeaderTextImageRightBox)`
@@ -344,6 +351,13 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
                 width={"500px"}
               />
             )}
+
+            <StyledHasOrganizationSkipOnboarding>
+              {t("professionalOnboarding.alreadyHasOrganizationText")}
+              <Link to={routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}>
+                {t("professionalOnboarding.alreadyHasOrganizationLink")}
+              </Link>
+            </StyledHasOrganizationSkipOnboarding>
           </StyledBox>
 
           <StyledHelperInfoHeaderTextImageRightBox
@@ -411,6 +425,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
                     },
                   })
                 }
+                type="button"
               >
                 {t("shareLinks.createWriteShareLink")}
               </StyledButtonPrimary>
@@ -467,13 +482,14 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
           <StyledFinishOnboardingButton
             disabled={isCompleteOnboardingButtonDisabled}
             onClick={() => handleCompleteonboardingFlow()}
+            type="button"
           >
             {t("professionalOnboarding.finishOnboarding")}
           </StyledFinishOnboardingButton>
         )}
 
         {!loading && activeStep !== 3 && (
-          <StyledFinishOnboardingButton onClick={nextStep} disabled={isNextStepButtonDisabled}>
+          <StyledFinishOnboardingButton onClick={nextStep} disabled={isNextStepButtonDisabled} type="button">
             {t("professionalOnboarding.navigateForwardStep")}
           </StyledFinishOnboardingButton>
         )}
