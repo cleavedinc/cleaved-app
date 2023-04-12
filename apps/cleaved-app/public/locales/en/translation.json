@@ -8,6 +8,7 @@
     "logOut": "Log out",
     "signUpLogIn": "Sign up / Log in"
   },
+  "cancel": "Cancel",
   "comment": {
     "leaveCommentPlaceholder": "Write a comment",
     "reply": "Reply"
@@ -88,6 +89,7 @@
     "professionalInformation": "Professional information"
   },
   "loginPage": {
+    "signInHeader": "Sign up / Log in",
     "signInMessage": "Create a new account, or log in to an existing one."
   },
   "organizations": {

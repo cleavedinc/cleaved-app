@@ -99,7 +99,7 @@ export const OrganizationRegisterForm: FunctionComponent = () => {
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof OrganizationRegisterFormType, yup.AnySchema>>({
           organizationName: yup.string().required(),
         })}
       >
@@ -122,7 +122,7 @@ export const OrganizationRegisterForm: FunctionComponent = () => {
 
                 <StyledButtonPrimaryWrapper>
                   <StyledButtonLink onClick={() => navigate(-1)} type="button">
-                    Cancel
+                    {t("cancel")}
                   </StyledButtonLink>
 
                   <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">

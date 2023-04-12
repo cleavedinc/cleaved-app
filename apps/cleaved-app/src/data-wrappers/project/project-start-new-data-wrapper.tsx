@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import { Box, H1, SPACING } from "@cleaved/ui";
 
-import { ProjectsContextProvider } from "../../contexts";
 import { ProjectStartNewForm } from "../../forms";
 import { useTranslator } from "../../hooks";
 
@@ -15,12 +14,10 @@ export const ProjectStartNewDataWrapper: FunctionComponent = () => {
   const { t } = useTranslator();
 
   return (
-    <ProjectsContextProvider>
-      <Box>
-        <StyledH1>{t("projectStartNew.startNewProject")}</StyledH1>
+    <Box>
+      <StyledH1>{t("projectStartNew.startNewProject")}</StyledH1>
 
-        <ProjectStartNewForm />
-      </Box>
-    </ProjectsContextProvider>
+      <ProjectStartNewForm />
+    </Box>
   );
 };

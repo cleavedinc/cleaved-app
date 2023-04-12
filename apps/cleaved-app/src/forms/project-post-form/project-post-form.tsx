@@ -22,6 +22,11 @@ type ProjectPostFormProps = {
   postId?: string;
 };
 
+type PostProjectCreateMutationVariablesValidation = {
+  body: string;
+  imageUrls: [string];
+};
+
 const StyledAdditionalActionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -123,13 +128,15 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
           closeForm();
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
-          body: yup
-            .string()
-            .matches(/^\s*\S[\s\S]*$/, notContainOnlyBlankSpaces)
-            .required(),
-          imageUrls: yup.array().nullable().of(yup.string()),
-        })}
+        validationSchema={yup
+          .object()
+          .shape<Record<keyof PostProjectCreateMutationVariablesValidation, yup.AnySchema>>({
+            body: yup
+              .string()
+              .matches(/^\s*\S[\s\S]*$/, notContainOnlyBlankSpaces)
+              .required(),
+            imageUrls: yup.array().nullable().of(yup.string()),
+          })}
       >
         {({ dirty, isSubmitting, isValid, setFieldValue }) => {
           return (

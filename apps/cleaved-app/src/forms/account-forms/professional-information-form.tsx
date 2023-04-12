@@ -119,7 +119,7 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
 
         resetForm({ values });
       }}
-      validationSchema={yup.object().shape<any>({
+      validationSchema={yup.object().shape<Record<keyof ProfesionalInformationFormType, yup.AnySchema>>({
         about: yup.string().max(250, aboutProfessionalCharactorLimit),
         accountEmail: yup.string().email(youMustHaveAValidEmailAddress),
         jobTitle: yup.string(),

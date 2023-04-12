@@ -87,7 +87,7 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
           resetForm();
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof { body: string }, yup.AnySchema>>({
           body: yup.string(),
         })}
       >

@@ -89,7 +89,7 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof OnboardingOrganizationRegisterFormType, yup.AnySchema>>({
           organizationName: yup.string().required(),
         })}
       >

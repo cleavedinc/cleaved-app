@@ -3,15 +3,13 @@ import styled, { css } from "styled-components";
 
 import { BORDERS, COLORS, FONT_SIZES, FONT_WEIGHTS, RADIUS, SPACING_PX } from "@cleaved/ui";
 
+import { OrganizationSeekMembersQuery, PostProjectAccountSeekQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile } from "../../hooks";
 
 type AsideTeamListAvatarProps = {
-  account: {
-    id: string;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    currentAvatar?: string | null | undefined;
-  };
+  account:
+    | PostProjectAccountSeekQuery["postProjectAccountSeek"][0]
+    | OrganizationSeekMembersQuery["organizationSeekMembers"][0];
 };
 
 const avatartBase = css`
@@ -39,6 +37,11 @@ const StyledAvatarInitials = styled.div`
   font-size: ${FONT_SIZES.XXSMALL};
 `;
 
+const StyledJobTitle = styled.div`
+  color: ${COLORS.GRAY_500};
+  font-size: ${FONT_SIZES.XSMALL};
+`;
+
 const StyledPostProfessionalName = styled.a`
   color: ${COLORS.BLACK};
   font-size: ${FONT_SIZES.SMALL};
@@ -48,6 +51,13 @@ const StyledPostProfessionalName = styled.a`
     color: ${COLORS.BLUE_500_HOVER};
     text-decoration: underline;
   }
+`;
+
+const StyledPostProfessionalInfoWrapper = styled.div`
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps> = (props) => {
@@ -71,9 +81,15 @@ export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps
         </StyledAvatarInitials>
       )}
 
-      <StyledPostProfessionalName href={professionalProfilePath}>
-        {account.firstName} {account.lastName}
-      </StyledPostProfessionalName>
+      <StyledPostProfessionalInfoWrapper>
+        <StyledPostProfessionalName href={professionalProfilePath}>
+          {account.firstName} {account.lastName}
+        </StyledPostProfessionalName>
+
+        {/* {account?.professionals[0]?.jobTitle && ( */}
+        <StyledJobTitle>{/* {account?.professionals[0]?.jobTitle} */}Temp job title</StyledJobTitle>
+        {/* )} */}
+      </StyledPostProfessionalInfoWrapper>
     </>
   );
 };

@@ -12,6 +12,10 @@ export const POST_PROJECT_ACCOUNT_SEEK_QUERY = graphql(`
       firstName
       lastName
       currentAvatar
+      professionals {
+        id
+        jobTitle
+      }
     }
   }
 `);

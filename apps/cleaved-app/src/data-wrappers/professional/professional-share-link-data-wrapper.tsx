@@ -33,7 +33,7 @@ const StyledLoginWrapper = styled.div`
   display: flex;
 `;
 
-const StyledParagraph = styled.p`
+const StyledParagraph = styled.div`
   margin-bottom: ${SPACING.XXLARGE};
 `;
 
