@@ -140,6 +140,9 @@
     "errorFileIncorrectType": "One file is not an accepted file type.",
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
   },
+  "professional": {
+    "emailLinkText": "Email"
+  },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Skip onboarding",
     "alreadyHasOrganizationText": "I already have an organization I am a part of. ",
