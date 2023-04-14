@@ -10,7 +10,6 @@ import { CommunityGuidelines } from "../pages/agreements/community-guidelines";
 import { ElaborationOfCommunityGuidelines } from "../pages/agreements/elaboration-of-community-guidelines";
 import { Home } from "../pages/home";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
-import { ProfessionalInvite } from "../pages/professional/professional-invite";
 import { Login } from "../pages/login/login";
 import { NotFound } from "../pages/not-found";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
@@ -23,6 +22,7 @@ import { ProjectStartNew } from "../pages/project/project-start-new";
 import { OrganizationList } from "../pages/organization/organization-list";
 import { OrganizationRegister } from "../pages/organization/organization-register";
 import { TeamsList } from "../pages/teams/teams-list";
+import { TeamsListProfessionalInvite } from "../pages/professional/professional-invite";
 import { TermsOfService } from "../pages/agreements/terms-of-service";
 import { TermsOfServiceAgreement } from "../pages/agreements/terms-of-service-agreement";
 import { routeConstantsCleavedApp } from "../router";
@@ -46,10 +46,6 @@ export const ApplicationRouter: FunctionComponent = () => (
       renderedPage={<Professional />}
     />
     <PageProtector path={`/:orgId${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
-    <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.professionalInvite.route}`}
-      renderedPage={<ProfessionalInvite />}
-    />
     <PageProtector
       path={routeConstantsCleavedApp.professionalOnboarding.route}
       renderedPage={<ProfessionalOnboarding />}
@@ -94,6 +90,10 @@ export const ApplicationRouter: FunctionComponent = () => (
       path={`${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/:shareLink`}
       renderedPage={<ProfessionalShareLinkRegistration />}
       isNotProtected
+    />
+    <PageProtector
+      path={`:orgId${routeConstantsCleavedApp.professionalInvite.route}`}
+      renderedPage={<TeamsListProfessionalInvite />}
     />
     <PageProtector path={routeConstantsShared.termsOfService.route} renderedPage={<TermsOfService />} isNotProtected />
     <PageProtector

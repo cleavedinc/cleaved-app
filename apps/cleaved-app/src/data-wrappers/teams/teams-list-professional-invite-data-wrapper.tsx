@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext, useEffect } from "react";
+import { navigate } from "@reach/router";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { debounce } from "ts-debounce";
@@ -24,11 +25,13 @@ import {
 } from "@cleaved/ui";
 
 import { HelperInfoHeaderTextImageRightBox, ShareLinkEditMenu } from "../../components";
-import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
+import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, OrganizationShareLinksQuery } from "../../generated-types/graphql";
-import { useRouteParams, useTranslator } from "../../hooks";
-import { routeConstantsCleavedApp } from "../../router";
+import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
 import { ORGANIZATION_SHARE_LINKS_QUERY } from "../../gql-queries";
+import { useRouteParams, useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
+import { routeConstantsCleavedApp } from "../../router";
 
 const StyledButtonPrimary = styled(ButtonPrimary)`
   margin-right: ${SPACING.MEDIUM};
@@ -110,10 +113,12 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
   }
 `;
 
-export const ProfessionalInviteDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
+export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const { preferredOrgId } = useContext(authTokenContext);
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
+  const { t } = useTranslator();
 
   const {
     data: organizationShareLinksArray,
@@ -151,6 +156,13 @@ export const ProfessionalInviteDataWrapper: FunctionComponent = () => {
     1000,
     { isImmediate: true }
   );
+
+  // route to the home page if the user makes it to this page somehow
+  useEffect(() => {
+    if (!hasPermission) {
+      navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`);
+    }
+  }, []); // eslint-disable-line
 
   return (
     <>

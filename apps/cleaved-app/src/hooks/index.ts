@@ -5,6 +5,7 @@ export * from "./use-organization-seek-members";
 export * from "./use-post-project-account-seek";
 export * from "./use-post-project-get-by-id";
 export * from "./use-post-project-replies";
+export * from "./use-project-by-id";
 export * from "./use-project-in-organization-seek";
 export * from "./use-query-string-params";
 export * from "./use-route-params";

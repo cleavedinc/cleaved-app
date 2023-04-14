@@ -2,13 +2,13 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, MainColumnWrapper } from "@cleaved/ui";
 
-import { ProfessionalInviteDataWrapper } from "../../data-wrappers";
+import { TeamslistProfessionalInviteDataWrapper } from "../../data-wrappers";
 
-export const ProfessionalInvite: FunctionComponent = () => {
+export const TeamsListProfessionalInvite: FunctionComponent = () => {
   return (
     <ContentWrapper>
       <MainColumnWrapper>
-        <ProfessionalInviteDataWrapper />
+        <TeamslistProfessionalInviteDataWrapper />
       </MainColumnWrapper>
     </ContentWrapper>
   );

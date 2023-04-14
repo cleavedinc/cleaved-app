@@ -1,10 +1,18 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
 import { mediaQueries, SPACING, StyledTd } from "@cleaved/ui";
 
 import { HeaderMenuAvatar, TeamsEditMenu } from "../../components";
+import { AccountContext } from "../../contexts";
+import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
+
+type TeamsListRowProps = {
+  member: OrganizationSeekMembersQuery["organizationSeekMembers"][0];
+  organizationSeekMembersDataRefetch?: () => void;
+};
 
 const StyledPersonNameLink = styled.a`
   margin-left: ${SPACING.SMALL};
@@ -15,6 +23,14 @@ const StyledPersonLinkWrapper = styled.div`
   display: flex;
 `;
 
+const StyledPermission = styled.div`
+  text-transform: lowercase;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+`;
+
 const StyledTdWithMenuContent = styled(StyledTd)`
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(1):before {
@@ -22,17 +38,18 @@ const StyledTdWithMenuContent = styled(StyledTd)`
     }
 
     &:nth-of-type(2):before {
-      content: "Job Title";
-    }
-
-    &:nth-of-type(3):before {
-      content: "Company";
+      content: "Permissions";
     }
   }
 
   ${mediaQueries.XS_LANDSCAPE} {
     &:first-child {
-      width: 30%;
+      /* width: 50%; */
+    }
+
+    &:nth-child(2) {
+      padding-right: ${SPACING.MEDIUM};
+      text-align: end;
     }
   }
 `;
@@ -47,18 +64,10 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
   }
 `;
 
-type TeamsListRowProps = {
-  member: {
-    id: string;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    currentAvatar?: string | null | undefined;
-  };
-  organizationSeekMembersDataRefetch?: () => void;
-};
-
 export const TeamsListRow: FunctionComponent<TeamsListRowProps> = (props) => {
   const { member, organizationSeekMembersDataRefetch } = props;
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const { accountData } = useContext(AccountContext);
   const { professionalProfilePath } = useNavigateToProfessionalProfile(member?.id);
 
   return (
@@ -71,11 +80,16 @@ export const TeamsListRow: FunctionComponent<TeamsListRowProps> = (props) => {
           </StyledPersonNameLink>
         </StyledPersonLinkWrapper>
       </StyledTdWithMenuContent>
-      <StyledTdWithMenuContent role="cell">Temp Title</StyledTdWithMenuContent>
-      <StyledTdWithMenuContent role="cell">Temp Company</StyledTdWithMenuContent>
-      <StyledTdWithMenuContentEdit role="cell">
-        <TeamsEditMenu member={member} organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch} />
-      </StyledTdWithMenuContentEdit>
+      <StyledTdWithMenuContent role="cell">
+        <StyledPermission>{member?.permissionInOrg}</StyledPermission>
+      </StyledTdWithMenuContent>
+      {hasPermission && (
+        <StyledTdWithMenuContentEdit role="cell">
+          {accountData?.id !== member.id && (
+            <TeamsEditMenu member={member} organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch} />
+          )}
+        </StyledTdWithMenuContentEdit>
+      )}
     </>
   );
 };

@@ -21,8 +21,26 @@ import {
   StyledRouterButton,
   StyledRouterButtonLink,
 } from "../../components";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
+
+const StyledAddPeopleText = styled.div`
+  margin-bottom: ${SPACING.SMALL};
+`;
+
+const StyledInviteMorePeopleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: ${SPACING.XLARGE} 0 ${SPACING.XXXLARGE};
+  text-align: center;
+
+  ${mediaQueries.SM_MD} {
+    margin: ${SPACING.XLARGE} 0;
+  }
+`;
 
 const StyledProjectLink = styled(Link)``;
 
@@ -50,17 +68,18 @@ const StyledTdWithMenuContent = styled(StyledTd)`
     }
 
     &:nth-of-type(3):before {
-      content: "Owner";
-    }
-
-    &:nth-of-type(4):before {
       content: "Posts";
     }
   }
 
   ${mediaQueries.XS_LANDSCAPE} {
     &:first-child {
-      width: 40%;
+      width: 50%;
+    }
+
+    &:nth-child(2) {
+      padding-right: ${SPACING.MEDIUM};
+      text-align: end;
     }
   }
 `;
@@ -75,27 +94,18 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
   }
 `;
 
-/// ///
-const StyledInviteMorePeopleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: ${SPACING.XLARGE} 0 ${SPACING.XXXLARGE};
-  text-align: center;
-
-  ${mediaQueries.SM_MD} {
-    margin: ${SPACING.XLARGE} 0;
+const StyledThRight = styled(StyledTh)`
+  &:nth-child(2) {
+    padding-right: ${SPACING.MEDIUM};
+    text-align: end;
   }
 `;
 
-const StyledAddPeopleText = styled.div`
-  margin-bottom: ${SPACING.SMALL};
-`;
-
 export const ProjectListDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { projectsInOrgSeek, projectsInOrgSeekDataLoading } = useContext(ProjectsContext);
+  const { t } = useTranslator();
 
   return (
     <>
@@ -107,24 +117,25 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         width={"400px"}
       />
 
-      <StyledProjectListHeader>
-        <StyledRouterButtonLeft
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-          title={routeConstantsCleavedApp.projectStartNew.name}
-        >
-          {t("projectStartNew.startNewProject")}
-        </StyledRouterButtonLeft>
-      </StyledProjectListHeader>
+      {hasPermission && (
+        <StyledProjectListHeader>
+          <StyledRouterButtonLeft
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+            title={routeConstantsCleavedApp.projectStartNew.name}
+          >
+            {t("projectStartNew.startNewProject")}
+          </StyledRouterButtonLeft>
+        </StyledProjectListHeader>
+      )}
 
       {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
         <StyledTable role="table">
           <StyledTHead role="rowgroup">
             <StyledTHeadTr role="row">
               <StyledTh role="columnheader">{t("project.projectName")}</StyledTh>
-              <StyledTh role="columnheader">{t("project.dateCreated")}</StyledTh>
-              <StyledTh role="columnheader">{t("project.owner")}</StyledTh>
+              <StyledThRight role="columnheader">{t("project.dateCreated")}</StyledThRight>
               <StyledTh role="columnheader">{t("project.posts")}</StyledTh>
-              <StyledTh role="columnheader">{t("project.edit")}</StyledTh>
+              {hasPermission && <StyledTh role="columnheader">{t("project.edit")}</StyledTh>}
             </StyledTHeadTr>
           </StyledTHead>
           <StyledTBody role="rowgroup">
@@ -140,11 +151,12 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                     </StyledProjectLink>
                   </StyledTdWithMenuContent>
                   <StyledTdWithMenuContent role="cell">temp: 01/25/2023</StyledTdWithMenuContent>
-                  <StyledTdWithMenuContent role="cell">temp: James Riddley</StyledTdWithMenuContent>
                   <StyledTdWithMenuContent role="cell">{project.totalRootPostCount}</StyledTdWithMenuContent>
-                  <StyledTdWithMenuContentEdit role="cell">
-                    <ProjectsEditMenu />
-                  </StyledTdWithMenuContentEdit>
+                  {hasPermission && (
+                    <StyledTdWithMenuContentEdit role="cell">
+                      <ProjectsEditMenu />
+                    </StyledTdWithMenuContentEdit>
+                  )}
                 </StyledTr>
               );
             })}
@@ -152,7 +164,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         </StyledTable>
       )}
 
-      {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
+      {hasPermission && !projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
         <StyledInviteMorePeopleWrapper>
           <StyledAddPeopleText>{t("projectStartNew.addNewProjectHelperText")}</StyledAddPeopleText>
 

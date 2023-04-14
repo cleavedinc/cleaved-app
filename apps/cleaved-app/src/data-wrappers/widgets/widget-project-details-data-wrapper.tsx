@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { Box, SectionHeader, SPACING } from "@cleaved/ui";
 
 import { WidgetProjectDetailsMenu } from "../../components";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
+import { useProjectById } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
 const StyledSectionHeaderWrapper = styled.div`
   align-items: center;
@@ -14,21 +17,21 @@ const StyledSectionHeaderWrapper = styled.div`
 const StyledProjectDetails = styled.div``;
 
 export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const projectData = useProjectById();
+
   return (
     <Box>
       <StyledSectionHeaderWrapper>
-        <SectionHeader>temp. Project Name initiative thing</SectionHeader>
+        <SectionHeader>{projectData && projectData.projectByIdData?.name}</SectionHeader>
 
-        <WidgetProjectDetailsMenu />
+        {hasPermission && <WidgetProjectDetailsMenu />}
       </StyledSectionHeaderWrapper>
 
       <StyledProjectDetails>
-        <p>temp. Project details, here are the project details here. Make these count at a high level.</p>
-        <p>
-          Here are some other facts. These facts are also important. Facts are what make facts so factual. I do think
-          this is a fact.
-        </p>
-        <p>A couple other things to keep in mind. one thing. Another thing.</p>
+        <p>temp.project details needed.</p>
+
+        <div>TEMP label total posts: {projectData && projectData.projectByIdData?.totalPostCount}</div>
       </StyledProjectDetails>
     </Box>
   );

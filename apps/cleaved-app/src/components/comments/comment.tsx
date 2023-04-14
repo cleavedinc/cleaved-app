@@ -15,8 +15,10 @@ import {
   StyledTooltipDark,
 } from "@cleaved/ui";
 
-import { AccountPublicView, ProjectPost } from "../../generated-types/graphql";
+import { AccountPublicView, OrgPermissionLevel, ProjectPost } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile, useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
+
 import { ReactionTypesAndTotalCount } from "../reactions";
 import { SeparatorDot } from "../separators";
 
@@ -100,8 +102,9 @@ const PostCommentProfessionalName = styled.a`
 
 export const Comment: FunctionComponent<CommentProps> = (props) => {
   const { account, commentLevel, postProjectRepliesDataRefetch, reply, setIsCommentRepliesVisible } = props;
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
+  const { t } = useTranslator();
 
   return (
     <StyledCommentWrapper>
@@ -119,15 +122,17 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
       </StyledCommentBody>
 
       <StyledCommentFooterWrapper>
-        <CommentReactions
-          activeReaction={reply.myReaction}
-          postId={reply.id}
-          postProjectRepliesDataRefetch={postProjectRepliesDataRefetch}
-        />
+        {hasPermission && (
+          <CommentReactions
+            activeReaction={reply.myReaction}
+            postId={reply.id}
+            postProjectRepliesDataRefetch={postProjectRepliesDataRefetch}
+          />
+        )}
 
         {reply.reactionTotalCount !== "0" && (
           <>
-            <SeparatorDot />
+            {hasPermission && <SeparatorDot />}
 
             <ReactionTypesAndTotalCount
               reactionsExpressed={reply.reactionsExpressed}
@@ -136,7 +141,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
           </>
         )}
 
-        {commentLevel <= 1 && (
+        {hasPermission && commentLevel <= 1 && (
           <>
             <StyledPipeSeparator>|</StyledPipeSeparator>
             <StyledCommentReplyButton type="button" onClick={() => setIsCommentRepliesVisible(true)}>

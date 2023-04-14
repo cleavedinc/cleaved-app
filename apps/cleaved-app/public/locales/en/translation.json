@@ -140,6 +140,9 @@
     "errorFileIncorrectType": "One file is not an accepted file type.",
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
   },
+  "professional": {
+    "emailLinkText": "Email"
+  },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Skip onboarding",
     "alreadyHasOrganizationText": "I already have an organization I am a part of. ",
@@ -228,10 +231,11 @@
     "areYouSureRemoveMemberModalHeader": "Are you sure?",
     "areYouSureRemoveMemberModalText": "If you remove this team member from your organization, they will not be able to access any of your projects again. Just remember, you can always invite tehm back.",
     "edit": "Edit",
-    "professionalCompany": "Company",
     "professionalName": "Name",
+    "professionalPermissions": "Permissions",
     "professionalTitle": "Job title",
-    "removeProfessional": "Remove professional"
+    "removeProfessional": "Remove professional",
+    "setUserPermission": "Edit user permission"
   },
   "termsOfService": {
     "acceptTermsOfService": "I accept the terms of service",

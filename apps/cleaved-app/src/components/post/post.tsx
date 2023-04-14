@@ -5,8 +5,9 @@ import styled from "styled-components";
 import { BORDERS, Box, COLORS, FONT_SIZES, SPACING, SPACING_PX } from "@cleaved/ui";
 
 import { PostReactions, ReactionTypesAndTotalCount } from "../../components";
-import { PostProjectSeekQuery } from "../../generated-types/graphql";
+import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
 import { CommentsList } from "../comments/comments-list";
 
@@ -95,9 +96,10 @@ const StyledToolbarPostInfo = styled.div`
 
 export const Post: FunctionComponent<PostProps> = (props) => {
   const { post } = props;
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
+  const { t } = useTranslator();
 
   const basicImageAlt = t("post.postImageBasicAlt") ? t("post.postImageBasicAlt") : "";
 
@@ -198,7 +200,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
     >
       <StyledProjectPostBox key={post.id}>
         {postContent}
-        <StyledPostFooter>{postFooterContent}</StyledPostFooter>
+        {hasPermission && <StyledPostFooter>{postFooterContent}</StyledPostFooter>}
 
         <ModalPostComments
           onCommentPostedTriggerGetComments={() => {
@@ -212,7 +214,9 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           <>
             {postContent}
 
-            <StyledmodalPostFooter postRepliesCount={post.repliesCount}>{postFooterContent}</StyledmodalPostFooter>
+            {hasPermission && (
+              <StyledmodalPostFooter postRepliesCount={post.repliesCount}>{postFooterContent}</StyledmodalPostFooter>
+            )}
 
             <CommentsList
               commentLevel={1}

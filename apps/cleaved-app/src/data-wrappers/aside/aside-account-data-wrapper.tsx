@@ -27,11 +27,6 @@ const StyledProfileName = styled(SectionHeader)`
   }
 `;
 
-const StyledProfessionalAbout = styled.div`
-  color: ${COLORS.GRAY_500};
-  white-space: pre-line;
-`;
-
 export const AsideAccountDataWrapper: FunctionComponent = () => {
   const { accountData, accountDataRefetch } = useContext(AccountContext);
   const { professionalProfilePath } = useNavigateToProfessionalProfile(accountData?.id);
@@ -50,8 +45,6 @@ export const AsideAccountDataWrapper: FunctionComponent = () => {
             </Link>
 
             <StyledJobTitle>{accountData?.professionals[0].jobTitle}</StyledJobTitle>
-
-            <StyledProfessionalAbout>{accountData?.professionals[0].about}</StyledProfessionalAbout>
           </StyledAsideAccountWrapper>
         </Box>
       </StickUnderHeaderDesktopOnly>
