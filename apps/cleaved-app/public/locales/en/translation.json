@@ -231,10 +231,11 @@
     "areYouSureRemoveMemberModalHeader": "Are you sure?",
     "areYouSureRemoveMemberModalText": "If you remove this team member from your organization, they will not be able to access any of your projects again. Just remember, you can always invite tehm back.",
     "edit": "Edit",
-    "professionalCompany": "Company",
     "professionalName": "Name",
+    "professionalPermissions": "Permissions",
     "professionalTitle": "Job title",
-    "removeProfessional": "Remove professional"
+    "removeProfessional": "Remove professional",
+    "setUserPermission": "Edit user permission"
   },
   "termsOfService": {
     "acceptTermsOfService": "I accept the terms of service",

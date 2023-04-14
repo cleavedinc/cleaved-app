@@ -6,8 +6,9 @@ import { getTimeSinceDate } from "@cleaved/helpers";
 
 import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
 import { AccountContext } from "../../contexts";
-import { PostProjectSeekQuery } from "../../generated-types/graphql";
+import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
 type PostProjectHeaderProps = {
   account: PostProjectSeekQuery["postProjectSeek"][0]["account"];
@@ -57,6 +58,7 @@ const StyledPostProfessionalName = styled.a`
 
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
   const { account, accountId, className, date, postId } = props;
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
   const { accountData, accountDataLoading } = useContext(AccountContext);
 
@@ -74,7 +76,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
         {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
       </StyledPostProfessionalInfoWrapper>
 
-      {!accountDataLoading && accountData?.id === accountId && (
+      {hasPermission && !accountDataLoading && accountData?.id === accountId && (
         <StyledPostDateWrapper>
           <PostEditMenu postId={postId} />
         </StyledPostDateWrapper>

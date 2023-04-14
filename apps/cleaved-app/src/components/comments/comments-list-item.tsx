@@ -6,6 +6,8 @@ import { ButtonLinkLoadMore, COLORS, SPACING } from "@cleaved/ui";
 import { PostCommentAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 import { CommentForm } from "../../forms";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
+import { useOrganizationPermission } from "../../permissions";
 
 import { Comment } from "../comments/comment";
 import { CommentsList } from "../comments/comments-list";
@@ -47,6 +49,7 @@ const StyledRepliesListWrapper = styled.div`
 
 export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props) => {
   const { commentLevel, postProjectRepliesDataRefetch, postReply } = props;
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { accountData } = useContext(AccountContext);
   const [isCommentRepliesVisible, setIsCommentRepliesVisible] = useState(false);
   const [triggerGetReplies, setTriggerGetReplies] = useState(0);
@@ -77,7 +80,7 @@ export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props
         </StyledRepliesListWrapper>
       )}
 
-      {isCommentRepliesVisible && (
+      {hasPermission && isCommentRepliesVisible && (
         <StyledPostCommentFormWrapper>
           <PostCommentAvatar account={accountData} />
           <CommentForm

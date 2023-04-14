@@ -21,7 +21,9 @@ import {
   StyledRouterButton,
   StyledRouterButtonLink,
 } from "../../components";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
 const StyledProjectLink = styled(Link)``;
@@ -93,9 +95,10 @@ const StyledAddPeopleText = styled.div`
 `;
 
 export const ProjectListDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { projectsInOrgSeek, projectsInOrgSeekDataLoading } = useContext(ProjectsContext);
+  const { t } = useTranslator();
 
   return (
     <>
@@ -107,14 +110,16 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         width={"400px"}
       />
 
-      <StyledProjectListHeader>
-        <StyledRouterButtonLeft
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-          title={routeConstantsCleavedApp.projectStartNew.name}
-        >
-          {t("projectStartNew.startNewProject")}
-        </StyledRouterButtonLeft>
-      </StyledProjectListHeader>
+      {hasPermission && (
+        <StyledProjectListHeader>
+          <StyledRouterButtonLeft
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+            title={routeConstantsCleavedApp.projectStartNew.name}
+          >
+            {t("projectStartNew.startNewProject")}
+          </StyledRouterButtonLeft>
+        </StyledProjectListHeader>
+      )}
 
       {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
         <StyledTable role="table">
@@ -143,7 +148,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                   <StyledTdWithMenuContent role="cell">temp: James Riddley</StyledTdWithMenuContent>
                   <StyledTdWithMenuContent role="cell">{project.totalRootPostCount}</StyledTdWithMenuContent>
                   <StyledTdWithMenuContentEdit role="cell">
-                    <ProjectsEditMenu />
+                    {hasPermission && <ProjectsEditMenu />}
                   </StyledTdWithMenuContentEdit>
                 </StyledTr>
               );
@@ -152,7 +157,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         </StyledTable>
       )}
 
-      {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
+      {hasPermission && !projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
         <StyledInviteMorePeopleWrapper>
           <StyledAddPeopleText>{t("projectStartNew.addNewProjectHelperText")}</StyledAddPeopleText>
 

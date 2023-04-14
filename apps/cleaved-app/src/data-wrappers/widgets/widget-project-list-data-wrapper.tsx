@@ -6,7 +6,9 @@ import { BORDERS, Box, COLORS, CommentIcon, FONT_SIZES, SectionHeader, SPACING }
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
 import { authTokenContext, ProjectsContext } from "../../contexts";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
 const StyledCommentCount = styled.div`
@@ -83,10 +85,11 @@ const StyledSeeAllProjectsLink = styled(Link)`
 `;
 
 export const WidgetProjectListDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { projectsInOrgSeek, projectsInOrgSeekDataLoading, projectsInOrgSeekRefetch, setProjectPageSize } =
     useContext(ProjectsContext);
+  const { t } = useTranslator();
 
   useEffect(() => {
     if (setProjectPageSize) {
@@ -103,7 +106,7 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
       <StyledSectionHeaderWrapper>
         <SectionHeader>{t("widget.projectsList")}</SectionHeader>
 
-        <WidgetProjectListMenu />
+        {hasPermission && <WidgetProjectListMenu />}
       </StyledSectionHeaderWrapper>
 
       {!projectsInOrgSeekDataLoading && projectsInOrgSeek?.length === 0 && (

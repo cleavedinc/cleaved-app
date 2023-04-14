@@ -78,8 +78,7 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
           <StyledTHead role="rowgroup">
             <StyledTHeadTr role="row">
               <StyledTh role="columnheader">{t("teams.professionalName")}</StyledTh>
-              <StyledTh role="columnheader">{t("teams.professionalTitle")}</StyledTh>
-              <StyledTh role="columnheader">{t("teams.professionalCompany")}</StyledTh>
+              <StyledTh role="columnheader">{t("teams.professionalPermissions")}</StyledTh>
               <StyledTh role="columnheader">{t("teams.edit")}</StyledTh>
             </StyledTHeadTr>
           </StyledTHead>

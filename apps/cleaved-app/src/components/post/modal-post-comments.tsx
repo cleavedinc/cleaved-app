@@ -18,7 +18,9 @@ import {
 import { PostCommentAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 import { CommentForm } from "../../forms";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
 type ModalPostCommentsBackgroundProps = {
   backgroundColor?: string;
@@ -153,6 +155,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
   title,
   useOnOutsideClick = true,
 }) => {
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { accountData } = useContext(AccountContext);
 
   if (!open) {
@@ -163,14 +166,16 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
     <>
       <ModalPostCommentsHeader hidden={forceOpen} onCloseRequested={onCloseRequested} title={title} />
       <StyledContentWrapper>{children}</StyledContentWrapper>
-      <StyledPostCommentFormWrapper>
-        <PostCommentAvatar account={accountData} />
+      {hasPermission && (
+        <StyledPostCommentFormWrapper>
+          <PostCommentAvatar account={accountData} />
 
-        <StyledCommentForm
-          postOrPostReplyId={postOrPostReplyId}
-          onCommentPostedTriggerGetComments={onCommentPostedTriggerGetComments}
-        />
-      </StyledPostCommentFormWrapper>
+          <StyledCommentForm
+            postOrPostReplyId={postOrPostReplyId}
+            onCommentPostedTriggerGetComments={onCommentPostedTriggerGetComments}
+          />
+        </StyledPostCommentFormWrapper>
+      )}
     </>
   );
 
