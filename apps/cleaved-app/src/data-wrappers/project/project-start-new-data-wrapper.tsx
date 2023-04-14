@@ -20,6 +20,7 @@ export const ProjectStartNewDataWrapper: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
   const { t } = useTranslator();
 
+  // route to the home page if the user makes it to this page somehow
   useEffect(() => {
     if (!hasPermission) {
       navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`);

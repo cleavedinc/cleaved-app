@@ -7,7 +7,9 @@ import { Box, buttonBase, buttonPrimaryBase, COLORS, HeadingWrapper, SectionHead
 
 import { authTokenContext } from "../../contexts";
 import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
 const StyledManageOrganizationsLink = styled(Link)`
   ${buttonBase}
@@ -20,8 +22,9 @@ const StyledManageOrganizationsLink = styled(Link)`
 `;
 
 export const AccountDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
+  const { t } = useTranslator();
 
   return (
     <>
@@ -33,18 +36,20 @@ export const AccountDataWrapper: FunctionComponent = () => {
         <PersonalInformationForm />
       </Box>
 
-      <Box>
-        <HeadingWrapper>
-          <SectionHeader>{t("organizations.organizations")}</SectionHeader>
-        </HeadingWrapper>
+      {hasPermission && (
+        <Box>
+          <HeadingWrapper>
+            <SectionHeader>{t("organizations.organizations")}</SectionHeader>
+          </HeadingWrapper>
 
-        <StyledManageOrganizationsLink
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.organizationList.route}`}
-          title={routeConstantsCleavedApp.organizationList.name}
-        >
-          {t("organizations.manageOrganizations")}
-        </StyledManageOrganizationsLink>
-      </Box>
+          <StyledManageOrganizationsLink
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.organizationList.route}`}
+            title={routeConstantsCleavedApp.organizationList.name}
+          >
+            {t("organizations.manageOrganizations")}
+          </StyledManageOrganizationsLink>
+        </Box>
+      )}
     </>
   );
 };
