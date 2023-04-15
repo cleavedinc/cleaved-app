@@ -12,7 +12,7 @@ const sharedPlugins = [HTMLWebpackPluginConfig];
 
 const getEntries = () => {
   const entries = {
-    account: ["./src/utils/i18n.ts", "./src/pages/account.tsx"],
+    account: ["./src/utils/i18n.ts", "./src/pages/account/account.tsx"],
     communityGuidelines: ["./src/utils/i18n.ts", "./src/pages/agreements/community-guidelines.tsx"],
     elaborationOfCommunityGuidelines: [
       "./src/utils/i18n.ts",

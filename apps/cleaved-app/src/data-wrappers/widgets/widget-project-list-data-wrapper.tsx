@@ -91,6 +91,9 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
     useContext(ProjectsContext);
   const { t } = useTranslator();
 
+  const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
+  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
+
   useEffect(() => {
     if (setProjectPageSize) {
       setProjectPageSize(5);
@@ -115,9 +118,9 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
 
           <StyledRouterButtonLeft
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={routeConstantsCleavedApp.projectStartNew.name}
+            title={projectStartNewLinkName}
           >
-            {t("projectStartNew.startNewProject")}
+            {projectStartNewLinkName}
           </StyledRouterButtonLeft>
         </>
       )}
@@ -148,7 +151,7 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
         <StyledSeeAllProjects>
           <StyledSeeAllProjectsLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectList.route}`}
-            title={routeConstantsCleavedApp.projectList.name}
+            title={projectListLinkName}
           >
             {t("widget.projectListSeeMore")}
           </StyledSeeAllProjectsLink>

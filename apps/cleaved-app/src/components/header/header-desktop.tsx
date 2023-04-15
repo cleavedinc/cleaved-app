@@ -98,6 +98,8 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
     handleCloseMenu();
   };
 
+  const accountLinkName = t("menuLinkNames.account") ? t("menuLinkNames.account") : "";
+
   return (
     <StyledStickyHeader className={className} hasBoxShadow>
       <NavigationWrapper>
@@ -113,7 +115,7 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
         </StyledLogoWrapper>
 
         <MainNavigationLinksWrapper>
-          <MainNavigationLinks preferredOrgId={preferredOrgId} />
+          <MainNavigationLinks />
         </MainNavigationLinksWrapper>
 
         <NavigationButtonWrapper>
@@ -135,10 +137,10 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
                     <Link
                       getProps={isMenuItemActive}
                       onClick={handleCloseMenu}
-                      title={routeConstantsCleavedApp.account.name}
+                      title={accountLinkName}
                       to={`/${preferredOrgId}${routeConstantsCleavedApp.account.route}`}
                     >
-                      <NavigationButtonLabel>{routeConstantsCleavedApp.account.name}</NavigationButtonLabel>
+                      <NavigationButtonLabel>{accountLinkName}</NavigationButtonLabel>
                     </Link>
                   </StyledDropdownMenuNavigationButton>
 

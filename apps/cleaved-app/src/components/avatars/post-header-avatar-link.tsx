@@ -3,15 +3,11 @@ import styled, { css } from "styled-components";
 
 import { BORDERS, COLORS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
 
+import { PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile } from "../../hooks";
 
 type PostHeaderAvatarProps = {
-  account: {
-    id: string;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    currentAvatar?: string | null | undefined;
-  };
+  account: PostProjectSeekQuery["postProjectSeek"][0]["account"] | undefined;
 };
 
 const avatartBase = css`
@@ -41,19 +37,19 @@ const StyledAvatarInitials = styled.div`
 
 export const PostHeaderAvatarLink: FunctionComponent<PostHeaderAvatarProps> = (props) => {
   const { account } = props;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account.id);
-  const firstNameInitial = account.firstName?.charAt(0).toUpperCase() || "";
-  const lastNameInitial = account.lastName?.charAt(0).toUpperCase() || "";
+  const { professionalProfilePath } = useNavigateToProfessionalProfile(account && account.id);
+  const firstNameInitial = (account && account.firstName?.charAt(0).toUpperCase()) || "";
+  const lastNameInitial = (account && account.lastName?.charAt(0).toUpperCase()) || "";
 
   return (
     <>
-      {account.currentAvatar && (
+      {account && account.currentAvatar && (
         <StyledAvatarImageLink href={professionalProfilePath}>
           <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
         </StyledAvatarImageLink>
       )}
 
-      {!account.currentAvatar && (
+      {account && !account.currentAvatar && (
         <StyledAvatarImageLink href={professionalProfilePath}>
           <StyledAvatarInitials>
             {firstNameInitial}

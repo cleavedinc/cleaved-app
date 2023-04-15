@@ -1,19 +1,13 @@
 import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 
-import { BORDERS, FONT_SIZES, RADIUS, SPACING } from "@cleaved/ui";
+import { BORDERS, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "@cleaved/ui";
 
 import { AccountAvatarForm } from "../../forms";
+import { FindMyAccountQuery } from "../../generated-types/graphql";
 
 type AsideAccountAvatarProps = {
-  account:
-    | {
-        id: string;
-        firstName?: string | null | undefined;
-        lastName?: string | null | undefined;
-        currentAvatar?: string | null | undefined;
-      }
-    | undefined;
+  account: FindMyAccountQuery["findMyAccount"] | undefined;
   refetchAccountData: (() => void) | undefined;
 };
 
@@ -22,16 +16,20 @@ const avatartBase = css`
   border-radius: ${RADIUS.CIRCLE};
   border: ${BORDERS.BORDER_PRIMARY};
   display: flex;
-  height: 100px;
+  height: 150px;
   justify-content: center;
   margin: 0 auto ${SPACING.MEDIUM};
-  width: 100px;
+  width: 150px;
 `;
 
 const StyledAccountAvatarForm = styled(AccountAvatarForm)`
-  bottom: 0;
+  bottom: 20px;
   position: absolute;
-  right: 60px;
+  right: 87px;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    right: 10px;
+  }
 `;
 
 const StyledAvatarImage = styled.img`
@@ -39,6 +37,7 @@ const StyledAvatarImage = styled.img`
 `;
 
 const StyledAvatarImageWrapper = styled.div`
+  margin-right: ${SPACING.XLARGE};
   position: relative;
 `;
 
@@ -47,7 +46,7 @@ const StyledAvatarInitials = styled.div`
   font-size: ${FONT_SIZES.XXLARGE};
 `;
 
-export const AsideAccountAvatar: FunctionComponent<AsideAccountAvatarProps> = (props) => {
+export const EditAccountAvatar: FunctionComponent<AsideAccountAvatarProps> = (props) => {
   const { account, refetchAccountData } = props;
   const firstNameInitial = account?.firstName?.charAt(0).toUpperCase() || "";
   const lastNameInitial = account?.lastName?.charAt(0).toUpperCase() || "";

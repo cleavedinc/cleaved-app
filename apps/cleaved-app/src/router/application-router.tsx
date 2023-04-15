@@ -5,7 +5,8 @@ import { Router } from "@reach/router";
 import { routeConstantsShared } from "@cleaved/helpers";
 import { mediaQueries } from "@cleaved/ui";
 
-import { Account } from "../pages/account";
+import { Account } from "../pages/account/account";
+import { AccountMembership } from "../pages/account/account-membership";
 import { CommunityGuidelines } from "../pages/agreements/community-guidelines";
 import { ElaborationOfCommunityGuidelines } from "../pages/agreements/elaboration-of-community-guidelines";
 import { Home } from "../pages/home";
@@ -41,6 +42,10 @@ const StyledRouter = styled(Router)`
 export const ApplicationRouter: FunctionComponent = () => (
   <StyledRouter primary={false}>
     <PageProtector path={`:orgId${routeConstantsCleavedApp.account.route}`} renderedPage={<Account />} />
+    <PageProtector
+      path={`:orgId${routeConstantsCleavedApp.accountMembership.route}`}
+      renderedPage={<AccountMembership />}
+    />
     <PageProtector
       path={`/:orgId${routeConstantsCleavedApp.professional.route}/:professionalId`}
       renderedPage={<Professional />}

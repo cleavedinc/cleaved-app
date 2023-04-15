@@ -1,3 +1,4 @@
+export * from "./account-page-menu";
 export * from "./members-list-menu";
 export * from "./organization-edit-menu";
 export * from "./post-edit-menu";

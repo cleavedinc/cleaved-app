@@ -15,7 +15,7 @@ import {
   StyledTooltipDark,
 } from "@cleaved/ui";
 
-import { AccountPublicView, OrgPermissionLevel, ProjectPost } from "../../generated-types/graphql";
+import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
@@ -25,10 +25,10 @@ import { SeparatorDot } from "../separators";
 import { CommentReactions } from "./comment-reactions";
 
 type CommentProps = {
-  account: AccountPublicView;
+  account: PostProjectRepliesQuery["postProjectReplies"][0]["account"];
   commentLevel: number;
   postProjectRepliesDataRefetch?: () => void;
-  reply: ProjectPost;
+  reply: PostProjectRepliesQuery["postProjectReplies"][0];
   setIsCommentRepliesVisible: Dispatch<React.SetStateAction<boolean>>;
 };
 

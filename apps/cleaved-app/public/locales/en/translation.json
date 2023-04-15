@@ -92,6 +92,17 @@
     "signInHeader": "Sign up / Log in",
     "signInMessage": "Create a new account, or log in to an existing one."
   },
+  "menuLinkNames": {
+    "account": "Account",
+    "accountMembership": "Membership",
+    "home": "Home",
+    "projectList": "Projects",
+    "projectStartNew": "Start a new project",
+    "professionalInvite": "Professional Invite",
+    "organizationList": "Organization list",
+    "organizationRegister": "Register organization",
+    "teamsList": "Team"
+  },
   "organizations": {
     "dateCreated": "Date created",
     "owner": "Owner",

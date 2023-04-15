@@ -70,6 +70,8 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
     useOrganizationSeekMembers(null, 20);
   const { t } = useTranslator();
 
+  const professionalInviteLinkName = t("menuLinkNames.professionalInvite") ? t("menuLinkNames.professionalInvite") : "";
+
   return (
     <>
       <HelperInfoHeaderTextImageRightBox
@@ -84,7 +86,7 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
         <StyledTeamListHeader>
           <StyledRouterButtonRight
             to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
-            title={routeConstantsCleavedApp.professionalInvite.name}
+            title={professionalInviteLinkName}
           >
             {t("teams.addNewTeamMember")}
           </StyledRouterButtonRight>
@@ -124,7 +126,7 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
 
             <StyledRouterButtonLink
               to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
-              title={routeConstantsCleavedApp.professionalInvite.name}
+              title={professionalInviteLinkName}
             >
               {t("teams.addNewTeamMember")}
             </StyledRouterButtonLink>

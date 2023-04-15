@@ -26,14 +26,16 @@ export const AccountDataWrapper: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
   const { t } = useTranslator();
 
+  const organizationListLinkName = t("menuLinkNames.organizationList") ? t("menuLinkNames.organizationList") : "";
+
   return (
     <>
       <Box>
-        <ProfesionalInformationForm />
+        <PersonalInformationForm />
       </Box>
 
       <Box>
-        <PersonalInformationForm />
+        <ProfesionalInformationForm />
       </Box>
 
       {hasPermission && (
@@ -44,7 +46,7 @@ export const AccountDataWrapper: FunctionComponent = () => {
 
           <StyledManageOrganizationsLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.organizationList.route}`}
-            title={routeConstantsCleavedApp.organizationList.name}
+            title={organizationListLinkName}
           >
             {t("organizations.manageOrganizations")}
           </StyledManageOrganizationsLink>

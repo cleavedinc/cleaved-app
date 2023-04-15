@@ -66,10 +66,14 @@ const StyledTdWithMenuContentEditColumn = styled(StyledTd)`
 `;
 
 export const OrganizationListDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
   const { organizationMembershipsData, organizationMembershipsDataLoading } =
     useContext(OrganizationMembershipsContext);
+  const { t } = useTranslator();
+
+  const organizationRegisterLinkName = t("menuLinkNames.organizationRegister")
+    ? t("menuLinkNames.organizationRegister")
+    : "";
 
   return (
     <>
@@ -84,7 +88,7 @@ export const OrganizationListDataWrapper: FunctionComponent = () => {
       <StyledOrganizationsHeader>
         <StyledRegisterOrgLink
           to={`/${preferredOrgId}${routeConstantsCleavedApp.organizationRegister.route}`}
-          title={routeConstantsCleavedApp.organizationRegister.name}
+          title={organizationRegisterLinkName}
         >
           {t("organizations.organizationRegister")}
         </StyledRegisterOrgLink>

@@ -107,6 +107,8 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
   const { projectsInOrgSeek, projectsInOrgSeekDataLoading } = useContext(ProjectsContext);
   const { t } = useTranslator();
 
+  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
+
   return (
     <>
       <HelperInfoHeaderTextImageRightBox
@@ -121,7 +123,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         <StyledProjectListHeader>
           <StyledRouterButtonLeft
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={routeConstantsCleavedApp.projectStartNew.name}
+            title={projectStartNewLinkName}
           >
             {t("projectStartNew.startNewProject")}
           </StyledRouterButtonLeft>
@@ -170,7 +172,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
 
           <StyledRouterButtonLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={routeConstantsCleavedApp.projectStartNew.name}
+            title={projectStartNewLinkName}
           >
             {t("projectStartNew.startNewProject")}
           </StyledRouterButtonLink>

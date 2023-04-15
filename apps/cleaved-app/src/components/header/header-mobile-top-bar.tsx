@@ -82,6 +82,8 @@ export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (p
     handleCloseMenu();
   };
 
+  const accountLinkName = t("menuLinkNames.account") ? t("menuLinkNames.account") : "";
+
   return (
     <StyledHeaderMobileTopBarStickyHeader className={className} hasBoxShadow>
       <NavigationWrapper>
@@ -111,10 +113,10 @@ export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (p
                     <Link
                       getProps={isMenuItemActive}
                       onClick={handleCloseMenu}
-                      title={routeConstantsCleavedApp.account.name}
+                      title={accountLinkName}
                       to={`/${preferredOrgId}${routeConstantsCleavedApp.account.route}`}
                     >
-                      <NavigationButtonLabel>{routeConstantsCleavedApp.account.name}</NavigationButtonLabel>
+                      <NavigationButtonLabel>{accountLinkName}</NavigationButtonLabel>
                     </Link>
                   </StyledDropdownMenuNavigationButton>
 
