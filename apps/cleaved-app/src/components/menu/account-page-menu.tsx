@@ -41,20 +41,50 @@ export const AccountPageMenu: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
   const { t } = useTranslator();
 
-  const accountLinkName = t("menuLinkNames.account") ? t("menuLinkNames.account") : "";
   const accountMembershipLinkName = t("menuLinkNames.accountMembership") ? t("menuLinkNames.accountMembership") : "";
+  const accountOrganizationsLinkName = t("menuLinkNames.accountOrganizations")
+    ? t("menuLinkNames.accountOrganizations")
+    : "";
+  const accountPersonalInformationLinkName = t("menuLinkNames.accountPersonalInformation")
+    ? t("menuLinkNames.accountPersonalInformation")
+    : "";
+  const accountProfessionalInformationLinkName = t("menuLinkNames.accountProfessionalInformation")
+    ? t("menuLinkNames.accountProfessionalInformation")
+    : "";
 
   return (
     <StyledMenuList>
       <StyledMenuListItem>
         <StyledMenuLink
           getProps={isMenuItemActive}
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.account.route}`}
-          title={accountLinkName}
+          to={`/${preferredOrgId}${routeConstantsCleavedApp.accountPersonalInformation.route}`}
+          title={accountPersonalInformationLinkName}
         >
-          <StyledMenuName>{accountLinkName}</StyledMenuName>
+          <StyledMenuName>{accountPersonalInformationLinkName}</StyledMenuName>
         </StyledMenuLink>
       </StyledMenuListItem>
+
+      <StyledMenuListItem>
+        <StyledMenuLink
+          getProps={isMenuItemActive}
+          to={`/${preferredOrgId}${routeConstantsCleavedApp.accountProfessionalInformation.route}`}
+          title={accountProfessionalInformationLinkName}
+        >
+          <StyledMenuName>{accountProfessionalInformationLinkName}</StyledMenuName>
+        </StyledMenuLink>
+      </StyledMenuListItem>
+
+      {hasPermission && (
+        <StyledMenuListItem>
+          <StyledMenuLink
+            getProps={isMenuItemActive}
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.accountOrganizations.route}`}
+            title={accountOrganizationsLinkName}
+          >
+            <StyledMenuName>{accountOrganizationsLinkName}</StyledMenuName>
+          </StyledMenuLink>
+        </StyledMenuListItem>
+      )}
 
       {hasPermission && (
         <StyledMenuListItem>

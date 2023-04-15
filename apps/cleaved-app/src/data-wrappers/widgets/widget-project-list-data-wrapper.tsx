@@ -2,7 +2,16 @@ import React, { FunctionComponent, useContext, useEffect } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { BORDERS, Box, COLORS, CommentIcon, FONT_SIZES, SectionHeader, SPACING } from "@cleaved/ui";
+import {
+  BORDERS,
+  Box,
+  COLORS,
+  CommentIcon,
+  FONT_SIZES,
+  SectionHeader,
+  SPACING,
+  WidgetHeadingWrapper,
+} from "@cleaved/ui";
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
 import { authTokenContext, ProjectsContext } from "../../contexts";
@@ -64,12 +73,6 @@ const StyledRouterButtonLeft = styled(StyledRouterButton)`
   margin-left: auto;
 `;
 
-const StyledSectionHeaderWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: ${SPACING.SMALL};
-`;
-
 const StyledSeeAllProjects = styled.div`
   font-size: ${FONT_SIZES.SMALL};
   text-align: right;
@@ -106,11 +109,11 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
 
   return (
     <Box>
-      <StyledSectionHeaderWrapper>
+      <WidgetHeadingWrapper>
         <SectionHeader>{t("widget.projectsList")}</SectionHeader>
 
         {hasPermission && <WidgetProjectListMenu />}
-      </StyledSectionHeaderWrapper>
+      </WidgetHeadingWrapper>
 
       {!projectsInOrgSeekDataLoading && projectsInOrgSeek?.length === 0 && (
         <>

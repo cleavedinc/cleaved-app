@@ -138,7 +138,7 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
                       getProps={isMenuItemActive}
                       onClick={handleCloseMenu}
                       title={accountLinkName}
-                      to={`/${preferredOrgId}${routeConstantsCleavedApp.account.route}`}
+                      to={`/${preferredOrgId}${routeConstantsCleavedApp.accountPersonalInformation.route}`}
                     >
                       <NavigationButtonLabel>{accountLinkName}</NavigationButtonLabel>
                     </Link>

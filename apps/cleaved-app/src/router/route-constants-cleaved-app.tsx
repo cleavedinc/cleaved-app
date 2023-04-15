@@ -1,9 +1,18 @@
 export const routeConstantsCleavedApp = {
-  account: {
-    route: "/account",
-  },
   accountMembership: {
     route: "/account-membership",
+  },
+  accountOrganizationRegister: {
+    route: "/account-organizations/register-organization",
+  },
+  accountPersonalInformation: {
+    route: "/account-personal-information",
+  },
+  accountProfessionalInformation: {
+    route: "/account-professional-information",
+  },
+  accountOrganizations: {
+    route: "/account-organizations",
   },
   home: {
     route: "/home",
@@ -37,12 +46,6 @@ export const routeConstantsCleavedApp = {
   },
   professionalOnboardingHasOrganization: {
     route: "/professional-onboarding-has-organization",
-  },
-  organizationList: {
-    route: "/organization-list",
-  },
-  organizationRegister: {
-    route: "/organization-list/register-organization",
   },
   teamsList: {
     route: "/teams-list",

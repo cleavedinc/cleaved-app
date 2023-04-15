@@ -26,6 +26,7 @@
   },
   "files": {
     "avatarImageSizeRecommendation": "Suggested 200px square",
+    "avatarUploadImage": "Upload image",
     "fileSizeExceeded": "The file size must be smaller than 1MB",
     "selectAnImageToUpload": "Select an image/gif to upload"
   },
@@ -95,12 +96,14 @@
   "menuLinkNames": {
     "account": "Account",
     "accountMembership": "Membership",
+    "accountOrganizations": "Organizations",
+    "accountPersonalInformation": "Personal Information",
+    "accountProfessionalInformation": "Professional Information",
     "home": "Home",
     "projectList": "Projects",
     "projectStartNew": "Start a new project",
     "professionalInvite": "Professional Invite",
-    "organizationList": "Organization list",
-    "organizationRegister": "Register organization",
+    "organizationRegister": "Register a new organization",
     "teamsList": "Team"
   },
   "organizations": {
@@ -112,12 +115,12 @@
     "organizations": "Organizations",
     "organizationName": "Organization",
     "organizationNamePlaceholder": "Organization name",
-    "organizationRegister": "Register a new organization",
+    "organizationRegister": "Register organization",
     "removeOrganization": "Remove organization",
     "setDefaultOrganization": "Set as active organization"
   },
   "organizationsStartNew": {
-    "registerNewOrganization": "Register an organization"
+    "registerNewOrganization": "Register a new organization"
   },
   "people": {
     "addPerson": "Add Teammate",

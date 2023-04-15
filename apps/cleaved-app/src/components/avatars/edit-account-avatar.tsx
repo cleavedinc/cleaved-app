@@ -16,19 +16,24 @@ const avatartBase = css`
   border-radius: ${RADIUS.CIRCLE};
   border: ${BORDERS.BORDER_PRIMARY};
   display: flex;
-  height: 150px;
+  height: 100px;
   justify-content: center;
-  margin: 0 auto ${SPACING.MEDIUM};
-  width: 150px;
+  margin: 0 auto ${SPACING.SMALL};
+  width: 100px;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    height: 150px;
+    width: 150px;
+  }
 `;
 
 const StyledAccountAvatarForm = styled(AccountAvatarForm)`
-  bottom: 20px;
-  position: absolute;
-  right: 87px;
+  font-size: ${FONT_SIZES.XSMALL};
+  justify-content: center;
+  margin-bottom: ${SPACING.SMALL};
+  padding: ${SPACING.MEDIUM} 0;
 
   ${mediaQueries.XS_LANDSCAPE} {
-    right: 10px;
   }
 `;
 
@@ -37,8 +42,11 @@ const StyledAvatarImage = styled.img`
 `;
 
 const StyledAvatarImageWrapper = styled.div`
-  margin-right: ${SPACING.XLARGE};
   position: relative;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    margin-right: ${SPACING.XLARGE};
+  }
 `;
 
 const StyledAvatarInitials = styled.div`

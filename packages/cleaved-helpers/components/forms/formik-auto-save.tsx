@@ -35,15 +35,25 @@ const SavedTextAlert = styled.div`
 export const FormikAutoSave: FunctionComponent<FormikAutoSaveProps> = (props) => {
   const { className, debounceMs, errorSavingText, lastSavedText, savingText } = props;
   const formik = useFormikContext<any>();
+  const [showSaveMessage, setShowDiv] = useState(false);
   const [lastSaved, setLastSaved] = useState<string | null>(null);
+  const [result, setResult] = useState<string | undefined | null>(null);
 
   const debouncedSubmit = useCallback(
     debounce(() => {
       if (!formik.isValid || !formik.dirty) return false;
 
-      return formik.submitForm().then(() => {
-        return setLastSaved(new Date().toLocaleTimeString());
-      });
+      return formik
+        .submitForm()
+        .then(() => {
+          setLastSaved(new Date().toLocaleTimeString());
+          setResult(lastSavedText);
+          setShowDiv(true);
+        })
+        .catch(() => {
+          setResult(errorSavingText);
+          setShowDiv(true);
+        });
     }, debounceMs),
     [formik.submitForm, formik.isValid, formik.initialValues, formik.values, debounceMs]
   );
@@ -53,21 +63,28 @@ export const FormikAutoSave: FunctionComponent<FormikAutoSaveProps> = (props) =>
     return debouncedSubmit.cancel;
   }, [debouncedSubmit, formik.values]);
 
-  let result = null;
+  useEffect(() => {
+    if (showSaveMessage) {
+      const timeout = setTimeout(() => {
+        setShowDiv(false);
+      }, 3000); // remove message after 3 seconds
+
+      return () => clearTimeout(timeout);
+    }
+  }, [showSaveMessage]);
+
   if (formik.isSubmitting) {
-    result = savingText;
+    setResult(savingText);
   } else if (Object.keys(formik.errors).length > 0) {
-    result = errorSavingText;
-  } else if (lastSaved !== null) {
-    result = <SavedTextAlert>{lastSavedText}</SavedTextAlert>;
+    setResult(errorSavingText);
   }
 
-  return <div className={className}>{result}</div>;
+  return <>{showSaveMessage && <SavedTextAlert className={className}>{result}</SavedTextAlert>}</>;
 };
 
 FormikAutoSave.defaultProps = {
   debounceMs: 800,
-  errorSavingText: "Something happened, please try again",
+  errorSavingText: "Error, please try again",
   lastSavedText: "Saved",
   savingText: "Saving...",
 };

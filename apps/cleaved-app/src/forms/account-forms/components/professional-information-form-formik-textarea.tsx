@@ -77,7 +77,7 @@ export const ProfessionalInformationFormFormikTextarea: FunctionComponent<
     <StyledFormikTextarea hasError={hasError}>
       <StyledTextarea
         {...rest}
-        autoFocus={true}
+        autoFocus={false}
         aria-label={ariaLabel}
         name={field.name}
         onBlur={field.onBlur}

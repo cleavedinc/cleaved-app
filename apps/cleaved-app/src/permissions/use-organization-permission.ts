@@ -7,7 +7,7 @@ export const useOrganizationPermission = (permissionLevels: OrgPermissionLevel[]
   const [hasPermission, setHasPermission] = useState(false);
   // const { accountData } = useContext(AccountContext);
   // const accountPermission = accountData?.permissionInOrg; // TODO: add this to the model??? Ask jeremy
-  const accountPermission = "ADMIN";
+  const accountPermission = "ADMIN"; // ADMIN, VIEWER, UPDATER
 
   useEffect(() => {
     let foundPermission = false;
