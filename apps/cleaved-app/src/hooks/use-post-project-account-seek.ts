@@ -25,6 +25,8 @@ export const usePostProjectAccountSeek = (
   const { preferredOrgId } = useContext(authTokenContext);
 
   const { data, loading, refetch } = useQuery<PostProjectAccountSeekQuery>(POST_PROJECT_ACCOUNT_SEEK_QUERY, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },

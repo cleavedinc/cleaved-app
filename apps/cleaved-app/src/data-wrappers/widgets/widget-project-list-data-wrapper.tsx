@@ -2,16 +2,7 @@ import React, { FunctionComponent, useContext, useEffect } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import {
-  BORDERS,
-  Box,
-  COLORS,
-  CommentIcon,
-  FONT_SIZES,
-  SectionHeader,
-  SPACING,
-  WidgetHeadingWrapper,
-} from "@cleaved/ui";
+import { BORDERS, Box, COLORS, FilePost, FONT_SIZES, SectionHeader, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
 import { authTokenContext, ProjectsContext } from "../../contexts";
@@ -20,12 +11,11 @@ import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
-const StyledCommentCount = styled.div`
+const StyledPostCount = styled.div`
   color: ${COLORS.BLACK};
-  font-size: ${FONT_SIZES.XSMALL};
 `;
 
-const StyledCommentIcon = styled(CommentIcon)`
+const StyledPostIcon = styled(FilePost)`
   margin-left: 2px;
 `;
 
@@ -54,11 +44,11 @@ const StyledProjectList = styled.ul`
 
 const StyledProjectListItem = styled.li`
   cursor: pointer;
-  padding: ${SPACING.SMALL};
+  padding: ${SPACING.SMALL} 0;
 
-  :hover {
+  /* :hover {
     background-color: ${COLORS.GRAY_50};
-  }
+  } */
 
   :not(:last-child) {
     border-bottom: ${BORDERS.BORDER_PRIMARY};
@@ -75,7 +65,6 @@ const StyledRouterButtonLeft = styled(StyledRouterButton)`
 
 const StyledSeeAllProjects = styled.div`
   font-size: ${FONT_SIZES.SMALL};
-  text-align: right;
 `;
 
 const StyledSeeAllProjectsLink = styled(Link)`
@@ -90,8 +79,7 @@ const StyledSeeAllProjectsLink = styled(Link)`
 export const WidgetProjectListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const { projectsInOrgSeek, projectsInOrgSeekDataLoading, projectsInOrgSeekRefetch, setProjectPageSize } =
-    useContext(ProjectsContext);
+  const { projectsInOrgSeek, projectsInOrgSeekDataLoading, setProjectPageSize } = useContext(ProjectsContext);
   const { t } = useTranslator();
 
   const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
@@ -101,10 +89,6 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
     if (setProjectPageSize) {
       setProjectPageSize(5);
     }
-
-    // if (projectsInOrgSeekRefetch) {
-    //   projectsInOrgSeekRefetch(); // TODO: ASK Jeremy if this is the way... I'm refreshing on project create and doens' tseem to retrigger state on the home page without a use effect
-    // }
   }, []); // eslint-disable-line
 
   return (
@@ -140,8 +124,8 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
                   >
                     <StyledProjectName>{project.name}</StyledProjectName>
                     <StyledCommentInfoWrapper>
-                      <StyledCommentCount>{project.totalResponseCount}</StyledCommentCount>
-                      <StyledCommentIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
+                      <StyledPostCount>{project.totalRootPostCount}</StyledPostCount>
+                      <StyledPostIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
                     </StyledCommentInfoWrapper>
                   </StyledProjectLink>
                 </StyledProjectListItem>

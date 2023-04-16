@@ -35,6 +35,8 @@ export const ProjectsContextProvider: FunctionComponent<ProjectsContextProviderT
   const [pageSize, setPageSize] = useState<number>(100);
 
   const { data, loading, fetchMore, refetch } = useQuery<ProjectsInOrgSeekQuery>(PROJECTS_IN_ORGANIZATION, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },

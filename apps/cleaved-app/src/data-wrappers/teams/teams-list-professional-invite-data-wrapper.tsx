@@ -1,5 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect } from "react";
-import { navigate } from "@reach/router";
+import React, { FunctionComponent } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { debounce } from "ts-debounce";
@@ -25,7 +24,6 @@ import {
 } from "@cleaved/ui";
 
 import { HelperInfoHeaderTextImageRightBox, ShareLinkEditMenu } from "../../components";
-import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, OrganizationShareLinksQuery } from "../../generated-types/graphql";
 import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
 import { ORGANIZATION_SHARE_LINKS_QUERY } from "../../gql-queries";
@@ -115,7 +113,6 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
 
 export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { preferredOrgId } = useContext(authTokenContext);
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const { t } = useTranslator();
@@ -125,6 +122,8 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
     loading,
     refetch,
   } = useQuery<OrganizationShareLinksQuery>(ORGANIZATION_SHARE_LINKS_QUERY, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },
@@ -157,13 +156,6 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
     { isImmediate: true }
   );
 
-  // route to the home page if the user makes it to this page somehow
-  useEffect(() => {
-    if (!hasPermission) {
-      navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`);
-    }
-  }, []); // eslint-disable-line
-
   return (
     <>
       <HelperInfoHeaderTextImageRightBox
@@ -175,7 +167,7 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
       />
 
       <StyledProfessionalInviteListHeader>
-        {!loading && !isPermissionReadCreated && (
+        {hasPermission && !loading && !isPermissionReadCreated && (
           <StyledButtonPrimary
             onClick={() =>
               generateOrganizationShareLink({
@@ -191,7 +183,7 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
           </StyledButtonPrimary>
         )}
 
-        {!loading && !isPermissionWriteCreated && (
+        {hasPermission && !loading && !isPermissionWriteCreated && (
           <StyledButtonPrimary
             onClick={() =>
               generateOrganizationShareLink({
@@ -207,7 +199,7 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
           </StyledButtonPrimary>
         )}
 
-        {!loading && !isPermissionAdminCreated && (
+        {hasPermission && !loading && !isPermissionAdminCreated && (
           <StyledButtonSecondary
             onClick={() =>
               generateOrganizationShareLink({
@@ -223,7 +215,7 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
         )}
       </StyledProfessionalInviteListHeader>
 
-      {!loading && shareLinkArray && shareLinkArray.length > 0 && (
+      {hasPermission && !loading && shareLinkArray && shareLinkArray.length > 0 && (
         <>
           <StyledTable role="table">
             <StyledTHead role="rowgroup">

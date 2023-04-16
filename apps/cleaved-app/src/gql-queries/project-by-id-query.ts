@@ -5,7 +5,8 @@ export const PROJECT_BY_ID_QUERY = graphql(`
     projectById(projectId: $projectId, organizationId: $organizationId) {
       id
       name
-      totalPostCount
+      totalRootPostCount
+      totalResponseCount
     }
   }
 `);
