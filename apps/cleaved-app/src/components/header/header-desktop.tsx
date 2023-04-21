@@ -106,11 +106,11 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
-            height="30px"
+            height="15px"
             isLogoTextVisible={true}
-            margin={`0 ${SPACING.SMALL} 0 0`}
+            margin={`0 0.3rem 0 0`}
             url={`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`}
-            width="30px"
+            width="15px"
           />
         </StyledLogoWrapper>
 

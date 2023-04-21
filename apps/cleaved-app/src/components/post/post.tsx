@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import styled from "styled-components";
 
-import { BORDERS, Box, COLORS, FONT_SIZES, SPACING, SPACING_PX } from "@cleaved/ui";
+import { BORDERS, BoxNoPadding, COLORS, FONT_SIZES, SPACING, SPACING_PX } from "@cleaved/ui";
 
 import { PostReactions, ReactionTypesAndTotalCount } from "../../components";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
@@ -21,13 +21,12 @@ type PostProps = {
   post: PostProjectSeekQuery["postProjectSeek"][0];
 };
 
-const StyledProjectPostBox = styled(Box)`
-  padding-bottom: 0;
-`;
+const StyledProjectPostBox = styled(BoxNoPadding)``;
 
 const StyledMessage = styled.div`
   margin-bottom: ${SPACING.SMALL};
   overflow-wrap: anywhere;
+  padding: 0 ${SPACING.SMALL};
   white-space: pre-line;
 `;
 
@@ -39,7 +38,7 @@ const StyledPostInfoBar = styled.div`
   color: ${COLORS.GRAY_500};
   display: flex;
   font-size: ${FONT_SIZES.SMALL};
-  padding-bottom: ${SPACING.SMALL};
+  padding: 0 ${SPACING.SMALL} ${SPACING.SMALL};
 `;
 
 const StyledmodalPostFooter = styled.div<{ postRepliesCount: string }>`
@@ -126,6 +125,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           account={post.account}
           accountId={post.accountId}
           date={new Date(post.date).toLocaleDateString()}
+          isPostOpenInModal={isCommentsVisible}
           postId={post.id}
         />
       )}

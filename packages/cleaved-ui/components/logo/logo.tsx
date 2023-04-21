@@ -2,7 +2,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { COLORS, mediaQueries } from "../../theme";
+import { COLORS, FONT_SIZES, mediaQueries } from "../../theme";
 
 import { LogoSVG } from "./logo-svg";
 

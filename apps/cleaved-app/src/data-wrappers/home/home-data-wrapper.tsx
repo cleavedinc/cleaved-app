@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { BoxHelperInfo, COLORS, FONT_WEIGHTS, mediaQueries, SectionHeader, SPACING } from "@cleaved/ui";
+import { BoxHelperInfo, BoxNoPadding, COLORS, FONT_WEIGHTS, mediaQueries, SectionHeader, SPACING } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { HelperInfoHeaderTextImageRightBox, PostProjectList } from "../../components";
@@ -11,7 +11,6 @@ const StyledHelperInfoBoxWrapper = styled(BoxHelperInfo)`
   align-items: center;
   background-color: ${COLORS.TAN_300};
   display: flex;
-  margin-bottom: ${SPACING.SMALL};
 
   ${mediaQueries.SM} {
     display: none;
@@ -61,14 +60,16 @@ export const HomeDataWrapper: FunctionComponent = () => {
       <PostProjectList />
 
       {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 0 && (
-        <HelperInfoHeaderTextImageRightBox
-          backgroundColor={"transparent"}
-          helperInfoImageAltText={t("helperInformationBoxes.homePageEmptyStateAlt")}
-          helperInfoImageUrl={"/helper-info/project-whiteboard-two-people.svg"}
-          helperInfoText={t("helperInformationBoxes.homePageEmptyStateText")}
-          helperInfoTextHeader={t("helperInformationBoxes.homePageEmptyStateHeader")}
-          width={"150px"}
-        />
+        <BoxNoPadding>
+          <HelperInfoHeaderTextImageRightBox
+            backgroundColor={"transparent"}
+            helperInfoImageAltText={t("helperInformationBoxes.homePageEmptyStateAlt")}
+            helperInfoImageUrl={"/helper-info/project-whiteboard-two-people.svg"}
+            helperInfoText={t("helperInformationBoxes.homePageEmptyStateText")}
+            helperInfoTextHeader={t("helperInformationBoxes.homePageEmptyStateHeader")}
+            width={"150px"}
+          />
+        </BoxNoPadding>
       )}
     </>
   );

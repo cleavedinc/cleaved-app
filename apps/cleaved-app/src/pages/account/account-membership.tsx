@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, LeftColumnWrapper, MainColumnWrapper } from "@cleaved/ui";
 
-import { AsideAccountDataWrapper } from "../../data-wrappers";
+import { AccountMembershipDataWrapper, AsideAccountDataWrapper } from "../../data-wrappers";
 
 export const AccountMembership: FunctionComponent = () => {
   return (
@@ -11,7 +11,9 @@ export const AccountMembership: FunctionComponent = () => {
         <AsideAccountDataWrapper />
       </LeftColumnWrapper>
 
-      <MainColumnWrapper>Account Membership</MainColumnWrapper>
+      <MainColumnWrapper>
+        <AccountMembershipDataWrapper />
+      </MainColumnWrapper>
     </ContentWrapper>
   );
 };

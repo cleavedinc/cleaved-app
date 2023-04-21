@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { Box, COLORS, CommentIcon, FilePost, FONT_SIZES, SectionHeader, SPACING } from "@cleaved/ui";
+import { BoxNoPadding, COLORS, CommentIcon, FilePost, FONT_SIZES, SectionHeader, SPACING } from "@cleaved/ui";
 
 import { WidgetProjectDetailsMenu } from "../../components";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useProjectById } from "../../hooks";
+import { useProjectById, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 const StyledCommentCount = styled.div`
@@ -17,10 +17,16 @@ const StyledCommentIcon = styled(CommentIcon)`
   margin-left: 2px;
 `;
 
+const StyledCommentInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const StyledCommentInfoWrapper = styled.div`
   align-items: center;
   display: flex;
   margin-bottom: ${SPACING.MEDIUM};
+  padding: 0 ${SPACING.SMALL};
 `;
 
 const StyledFileText = styled(FilePost)`
@@ -33,20 +39,27 @@ const StyledPostCount = styled.div`
   font-size: ${FONT_SIZES.XSMALL};
 `;
 
-const StyledProjectDetails = styled.div``;
+const StyledProjectDetails = styled.div`
+  padding: ${SPACING.SMALL};
+`;
 
 const WidgetHeadingWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
+  padding: ${SPACING.SMALL} ${SPACING.SMALL} 0;
 `;
 
 export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const projectData = useProjectById();
+  const { t } = useTranslator();
+
+  const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
+  const totalComments = t("post.totalComments") ? t("post.totalComments") : "";
 
   return (
-    <Box>
+    <BoxNoPadding>
       <div>
         <WidgetHeadingWrapper>
           <SectionHeader>{projectData && projectData.projectByIdData?.name}</SectionHeader>
@@ -56,24 +69,22 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
 
         <StyledCommentInfoWrapper>
           {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalRootPostCount > 0 && (
-            <>
+            <StyledCommentInfo title={totalPosts}>
               <StyledPostCount>{projectData.projectByIdData?.totalRootPostCount}</StyledPostCount>
               <StyledFileText iconSize={FONT_SIZES.XXSMALL} color={COLORS.GRAY_500} />
-            </>
+            </StyledCommentInfo>
           )}
 
           {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalResponseCount > 0 && (
-            <>
+            <StyledCommentInfo title={totalComments}>
               <StyledCommentCount>{projectData.projectByIdData?.totalResponseCount}</StyledCommentCount>
               <StyledCommentIcon iconSize={FONT_SIZES.XXSMALL} color={COLORS.GRAY_500} />
-            </>
+            </StyledCommentInfo>
           )}
         </StyledCommentInfoWrapper>
       </div>
 
-      <StyledProjectDetails>
-        <p>temp.project details needed.</p>
-      </StyledProjectDetails>
-    </Box>
+      <StyledProjectDetails>temp.project details needed.</StyledProjectDetails>
+    </BoxNoPadding>
   );
 };

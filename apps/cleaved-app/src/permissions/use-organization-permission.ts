@@ -14,16 +14,12 @@ export const useOrganizationPermission = (permissionLevels: OrgPermissionLevel[]
 
     permissionLevels.forEach((permissionLevel) => {
       if (permissionLevel === accountPermission) {
-        console.log("hit");
-
         foundPermission = true;
       }
     });
 
     setHasPermission(foundPermission);
   }, [permissionLevels, accountPermission]);
-
-  console.log("hasPermission 11111", hasPermission);
 
   return hasPermission;
 };

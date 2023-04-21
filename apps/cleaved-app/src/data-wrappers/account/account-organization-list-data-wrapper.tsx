@@ -57,7 +57,7 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
         helperInfoImageUrl={"/helper-info/organizations-helper-image.svg"}
         helperInfoText={t("helperInformationBoxes.organizationsText")}
         helperInfoTextHeader={t("helperInformationBoxes.organizationsHeader")}
-        width={"400px"}
+        width={"250px"}
       />
 
       <Box>

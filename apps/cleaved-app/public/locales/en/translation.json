@@ -55,7 +55,7 @@
     "collaborativeTimelineHeader": "Collaborative Timeline",
     "collaborativeTimelineText": "Get project insights and provide feedback, all in one place.",
     "homePageEmptyStateAlt": "Whiteboard with two people working in front of it",
-    "homePageEmptyStateHeader": "We know you are working hard",
+    "homePageEmptyStateHeader": "We know you're working hard",
     "homePageEmptyStateText": "When you have a minute, post your update or idea to your project. Getting feedback and keeping people updated is important.",
     "inviteProfessionalToOrganizationAlt": "Arrow pointing to the invite professional form",
     "inviteProfessionalToOrganizationHeader": "Invite people to your organization",
@@ -147,7 +147,9 @@
     "post": "Post",
     "postImageBasicAlt": "Post iImage",
     "removePost": "Remove Post",
-    "submitPost": "Post"
+    "submitPost": "Post",
+    "totalComments": "Total comments",
+    "totalPosts": "Total posts"
   },
   "postFileUpload": {
     "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",

@@ -30,11 +30,11 @@ export const HeaderLoggedOut: FunctionComponent = () => {
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
-            height="30px"
+            height="15px"
             isLogoTextVisible
-            margin={`0 ${SPACING.MEDIUM} 0 0`}
+            margin={`0 0.3rem 0 0`}
             url={"/"}
-            width="30px"
+            width="15px"
           />
         </StyledLogoWrapper>
 

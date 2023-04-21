@@ -13,10 +13,6 @@ import { useOrganizationPermission } from "../../permissions";
 const StyledMenuLink = styled(Link)`
   color: ${COLORS.BLACK};
   display: flex;
-
-  :hover {
-    color: ${COLORS.BLACK};
-  }
 `;
 
 const StyledMenuList = styled.ul``;
@@ -24,10 +20,6 @@ const StyledMenuList = styled.ul``;
 const StyledMenuListItem = styled.li`
   cursor: pointer;
   padding: ${SPACING.SMALL};
-
-  :hover {
-    background-color: ${COLORS.GRAY_50};
-  }
 
   :not(:last-child) {
     border-bottom: ${BORDERS.BORDER_PRIMARY};

@@ -2,7 +2,17 @@ import React, { FunctionComponent, useContext, useEffect } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { BORDERS, Box, COLORS, FilePost, FONT_SIZES, SectionHeader, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
+import {
+  BORDERS,
+  BoxNoPadding,
+  COLORS,
+  FilePost,
+  FONT_SIZES,
+  RADIUS,
+  SectionHeader,
+  SPACING,
+  WidgetHeadingWrapper,
+} from "@cleaved/ui";
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
 import { authTokenContext, ProjectsContext } from "../../contexts";
@@ -11,12 +21,9 @@ import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
-const StyledPostCount = styled.div`
-  color: ${COLORS.BLACK};
-`;
-
-const StyledPostIcon = styled(FilePost)`
-  margin-left: 2px;
+const StyledBoxNoPadding = styled(BoxNoPadding)`
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledCommentInfoWrapper = styled.div`
@@ -27,15 +34,20 @@ const StyledCommentInfoWrapper = styled.div`
 
 const StyledEmptyWidgetText = styled.div`
   margin-bottom: ${SPACING.MEDIUM};
+  padding: ${SPACING.SMALL};
+`;
+
+const StyledPostCount = styled.div`
+  color: ${COLORS.BLACK};
+`;
+
+const StyledPostIcon = styled(FilePost)`
+  margin-left: 2px;
 `;
 
 const StyledProjectLink = styled(Link)`
   color: ${COLORS.BLACK};
   display: flex;
-
-  :hover {
-    color: ${COLORS.BLACK};
-  }
 `;
 
 const StyledProjectList = styled.ul`
@@ -44,11 +56,7 @@ const StyledProjectList = styled.ul`
 
 const StyledProjectListItem = styled.li`
   cursor: pointer;
-  padding: ${SPACING.SMALL} 0;
-
-  /* :hover {
-    background-color: ${COLORS.GRAY_50};
-  } */
+  padding: ${SPACING.SMALL};
 
   :not(:last-child) {
     border-bottom: ${BORDERS.BORDER_PRIMARY};
@@ -60,11 +68,12 @@ const StyledProjectName = styled.div`
 `;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
-  margin-left: auto;
+  border-radius: 0 0 ${RADIUS.MEDIUM} ${RADIUS.MEDIUM};
 `;
 
 const StyledSeeAllProjects = styled.div`
   font-size: ${FONT_SIZES.SMALL};
+  padding: ${SPACING.SMALL};
 `;
 
 const StyledSeeAllProjectsLink = styled(Link)`
@@ -84,6 +93,7 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
 
   const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
   const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
+  const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
 
   useEffect(() => {
     if (setProjectPageSize) {
@@ -92,7 +102,7 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
   }, []); // eslint-disable-line
 
   return (
-    <Box>
+    <StyledBoxNoPadding>
       <WidgetHeadingWrapper>
         <SectionHeader>{t("widget.projectsList")}</SectionHeader>
 
@@ -123,7 +133,7 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
                     title={project.name}
                   >
                     <StyledProjectName>{project.name}</StyledProjectName>
-                    <StyledCommentInfoWrapper>
+                    <StyledCommentInfoWrapper title={totalPosts}>
                       <StyledPostCount>{project.totalRootPostCount}</StyledPostCount>
                       <StyledPostIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
                     </StyledCommentInfoWrapper>
@@ -144,6 +154,6 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
           </StyledSeeAllProjectsLink>
         </StyledSeeAllProjects>
       )}
-    </Box>
+    </StyledBoxNoPadding>
   );
 };

@@ -4,8 +4,7 @@ import { SPACING } from "../../theme";
 
 import { boxBase } from "./box-base";
 
-export const Box = styled.div`
+export const BoxNoPadding = styled.div`
   ${boxBase}
   margin-bottom: ${SPACING.MEDIUM};
-  padding: ${SPACING.MEDIUM};
 `;

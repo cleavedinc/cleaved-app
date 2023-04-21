@@ -43,10 +43,10 @@ const StyledRouterButtonRight = styled(StyledRouterButton)`
 
 const StyledTeamListHeader = styled.div`
   display: flex;
-  margin-bottom: ${SPACING.MEDIUM};
+  margin: ${SPACING.XLARGE} 0 ${SPACING.MEDIUM};
 
   ${mediaQueries.RESPONSIVE_TABLE} {
-    margin-top: ${SPACING.SMALL};
+    margin: ${SPACING.LARGE} ${SPACING.SMALL} ${SPACING.MEDIUM} 0;
   }
 `;
 
@@ -79,7 +79,7 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
         helperInfoImageUrl={"/helper-info/people-helper-image.svg"}
         helperInfoText={t("helperInformationBoxes.teamsText")}
         helperInfoTextHeader={t("helperInformationBoxes.teamsHeader")}
-        width={"400px"}
+        width={"250px"}
       />
 
       {hasPermission && (

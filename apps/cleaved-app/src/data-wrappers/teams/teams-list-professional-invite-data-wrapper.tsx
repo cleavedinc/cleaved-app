@@ -163,7 +163,7 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
         helperInfoImageUrl={"/helper-info/people-helper-image.svg"}
         helperInfoText={t("helperInformationBoxes.inviteProfessionalToOrganizationText")}
         helperInfoTextHeader={t("helperInformationBoxes.inviteProfessionalToOrganizationHeader")}
-        width={"400px"}
+        width={"250px"}
       />
 
       <StyledProfessionalInviteListHeader>

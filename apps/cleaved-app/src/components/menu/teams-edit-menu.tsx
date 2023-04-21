@@ -44,7 +44,10 @@ const StyledSubMenu = styled(SubMenu)`
 
 const StyledBasicItemRed = styled(MenuItem)`
   ${basicItemBase}
-  color: ${COLORS.RED_500};
+
+  :hover {
+    color: ${COLORS.RED_500};
+  }
 `;
 
 const StyledBasicMenu = styled(Menu)`
