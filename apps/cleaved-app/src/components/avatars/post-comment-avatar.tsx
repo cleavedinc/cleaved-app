@@ -3,18 +3,13 @@ import styled, { css } from "styled-components";
 
 import { BORDERS, COLORS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
 
-import { ProfessionalUnlinkedView } from "../../generated-types/graphql";
+import { FindMyAccountQuery, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile } from "../../hooks";
 
 type PostHeaderAvatarProps = {
   account:
-    | {
-        id: string;
-        firstName?: string | null | undefined;
-        lastName?: string | null | undefined;
-        currentAvatar?: string | null | undefined;
-        professionals: Array<ProfessionalUnlinkedView>;
-      }
+    | FindMyAccountQuery["findMyAccount"]
+    | PostProjectRepliesQuery["postProjectReplies"][0]["account"]
     | undefined;
 };
 

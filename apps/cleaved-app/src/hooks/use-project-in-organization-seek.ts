@@ -26,6 +26,8 @@ export const useProjectsInOrganizationSeek = (
   const { preferredOrgId } = useContext(authTokenContext);
 
   const { data, loading, refetch } = useQuery<ProjectsInOrgSeekQuery>(PROJECTS_IN_ORGANIZATION, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },

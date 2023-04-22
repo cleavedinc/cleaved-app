@@ -228,6 +228,8 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
     loading,
     refetch,
   } = useQuery<OrganizationShareLinksQuery>(ORGANIZATION_SHARE_LINKS_QUERY, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },

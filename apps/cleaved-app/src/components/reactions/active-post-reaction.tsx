@@ -1,25 +1,11 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import {
-  CelebrationIcon,
-  CheckIcon,
-  COLORS,
-  HandshakeIcon,
-  SPACING_PX,
-  ThumbUpIcon,
-  ThumbUpOutlineIcon,
-} from "@cleaved/ui";
+import { CelebrationIcon, COLORS, FavoriteIcon, SPACING_PX, ThumbUpIcon, ThumbUpOutlineIcon } from "@cleaved/ui";
 import { PostReactionType } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
 
-import {
-  celebrateIconColor,
-  likeIconColor,
-  likeIconInactiveColor,
-  reviewedIconColor,
-  thanksIconColor,
-} from "./reaction-colors";
+import { celebrateIconColor, likeIconColor, likeIconInactiveColor, loveIconColor } from "./reaction-colors";
 
 type PostReactionProps = {
   myReaction: PostReactionType;
@@ -35,18 +21,13 @@ const StyledLikeText = styled.div`
   margin-left: ${SPACING_PX.ONE};
 `;
 
-const StyledThanksText = styled.div`
-  color: ${thanksIconColor};
+const StyledLoveText = styled.div`
+  color: ${loveIconColor};
   margin-left: ${SPACING_PX.ONE};
 `;
 
 const StyledCelebrateText = styled.div`
   color: ${celebrateIconColor};
-  margin-left: ${SPACING_PX.ONE};
-`;
-
-const StyledReviewedText = styled.div`
-  color: ${reviewedIconColor};
   margin-left: ${SPACING_PX.ONE};
 `;
 
@@ -61,11 +42,11 @@ const handleReactionType = (reactionType: PostReactionType, t: any): React.React
         </>
       );
       break;
-    case PostReactionType.Thanks:
+    case PostReactionType.Love:
       return (
         <>
-          <HandshakeIcon color={thanksIconColor} iconSize="19px" />
-          <StyledThanksText>{t("reactions.thanks")}</StyledThanksText>
+          <FavoriteIcon color={loveIconColor} iconSize="19px" />
+          <StyledLoveText>{t("reactions.love")}</StyledLoveText>
         </>
       );
       break;
@@ -74,14 +55,6 @@ const handleReactionType = (reactionType: PostReactionType, t: any): React.React
         <>
           <CelebrationIcon color={celebrateIconColor} iconSize="19px" />
           <StyledCelebrateText>{t("reactions.celebrate")}</StyledCelebrateText>
-        </>
-      );
-      break;
-    case PostReactionType.Reviewed:
-      return (
-        <>
-          <CheckIcon color={reviewedIconColor} iconSize="19px" />
-          <StyledReviewedText>{t("reactions.reviewed")}</StyledReviewedText>
         </>
       );
       break;

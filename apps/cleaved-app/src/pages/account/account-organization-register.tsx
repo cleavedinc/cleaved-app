@@ -5,7 +5,7 @@ import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth } from "@c
 import { OrganizationMembershipsContextProvider } from "../../contexts";
 import { AsideOrganizationRegisterDataWrapper, OrganizationRegisterDataWrapper } from "../../data-wrappers";
 
-export const OrganizationRegister: FunctionComponent = () => {
+export const AccountOrganizationRegister: FunctionComponent = () => {
   return (
     <ContentWrapper>
       <LeftColumnWrapper>

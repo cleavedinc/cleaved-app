@@ -1,38 +1,90 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { Box, SectionHeader, SPACING } from "@cleaved/ui";
+import { BoxNoPadding, COLORS, CommentIcon, FilePost, FONT_SIZES, SectionHeader, SPACING } from "@cleaved/ui";
 
 import { WidgetProjectDetailsMenu } from "../../components";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useProjectById } from "../../hooks";
+import { useProjectById, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
-const StyledSectionHeaderWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: ${SPACING.SMALL};
+const StyledCommentCount = styled.div`
+  color: ${COLORS.BLACK};
+  font-size: ${FONT_SIZES.XSMALL};
 `;
 
-const StyledProjectDetails = styled.div``;
+const StyledCommentIcon = styled(CommentIcon)`
+  margin-left: 2px;
+`;
+
+const StyledCommentInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledCommentInfoWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  margin-bottom: ${SPACING.MEDIUM};
+  padding: 0 ${SPACING.SMALL};
+`;
+
+const StyledFileText = styled(FilePost)`
+  margin-left: 2px;
+  margin-right: ${SPACING.SMALL};
+`;
+
+const StyledPostCount = styled.div`
+  color: ${COLORS.BLACK};
+  font-size: ${FONT_SIZES.XSMALL};
+`;
+
+const StyledProjectDetails = styled.div`
+  padding: ${SPACING.SMALL};
+`;
+
+const WidgetHeadingWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: ${SPACING.SMALL} ${SPACING.SMALL} 0;
+`;
 
 export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const projectData = useProjectById();
+  const { t } = useTranslator();
+
+  const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
+  const totalComments = t("post.totalComments") ? t("post.totalComments") : "";
 
   return (
-    <Box>
-      <StyledSectionHeaderWrapper>
-        <SectionHeader>{projectData && projectData.projectByIdData?.name}</SectionHeader>
+    <BoxNoPadding>
+      <div>
+        <WidgetHeadingWrapper>
+          <SectionHeader>{projectData && projectData.projectByIdData?.name}</SectionHeader>
 
-        {hasPermission && <WidgetProjectDetailsMenu />}
-      </StyledSectionHeaderWrapper>
+          {hasPermission && <WidgetProjectDetailsMenu />}
+        </WidgetHeadingWrapper>
 
-      <StyledProjectDetails>
-        <p>temp.project details needed.</p>
+        <StyledCommentInfoWrapper>
+          {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalRootPostCount > 0 && (
+            <StyledCommentInfo title={totalPosts}>
+              <StyledPostCount>{projectData.projectByIdData?.totalRootPostCount}</StyledPostCount>
+              <StyledFileText iconSize={FONT_SIZES.XXSMALL} color={COLORS.GRAY_500} />
+            </StyledCommentInfo>
+          )}
 
-        <div>TEMP label total posts: {projectData && projectData.projectByIdData?.totalPostCount}</div>
-      </StyledProjectDetails>
-    </Box>
+          {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalResponseCount > 0 && (
+            <StyledCommentInfo title={totalComments}>
+              <StyledCommentCount>{projectData.projectByIdData?.totalResponseCount}</StyledCommentCount>
+              <StyledCommentIcon iconSize={FONT_SIZES.XXSMALL} color={COLORS.GRAY_500} />
+            </StyledCommentInfo>
+          )}
+        </StyledCommentInfoWrapper>
+      </div>
+
+      <StyledProjectDetails>temp.project details needed.</StyledProjectDetails>
+    </BoxNoPadding>
   );
 };

@@ -24,6 +24,8 @@ export const useProjectById = (): UseProjectByIdType => {
   const projectId = routeParams.projectId;
 
   const { data, loading, refetch } = useQuery<ProjectByIdQuery>(PROJECT_BY_ID_QUERY, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },

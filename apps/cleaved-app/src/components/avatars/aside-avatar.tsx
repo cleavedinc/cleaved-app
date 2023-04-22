@@ -3,14 +3,12 @@ import styled, { css } from "styled-components";
 
 import { BORDERS, FONT_SIZES, RADIUS, SPACING } from "@cleaved/ui";
 
+import { FindMyAccountQuery, FindMyProfessionalByIdQuery } from "../../generated-types/graphql";
+
 type AsideAvatarProps = {
   account:
-    | {
-        id: string;
-        firstName?: string | null | undefined;
-        lastName?: string | null | undefined;
-        currentAvatar?: string | null | undefined;
-      }
+    | FindMyAccountQuery["findMyAccount"]
+    | FindMyProfessionalByIdQuery["findProfessionalById"]["account"]
     | undefined;
 };
 

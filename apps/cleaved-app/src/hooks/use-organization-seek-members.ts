@@ -24,6 +24,8 @@ export const useOrganizationSeekMembers = (
   const { preferredOrgId } = useContext(authTokenContext);
 
   const { data, loading, refetch } = useQuery<OrganizationSeekMembersQuery>(ORGANIZATION_SEEK_MEMBERS_QUERY, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },

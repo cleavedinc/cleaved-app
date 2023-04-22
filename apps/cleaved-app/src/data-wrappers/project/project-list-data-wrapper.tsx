@@ -12,6 +12,7 @@ import {
   StyledTHeadTr,
   StyledTHead,
   StyledTr,
+  COLORS,
 } from "@cleaved/ui";
 
 import { authTokenContext, ProjectsContext } from "../../contexts";
@@ -42,7 +43,9 @@ const StyledInviteMorePeopleWrapper = styled.div`
   }
 `;
 
-const StyledProjectLink = styled(Link)``;
+const StyledProjectLink = styled(Link)`
+  color: ${COLORS.BLACK};
+`;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
   margin-left: auto;
@@ -50,10 +53,10 @@ const StyledRouterButtonLeft = styled(StyledRouterButton)`
 
 const StyledProjectListHeader = styled.div`
   display: flex;
-  margin-bottom: ${SPACING.MEDIUM};
+  margin: ${SPACING.XLARGE} 0 ${SPACING.MEDIUM};
 
   ${mediaQueries.RESPONSIVE_TABLE} {
-    margin-top: ${SPACING.SMALL};
+    margin: ${SPACING.LARGE} ${SPACING.SMALL} ${SPACING.MEDIUM} 0;
   }
 `;
 
@@ -101,11 +104,19 @@ const StyledThRight = styled(StyledTh)`
   }
 `;
 
+const StyledTrWrapper = styled(StyledTr)`
+  ${mediaQueries.RESPONSIVE_TABLE} {
+    margin-bottom: ${SPACING.LARGE};
+  }
+`;
+
 export const ProjectListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { projectsInOrgSeek, projectsInOrgSeekDataLoading } = useContext(ProjectsContext);
   const { t } = useTranslator();
+
+  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
 
   return (
     <>
@@ -114,14 +125,14 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         helperInfoImageUrl={"/helper-info/project-helper-image.svg"}
         helperInfoText={t("helperInformationBoxes.projectslistText")}
         helperInfoTextHeader={t("helperInformationBoxes.projectslistHeader")}
-        width={"400px"}
+        width={"250px"}
       />
 
       {hasPermission && (
         <StyledProjectListHeader>
           <StyledRouterButtonLeft
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={routeConstantsCleavedApp.projectStartNew.name}
+            title={projectStartNewLinkName}
           >
             {t("projectStartNew.startNewProject")}
           </StyledRouterButtonLeft>
@@ -141,7 +152,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
           <StyledTBody role="rowgroup">
             {projectsInOrgSeek?.map((project) => {
               return (
-                <StyledTr key={project.id} role="row">
+                <StyledTrWrapper key={project.id} role="row">
                   <StyledTdWithMenuContent role="cell">
                     <StyledProjectLink
                       to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
@@ -157,20 +168,20 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                       <ProjectsEditMenu />
                     </StyledTdWithMenuContentEdit>
                   )}
-                </StyledTr>
+                </StyledTrWrapper>
               );
             })}
           </StyledTBody>
         </StyledTable>
       )}
 
-      {hasPermission && !projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
+      {hasPermission && !projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length >= 0 && (
         <StyledInviteMorePeopleWrapper>
           <StyledAddPeopleText>{t("projectStartNew.addNewProjectHelperText")}</StyledAddPeopleText>
 
           <StyledRouterButtonLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={routeConstantsCleavedApp.projectStartNew.name}
+            title={projectStartNewLinkName}
           >
             {t("projectStartNew.startNewProject")}
           </StyledRouterButtonLink>

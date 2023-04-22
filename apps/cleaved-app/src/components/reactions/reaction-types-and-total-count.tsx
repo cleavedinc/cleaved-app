@@ -1,13 +1,11 @@
 import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 
-import { COLORS, CelebrationIcon, CheckIcon, HandshakeIcon, RADIUS, ThumbUpIcon } from "@cleaved/ui";
+import { COLORS, CelebrationIcon, FavoriteIcon, RADIUS, ThumbUpIcon } from "@cleaved/ui";
 
 import { PostReactionType } from "../../generated-types/graphql";
 
-import { SeparatorDot } from "../separators";
-
-import { celebrateIconColor, likeIconColor, reviewedIconColor, thanksIconColor } from "./reaction-colors";
+import { celebrateIconColor, likeIconColor, loveIconColor } from "./reaction-colors";
 
 type ReactionTypesAndtotalCountProps = {
   reactionsExpressed: PostReactionType[];
@@ -30,9 +28,9 @@ const StyledReactionLike = styled.div`
   z-index: 40;
 `;
 
-const StyledReactionThanks = styled.div`
+const StyledReactionLove = styled.div`
   ${styledReactionBase}
-  background-color: ${thanksIconColor};
+  background-color: ${loveIconColor};
   z-index: 30;
 
   :not(:first-child) {
@@ -44,16 +42,6 @@ const StyledReactionCelebrate = styled.div`
   ${styledReactionBase}
   background-color: ${celebrateIconColor};
   z-index: 20;
-
-  :not(:first-child) {
-    margin-left: -5px;
-  }
-`;
-
-const StyledReactionReviewed = styled.div`
-  ${styledReactionBase}
-  background-color: ${reviewedIconColor};
-  z-index: 10;
 
   :not(:first-child) {
     margin-left: -5px;
@@ -78,11 +66,11 @@ const handleReactionTypes = (reactionIndex: number, reactionType: PostReactionTy
         </StyledReactionLike>
       );
       break;
-    case PostReactionType.Thanks:
+    case PostReactionType.Love:
       return (
-        <StyledReactionThanks key={reactionIndex}>
-          <HandshakeIcon color={COLORS.WHITE} iconSize="9px" />
-        </StyledReactionThanks>
+        <StyledReactionLove key={reactionIndex}>
+          <FavoriteIcon color={COLORS.WHITE} iconSize="9px" />
+        </StyledReactionLove>
       );
       break;
     case PostReactionType.Celebrate:
@@ -90,13 +78,6 @@ const handleReactionTypes = (reactionIndex: number, reactionType: PostReactionTy
         <StyledReactionCelebrate key={reactionIndex}>
           <CelebrationIcon color={COLORS.WHITE} iconSize="9px" />
         </StyledReactionCelebrate>
-      );
-      break;
-    case PostReactionType.Reviewed:
-      return (
-        <StyledReactionReviewed key={reactionIndex}>
-          <CheckIcon color={COLORS.WHITE} iconSize="11px" />
-        </StyledReactionReviewed>
       );
       break;
     default:

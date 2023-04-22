@@ -26,6 +26,7 @@
   },
   "files": {
     "avatarImageSizeRecommendation": "Suggested 200px square",
+    "avatarUploadImage": "Upload image",
     "fileSizeExceeded": "The file size must be smaller than 1MB",
     "selectAnImageToUpload": "Select an image/gif to upload"
   },
@@ -54,7 +55,7 @@
     "collaborativeTimelineHeader": "Collaborative Timeline",
     "collaborativeTimelineText": "Get project insights and provide feedback, all in one place.",
     "homePageEmptyStateAlt": "Whiteboard with two people working in front of it",
-    "homePageEmptyStateHeader": "We know you are working hard",
+    "homePageEmptyStateHeader": "We know you're working hard",
     "homePageEmptyStateText": "When you have a minute, post your update or idea to your project. Getting feedback and keeping people updated is important.",
     "inviteProfessionalToOrganizationAlt": "Arrow pointing to the invite professional form",
     "inviteProfessionalToOrganizationHeader": "Invite people to your organization",
@@ -92,6 +93,19 @@
     "signInHeader": "Sign up / Log in",
     "signInMessage": "Create a new account, or log in to an existing one."
   },
+  "menuLinkNames": {
+    "account": "Account",
+    "accountMembership": "Membership",
+    "accountOrganizations": "Organizations",
+    "accountPersonalInformation": "Personal Information",
+    "accountProfessionalInformation": "Professional Information",
+    "home": "Home",
+    "projectList": "Projects",
+    "projectStartNew": "Start a new project",
+    "professionalInvite": "Professional Invite",
+    "organizationRegister": "Register a new organization",
+    "teamsList": "Team"
+  },
   "organizations": {
     "dateCreated": "Date created",
     "owner": "Owner",
@@ -101,12 +115,12 @@
     "organizations": "Organizations",
     "organizationName": "Organization",
     "organizationNamePlaceholder": "Organization name",
-    "organizationRegister": "Register a new organization",
+    "organizationRegister": "Register organization",
     "removeOrganization": "Remove organization",
     "setDefaultOrganization": "Set as active organization"
   },
   "organizationsStartNew": {
-    "registerNewOrganization": "Register an organization"
+    "registerNewOrganization": "Register a new organization"
   },
   "people": {
     "addPerson": "Add Teammate",
@@ -133,7 +147,9 @@
     "post": "Post",
     "postImageBasicAlt": "Post iImage",
     "removePost": "Remove Post",
-    "submitPost": "Post"
+    "submitPost": "Post",
+    "totalComments": "Total comments",
+    "totalPosts": "Total posts"
   },
   "postFileUpload": {
     "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",
@@ -208,9 +224,8 @@
   "reactions": {
     "celebrate": "Celebrate",
     "like": "Like",
-    "noReaction": "Like",
-    "reviewed": "Reviewed",
-    "thanks": "Thanks"
+    "love": "Love",
+    "noReaction": "Like"
   },
   "shareLinks": {
     "createAdminShareLink": "Create admin link",
@@ -252,6 +267,6 @@
     "projectsList": "Projects List",
     "projectsListEmptyListText": "Awe shucks, no project yet. Let's go create one!",
     "projectsListMenuCreateProjectLink": "Create a project",
-    "projectListSeeMore": "See more"
+    "projectListSeeMore": "View all"
   }
 }

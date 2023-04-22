@@ -21,6 +21,8 @@ export const usePostProjectGetById = (postId: string | undefined): UsePostProjec
   const { preferredOrgId } = useContext(authTokenContext);
 
   const { data, loading, refetch } = useQuery<PostProjectGetByIdQuery>(POST_PROJECT_GET_BY_ID_QUERY, {
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "network-only",
     onError: (error) => {
       logQueryError(error);
     },

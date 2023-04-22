@@ -6,7 +6,6 @@ export const PROJECTS_IN_ORGANIZATION = graphql(`
       id
       name
       totalRootPostCount
-      totalResponseCount
     }
   }
 `);

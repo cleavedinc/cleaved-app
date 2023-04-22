@@ -10,6 +10,8 @@ export * from "./emoji-eyes";
 export * from "./emoji-party-popper";
 export * from "./emoji-smiling-face";
 export * from "./emoji-thinking-face";
+export * from "./favorite";
+export * from "./file-post";
 export * from "./handshake";
 export * from "./image";
 export * from "./plus";

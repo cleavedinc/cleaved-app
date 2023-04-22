@@ -30,6 +30,8 @@ export const OrganizationMembershipsContextProvider: FunctionComponent<Organizat
   const { isLoggedIn } = useLoginGuard();
 
   const { data, loading, refetch } = useQuery<OrganizationMembershipsQuery>(FIND_MY_ORGANIZATION_MEMBERSHIP, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error: ApolloError) => {
       logQueryError(error);
     },

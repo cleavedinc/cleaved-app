@@ -44,6 +44,8 @@ export const PostProjectList: FunctionComponent = () => {
   const lastPostId = postProjectSeekData && postProjectSeekData[postProjectSeekData.length - 1]?.id;
   const { t } = useTranslator();
 
+  const professionalInviteLinkName = t("menuLinkNames.professionalInvite") ? t("menuLinkNames.professionalInvite") : "";
+
   const handleLoadMoreData = () => {
     postProjectSeekFetchMore({
       variables: { seekKey: lastPostId },
@@ -87,7 +89,7 @@ export const PostProjectList: FunctionComponent = () => {
 
           <StyledRouterButtonLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
-            title={routeConstantsCleavedApp.professionalInvite.name}
+            title={professionalInviteLinkName}
           >
             {t("teams.addNewTeamMember")}
           </StyledRouterButtonLink>

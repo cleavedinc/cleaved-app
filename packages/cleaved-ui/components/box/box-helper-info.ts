@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import { RADIUS, SPACING } from "../../theme";
+import { mediaQueries, RADIUS, SPACING } from "../../theme";
 
 export const BoxHelperInfo = styled.div`
   padding: ${SPACING.MEDIUM};
-  border-radius: ${RADIUS.MEDIUM};
-  margin-bottom: ${SPACING.XLARGE};
+  margin-bottom: ${SPACING.MEDIUM};
+
+  ${mediaQueries.SM} {
+    border-radius: ${RADIUS.MEDIUM};
+  }
 `;

@@ -1,19 +1,13 @@
 import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 
-import { BORDERS, FONT_SIZES, RADIUS, SPACING } from "@cleaved/ui";
+import { BORDERS, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "@cleaved/ui";
 
 import { AccountAvatarForm } from "../../forms";
+import { FindMyAccountQuery } from "../../generated-types/graphql";
 
 type AsideAccountAvatarProps = {
-  account:
-    | {
-        id: string;
-        firstName?: string | null | undefined;
-        lastName?: string | null | undefined;
-        currentAvatar?: string | null | undefined;
-      }
-    | undefined;
+  account: FindMyAccountQuery["findMyAccount"] | undefined;
   refetchAccountData: (() => void) | undefined;
 };
 
@@ -24,14 +18,23 @@ const avatartBase = css`
   display: flex;
   height: 100px;
   justify-content: center;
-  margin: 0 auto ${SPACING.MEDIUM};
+  margin: 0 auto ${SPACING.SMALL};
   width: 100px;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    height: 150px;
+    width: 150px;
+  }
 `;
 
 const StyledAccountAvatarForm = styled(AccountAvatarForm)`
-  bottom: 0;
-  position: absolute;
-  right: 60px;
+  font-size: ${FONT_SIZES.XSMALL};
+  justify-content: center;
+  margin-bottom: ${SPACING.SMALL};
+  padding: ${SPACING.MEDIUM} 0;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+  }
 `;
 
 const StyledAvatarImage = styled.img`
@@ -40,6 +43,10 @@ const StyledAvatarImage = styled.img`
 
 const StyledAvatarImageWrapper = styled.div`
   position: relative;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    margin-right: ${SPACING.XLARGE};
+  }
 `;
 
 const StyledAvatarInitials = styled.div`
@@ -47,7 +54,7 @@ const StyledAvatarInitials = styled.div`
   font-size: ${FONT_SIZES.XXLARGE};
 `;
 
-export const AsideAccountAvatar: FunctionComponent<AsideAccountAvatarProps> = (props) => {
+export const EditAccountAvatar: FunctionComponent<AsideAccountAvatarProps> = (props) => {
   const { account, refetchAccountData } = props;
   const firstNameInitial = account?.firstName?.charAt(0).toUpperCase() || "";
   const lastNameInitial = account?.lastName?.charAt(0).toUpperCase() || "";

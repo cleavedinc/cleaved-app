@@ -15,8 +15,6 @@ export const StyledTr = styled.tr`
 
     margin: 0;
 
-    &:nth-child(odd) {
-      background: ${COLORS.WHITE};
-    }
+    background: ${COLORS.WHITE};
   }
 `;

@@ -2,7 +2,17 @@ import React, { FunctionComponent, useContext, useEffect } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { BORDERS, Box, COLORS, CommentIcon, FONT_SIZES, SectionHeader, SPACING } from "@cleaved/ui";
+import {
+  BORDERS,
+  BoxNoPadding,
+  COLORS,
+  FilePost,
+  FONT_SIZES,
+  RADIUS,
+  SectionHeader,
+  SPACING,
+  WidgetHeadingWrapper,
+} from "@cleaved/ui";
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
 import { authTokenContext, ProjectsContext } from "../../contexts";
@@ -11,13 +21,9 @@ import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
-const StyledCommentCount = styled.div`
-  color: ${COLORS.BLACK};
-  font-size: ${FONT_SIZES.XSMALL};
-`;
-
-const StyledCommentIcon = styled(CommentIcon)`
-  margin-left: 2px;
+const StyledBoxNoPadding = styled(BoxNoPadding)`
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledCommentInfoWrapper = styled.div`
@@ -28,15 +34,20 @@ const StyledCommentInfoWrapper = styled.div`
 
 const StyledEmptyWidgetText = styled.div`
   margin-bottom: ${SPACING.MEDIUM};
+  padding: ${SPACING.SMALL};
+`;
+
+const StyledPostCount = styled.div`
+  color: ${COLORS.BLACK};
+`;
+
+const StyledPostIcon = styled(FilePost)`
+  margin-left: 2px;
 `;
 
 const StyledProjectLink = styled(Link)`
   color: ${COLORS.BLACK};
   display: flex;
-
-  :hover {
-    color: ${COLORS.BLACK};
-  }
 `;
 
 const StyledProjectList = styled.ul`
@@ -46,10 +57,6 @@ const StyledProjectList = styled.ul`
 const StyledProjectListItem = styled.li`
   cursor: pointer;
   padding: ${SPACING.SMALL};
-
-  :hover {
-    background-color: ${COLORS.GRAY_50};
-  }
 
   :not(:last-child) {
     border-bottom: ${BORDERS.BORDER_PRIMARY};
@@ -61,18 +68,12 @@ const StyledProjectName = styled.div`
 `;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
-  margin-left: auto;
-`;
-
-const StyledSectionHeaderWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: ${SPACING.SMALL};
+  border-radius: 0 0 ${RADIUS.MEDIUM} ${RADIUS.MEDIUM};
 `;
 
 const StyledSeeAllProjects = styled.div`
   font-size: ${FONT_SIZES.SMALL};
-  text-align: right;
+  padding: ${SPACING.SMALL};
 `;
 
 const StyledSeeAllProjectsLink = styled(Link)`
@@ -87,27 +88,26 @@ const StyledSeeAllProjectsLink = styled(Link)`
 export const WidgetProjectListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const { projectsInOrgSeek, projectsInOrgSeekDataLoading, projectsInOrgSeekRefetch, setProjectPageSize } =
-    useContext(ProjectsContext);
+  const { projectsInOrgSeek, projectsInOrgSeekDataLoading, setProjectPageSize } = useContext(ProjectsContext);
   const { t } = useTranslator();
+
+  const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
+  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
+  const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
 
   useEffect(() => {
     if (setProjectPageSize) {
       setProjectPageSize(5);
     }
-
-    // if (projectsInOrgSeekRefetch) {
-    //   projectsInOrgSeekRefetch(); // TODO: ASK Jeremy if this is the way... I'm refreshing on project create and doens' tseem to retrigger state on the home page without a use effect
-    // }
   }, []); // eslint-disable-line
 
   return (
-    <Box>
-      <StyledSectionHeaderWrapper>
+    <StyledBoxNoPadding>
+      <WidgetHeadingWrapper>
         <SectionHeader>{t("widget.projectsList")}</SectionHeader>
 
         {hasPermission && <WidgetProjectListMenu />}
-      </StyledSectionHeaderWrapper>
+      </WidgetHeadingWrapper>
 
       {!projectsInOrgSeekDataLoading && projectsInOrgSeek?.length === 0 && (
         <>
@@ -115,9 +115,9 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
 
           <StyledRouterButtonLeft
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={routeConstantsCleavedApp.projectStartNew.name}
+            title={projectStartNewLinkName}
           >
-            {t("projectStartNew.startNewProject")}
+            {projectStartNewLinkName}
           </StyledRouterButtonLeft>
         </>
       )}
@@ -133,9 +133,9 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
                     title={project.name}
                   >
                     <StyledProjectName>{project.name}</StyledProjectName>
-                    <StyledCommentInfoWrapper>
-                      <StyledCommentCount>{project.totalResponseCount}</StyledCommentCount>
-                      <StyledCommentIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
+                    <StyledCommentInfoWrapper title={totalPosts}>
+                      <StyledPostCount>{project.totalRootPostCount}</StyledPostCount>
+                      <StyledPostIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
                     </StyledCommentInfoWrapper>
                   </StyledProjectLink>
                 </StyledProjectListItem>
@@ -148,12 +148,12 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
         <StyledSeeAllProjects>
           <StyledSeeAllProjectsLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectList.route}`}
-            title={routeConstantsCleavedApp.projectList.name}
+            title={projectListLinkName}
           >
             {t("widget.projectListSeeMore")}
           </StyledSeeAllProjectsLink>
         </StyledSeeAllProjects>
       )}
-    </Box>
+    </StyledBoxNoPadding>
   );
 };

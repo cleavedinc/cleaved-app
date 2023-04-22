@@ -98,22 +98,24 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
     handleCloseMenu();
   };
 
+  const accountLinkName = t("menuLinkNames.account") ? t("menuLinkNames.account") : "";
+
   return (
     <StyledStickyHeader className={className} hasBoxShadow>
       <NavigationWrapper>
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
-            height="30px"
+            height="15px"
             isLogoTextVisible={true}
-            margin={`0 ${SPACING.SMALL} 0 0`}
+            margin={`0 0.3rem 0 0`}
             url={`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`}
-            width="30px"
+            width="15px"
           />
         </StyledLogoWrapper>
 
         <MainNavigationLinksWrapper>
-          <MainNavigationLinks preferredOrgId={preferredOrgId} />
+          <MainNavigationLinks />
         </MainNavigationLinksWrapper>
 
         <NavigationButtonWrapper>
@@ -135,10 +137,10 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
                     <Link
                       getProps={isMenuItemActive}
                       onClick={handleCloseMenu}
-                      title={routeConstantsCleavedApp.account.name}
-                      to={`/${preferredOrgId}${routeConstantsCleavedApp.account.route}`}
+                      title={accountLinkName}
+                      to={`/${preferredOrgId}${routeConstantsCleavedApp.accountPersonalInformation.route}`}
                     >
-                      <NavigationButtonLabel>{routeConstantsCleavedApp.account.name}</NavigationButtonLabel>
+                      <NavigationButtonLabel>{accountLinkName}</NavigationButtonLabel>
                     </Link>
                   </StyledDropdownMenuNavigationButton>
 

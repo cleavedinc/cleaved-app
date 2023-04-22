@@ -12,7 +12,6 @@ export type ThemeColors = {
   HONEY_YELLOW_100: string;
   HONEY_YELLOW_300: string;
   HONEY_YELLOW_500: string;
-  Pink_500: string;
   RED_500: string;
   TAN_300: string;
   WHITE: string;
@@ -36,8 +35,6 @@ export const COLORS: ThemeColors = {
   HONEY_YELLOW_100: "#FFD166", // NOT USED YET
   HONEY_YELLOW_300: "#FFC233", // NOT USED YET
   HONEY_YELLOW_500: "#FFB300", // NOT USED YET: stars / rating
-
-  Pink_500: "#ff3e71", // Thank you icon, gratitude
 
   RED_500: "#FF6366", // errors, private
 

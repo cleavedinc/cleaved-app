@@ -1,9 +1,7 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 import { StickyHeader, NavigationLinksWrapper, NavigationWrapper } from "@cleaved/ui";
-
-import { authTokenContext } from "../../contexts";
 
 import { MainNavigationLinks } from "./main-navigation-links";
 
@@ -29,13 +27,12 @@ const MainNavigationLinksWrapper = styled(NavigationLinksWrapper)`
 
 export const HeaderMobileBottomBar: FunctionComponent<HeaderMobileBottomBarProps> = (props) => {
   const { className } = props;
-  const { preferredOrgId } = useContext(authTokenContext);
 
   return (
     <StyledStickyHeader className={className} hasBoxShadow>
       <NavigationWrapper>
         <MainNavigationLinksWrapper>
-          <MainNavigationLinks preferredOrgId={preferredOrgId} />
+          <MainNavigationLinks />
         </MainNavigationLinksWrapper>
       </NavigationWrapper>
     </StyledStickyHeader>

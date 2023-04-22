@@ -25,3 +25,4 @@ export * from "./textbox";
 export * from "./toggle";
 export * from "./tooltips";
 export * from "./typography";
+export * from "./widget";

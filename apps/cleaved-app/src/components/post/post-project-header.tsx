@@ -15,6 +15,7 @@ type PostProjectHeaderProps = {
   accountId: string;
   className?: string;
   date: string | null;
+  isPostOpenInModal: boolean;
   postId: string;
 };
 
@@ -36,6 +37,7 @@ const StyledPostHeaderWrapper = styled.div`
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.LARGE};
+  padding: ${SPACING.SMALL} ${SPACING.SMALL} 0;
 `;
 
 const StyledPostProfessionalInfoWrapper = styled.div`
@@ -57,7 +59,7 @@ const StyledPostProfessionalName = styled.a`
 `;
 
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
-  const { account, accountId, className, date, postId } = props;
+  const { account, accountId, className, date, isPostOpenInModal, postId } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
   const { accountData, accountDataLoading } = useContext(AccountContext);
@@ -76,7 +78,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
         {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
       </StyledPostProfessionalInfoWrapper>
 
-      {hasPermission && !accountDataLoading && accountData?.id === accountId && (
+      {hasPermission && !isPostOpenInModal && !accountDataLoading && accountData?.id === accountId && (
         <StyledPostDateWrapper>
           <PostEditMenu postId={postId} />
         </StyledPostDateWrapper>

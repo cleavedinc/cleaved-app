@@ -3,15 +3,10 @@ import styled, { css } from "styled-components";
 
 import { BORDERS, FONT_SIZES, RADIUS } from "@cleaved/ui";
 
+import { FindMyAccountQuery } from "../../generated-types/graphql";
+
 type HeaderMenuAvatarProps = {
-  account:
-    | {
-        id: string;
-        firstName?: string | null | undefined;
-        lastName?: string | null | undefined;
-        currentAvatar?: string | null | undefined;
-      }
-    | undefined;
+  account: FindMyAccountQuery["findMyAccount"] | undefined;
 };
 
 const avatartBase = css`

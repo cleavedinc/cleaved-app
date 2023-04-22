@@ -8,7 +8,7 @@ export const LeftColumnWrapper = styled.div`
   ${mediaQueries.SM} {
     display: block;
     flex-grow: 1;
-    min-width: 250px;
+    min-width: 300px;
     max-width: 300px;
   }
 `;
