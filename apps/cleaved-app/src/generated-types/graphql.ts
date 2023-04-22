@@ -307,9 +307,8 @@ export type PostReactionAggregateType = {
 export enum PostReactionType {
   Celebrate = 'CELEBRATE',
   Like = 'LIKE',
-  NoReaction = 'NO_REACTION',
-  Reviewed = 'REVIEWED',
-  Thanks = 'THANKS'
+  Love = 'LOVE',
+  NoReaction = 'NO_REACTION'
 }
 
 export type PrivateOrganizationView = {

@@ -17,11 +17,6 @@ const getEntries = () => {
     accountOrganizationRegister: ["./src/utils/i18n.ts", "./src/pages/account/account-organization-register.tsx"],
     accountPersonalInformation: ["./src/utils/i18n.ts", "./src/pages/account/account-personal-information.tsx"],
     accountProfessionalInformation: ["./src/utils/i18n.ts", "./src/pages/account/account-professional-information.tsx"],
-    communityGuidelines: ["./src/utils/i18n.ts", "./src/pages/agreements/community-guidelines.tsx"],
-    elaborationOfCommunityGuidelines: [
-      "./src/utils/i18n.ts",
-      "./src/pages/agreements/elaboration-of-community-guidelines.tsx",
-    ],
     home: ["./src/utils/i18n.ts", "./src/pages/home.tsx"],
     login: ["./src/utils/i18n.ts", "./src/pages/login/login.tsx"],
     main: ["./src/utils/i18n.ts", "./src/pages/index.tsx"],

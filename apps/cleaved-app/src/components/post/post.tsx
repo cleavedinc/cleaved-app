@@ -57,12 +57,15 @@ const StyledPostFooter = styled.div`
 `;
 
 const StyledPostImage = styled.img`
-  border: ${BORDERS.BORDER_PRIMARY};
   cursor: pointer;
   height: 100%;
   object-position: top left;
   object-fit: cover;
   width: 100%;
+
+  :not(:first-child) {
+    border: ${BORDERS.BORDER_PRIMARY};
+  }
 `;
 
 const StyledPostImageMultiple = styled.img`

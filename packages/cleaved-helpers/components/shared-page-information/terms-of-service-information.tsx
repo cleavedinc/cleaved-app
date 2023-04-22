@@ -3,6 +3,7 @@ import React, { FunctionComponent } from "react";
 import { routeConstantsShared } from "../router-constants";
 import {
   Bold,
+  Box,
   Link,
   OrderedListCounters,
   OrderedListItemCounters,
@@ -14,7 +15,7 @@ import {
 
 export const TermsOfServiceInformation: FunctionComponent = () => {
   return (
-    <>
+    <Box>
       <SectionHeader>Terms of Service - User Agreement</SectionHeader>
       <Paragraph>Last Updated: January 1, 2022</Paragraph>
 
@@ -238,6 +239,6 @@ export const TermsOfServiceInformation: FunctionComponent = () => {
           operation of law, the remaining Terms will remain in effect.
         </OrderedListItemCounters>
       </OrderedListCounters>
-    </>
+    </Box>
   );
 };

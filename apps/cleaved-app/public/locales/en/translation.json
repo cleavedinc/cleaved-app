@@ -224,9 +224,8 @@
   "reactions": {
     "celebrate": "Celebrate",
     "like": "Like",
-    "noReaction": "Like",
-    "reviewed": "Reviewed",
-    "thanks": "Thanks"
+    "love": "Love",
+    "noReaction": "Like"
   },
   "shareLinks": {
     "createAdminShareLink": "Create admin link",

@@ -1,14 +1,20 @@
 import React, { FunctionComponent, useContext } from "react";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 
 import { ButtonLink, COLORS, Logo, SPACING, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
+import { routeConstantsCleavedApp } from "../../router";
 
 import { StyledStickyHeader } from "./styled-sticky-header";
 
 const StyledButtonLink = styled(ButtonLink)`
+  color: ${COLORS.GRAY_500};
+`;
+
+const StyledLoginLink = styled(Link)`
   color: ${COLORS.GRAY_500};
 `;
 
@@ -24,6 +30,8 @@ export const HeaderLoggedOut: FunctionComponent = () => {
   const { t } = useTranslator();
   const { logOut, loggedIn } = useContext(authTokenContext);
 
+  const signUpLogIn = t("buttonLabels.signUpLogIn") ? t("buttonLabels.signUpLogIn") : "";
+
   return (
     <StyledLoggedoutStickyHeader hasBoxShadow>
       <NavigationWrapper>
@@ -38,11 +46,17 @@ export const HeaderLoggedOut: FunctionComponent = () => {
           />
         </StyledLogoWrapper>
 
-        {loggedIn && (
+        {loggedIn ? (
           <NavigationButtonWrapper>
             <StyledButtonLink type="button" onClick={() => logOut()}>
               {t("buttonLabels.logOut")}
             </StyledButtonLink>
+          </NavigationButtonWrapper>
+        ) : (
+          <NavigationButtonWrapper>
+            <StyledLoginLink title={signUpLogIn} to={routeConstantsCleavedApp.login.route}>
+              {signUpLogIn}
+            </StyledLoginLink>
           </NavigationButtonWrapper>
         )}
       </NavigationWrapper>
