@@ -22,6 +22,10 @@ export const POST_PROJECT_SEEK_QUERY = graphql(`
       myReaction
       repliesCount
       images
+      project {
+        id
+        name
+      }
     }
   }
 `);
