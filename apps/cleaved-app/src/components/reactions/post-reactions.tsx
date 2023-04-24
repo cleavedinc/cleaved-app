@@ -3,8 +3,9 @@ import { useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { COLORS, RADIUS, removeDefaultButtonStyles, SPACING_PX, StyledTooltipWhite } from "@cleaved/ui";
+import { StyledTooltipWhite } from "@cleaved/ui";
 
+import { StyledPostProjectFooterButtonButton } from "../../components";
 import { PostsContext } from "../../contexts";
 import { PostProjectSetReactionMutation, PostReactionType } from "../../generated-types/graphql";
 import { POST_PROJECT_SET_REACTION } from "../../gql-mutations";
@@ -18,21 +19,6 @@ type PostReactionsProps = {
   myReaction: PostReactionType;
   postId: string;
 };
-
-const StyledPostFooterButtonButton = styled.button`
-  ${removeDefaultButtonStyles}
-  align-items: center;
-  border-radius: ${RADIUS.SMALL};
-  display: flex;
-  flex-basis: 100%;
-  justify-content: center;
-  min-width: 100px;
-  padding: ${SPACING_PX.ONE} ${SPACING_PX.FOUR};
-
-  &:hover {
-    background-color: ${COLORS.GRAY_50};
-  }
-`;
 
 const StyledTooltipWrapper = styled.div`
   flex-basis: 100%;
@@ -64,12 +50,12 @@ export const PostReactions: FunctionComponent<PostReactionsProps> = (props) => {
         interactive
         tooltip={<ReactionSelections postId={postId} postProjectSetReaction={postProjectSetReaction} />}
       >
-        <StyledPostFooterButtonButton
+        <StyledPostProjectFooterButtonButton
           onClick={() => handleSetPostReaction(myReaction, organizationId, postId, postProjectSetReaction)}
           type="button"
         >
           <ActivePostReaction myReaction={myReaction} />
-        </StyledPostFooterButtonButton>
+        </StyledPostProjectFooterButtonButton>
       </StyledTooltipWhite>
     </StyledTooltipWrapper>
   );

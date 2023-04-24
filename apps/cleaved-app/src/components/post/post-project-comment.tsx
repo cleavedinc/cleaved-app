@@ -16,14 +16,18 @@ const StyledReactionText = styled.div`
   margin-left: ${SPACING_PX.ONE};
 `;
 
+const StyledPostProjectFooterButtonButtonAdjustedWidth = styled(StyledPostProjectFooterButtonButton)`
+  flex: 0 0 50%;
+`;
+
 export const PostProjectComment: FunctionComponent<PostProjectCommentProps> = (props) => {
   const { showComments } = props;
   const { t } = useTranslator();
 
   return (
-    <StyledPostProjectFooterButtonButton onClick={() => showComments()} type="button">
+    <StyledPostProjectFooterButtonButtonAdjustedWidth onClick={() => showComments()} type="button">
       <CommentIcon color={COLORS.GRAY_500} />
       <StyledReactionText>{t("post.comment")}</StyledReactionText>
-    </StyledPostProjectFooterButtonButton>
+    </StyledPostProjectFooterButtonButtonAdjustedWidth>
   );
 };
