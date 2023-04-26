@@ -19,10 +19,10 @@ const StyledMenuList = styled.ul``;
 
 const StyledMenuListItem = styled.li`
   cursor: pointer;
-  padding: ${SPACING.SMALL};
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
 
   :not(:last-child) {
-    border-bottom: ${BORDERS.BORDER_PRIMARY};
+    border-bottom: ${BORDERS.BORDER_PRIMARY_LIGHT};
   }
 `;
 
