@@ -163,7 +163,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
         uploadPostImage({ variables: { image: file } });
       });
 
-      const maxFileSizeInMb = (10 * 1048576) / 1024 ** 2; // 10MB limit
+      const maxFileSizeInMb = (15 * 1048576) / 1024 ** 2; // 15MB limit
       // handle file upload errors
       fileRejections.forEach((file) => {
         file.errors.forEach((err) => {
@@ -178,7 +178,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
       });
     },
     maxFiles: maxFileUploadlimit,
-    maxSize: 10485760,
+    maxSize: 15728640,
   });
 
   const openImagePicker = () => {
