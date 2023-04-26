@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { navigate } from "@reach/router";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
+import { v4 as uuidv4 } from "uuid";
 
 import { logQueryError } from "@cleaved/helpers";
 import {
@@ -18,7 +19,7 @@ import {
   Spinner,
 } from "@cleaved/ui";
 
-import { authTokenContext, ProjectsContext } from "../../contexts";
+import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
@@ -72,20 +73,23 @@ const StyledProjectFormLabel = styled.label`
 export const ProjectStartNewForm: FunctionComponent = () => {
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
-  const { projectsInOrgSeekRefetch } = useContext(ProjectsContext);
+  const [newProjectGuid, setNewProjectGuid] = useState<string | null>();
 
   const [projectStart] = useMutation(PROJECT_START_NEW, {
     onCompleted: () => {
-      if (projectsInOrgSeekRefetch) {
-        projectsInOrgSeekRefetch();
-      }
-
-      navigate(`/${preferredOrgId}${routeConstantsCleavedApp.projectList.route}`);
+      navigate(
+        `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${newProjectGuid}${routeConstantsCleavedApp.projectBoard.route}`
+      );
     },
     onError: (error) => {
       logQueryError(error);
     },
   });
+
+  useEffect(() => {
+    const newGuid = uuidv4();
+    setNewProjectGuid(newGuid);
+  }, []);
 
   return (
     <>
@@ -101,6 +105,7 @@ export const ProjectStartNewForm: FunctionComponent = () => {
             variables: {
               projectName: values.projectName,
               organizationId: preferredOrgId,
+              projectId: newProjectGuid,
               // projectDetails: values.projectDetails,
             },
           });
@@ -141,7 +146,7 @@ export const ProjectStartNewForm: FunctionComponent = () => {
 
               <StyledButtonPrimaryWrapper>
                 <StyledButtonLink onClick={() => navigate(-1)} type="button">
-                  Cancel
+                  {t("cancel")}
                 </StyledButtonLink>
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">

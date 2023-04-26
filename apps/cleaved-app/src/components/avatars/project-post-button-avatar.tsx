@@ -36,11 +36,11 @@ export const ProjectPostButtonAvatar: FunctionComponent<HeaderMenuAvatarProps> =
 
   return (
     <>
-      {account?.currentAvatar && (
+      {account && account?.currentAvatar && (
         <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
       )}
 
-      {!account?.currentAvatar && (
+      {account && !account?.currentAvatar && (
         <StyledAvatarInitials>
           {firstNameInitial}
           {lastNameInitial}

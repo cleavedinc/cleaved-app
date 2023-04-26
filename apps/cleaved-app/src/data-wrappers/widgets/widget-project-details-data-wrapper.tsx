@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { BoxNoPadding, COLORS, CommentIcon, FilePost, FONT_SIZES, SectionHeader, SPACING } from "@cleaved/ui";
+import { BoxNoPadding, COLORS, CommentIcon, FilePost, FONT_SIZES, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
 
 import { WidgetProjectDetailsMenu } from "../../components";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
@@ -35,7 +35,7 @@ const StyledFileText = styled(FilePost)`
 `;
 
 const StyledPostCount = styled.div`
-  color: ${COLORS.BLACK};
+  color: ${COLORS.GRAY_500};
   font-size: ${FONT_SIZES.XSMALL};
 `;
 
@@ -43,12 +43,7 @@ const StyledProjectDetails = styled.div`
   padding: ${SPACING.SMALL};
 `;
 
-const WidgetHeadingWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  padding: ${SPACING.SMALL} ${SPACING.SMALL} 0;
-`;
+const StyledWidgetHeader = styled.div``;
 
 export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
@@ -62,7 +57,7 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
     <BoxNoPadding>
       <div>
         <WidgetHeadingWrapper>
-          <SectionHeader>{projectData && projectData.projectByIdData?.name}</SectionHeader>
+          <StyledWidgetHeader>{projectData && projectData.projectByIdData?.name}</StyledWidgetHeader>
 
           {hasPermission && <WidgetProjectDetailsMenu />}
         </WidgetHeadingWrapper>

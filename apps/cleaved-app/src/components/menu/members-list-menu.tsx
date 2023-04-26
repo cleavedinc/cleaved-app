@@ -43,7 +43,7 @@ export const MembersListMenu: FunctionComponent = () => {
     <StyledBasicMenu
       menuButton={
         <CircleEditButtonSmall type="button">
-          <EllipsisHorizontalIcon iconSize={FONT_SIZES.LARGE} />
+          <EllipsisHorizontalIcon color={COLORS.GRAY_500} iconSize={FONT_SIZES.LARGE} />
         </CircleEditButtonSmall>
       }
       direction={"left"}

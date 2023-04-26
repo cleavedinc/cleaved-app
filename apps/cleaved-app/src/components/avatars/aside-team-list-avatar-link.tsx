@@ -68,13 +68,13 @@ export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps
 
   return (
     <>
-      {account?.currentAvatar && (
+      {account && account?.currentAvatar && (
         <StyledAvatarImageLink href={professionalProfilePath}>
           <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
         </StyledAvatarImageLink>
       )}
 
-      {!account?.currentAvatar && (
+      {account && !account?.currentAvatar && (
         <StyledAvatarInitials>
           {firstNameInitial}
           {lastNameInitial}

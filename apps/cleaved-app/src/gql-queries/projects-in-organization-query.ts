@@ -5,6 +5,7 @@ export const PROJECTS_IN_ORGANIZATION = graphql(`
     projectsInOrgSeek(organizationId: $organizationId, seekKey: $seekKey, pageSize: $pageSize) {
       id
       name
+      status
       totalRootPostCount
     }
   }

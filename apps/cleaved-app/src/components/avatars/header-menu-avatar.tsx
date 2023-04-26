@@ -39,7 +39,7 @@ export const HeaderMenuAvatar: FunctionComponent<HeaderMenuAvatarProps> = (props
         <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
       )}
 
-      {!account?.currentAvatar && (
+      {account && !account?.currentAvatar && (
         <StyledAvatarInitials>
           {firstNameInitial}
           {lastNameInitial}

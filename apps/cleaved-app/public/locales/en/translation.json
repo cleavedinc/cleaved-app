@@ -228,6 +228,10 @@
     "noReaction": "Like"
   },
   "shareLinks": {
+    "areYouSureRemoveButtonText": "Remove share link",
+    "areYouSureKeepButtonText": "Keep my share link",
+    "areYouSureRemoveSharelinkModalHeader": "Are you sure?",
+    "areYouSureRemoveSharelinkModalText": "If you remove this share link, it will be gone forever. No turning back.",
     "createAdminShareLink": "Create admin link",
     "createReadShareLink": "Create read only link",
     "createWriteShareLink": "Create read/write link",

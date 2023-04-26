@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
@@ -9,15 +9,14 @@ import {
   FilePost,
   FONT_SIZES,
   RADIUS,
-  SectionHeader,
   SPACING,
   WidgetHeadingWrapper,
 } from "@cleaved/ui";
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
-import { authTokenContext, ProjectsContext } from "../../contexts";
+import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useTranslator } from "../../hooks";
+import { useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
@@ -37,9 +36,7 @@ const StyledEmptyWidgetText = styled.div`
   padding: ${SPACING.SMALL};
 `;
 
-const StyledPostCount = styled.div`
-  color: ${COLORS.BLACK};
-`;
+const StyledPostCount = styled.div``;
 
 const StyledPostIcon = styled(FilePost)`
   margin-left: 2px;
@@ -56,10 +53,11 @@ const StyledProjectList = styled.ul`
 
 const StyledProjectListItem = styled.li`
   cursor: pointer;
-  padding: ${SPACING.SMALL};
+  font-size: ${FONT_SIZES.XSMALL};
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
 
   :not(:last-child) {
-    border-bottom: ${BORDERS.BORDER_PRIMARY};
+    border-bottom: ${BORDERS.BORDER_PRIMARY_LIGHT};
   }
 `;
 
@@ -78,6 +76,7 @@ const StyledSeeAllProjects = styled.div`
 
 const StyledSeeAllProjectsLink = styled(Link)`
   color: ${COLORS.GRAY_500};
+  font-size: ${FONT_SIZES.XSMALL};
 
   :hover {
     color: ${COLORS.GRAY_500};
@@ -85,75 +84,81 @@ const StyledSeeAllProjectsLink = styled(Link)`
   }
 `;
 
+const StyledWidgetHeader = styled.div``;
+
 export const WidgetProjectListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const { projectsInOrgSeek, projectsInOrgSeekDataLoading, setProjectPageSize } = useContext(ProjectsContext);
   const { t } = useTranslator();
+
+  const { projectsInOrganizationSeekData, projectsInOrganizationSeekDataLoading } = useProjectsInOrganizationSeek(
+    null,
+    5
+  );
 
   const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
   const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
   const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
 
-  useEffect(() => {
-    if (setProjectPageSize) {
-      setProjectPageSize(5);
-    }
-  }, []); // eslint-disable-line
-
   return (
     <StyledBoxNoPadding>
       <WidgetHeadingWrapper>
-        <SectionHeader>{t("widget.projectsList")}</SectionHeader>
+        <StyledWidgetHeader>{t("widget.projectsList")}</StyledWidgetHeader>
 
         {hasPermission && <WidgetProjectListMenu />}
       </WidgetHeadingWrapper>
 
-      {!projectsInOrgSeekDataLoading && projectsInOrgSeek?.length === 0 && (
-        <>
-          <StyledEmptyWidgetText>{t("widget.projectsListEmptyListText")}</StyledEmptyWidgetText>
+      {!projectsInOrganizationSeekDataLoading &&
+        projectsInOrganizationSeekData &&
+        projectsInOrganizationSeekData.length === 0 && (
+          <>
+            <StyledEmptyWidgetText>{t("widget.projectsListEmptyListText")}</StyledEmptyWidgetText>
 
-          <StyledRouterButtonLeft
-            to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={projectStartNewLinkName}
-          >
-            {projectStartNewLinkName}
-          </StyledRouterButtonLeft>
-        </>
-      )}
+            <StyledRouterButtonLeft
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+              title={projectStartNewLinkName}
+            >
+              {projectStartNewLinkName}
+            </StyledRouterButtonLeft>
+          </>
+        )}
 
-      {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
-        <StyledProjectList>
-          {projectsInOrgSeek &&
-            projectsInOrgSeek?.map((project) => {
-              return (
-                <StyledProjectListItem key={project.id}>
-                  <StyledProjectLink
-                    to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
-                    title={project.name}
-                  >
-                    <StyledProjectName>{project.name}</StyledProjectName>
-                    <StyledCommentInfoWrapper title={totalPosts}>
-                      <StyledPostCount>{project.totalRootPostCount}</StyledPostCount>
-                      <StyledPostIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
-                    </StyledCommentInfoWrapper>
-                  </StyledProjectLink>
-                </StyledProjectListItem>
-              );
-            })}
-        </StyledProjectList>
-      )}
+      {!projectsInOrganizationSeekDataLoading &&
+        projectsInOrganizationSeekData &&
+        projectsInOrganizationSeekData.length > 0 && (
+          <StyledProjectList>
+            {projectsInOrganizationSeekData &&
+              projectsInOrganizationSeekData.map((project) => {
+                return (
+                  <StyledProjectListItem key={project.id}>
+                    <StyledProjectLink
+                      to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
+                      title={project.name}
+                    >
+                      <StyledProjectName>{project.name}</StyledProjectName>
+                      <StyledCommentInfoWrapper title={totalPosts}>
+                        <StyledPostCount>{project.totalRootPostCount}</StyledPostCount>
+                        <StyledPostIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
+                      </StyledCommentInfoWrapper>
+                    </StyledProjectLink>
+                  </StyledProjectListItem>
+                );
+              })}
+          </StyledProjectList>
+        )}
 
-      {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 1 && (
-        <StyledSeeAllProjects>
-          <StyledSeeAllProjectsLink
-            to={`/${preferredOrgId}${routeConstantsCleavedApp.projectList.route}`}
-            title={projectListLinkName}
-          >
-            {t("widget.projectListSeeMore")}
-          </StyledSeeAllProjectsLink>
-        </StyledSeeAllProjects>
-      )}
+      {!projectsInOrganizationSeekDataLoading &&
+        projectsInOrganizationSeekData &&
+        projectsInOrganizationSeekData.length > 1 && (
+          <StyledSeeAllProjects>
+            <StyledSeeAllProjectsLink
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.projectList.route}`}
+              title={projectListLinkName}
+            >
+              {t("widget.projectListSeeMore")}
+            </StyledSeeAllProjectsLink>
+          </StyledSeeAllProjects>
+        )}
     </StyledBoxNoPadding>
   );
 };

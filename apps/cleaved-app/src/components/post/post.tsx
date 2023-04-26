@@ -74,6 +74,7 @@ const StyledPostImageMultiple = styled.img`
   border: ${BORDERS.BORDER_PRIMARY};
   cursor: pointer;
   height: 75px;
+  margin: ${SPACING.SMALL} 0 0 ${SPACING.SMALL};
   width: 75px;
 
   :not(:last-child) {

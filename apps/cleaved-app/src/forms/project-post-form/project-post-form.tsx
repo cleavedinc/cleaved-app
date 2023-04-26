@@ -111,6 +111,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
                 organizationId: values.organizationId,
                 postId: postId,
                 body: values.body,
+                imageUrls: values.imageUrls,
               },
             });
           } else {

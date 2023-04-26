@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth } from "@cleaved/ui";
 
-import { ProjectsContextProvider } from "../../contexts";
 import { AsideProjectStartNewDataWrapper, ProjectStartNewDataWrapper } from "../../data-wrappers";
 
 export const ProjectStartNew: FunctionComponent = () => {
@@ -13,9 +12,7 @@ export const ProjectStartNew: FunctionComponent = () => {
       </LeftColumnWrapper>
 
       <MainColumnWrapperMaxWidth>
-        <ProjectsContextProvider>
-          <ProjectStartNewDataWrapper />
-        </ProjectsContextProvider>
+        <ProjectStartNewDataWrapper />
       </MainColumnWrapperMaxWidth>
     </ContentWrapper>
   );
