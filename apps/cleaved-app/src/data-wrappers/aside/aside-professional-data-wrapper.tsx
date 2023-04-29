@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 import styled from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { Box, COLORS, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { Box, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideAvatar } from "../../components";
 import { FindMyProfessionalByIdQuery } from "../../generated-types/graphql";
@@ -18,13 +18,13 @@ const StyledAsideProfessionalWrapper = styled.div`
 const StyledEmaillink = styled.div``;
 
 const StyledJobTitle = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.SMALL};
   margin-bottom: ${SPACING.MEDIUM};
 `;
 
 const StyledProfileName = styled(SectionHeader)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
 
   &:hover {
@@ -33,7 +33,7 @@ const StyledProfileName = styled(SectionHeader)`
 `;
 
 const StyledProfessionalAbout = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   margin-bottom: ${SPACING.MEDIUM};
   white-space: pre-line;
 `;

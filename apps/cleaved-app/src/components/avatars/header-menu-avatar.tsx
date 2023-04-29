@@ -11,7 +11,7 @@ type HeaderMenuAvatarProps = {
 
 const avatartBase = css`
   align-items: center;
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
   height: 32px;

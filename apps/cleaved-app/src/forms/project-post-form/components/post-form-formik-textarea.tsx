@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import {
   ANIMATION_DURATIONS,
-  COLORS,
   FONT_SIZES,
   FONTS,
   FormField,
@@ -38,7 +37,7 @@ const StyledTextarea = styled.textarea`
   width: 100%;
 
   &::placeholder {
-    color: ${COLORS.GRAY_500};
+    color: ${({ theme }) => theme.colors.basePlaceholderText_color};
     transition: color ${ANIMATION_DURATIONS.FAST} ease;
   }
 `;

@@ -1,18 +1,18 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { Box, COLORS, FONT_SIZES, SectionHeader, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { Box, FONT_SIZES, SectionHeader, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 
 const StyledJobTitle = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.SMALL};
 `;
 
 const StyledProfileName = styled(SectionHeader)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
 
   &:hover {
     text-decoration: underline;

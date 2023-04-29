@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-import { BoxNoPadding, COLORS, CommentIcon, FilePost, FONT_SIZES, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
+import { BoxNoPadding, CommentIcon, FilePost, FONT_SIZES, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
 
 import { WidgetProjectDetailsMenu } from "../../components";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
@@ -9,7 +9,7 @@ import { useProjectById, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 const StyledCommentCount = styled.div`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.XSMALL};
 `;
 
@@ -35,7 +35,7 @@ const StyledFileText = styled(FilePost)`
 `;
 
 const StyledPostCount = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
 `;
 
@@ -48,6 +48,7 @@ const StyledWidgetHeader = styled.div``;
 export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const projectData = useProjectById();
+  const theme = useTheme();
   const { t } = useTranslator();
 
   const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
@@ -66,14 +67,14 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
           {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalRootPostCount > 0 && (
             <StyledCommentInfo title={totalPosts}>
               <StyledPostCount>{projectData.projectByIdData?.totalRootPostCount}</StyledPostCount>
-              <StyledFileText iconSize={FONT_SIZES.XXSMALL} color={COLORS.GRAY_500} />
+              <StyledFileText iconSize={FONT_SIZES.XXSMALL} color={theme.colors.baseIcon_color} />
             </StyledCommentInfo>
           )}
 
           {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalResponseCount > 0 && (
             <StyledCommentInfo title={totalComments}>
               <StyledCommentCount>{projectData.projectByIdData?.totalResponseCount}</StyledCommentCount>
-              <StyledCommentIcon iconSize={FONT_SIZES.XXSMALL} color={COLORS.GRAY_500} />
+              <StyledCommentIcon iconSize={FONT_SIZES.XXSMALL} color={theme.colors.baseIcon_color} />
             </StyledCommentInfo>
           )}
         </StyledCommentInfoWrapper>

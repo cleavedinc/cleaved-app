@@ -62,7 +62,7 @@ const StyledLogoWrapper = styled.div`
 `;
 
 const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
-  border-bottom: ${BORDERS.BORDER_PRIMARY};
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
 
   &:last-child:after {
     border-bottom: none;

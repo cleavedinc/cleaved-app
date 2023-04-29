@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { COLORS, FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
+import { FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
 import { getTimeSinceDate } from "@cleaved/helpers";
 
 import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
@@ -20,15 +20,15 @@ type PostProjectHeaderProps = {
 };
 
 const StyledJobTitle = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
 `;
 
 const StyledPostDate = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
 `;
 
 const StyledPostDateWrapper = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   text-align: right;
   margin-left: auto;
 `;
@@ -48,12 +48,12 @@ const StyledPostProfessionalInfoWrapper = styled.div`
 `;
 
 const StyledPostProfessionalName = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   font-size: ${FONT_SIZES.SMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseTextLink_colorHover};
     text-decoration: underline;
   }
 `;

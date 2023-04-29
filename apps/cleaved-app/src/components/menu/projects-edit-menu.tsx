@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { Menu, MenuItem, MenuRadioGroup } from "@szhsin/react-menu";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { CircleEditButtonSmall, COLORS, EllipsisHorizontalIcon } from "@cleaved/ui";
+import { CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
 
 import { ProjectStatus } from "../../generated-types/graphql";
 import { useRouteParams, useTranslator } from "../../hooks";
@@ -20,13 +20,13 @@ type ProjectEditMenuProps = {
 
 const StyledBasicItem = styled(MenuItem)`
   :hover {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 `;
 
 const StyledBasicMenu = styled(Menu)`
   ul {
-    color: ${COLORS.BLACK};
+    color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;
 
@@ -34,6 +34,7 @@ export const ProjectsEditMenu: FunctionComponent<ProjectEditMenuProps> = (props)
   const { projectId, projectStatus, refreshProjectListData } = props;
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
+  const theme = useTheme();
   const { t } = useTranslator();
 
   const [projectSetStatus] = useMutation(PROJECT_SET_STATUS, {
@@ -61,7 +62,7 @@ export const ProjectsEditMenu: FunctionComponent<ProjectEditMenuProps> = (props)
     <StyledBasicMenu
       menuButton={
         <CircleEditButtonSmall type="button">
-          <EllipsisHorizontalIcon color={COLORS.GRAY_500} />
+          <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
         </CircleEditButtonSmall>
       }
       direction={"left"}

@@ -3,7 +3,7 @@ import { Link, navigate } from "@reach/router";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { debounce } from "ts-debounce";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { alertCopied, logQueryError } from "@cleaved/helpers";
 import {
@@ -12,7 +12,6 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   CheckIcon,
-  COLORS,
   CopyIcon,
   FONT_SIZES,
   H1,
@@ -69,18 +68,14 @@ const StyledShareLinkIcon = styled(CopyIcon)`
 `;
 
 const StyledShareLinkInputReadOnly = styled.input`
-  background-color: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
   cursor: pointer;
   display: flex;
   margin-right: ${SPACING.SMALL};
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
   width: 100%;
-
-  :hover {
-    background-color: ${COLORS.BLUE_50};
-  }
 `;
 
 const StyledShareLinkWrapper = styled.div`
@@ -107,7 +102,7 @@ const StyledStepContainer = styled.div<StyledStepContainerProps>`
   :before {
     content: "";
     position: absolute;
-    background: ${COLORS.GRAY_100};
+    background: ${({ theme }) => theme.colors.baseBordersAndShadows_color};
     height: 3px;
     width: 100%;
     top: 50%;
@@ -118,7 +113,7 @@ const StyledStepContainer = styled.div<StyledStepContainerProps>`
   :after {
     content: "";
     position: absolute;
-    background: ${COLORS.BLUE_500};
+    background: ${({ theme }) => theme.colors.baseLink_color};
     height: 3px;
     width: ${({ width }) => width};
     top: 50%;
@@ -141,9 +136,14 @@ const StyledStep = styled.div<StyledStepProps>`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: ${COLORS.WHITE};
-  border: 2px solid ${({ step }) => (step === "completed" ? COLORS.BLUE_500 : COLORS.GRAY_100)};
-  color: ${({ step }) => (step === "completed" ? COLORS.BLUE_500 : COLORS.GRAY_500)};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
+  border: 2px solid
+    ${({ step }) =>
+      step === "completed"
+        ? ({ theme }) => theme.colors.baseLink_color
+        : ({ theme }) => theme.colors.baseBordersAndShadows_color};
+  color: ${({ step }) =>
+    step === "completed" ? ({ theme }) => theme.colors.baseLink_color : ({ theme }) => theme.colors.baseSubText_color};
   transition: 0.4s ease;
   display: flex;
   justify-content: center;
@@ -167,7 +167,9 @@ type StyledStepLabelProps = {
 
 const StyledStepLabel = styled.span<StyledStepLabelProps>`
   font-size: ${FONT_SIZES.SMALL};
-  color: ${({ step }) => (step === "completed" ? COLORS.BLUE_500 : COLORS.GRAY_500)};
+  color: ${({ step }) =>
+    step === "completed" ? ({ theme }) => theme.colors.baseLink_color : ({ theme }) => theme.colors.baseIcon_color};
+
   overflow-wrap: normal;
 `;
 
@@ -194,7 +196,6 @@ const StyledCelebrateStepCompletionImage = styled.img<StyledCelebrateStepComplet
 // END PROGRESS BAR STEPS STYLES
 
 export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
   const { isLoggedIn } = useLoginGuard();
   const { termsAccepted, termsAcceptedIsLoading } = useTermsAccepted();
   const {
@@ -204,6 +205,8 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
   } = useProjectsInOrganizationSeek();
   const { preferredOrgId } = useContext(authTokenContext);
   const [activeStep, setActiveStep] = useState(1);
+  const theme = useTheme();
+  const { t } = useTranslator();
 
   const progressBarSteps = [
     {
@@ -317,7 +320,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
             <StyledStepWrapper key={step}>
               <StyledStep step={activeStep >= step ? "completed" : "incomplete"}>
                 {activeStep > step ? (
-                  <CheckIcon color={COLORS.BLUE_500} iconSize={FONT_SIZES.SMALL} />
+                  <CheckIcon color={theme.colors.baseLink_color} iconSize={FONT_SIZES.SMALL} />
                 ) : (
                   <StyledStepCount>{step}</StyledStepCount>
                 )}

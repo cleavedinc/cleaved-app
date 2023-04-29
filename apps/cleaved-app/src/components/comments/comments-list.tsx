@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { ButtonLinkLoadMore, COLORS } from "@cleaved/ui";
+import { ButtonLinkLoadMore } from "@cleaved/ui";
 
 import { PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { usePostProjectReplies, useTranslator } from "../../hooks";
@@ -24,7 +24,7 @@ type StyledLoadMoreButtonProps = {
 };
 
 export const StyledLoadMoreButton = styled(ButtonLinkLoadMore)<StyledLoadMoreButtonProps>`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: ${(props) => (props.isHidden ? "none" : "initial")};
 
   :hover {

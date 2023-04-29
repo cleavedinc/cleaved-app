@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { alertError, logQueryError, verifyUploadSizeIsOK } from "@cleaved/helpers";
-import { COLORS, StyledTooltipDark } from "@cleaved/ui";
+import { StyledTooltipDark } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
@@ -15,12 +15,12 @@ type AccountAvatarFormProps = {
 };
 
 const StyledFileInputLabel = styled.label`
-  color: ${COLORS.BLUE_500};
+  color: ${({ theme }) => theme.colors.baseLink_color};
   cursor: pointer;
   display: flex;
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseLink_colorHover};
   }
 
   input[type="file"] {

@@ -2,7 +2,7 @@ import InputMask from "react-input-mask";
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { ANIMATION_DURATIONS, BORDERS, COLORS, FONT_SIZES, RADIUS, SPACING } from "../../theme";
+import { ANIMATION_DURATIONS, BORDERS, FONT_SIZES, RADIUS, SPACING } from "../../theme";
 
 export type TextboxProps = Pick<
   JSX.IntrinsicElements["input"],
@@ -27,8 +27,8 @@ export type TextboxProps = Pick<
 };
 
 export const TextboxWrapper = styled.div`
-  background-color: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
   display: flex;
   font-size: ${FONT_SIZES.SMALL};
@@ -48,7 +48,7 @@ export const TextboxWrapper = styled.div`
     width: 100%;
 
     &::placeholder {
-      color: ${COLORS.GRAY_500};
+      color: ${({ theme }) => theme.colors.basePlaceholderText_color};
       transition: color ${ANIMATION_DURATIONS.FAST} ease;
     }
   }

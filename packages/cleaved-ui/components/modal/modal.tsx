@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Portal } from "react-portal";
 
 import { CircleEditButtonSmall } from "../button";
 import { CloseIcon } from "../icons";
-import { COLORS, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "../../theme";
+import { FONT_SIZES, mediaQueries, RADIUS, SPACING } from "../../theme";
 import { OnOutsideClick } from "../on-outside-click";
 import { ScrollLock } from "../scroll-lock";
 
@@ -45,7 +45,7 @@ const StyledModalCloseButton = styled(CircleEditButtonSmall)`
 `;
 
 const StyledModalContentWrapper = styled.div<ModalBackgroundProps>`
-  background-color: ${COLORS.WHITE};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   height: 100%;
   max-height: 100%;
   min-width: auto;
@@ -77,7 +77,7 @@ const StyledModalTitle = styled.div`
 
 const StyledModalWrapper = styled.div`
   align-items: center;
-  background-color: ${COLORS.BLACK_ALPHA_6};
+  background-color: ${({ theme }) => theme.colors.baseOverlay_backgroundColor};
   bottom: 0;
   display: flex;
   flex: 1;
@@ -90,6 +90,8 @@ const StyledModalWrapper = styled.div`
 `;
 
 const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ hidden, onCloseRequested, title }) => {
+  const theme = useTheme();
+
   if (hidden) {
     return null;
   }
@@ -98,7 +100,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ hidden, onCloseReque
     <StyledModalHeaderWrapper>
       <StyledModalTitle>{title}</StyledModalTitle>
       <StyledModalCloseButton onClick={onCloseRequested} type="button">
-        <CloseIcon color={COLORS.GRAY_500} iconSize={FONT_SIZES.LARGE} />
+        <CloseIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
       </StyledModalCloseButton>
     </StyledModalHeaderWrapper>
   );

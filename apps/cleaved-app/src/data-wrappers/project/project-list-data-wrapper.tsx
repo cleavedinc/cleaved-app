@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Link } from "@reach/router";
 import Select from "react-select";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import {
   mediaQueries,
@@ -51,7 +51,7 @@ const StyledInviteMorePeopleWrapper = styled.div`
 `;
 
 const StyledProjectLink = styled(Link)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
 `;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
@@ -122,6 +122,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const [projectStatus, setProjectStatus] = useState<ProjectStatus>(ProjectStatus.Active);
+  const colorTheme = useTheme();
   const { t } = useTranslator();
 
   const {
@@ -168,8 +169,10 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
               ...theme,
               colors: {
                 ...theme.colors,
-                primary: COLORS.BLUE_500,
-                primary25: COLORS.GRAY_50,
+                neutral0: colorTheme.colors.baseBox_backgroundColor,
+                neutral80: colorTheme.colors.baseText_color,
+                primary: colorTheme.colors.baseLink_color,
+                primary25: colorTheme.colors.baseButtonAndIcon_backgroundColorHover,
               },
             })}
           />

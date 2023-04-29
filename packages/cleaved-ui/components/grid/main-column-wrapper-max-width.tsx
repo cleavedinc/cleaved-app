@@ -12,6 +12,6 @@ export const MainColumnWrapperMaxWidth = styled.div`
   ${mediaQueries.SM} {
     margin-top: ${SPACING.MEDIUM_LARGE};
     min-width: 450px;
-    max-width: 550px;
+    max-width: 450px;
   }
 `;

@@ -2,7 +2,6 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from "reac
 import { debounce } from "ts-debounce";
 import { useFormikContext } from "formik";
 import styled from "styled-components";
-import { COLORS } from "@cleaved/ui";
 
 type FormikAutoSaveProps = {
   className?: string;
@@ -29,7 +28,7 @@ const SavedTextAlert = styled.div`
 
   animation: fade 3s;
   animation-fill-mode: both;
-  color: ${COLORS.GREEN_500};
+  color: ${({ theme }) => theme.colors.baseApproved_color};
 `;
 
 export const FormikAutoSave: FunctionComponent<FormikAutoSaveProps> = (props) => {

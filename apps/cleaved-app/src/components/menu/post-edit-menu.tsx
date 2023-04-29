@@ -1,14 +1,13 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
 import { useMutation } from "@apollo/react-hooks";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
 import {
   ButtonPrimary,
   ButtonSecondary,
   CircleEditButtonSmall,
-  COLORS,
   EllipsisHorizontalIcon,
   Modal,
   SPACING,
@@ -27,7 +26,7 @@ type PostEditMenuProps = {
 
 const basicItemBase = css`
   :hover {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 `;
 
@@ -39,13 +38,13 @@ const StyledBasicItemRed = styled(MenuItem)`
   ${basicItemBase}
 
   :hover {
-    color: ${COLORS.RED_500};
+    color: ${({ theme }) => theme.colors.baseAlert_color};
   }
 `;
 
 const StyledBasicMenu = styled(Menu)`
   ul {
-    color: ${COLORS.BLACK};
+    color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;
 
@@ -68,6 +67,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
   const organizationId = routeParams.orgId;
   const [isPostEditFormModalOpen, setIsPostEditFormModalOpen] = useState(false);
   const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
+  const theme = useTheme();
 
   const { t } = useTranslator();
 
@@ -101,7 +101,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
       <StyledBasicMenu
         menuButton={
           <CircleEditButtonSmall type="button">
-            <EllipsisHorizontalIcon color={COLORS.GRAY_500} />
+            <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
           </CircleEditButtonSmall>
         }
         direction={"left"}

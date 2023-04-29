@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { Box, COLORS, FONT_SIZES, SPACING } from "@cleaved/ui";
+import { Box, FONT_SIZES, SPACING } from "@cleaved/ui";
 
 import { GoogleLoginWrapper } from "../../components/login/google-login";
 import { useTranslator } from "../../hooks";
@@ -19,7 +19,7 @@ const StyledSignInMessage = styled.div`
 
 const StyledLogInWrapper = styled(Box)`
   align-items: center;
-  background: ${COLORS.WHITE};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -7,7 +7,6 @@ import { routeConstantsCleavedApp } from "../../router";
 import {
   BORDERS,
   ButtonSecondary,
-  COLORS,
   Logo,
   isMenuItemActive,
   NavigationButtonLabel,
@@ -32,6 +31,7 @@ type HeaderDesktopProps = {
 };
 
 const StyledFeedbackButton = styled(ButtonSecondary)`
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   margin-right: ${SPACING.MEDIUM};
 `;
 
@@ -60,7 +60,7 @@ const StyledLogoutButton = styled.button`
   width: 100%;
 
   :hover {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 `;
 
@@ -76,7 +76,7 @@ const StyledLogoWrapper = styled.div`
 `;
 
 const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
-  border-bottom: ${BORDERS.BORDER_PRIMARY};
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
 
   &:last-child:after {
     border-bottom: none;

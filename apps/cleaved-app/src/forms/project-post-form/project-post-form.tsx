@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { ButtonPrimary, COLORS, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
+import { ButtonPrimary, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
 
 import { AccountContext, PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
@@ -62,11 +62,12 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
   const { accountData } = useContext(AccountContext);
   const { postProjectSeekRefetch } = useContext(PostsContext);
   const { postProjectGetByIdData, postProjectGetByIdDataLoading } = usePostProjectGetById(postId);
-  const { t } = useTranslator();
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId;
   const [isImageUploadWrapperActive, setImageUploadWrapperActive] = useState(false);
+  const theme = useTheme();
+  const { t } = useTranslator();
 
   const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
     ? t("post.notContainOnlyBlankSpaces")
@@ -163,7 +164,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
                     onClick={() => setImageUploadWrapperActive(!isImageUploadWrapperActive)}
                     type="button"
                   >
-                    <ImageIcon color={COLORS.GRAY_500} iconSize="30px" />
+                    <ImageIcon color={theme.colors.baseIcon_color} iconSize="30px" />
                   </StyledAdditionalActionsIconButton>
                 </StyledTooltipDark>
 

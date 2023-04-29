@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import {
   Box,
-  COLORS,
   FONT_SIZES,
   HeadingWrapper,
   mediaQueries,
@@ -22,7 +21,7 @@ import { authTokenContext, OrganizationMembershipsContext } from "../../contexts
 import { useTranslator } from "../../hooks";
 
 const StyledOrgActiveTag = styled.span`
-  color: ${COLORS.GREEN_500};
+  color: ${({ theme }) => theme.colors.baseApproved_color};
   font-size: ${FONT_SIZES.XSMALL};
 `;
 

@@ -1,7 +1,6 @@
 export type ThemeColors = {
   BLACK: string;
   BLACK_ALPHA_6: string;
-  BLUE_50: string;
   BLUE_500: string;
   BLUE_500_HOVER: string;
   GRAY_50: string;
@@ -21,7 +20,6 @@ export const COLORS: ThemeColors = {
   BLACK: "#050505", // base font
   BLACK_ALPHA_6: "rgba(0,0,0,0.6)", // overlays
 
-  BLUE_50: "#e5f5ff", // helper info box
   BLUE_500: "#0095F6", // primary CTAs // original: #0059FF
   BLUE_500_HOVER: "#0086dd", // original: #337AFF
 

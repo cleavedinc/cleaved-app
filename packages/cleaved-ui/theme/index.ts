@@ -10,6 +10,7 @@ export * from "./grid";
 export * from "./line-height";
 export * from "./provider";
 export * from "./radius";
-export * from "./shadows";
 export * from "./spacing";
+export * from "./theme-dark";
+export * from "./theme-light";
 export * from "./utils";

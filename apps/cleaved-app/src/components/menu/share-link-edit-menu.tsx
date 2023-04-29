@@ -1,14 +1,13 @@
 import React, { FunctionComponent, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
 import {
   ButtonPrimary,
   ButtonSecondary,
   CircleEditButtonSmall,
-  COLORS,
   EllipsisHorizontalIcon,
   Modal,
   SPACING,
@@ -29,20 +28,20 @@ type ShareLinkEditMenuProps = {
 
 const StyledBasicItem = styled(MenuItem)`
   :hover {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 `;
 
 const StyledBasicItemRed = styled(MenuItem)`
   :hover {
-    color: ${COLORS.RED_500};
-    background-color: ${COLORS.GRAY_50};
+    color: ${({ theme }) => theme.colors.baseAlert_color}
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 `;
 
 const StyledBasicMenu = styled(Menu)`
   ul {
-    color: ${COLORS.BLACK};
+    color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;
 
@@ -59,12 +58,13 @@ const StyledButtonPrimary = styled(ButtonPrimary)`
 `;
 
 export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (props) => {
-  const { t } = useTranslator();
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const { refetchSharelinkData, shareLinkPermission } = props;
   const shareLinkPermissionText = shareLinkPermission.toLowerCase();
   const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
+  const theme = useTheme();
+  const { t } = useTranslator();
 
   const [generateOrganizationShareLink] = useMutation(GENERATE_ORGANIZATION_SHARE_LINK_MUTATION, {
     onCompleted: () => {
@@ -108,7 +108,7 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
       <StyledBasicMenu
         menuButton={
           <CircleEditButtonSmall type="button">
-            <EllipsisHorizontalIcon color={COLORS.GRAY_500} />
+            <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
           </CircleEditButtonSmall>
         }
         direction={"left"}

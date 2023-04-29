@@ -12,6 +12,7 @@ const AvatarWrapper = styled.button`
   align-items: center;
   background-color: transparent;
   border: none;
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   cursor: pointer;
   display: flex;
   justify-content: space-between;

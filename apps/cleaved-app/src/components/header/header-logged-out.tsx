@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { ButtonLink, COLORS, Logo, SPACING, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
+import { ButtonLink, Logo, SPACING, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -11,11 +11,11 @@ import { routeConstantsCleavedApp } from "../../router";
 import { StyledStickyHeader } from "./styled-sticky-header";
 
 const StyledButtonLink = styled(ButtonLink)`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
 `;
 
 const StyledLoginLink = styled(Link)`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
 `;
 
 const StyledLogoWrapper = styled.div`

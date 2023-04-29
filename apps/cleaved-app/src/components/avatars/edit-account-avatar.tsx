@@ -14,7 +14,7 @@ type AsideAccountAvatarProps = {
 const avatartBase = css`
   align-items: center;
   border-radius: ${RADIUS.CIRCLE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
   height: 100px;
   justify-content: center;

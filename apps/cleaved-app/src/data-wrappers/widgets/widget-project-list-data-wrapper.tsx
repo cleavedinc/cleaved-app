@@ -1,17 +1,8 @@
 import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-import {
-  BORDERS,
-  BoxNoPadding,
-  COLORS,
-  FilePost,
-  FONT_SIZES,
-  RADIUS,
-  SPACING,
-  WidgetHeadingWrapper,
-} from "@cleaved/ui";
+import { BORDERS, BoxNoPadding, FilePost, FONT_SIZES, RADIUS, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
 import { authTokenContext } from "../../contexts";
@@ -43,7 +34,7 @@ const StyledPostIcon = styled(FilePost)`
 `;
 
 const StyledProjectLink = styled(Link)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   display: flex;
 `;
 
@@ -53,11 +44,11 @@ const StyledProjectList = styled.ul`
 
 const StyledProjectListItem = styled.li`
   cursor: pointer;
-  font-size: ${FONT_SIZES.XSMALL};
-  padding: ${SPACING.BASE} ${SPACING.SMALL};
+  font-size: ${FONT_SIZES.SMALL};
+  padding: ${SPACING.SMALL};
 
   :not(:last-child) {
-    border-bottom: ${BORDERS.BORDER_PRIMARY_LIGHT};
+    border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   }
 `;
 
@@ -75,11 +66,10 @@ const StyledSeeAllProjects = styled.div`
 `;
 
 const StyledSeeAllProjectsLink = styled(Link)`
-  color: ${COLORS.GRAY_500};
-  font-size: ${FONT_SIZES.XSMALL};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
+  font-size: ${FONT_SIZES.SMALL};
 
   :hover {
-    color: ${COLORS.GRAY_500};
     text-decoration: underline;
   }
 `;
@@ -89,6 +79,7 @@ const StyledWidgetHeader = styled.div``;
 export const WidgetProjectListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
+  const theme = useTheme();
   const { t } = useTranslator();
 
   const { projectsInOrganizationSeekData, projectsInOrganizationSeekDataLoading } = useProjectsInOrganizationSeek(
@@ -138,7 +129,7 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
                       <StyledProjectName>{project.name}</StyledProjectName>
                       <StyledCommentInfoWrapper title={totalPosts}>
                         <StyledPostCount>{project.totalRootPostCount}</StyledPostCount>
-                        <StyledPostIcon iconSize={FONT_SIZES.XSMALL} color={COLORS.GRAY_500} />
+                        <StyledPostIcon iconSize={FONT_SIZES.XSMALL} color={theme.colors.baseIcon_color} />
                       </StyledCommentInfoWrapper>
                     </StyledProjectLink>
                   </StyledProjectListItem>

@@ -6,7 +6,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { v4 as uuidv4 } from "uuid";
 
 import { logError, logQueryError, RollbarLogLevels } from "@cleaved/helpers";
-import { BORDERS, ButtonPrimary, COLORS, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
+import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -22,7 +22,7 @@ const StyledButtonPrimaryWrapper = styled.div`
 `;
 
 const StyledField = styled(Field)`
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.MEDIUM};
@@ -42,7 +42,7 @@ const StyledProjectFormWrapper = styled.div`
 `;
 
 const StyledProjectFormLabel = styled.label`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING_PX.ONE};
 `;
