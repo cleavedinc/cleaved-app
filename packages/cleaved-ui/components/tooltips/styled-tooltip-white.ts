@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-import { COLORS, RADIUS } from "../../theme";
+import { BORDERS, RADIUS, SPACING } from "../../theme";
 
 import { Tooltip } from "./tooltip";
 
 export const StyledTooltipWhite = styled(Tooltip)`
-  color: ${COLORS.BLACK};
-  background-color: ${COLORS.WHITE};
+  color: ${({ theme }) => theme.colors.baseText_color};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.PILL};
-  padding: 3px 10px;
+  padding: ${SPACING.SMALL};
 `;

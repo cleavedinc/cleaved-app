@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Link } from "@reach/router";
-import { PhotoProvider, PhotoView } from "react-photo-view";
+import { ReactPhotoCollage } from "react-photo-collage";
+
 import styled from "styled-components";
 
-import { BORDERS, BoxNoPadding, COLORS, FONT_SIZES, FONT_WEIGHTS, RADIUS, SPACING, SPACING_PX } from "@cleaved/ui";
+import { BORDERS, BoxNoPadding, FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
 
 import { PostReactions, ReactionTypesAndTotalCount } from "../../components";
 import { authTokenContext } from "../../contexts";
@@ -17,8 +18,6 @@ import { CommentsList } from "../comments/comments-list";
 import { ModalPostComments } from "./modal-post-comments";
 import { PostProjectComment } from "./post-project-comment";
 import { PostProjectHeader } from "./post-project-header";
-
-import "react-photo-view/dist/react-photo-view.css";
 
 type PostProps = {
   post: PostProjectSeekQuery["postProjectSeek"][0];
@@ -38,14 +37,15 @@ const StyledPostComments = styled.span`
 `;
 
 const StyledPostInfoBar = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: flex;
   font-size: ${FONT_SIZES.SMALL};
+  margin: ${SPACING.SMALL};
 `;
 
 const StyledmodalPostFooter = styled.div<{ postRepliesCount: string }>`
   align-items: flex-start;
-  border-top: ${BORDERS.BORDER_PRIMARY};
+  border-top: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
   padding: 5px 0;
   margin-bottom: ${(props) => (props.postRepliesCount !== "0" ? SPACING.LARGE : "0")};
@@ -53,39 +53,13 @@ const StyledmodalPostFooter = styled.div<{ postRepliesCount: string }>`
 
 const StyledPostFooter = styled.div`
   align-items: flex-start;
-  border-top: ${BORDERS.BORDER_PRIMARY};
+  border-top: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
 `;
 
-const StyledPostImage = styled.img`
-  cursor: pointer;
-  display: block;
-  height: 100%;
-  object-position: top left;
-  object-fit: cover;
-  width: 100%;
-
-  :not(:first-child) {
-    border: ${BORDERS.BORDER_PRIMARY};
-  }
-`;
-
-const StyledPostImageMultiple = styled.img`
-  border: ${BORDERS.BORDER_PRIMARY};
-  cursor: pointer;
-  height: 75px;
-  width: 75px;
-
-  :not(:last-child) {
-    margin-right: ${SPACING_PX.ONE};
-  }
-`;
-
-const StyledPostImageWrapper = styled.div``;
-
 const StyledPostInfoBarCommentCount = styled.div`
   cursor: pointer;
-  margin: ${SPACING.SMALL} ${SPACING.SMALL} ${SPACING.SMALL} auto;
+  margin-left: auto;
 
   :hover {
     text-decoration: underline;
@@ -93,7 +67,7 @@ const StyledPostInfoBarCommentCount = styled.div`
 `;
 
 const StyledProjectNameLink = styled(Link)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: inline-block;
   font-size: ${FONT_SIZES.XXSMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
@@ -101,8 +75,10 @@ const StyledProjectNameLink = styled(Link)`
   text-transform: uppercase;
 `;
 
-const StyledToolbarPostInfo = styled.div`
-  font-size: ${FONT_SIZES.SMALL};
+const StyledReactPhotoCollage = styled(ReactPhotoCollage)`
+  & > div {
+    border: none !important;
+  }
 `;
 
 export const Post: FunctionComponent<PostProps> = (props) => {
@@ -112,8 +88,6 @@ export const Post: FunctionComponent<PostProps> = (props) => {
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
   const { t } = useTranslator();
-
-  const basicImageAlt = t("post.postImageBasicAlt") ? t("post.postImageBasicAlt") : "";
 
   const handleShowCommentsmodal = () => {
     setIsCommentsVisible(true);
@@ -131,118 +105,91 @@ export const Post: FunctionComponent<PostProps> = (props) => {
     </>
   );
 
-  const postContent = (
-    <>
-      {post && (
-        <PostProjectHeader
-          account={post.account}
-          accountId={post.accountId}
-          date={new Date(post.date).toLocaleDateString()}
-          isPostOpenInModal={isCommentsVisible}
-          postId={post.id}
-        />
-      )}
-      <StyledMessage>{post.body}</StyledMessage>
-      <StyledProjectNameLink
-        to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
-        title={post.project.name}
-      >
-        {post.project.name}
-      </StyledProjectNameLink>
-      {post.images && post.images.length > 0 && (
-        <StyledPostImageWrapper>
-          {post.images.length === 1 && (
-            <PhotoView key={"1"} src={`${process.env.MEDIA_ENDPOINT}/${post.images[0]}`}>
-              <StyledPostImage src={`${process.env.MEDIA_ENDPOINT}/${post.images[0]}`} alt={basicImageAlt} />
-            </PhotoView>
-          )}
+  const postContent = () => {
+    const photoArray = post.images.map((value) => ({ source: `${process.env.MEDIA_ENDPOINT}/${value}` }));
 
-          {post.images.length > 1 &&
-            post.images.map((image, index) => {
-              // handle the first image in the array (large format)
-              if (index === 0) {
-                return (
-                  <PhotoView key={index} src={`${process.env.MEDIA_ENDPOINT}/${image}`}>
-                    <StyledPostImage src={`${process.env.MEDIA_ENDPOINT}/${image}`} alt={basicImageAlt} />
-                  </PhotoView>
-                );
-              }
+    const reactPhotoCollageSetting = {
+      width: "100%",
+      height: ["250px", "100px"],
+      layout: [1, 4],
+      photos: photoArray,
+      showNumOfRemainingPhotos: true,
+    };
 
-              // handle remaining images as thumbnails
-              if (index !== 0) {
-                return (
-                  <PhotoView key={index} src={`${process.env.MEDIA_ENDPOINT}/${image}`}>
-                    <StyledPostImageMultiple src={`${process.env.MEDIA_ENDPOINT}/${image}`} alt={basicImageAlt} />
-                  </PhotoView>
-                );
-              }
-            })}
-        </StyledPostImageWrapper>
-      )}
-
-      <StyledPostInfoBar>
-        {post.reactionTotalCount !== "0" && (
-          <ReactionTypesAndTotalCount
-            reactionsExpressed={post.reactionsExpressed}
-            reactionTotalCount={post.reactionTotalCount}
+    return (
+      <>
+        {post && (
+          <PostProjectHeader
+            account={post.account}
+            accountId={post.accountId}
+            date={new Date(post.date).toLocaleDateString()}
+            isPostOpenInModal={isCommentsVisible}
+            postId={post.id}
           />
         )}
-        {post.repliesCount !== "0" && (
-          <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
-            {post.repliesCount}{" "}
-            <StyledPostComments>
-              {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
-            </StyledPostComments>
-          </StyledPostInfoBarCommentCount>
+
+        <StyledMessage>{post.body}</StyledMessage>
+
+        <StyledProjectNameLink
+          to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
+          title={post.project.name}
+        >
+          {post.project.name}
+        </StyledProjectNameLink>
+
+        {post.images && post.images.length > 0 && <StyledReactPhotoCollage {...reactPhotoCollageSetting} />}
+
+        {post.reactionTotalCount !== "0" && post.repliesCount !== "0" && (
+          <StyledPostInfoBar>
+            {post.reactionTotalCount !== "0" && (
+              <ReactionTypesAndTotalCount
+                reactionsExpressed={post.reactionsExpressed}
+                reactionTotalCount={post.reactionTotalCount}
+              />
+            )}
+            {post.repliesCount !== "0" && (
+              <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
+                {post.repliesCount}{" "}
+                <StyledPostComments>
+                  {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
+                </StyledPostComments>
+              </StyledPostInfoBarCommentCount>
+            )}
+          </StyledPostInfoBar>
         )}
-      </StyledPostInfoBar>
-    </>
-  );
+      </>
+    );
+  };
 
   return (
-    <PhotoProvider
-      maskOpacity={0.6}
-      toolbarRender={() => {
-        return (
-          <StyledToolbarPostInfo>
-            {t("post.photoViewerToolbarMessage", {
-              firstName: post.account?.firstName,
-              lastName: post.account?.lastName,
-            })}
-            {new Date(post.date).toLocaleDateString()}
-          </StyledToolbarPostInfo>
-        );
-      }}
-    >
-      <StyledProjectPostBox key={post.id}>
-        {postContent}
-        {hasPermission && <StyledPostFooter>{postFooterContent}</StyledPostFooter>}
+    <StyledProjectPostBox key={post.id}>
+      {postContent()}
+      {hasPermission && <StyledPostFooter>{postFooterContent}</StyledPostFooter>}
 
-        <ModalPostComments
-          onCommentPostedTriggerGetComments={() => {
-            setTriggerGetComments(triggerGetComments + 1);
-          }}
-          open={isCommentsVisible}
-          onCloseRequested={() => setIsCommentsVisible(false)}
-          postOrPostReplyId={post.id}
-          title={`${post?.account?.firstName} ${post?.account?.lastName}`}
-        >
-          <>
-            {postContent}
+      <ModalPostComments
+        onCommentPostedTriggerGetComments={() => {
+          setTriggerGetComments(triggerGetComments + 1);
+        }}
+        open={isCommentsVisible}
+        onCloseRequested={() => setIsCommentsVisible(false)}
+        postOrPostReplyId={post.id}
+        title={`${post?.account?.firstName} ${post?.account?.lastName}`}
+      >
+        <>
+          {postContent()}
 
-            {hasPermission && (
-              <StyledmodalPostFooter postRepliesCount={post.repliesCount}>{postFooterContent}</StyledmodalPostFooter>
-            )}
+          {hasPermission && (
+            <StyledmodalPostFooter postRepliesCount={post.repliesCount}>{postFooterContent}</StyledmodalPostFooter>
+          )}
 
-            <CommentsList
-              commentLevel={1}
-              commentRepliesCount={post.repliesCount}
-              parentPostId={post.id}
-              triggerGetComments={triggerGetComments}
-            />
-          </>
-        </ModalPostComments>
-      </StyledProjectPostBox>
-    </PhotoProvider>
+          <CommentsList
+            commentLevel={1}
+            commentRepliesCount={post.repliesCount}
+            parentPostId={post.id}
+            triggerGetComments={triggerGetComments}
+          />
+        </>
+      </ModalPostComments>
+    </StyledProjectPostBox>
   );
 };

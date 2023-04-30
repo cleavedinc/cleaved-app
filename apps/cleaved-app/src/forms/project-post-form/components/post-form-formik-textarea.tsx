@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import {
   ANIMATION_DURATIONS,
-  COLORS,
   FONT_SIZES,
   FONTS,
   FormField,
@@ -29,6 +28,7 @@ type PostFormFormikTextareaProps = FieldHookConfig<any> &
 const StyledTextarea = styled.textarea`
   background-color: transparent;
   border: none;
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-family: ${FONTS.SANS_SERIF_1};
   font-size: ${FONT_SIZES.MEDIUM};
   min-height: 200px;
@@ -38,7 +38,7 @@ const StyledTextarea = styled.textarea`
   width: 100%;
 
   &::placeholder {
-    color: ${COLORS.GRAY_500};
+    color: ${({ theme }) => theme.colors.basePlaceholderText_color};
     transition: color ${ANIMATION_DURATIONS.FAST} ease;
   }
 `;

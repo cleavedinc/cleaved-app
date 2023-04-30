@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 
-import { BORDERS, COLORS, FONT_SIZES, FONT_WEIGHTS, RADIUS, SPACING_PX } from "@cleaved/ui";
+import { BORDERS, FONT_SIZES, FONT_WEIGHTS, RADIUS, SPACING_PX } from "@cleaved/ui";
 
 import { OrganizationSeekMembersQuery, PostProjectAccountSeekQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile } from "../../hooks";
@@ -14,7 +14,7 @@ type AsideTeamListAvatarProps = {
 
 const avatartBase = css`
   align-items: center;
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
   height: 30px;
@@ -28,7 +28,7 @@ const StyledAvatarImage = styled.img`
 `;
 
 const StyledAvatarImageLink = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
   height: max-content;
 `;
 
@@ -38,17 +38,17 @@ const StyledAvatarInitials = styled.div`
 `;
 
 const StyledJobTitle = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
 `;
 
 const StyledPostProfessionalName = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   font-size: ${FONT_SIZES.SMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseTextLink_colorHover};
     text-decoration: underline;
   }
 `;
@@ -68,13 +68,13 @@ export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps
 
   return (
     <>
-      {account?.currentAvatar && (
+      {account && account?.currentAvatar && (
         <StyledAvatarImageLink href={professionalProfilePath}>
           <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
         </StyledAvatarImageLink>
       )}
 
-      {!account?.currentAvatar && (
+      {account && !account?.currentAvatar && (
         <StyledAvatarInitials>
           {firstNameInitial}
           {lastNameInitial}

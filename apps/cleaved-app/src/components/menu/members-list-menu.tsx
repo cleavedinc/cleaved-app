@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useContext } from "react";
 import { navigate } from "@reach/router";
 import { Menu, MenuItem } from "@szhsin/react-menu";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-import { CircleEditButtonSmall, COLORS, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
+import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -14,8 +14,9 @@ import "@szhsin/react-menu/dist/index.css";
 const StyledBasicItem = styled(MenuItem)`
   font-size: ${FONT_SIZES.SMALL};
 
-  :hover {
-    background-color: ${COLORS.GRAY_50};
+  :hover,
+  &.szh-menu__item--hover {
+    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   }
 `;
 
@@ -23,12 +24,15 @@ const StyledBasicMenu = styled(Menu)`
   margin-left: auto;
 
   ul {
-    color: ${COLORS.BLACK};
+    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+    color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;
 
 export const MembersListMenu: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
+  const theme = useTheme();
   const { t } = useTranslator();
 
   const handleRouteToTeamsPage = () => {
@@ -43,7 +47,7 @@ export const MembersListMenu: FunctionComponent = () => {
     <StyledBasicMenu
       menuButton={
         <CircleEditButtonSmall type="button">
-          <EllipsisHorizontalIcon iconSize={FONT_SIZES.LARGE} />
+          <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
         </CircleEditButtonSmall>
       }
       direction={"left"}

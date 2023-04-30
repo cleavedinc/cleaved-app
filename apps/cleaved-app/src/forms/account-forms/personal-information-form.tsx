@@ -7,7 +7,6 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import {
   BORDERS,
-  COLORS,
   FONT_SIZES,
   HeadingWrapper,
   mediaQueries,
@@ -39,10 +38,13 @@ const StyledAvatarNameWrapper = styled.div`
 `;
 
 const StyledField = styled(Field)`
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.MEDIUM};
+  outline: none;
   padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
   width: 100%;
 `;
@@ -64,7 +66,7 @@ const StyledProjectFormWrapper = styled.div`
 `;
 
 const StyledProjectFormLabel = styled.label`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING_PX.ONE};
 `;

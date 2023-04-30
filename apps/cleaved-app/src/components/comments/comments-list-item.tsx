@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import styled from "styled-components";
 
-import { ButtonLinkLoadMore, COLORS, SPACING } from "@cleaved/ui";
+import { ButtonLinkLoadMore, SPACING } from "@cleaved/ui";
 
 import { PostCommentAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
@@ -34,7 +34,7 @@ type StyledLoadMoreButtonProps = {
 };
 
 export const StyledLoadMoreButton = styled(ButtonLinkLoadMore)<StyledLoadMoreButtonProps>`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
   display: ${(props) => (props.isHidden ? "none" : "initial")};
 
   :hover {

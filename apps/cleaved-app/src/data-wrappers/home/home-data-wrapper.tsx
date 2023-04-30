@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { BoxHelperInfo, BoxNoPadding, COLORS, FONT_WEIGHTS, mediaQueries, SectionHeader, SPACING } from "@cleaved/ui";
+import { BoxHelperInfo, BoxNoPadding, FONT_WEIGHTS, mediaQueries, SectionHeader, SPACING } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { HelperInfoHeaderTextImageRightBox, PostProjectList } from "../../components";
@@ -9,7 +9,7 @@ import { useTranslator } from "../../hooks";
 
 const StyledHelperInfoBoxWrapper = styled(BoxHelperInfo)`
   align-items: center;
-  background-color: ${COLORS.TAN_300};
+  background-color: ${({ theme }) => theme.colors.helperInfoBoxWrapper_backgroundColor};
   display: flex;
 
   ${mediaQueries.SM} {

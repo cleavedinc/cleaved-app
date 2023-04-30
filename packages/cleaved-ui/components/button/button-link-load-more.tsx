@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS, FONT_SIZES, RADIUS } from "../../theme";
+import { FONT_SIZES, RADIUS } from "../../theme";
 
 export const ButtonLinkLoadMore = styled.button`
   background: none;
@@ -11,7 +11,7 @@ export const ButtonLinkLoadMore = styled.button`
 
   &:hover,
   &:focus {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
     border-radius: ${RADIUS.SMALL};
   }
 `;

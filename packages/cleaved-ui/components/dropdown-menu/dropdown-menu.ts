@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { BORDERS, COLORS, RADIUS, SHADOWS, SPACING } from "../../theme";
+import { BORDERS, RADIUS, SPACING } from "../../theme";
 
 export const DropdownMenu = styled.nav`
-  background: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  background: ${({ theme }) => theme.colors.baseDropdownMenu_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
-  box-shadow: ${SHADOWS.LIGHT_BOTTOM};
   display: none;
   position: absolute;
   right: ${SPACING.MEDIUM};
@@ -25,7 +24,7 @@ export const DropdownMenu = styled.nav`
 
   ul li {
     :not(:last-child) {
-      border-bottom: ${BORDERS.BORDER_PRIMARY};
+      border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     }
 
     a {

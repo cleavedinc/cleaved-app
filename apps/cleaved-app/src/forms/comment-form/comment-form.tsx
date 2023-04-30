@@ -5,7 +5,6 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { FormikTextareaNoErrorFields, logQueryError } from "@cleaved/helpers";
-import { COLORS } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { POST_PROJECT_REPLY } from "../../gql-mutations";
@@ -25,7 +24,7 @@ export type CommentFormProps = {
 };
 
 const StyledCommentForm = styled.div`
-  background-color: ${COLORS.WHITE};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   width: 100%;
 `;
 

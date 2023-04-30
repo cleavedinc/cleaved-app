@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { COLORS, mediaQueries, SPACING, StyledTd } from "@cleaved/ui";
+import { mediaQueries, SPACING, StyledTd } from "@cleaved/ui";
 
 import { HeaderMenuAvatar, TeamsEditMenu } from "../../components";
 import { AccountContext } from "../../contexts";
@@ -15,7 +15,7 @@ type TeamsListRowProps = {
 };
 
 const StyledPersonNameLink = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   margin-left: ${SPACING.SMALL};
 `;
 

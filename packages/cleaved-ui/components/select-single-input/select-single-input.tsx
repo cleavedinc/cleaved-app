@@ -14,6 +14,7 @@ export const SelectSingleInput: FunctionComponent<any> = (props) => {
     onChange,
     options,
     placeholder,
+    styles,
     value,
   } = props;
 
@@ -29,6 +30,7 @@ export const SelectSingleInput: FunctionComponent<any> = (props) => {
       onChange={onChange}
       options={options}
       placeholder={placeholder}
+      styles={styles}
       value={value}
     />
   );

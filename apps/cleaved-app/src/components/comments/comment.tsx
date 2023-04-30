@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 
 import { getTimeSinceDate } from "@cleaved/helpers";
 import {
-  COLORS,
   FONT_SIZES,
   FONT_WEIGHTS,
   RADIUS,
@@ -33,7 +32,7 @@ type CommentProps = {
 };
 
 const StyledCommentDateTime = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   margin-left: auto;
   &:hover {
     text-decoration: underline;
@@ -47,7 +46,7 @@ const StyledCommentFooterWrapper = styled.div`
 `;
 
 const StyledCommentBody = styled.div`
-  background-color: ${COLORS.GRAY_50};
+  background-color: ${({ theme }) => theme.colors.body_backgroundColor};
   border-radius: ${RADIUS.MEDIUM};
   margin-bottom: ${SPACING_PX.ONE};
   padding: ${SPACING.MEDIUM};
@@ -65,14 +64,15 @@ const StyledCommentWrapper = styled.div`
 
 const StyledCommentReplyButton = styled.button`
   ${removeDefaultButtonStyles}
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+
   &:hover {
     text-decoration: underline;
   }
 `;
 
 const StyledPipeSeparator = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   margin: 0 ${SPACING.SMALL};
 `;
 
@@ -82,7 +82,7 @@ const PostCommentHeaderDataWrapper = styled.div`
 
 const PostCommentHeaderWrapper = styled.div`
   align-items: center;
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.MEDIUM};
@@ -90,12 +90,12 @@ const PostCommentHeaderWrapper = styled.div`
 `;
 
 const PostCommentProfessionalName = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   font-size: ${FONT_SIZES.SMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseTextLink_colorHover};
     text-decoration: underline;
   }
 `;

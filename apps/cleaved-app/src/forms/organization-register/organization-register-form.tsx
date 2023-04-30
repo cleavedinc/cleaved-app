@@ -7,17 +7,7 @@ import { useMutation } from "@apollo/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonLink,
-  ButtonPrimary,
-  COLORS,
-  FONT_SIZES,
-  RADIUS,
-  SPACING,
-  SPACING_PX,
-  Spinner,
-} from "@cleaved/ui";
+import { BORDERS, ButtonLink, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { OrganizationMembershipsContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -29,7 +19,7 @@ type OrganizationRegisterFormType = {
 };
 
 const StyledButtonLink = styled(ButtonLink)`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
 `;
 
 const StyledButtonPrimaryWrapper = styled.div`
@@ -37,10 +27,13 @@ const StyledButtonPrimaryWrapper = styled.div`
 `;
 
 const StyledField = styled(Field)`
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.MEDIUM};
+  outline: none;
   padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
   width: 100%;
 `;
@@ -57,7 +50,7 @@ const StyledProjectFormWrapper = styled.div`
 `;
 
 const StyledProjectFormLabel = styled.label`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING_PX.ONE};
 `;

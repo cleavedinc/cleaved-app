@@ -62,7 +62,7 @@ const StyledLogoWrapper = styled.div`
 `;
 
 const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
-  border-bottom: ${BORDERS.BORDER_PRIMARY};
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
 
   &:last-child:after {
     border-bottom: none;
@@ -71,11 +71,11 @@ const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
 
 export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (props) => {
   const { className } = props;
-  const { t } = useTranslator();
+  const { logOut, preferredOrgId } = useContext(authTokenContext);
   const [isAccountMenuActive, setIsAccountMenuActive] = useState(false);
   const onAccountMenuClick = () => setIsAccountMenuActive(!isAccountMenuActive);
   const handleCloseMenu = () => setIsAccountMenuActive(false);
-  const { logOut, preferredOrgId } = useContext(authTokenContext);
+  const { t } = useTranslator();
 
   const handleLogout = () => {
     logOut();

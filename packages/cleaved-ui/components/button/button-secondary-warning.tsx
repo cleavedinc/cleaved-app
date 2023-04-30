@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { BORDERS, COLORS } from "../../theme";
+import { BORDERS } from "../../theme";
 
 import { buttonBase } from "./button-base";
 
 export const ButtonSecondaryWarning = styled.button`
   ${buttonBase}
-  background-color: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
-  color: ${COLORS.RED_500};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+  color: ${({ theme }) => theme.colors.baseAlert_color}
 
   &:hover:not([disabled]) {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 `;

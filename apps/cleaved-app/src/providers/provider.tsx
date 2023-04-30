@@ -1,14 +1,9 @@
-import React, { FunctionComponent, ReactNode } from "react";
+import React, { FunctionComponent, ReactNode, useContext } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { COLORS } from "./colors";
-import { BREAKPOINTS } from "./breakpoints";
-import { FONTS } from "./fonts";
-import { FONT_SIZES } from "./font-sizes";
-import { FONT_WEIGHTS } from "./font-weights";
-import { GRID } from "./grid";
-import { RADIUS } from "./radius";
-import { SHADOWS } from "./shadows";
-import { SPACING_PX } from "./spacing";
+
+import { FONTS, FONT_WEIGHTS, SPACING_PX, themeDark, themeLight } from "@cleaved/ui";
+
+import { ThemeContext } from "../contexts";
 
 type UIProviderTypes = {
   children: ReactNode;
@@ -22,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
 
 html {
   box-sizing: border-box;
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: 16px;
 }
 
@@ -134,7 +129,7 @@ section {
   display: block;
 }
 body {
-  background-color: ${COLORS.GRAY_50};
+  background-color: ${({ theme }) => theme.colors.body_backgroundColor};
 }
 div {
   overflow-wrap: anywhere;
@@ -143,12 +138,12 @@ p {
   margin-bottom: ${SPACING_PX.FOUR};
 }
 a{
-  color: ${COLORS.BLUE_500};
+  color: ${({ theme }) => theme.colors.baseLink_color};
   cursor: pointer;
   text-decoration: none;
 
   :hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseLink_colorHover};
   }
 }
 strong {
@@ -178,23 +173,15 @@ table {
 }
 `;
 
-export const UIProvider: FunctionComponent<UIProviderTypes> = ({ children }) => (
-  <ThemeProvider
-    theme={{
-      BREAKPOINTS,
-      FONTS,
-      FONT_SIZES,
-      FONT_WEIGHTS,
-      GRID,
-      COLORS,
-      RADIUS,
-      SHADOWS,
-      SPACING_PX,
-    }}
-  >
-    <>
-      <GlobalStyles />
-      {children}
-    </>
-  </ThemeProvider>
-);
+export const UIProvider: FunctionComponent<UIProviderTypes> = ({ children }) => {
+  const { isDarkTheme } = useContext(ThemeContext);
+
+  return (
+    <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
+      <>
+        <GlobalStyles />
+        {children}
+      </>
+    </ThemeProvider>
+  );
+};

@@ -14,7 +14,7 @@ type AsideAccountAvatarProps = {
 const avatartBase = css`
   align-items: center;
   border-radius: ${RADIUS.CIRCLE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
   height: 100px;
   justify-content: center;
@@ -62,11 +62,11 @@ export const EditAccountAvatar: FunctionComponent<AsideAccountAvatarProps> = (pr
   return (
     <>
       <StyledAvatarImageWrapper>
-        {account?.currentAvatar && (
+        {account && account?.currentAvatar && (
           <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
         )}
 
-        {!account?.currentAvatar && (
+        {account && !account?.currentAvatar && (
           <StyledAvatarInitials>
             {firstNameInitial}
             {lastNameInitial}

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-import { COLORS, CommentIcon, SPACING_PX } from "@cleaved/ui";
+import { CommentIcon, SPACING_PX } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
@@ -11,8 +11,8 @@ type PostProjectCommentProps = {
   showComments: () => void;
 };
 
-const StyledReactionText = styled.div`
-  color: ${COLORS.GRAY_500};
+const StyledCommentButtonText = styled.div`
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
   margin-left: ${SPACING_PX.ONE};
 `;
 
@@ -22,12 +22,13 @@ const StyledPostProjectFooterButtonButtonAdjustedWidth = styled(StyledPostProjec
 
 export const PostProjectComment: FunctionComponent<PostProjectCommentProps> = (props) => {
   const { showComments } = props;
+  const theme = useTheme();
   const { t } = useTranslator();
 
   return (
     <StyledPostProjectFooterButtonButtonAdjustedWidth onClick={() => showComments()} type="button">
-      <CommentIcon color={COLORS.GRAY_500} />
-      <StyledReactionText>{t("post.comment")}</StyledReactionText>
+      <CommentIcon color={theme.colors.baseIcon_color} />
+      <StyledCommentButtonText>{t("post.comment")}</StyledCommentButtonText>
     </StyledPostProjectFooterButtonButtonAdjustedWidth>
   );
 };

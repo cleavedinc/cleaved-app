@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 
-import { BORDERS, COLORS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
+import { BORDERS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
 
 import { PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useNavigateToProfessionalProfile } from "../../hooks";
@@ -12,7 +12,7 @@ type PostHeaderAvatarProps = {
 
 const avatartBase = css`
   align-items: center;
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
   height: 30px;
@@ -26,7 +26,7 @@ const StyledAvatarImage = styled.img`
 `;
 
 const StyledAvatarImageLink = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   height: max-content;
 `;
 

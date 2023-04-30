@@ -9,7 +9,6 @@ import {
   BORDERS,
   ButtonPrimary,
   ButtonSecondary,
-  COLORS,
   CopyIcon,
   mediaQueries,
   RADIUS,
@@ -75,18 +74,15 @@ const StyledShareLinkWrapper = styled.div`
 `;
 
 const StyledShareLinkInputReadOnly = styled.input`
-  background-color: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
   display: flex;
   margin-right: ${SPACING.SMALL};
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
   width: 100%;
-
-  :hover {
-    background-color: ${COLORS.BLUE_50};
-  }
 `;
 
 const StyledTdWithMenuContent = styled(StyledTd)`

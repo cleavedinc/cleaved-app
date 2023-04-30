@@ -1,15 +1,6 @@
 import React, { FunctionComponent, TextareaHTMLAttributes, useRef } from "react";
 import styled from "styled-components";
-import {
-  ANIMATION_DURATIONS,
-  BORDERS,
-  COLORS,
-  FONT_SIZES,
-  FONTS,
-  RADIUS,
-  SPACING,
-  TEXTAREA_MAX_HEIGHT,
-} from "../../theme";
+import { ANIMATION_DURATIONS, BORDERS, FONT_SIZES, FONTS, RADIUS, SPACING, TEXTAREA_MAX_HEIGHT } from "../../theme";
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> | any;
 
@@ -21,7 +12,7 @@ type TextareaWrapperProps = {
 
 export const TextareaWrapper = styled.div<TextareaWrapperProps>`
   ${(props) => (props.backgroundColor ? `background-color: ${props.backgroundColor}` : null)};
-  border: ${(props) => (props.hasBorder ? `${BORDERS.BORDER_PRIMARY}` : "none")};
+  border: ${(props) => (props.hasBorder ? `${BORDERS.SOLID_1PX}` : "none")};
   border-radius: ${RADIUS.MEDIUM};
 
   > * + * {
@@ -40,7 +31,7 @@ export const TextareaWrapper = styled.div<TextareaWrapperProps>`
     width: 100%;
 
     &::placeholder {
-      color: ${COLORS.GRAY_500};
+      color: ${({ theme }) => theme.colors.basePlaceholderText_color};
       transition: color ${ANIMATION_DURATIONS.FAST} ease;
     }
   }

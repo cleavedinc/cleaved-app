@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
-import { BORDERS, COLORS } from "../../theme";
+import { BORDERS } from "../../theme";
 
 export const NavigationLinksWrapper = styled.div`
   a {
     border-bottom: 2px solid transparent;
 
     &.active {
-      border-bottom: ${BORDERS.BORDER_BLUE500_2PX};
+      border-bottom: ${BORDERS.SOLID_2PX} ${({ theme }) => theme.borders.baseLink_color};
 
       li label {
       }
     }
 
     &:hover {
-      background-color: ${COLORS.GRAY_50};
-      border-bottom: ${BORDERS.BORDER_BLUE500_2PX};
+      background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+      border-bottom: ${BORDERS.SOLID_2PX} ${({ theme }) => theme.borders.baseLink_color};
     }
   }
 `;

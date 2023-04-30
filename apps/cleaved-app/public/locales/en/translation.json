@@ -145,7 +145,7 @@
     "editProjectPost": "Edit post",
     "photoViewerToolbarMessage": "Posted by {{firstName}} {{lastName}} on ",
     "post": "Post",
-    "postImageBasicAlt": "Post iImage",
+    "postImageBasicAlt": "Post Image",
     "removePost": "Remove Post",
     "submitPost": "Post",
     "totalComments": "Total comments",
@@ -227,7 +227,14 @@
     "love": "Love",
     "noReaction": "Like"
   },
+  "settings": {
+    "darkMode": "Dark mode"
+  },
   "shareLinks": {
+    "areYouSureRemoveButtonText": "Remove share link",
+    "areYouSureKeepButtonText": "Keep my share link",
+    "areYouSureRemoveSharelinkModalHeader": "Are you sure?",
+    "areYouSureRemoveSharelinkModalText": "If you remove this share link, it will be gone forever. No turning back.",
     "createAdminShareLink": "Create admin link",
     "createReadShareLink": "Create read only link",
     "createWriteShareLink": "Create read/write link",

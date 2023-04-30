@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import { COLORS } from "../../theme";
 
 import { buttonBase } from "./button-base";
 
 export const ButtonDisabled = styled.button`
   ${buttonBase}
-  background-color: ${COLORS.GRAY_100};
+  background-color: ${({ theme }) => theme.colors.baseBordersAndShadows_color};
   border: none;
-  color: ${COLORS.GRAY_100};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: not-allowed;
   pointer-events: none;
 `;
