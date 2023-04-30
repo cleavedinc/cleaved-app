@@ -3,7 +3,7 @@ import { navigate } from "@reach/router";
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import styled, { useTheme } from "styled-components";
 
-import { CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
+import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -14,8 +14,9 @@ import "@szhsin/react-menu/dist/index.css";
 const StyledBasicItem = styled(MenuItem)`
   font-size: ${FONT_SIZES.SMALL};
 
-  :hover {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+  :hover,
+  &.szh-menu__item--hover {
+    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   }
 `;
 
@@ -23,6 +24,8 @@ const StyledBasicMenu = styled(Menu)`
   margin-left: auto;
 
   ul {
+    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;

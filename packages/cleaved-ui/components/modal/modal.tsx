@@ -4,7 +4,7 @@ import { Portal } from "react-portal";
 
 import { CircleEditButtonSmall } from "../button";
 import { CloseIcon } from "../icons";
-import { FONT_SIZES, mediaQueries, RADIUS, SPACING } from "../../theme";
+import { BORDERS, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "../../theme";
 import { OnOutsideClick } from "../on-outside-click";
 import { ScrollLock } from "../scroll-lock";
 
@@ -46,6 +46,7 @@ const StyledModalCloseButton = styled(CircleEditButtonSmall)`
 
 const StyledModalContentWrapper = styled.div<ModalBackgroundProps>`
   background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   height: 100%;
   max-height: 100%;
   min-width: auto;

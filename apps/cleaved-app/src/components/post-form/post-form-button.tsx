@@ -6,6 +6,7 @@ export const StyledPostFormButton = styled.button`
   background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
   border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: 32px;
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
   display: flex;
   flex-grow: 1;

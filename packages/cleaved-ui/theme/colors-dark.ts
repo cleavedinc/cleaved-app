@@ -18,7 +18,7 @@ export type ThemeColorsDark = {
 
 export const COLORS_DARK: ThemeColorsDark = {
   BLACK: "#F9F9F9", // base font
-  BLACK_ALPHA_6: "rgba(255,255,255,0.6)", // overlays
+  BLACK_ALPHA_6: "rgba(0,0,0,0.8)", // overlays
 
   BLUE_500: "#3BA1E5", // primary CTAs // original: #0059FF
   BLUE_500_HOVER: "#5CB5F5", // original: #337AFF
@@ -32,9 +32,9 @@ export const COLORS_DARK: ThemeColorsDark = {
 
   HONEY_YELLOW_100: "#FFD166", // NOT USED YET
   HONEY_YELLOW_300: "#FFC233", // NOT USED YET
-  HONEY_YELLOW_500: "#FFB300", // NOT USED YET: stars / rating
+  HONEY_YELLOW_500: "#FFB300", // Celebrate icon
 
-  RED_500: "#FF4D4D", // errors, private
+  RED_500: "#FF6366", // errors, private
 
   TAN_300: "#594F4F", // Help text boxes
 

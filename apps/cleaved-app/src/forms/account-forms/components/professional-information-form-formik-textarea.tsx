@@ -30,6 +30,7 @@ const StyledTextarea = styled.textarea`
   background-color: transparent;
   border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-family: ${FONTS.SANS_SERIF_1};
   font-size: ${FONT_SIZES.MEDIUM};
   min-height: 100px;

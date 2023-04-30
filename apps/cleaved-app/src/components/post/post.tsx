@@ -67,7 +67,7 @@ const StyledPostInfoBarCommentCount = styled.div`
 `;
 
 const StyledProjectNameLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.baseTextLink_color};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: inline-block;
   font-size: ${FONT_SIZES.XXSMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};

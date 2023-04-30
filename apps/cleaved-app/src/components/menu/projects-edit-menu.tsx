@@ -4,7 +4,7 @@ import { Menu, MenuItem, MenuRadioGroup } from "@szhsin/react-menu";
 import styled, { useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
+import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
 
 import { ProjectStatus } from "../../generated-types/graphql";
 import { useRouteParams, useTranslator } from "../../hooks";
@@ -19,13 +19,16 @@ type ProjectEditMenuProps = {
 };
 
 const StyledBasicItem = styled(MenuItem)`
-  :hover {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+  :hover,
+  &.szh-menu__item--hover {
+    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   }
 `;
 
 const StyledBasicMenu = styled(Menu)`
   ul {
+    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;

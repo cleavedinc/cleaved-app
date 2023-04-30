@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { alertError, logQueryError, verifyUploadSizeIsOK } from "@cleaved/helpers";
-import { StyledTooltipDark } from "@cleaved/ui";
+import { StyledTooltipWhite } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
@@ -64,9 +64,9 @@ export const AccountAvatarForm: FunctionComponent<AccountAvatarFormProps> = (pro
 
   return (
     <StyledFileInputLabel className={className}>
-      <StyledTooltipDark tooltip={t("files.avatarImageSizeRecommendation")}>
+      <StyledTooltipWhite tooltip={t("files.avatarImageSizeRecommendation")}>
         <StyledEditIconWrapper>{t("files.avatarUploadImage")}</StyledEditIconWrapper>
-      </StyledTooltipDark>
+      </StyledTooltipWhite>
 
       <input type="file" required onChange={onChange} />
     </StyledFileInputLabel>

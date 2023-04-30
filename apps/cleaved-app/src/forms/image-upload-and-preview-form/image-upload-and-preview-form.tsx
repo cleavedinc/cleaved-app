@@ -105,8 +105,8 @@ const StyledImageUploadWrapper = styled.section<GetColorProps>`
       ? props.theme.colors.baseLink_colorHover
       : props.theme.colors.baseBordersAndShadows_color};
   border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  color: ${({ theme }) => theme.colors.baseText_color};
   display: flex;
   flex: 1;
   height: 200px;

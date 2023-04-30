@@ -25,6 +25,7 @@ const spin = keyframes`
 
 export const SpinnerWrapper = styled.div`
   border-radius: 100%;
+  color: ${({ theme }) => theme.colors.baseText_color};
   height: 20px;
   margin: 0 auto;
   position: relative;
@@ -38,6 +39,7 @@ export const SpinnerWrapper = styled.div`
     height: 100%;
     left: -10px;
     position: absolute;
+    size: 1;
     top: -10px;
     width: 100%;
   }
@@ -56,9 +58,4 @@ export const Spinner: FunctionComponent<SpinnerProps> = ({ className, color, siz
   }
 
   return <SpinnerWrapper className={className} />;
-};
-
-Spinner.defaultProps = {
-  color: "#000000",
-  size: 1,
 };

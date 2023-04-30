@@ -66,10 +66,11 @@ const StyledSeeAllProjects = styled.div`
 `;
 
 const StyledSeeAllProjectsLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.baseTextLink_color};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.SMALL};
 
   :hover {
+    color: ${({ theme }) => theme.colors.baseSubText_color};
     text-decoration: underline;
   }
 `;

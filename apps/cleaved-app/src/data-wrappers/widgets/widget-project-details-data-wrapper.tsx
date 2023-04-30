@@ -35,7 +35,7 @@ const StyledFileText = styled(FilePost)`
 `;
 
 const StyledPostCount = styled.div`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.XSMALL};
 `;
 

@@ -77,6 +77,7 @@ const StyledShareLinkInputReadOnly = styled.input`
   background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
   border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
   display: flex;
   margin-right: ${SPACING.SMALL};

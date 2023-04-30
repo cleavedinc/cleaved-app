@@ -4,6 +4,7 @@ import { FONT_SIZES, RADIUS, SPACING } from "../../theme";
 export const buttonBase = css`
   align-items: center;
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
   display: inline-flex;
   font-size: ${FONT_SIZES.SMALL};
@@ -13,7 +14,6 @@ export const buttonBase = css`
 
   :disabled {
     background-color: ${({ theme }) => theme.colors.baseBordersAndShadows_color};
-    color: ${({ theme }) => theme.colors.baseText_color};
     cursor: not-allowed;
   }
 `;

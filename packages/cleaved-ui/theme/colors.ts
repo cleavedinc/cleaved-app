@@ -18,7 +18,7 @@ export type ThemeColors = {
 
 export const COLORS: ThemeColors = {
   BLACK: "#050505", // base font
-  BLACK_ALPHA_6: "rgba(0,0,0,0.6)", // overlays
+  BLACK_ALPHA_6: "rgba(0,0,0,0.8)", // overlays
 
   BLUE_500: "#0095F6", // primary CTAs // original: #0059FF
   BLUE_500_HOVER: "#0086dd", // original: #337AFF
@@ -32,7 +32,7 @@ export const COLORS: ThemeColors = {
 
   HONEY_YELLOW_100: "#FFD166", // NOT USED YET
   HONEY_YELLOW_300: "#FFC233", // NOT USED YET
-  HONEY_YELLOW_500: "#FFB300", // NOT USED YET: stars / rating
+  HONEY_YELLOW_500: "#FFB300", // Celebrate icon
 
   RED_500: "#FF6366", // errors, private
 

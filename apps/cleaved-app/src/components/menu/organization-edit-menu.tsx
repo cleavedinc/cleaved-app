@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
+import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -18,8 +18,9 @@ type OrganizationEditMenuProps = {
 };
 
 const basicItemBase = css`
-  :hover {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+  :hover,
+  &.szh-menu__item--hover {
+    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   }
 `;
 
@@ -37,6 +38,8 @@ const StyledBasicItemRed = styled(MenuItem)`
 
 const StyledBasicMenu = styled(Menu)`
   ul {
+    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;

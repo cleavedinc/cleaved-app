@@ -178,12 +178,25 @@ table {
 export const UIProvider: FunctionComponent<UIProviderTypes> = ({ children }) => {
   const [theme, setTheme] = useState("dark"); // dark || light
   const isDarkTheme = theme === "dark";
-  // const toggleTheme = () => setTheme(isDarkTheme ? "light" : "dark");
+  const toggleTheme = () => setTheme(isDarkTheme ? "light" : "dark");
 
   return (
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <>
         <GlobalStyles />
+
+        <button onClick={toggleTheme}>
+          {isDarkTheme ? (
+            <span aria-label="Light mode" role="img">
+              🌞
+            </span>
+          ) : (
+            <span aria-label="Dark mode" role="img">
+              🌜
+            </span>
+          )}
+        </button>
+
         {children}
       </>
     </ThemeProvider>

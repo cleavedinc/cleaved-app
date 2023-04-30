@@ -13,7 +13,6 @@ import {
   StyledTHeadTr,
   StyledTHead,
   StyledTr,
-  COLORS,
 } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
@@ -55,6 +54,7 @@ const StyledProjectLink = styled(Link)`
 `;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
+  color: ${({ theme }) => theme.colors.baseText_color};
   margin-left: auto;
 `;
 
@@ -153,6 +153,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         <StyledProjectListHeader>
           <Select
             defaultValue={projectStatusOptions[0]}
+            isSearchable={false}
             onChange={(projectStatusFilter) => projectStatusFilter && setProjectStatus(projectStatusFilter.value)}
             options={projectStatusOptions}
             styles={{
@@ -164,6 +165,12 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                 ...baseStyles,
                 textTransform: "capitalize",
               }),
+              option: (styles) => {
+                return {
+                  ...styles,
+                  color: colorTheme.colors.baseText_color,
+                };
+              },
             }}
             theme={(theme) => ({
               ...theme,

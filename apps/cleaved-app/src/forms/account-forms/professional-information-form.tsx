@@ -24,10 +24,13 @@ type ProfesionalInformationFormType = {
 const StyledFormWrapper = styled.div``;
 
 const StyledField = styled(Field)`
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
   border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.MEDIUM};
+  outline: none;
   padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
   width: 100%;
 `;

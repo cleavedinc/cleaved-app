@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
-import styled, { useTheme } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
 import {
+  BORDERS,
   ButtonPrimary,
   ButtonSecondary,
   CircleEditButtonSmall,
@@ -26,21 +27,29 @@ type ShareLinkEditMenuProps = {
   shareLinkPermission: OrgPermissionLevel;
 };
 
-const StyledBasicItem = styled(MenuItem)`
-  :hover {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+const basicItemBase = css`
+  :hover,
+  &.szh-menu__item--hover {
+    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   }
 `;
 
+const StyledBasicItem = styled(MenuItem)`
+  ${basicItemBase}
+`;
+
 const StyledBasicItemRed = styled(MenuItem)`
+  ${basicItemBase}
+
   :hover {
-    color: ${({ theme }) => theme.colors.baseAlert_color}
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+    color: ${({ theme }) => theme.colors.baseAlert_color};
   }
 `;
 
 const StyledBasicMenu = styled(Menu)`
   ul {
+    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;
