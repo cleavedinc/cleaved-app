@@ -227,6 +227,9 @@
     "love": "Love",
     "noReaction": "Like"
   },
+  "settings": {
+    "darkMode": "Dark mode"
+  },
   "shareLinks": {
     "areYouSureRemoveButtonText": "Remove share link",
     "areYouSureKeepButtonText": "Keep my share link",

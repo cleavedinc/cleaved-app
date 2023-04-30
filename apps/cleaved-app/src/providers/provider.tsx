@@ -1,11 +1,9 @@
-import React, { FunctionComponent, ReactNode, useState } from "react";
+import React, { FunctionComponent, ReactNode, useContext } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { FONTS } from "./fonts";
-import { FONT_WEIGHTS } from "./font-weights";
-import { SPACING_PX } from "./spacing";
 
-import { themeDark } from "./theme-dark";
-import { themeLight } from "./theme-light";
+import { FONTS, FONT_WEIGHTS, SPACING_PX, themeDark, themeLight } from "@cleaved/ui";
+
+import { ThemeContext } from "../contexts";
 
 type UIProviderTypes = {
   children: ReactNode;
@@ -176,27 +174,12 @@ table {
 `;
 
 export const UIProvider: FunctionComponent<UIProviderTypes> = ({ children }) => {
-  const [theme, setTheme] = useState("dark"); // dark || light
-  const isDarkTheme = theme === "dark";
-  const toggleTheme = () => setTheme(isDarkTheme ? "light" : "dark");
+  const { isDarkTheme } = useContext(ThemeContext);
 
   return (
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <>
         <GlobalStyles />
-
-        <button onClick={toggleTheme}>
-          {isDarkTheme ? (
-            <span aria-label="Light mode" role="img">
-              🌞
-            </span>
-          ) : (
-            <span aria-label="Dark mode" role="img">
-              🌜
-            </span>
-          )}
-        </button>
-
         {children}
       </>
     </ThemeProvider>

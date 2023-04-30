@@ -1,13 +1,37 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext } from "react";
+import styled, { useTheme } from "styled-components";
 
-import { Box } from "@cleaved/ui";
+import { Box, Toggle } from "@cleaved/ui";
 
+import { ThemeContext } from "../../contexts";
 import { PersonalInformationForm } from "../../forms";
+import { useTranslator } from "../../hooks";
+
+const StyledBox = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledToggle = styled(Toggle)`
+  margin-left: auto;
+`;
 
 export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
+  const { setThemeMode } = useContext(ThemeContext);
+  const theme = useTheme();
+  const { t } = useTranslator();
+
+  const darkModeLabel = t("settings.darkMode") ? t("settings.darkMode") : "";
+
   return (
-    <Box>
+    <StyledBox>
+      <StyledToggle
+        callback={() => setThemeMode()}
+        label={darkModeLabel}
+        offColor={theme.colors.baseBordersAndShadows_color}
+        onColor={theme.colors.baseApproved_color}
+      />
       <PersonalInformationForm />
-    </Box>
+    </StyledBox>
   );
 };

@@ -8,7 +8,6 @@ export * from "./font-sizes";
 export * from "./font-weights";
 export * from "./grid";
 export * from "./line-height";
-export * from "./provider";
 export * from "./radius";
 export * from "./spacing";
 export * from "./theme-dark";

@@ -5,11 +5,11 @@ import TagManager from "react-gtm-module";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 
 import { logError, RollbarLogLevels } from "@cleaved/helpers";
-import { UIProvider } from "@cleaved/ui";
-import { useTranslator } from "../hooks";
 
 import { apolloClient } from "../client";
-import { AuthTokenContextProvider, AccountContextProvider } from "../contexts";
+import { AuthTokenContextProvider, AccountContextProvider, ThemeContextProvider } from "../contexts";
+import { useTranslator } from "../hooks";
+import { UIProvider } from "../providers";
 
 import { Application } from "./application";
 
@@ -54,9 +54,11 @@ export const ApplicationWrapper: FunctionComponent = () => {
         <ApolloProvider client={apolloClient}>
           <AuthTokenContextProvider>
             <AccountContextProvider>
-              <UIProvider>
-                <Application />
-              </UIProvider>
+              <ThemeContextProvider>
+                <UIProvider>
+                  <Application />
+                </UIProvider>
+              </ThemeContextProvider>
             </AccountContextProvider>
           </AuthTokenContextProvider>
         </ApolloProvider>
