@@ -103,7 +103,7 @@ const PostCommentProfessionalName = styled.a`
 export const Comment: FunctionComponent<CommentProps> = (props) => {
   const { account, commentLevel, postProjectRepliesDataRefetch, reply, setIsCommentRepliesVisible } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
+  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.id);
   const { t } = useTranslator();
 
   return (
@@ -114,7 +114,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
             <PostCommentProfessionalName href={professionalProfilePath}>
               {account?.firstName} {account?.lastName}
             </PostCommentProfessionalName>
-            {account?.professionals[0]?.jobTitle && <div>{account?.professionals[0]?.jobTitle}</div>}
+            {account?.jobTitle && <div>{account?.jobTitle}</div>}
           </PostCommentHeaderDataWrapper>
         </PostCommentHeaderWrapper>
 

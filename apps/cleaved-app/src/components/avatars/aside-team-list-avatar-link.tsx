@@ -86,8 +86,8 @@ export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps
           {account.firstName} {account.lastName}
         </StyledPostProfessionalName>
 
-        {/* {account?.professionals[0]?.jobTitle && ( */}
-        <StyledJobTitle>{/* {account?.professionals[0]?.jobTitle} */}Temp job title</StyledJobTitle>
+        {/* {account?.jobTitle && ( */}
+        <StyledJobTitle>{/* {account?.jobTitle} */}Temp job title</StyledJobTitle>
         {/* )} */}
       </StyledPostProfessionalInfoWrapper>
     </>

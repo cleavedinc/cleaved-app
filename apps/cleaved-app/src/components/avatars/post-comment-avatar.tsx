@@ -40,7 +40,7 @@ const StyledAvatarInitials = styled.div`
 
 export const PostCommentAvatar: FunctionComponent<PostHeaderAvatarProps> = (props) => {
   const { account } = props;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
+  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.id);
   const firstNameInitial = account?.firstName?.charAt(0).toUpperCase() || "";
   const lastNameInitial = account?.lastName?.charAt(0).toUpperCase() || "";
 

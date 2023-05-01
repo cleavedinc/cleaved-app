@@ -61,7 +61,7 @@ const StyledPostProfessionalName = styled.a`
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
   const { account, accountId, className, date, isPostOpenInModal, postId } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
+  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.id);
   const { accountData, accountDataLoading } = useContext(AccountContext);
 
   return (
@@ -73,7 +73,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
           {account?.firstName} {account?.lastName}
         </StyledPostProfessionalName>
 
-        {account?.professionals[0]?.jobTitle && <StyledJobTitle>{account?.professionals[0]?.jobTitle}</StyledJobTitle>}
+        {account?.jobTitle && <StyledJobTitle>{account?.jobTitle}</StyledJobTitle>}
 
         {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
       </StyledPostProfessionalInfoWrapper>

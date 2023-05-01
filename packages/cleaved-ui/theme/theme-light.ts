@@ -36,6 +36,8 @@ export const themeLight = {
     iconCelebrateColor: COLORS.HONEY_YELLOW_500,
 
     helperInfoBoxWrapper_backgroundColor: COLORS.TAN_300,
+
+    white_color: COLORS.WHITE,
   },
 };
 
