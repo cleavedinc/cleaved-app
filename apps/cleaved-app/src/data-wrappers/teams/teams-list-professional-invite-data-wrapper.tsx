@@ -40,6 +40,22 @@ const StyledButtonSecondary = styled(ButtonSecondary)`
   margin-bottom: ${SPACING.SMALL};
 `;
 
+const StyledCreateShareLinkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: ${SPACING.XLARGE} ${SPACING.MEDIUM};
+  text-align: center;
+
+  ${mediaQueries.SM_MD} {
+    margin: ${SPACING.XXXLARGE} ${SPACING.MEDIUM};
+  }
+`;
+
+const StyledCreateShareLinkText = styled.div`
+  margin-bottom: ${SPACING.SMALL};
+`;
+
 const StyledPermissionLevel = styled.div`
   text-transform: lowercase;
 
@@ -251,6 +267,12 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
             </StyledTBody>
           </StyledTable>
         </>
+      )}
+
+      {hasPermission && !loading && shareLinkArray && shareLinkArray.length <= 0 && (
+        <StyledCreateShareLinkWrapper>
+          <StyledCreateShareLinkText>{t("shareLinks.professionalInviteEmptyState")}</StyledCreateShareLinkText>
+        </StyledCreateShareLinkWrapper>
       )}
     </>
   );

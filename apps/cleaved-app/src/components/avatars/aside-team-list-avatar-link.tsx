@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { BORDERS, FONT_SIZES, FONT_WEIGHTS, RADIUS, SPACING_PX } from "@cleaved/ui";
 
 import { OrganizationSeekMembersQuery, PostProjectAccountSeekQuery } from "../../generated-types/graphql";
-import { useNavigateToProfessionalProfile } from "../../hooks";
+import { useNavigateToProfile } from "../../hooks";
 
 type AsideTeamListAvatarProps = {
   account:
@@ -62,14 +62,14 @@ const StyledPostProfessionalInfoWrapper = styled.div`
 
 export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps> = (props) => {
   const { account } = props;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account.id);
+  const { profilePath } = useNavigateToProfile(account.id);
   const firstNameInitial = account?.firstName?.charAt(0).toUpperCase() || "";
   const lastNameInitial = account?.lastName?.charAt(0).toUpperCase() || "";
 
   return (
     <>
       {account && account?.currentAvatar && (
-        <StyledAvatarImageLink href={professionalProfilePath}>
+        <StyledAvatarImageLink href={profilePath}>
           <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
         </StyledAvatarImageLink>
       )}
@@ -82,13 +82,11 @@ export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps
       )}
 
       <StyledPostProfessionalInfoWrapper>
-        <StyledPostProfessionalName href={professionalProfilePath}>
+        <StyledPostProfessionalName href={profilePath}>
           {account.firstName} {account.lastName}
         </StyledPostProfessionalName>
 
-        {/* {account?.jobTitle && ( */}
-        <StyledJobTitle>{/* {account?.jobTitle} */}Temp job title</StyledJobTitle>
-        {/* )} */}
+        {account && account?.jobTitle && <StyledJobTitle>{account?.jobTitle}</StyledJobTitle>}
       </StyledPostProfessionalInfoWrapper>
     </>
   );

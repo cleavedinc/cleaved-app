@@ -7,7 +7,7 @@ import { getTimeSinceDate } from "@cleaved/helpers";
 import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
 import { AccountContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
-import { useNavigateToProfessionalProfile } from "../../hooks";
+import { useNavigateToProfile } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 type PostProjectHeaderProps = {
@@ -61,7 +61,7 @@ const StyledPostProfessionalName = styled.a`
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
   const { account, accountId, className, date, isPostOpenInModal, postId } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.id);
+  const { profilePath } = useNavigateToProfile(account?.id);
   const { accountData, accountDataLoading } = useContext(AccountContext);
 
   return (
@@ -69,7 +69,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
       <PostHeaderAvatarLink account={account} />
 
       <StyledPostProfessionalInfoWrapper>
-        <StyledPostProfessionalName href={professionalProfilePath}>
+        <StyledPostProfessionalName href={profilePath}>
           {account?.firstName} {account?.lastName}
         </StyledPostProfessionalName>
 

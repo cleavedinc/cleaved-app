@@ -1,24 +1,18 @@
-import { useContext } from "react";
 import { navigate } from "@reach/router";
 
-import { authTokenContext } from "../contexts";
 import { routeConstantsCleavedApp } from "../router";
 
-type NavigateToProfessionalProfileType = {
-  navigateToProfessionalProfile: () => void;
-  professionalProfilePath: string;
+type NavigateToProfileType = {
+  navigateToProfile: () => void;
+  profilePath: string;
 };
 
-export const useNavigateToProfessionalProfile = (
-  professionalId: string | undefined
-): NavigateToProfessionalProfileType => {
-  const { preferredOrgId } = useContext(authTokenContext);
+export const useNavigateToProfile = (accountId: string | undefined): NavigateToProfileType => {
+  const profilePath = `${routeConstantsCleavedApp.account.route}/${accountId}`;
 
-  const professionalProfilePath = `/${preferredOrgId}${routeConstantsCleavedApp.professional.route}/${professionalId}`;
-
-  const navigateToProfessionalProfile = () => {
-    navigate(professionalProfilePath);
+  const navigateToProfile = () => {
+    navigate(profilePath);
   };
 
-  return { navigateToProfessionalProfile, professionalProfilePath };
+  return { navigateToProfile, profilePath };
 };

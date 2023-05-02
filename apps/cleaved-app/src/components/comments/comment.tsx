@@ -15,7 +15,7 @@ import {
 } from "@cleaved/ui";
 
 import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
-import { useNavigateToProfessionalProfile, useTranslator } from "../../hooks";
+import { useNavigateToProfile, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 import { ReactionTypesAndTotalCount } from "../reactions";
@@ -103,7 +103,7 @@ const PostCommentProfessionalName = styled.a`
 export const Comment: FunctionComponent<CommentProps> = (props) => {
   const { account, commentLevel, postProjectRepliesDataRefetch, reply, setIsCommentRepliesVisible } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.id);
+  const { profilePath } = useNavigateToProfile(account?.id);
   const { t } = useTranslator();
 
   return (
@@ -111,7 +111,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
       <StyledCommentBody>
         <PostCommentHeaderWrapper>
           <PostCommentHeaderDataWrapper>
-            <PostCommentProfessionalName href={professionalProfilePath}>
+            <PostCommentProfessionalName href={profilePath}>
               {account?.firstName} {account?.lastName}
             </PostCommentProfessionalName>
             {account?.jobTitle && <div>{account?.jobTitle}</div>}

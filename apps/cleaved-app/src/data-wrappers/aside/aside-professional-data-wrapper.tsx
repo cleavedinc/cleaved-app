@@ -6,7 +6,7 @@ import { Box, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } 
 
 import { AsideAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
-import { useNavigateToProfessionalProfile, useRouteParams, useTranslator } from "../../hooks";
+import { useNavigateToProfile, useRouteParams, useTranslator } from "../../hooks";
 
 const StyledAsideProfessionalWrapper = styled.div`
   text-align: center;
@@ -39,7 +39,7 @@ export const AsideProfessionalDataWrapper: FunctionComponent = () => {
   const { accountData, accountDataLoading } = useContext(AccountContext);
   const routeParams = useRouteParams();
   const professionalId = routeParams.professionalId;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(professionalId);
+  const { profilePath } = useNavigateToProfile(professionalId);
   const { t } = useTranslator();
 
   return (
@@ -50,7 +50,7 @@ export const AsideProfessionalDataWrapper: FunctionComponent = () => {
             <StyledAsideProfessionalWrapper>
               <AsideAvatar account={accountData} />
 
-              <Link to={professionalProfilePath}>
+              <Link to={profilePath}>
                 <StyledProfileName>
                   {accountData?.firstName} {accountData?.lastName}
                 </StyledProfileName>

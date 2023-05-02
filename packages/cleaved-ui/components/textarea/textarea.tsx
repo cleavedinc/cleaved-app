@@ -6,13 +6,14 @@ export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> | any;
 
 type TextareaWrapperProps = {
   backgroundColor?: string;
+  className?: string;
   hasBorder?: boolean;
   minHeight?: string;
 };
 
 export const TextareaWrapper = styled.div<TextareaWrapperProps>`
   ${(props) => (props.backgroundColor ? `background-color: ${props.backgroundColor}` : null)};
-  border: ${(props) => (props.hasBorder ? `${BORDERS.SOLID_1PX}` : "none")};
+  border: ${(props) => (props.hasBorder ? `${BORDERS.SOLID_1PX} ${props.theme.borders.primary_color}` : "none")};
   border-radius: ${RADIUS.MEDIUM};
 
   > * + * {
@@ -38,12 +39,17 @@ export const TextareaWrapper = styled.div<TextareaWrapperProps>`
 `;
 
 export const Textarea: FunctionComponent<TextareaProps> = (props) => {
-  const { autoFocus, backgroundColor, hasBorder, minHeight, onKeyPress, onKeyUp, ...rest } = props;
+  const { autoFocus, backgroundColor, className, hasBorder, minHeight, onKeyPress, onKeyUp, ...rest } = props;
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   /* eslint-disable */
   return (
-    <TextareaWrapper backgroundColor={backgroundColor} hasBorder={hasBorder} minHeight={minHeight}>
+    <TextareaWrapper
+      backgroundColor={backgroundColor}
+      className={className}
+      hasBorder={hasBorder}
+      minHeight={minHeight}
+    >
       <textarea {...rest} autoFocus={autoFocus} onKeyPress={onKeyPress} onKeyUp={onKeyUp} ref={textAreaRef} rows={1} />
     </TextareaWrapper>
   );

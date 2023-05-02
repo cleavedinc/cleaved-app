@@ -1,4 +1,7 @@
 export const routeConstantsCleavedApp = {
+  account: {
+    route: "/account",
+  },
   accountMembership: {
     route: "/account-membership",
   },
@@ -31,9 +34,6 @@ export const routeConstantsCleavedApp = {
   },
   projectStartNew: {
     route: "/project-list/start-new-project",
-  },
-  professional: {
-    route: "/professional",
   },
   professionalInvite: {
     route: "/teams-list/professional-invite",
