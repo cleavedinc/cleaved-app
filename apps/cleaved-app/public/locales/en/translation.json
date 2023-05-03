@@ -152,6 +152,7 @@
     "totalPosts": "Total posts"
   },
   "postFileUpload": {
+    "addMoreImages": "Add more images",
     "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",
     "errorFileIncorrectType": "One file is not an accepted file type.",
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
@@ -242,6 +243,7 @@
     "editMenuRemoveShareLink": "Remove {{shareLinkPermission}} share link",
     "manage": "Manage",
     "permissionLevel": "Role",
+    "professionalInviteEmptyState": "To invite your team, you can create a share link and then share it with them.",
     "shareLink": "Share link"
   },
   "submit": "Submit",

@@ -54,7 +54,6 @@ const StyledProjectLink = styled(Link)`
 `;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
-  color: ${({ theme }) => theme.colors.baseText_color};
   margin-left: auto;
 `;
 
@@ -165,10 +164,10 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                 ...baseStyles,
                 textTransform: "capitalize",
               }),
-              option: (styles) => {
+              option: (styles, { isSelected }) => {
                 return {
                   ...styles,
-                  color: colorTheme.colors.baseText_color,
+                  color: isSelected ? colorTheme.colors.white_color : colorTheme.colors.baseText_color,
                 };
               },
             }}

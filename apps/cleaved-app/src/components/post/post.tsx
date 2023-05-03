@@ -122,7 +122,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           <PostProjectHeader
             account={post.account}
             accountId={post.accountId}
-            date={new Date(post.date).toLocaleDateString()}
+            date={post.date}
             isPostOpenInModal={isCommentsVisible}
             postId={post.id}
           />

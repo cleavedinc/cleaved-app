@@ -12,7 +12,7 @@ import { AccountContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
 import { ProfessionalInformationFormFormikTextarea } from "./components";
-import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_PROFESSIONAL_ABOUT_MUTATION } from "./gql";
+import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION } from "./gql";
 import { StyledFormikAutoSave } from "./styled-formik-auto-save";
 
 type ProfesionalInformationFormType = {
@@ -83,7 +83,7 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     },
   });
 
-  const [setProfessionalAbout] = useMutation(SET_PROFESSIONAL_ABOUT_MUTATION, {
+  const [setAbout] = useMutation(SET_ABOUT_MUTATION, {
     onError: (error) => {
       logQueryError(error);
     },
@@ -93,9 +93,9 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        about: accountData?.professionals[0].about || "",
+        about: accountData?.about || "",
         accountEmail: accountData?.emailAddress || "",
-        jobTitle: accountData?.professionals[0].jobTitle || "",
+        jobTitle: accountData?.jobTitle || "",
       }}
       onSubmit={(values: ProfesionalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
@@ -108,15 +108,13 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
 
         setJobTitle({
           variables: {
-            newTitle: values.jobTitle ? values.jobTitle : "",
-            professionalId: accountData?.professionals[0].id ? accountData?.professionals[0].id : "",
+            jobTitle: values.jobTitle ? values.jobTitle : "",
           },
         });
 
-        setProfessionalAbout({
+        setAbout({
           variables: {
-            newAbout: values.about ? values.about : "",
-            professionalId: accountData?.professionals[0].id ? accountData?.professionals[0].id : "",
+            about: values.about ? values.about : "",
           },
         });
 

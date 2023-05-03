@@ -354,7 +354,6 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
               <StyledCelebrateStepCompletionImage
                 alt={registerOrganizationCelebrateImageAlt}
                 src={"/helper-info/celebrate-high-five-fireworks.svg"}
-                width={"500px"}
               />
             )}
 
@@ -400,7 +399,6 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
                 <StyledCelebrateStepCompletionImage
                   alt={startNewProjectCelebrateImageAlt}
                   src={"/helper-info/celebrate-high-five-fireworks-2.svg"}
-                  width={"500px"}
                 />
               )}
           </StyledBox>

@@ -14,6 +14,7 @@ export const buttonBase = css`
 
   :disabled {
     background-color: ${({ theme }) => theme.colors.baseBordersAndShadows_color};
+    color: ${({ theme }) => theme.colors.baseText_color};
     cursor: not-allowed;
   }
 `;

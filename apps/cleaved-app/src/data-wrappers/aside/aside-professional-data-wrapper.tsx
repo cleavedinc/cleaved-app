@@ -1,15 +1,12 @@
-import React, { FunctionComponent } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { logQueryError } from "@cleaved/helpers";
 import { Box, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideAvatar } from "../../components";
-import { FindMyProfessionalByIdQuery } from "../../generated-types/graphql";
-import { FIND_MY_PROFESSIONAL_BY_ID } from "../../gql-queries";
-import { useLoginGuard, useNavigateToProfessionalProfile, useRouteParams, useTranslator } from "../../hooks";
+import { AccountContext } from "../../contexts";
+import { useNavigateToProfile, useRouteParams, useTranslator } from "../../hooks";
 
 const StyledAsideProfessionalWrapper = styled.div`
   text-align: center;
@@ -39,45 +36,32 @@ const StyledProfessionalAbout = styled.div`
 `;
 
 export const AsideProfessionalDataWrapper: FunctionComponent = () => {
-  const { isLoggedIn } = useLoginGuard();
+  const { accountData, accountDataLoading } = useContext(AccountContext);
   const routeParams = useRouteParams();
   const professionalId = routeParams.professionalId;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(professionalId);
+  const { profilePath } = useNavigateToProfile(professionalId);
   const { t } = useTranslator();
-
-  const { data, loading } = useQuery<FindMyProfessionalByIdQuery>(FIND_MY_PROFESSIONAL_BY_ID, {
-    fetchPolicy: "cache-and-network",
-    nextFetchPolicy: "cache-and-network",
-    onError: (error) => {
-      console.log("error", error);
-      logQueryError(error);
-    },
-    skip: !isLoggedIn || !professionalId,
-    variables: { professionalId },
-  });
-
-  const professionalData = data?.findProfessionalById;
 
   return (
     <>
       <StickUnderHeaderDesktopOnly>
-        {!loading && (
+        {!accountDataLoading && (
           <Box>
             <StyledAsideProfessionalWrapper>
-              <AsideAvatar account={professionalData?.account} />
+              <AsideAvatar account={accountData} />
 
-              <Link to={professionalProfilePath}>
+              <Link to={profilePath}>
                 <StyledProfileName>
-                  {professionalData?.account.firstName} {professionalData?.account.lastName}
+                  {accountData?.firstName} {accountData?.lastName}
                 </StyledProfileName>
               </Link>
 
-              <StyledJobTitle>{professionalData?.jobTitle}</StyledJobTitle>
+              <StyledJobTitle>{accountData?.jobTitle}</StyledJobTitle>
 
-              <StyledProfessionalAbout>{professionalData?.about}</StyledProfessionalAbout>
+              <StyledProfessionalAbout>{accountData?.about}</StyledProfessionalAbout>
 
               <StyledEmaillink>
-                <a href={`mailto:${professionalData?.id}`}>TEMP EMAIL LINK NEEDED {t("professional.emailLinkText")}</a>
+                <a href={`mailto:${accountData?.id}`}>TEMP EMAIL LINK NEEDED {t("professional.emailLinkText")}</a>
               </StyledEmaillink>
             </StyledAsideProfessionalWrapper>
           </Box>

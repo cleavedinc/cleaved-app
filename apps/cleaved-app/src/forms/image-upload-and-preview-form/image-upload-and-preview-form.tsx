@@ -5,7 +5,7 @@ import styled, { useTheme } from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, CloseIcon, FONT_SIZES, PlusIcon, SPACING } from "@cleaved/ui";
+import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, SPACING } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
@@ -24,12 +24,8 @@ type GetColorProps = {
   isFocused: boolean;
 };
 
-const StyledAddFileButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 0 ${SPACING.SMALL} ${SPACING.SMALL} 0;
-  width: 50px;
+const StyledAddFileButton = styled(ButtonLink)`
+  margin-bottom: ${SPACING.SMALL};
 `;
 
 const StyledErrorMessage = styled.div`
@@ -51,9 +47,7 @@ const StyledImageThumbnail = styled.div`
 `;
 
 const StyledImageThumbnailContainer = styled.aside`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: block;
 `;
 
 const StyledImageThumbnailInner = styled.div`
@@ -117,9 +111,7 @@ const StyledImageUploadWrapper = styled.section<GetColorProps>`
   transition: border 0.24s ease-in-out;
 `;
 
-const StyledReactSortable = styled(ReactSortable)`
-  display: contents;
-`;
+const StyledReactSortable = styled(ReactSortable)``;
 
 // TODO: fix later???
 // This is type react-sortablejs expects. Using a string[] seems to work.
@@ -222,9 +214,15 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
         </StyledImageUploadWrapper>
       )}
 
-      <StyledErrorMessage>{errors}</StyledErrorMessage>
+      {errors && <StyledErrorMessage>{errors}</StyledErrorMessage>}
 
       <StyledImageThumbnailContainer>
+        {savedFileUrls && savedFileUrls.length > 0 && savedFileUrls.length < maxFileUploadlimit && (
+          <StyledAddFileButton type="button" onClick={() => openImagePicker()}>
+            {t("postFileUpload.addMoreImages")}
+          </StyledAddFileButton>
+        )}
+
         {savedFileUrls && (
           <StyledReactSortable list={savedFileUrls} setList={setSavedFileUrls}>
             {savedFileUrls.map((fileUrl) => (
@@ -244,12 +242,6 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
               </StyledImageThumbnail>
             ))}
           </StyledReactSortable>
-        )}
-
-        {savedFileUrls && savedFileUrls.length > 0 && savedFileUrls.length < maxFileUploadlimit && (
-          <StyledAddFileButton type="button" onClick={() => openImagePicker()}>
-            <PlusIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.XLARGE} />
-          </StyledAddFileButton>
         )}
       </StyledImageThumbnailContainer>
     </div>

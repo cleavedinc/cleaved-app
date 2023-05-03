@@ -6,7 +6,7 @@ import { mediaQueries, SPACING, StyledTd } from "@cleaved/ui";
 import { HeaderMenuAvatar, TeamsEditMenu } from "../../components";
 import { AccountContext } from "../../contexts";
 import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../generated-types/graphql";
-import { useNavigateToProfessionalProfile } from "../../hooks";
+import { useNavigateToProfile } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 type TeamsListRowProps = {
@@ -69,14 +69,14 @@ export const TeamsListRow: FunctionComponent<TeamsListRowProps> = (props) => {
   const { member, organizationSeekMembersDataRefetch } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { accountData } = useContext(AccountContext);
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(member?.id);
+  const { profilePath } = useNavigateToProfile(member?.id);
 
   return (
     <>
       <StyledTdWithMenuContent role="cell">
         <StyledPersonLinkWrapper>
           <HeaderMenuAvatar account={member} />
-          <StyledPersonNameLink href={professionalProfilePath}>
+          <StyledPersonNameLink href={profilePath}>
             {member?.firstName} {member?.lastName}
           </StyledPersonNameLink>
         </StyledPersonLinkWrapper>

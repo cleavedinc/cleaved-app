@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { BORDERS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
 
 import { FindMyAccountQuery, PostProjectRepliesQuery } from "../../generated-types/graphql";
-import { useNavigateToProfessionalProfile } from "../../hooks";
+import { useNavigateToProfile } from "../../hooks";
 
 type PostHeaderAvatarProps = {
   account:
@@ -40,20 +40,20 @@ const StyledAvatarInitials = styled.div`
 
 export const PostCommentAvatar: FunctionComponent<PostHeaderAvatarProps> = (props) => {
   const { account } = props;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
+  const { profilePath } = useNavigateToProfile(account?.id);
   const firstNameInitial = account?.firstName?.charAt(0).toUpperCase() || "";
   const lastNameInitial = account?.lastName?.charAt(0).toUpperCase() || "";
 
   return (
     <>
       {account && account?.currentAvatar && (
-        <StyledAvatarImageLink href={professionalProfilePath}>
+        <StyledAvatarImageLink href={profilePath}>
           <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
         </StyledAvatarImageLink>
       )}
 
       {account && !account?.currentAvatar && (
-        <StyledAvatarImageLink href={professionalProfilePath}>
+        <StyledAvatarImageLink href={profilePath}>
           <StyledAvatarInitials>
             {firstNameInitial}
             {lastNameInitial}

@@ -8,14 +8,11 @@ export const POST_PROJECT_GET_BY_ID_QUERY = graphql(`
       accountId
       date
       account {
-        id
-        firstName
-        lastName
-        professionals {
-          id
-          jobTitle
-        }
         currentAvatar
+        firstName
+        id
+        jobTitle
+        lastName
       }
       images
     }

@@ -32,7 +32,7 @@ export const MyAccountInformationDataWrapper: FunctionComponent = () => {
             {accountData?.firstName} {accountData?.lastName}
           </StyledProfileName>
 
-          <StyledJobTitle>{accountData?.professionals[0].jobTitle}</StyledJobTitle>
+          <StyledJobTitle>{accountData?.jobTitle}</StyledJobTitle>
         </div>
       </Box>
     </StickUnderHeaderDesktopOnly>

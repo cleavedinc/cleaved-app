@@ -3,13 +3,10 @@ import styled, { css } from "styled-components";
 
 import { BORDERS, FONT_SIZES, RADIUS, SPACING } from "@cleaved/ui";
 
-import { FindMyAccountQuery, FindMyProfessionalByIdQuery } from "../../generated-types/graphql";
+import { FindMyAccountQuery } from "../../generated-types/graphql";
 
 type AsideAvatarProps = {
-  account:
-    | FindMyAccountQuery["findMyAccount"]
-    | FindMyProfessionalByIdQuery["findProfessionalById"]["account"]
-    | undefined;
+  account: FindMyAccountQuery["findMyAccount"] | undefined;
 };
 
 const avatartBase = css`
