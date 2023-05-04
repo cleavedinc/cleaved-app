@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { AsideSharelinkRegistrationDataWrapper, ProfessionalShareLinkDataWrapper } from "../../data-wrappers";
 
@@ -11,9 +11,9 @@ export const ProfessionalShareLinkRegistration: FunctionComponent = () => {
         <AsideSharelinkRegistrationDataWrapper />
       </LeftColumnWrapper>
 
-      <MainColumnWrapperMaxWidth>
+      <MainColumnMaxWidthWrapper>
         <ProfessionalShareLinkDataWrapper />
-      </MainColumnWrapperMaxWidth>
+      </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );
 };

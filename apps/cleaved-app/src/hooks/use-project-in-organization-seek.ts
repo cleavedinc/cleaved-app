@@ -19,7 +19,7 @@ type UseProjectsInOrganizationSeekType = {
 export const useProjectsInOrganizationSeek = (
   seekKey?: string | null,
   pageSize?: number | null,
-  statusFilter?: ProjectStatus | null
+  statusFilter?: [ProjectStatus] | null
 ): UseProjectsInOrganizationSeekType => {
   const { isLoggedIn } = useLoginGuard();
   const { preferredOrgId } = useContext(authTokenContext);

@@ -9,6 +9,7 @@ export const CircleEditButtonSmall = styled.button`
   background-color: transparent;
   border: none;
   border-radius: ${RADIUS.CIRCLE};
+  color: ${({ theme }) => theme.colors.baseText_color};
   margin-left: auto;
   min-height: 30px;
   min-width: 30px;

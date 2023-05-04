@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { OrganizationMembershipsContextProvider } from "../../contexts";
 import { AsideOrganizationRegisterDataWrapper, OrganizationRegisterDataWrapper } from "../../data-wrappers";
@@ -12,11 +12,11 @@ export const AccountOrganizationRegister: FunctionComponent = () => {
         <AsideOrganizationRegisterDataWrapper />
       </LeftColumnWrapper>
 
-      <MainColumnWrapperMaxWidth>
+      <MainColumnMaxWidthWrapper>
         <OrganizationMembershipsContextProvider>
           <OrganizationRegisterDataWrapper />
         </OrganizationMembershipsContextProvider>
-      </MainColumnWrapperMaxWidth>
+      </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );
 };

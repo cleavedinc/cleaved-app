@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { AsideTermsOfServiceAgreementDataWrapper, TermsOfServiceAgreementDataWrapper } from "../../data-wrappers";
 
@@ -11,9 +11,9 @@ export const TermsOfServiceAgreement: FunctionComponent = () => {
         <AsideTermsOfServiceAgreementDataWrapper />
       </LeftColumnWrapper>
 
-      <MainColumnWrapperMaxWidth>
+      <MainColumnMaxWidthWrapper>
         <TermsOfServiceAgreementDataWrapper />
-      </MainColumnWrapperMaxWidth>
+      </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );
 };

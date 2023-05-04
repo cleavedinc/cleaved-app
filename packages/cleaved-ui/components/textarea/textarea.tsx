@@ -23,6 +23,7 @@ export const TextareaWrapper = styled.div<TextareaWrapperProps>`
   > textarea {
     background-color: transparent;
     border: none;
+    color: ${({ theme }) => theme.colors.baseText_color};
     font-family: ${FONTS.SANS_SERIF_1};
     font-size: ${FONT_SIZES.MEDIUM};
     min-height: ${(props) => (props.minHeight ? props.minHeight : TEXTAREA_MAX_HEIGHT)};

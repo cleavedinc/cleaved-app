@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { AsideProjectStartNewDataWrapper, ProjectStartNewDataWrapper } from "../../data-wrappers";
 
@@ -11,9 +11,9 @@ export const ProjectStartNew: FunctionComponent = () => {
         <AsideProjectStartNewDataWrapper />
       </LeftColumnWrapper>
 
-      <MainColumnWrapperMaxWidth>
+      <MainColumnMaxWidthWrapper>
         <ProjectStartNewDataWrapper />
-      </MainColumnWrapperMaxWidth>
+      </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );
 };

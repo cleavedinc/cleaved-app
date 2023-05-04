@@ -45,6 +45,7 @@ const StyledMenuUnorderedList = styled.ul`
 const StyledLogoutButton = styled.button`
   background-color: transparent;
   border: none;
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   cursor: pointer;
   padding: ${SPACING.MEDIUM};
   text-align: center;

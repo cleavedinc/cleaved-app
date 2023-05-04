@@ -4,6 +4,7 @@ import { FONT_SIZES, RADIUS } from "../../theme";
 export const ButtonLinkLoadMore = styled.button`
   background: none;
   border: none;
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
   font-size: ${FONT_SIZES.MEDIUM};
   outline: inherit;

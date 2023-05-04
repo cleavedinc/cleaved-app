@@ -1,10 +1,8 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Link } from "@reach/router";
-import { ReactPhotoCollage } from "react-photo-collage";
-
 import styled from "styled-components";
 
-import { BORDERS, BoxNoPadding, FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
+import { BORDERS, BoxNoPadding, FONT_SIZES, FONT_WEIGHTS, PhotoCollage, SPACING } from "@cleaved/ui";
 
 import { PostReactions, ReactionTypesAndTotalCount } from "../../components";
 import { authTokenContext } from "../../contexts";
@@ -75,7 +73,7 @@ const StyledProjectNameLink = styled(Link)`
   text-transform: uppercase;
 `;
 
-const StyledReactPhotoCollage = styled(ReactPhotoCollage)`
+const StyledReactPhotoCollage = styled(PhotoCollage)`
   & > div {
     border: none !important;
   }
@@ -108,14 +106,6 @@ export const Post: FunctionComponent<PostProps> = (props) => {
   const postContent = () => {
     const photoArray = post.images.map((value) => ({ source: `${process.env.MEDIA_ENDPOINT}/${value}` }));
 
-    const reactPhotoCollageSetting = {
-      width: "100%",
-      height: ["250px", "100px"],
-      layout: [1, 4],
-      photos: photoArray,
-      showNumOfRemainingPhotos: true,
-    };
-
     return (
       <>
         {post && (
@@ -137,7 +127,15 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           {post.project.name}
         </StyledProjectNameLink>
 
-        {post.images && post.images.length > 0 && <StyledReactPhotoCollage {...reactPhotoCollageSetting} />}
+        {post.images && post.images.length > 0 && (
+          <StyledReactPhotoCollage
+            width={"100%"}
+            height={["250px", "100px"]}
+            photoLayout={[1, 4]}
+            photos={photoArray}
+            showTotalPhotosNotSeenNumber={true}
+          />
+        )}
 
         {post.reactionTotalCount !== "0" && post.repliesCount !== "0" && (
           <StyledPostInfoBar>

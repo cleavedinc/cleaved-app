@@ -1,6 +1,7 @@
 export type ThemeColorsDark = {
   BLACK: string;
-  BLACK_ALPHA_6: string;
+  BLACK_ALPHA_DARK: string;
+  BLACK_ALPHA_MEDIUM: string;
   BLUE_500: string;
   BLUE_500_HOVER: string;
   GRAY_50: string;
@@ -18,7 +19,8 @@ export type ThemeColorsDark = {
 
 export const COLORS_DARK: ThemeColorsDark = {
   BLACK: "#F9F9F9", // base font
-  BLACK_ALPHA_6: "rgba(0,0,0,0.8)", // overlays
+  BLACK_ALPHA_DARK: "rgba(0,0,0,0.8)", // overlays
+  BLACK_ALPHA_MEDIUM: "rgba(0,0,0,0.5)", // overlays
 
   BLUE_500: "#3BA1E5", // primary CTAs // original: #0059FF
   BLUE_500_HOVER: "#5CB5F5", // original: #337AFF
