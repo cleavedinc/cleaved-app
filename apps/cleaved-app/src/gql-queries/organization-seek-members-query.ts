@@ -7,7 +7,7 @@ export const ORGANIZATION_SEEK_MEMBERS_QUERY = graphql(`
       firstName
       lastName
       currentAvatar
-      # jobTitle
+      jobTitle
       permissionInOrg
     }
   }

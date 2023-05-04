@@ -1,3 +1,4 @@
+import { COLORS } from "./colors";
 import { COLORS_DARK } from "./colors-dark";
 
 export const themeDark = {
@@ -20,7 +21,8 @@ export const themeDark = {
     baseLink_color: COLORS_DARK.BLUE_500,
     baseLink_colorHover: COLORS_DARK.BLUE_500_HOVER,
     baseLogo: COLORS_DARK.GRAY_900,
-    baseOverlay_backgroundColor: COLORS_DARK.BLACK_ALPHA_6,
+    baseOverlay_backgroundColor: COLORS_DARK.BLACK_ALPHA_DARK,
+    baseOverlayImage_backgroundColor: COLORS_DARK.BLACK_ALPHA_MEDIUM,
     basePlaceholderText_color: COLORS_DARK.GRAY_500,
     baseSubText_color: COLORS_DARK.GRAY_500,
     baseText_color: COLORS_DARK.BLACK,
@@ -37,7 +39,7 @@ export const themeDark = {
 
     helperInfoBoxWrapper_backgroundColor: COLORS_DARK.TAN_300,
 
-    white_color: COLORS_DARK.WHITE,
+    white_color: COLORS.WHITE,
   },
 };
 

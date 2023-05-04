@@ -14,6 +14,7 @@ export * from "./logo";
 export * from "./modal";
 export * from "./navigation";
 export * from "./on-outside-click";
+export * from "./photo-collage";
 export * from "./scroll-lock";
 export * from "./select-single-input";
 export * from "./spinner";

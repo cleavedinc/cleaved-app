@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth, RightColumnWrapper } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper, RightColumnWrapper } from "@cleaved/ui";
 
 import { PostsContextProvider } from "../contexts";
 import { AsideHomeDataWrapper, AsideHomeOrganizationMembersDataWrapper, HomeDataWrapper } from "../data-wrappers";
@@ -13,9 +13,9 @@ export const Home: FunctionComponent = () => {
           <AsideHomeDataWrapper />
         </LeftColumnWrapper>
 
-        <MainColumnWrapperMaxWidth>
+        <MainColumnMaxWidthWrapper>
           <HomeDataWrapper />
-        </MainColumnWrapperMaxWidth>
+        </MainColumnMaxWidthWrapper>
       </PostsContextProvider>
 
       <RightColumnWrapper>
