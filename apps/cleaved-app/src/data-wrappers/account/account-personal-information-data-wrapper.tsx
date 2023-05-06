@@ -17,7 +17,7 @@ const StyledToggle = styled(Toggle)`
 `;
 
 export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
-  const { setThemeMode } = useContext(ThemeContext);
+  const { isDarkTheme, setThemeMode } = useContext(ThemeContext);
   const theme = useTheme();
   const { t } = useTranslator();
 
@@ -28,6 +28,7 @@ export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
       <StyledToggle
         callback={() => setThemeMode()}
         label={darkModeLabel}
+        isChecked={isDarkTheme ? true : false}
         offColor={theme.colors.baseBordersAndShadows_color}
         onColor={theme.colors.baseApproved_color}
       />
