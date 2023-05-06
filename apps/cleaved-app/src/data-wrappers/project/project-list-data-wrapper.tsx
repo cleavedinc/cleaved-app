@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Link } from "@reach/router";
 import Select from "react-select";
+import dayjs from "dayjs";
 import styled, { useTheme } from "styled-components";
 
 import {
@@ -216,7 +217,9 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                         {project.name}
                       </StyledProjectLink>
                     </StyledTdWithMenuContent>
-                    <StyledTdWithMenuContent role="cell">temp: 01/25/2023</StyledTdWithMenuContent>
+                    <StyledTdWithMenuContent role="cell">
+                      {dayjs(project.createdAt).format("MMMM DD, YYYY")}
+                    </StyledTdWithMenuContent>
                     <StyledTdWithMenuContent role="cell">{project.totalRootPostCount}</StyledTdWithMenuContent>
                     {hasPermission && (
                       <StyledTdWithMenuContentEdit role="cell">
