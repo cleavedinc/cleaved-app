@@ -30,7 +30,9 @@ const createLayoutPhotoMaps = (photoLayout: PhotoLayoutType, photos: PhotosType[
 export const PhotoCollage: FunctionComponent<ReactPhotoCollageContainerProps> = (props) => {
   const { width, height, photoLayout, photos, showTotalPhotosNotSeenNumber } = props;
 
-  const totalPhotos = photoLayout.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  const photoLayoutAdjusted = photos.length === 1 ? [1] : photoLayout;
+
+  const totalPhotos = photoLayoutAdjusted.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   const totalPhotosNotSeen = photos.length - totalPhotos;
   const [layoutPhotoMaps, setLayoutPhotoMaps] = useState<LayoutPhotosMappedType>({});
   const [viewerIsOpen, setViewerIsOpen] = useState<boolean>(false);
@@ -48,7 +50,7 @@ export const PhotoCollage: FunctionComponent<ReactPhotoCollageContainerProps> = 
 
   useEffect(() => {
     if (photos) {
-      setLayoutPhotoMaps(createLayoutPhotoMaps(photoLayout, photos));
+      setLayoutPhotoMaps(createLayoutPhotoMaps(photoLayoutAdjusted, photos));
     }
   }, [photos]);
 
@@ -57,7 +59,7 @@ export const PhotoCollage: FunctionComponent<ReactPhotoCollageContainerProps> = 
       <PhotoCollageComponent
         width={width}
         height={height}
-        photoLayout={photoLayout}
+        photoLayout={photoLayoutAdjusted}
         photos={layoutPhotoMaps}
         totalPhotos={totalPhotos}
         totalPhotosNotSeen={totalPhotosNotSeen}

@@ -31,6 +31,9 @@ export const PhotoCollageComponent: FunctionComponent<PhotoCollageComponentProps
     openLightboxModal,
   } = props;
 
+  console.log("photos", photos);
+  console.log("photoLayout", photoLayout);
+
   return (
     <StyledPhotoCollage width={width}>
       {photoLayout &&
