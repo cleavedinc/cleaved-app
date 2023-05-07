@@ -73,7 +73,11 @@ const StyledModalHeaderWrapper = styled.div<ModalBackgroundProps>`
 `;
 
 const StyledModalTitle = styled.div`
-  font-size: ${FONT_SIZES.XLARGE};
+  font-size: ${FONT_SIZES.LARGE};
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    font-size: ${FONT_SIZES.XLARGE};
+  }
 `;
 
 const StyledModalWrapper = styled.div`

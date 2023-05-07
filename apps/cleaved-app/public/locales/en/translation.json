@@ -107,6 +107,10 @@
     "teamsList": "Team"
   },
   "organizations": {
+    "areYouSureKeepButtonText": "Stay in organization",
+    "areYouSureRemoveButtonText": "I understand the risk, leave organization",
+    "areYouSureRemoveMeFromOrganizationDetails": "If you remove yourself from this organization, you will not have access to the organization any more. If you are the last member to leave the organization, the organization and all data will be deleted.",
+    "areYouSureRemoveMeFromOrganizationTitle": "Be careful, this is not reversable",
     "dateCreated": "Date created",
     "owner": "Owner",
     "posts": "Posts",

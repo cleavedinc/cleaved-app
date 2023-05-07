@@ -25,6 +25,8 @@ export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
 
   return (
     <StyledBox>
+      <PersonalInformationForm />
+
       <StyledToggle
         callback={() => setThemeMode()}
         label={darkModeLabel}
@@ -32,7 +34,6 @@ export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
         offColor={theme.colors.baseBordersAndShadows_color}
         onColor={theme.colors.baseApproved_color}
       />
-      <PersonalInformationForm />
     </StyledBox>
   );
 };

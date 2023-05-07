@@ -31,6 +31,7 @@ const documents = {
     "\n  mutation acceptTerms {\n    acceptTerms\n  }\n": types.AcceptTermsDocument,
     "\n  mutation generateOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    generateOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n": types.GenerateOrganizationShareLinkDocument,
     "\n  mutation joinOrganizationWithShareLink($shareLink: ID!) {\n    joinOrganizationWithShareLink(shareLink: $shareLink)\n  }\n": types.JoinOrganizationWithShareLinkDocument,
+    "\n  mutation organizationRemoveMe($organizationId: ID!) {\n    organizationRemoveMe(organizationId: $organizationId)\n  }\n": types.OrganizationRemoveMeDocument,
     "\n  mutation postProjectRemove($organizationId: ID!, $postId: ID!) {\n    postProjectRemove(organizationId: $organizationId, postId: $postId)\n  }\n": types.PostProjectRemoveDocument,
     "\n  mutation postProjectReply($organizationId: ID!, $postOrPostReplyId: ID!, $body: String!) {\n    postProjectReply(organizationId: $organizationId, postOrPostReplyId: $postOrPostReplyId, body: $body)\n  }\n": types.PostProjectReplyDocument,
     "\n  mutation postProjectSetReaction($organizationId: ID!, $postId: ID!, $reactionType: PostReactionType!) {\n    postProjectSetReaction(organizationId: $organizationId, postId: $postId, reactionType: $reactionType)\n  }\n": types.PostProjectSetReactionDocument,
@@ -135,6 +136,10 @@ export function graphql(source: "\n  mutation generateOrganizationShareLink($org
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation joinOrganizationWithShareLink($shareLink: ID!) {\n    joinOrganizationWithShareLink(shareLink: $shareLink)\n  }\n"): (typeof documents)["\n  mutation joinOrganizationWithShareLink($shareLink: ID!) {\n    joinOrganizationWithShareLink(shareLink: $shareLink)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation organizationRemoveMe($organizationId: ID!) {\n    organizationRemoveMe(organizationId: $organizationId)\n  }\n"): (typeof documents)["\n  mutation organizationRemoveMe($organizationId: ID!) {\n    organizationRemoveMe(organizationId: $organizationId)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
