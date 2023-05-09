@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
-import { Formik, Form } from "formik";
+import { Field, Formik, Form } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
@@ -13,8 +13,9 @@ import { usePostProjectGetById, useRouteParams, useTranslator } from "../../hook
 
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
+import { htmlToMarkdown } from "./components/markdown-parser";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
-import { PostFormFormikTextarea } from "./components";
+import { PostFormEditor } from "./components";
 
 type ProjectPostFormProps = {
   closeForm: () => void;
@@ -23,7 +24,7 @@ type ProjectPostFormProps = {
 };
 
 type PostProjectCreateMutationVariablesValidation = {
-  body: string;
+  // body: string;
   imageUrls: [string];
 };
 
@@ -93,6 +94,17 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
     }
   }, [postId, postProjectGetByIdData]);
 
+  interface EditorContentChanged {
+    html: string;
+    markdown: string;
+  }
+
+  const [editorMarkdownValue, setEditorMarkdownValue] = useState<string>("");
+
+  const onEditorContentChanged = (content: EditorContentChanged) => {
+    setEditorMarkdownValue(content.markdown);
+  };
+
   return (
     <StyledProjectPostForm>
       <Formik
@@ -106,25 +118,28 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         onSubmit={(values: PostProjectCreateMutationVariables, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
-          if (postId) {
-            updatePost({
-              variables: {
-                organizationId: values.organizationId,
-                postId: postId,
-                body: values.body,
-                imageUrls: values.imageUrls,
-              },
-            });
-          } else {
-            submitPost({
-              variables: {
-                organizationId: values.organizationId,
-                projectId: values.projectId,
-                body: values.body,
-                imageUrls: values.imageUrls,
-              },
-            });
-          }
+          console.log("values", values);
+          console.log("editorMarkdownValue", editorMarkdownValue);
+
+          // if (postId) {
+          //   updatePost({
+          //     variables: {
+          //       organizationId: values.organizationId,
+          //       postId: postId,
+          //       body: editorMarkdownValue,
+          //       imageUrls: values.imageUrls,
+          //     },
+          //   });
+          // } else {
+          //   submitPost({
+          //     variables: {
+          //       organizationId: values.organizationId,
+          //       projectId: values.projectId,
+          //       body: editorMarkdownValue,
+          //       imageUrls: values.imageUrls,
+          //     },
+          //   });
+          // }
 
           resetForm({});
           closeForm();
@@ -133,20 +148,30 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         validationSchema={yup
           .object()
           .shape<Record<keyof PostProjectCreateMutationVariablesValidation, yup.AnySchema>>({
-            body: yup
-              .string()
-              .matches(/^\s*\S[\s\S]*$/, notContainOnlyBlankSpaces)
-              .required(),
+            // body: yup
+            //   .string()
+            //   .matches(/^\s*\S[\s\S]*$/, notContainOnlyBlankSpaces)
+            //   .required(),
             imageUrls: yup.array().nullable().of(yup.string()),
           })}
       >
         {({ dirty, isSubmitting, isValid, setFieldValue }) => {
           return (
             <Form>
-              <PostFormFormikTextarea
+              <Field name="body">
+                {({ field, setFieldTouched }) => (
+                  <PostFormEditor
+                    field={field}
+                    onEditorContentChanged={onEditorContentChanged}
+                    setFieldTouched={setFieldTouched}
+                  />
+                )}
+              </Field>
+
+              {/* <PostFormFormikTextarea
                 name="body"
                 placeholder={t("post.createProjectPostWithNamePlaceholder", { name: accountData?.firstName })}
-              />
+              /> */}
 
               <StyledAdditionalActionsWrapper>
                 {isImageUploadWrapperActive && (
@@ -168,7 +193,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
                   </StyledAdditionalActionsIconButton>
                 </StyledTooltipDark>
 
-                <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
+                <StyledPostButton disabled={!(isValid /* && dirty */) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}
                   <Spinner visible={isSubmitting} />
                 </StyledPostButton>

@@ -27,9 +27,6 @@ export const useProjectsInOrganizationSeek = (
   const { data, loading, refetch } = useQuery<ProjectsInOrgSeekQuery>(PROJECTS_IN_ORGANIZATION, {
     fetchPolicy: "cache-and-network",
     nextFetchPolicy: "cache-and-network",
-    onCompleted: (data1) => {
-      console.log(data1);
-    },
     onError: (error) => {
       logQueryError(error);
     },

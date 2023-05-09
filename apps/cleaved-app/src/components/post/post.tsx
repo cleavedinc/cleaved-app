@@ -38,7 +38,6 @@ const StyledPostInfoBar = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   display: flex;
   font-size: ${FONT_SIZES.SMALL};
-  margin: ${SPACING.SMALL};
 `;
 
 const StyledmodalPostFooter = styled.div<{ postRepliesCount: string }>`
@@ -57,7 +56,7 @@ const StyledPostFooter = styled.div`
 
 const StyledPostInfoBarCommentCount = styled.div`
   cursor: pointer;
-  margin-left: auto;
+  margin: ${SPACING.SMALL} ${SPACING.SMALL} ${SPACING.SMALL} auto;
 
   :hover {
     text-decoration: underline;
@@ -118,7 +117,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           />
         )}
 
-        <StyledMessage>{post.body}</StyledMessage>
+        <StyledMessage dangerouslySetInnerHTML={{ __html: post.body }} />
 
         <StyledProjectNameLink
           to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
@@ -137,24 +136,23 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           />
         )}
 
-        {post.reactionTotalCount !== "0" && post.repliesCount !== "0" && (
-          <StyledPostInfoBar>
-            {post.reactionTotalCount !== "0" && (
-              <ReactionTypesAndTotalCount
-                reactionsExpressed={post.reactionsExpressed}
-                reactionTotalCount={post.reactionTotalCount}
-              />
-            )}
-            {post.repliesCount !== "0" && (
-              <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
-                {post.repliesCount}{" "}
-                <StyledPostComments>
-                  {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
-                </StyledPostComments>
-              </StyledPostInfoBarCommentCount>
-            )}
-          </StyledPostInfoBar>
-        )}
+        <StyledPostInfoBar>
+          {post.reactionsExpressed.length > 0 && (
+            <ReactionTypesAndTotalCount
+              reactionsExpressed={post.reactionsExpressed}
+              reactionTotalCount={post.reactionTotalCount}
+            />
+          )}
+
+          {post.repliesCount !== "0" && (
+            <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
+              {post.repliesCount}{" "}
+              <StyledPostComments>
+                {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
+              </StyledPostComments>
+            </StyledPostInfoBarCommentCount>
+          )}
+        </StyledPostInfoBar>
       </>
     );
   };

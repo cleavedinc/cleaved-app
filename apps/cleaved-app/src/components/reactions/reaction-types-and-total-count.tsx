@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled, { css, useTheme } from "styled-components";
 
-import { BORDERS, CelebrationIcon, FavoriteIcon, RADIUS, ThumbUpIcon } from "@cleaved/ui";
+import { BORDERS, CelebrationIcon, FavoriteIcon, RADIUS, SPACING, ThumbUpIcon } from "@cleaved/ui";
 
 import { PostReactionType } from "../../generated-types/graphql";
 
@@ -50,6 +50,7 @@ const StyledReaction = styled.div``;
 
 const StyledReactionWrapper = styled.div`
   display: flex;
+  margin: ${SPACING.SMALL};
 `;
 
 const StyledReactionsCount = styled.div`
@@ -95,9 +96,7 @@ export const ReactionTypesAndTotalCount: FunctionComponent<ReactionTypesAndtotal
         {reactionsExpressed?.map((reaction, index) => handleReactionTypes(index, reaction))}
       </StyledReaction>
 
-      {reactionTotalCount && reactionTotalCount !== "0" && (
-        <StyledReactionsCount>{reactionTotalCount}</StyledReactionsCount>
-      )}
+      <StyledReactionsCount>{reactionTotalCount}</StyledReactionsCount>
     </StyledReactionWrapper>
   );
 };
