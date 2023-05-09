@@ -5,7 +5,7 @@ import rehypeParse from "rehype-parse";
 import rehypeRemark from "rehype-remark";
 import remarkStringify from "remark-stringify";
 
-export function markdownToHtml(markdownText: string) {
+export function markdownToHtml(markdownText?: string) {
   const file = remark().use(remarkHtml).processSync(markdownText);
   return String(file);
 }

@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useRef, useState } from "react";
+import { useFormikContext } from "formik";
 import styled from "styled-components";
 import ReactQuill from "react-quill";
 
@@ -6,17 +7,9 @@ import { markdownToHtml, htmlToMarkdown } from "./markdown-parser";
 
 import "react-quill/dist/quill.snow.css";
 
-// same on the post form
-interface EditorContentChanged {
-  html: string;
-  markdown: string;
-}
-
 type PostFormEditorProps = {
   className?: string;
-  field: any;
-  onEditorContentChanged: (changes: EditorContentChanged) => void;
-  setFieldTouched: any;
+  name: string;
 };
 
 const StyledReactQuill = styled(ReactQuill)`
@@ -38,30 +31,35 @@ const modules = {
 const formats = ["bold", "italic", "underline", "strike", "list", "bullet", "link"];
 
 export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) => {
-  const { className, field, onEditorContentChanged } = props;
-  const [value, setValue] = useState<string>(markdownToHtml(field.value || ""));
-  const reactQuillRef = useRef<ReactQuill>(null);
+  const { className, name } = props;
+  const { values, setFieldValue, setFieldTouched } = useFormikContext<any>();
 
-  const onChange = (content: string) => {
-    setValue(content);
-
-    if (onEditorContentChanged) {
-      onEditorContentChanged({
-        html: content,
-        markdown: htmlToMarkdown(content),
-      });
-    }
+  const handleChange = (value: string) => {
+    setFieldValue(name, value);
+    setFieldTouched(name, true);
   };
+
+  // const [value, setValue] = useState<string>(markdownToHtml(field.value || ""));
+
+  // const onChange = (content: string) => {
+  //   setValue(content);
+
+  //   if (onEditorContentChanged) {
+  //     onEditorContentChanged({
+  //       html: content,
+  //       markdown: htmlToMarkdown(content),
+  //     });
+  //   }
+  // };
 
   return (
     <StyledReactQuill
       className={className}
       formats={formats}
       modules={modules}
-      onChange={onChange}
-      ref={reactQuillRef}
+      onChange={handleChange}
       theme="snow"
-      value={value}
+      value={values[name]}
     />
   );
 };

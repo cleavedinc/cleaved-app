@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Link } from "@reach/router";
+import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
 
 import { BORDERS, BoxNoPadding, FONT_SIZES, FONT_WEIGHTS, PhotoCollage, SPACING } from "@cleaved/ui";
@@ -23,7 +24,7 @@ type PostProps = {
 
 const StyledProjectPostBox = styled(BoxNoPadding)``;
 
-const StyledMessage = styled.div`
+const StyledMessage = styled(ReactMarkdown)`
   margin-bottom: ${SPACING.SMALL};
   overflow-wrap: anywhere;
   margin: 0 ${SPACING.SMALL};
@@ -117,7 +118,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           />
         )}
 
-        <StyledMessage dangerouslySetInnerHTML={{ __html: post.body }} />
+        <StyledMessage>{post.body}</StyledMessage>
 
         <StyledProjectNameLink
           to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
