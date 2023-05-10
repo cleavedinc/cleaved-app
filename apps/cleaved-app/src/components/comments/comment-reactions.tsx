@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import styled from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { removeDefaultButtonStyles, StyledTooltipWhite } from "@cleaved/ui";
+import { removeDefaultButtonStyles, SPACING, StyledTooltipWhite } from "@cleaved/ui";
 
 import { PostProjectSetReactionMutation, PostReactionType } from "../../generated-types/graphql";
 import { POST_PROJECT_SET_REACTION } from "../../gql-mutations";
@@ -19,6 +19,8 @@ type CommentReactionsProps = {
 
 const StyledCommentFooterButtonButton = styled.button`
   ${removeDefaultButtonStyles}
+  margin-right: ${SPACING.SMALL};
+
   &:hover {
     text-decoration: underline;
   }

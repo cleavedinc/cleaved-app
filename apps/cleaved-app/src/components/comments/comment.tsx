@@ -40,6 +40,7 @@ const StyledCommentDateTime = styled.div`
 `;
 
 const StyledCommentFooterWrapper = styled.div`
+  align-items: center;
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
   min-height: 16px;

@@ -30,7 +30,7 @@ type ModalProps = ModalBackgroundProps & {
 const StyledContentWrapper = styled.div`
   padding: 0 ${SPACING.MEDIUM};
   ${mediaQueries.SM} {
-    padding: 0 ${SPACING.LARGE} ${SPACING.XLARGE};
+    padding: 0 ${SPACING.MEDIUM} ${SPACING.MEDIUM};
   }
 `;
 
@@ -67,13 +67,17 @@ const StyledModalHeaderWrapper = styled.div<ModalBackgroundProps>`
   align-items: center;
   display: flex;
   margin-bottom: ${SPACING.SMALL};
-  padding: ${SPACING.MEDIUM} ${SPACING.MEDIUM_LARGE} ${SPACING.MEDIUM} ${SPACING.LARGE};
+  padding: ${SPACING.MEDIUM};
   position: sticky;
   top: 0;
 `;
 
 const StyledModalTitle = styled.div`
-  font-size: ${FONT_SIZES.XLARGE};
+  font-size: ${FONT_SIZES.LARGE};
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    font-size: ${FONT_SIZES.XLARGE};
+  }
 `;
 
 const StyledModalWrapper = styled.div`

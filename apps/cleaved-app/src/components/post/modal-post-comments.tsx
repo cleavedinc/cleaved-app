@@ -51,7 +51,7 @@ const StyledCommentForm = styled(CommentForm)``;
 const StyledContentWrapper = styled.div`
   min-height: 100px;
   overflow-y: auto;
-  padding: 0 ${SPACING.MEDIUM};
+  padding: 0;
 
   ${mediaQueries.SM} {
     max-height: 550px;

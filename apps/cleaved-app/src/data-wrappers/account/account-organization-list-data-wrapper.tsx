@@ -16,7 +16,7 @@ import {
   StyledTr,
 } from "@cleaved/ui";
 
-import { AccountOrganizationsMenu, HelperInfoHeaderTextImageRightBox, OrganizationEditMenu } from "../../components";
+import { HelperInfoHeaderTextImageRightBox, OrganizationEditMenu } from "../../components";
 import { authTokenContext, OrganizationMembershipsContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
@@ -62,7 +62,6 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
       <Box>
         <HeadingWrapper>
           <SectionHeader>{t("organizations.organizations")}</SectionHeader>
-          <AccountOrganizationsMenu />
         </HeadingWrapper>
 
         {!organizationMembershipsDataLoading && organizationMembershipsData && organizationMembershipsData.length > 0 && (

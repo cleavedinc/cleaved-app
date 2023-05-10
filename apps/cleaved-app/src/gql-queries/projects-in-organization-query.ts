@@ -8,6 +8,7 @@ export const PROJECTS_IN_ORGANIZATION = graphql(`
       pageSize: $pageSize
       statusFilter: $statusFilter
     ) {
+      createdAt
       id
       name
       status

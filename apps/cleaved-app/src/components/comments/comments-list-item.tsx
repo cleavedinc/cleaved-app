@@ -29,20 +29,6 @@ const StyledPostCommentFormWrapper = styled.div`
   margin: ${SPACING.SMALL} 0 ${SPACING.SMALL} 50px;
 `;
 
-type StyledLoadMoreButtonProps = {
-  isHidden: boolean;
-};
-
-export const StyledLoadMoreButton = styled(ButtonLinkLoadMore)<StyledLoadMoreButtonProps>`
-  color: ${({ theme }) => theme.colors.baseButtonLink_color};
-  display: ${(props) => (props.isHidden ? "none" : "initial")};
-
-  :hover {
-    background-color: transparent;
-    text-decoration: underline;
-  }
-`;
-
 const StyledRepliesListWrapper = styled.div`
   margin-left: 50px;
 `;
