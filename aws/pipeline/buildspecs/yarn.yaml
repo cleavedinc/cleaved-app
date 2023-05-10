@@ -13,6 +13,7 @@ phases:
     commands:
       - cd $CODEBUILD_SRC_DIR/apps/cleaved-app
       - yarn prod:us
+      - cp -R public build/
   post_build:
     commands:
       - aws s3 sync $CODEBUILD_SRC_DIR/apps/cleaved-app/build s3://$BUCKET --delete
