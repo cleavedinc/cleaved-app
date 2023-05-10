@@ -135,7 +135,7 @@ div {
   overflow-wrap: anywhere;
 }
 p {
-  margin-bottom: ${SPACING_PX.FOUR};
+  margin-bottom: ${SPACING_PX.THREE};
 }
 a{
   color: ${({ theme }) => theme.colors.baseLink_color};
@@ -151,6 +151,9 @@ strong {
 }
 em{
   font-style: italic;
+}
+del {
+  text-decoration: line-through;
 }
 ol,
 ul {

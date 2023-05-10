@@ -74,6 +74,12 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
     ? t("post.notContainOnlyBlankSpaces")
     : undefined;
 
+  const createProjectPostWithNamePlaceholder = t("post.createProjectPostWithNamePlaceholder", {
+    name: accountData?.firstName,
+  })
+    ? t("post.createProjectPostWithNamePlaceholder", { name: accountData?.firstName })
+    : undefined;
+
   const [submitPost] = useMutation(POST_PROJECT_CREATE, {
     onCompleted: () => postProjectSeekRefetch(),
     onError: (error) => {
@@ -101,12 +107,15 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         initialValues={{
           organizationId,
           projectId: projectId,
-          body: (!postProjectGetByIdDataLoading && markdownToHtml(postProjectGetByIdData?.body)) || "",
+          body:
+            (!postProjectGetByIdDataLoading && postProjectGetByIdData && markdownToHtml(postProjectGetByIdData.body)) ||
+            "", // convert markdown into html for the editor
           imageUrls: (!postProjectGetByIdDataLoading && postProjectGetByIdData?.images) || null,
         }}
         onSubmit={(values: PostProjectCreateMutationVariables, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
+          // convert editor html to markdown to be saved
           const bodyMarkdown = htmlToMarkdown(values.body);
 
           if (postId) {
@@ -138,7 +147,13 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
           .shape<Record<keyof PostProjectCreateMutationVariablesValidation, yup.AnySchema>>({
             body: yup
               .string()
-              .matches(/^\s*\S[\s\S]*$/, notContainOnlyBlankSpaces)
+              .matches(/^(?=.*[a-zA-Z0-9]).+$/, notContainOnlyBlankSpaces)
+              .test("empty-body", "Body cannot be empty", (value) => {
+                if (value && value.replace(/<[^>]+>/g, "").trim().length === 0) {
+                  return false; // Invalid if value is present but only contains empty HTML elements
+                }
+                return true; // Valid if value is empty or contains non-empty text
+              })
               .required(),
             imageUrls: yup.array().nullable().of(yup.string()),
           })}
@@ -146,12 +161,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         {({ dirty, isSubmitting, isValid, setFieldValue }) => {
           return (
             <Form>
-              <PostFormEditor name="body" />
-
-              {/* <PostFormFormikTextarea
-                name="body"
-                placeholder={t("post.createProjectPostWithNamePlaceholder", { name: accountData?.firstName })}
-              /> */}
+              <PostFormEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
 
               <StyledAdditionalActionsWrapper>
                 {isImageUploadWrapperActive && (

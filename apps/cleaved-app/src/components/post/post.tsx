@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Link } from "@reach/router";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import styled from "styled-components";
 
 import { BORDERS, BoxNoPadding, FONT_SIZES, FONT_WEIGHTS, PhotoCollage, SPACING } from "@cleaved/ui";
@@ -28,7 +29,19 @@ const StyledMessage = styled(ReactMarkdown)`
   margin-bottom: ${SPACING.SMALL};
   overflow-wrap: anywhere;
   margin: 0 ${SPACING.SMALL};
-  white-space: pre-line;
+
+  ul,
+  ol {
+    margin: 0 0 ${SPACING.MEDIUM} ${SPACING.XLARGE};
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
 `;
 
 const StyledPostComments = styled.span`
@@ -69,7 +82,7 @@ const StyledProjectNameLink = styled(Link)`
   display: inline-block;
   font-size: ${FONT_SIZES.XXSMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
-  margin: ${SPACING.XLARGE} ${SPACING.SMALL} ${SPACING.SMALL};
+  margin: ${SPACING.MEDIUM} ${SPACING.SMALL} ${SPACING.SMALL};
   text-transform: uppercase;
 `;
 
@@ -118,7 +131,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           />
         )}
 
-        <StyledMessage>{post.body}</StyledMessage>
+        <StyledMessage remarkPlugins={[remarkGfm]}>{post.body}</StyledMessage>
 
         <StyledProjectNameLink
           to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
@@ -138,7 +151,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
         )}
 
         <StyledPostInfoBar>
-          {post.reactionsExpressed.length > 0 && (
+          {post.reactionTotalCount !== "0" && (
             <ReactionTypesAndTotalCount
               reactionsExpressed={post.reactionsExpressed}
               reactionTotalCount={post.reactionTotalCount}

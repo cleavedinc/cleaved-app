@@ -15,7 +15,9 @@ type CommentsListProps = {
   triggerGetComments?: number;
 };
 
-const StyledCommentAndRepliesWrapper = styled.div``;
+const StyledCommentAndRepliesWrapper = styled.div`
+  padding: 0 ${SPACING.MEDIUM};
+`;
 
 const StyledCommentListWrapper = styled.div``;
 

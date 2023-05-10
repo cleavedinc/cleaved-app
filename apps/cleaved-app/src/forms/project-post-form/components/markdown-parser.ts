@@ -1,21 +1,39 @@
-import { remark } from "remark";
-import remarkHtml from "remark-html";
+import TurndownService from "turndown";
+import { Converter } from "showdown";
 
-import rehypeParse from "rehype-parse";
-import rehypeRemark from "rehype-remark";
-import remarkStringify from "remark-stringify";
+export function markdownToHtml(markdownText: string) {
+  const converter = new Converter({
+    strikethrough: true,
+  });
 
-export function markdownToHtml(markdownText?: string) {
-  const file = remark().use(remarkHtml).processSync(markdownText);
-  return String(file);
+  const html = converter.makeHtml(markdownText);
+
+  //  converty <de> to <s> so that react-quill can edit strike properly.
+  //  without this conversion, when you convert from markdown to html to use in react-quill,
+  //  it will not recognize <del> and apply the strike
+  const newHTML = html.replace(/<del>/g, "<s>").replace(/<\/del>/g, "</s>");
+
+  return newHTML;
 }
 
 export function htmlToMarkdown(htmlText: string) {
-  const file = remark()
-    .use(rehypeParse, { emitParseErrors: true, duplicateAttribute: false })
-    .use(rehypeRemark)
-    .use(remarkStringify)
-    .processSync(htmlText);
+  const turndownService = new TurndownService();
 
-  return String(file);
+  // Add custom rule for emphasis tags
+  turndownService.addRule("emphasis", {
+    filter: ["em", "i"],
+    replacement: function (content, node, options) {
+      return options.emDelimiter + content + options.emDelimiter;
+    },
+  });
+
+  // Add custom rule for strike tags
+  turndownService.addRule("strike", {
+    filter: ["del", "s"],
+    replacement: (content) => {
+      return "~~" + content + "~~";
+    },
+  });
+
+  return turndownService.turndown(htmlText);
 }
