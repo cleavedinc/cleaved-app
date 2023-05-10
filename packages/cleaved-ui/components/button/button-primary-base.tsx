@@ -1,13 +1,12 @@
 import { css } from "styled-components";
-import { COLORS } from "../../theme";
 
 export const buttonPrimaryBase = css`
-  background-color: ${COLORS.BLUE_500};
+  background-color: ${({ theme }) => theme.colors.baseLink_color};
   border: none;
-  color: ${COLORS.WHITE};
+  color: ${({ theme }) => theme.colors.white_color};
 
   &:hover:not([disabled]) {
-    background-color: ${COLORS.BLUE_500_HOVER};
-    color: ${COLORS.WHITE};
+    background-color: ${({ theme }) => theme.colors.baseLink_colorHover};
+    color: ${({ theme }) => theme.colors.white_color};
   }
 `;

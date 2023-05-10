@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { BORDERS, COLORS, FONT_SIZES, mediaQueries } from "../../theme";
+import { BORDERS, FONT_SIZES, mediaQueries } from "../../theme";
 
 export const StyledTHeadTr = styled.tr`
-  border-bottom: ${BORDERS.BORDER_PRIMARY};
-  color: ${COLORS.GRAY_500};
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   text-align: left;
 

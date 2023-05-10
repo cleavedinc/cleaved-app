@@ -11,10 +11,7 @@ export const POST_PROJECT_SEEK_QUERY = graphql(`
         id
         firstName
         lastName
-        professionals {
-          id
-          jobTitle
-        }
+        jobTitle
         currentAvatar
       }
       reactionTotalCount
@@ -22,6 +19,10 @@ export const POST_PROJECT_SEEK_QUERY = graphql(`
       myReaction
       repliesCount
       images
+      project {
+        id
+        name
+      }
     }
   }
 `);

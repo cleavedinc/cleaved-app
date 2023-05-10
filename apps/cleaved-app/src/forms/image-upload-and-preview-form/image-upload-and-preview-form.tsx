@@ -1,10 +1,11 @@
 import React, { Dispatch, FunctionComponent, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import styled from "styled-components";
+import { ReactSortable } from "react-sortablejs";
+import styled, { useTheme } from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, CloseIcon, COLORS, FONT_SIZES, PlusIcon, SPACING } from "@cleaved/ui";
+import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, SPACING } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
@@ -23,24 +24,21 @@ type GetColorProps = {
   isFocused: boolean;
 };
 
-const StyledAddFileButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 0 ${SPACING.SMALL} ${SPACING.SMALL} 0;
-  width: 50px;
+const StyledAddFileButton = styled(ButtonLink)`
+  margin-bottom: ${SPACING.SMALL};
 `;
 
 const StyledErrorMessage = styled.div`
-  color: ${COLORS.RED_500};
+  color: ${({ theme }) => theme.colors.baseAlert_color}
   font-size: ${FONT_SIZES.XSMALL};
   height: 15px;
 `;
 
 const StyledImageThumbnail = styled.div`
+  cursor: move;
   display: inline-flex;
   border-radius: 2px;
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   box-sizing: border-box;
   height: 75px;
   margin: 0 ${SPACING.SMALL} ${SPACING.SMALL} 0;
@@ -49,9 +47,7 @@ const StyledImageThumbnail = styled.div`
 `;
 
 const StyledImageThumbnailContainer = styled.aside`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: block;
 `;
 
 const StyledImageThumbnailInner = styled.div`
@@ -68,8 +64,8 @@ const StyledImageThumbnailPreview = styled.img`
 
 const StyledImageThumbnailRemoveButton = styled.button`
   align-items: center;
-  background-color: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: 0 0 0 10px;
   cursor: pointer;
   display: flex;
@@ -84,33 +80,27 @@ const StyledImageThumbnailRemoveButton = styled.button`
   width: 25px;
 
   &:hover {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 `;
 
 const StyledImageUploadText = styled.div``;
 
-const getColor = (props: GetColorProps) => {
-  if (props.isDragAccept) {
-    return COLORS.GREEN_500;
-  }
-  if (props.isDragReject) {
-    return COLORS.RED_500;
-  }
-  if (props.isFocused) {
-    return COLORS.BLUE_500_HOVER;
-  }
-  return COLORS.GRAY_100;
-};
-
 const StyledImageUploadWrapper = styled.section<GetColorProps>`
   align-items: center;
   border-width: 2px;
   border-radius: 2px;
-  border-color: ${(props) => getColor(props)};
+  border-color: ${(props) =>
+    props.isDragAccept
+      ? props.theme.colors.baseApproved_color
+      : props.isDragReject
+      ? props.theme.colors.baseAlert_color
+      : props.isFocused
+      ? props.theme.colors.baseLink_colorHover
+      : props.theme.colors.baseBordersAndShadows_color};
   border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  color: ${({ theme }) => theme.colors.baseText_color};
   display: flex;
   flex: 1;
   height: 200px;
@@ -121,12 +111,22 @@ const StyledImageUploadWrapper = styled.section<GetColorProps>`
   transition: border 0.24s ease-in-out;
 `;
 
+const StyledReactSortable = styled(ReactSortable)``;
+
+// TODO: fix later???
+// This is type react-sortablejs expects. Using a string[] seems to work.
+// interface ItemType {
+//   id: number;
+//   name: string;
+// }
+
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
   const { images, setFieldValue } = props;
-  const { t } = useTranslator();
   const [savedFileUrls, setSavedFileUrls] = useState<string[]>([]);
   const [errors, setErrors] = useState<string | null>("");
   const maxFileUploadlimit = 10;
+  const theme = useTheme();
+  const { t } = useTranslator();
 
   const handleSetImageURI = (savedFileUrlsArg: string[]) => {
     setSavedFileUrls((existingArray) => {
@@ -163,7 +163,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
         uploadPostImage({ variables: { image: file } });
       });
 
-      const maxFileSizeInMb = 1048576 / 1024 ** 2;
+      const maxFileSizeInMb = (15 * 1048576) / 1024 ** 2; // 15MB limit
       // handle file upload errors
       fileRejections.forEach((file) => {
         file.errors.forEach((err) => {
@@ -178,7 +178,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
       });
     },
     maxFiles: maxFileUploadlimit,
-    maxSize: 1048576,
+    maxSize: 15728640,
   });
 
   const openImagePicker = () => {
@@ -191,25 +191,6 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
       return newSavedFileUrlsArray;
     });
   };
-
-  const thumbs =
-    savedFileUrls &&
-    savedFileUrls.map((fileUrl) => (
-      <StyledImageThumbnail key={fileUrl}>
-        <StyledImageThumbnailInner>
-          <StyledImageThumbnailPreview
-            src={`${process.env.MEDIA_ENDPOINT}/${fileUrl}`}
-            // Revoke data uri after image is loaded
-            onLoad={() => {
-              URL.revokeObjectURL(fileUrl);
-            }}
-          />
-        </StyledImageThumbnailInner>
-        <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
-          <CloseIcon color={COLORS.GRAY_500} font-size={FONT_SIZES.SMALL} />
-        </StyledImageThumbnailRemoveButton>
-      </StyledImageThumbnail>
-    ));
 
   useEffect(() => {
     if (images) {
@@ -233,15 +214,34 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
         </StyledImageUploadWrapper>
       )}
 
-      <StyledErrorMessage>{errors}</StyledErrorMessage>
+      {errors && <StyledErrorMessage>{errors}</StyledErrorMessage>}
 
       <StyledImageThumbnailContainer>
-        {thumbs}
-
         {savedFileUrls && savedFileUrls.length > 0 && savedFileUrls.length < maxFileUploadlimit && (
           <StyledAddFileButton type="button" onClick={() => openImagePicker()}>
-            <PlusIcon color={COLORS.GRAY_500} iconSize={FONT_SIZES.XLARGE} />
+            {t("postFileUpload.addMoreImages")}
           </StyledAddFileButton>
+        )}
+
+        {savedFileUrls && (
+          <StyledReactSortable list={savedFileUrls} setList={setSavedFileUrls}>
+            {savedFileUrls.map((fileUrl) => (
+              <StyledImageThumbnail key={fileUrl}>
+                <StyledImageThumbnailInner>
+                  <StyledImageThumbnailPreview
+                    src={`${process.env.MEDIA_ENDPOINT}/${fileUrl}`}
+                    // Revoke data uri after image is loaded
+                    onLoad={() => {
+                      URL.revokeObjectURL(fileUrl);
+                    }}
+                  />
+                </StyledImageThumbnailInner>
+                <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
+                  <CloseIcon color={theme.colors.baseIcon_color} font-size={FONT_SIZES.SMALL} />
+                </StyledImageThumbnailRemoveButton>
+              </StyledImageThumbnail>
+            ))}
+          </StyledReactSortable>
         )}
       </StyledImageThumbnailContainer>
     </div>

@@ -1,4 +1,4 @@
-export * from "./aside-account-avatar";
+export * from "./edit-account-avatar";
 export * from "./aside-avatar";
 export * from "./aside-team-list-avatar-link";
 export * from "./header-avatar";

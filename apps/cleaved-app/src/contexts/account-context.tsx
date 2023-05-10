@@ -28,6 +28,8 @@ export const AccountContextProvider: FunctionComponent<AccountContextProviderTyp
   const { isLoggedIn } = useLoginGuard();
 
   const { data, loading, refetch } = useQuery<FindMyAccountQuery>(FIND_MY_ACCOUNT, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error: ApolloError) => {
       logQueryError(error);
     },

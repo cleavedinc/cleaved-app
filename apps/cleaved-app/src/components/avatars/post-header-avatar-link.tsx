@@ -1,22 +1,18 @@
 import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 
-import { BORDERS, COLORS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
+import { BORDERS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
 
-import { useNavigateToProfessionalProfile } from "../../hooks";
+import { PostProjectSeekQuery } from "../../generated-types/graphql";
+import { useNavigateToProfile } from "../../hooks";
 
 type PostHeaderAvatarProps = {
-  account: {
-    id: string;
-    firstName?: string | null | undefined;
-    lastName?: string | null | undefined;
-    currentAvatar?: string | null | undefined;
-  };
+  account: PostProjectSeekQuery["postProjectSeek"][0]["account"] | undefined;
 };
 
 const avatartBase = css`
   align-items: center;
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
   height: 30px;
@@ -30,7 +26,7 @@ const StyledAvatarImage = styled.img`
 `;
 
 const StyledAvatarImageLink = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   height: max-content;
 `;
 
@@ -41,20 +37,20 @@ const StyledAvatarInitials = styled.div`
 
 export const PostHeaderAvatarLink: FunctionComponent<PostHeaderAvatarProps> = (props) => {
   const { account } = props;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account.id);
-  const firstNameInitial = account.firstName?.charAt(0).toUpperCase() || "";
-  const lastNameInitial = account.lastName?.charAt(0).toUpperCase() || "";
+  const { profilePath } = useNavigateToProfile(account && account.id);
+  const firstNameInitial = (account && account.firstName?.charAt(0).toUpperCase()) || "";
+  const lastNameInitial = (account && account.lastName?.charAt(0).toUpperCase()) || "";
 
   return (
     <>
-      {account.currentAvatar && (
-        <StyledAvatarImageLink href={professionalProfilePath}>
+      {account && account.currentAvatar && (
+        <StyledAvatarImageLink href={profilePath}>
           <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
         </StyledAvatarImageLink>
       )}
 
-      {!account.currentAvatar && (
-        <StyledAvatarImageLink href={professionalProfilePath}>
+      {account && !account.currentAvatar && (
+        <StyledAvatarImageLink href={profilePath}>
           <StyledAvatarInitials>
             {firstNameInitial}
             {lastNameInitial}

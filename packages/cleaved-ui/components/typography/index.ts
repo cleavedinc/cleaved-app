@@ -3,8 +3,6 @@ export * from "./h1";
 export * from "./h2";
 export * from "./h3";
 export * from "./h4";
-export * from "./hero-value-proposition";
-export * from "./hero-value-proposition-byline";
 export * from "./list-item";
 export * from "./list";
 export * from "./ordered-list-counters";

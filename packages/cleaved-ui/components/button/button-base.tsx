@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { COLORS, FONT_SIZES, RADIUS, SPACING } from "../../theme";
+import { FONT_SIZES, RADIUS, SPACING } from "../../theme";
 
 export const buttonBase = css`
   align-items: center;
@@ -12,8 +12,7 @@ export const buttonBase = css`
   padding: ${SPACING.SMALL} ${SPACING.LARGE};
 
   :disabled {
-    background-color: ${COLORS.GRAY_100};
-    color: ${COLORS.BLACK};
+    background-color: ${({ theme }) => theme.colors.baseBordersAndShadows_color};
     cursor: not-allowed;
   }
 `;

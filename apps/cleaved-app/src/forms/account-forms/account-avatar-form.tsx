@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { alertError, logQueryError, verifyUploadSizeIsOK } from "@cleaved/helpers";
-import { BORDERS, COLORS, UploadIcon, FONT_SIZES, RADIUS, StyledTooltipDark } from "@cleaved/ui";
+import { StyledTooltipWhite } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
@@ -15,19 +15,12 @@ type AccountAvatarFormProps = {
 };
 
 const StyledFileInputLabel = styled.label`
-  align-items: center;
-  background-color: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
-  border-radius: ${RADIUS.CIRCLE};
-  color: ${COLORS.BLUE_500};
+  color: ${({ theme }) => theme.colors.baseLink_color};
   cursor: pointer;
   display: flex;
-  height: 35px;
-  justify-content: center;
-  width: 35px;
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseLink_colorHover};
   }
 
   input[type="file"] {
@@ -71,11 +64,9 @@ export const AccountAvatarForm: FunctionComponent<AccountAvatarFormProps> = (pro
 
   return (
     <StyledFileInputLabel className={className}>
-      <StyledTooltipDark tooltip={t("files.avatarImageSizeRecommendation")}>
-        <StyledEditIconWrapper>
-          <UploadIcon color={COLORS.BLUE_500} iconSize={FONT_SIZES.MEDIUM} />
-        </StyledEditIconWrapper>
-      </StyledTooltipDark>
+      <StyledTooltipWhite tooltip={t("files.avatarImageSizeRecommendation")}>
+        <StyledEditIconWrapper>{t("files.avatarUploadImage")}</StyledEditIconWrapper>
+      </StyledTooltipWhite>
 
       <input type="file" required onChange={onChange} />
     </StyledFileInputLabel>

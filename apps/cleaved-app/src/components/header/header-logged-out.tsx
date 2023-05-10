@@ -1,15 +1,21 @@
 import React, { FunctionComponent, useContext } from "react";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { ButtonLink, COLORS, Logo, SPACING, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
+import { ButtonLink, Logo, SPACING, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
+import { routeConstantsCleavedApp } from "../../router";
 
 import { StyledStickyHeader } from "./styled-sticky-header";
 
 const StyledButtonLink = styled(ButtonLink)`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
+`;
+
+const StyledLoginLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
 `;
 
 const StyledLogoWrapper = styled.div`
@@ -24,25 +30,33 @@ export const HeaderLoggedOut: FunctionComponent = () => {
   const { t } = useTranslator();
   const { logOut, loggedIn } = useContext(authTokenContext);
 
+  const signUpLogIn = t("buttonLabels.signUpLogIn") ? t("buttonLabels.signUpLogIn") : "";
+
   return (
     <StyledLoggedoutStickyHeader hasBoxShadow>
       <NavigationWrapper>
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
-            height="30px"
+            height="15px"
             isLogoTextVisible
-            margin={`0 ${SPACING.MEDIUM} 0 0`}
+            margin={`0 0.3rem 0 0`}
             url={"/"}
-            width="30px"
+            width="15px"
           />
         </StyledLogoWrapper>
 
-        {loggedIn && (
+        {loggedIn ? (
           <NavigationButtonWrapper>
             <StyledButtonLink type="button" onClick={() => logOut()}>
               {t("buttonLabels.logOut")}
             </StyledButtonLink>
+          </NavigationButtonWrapper>
+        ) : (
+          <NavigationButtonWrapper>
+            <StyledLoginLink title={signUpLogIn} to={routeConstantsCleavedApp.login.route}>
+              {signUpLogIn}
+            </StyledLoginLink>
           </NavigationButtonWrapper>
         )}
       </NavigationWrapper>

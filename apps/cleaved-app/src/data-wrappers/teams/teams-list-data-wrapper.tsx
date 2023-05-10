@@ -14,7 +14,9 @@ import {
 
 import { authTokenContext } from "../../contexts";
 import { HelperInfoHeaderTextImageRightBox, StyledRouterButton, StyledRouterButtonLink } from "../../components";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useOrganizationSeekMembers, useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
 import { TeamsListRow } from "./teams-list-row";
@@ -35,24 +37,40 @@ const StyledAddPeopleText = styled.div`
   margin-bottom: ${SPACING.SMALL};
 `;
 
-const StyledRouterButtonLeft = styled(StyledRouterButton)`
+const StyledRouterButtonRight = styled(StyledRouterButton)`
   margin-left: auto;
 `;
 
 const StyledTeamListHeader = styled.div`
   display: flex;
-  margin-bottom: ${SPACING.MEDIUM};
+  margin: ${SPACING.XLARGE} 0 ${SPACING.MEDIUM};
 
   ${mediaQueries.RESPONSIVE_TABLE} {
-    margin-top: ${SPACING.SMALL};
+    margin: ${SPACING.LARGE} ${SPACING.SMALL} ${SPACING.MEDIUM} 0;
+  }
+`;
+
+const StyledThRight = styled(StyledTh)`
+  &:nth-child(2) {
+    padding-right: ${SPACING.MEDIUM};
+    text-align: end;
+  }
+`;
+
+const StyledTrWrapper = styled(StyledTr)`
+  ${mediaQueries.RESPONSIVE_TABLE} {
+    margin-bottom: ${SPACING.LARGE};
   }
 `;
 
 export const TeamsListDataWrapper: FunctionComponent = () => {
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { organizationSeekMembersData, organizationSeekMembersDataLoading, organizationSeekMembersDataRefetch } =
     useOrganizationSeekMembers(null, 20);
   const { t } = useTranslator();
+
+  const professionalInviteLinkName = t("menuLinkNames.professionalInvite") ? t("menuLinkNames.professionalInvite") : "";
 
   return (
     <>
@@ -61,55 +79,59 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
         helperInfoImageUrl={"/helper-info/people-helper-image.svg"}
         helperInfoText={t("helperInformationBoxes.teamsText")}
         helperInfoTextHeader={t("helperInformationBoxes.teamsHeader")}
-        width={"400px"}
+        width={"250px"}
       />
 
-      <StyledTeamListHeader>
-        <StyledRouterButtonLeft
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
-          title={routeConstantsCleavedApp.professionalInvite.name}
-        >
-          {t("teams.addNewTeamMember")}
-        </StyledRouterButtonLeft>
-      </StyledTeamListHeader>
+      {hasPermission && (
+        <StyledTeamListHeader>
+          <StyledRouterButtonRight
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
+            title={professionalInviteLinkName}
+          >
+            {t("teams.addNewTeamMember")}
+          </StyledRouterButtonRight>
+        </StyledTeamListHeader>
+      )}
 
       {!organizationSeekMembersDataLoading && organizationSeekMembersData && organizationSeekMembersData?.length > 0 && (
         <StyledTable role="table">
           <StyledTHead role="rowgroup">
             <StyledTHeadTr role="row">
               <StyledTh role="columnheader">{t("teams.professionalName")}</StyledTh>
-              <StyledTh role="columnheader">{t("teams.professionalTitle")}</StyledTh>
-              <StyledTh role="columnheader">{t("teams.professionalCompany")}</StyledTh>
-              <StyledTh role="columnheader">{t("teams.edit")}</StyledTh>
+              <StyledThRight role="columnheader">{t("teams.professionalPermissions")}</StyledThRight>
+              {hasPermission && <StyledTh role="columnheader">{t("teams.edit")}</StyledTh>}
             </StyledTHeadTr>
           </StyledTHead>
           <StyledTBody role="rowgroup">
             {organizationSeekMembersData.map((member) => {
               return (
-                <StyledTr key={member.id} role="row">
+                <StyledTrWrapper key={member.id} role="row">
                   <TeamsListRow
                     member={member}
                     organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch}
                   />
-                </StyledTr>
+                </StyledTrWrapper>
               );
             })}
           </StyledTBody>
         </StyledTable>
       )}
 
-      {!organizationSeekMembersDataLoading && organizationSeekMembersData && organizationSeekMembersData?.length > 0 && (
-        <StyledInviteMorePeopleWrapper>
-          <StyledAddPeopleText>{t("teams.addNewTeamMemberHelperText")}</StyledAddPeopleText>
+      {hasPermission &&
+        !organizationSeekMembersDataLoading &&
+        organizationSeekMembersData &&
+        organizationSeekMembersData?.length > 0 && (
+          <StyledInviteMorePeopleWrapper>
+            <StyledAddPeopleText>{t("teams.addNewTeamMemberHelperText")}</StyledAddPeopleText>
 
-          <StyledRouterButtonLink
-            to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
-            title={routeConstantsCleavedApp.professionalInvite.name}
-          >
-            {t("teams.addNewTeamMember")}
-          </StyledRouterButtonLink>
-        </StyledInviteMorePeopleWrapper>
-      )}
+            <StyledRouterButtonLink
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
+              title={professionalInviteLinkName}
+            >
+              {t("teams.addNewTeamMember")}
+            </StyledRouterButtonLink>
+          </StyledInviteMorePeopleWrapper>
+        )}
     </>
   );
 };

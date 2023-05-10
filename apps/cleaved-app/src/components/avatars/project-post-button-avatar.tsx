@@ -3,20 +3,15 @@ import styled, { css } from "styled-components";
 
 import { BORDERS, FONT_SIZES, RADIUS } from "@cleaved/ui";
 
+import { FindMyAccountQuery } from "../../generated-types/graphql";
+
 type HeaderMenuAvatarProps = {
-  account:
-    | {
-        id: string;
-        firstName?: string | null | undefined;
-        lastName?: string | null | undefined;
-        currentAvatar?: string | null | undefined;
-      }
-    | undefined;
+  account: FindMyAccountQuery["findMyAccount"] | undefined;
 };
 
 const avatartBase = css`
   align-items: center;
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
   height: 56px;
@@ -41,11 +36,11 @@ export const ProjectPostButtonAvatar: FunctionComponent<HeaderMenuAvatarProps> =
 
   return (
     <>
-      {account?.currentAvatar && (
+      {account && account?.currentAvatar && (
         <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
       )}
 
-      {!account?.currentAvatar && (
+      {account && !account?.currentAvatar && (
         <StyledAvatarInitials>
           {firstNameInitial}
           {lastNameInitial}

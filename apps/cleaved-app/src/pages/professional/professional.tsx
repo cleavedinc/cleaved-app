@@ -1,21 +1,15 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth, RightColumnWrapper } from "@cleaved/ui";
+import { ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { AsideProfessionalDataWrapper, AsideProfessionalInformationDataWrapper } from "../../data-wrappers";
+import { AsideProfessionalDataWrapper } from "../../data-wrappers";
 
 export const Professional: FunctionComponent = () => {
   return (
     <ContentWrapper>
-      <LeftColumnWrapper>
+      <MainColumnMaxWidthWrapper>
         <AsideProfessionalDataWrapper />
-      </LeftColumnWrapper>
-
-      <MainColumnWrapperMaxWidth>Feedback posts timeline here</MainColumnWrapperMaxWidth>
-
-      <RightColumnWrapper>
-        <AsideProfessionalInformationDataWrapper />
-      </RightColumnWrapper>
+      </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );
 };

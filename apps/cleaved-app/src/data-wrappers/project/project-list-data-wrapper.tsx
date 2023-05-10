@@ -1,6 +1,8 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext, useState } from "react";
 import { Link } from "@reach/router";
-import styled from "styled-components";
+import Select from "react-select";
+import dayjs from "dayjs";
+import styled, { useTheme } from "styled-components";
 
 import {
   mediaQueries,
@@ -14,28 +16,55 @@ import {
   StyledTr,
 } from "@cleaved/ui";
 
-import { authTokenContext, ProjectsContext } from "../../contexts";
+import { authTokenContext } from "../../contexts";
 import {
   ProjectsEditMenu,
   HelperInfoHeaderTextImageRightBox,
   StyledRouterButton,
   StyledRouterButtonLink,
 } from "../../components";
-import { useTranslator } from "../../hooks";
+
+import { OrgPermissionLevel, ProjectStatus } from "../../generated-types/graphql";
+import { useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
-const StyledProjectLink = styled(Link)``;
+type ProjectStatusType = {
+  value: ProjectStatus;
+  label: string;
+};
+
+const StyledAddPeopleText = styled.div`
+  margin-bottom: ${SPACING.SMALL};
+`;
+
+const StyledInviteMorePeopleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: ${SPACING.XLARGE} 0 ${SPACING.XXXLARGE};
+  text-align: center;
+
+  ${mediaQueries.SM_MD} {
+    margin: ${SPACING.XLARGE} 0;
+  }
+`;
+
+const StyledProjectLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
+`;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
   margin-left: auto;
 `;
 
 const StyledProjectListHeader = styled.div`
+  align-items: center;
   display: flex;
-  margin-bottom: ${SPACING.MEDIUM};
+  margin: ${SPACING.XLARGE} 0 ${SPACING.MEDIUM};
 
   ${mediaQueries.RESPONSIVE_TABLE} {
-    margin-top: ${SPACING.SMALL};
+    margin: ${SPACING.LARGE} ${SPACING.SMALL} ${SPACING.MEDIUM} 0;
   }
 `;
 
@@ -50,17 +79,18 @@ const StyledTdWithMenuContent = styled(StyledTd)`
     }
 
     &:nth-of-type(3):before {
-      content: "Owner";
-    }
-
-    &:nth-of-type(4):before {
       content: "Posts";
     }
   }
 
   ${mediaQueries.XS_LANDSCAPE} {
     &:first-child {
-      width: 40%;
+      width: 50%;
+    }
+
+    &:nth-child(2) {
+      padding-right: ${SPACING.MEDIUM};
+      text-align: end;
     }
   }
 `;
@@ -75,27 +105,39 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
   }
 `;
 
-/// ///
-const StyledInviteMorePeopleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: ${SPACING.XLARGE} 0 ${SPACING.XXXLARGE};
-  text-align: center;
-
-  ${mediaQueries.SM_MD} {
-    margin: ${SPACING.XLARGE} 0;
+const StyledThRight = styled(StyledTh)`
+  &:nth-child(2) {
+    padding-right: ${SPACING.MEDIUM};
+    text-align: end;
   }
 `;
 
-const StyledAddPeopleText = styled.div`
-  margin-bottom: ${SPACING.SMALL};
+const StyledTrWrapper = styled(StyledTr)`
+  ${mediaQueries.RESPONSIVE_TABLE} {
+    margin-bottom: ${SPACING.LARGE};
+  }
 `;
 
 export const ProjectListDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const { projectsInOrgSeek, projectsInOrgSeekDataLoading } = useContext(ProjectsContext);
+  const [projectStatus, setProjectStatus] = useState<ProjectStatus>(ProjectStatus.Active);
+  const colorTheme = useTheme();
+  const { t } = useTranslator();
+
+  const {
+    projectsInOrganizationSeekData,
+    projectsInOrganizationSeekDataLoading,
+    projectsInOrganizationSeekDataRefetch,
+  } = useProjectsInOrganizationSeek(null, 100, [projectStatus]);
+
+  const projectStatusOptions: readonly ProjectStatusType[] = [
+    { value: ProjectStatus.Active, label: t("projects.active") },
+    { value: ProjectStatus.Inactive, label: t("projects.inactive") },
+    { value: ProjectStatus.Archived, label: t("projects.archive") },
+  ];
+
+  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
 
   return (
     <>
@@ -104,66 +146,112 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         helperInfoImageUrl={"/helper-info/project-helper-image.svg"}
         helperInfoText={t("helperInformationBoxes.projectslistText")}
         helperInfoTextHeader={t("helperInformationBoxes.projectslistHeader")}
-        width={"400px"}
+        width={"250px"}
       />
 
-      <StyledProjectListHeader>
-        <StyledRouterButtonLeft
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-          title={routeConstantsCleavedApp.projectStartNew.name}
-        >
-          {t("projectStartNew.startNewProject")}
-        </StyledRouterButtonLeft>
-      </StyledProjectListHeader>
-
-      {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
-        <StyledTable role="table">
-          <StyledTHead role="rowgroup">
-            <StyledTHeadTr role="row">
-              <StyledTh role="columnheader">{t("project.projectName")}</StyledTh>
-              <StyledTh role="columnheader">{t("project.dateCreated")}</StyledTh>
-              <StyledTh role="columnheader">{t("project.owner")}</StyledTh>
-              <StyledTh role="columnheader">{t("project.posts")}</StyledTh>
-              <StyledTh role="columnheader">{t("project.edit")}</StyledTh>
-            </StyledTHeadTr>
-          </StyledTHead>
-          <StyledTBody role="rowgroup">
-            {projectsInOrgSeek?.map((project) => {
-              return (
-                <StyledTr key={project.id} role="row">
-                  <StyledTdWithMenuContent role="cell">
-                    <StyledProjectLink
-                      to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
-                      title={project.name}
-                    >
-                      {project.name}
-                    </StyledProjectLink>
-                  </StyledTdWithMenuContent>
-                  <StyledTdWithMenuContent role="cell">temp: 01/25/2023</StyledTdWithMenuContent>
-                  <StyledTdWithMenuContent role="cell">temp: James Riddley</StyledTdWithMenuContent>
-                  <StyledTdWithMenuContent role="cell">{project.totalRootPostCount}</StyledTdWithMenuContent>
-                  <StyledTdWithMenuContentEdit role="cell">
-                    <ProjectsEditMenu />
-                  </StyledTdWithMenuContentEdit>
-                </StyledTr>
-              );
+      {hasPermission && (
+        <StyledProjectListHeader>
+          <Select
+            defaultValue={projectStatusOptions[0]}
+            isSearchable={false}
+            onChange={(projectStatusFilter) => projectStatusFilter && setProjectStatus(projectStatusFilter.value)}
+            options={projectStatusOptions}
+            styles={{
+              singleValue: (baseStyles) => ({
+                ...baseStyles,
+                textTransform: "capitalize",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                textTransform: "capitalize",
+              }),
+              option: (styles, { isSelected }) => {
+                return {
+                  ...styles,
+                  color: isSelected ? colorTheme.colors.white_color : colorTheme.colors.baseText_color,
+                };
+              },
+            }}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                neutral0: colorTheme.colors.baseBox_backgroundColor,
+                neutral80: colorTheme.colors.baseText_color,
+                primary: colorTheme.colors.baseLink_color,
+                primary25: colorTheme.colors.baseButtonAndIcon_backgroundColorHover,
+              },
             })}
-          </StyledTBody>
-        </StyledTable>
-      )}
+          />
 
-      {!projectsInOrgSeekDataLoading && projectsInOrgSeek && projectsInOrgSeek?.length > 0 && (
-        <StyledInviteMorePeopleWrapper>
-          <StyledAddPeopleText>{t("projectStartNew.addNewProjectHelperText")}</StyledAddPeopleText>
-
-          <StyledRouterButtonLink
+          <StyledRouterButtonLeft
             to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
-            title={routeConstantsCleavedApp.projectStartNew.name}
+            title={projectStartNewLinkName}
           >
             {t("projectStartNew.startNewProject")}
-          </StyledRouterButtonLink>
-        </StyledInviteMorePeopleWrapper>
+          </StyledRouterButtonLeft>
+        </StyledProjectListHeader>
       )}
+
+      {!projectsInOrganizationSeekDataLoading &&
+        projectsInOrganizationSeekData &&
+        projectsInOrganizationSeekData.length > 0 && (
+          <StyledTable role="table">
+            <StyledTHead role="rowgroup">
+              <StyledTHeadTr role="row">
+                <StyledTh role="columnheader">{t("project.projectName")}</StyledTh>
+                <StyledThRight role="columnheader">{t("project.dateCreated")}</StyledThRight>
+                <StyledTh role="columnheader">{t("project.posts")}</StyledTh>
+                {hasPermission && <StyledTh role="columnheader">{t("project.edit")}</StyledTh>}
+              </StyledTHeadTr>
+            </StyledTHead>
+            <StyledTBody role="rowgroup">
+              {projectsInOrganizationSeekData.map((project) => {
+                return (
+                  <StyledTrWrapper key={project.id} role="row">
+                    <StyledTdWithMenuContent role="cell">
+                      <StyledProjectLink
+                        to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
+                        title={project.name}
+                      >
+                        {project.name}
+                      </StyledProjectLink>
+                    </StyledTdWithMenuContent>
+                    <StyledTdWithMenuContent role="cell">
+                      {dayjs(project.createdAt).format("MMMM DD, YYYY")}
+                    </StyledTdWithMenuContent>
+                    <StyledTdWithMenuContent role="cell">{project.totalRootPostCount}</StyledTdWithMenuContent>
+                    {hasPermission && (
+                      <StyledTdWithMenuContentEdit role="cell">
+                        <ProjectsEditMenu
+                          projectId={project.id}
+                          projectStatus={project.status}
+                          refreshProjectListData={projectsInOrganizationSeekDataRefetch}
+                        />
+                      </StyledTdWithMenuContentEdit>
+                    )}
+                  </StyledTrWrapper>
+                );
+              })}
+            </StyledTBody>
+          </StyledTable>
+        )}
+
+      {hasPermission &&
+        !projectsInOrganizationSeekDataLoading &&
+        projectsInOrganizationSeekData &&
+        projectsInOrganizationSeekData.length >= 0 && (
+          <StyledInviteMorePeopleWrapper>
+            <StyledAddPeopleText>{t("projectStartNew.addNewProjectHelperText")}</StyledAddPeopleText>
+
+            <StyledRouterButtonLink
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+              title={projectStartNewLinkName}
+            >
+              {t("projectStartNew.startNewProject")}
+            </StyledRouterButtonLink>
+          </StyledInviteMorePeopleWrapper>
+        )}
     </>
   );
 };

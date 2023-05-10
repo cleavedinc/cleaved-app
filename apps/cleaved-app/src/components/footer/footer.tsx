@@ -2,13 +2,13 @@ import React, { FunctionComponent } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { COLORS, mediaQueries, SPACING, SPACING_PX, WrapperOneHalf } from "@cleaved/ui";
+import { mediaQueries, SPACING, SPACING_PX, WrapperOneHalf } from "@cleaved/ui";
 
 import { routeConstantsShared } from "@cleaved/helpers";
 import { useTranslator } from "../../hooks";
 
 const StyledFooterWrapper = styled.div`
-  background-color: ${COLORS.WHITE};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   display: flex;
   flex: 0 1 auto;
 
@@ -20,7 +20,7 @@ const StyledFooterWrapper = styled.div`
 const StyledCopyrightWrapper = styled.div``;
 
 const StyledLink = styled(Link)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
 
   :not(:last-child) {
     margin-right: ${SPACING_PX.THREE};

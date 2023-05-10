@@ -1,23 +1,25 @@
 import React, { FunctionComponent, ReactNode, useContext } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Portal } from "react-portal";
 
 import {
   BORDERS,
-  COLORS,
+  CloseIcon,
+  CircleEditButtonSmall,
   FONT_SIZES,
   mediaQueries,
   OnOutsideClick,
   RADIUS,
   ScrollLock,
-  SHADOWS,
   SPACING,
 } from "@cleaved/ui";
 
 import { PostCommentAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 import { CommentForm } from "../../forms";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
 type ModalPostCommentsBackgroundProps = {
   backgroundColor?: string;
@@ -25,6 +27,7 @@ type ModalPostCommentsBackgroundProps = {
 
 type ModalPostCommentsHeaderProps = ModalPostCommentsBackgroundProps & {
   hidden: boolean;
+  onCloseRequested?: () => void;
   title?: string;
 };
 
@@ -39,17 +42,24 @@ type ModalPostCommentsProps = ModalPostCommentsBackgroundProps & {
   useOnOutsideClick?: boolean;
 };
 
+const StyledCircleEditButtonSmall = styled(CircleEditButtonSmall)`
+  margin-left: auto;
+`;
+
 const StyledCommentForm = styled(CommentForm)``;
 
 const StyledContentWrapper = styled.div`
   min-height: 100px;
-  max-height: 550px;
   overflow-y: auto;
-  padding: 0 ${SPACING.MEDIUM};
+  padding: 0;
+
+  ${mediaQueries.SM} {
+    max-height: 550px;
+  }
 `;
 
 const StyledModalPostCommentsContentWrapper = styled.div<ModalPostCommentsBackgroundProps>`
-  background-color: ${COLORS.WHITE};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   height: 100%;
   max-height: 100%;
   min-width: auto;
@@ -69,7 +79,7 @@ const StyledModalPostCommentsContentWrapper = styled.div<ModalPostCommentsBackgr
 
 const StyledModalPostCommentsHeaderWrapper = styled.div<ModalPostCommentsBackgroundProps>`
   align-items: center;
-  border-bottom: ${BORDERS.BORDER_PRIMARY};
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
   justify-content: center;
   margin-bottom: ${SPACING.MEDIUM};
@@ -84,7 +94,7 @@ const StyledModalPostCommentsTitle = styled.div`
 
 const StyledModalPostCommentsWrapper = styled.div`
   align-items: center;
-  background-color: ${COLORS.BLACK_ALPHA_6};
+  background-color: ${({ theme }) => theme.colors.baseOverlay_backgroundColor};
   bottom: 0;
   display: flex;
   flex: 1;
@@ -103,7 +113,7 @@ const StyledOnOutsideClick = styled(OnOutsideClick)`
 `;
 
 const StyledPostCommentFormWrapper = styled.div`
-  border-top: ${BORDERS.BORDER_PRIMARY};
+  border-top: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
   margin-top: auto;
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
@@ -113,7 +123,12 @@ const StyledScrollLock = styled(ScrollLock)`
   display: flex;
 `;
 
-const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> = ({ hidden, title }) => {
+const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> = ({
+  hidden,
+  onCloseRequested,
+  title,
+}) => {
+  const theme = useTheme();
   const { t } = useTranslator();
 
   if (hidden) {
@@ -123,6 +138,9 @@ const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> =
   return (
     <StyledModalPostCommentsHeaderWrapper>
       <StyledModalPostCommentsTitle>{`${title}'s ${t("post.post")}`}</StyledModalPostCommentsTitle>
+      <StyledCircleEditButtonSmall onClick={() => onCloseRequested && onCloseRequested()} type="button">
+        <CloseIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+      </StyledCircleEditButtonSmall>
     </StyledModalPostCommentsHeaderWrapper>
   );
 };
@@ -137,6 +155,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
   title,
   useOnOutsideClick = true,
 }) => {
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { accountData } = useContext(AccountContext);
 
   if (!open) {
@@ -145,16 +164,18 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
 
   const content = (
     <>
-      <ModalPostCommentsHeader hidden={forceOpen} title={title} />
+      <ModalPostCommentsHeader hidden={forceOpen} onCloseRequested={onCloseRequested} title={title} />
       <StyledContentWrapper>{children}</StyledContentWrapper>
-      <StyledPostCommentFormWrapper>
-        <PostCommentAvatar account={accountData} />
+      {hasPermission && (
+        <StyledPostCommentFormWrapper>
+          <PostCommentAvatar account={accountData} />
 
-        <StyledCommentForm
-          postOrPostReplyId={postOrPostReplyId}
-          onCommentPostedTriggerGetComments={onCommentPostedTriggerGetComments}
-        />
-      </StyledPostCommentFormWrapper>
+          <StyledCommentForm
+            postOrPostReplyId={postOrPostReplyId}
+            onCommentPostedTriggerGetComments={onCommentPostedTriggerGetComments}
+          />
+        </StyledPostCommentFormWrapper>
+      )}
     </>
   );
 

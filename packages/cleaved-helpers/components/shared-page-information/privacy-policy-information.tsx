@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from "react";
 
 import { routeConstantsShared } from "../router-constants";
-import { Bold, Link, List, ListItem, Paragraph, SectionHeader } from "@cleaved/ui";
+import { Bold, Box, Link, List, ListItem, Paragraph, SectionHeader } from "@cleaved/ui";
 
 export const PrivacyPolicyInformation: FunctionComponent = () => {
   return (
-    <>
+    <Box>
       <SectionHeader>Cleaved Privacy Policy</SectionHeader>
       <Paragraph>Last Updated: January 1, 2022</Paragraph>
 
@@ -621,6 +621,6 @@ export const PrivacyPolicyInformation: FunctionComponent = () => {
         activities. To make a request for access or deletion of your Personal Information as permitted by law, please
         submit a request via our online Cleaved Privacy Request portal, which is accessible by clicking here.
       </Paragraph>
-    </>
+    </Box>
   );
 };

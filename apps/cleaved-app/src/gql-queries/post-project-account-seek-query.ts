@@ -9,9 +9,10 @@ export const POST_PROJECT_ACCOUNT_SEEK_QUERY = graphql(`
       pageSize: $pageSize
     ) {
       id
-      firstName
-      lastName
       currentAvatar
+      firstName
+      jobTitle
+      lastName
     }
   }
 `);

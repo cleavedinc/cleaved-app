@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import styled from "styled-components";
 
-import { ButtonLinkLoadMore, COLORS, SPACING } from "@cleaved/ui";
+import { ButtonLinkLoadMore, SPACING } from "@cleaved/ui";
 
 import { PostCommentAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 import { CommentForm } from "../../forms";
-import { ProjectPost } from "../../generated-types/graphql";
+import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
+import { useOrganizationPermission } from "../../permissions";
 
 import { Comment } from "../comments/comment";
 import { CommentsList } from "../comments/comments-list";
@@ -14,7 +15,7 @@ import { CommentsList } from "../comments/comments-list";
 type CommentsListItemProps = {
   commentLevel: number;
   postProjectRepliesDataRefetch?: () => void;
-  postReply: ProjectPost;
+  postReply: PostProjectRepliesQuery["postProjectReplies"][0];
 };
 
 const StyledCommentWrapper = styled.div`
@@ -28,26 +29,13 @@ const StyledPostCommentFormWrapper = styled.div`
   margin: ${SPACING.SMALL} 0 ${SPACING.SMALL} 50px;
 `;
 
-type StyledLoadMoreButtonProps = {
-  isHidden: boolean;
-};
-
-export const StyledLoadMoreButton = styled(ButtonLinkLoadMore)<StyledLoadMoreButtonProps>`
-  color: ${COLORS.GRAY_500};
-  display: ${(props) => (props.isHidden ? "none" : "initial")};
-
-  :hover {
-    background-color: transparent;
-    text-decoration: underline;
-  }
-`;
-
 const StyledRepliesListWrapper = styled.div`
   margin-left: 50px;
 `;
 
 export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props) => {
   const { commentLevel, postProjectRepliesDataRefetch, postReply } = props;
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { accountData } = useContext(AccountContext);
   const [isCommentRepliesVisible, setIsCommentRepliesVisible] = useState(false);
   const [triggerGetReplies, setTriggerGetReplies] = useState(0);
@@ -78,7 +66,7 @@ export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props
         </StyledRepliesListWrapper>
       )}
 
-      {isCommentRepliesVisible && (
+      {hasPermission && isCommentRepliesVisible && (
         <StyledPostCommentFormWrapper>
           <PostCommentAvatar account={accountData} />
           <CommentForm

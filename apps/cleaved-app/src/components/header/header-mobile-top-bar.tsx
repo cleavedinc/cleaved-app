@@ -45,6 +45,7 @@ const StyledMenuUnorderedList = styled.ul`
 const StyledLogoutButton = styled.button`
   background-color: transparent;
   border: none;
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   cursor: pointer;
   padding: ${SPACING.MEDIUM};
   text-align: center;
@@ -62,7 +63,7 @@ const StyledLogoWrapper = styled.div`
 `;
 
 const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
-  border-bottom: ${BORDERS.BORDER_PRIMARY};
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
 
   &:last-child:after {
     border-bottom: none;
@@ -71,16 +72,18 @@ const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
 
 export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (props) => {
   const { className } = props;
-  const { t } = useTranslator();
+  const { logOut, preferredOrgId } = useContext(authTokenContext);
   const [isAccountMenuActive, setIsAccountMenuActive] = useState(false);
   const onAccountMenuClick = () => setIsAccountMenuActive(!isAccountMenuActive);
   const handleCloseMenu = () => setIsAccountMenuActive(false);
-  const { logOut, preferredOrgId } = useContext(authTokenContext);
+  const { t } = useTranslator();
 
   const handleLogout = () => {
     logOut();
     handleCloseMenu();
   };
+
+  const accountLinkName = t("menuLinkNames.account") ? t("menuLinkNames.account") : "";
 
   return (
     <StyledHeaderMobileTopBarStickyHeader className={className} hasBoxShadow>
@@ -88,11 +91,11 @@ export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (p
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
-            height="30px"
+            height="15px"
             isLogoTextVisible
-            margin={`0 ${SPACING.SMALL} 0 0`}
+            margin={`0 0.3rem 0 0`}
             url={`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`}
-            width="30px"
+            width="15px"
           />
         </StyledLogoWrapper>
 
@@ -111,10 +114,10 @@ export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (p
                     <Link
                       getProps={isMenuItemActive}
                       onClick={handleCloseMenu}
-                      title={routeConstantsCleavedApp.account.name}
-                      to={`/${preferredOrgId}${routeConstantsCleavedApp.account.route}`}
+                      title={accountLinkName}
+                      to={`/${preferredOrgId}${routeConstantsCleavedApp.accountPersonalInformation.route}`}
                     >
-                      <NavigationButtonLabel>{routeConstantsCleavedApp.account.name}</NavigationButtonLabel>
+                      <NavigationButtonLabel>{accountLinkName}</NavigationButtonLabel>
                     </Link>
                   </StyledDropdownMenuNavigationButton>
 

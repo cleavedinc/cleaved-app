@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonPrimary, COLORS, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
+import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -17,26 +17,35 @@ type OnboardingProjectStartNewFormProps = {
   projectsInOrgSeekRefetch?: (() => void) | undefined;
 };
 
-type OnboardingProjectStartNewFormType = {
+type ProjectNameType = {
   projectName: string;
+};
+
+type ProjectDetailsType = {
   projectDetails: string;
 };
+
+type OnboardingProjectStartNewFormType = ProjectNameType & ProjectDetailsType;
 
 const StyledButtonPrimaryWrapper = styled.div`
   display: flex;
 `;
 
 const StyledField = styled(Field)`
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.MEDIUM};
+  outline: none;
   padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
   width: 100%;
 `;
 
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
   margin-top: ${SPACING_PX.ONE};
 `;
 
@@ -46,7 +55,7 @@ const StyledProjectFormWrapper = styled.div`
 `;
 
 const StyledProjectFormLabel = styled.label`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING_PX.ONE};
 `;
@@ -88,7 +97,7 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof ProjectNameType, yup.AnySchema>>({
           projectName: yup.string().required(),
         })}
       >

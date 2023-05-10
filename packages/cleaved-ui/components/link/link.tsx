@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
-import { COLORS } from "../../theme";
-
 export const Link = styled.a`
-  color: ${COLORS.BLUE_500};
+  color: ${({ theme }) => theme.colors.baseLink_color};
   cursor: pointer;
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseLink_colorHover};
   }
 `;

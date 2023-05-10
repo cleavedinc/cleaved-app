@@ -1,37 +1,33 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { navigate } from "@reach/router";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
+import { v4 as uuidv4 } from "uuid";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  ButtonLink,
-  COLORS,
-  FONT_SIZES,
-  RADIUS,
-  SPACING,
-  SPACING_PX,
-  Spinner,
-} from "@cleaved/ui";
+import { BORDERS, ButtonPrimary, ButtonLink, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
-import { authTokenContext, ProjectsContext } from "../../contexts";
+import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
 import { PROJECT_START_NEW } from "./gql";
 
-type ProjectStartNewFormType = {
+type ProjectNameType = {
   projectName: string;
+};
+
+type ProjectDetailsType = {
   projectDetails: string;
 };
 
+type ProjectStartNewFormType = ProjectNameType & ProjectDetailsType;
+
 const StyledButtonLink = styled(ButtonLink)`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseButtonLink_color};
 `;
 
 const StyledButtonPrimaryWrapper = styled.div`
@@ -39,10 +35,13 @@ const StyledButtonPrimaryWrapper = styled.div`
 `;
 
 const StyledField = styled(Field)`
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.MEDIUM};
+  outline: none;
   padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
   width: 100%;
 `;
@@ -59,7 +58,7 @@ const StyledProjectFormWrapper = styled.div`
 `;
 
 const StyledProjectFormLabel = styled.label`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING_PX.ONE};
 `;
@@ -67,20 +66,23 @@ const StyledProjectFormLabel = styled.label`
 export const ProjectStartNewForm: FunctionComponent = () => {
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
-  const { projectsInOrgSeekRefetch } = useContext(ProjectsContext);
+  const [newProjectGuid, setNewProjectGuid] = useState<string | null>();
 
   const [projectStart] = useMutation(PROJECT_START_NEW, {
     onCompleted: () => {
-      if (projectsInOrgSeekRefetch) {
-        projectsInOrgSeekRefetch();
-      }
-
-      navigate(`/${preferredOrgId}${routeConstantsCleavedApp.projectList.route}`);
+      navigate(
+        `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${newProjectGuid}${routeConstantsCleavedApp.projectBoard.route}`
+      );
     },
     onError: (error) => {
       logQueryError(error);
     },
   });
+
+  useEffect(() => {
+    const newGuid = uuidv4();
+    setNewProjectGuid(newGuid);
+  }, []);
 
   return (
     <>
@@ -96,6 +98,7 @@ export const ProjectStartNewForm: FunctionComponent = () => {
             variables: {
               projectName: values.projectName,
               organizationId: preferredOrgId,
+              projectId: newProjectGuid,
               // projectDetails: values.projectDetails,
             },
           });
@@ -103,7 +106,7 @@ export const ProjectStartNewForm: FunctionComponent = () => {
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
+        validationSchema={yup.object().shape<Record<keyof ProjectNameType, yup.AnySchema>>({
           projectName: yup.string().required(),
         })}
       >
@@ -135,7 +138,9 @@ export const ProjectStartNewForm: FunctionComponent = () => {
               </StyledProjectFormWrapper>
 
               <StyledButtonPrimaryWrapper>
-                <StyledButtonLink onClick={() => navigate(-1)}>Cancel</StyledButtonLink>
+                <StyledButtonLink onClick={() => navigate(-1)} type="button">
+                  {t("cancel")}
+                </StyledButtonLink>
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("projectStartNew.startNewProject")}

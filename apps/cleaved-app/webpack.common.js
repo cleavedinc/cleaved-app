@@ -12,18 +12,15 @@ const sharedPlugins = [HTMLWebpackPluginConfig];
 
 const getEntries = () => {
   const entries = {
-    account: ["./src/utils/i18n.ts", "./src/pages/account.tsx"],
-    communityGuidelines: ["./src/utils/i18n.ts", "./src/pages/agreements/community-guidelines.tsx"],
-    elaborationOfCommunityGuidelines: [
-      "./src/utils/i18n.ts",
-      "./src/pages/agreements/elaboration-of-community-guidelines.tsx",
-    ],
+    accountMembership: ["./src/utils/i18n.ts", "./src/pages/account/account-membership.tsx"],
+    accountOrganizations: ["./src/utils/i18n.ts", "./src/pages/account/account-organizations.tsx"],
+    accountOrganizationRegister: ["./src/utils/i18n.ts", "./src/pages/account/account-organization-register.tsx"],
+    accountPersonalInformation: ["./src/utils/i18n.ts", "./src/pages/account/account-personal-information.tsx"],
+    accountProfessionalInformation: ["./src/utils/i18n.ts", "./src/pages/account/account-professional-information.tsx"],
     home: ["./src/utils/i18n.ts", "./src/pages/home.tsx"],
     login: ["./src/utils/i18n.ts", "./src/pages/login/login.tsx"],
     main: ["./src/utils/i18n.ts", "./src/pages/index.tsx"],
-    organizationList: ["./src/utils/i18n.ts", "./src/pages/organization/organization-list.tsx"],
     notFound: ["./src/utils/i18n.ts", "./src/pages/not-found.tsx"],
-    organizationRegister: ["./src/utils/i18n.ts", "./src/pages/organization/organization-register.tsx"],
     professionalInvite: ["./src/utils/i18n.ts", "./src/pages/professional/professional-invite.tsx"],
     professionalOnboarding: ["./src/utils/i18n.ts", "./src/pages/professional/professional-onboarding.tsx"],
     professionalShareLinkRegistration: [

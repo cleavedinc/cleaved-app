@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { BORDERS, COLORS, mediaQueries, SHADOWS, SPACING } from "../../theme";
+import { BORDERS, mediaQueries, SPACING } from "../../theme";
 
 export type StickyHeaderProps = {
   hasBoxShadow?: boolean;
 };
 
 export const StickyHeader = styled.header<StickyHeaderProps>`
-  background-color: ${COLORS.WHITE};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   top: 0;
-  border-bottom: ${BORDERS.BORDER_PRIMARY};
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   padding: 0 ${SPACING.SMALL};
   position: sticky;
   z-index: 999;
@@ -24,10 +24,5 @@ export const StickyHeader = styled.header<StickyHeaderProps>`
     input[type="text"] {
       display: block;
     }
-  }
-
-  ${mediaQueries.MD} {
-    ${(props) => (props.hasBoxShadow ? `box-shadow: ${SHADOWS.LIGHT_INSET}` : null)};
-    top: 0;
   }
 `;

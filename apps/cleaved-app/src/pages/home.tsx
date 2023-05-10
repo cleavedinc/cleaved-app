@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth, RightColumnWrapper } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper, RightColumnWrapper } from "@cleaved/ui";
 
 import { PostsContextProvider } from "../contexts";
-import { AsideHomeDataWrapper, AsideOrganizationMembersDataWrapper, HomeDataWrapper } from "../data-wrappers";
+import { AsideHomeDataWrapper, AsideHomeOrganizationMembersDataWrapper, HomeDataWrapper } from "../data-wrappers";
 
 export const Home: FunctionComponent = () => {
   return (
@@ -13,13 +13,13 @@ export const Home: FunctionComponent = () => {
           <AsideHomeDataWrapper />
         </LeftColumnWrapper>
 
-        <MainColumnWrapperMaxWidth>
+        <MainColumnMaxWidthWrapper>
           <HomeDataWrapper />
-        </MainColumnWrapperMaxWidth>
+        </MainColumnMaxWidthWrapper>
       </PostsContextProvider>
 
       <RightColumnWrapper>
-        <AsideOrganizationMembersDataWrapper />
+        <AsideHomeOrganizationMembersDataWrapper />
       </RightColumnWrapper>
     </ContentWrapper>
   );

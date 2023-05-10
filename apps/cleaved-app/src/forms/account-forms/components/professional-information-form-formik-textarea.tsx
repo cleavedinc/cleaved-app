@@ -5,7 +5,6 @@ import styled from "styled-components";
 import {
   ANIMATION_DURATIONS,
   BORDERS,
-  COLORS,
   FONT_SIZES,
   FONTS,
   FormField,
@@ -29,8 +28,9 @@ type ProfessionalInformationFormFormikTextareaProps = FieldHookConfig<any> &
 
 const StyledTextarea = styled.textarea`
   background-color: transparent;
-  border: ${BORDERS.BORDER_PRIMARY};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-family: ${FONTS.SANS_SERIF_1};
   font-size: ${FONT_SIZES.MEDIUM};
   min-height: 100px;
@@ -40,7 +40,7 @@ const StyledTextarea = styled.textarea`
   width: 100%;
 
   &::placeholder {
-    color: ${COLORS.GRAY_500};
+    color: ${({ theme }) => theme.colors.basePlaceholderText_color};
     transition: color ${ANIMATION_DURATIONS.FAST} ease;
   }
 `;
@@ -77,7 +77,7 @@ export const ProfessionalInformationFormFormikTextarea: FunctionComponent<
     <StyledFormikTextarea hasError={hasError}>
       <StyledTextarea
         {...rest}
-        autoFocus={true}
+        autoFocus={false}
         aria-label={ariaLabel}
         name={field.name}
         onBlur={field.onBlur}

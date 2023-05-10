@@ -2,23 +2,26 @@ import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { Box, COLORS, FONT_SIZES, SectionHeader, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { Box, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
-import { useNavigateToProfessionalProfile } from "../../hooks";
+import { useNavigateToProfile, useRouteParams, useTranslator } from "../../hooks";
 
 const StyledAsideProfessionalWrapper = styled.div`
   text-align: center;
 `;
 
-const StyledJobTitle = styled.p`
-  color: ${COLORS.GRAY_500};
+const StyledEmaillink = styled.div``;
+
+const StyledJobTitle = styled.div`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.SMALL};
+  margin-bottom: ${SPACING.MEDIUM};
 `;
 
 const StyledProfileName = styled(SectionHeader)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
 
   &:hover {
@@ -26,26 +29,43 @@ const StyledProfileName = styled(SectionHeader)`
   }
 `;
 
+const StyledProfessionalAbout = styled.div`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  margin-bottom: ${SPACING.MEDIUM};
+  white-space: pre-line;
+`;
+
 export const AsideProfessionalDataWrapper: FunctionComponent = () => {
-  const { accountData } = useContext(AccountContext);
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(accountData?.id);
+  const { accountData, accountDataLoading } = useContext(AccountContext);
+  const routeParams = useRouteParams();
+  const professionalId = routeParams.professionalId;
+  const { profilePath } = useNavigateToProfile(professionalId);
+  const { t } = useTranslator();
 
   return (
     <>
       <StickUnderHeaderDesktopOnly>
-        <Box>
-          <StyledAsideProfessionalWrapper>
-            <AsideAvatar account={accountData} />
+        {!accountDataLoading && (
+          <Box>
+            <StyledAsideProfessionalWrapper>
+              <AsideAvatar account={accountData} />
 
-            <Link to={professionalProfilePath}>
-              <StyledProfileName>
-                {accountData?.firstName} {accountData?.lastName}
-              </StyledProfileName>
-            </Link>
+              <Link to={profilePath}>
+                <StyledProfileName>
+                  {accountData?.firstName} {accountData?.lastName}
+                </StyledProfileName>
+              </Link>
 
-            <StyledJobTitle>{accountData?.professionals[0].jobTitle}</StyledJobTitle>
-          </StyledAsideProfessionalWrapper>
-        </Box>
+              <StyledJobTitle>{accountData?.jobTitle}</StyledJobTitle>
+
+              <StyledProfessionalAbout>{accountData?.about}</StyledProfessionalAbout>
+
+              <StyledEmaillink>
+                <a href={`mailto:${accountData?.id}`}>TEMP EMAIL LINK NEEDED {t("professional.emailLinkText")}</a>
+              </StyledEmaillink>
+            </StyledAsideProfessionalWrapper>
+          </Box>
+        )}
       </StickUnderHeaderDesktopOnly>
     </>
   );

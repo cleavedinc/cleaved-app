@@ -3,7 +3,7 @@ export * from "./content-wrapper-centered";
 export * from "./flex-row";
 export * from "./full-width";
 export * from "./left-column-wrapper";
-export * from "./main-column-wrapper-max-width";
+export * from "./main-column-max-width-wrapper";
 export * from "./main-column-wrapper";
 export * from "./right-column-wrapper";
 export * from "./wrapper-one-half";

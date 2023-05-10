@@ -1,1 +1,1 @@
-export * from "./post-form-formik-textarea";
+export * from "./post-form-editor";

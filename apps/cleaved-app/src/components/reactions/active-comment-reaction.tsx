@@ -4,36 +4,24 @@ import styled from "styled-components";
 import { PostReactionType } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
 
-import {
-  celebrateIconColor,
-  likeIconColor,
-  likeIconInactiveColor,
-  reviewedIconColor,
-  thanksIconColor,
-} from "./reaction-colors";
-
 type PostReactionProps = {
   activeReaction: PostReactionType;
 };
 
 const StyledReactionLikeText = styled.div`
-  color: ${likeIconColor};
+  color: ${({ theme }) => theme.colors.iconlikeColor};
 `;
 
-const StyledReactionThanksText = styled.div`
-  color: ${thanksIconColor};
+const StyledReactionLoveText = styled.div`
+  color: ${({ theme }) => theme.colors.iconLoveColor};
 `;
 
 const StyledReactionCelebrateText = styled.div`
-  color: ${celebrateIconColor};
-`;
-
-const StyledReactionReviewedText = styled.div`
-  color: ${reviewedIconColor};
+  color: ${({ theme }) => theme.colors.iconCelebrateColor};
 `;
 
 const StyledReactionNoReactionText = styled.div`
-  color: ${likeIconInactiveColor};
+  color: ${({ theme }) => theme.colors.iconLikeInactiveColor};
 `;
 
 // eslint-disable-next-line
@@ -42,14 +30,11 @@ const handleReactionType = (reactionType: PostReactionType, t: any): React.React
     case PostReactionType.Like:
       return <StyledReactionLikeText>{t("reactions.like")}</StyledReactionLikeText>;
       break;
-    case PostReactionType.Thanks:
-      return <StyledReactionThanksText>{t("reactions.thanks")}</StyledReactionThanksText>;
+    case PostReactionType.Love:
+      return <StyledReactionLoveText>{t("reactions.love")}</StyledReactionLoveText>;
       break;
     case PostReactionType.Celebrate:
       return <StyledReactionCelebrateText>{t("reactions.celebrate")}</StyledReactionCelebrateText>;
-      break;
-    case PostReactionType.Reviewed:
-      return <StyledReactionReviewedText>{t("reactions.reviewed")}</StyledReactionReviewedText>;
       break;
     case PostReactionType.NoReaction:
     default:

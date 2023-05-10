@@ -1,32 +1,34 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { COLORS, FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
+import { FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
 import { getTimeSinceDate } from "@cleaved/helpers";
 
 import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
 import { AccountContext } from "../../contexts";
-import { PostProjectSeekQuery } from "../../generated-types/graphql";
-import { useNavigateToProfessionalProfile } from "../../hooks";
+import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
+import { useNavigateToProfile } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
 type PostProjectHeaderProps = {
   account: PostProjectSeekQuery["postProjectSeek"][0]["account"];
   accountId: string;
   className?: string;
   date: string | null;
+  isPostOpenInModal: boolean;
   postId: string;
 };
 
 const StyledJobTitle = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
 `;
 
 const StyledPostDate = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
 `;
 
 const StyledPostDateWrapper = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   text-align: right;
   margin-left: auto;
 `;
@@ -35,6 +37,7 @@ const StyledPostHeaderWrapper = styled.div`
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.LARGE};
+  padding: ${SPACING.SMALL} ${SPACING.SMALL} 0;
 `;
 
 const StyledPostProfessionalInfoWrapper = styled.div`
@@ -45,19 +48,20 @@ const StyledPostProfessionalInfoWrapper = styled.div`
 `;
 
 const StyledPostProfessionalName = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   font-size: ${FONT_SIZES.SMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseTextLink_colorHover};
     text-decoration: underline;
   }
 `;
 
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
-  const { account, accountId, className, date, postId } = props;
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
+  const { account, accountId, className, date, isPostOpenInModal, postId } = props;
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const { profilePath } = useNavigateToProfile(account?.id);
   const { accountData, accountDataLoading } = useContext(AccountContext);
 
   return (
@@ -65,16 +69,16 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
       <PostHeaderAvatarLink account={account} />
 
       <StyledPostProfessionalInfoWrapper>
-        <StyledPostProfessionalName href={professionalProfilePath}>
+        <StyledPostProfessionalName href={profilePath}>
           {account?.firstName} {account?.lastName}
         </StyledPostProfessionalName>
 
-        {account?.professionals[0]?.jobTitle && <StyledJobTitle>{account?.professionals[0]?.jobTitle}</StyledJobTitle>}
+        {account?.jobTitle && <StyledJobTitle>{account?.jobTitle}</StyledJobTitle>}
 
         {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
       </StyledPostProfessionalInfoWrapper>
 
-      {!accountDataLoading && accountData?.id === accountId && (
+      {hasPermission && !isPostOpenInModal && !accountDataLoading && accountData?.id === accountId && (
         <StyledPostDateWrapper>
           <PostEditMenu postId={postId} />
         </StyledPostDateWrapper>

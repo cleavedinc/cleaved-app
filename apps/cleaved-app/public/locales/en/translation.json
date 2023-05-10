@@ -8,6 +8,7 @@
     "logOut": "Log out",
     "signUpLogIn": "Sign up / Log in"
   },
+  "cancel": "Cancel",
   "comment": {
     "leaveCommentPlaceholder": "Write a comment",
     "reply": "Reply"
@@ -25,6 +26,7 @@
   },
   "files": {
     "avatarImageSizeRecommendation": "Suggested 200px square",
+    "avatarUploadImage": "Upload image",
     "fileSizeExceeded": "The file size must be smaller than 1MB",
     "selectAnImageToUpload": "Select an image/gif to upload"
   },
@@ -53,7 +55,7 @@
     "collaborativeTimelineHeader": "Collaborative Timeline",
     "collaborativeTimelineText": "Get project insights and provide feedback, all in one place.",
     "homePageEmptyStateAlt": "Whiteboard with two people working in front of it",
-    "homePageEmptyStateHeader": "We know you are working hard",
+    "homePageEmptyStateHeader": "We know you're working hard",
     "homePageEmptyStateText": "When you have a minute, post your update or idea to your project. Getting feedback and keeping people updated is important.",
     "inviteProfessionalToOrganizationAlt": "Arrow pointing to the invite professional form",
     "inviteProfessionalToOrganizationHeader": "Invite people to your organization",
@@ -88,15 +90,27 @@
     "professionalInformation": "Professional information"
   },
   "loginPage": {
-    "loginHelperHeader": "Stay informed",
-    "loginHelperImageTopAlt": "Person sitting at a desk, using cleaved on a desktop computer",
-    "loginHelperText": "Your teams post project updates, solicit feedback and build better products.",
-    "valuePropositionFirstLine": "Get Valuable Feedback,",
-    "valuePropositionLoginImageAlt": "Arrows pointing to the login button",
-    "valuePropositionSecondLine": "Make Better Decisions",
-    "valuePropositionSupportingText": "We enhance transparency, foster collaboration, and keep you informed about your project's progress in one centralized location."
+    "signInHeader": "Sign up / Log in",
+    "signInMessage": "Create a new account, or log in to an existing one."
+  },
+  "menuLinkNames": {
+    "account": "Account",
+    "accountMembership": "Membership",
+    "accountOrganizations": "Organizations",
+    "accountPersonalInformation": "Personal Information",
+    "accountProfessionalInformation": "Professional Information",
+    "home": "Home",
+    "projectList": "Projects",
+    "projectStartNew": "Start a new project",
+    "professionalInvite": "Professional Invite",
+    "organizationRegister": "Register a new organization",
+    "teamsList": "Team"
   },
   "organizations": {
+    "areYouSureKeepButtonText": "Stay in organization",
+    "areYouSureRemoveButtonText": "I understand the risk, leave organization",
+    "areYouSureRemoveMeFromOrganizationDetails": "If you remove yourself from this organization, you will not have access to the organization any more. If you are the last member to leave the organization, the organization and all data will be deleted.",
+    "areYouSureRemoveMeFromOrganizationTitle": "Be careful, this is not reversable",
     "dateCreated": "Date created",
     "owner": "Owner",
     "posts": "Posts",
@@ -105,12 +119,12 @@
     "organizations": "Organizations",
     "organizationName": "Organization",
     "organizationNamePlaceholder": "Organization name",
-    "organizationRegister": "Register a new organization",
+    "organizationRegister": "Register organization",
     "removeOrganization": "Remove organization",
     "setDefaultOrganization": "Set as active organization"
   },
   "organizationsStartNew": {
-    "registerNewOrganization": "Register an organization"
+    "registerNewOrganization": "Register a new organization"
   },
   "people": {
     "addPerson": "Add Teammate",
@@ -135,16 +149,24 @@
     "editProjectPost": "Edit post",
     "photoViewerToolbarMessage": "Posted by {{firstName}} {{lastName}} on ",
     "post": "Post",
-    "postImageBasicAlt": "Post iImage",
+    "postImageBasicAlt": "Post Image",
     "removePost": "Remove Post",
-    "submitPost": "Post"
+    "submitPost": "Post",
+    "totalComments": "Total comments",
+    "totalPosts": "Total posts"
   },
   "postFileUpload": {
+    "addMoreImages": "Add more images",
     "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",
     "errorFileIncorrectType": "One file is not an accepted file type.",
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
   },
+  "professional": {
+    "emailLinkText": "Email"
+  },
   "professionalOnboarding": {
+    "alreadyHasOrganizationLink": "Skip onboarding",
+    "alreadyHasOrganizationText": "I already have an organization I am a part of. ",
     "finishOnboarding": "Take me to my new project",
     "registerOrganizationCelebrateImageAlt": "Two people high-fiving with fireworks around them",
     "registerOrganizationHelperInfoImageAlt": "A single building",
@@ -164,6 +186,13 @@
     "mailtoLink": "Invite your team",
     "navigateBackwardStep": "Previous",
     "navigateForwardStep": "Next"
+  },
+  "professionalOnboardingHasOrganization": {
+    "hasOrganizationHeader": "Reach out to your admin to be invited",
+    "hasOrganizationGetInviteImageAlt": "Man and woman holding pieces of mail. Text that reads: Get invited",
+    "hasOrganizationMessage": "If your company already uses our service, you are lucky to work there. 🙂 Ask your admin to invite you.",
+    "goBackToOnboardingLink": "go back to onboarding",
+    "goBackToOnboardingText": "I made a mistake and want to "
   },
   "professionalShareLinkRegistration": {
     "header": "We're so glad someone invited you!",
@@ -200,11 +229,17 @@
   "reactions": {
     "celebrate": "Celebrate",
     "like": "Like",
-    "noReaction": "Like",
-    "reviewed": "Reviewed",
-    "thanks": "Thanks"
+    "love": "Love",
+    "noReaction": "Like"
+  },
+  "settings": {
+    "darkMode": "Dark mode"
   },
   "shareLinks": {
+    "areYouSureRemoveButtonText": "Remove share link",
+    "areYouSureKeepButtonText": "Keep my share link",
+    "areYouSureRemoveSharelinkModalHeader": "Are you sure?",
+    "areYouSureRemoveSharelinkModalText": "If you remove this share link, it will be gone forever. No turning back.",
     "createAdminShareLink": "Create admin link",
     "createReadShareLink": "Create read only link",
     "createWriteShareLink": "Create read/write link",
@@ -212,6 +247,7 @@
     "editMenuRemoveShareLink": "Remove {{shareLinkPermission}} share link",
     "manage": "Manage",
     "permissionLevel": "Role",
+    "professionalInviteEmptyState": "To invite your team, you can create a share link and then share it with them.",
     "shareLink": "Share link"
   },
   "submit": "Submit",
@@ -223,10 +259,11 @@
     "areYouSureRemoveMemberModalHeader": "Are you sure?",
     "areYouSureRemoveMemberModalText": "If you remove this team member from your organization, they will not be able to access any of your projects again. Just remember, you can always invite tehm back.",
     "edit": "Edit",
-    "professionalCompany": "Company",
     "professionalName": "Name",
+    "professionalPermissions": "Permissions",
     "professionalTitle": "Job title",
-    "removeProfessional": "Remove professional"
+    "removeProfessional": "Remove professional",
+    "setUserPermission": "Edit user permission"
   },
   "termsOfService": {
     "acceptTermsOfService": "I accept the terms of service",
@@ -243,6 +280,6 @@
     "projectsList": "Projects List",
     "projectsListEmptyListText": "Awe shucks, no project yet. Let's go create one!",
     "projectsListMenuCreateProjectLink": "Create a project",
-    "projectListSeeMore": "See more"
+    "projectListSeeMore": "View all"
   }
 }

@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { ButtonPrimary, COLORS, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
+import { ButtonPrimary, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
 
 import { AccountContext, PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
@@ -13,13 +13,19 @@ import { usePostProjectGetById, useRouteParams, useTranslator } from "../../hook
 
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
+import { htmlToMarkdown, markdownToHtml } from "./components/markdown-parser";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
-import { PostFormFormikTextarea } from "./components";
+import { PostFormEditor } from "./components";
 
 type ProjectPostFormProps = {
   closeForm: () => void;
   recipientProfessionalId?: string | undefined;
   postId?: string;
+};
+
+type PostProjectCreateMutationVariablesValidation = {
+  body: string;
+  imageUrls: [string];
 };
 
 const StyledAdditionalActionsWrapper = styled.div`
@@ -57,14 +63,21 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
   const { accountData } = useContext(AccountContext);
   const { postProjectSeekRefetch } = useContext(PostsContext);
   const { postProjectGetByIdData, postProjectGetByIdDataLoading } = usePostProjectGetById(postId);
-  const { t } = useTranslator();
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId;
   const [isImageUploadWrapperActive, setImageUploadWrapperActive] = useState(false);
+  const theme = useTheme();
+  const { t } = useTranslator();
 
   const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
     ? t("post.notContainOnlyBlankSpaces")
+    : undefined;
+
+  const createProjectPostWithNamePlaceholder = t("post.createProjectPostWithNamePlaceholder", {
+    name: accountData?.firstName,
+  })
+    ? t("post.createProjectPostWithNamePlaceholder", { name: accountData?.firstName })
     : undefined;
 
   const [submitPost] = useMutation(POST_PROJECT_CREATE, {
@@ -94,18 +107,24 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         initialValues={{
           organizationId,
           projectId: projectId,
-          body: (!postProjectGetByIdDataLoading && postProjectGetByIdData?.body) || "",
+          body:
+            (!postProjectGetByIdDataLoading && postProjectGetByIdData && markdownToHtml(postProjectGetByIdData.body)) ||
+            "", // convert markdown into html for the editor
           imageUrls: (!postProjectGetByIdDataLoading && postProjectGetByIdData?.images) || null,
         }}
         onSubmit={(values: PostProjectCreateMutationVariables, { resetForm, setSubmitting }) => {
           setSubmitting(false);
+
+          // convert editor html to markdown to be saved
+          const bodyMarkdown = htmlToMarkdown(values.body);
 
           if (postId) {
             updatePost({
               variables: {
                 organizationId: values.organizationId,
                 postId: postId,
-                body: values.body,
+                body: bodyMarkdown,
+                imageUrls: values.imageUrls,
               },
             });
           } else {
@@ -113,7 +132,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
               variables: {
                 organizationId: values.organizationId,
                 projectId: values.projectId,
-                body: values.body,
+                body: bodyMarkdown,
                 imageUrls: values.imageUrls,
               },
             });
@@ -123,21 +142,26 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
           closeForm();
         }}
         validateOnChange
-        validationSchema={yup.object().shape<any>({
-          body: yup
-            .string()
-            .matches(/^\s*\S[\s\S]*$/, notContainOnlyBlankSpaces)
-            .required(),
-          imageUrls: yup.array().nullable().of(yup.string()),
-        })}
+        validationSchema={yup
+          .object()
+          .shape<Record<keyof PostProjectCreateMutationVariablesValidation, yup.AnySchema>>({
+            body: yup
+              .string()
+              .matches(/^(?=.*[a-zA-Z0-9]).+$/, notContainOnlyBlankSpaces)
+              .test("empty-body", "Body cannot be empty", (value) => {
+                if (value && value.replace(/<[^>]+>/g, "").trim().length === 0) {
+                  return false; // Invalid if value is present but only contains empty HTML elements
+                }
+                return true; // Valid if value is empty or contains non-empty text
+              })
+              .required(),
+            imageUrls: yup.array().nullable().of(yup.string()),
+          })}
       >
         {({ dirty, isSubmitting, isValid, setFieldValue }) => {
           return (
             <Form>
-              <PostFormFormikTextarea
-                name="body"
-                placeholder={t("post.createProjectPostWithNamePlaceholder", { name: accountData?.firstName })}
-              />
+              <PostFormEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
 
               <StyledAdditionalActionsWrapper>
                 {isImageUploadWrapperActive && (
@@ -155,7 +179,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
                     onClick={() => setImageUploadWrapperActive(!isImageUploadWrapperActive)}
                     type="button"
                   >
-                    <ImageIcon color={COLORS.GRAY_500} iconSize="30px" />
+                    <ImageIcon color={theme.colors.baseIcon_color} iconSize="30px" />
                   </StyledAdditionalActionsIconButton>
                 </StyledTooltipDark>
 

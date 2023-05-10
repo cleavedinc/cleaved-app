@@ -1,14 +1,14 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
 import { useMutation } from "@apollo/react-hooks";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
 import {
+  BORDERS,
   ButtonPrimary,
   ButtonSecondary,
   CircleEditButtonSmall,
-  COLORS,
   EllipsisHorizontalIcon,
   Modal,
   SPACING,
@@ -26,8 +26,9 @@ type PostEditMenuProps = {
 };
 
 const basicItemBase = css`
-  :hover {
-    background-color: ${COLORS.GRAY_50};
+  :hover,
+  &.szh-menu__item--hover {
+    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   }
 `;
 
@@ -37,12 +38,17 @@ const StyledBasicItem = styled(MenuItem)`
 
 const StyledBasicItemRed = styled(MenuItem)`
   ${basicItemBase}
-  color: ${COLORS.RED_500};
+
+  :hover {
+    color: ${({ theme }) => theme.colors.baseAlert_color};
+  }
 `;
 
 const StyledBasicMenu = styled(Menu)`
   ul {
-    color: ${COLORS.BLACK};
+    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+    color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;
 
@@ -65,6 +71,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
   const organizationId = routeParams.orgId;
   const [isPostEditFormModalOpen, setIsPostEditFormModalOpen] = useState(false);
   const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
+  const theme = useTheme();
 
   const { t } = useTranslator();
 
@@ -97,8 +104,8 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
     <>
       <StyledBasicMenu
         menuButton={
-          <CircleEditButtonSmall>
-            <EllipsisHorizontalIcon />
+          <CircleEditButtonSmall type="button">
+            <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
           </CircleEditButtonSmall>
         }
         direction={"left"}
@@ -110,7 +117,6 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
           {t("post.removePost")}
         </StyledBasicItemRed>
-        {/* <StyledBasicItemRed onClick={() => handlePostProjectRemove(postId)}>{t("post.removePost")}</StyledBasicItemRed> */}
       </StyledBasicMenu>
 
       <Modal
@@ -129,7 +135,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
         <StyledActionText>{t("post.areYouSureRemovePostModalText")}</StyledActionText>
 
         <StyledActionWrapper>
-          <ButtonSecondary type="button" onClick={() => alert("NOT HOOKED UP YET")}>
+          <ButtonSecondary type="button" onClick={() => handlePostProjectRemove(postId)}>
             {t("post.areYouSureRemoveButtonText")}
           </ButtonSecondary>
 

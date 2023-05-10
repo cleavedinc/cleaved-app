@@ -15,10 +15,7 @@ export const POST_PROJECT_REPLIES = graphql(`
         id
         firstName
         lastName
-        professionals {
-          id
-          jobTitle
-        }
+        jobTitle
         currentAvatar
       }
       reactionTotalCount
@@ -32,10 +29,7 @@ export const POST_PROJECT_REPLIES = graphql(`
           id
           firstName
           lastName
-          professionals {
-            id
-            jobTitle
-          }
+          jobTitle
           currentAvatar
         }
         reactionTotalCount

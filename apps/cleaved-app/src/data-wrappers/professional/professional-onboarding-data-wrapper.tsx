@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
-import { navigate } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { debounce } from "ts-debounce";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { alertCopied, logQueryError } from "@cleaved/helpers";
 import {
@@ -12,7 +12,6 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   CheckIcon,
-  COLORS,
   CopyIcon,
   FONT_SIZES,
   H1,
@@ -46,6 +45,13 @@ const StyledFinishOnboardingButton = styled(ButtonPrimary)`
   margin-left: auto;
 `;
 
+const StyledHasOrganizationSkipOnboarding = styled.div`
+  font-size: ${FONT_SIZES.SMALL};
+  font-style: italic;
+  margin-top: ${SPACING.XXLARGE};
+  text-align: center;
+`;
+
 const StyledHelperInfoHeaderTextImageRightBox = styled(HelperInfoHeaderTextImageRightBox)`
   margin-bottom: ${SPACING.MEDIUM};
   padding-left: 0;
@@ -62,18 +68,15 @@ const StyledShareLinkIcon = styled(CopyIcon)`
 `;
 
 const StyledShareLinkInputReadOnly = styled.input`
-  background-color: ${COLORS.WHITE};
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
   display: flex;
   margin-right: ${SPACING.SMALL};
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
   width: 100%;
-
-  :hover {
-    background-color: ${COLORS.BLUE_50};
-  }
 `;
 
 const StyledShareLinkWrapper = styled.div`
@@ -100,7 +103,7 @@ const StyledStepContainer = styled.div<StyledStepContainerProps>`
   :before {
     content: "";
     position: absolute;
-    background: ${COLORS.GRAY_100};
+    background: ${({ theme }) => theme.colors.baseBordersAndShadows_color};
     height: 3px;
     width: 100%;
     top: 50%;
@@ -111,7 +114,7 @@ const StyledStepContainer = styled.div<StyledStepContainerProps>`
   :after {
     content: "";
     position: absolute;
-    background: ${COLORS.BLUE_500};
+    background: ${({ theme }) => theme.colors.baseLink_color};
     height: 3px;
     width: ${({ width }) => width};
     top: 50%;
@@ -134,9 +137,14 @@ const StyledStep = styled.div<StyledStepProps>`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: ${COLORS.WHITE};
-  border: 2px solid ${({ step }) => (step === "completed" ? COLORS.BLUE_500 : COLORS.GRAY_100)};
-  color: ${({ step }) => (step === "completed" ? COLORS.BLUE_500 : COLORS.GRAY_500)};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
+  border: 2px solid
+    ${({ step }) =>
+      step === "completed"
+        ? ({ theme }) => theme.colors.baseLink_color
+        : ({ theme }) => theme.colors.baseBordersAndShadows_color};
+  color: ${({ step }) =>
+    step === "completed" ? ({ theme }) => theme.colors.baseLink_color : ({ theme }) => theme.colors.baseSubText_color};
   transition: 0.4s ease;
   display: flex;
   justify-content: center;
@@ -160,7 +168,9 @@ type StyledStepLabelProps = {
 
 const StyledStepLabel = styled.span<StyledStepLabelProps>`
   font-size: ${FONT_SIZES.SMALL};
-  color: ${({ step }) => (step === "completed" ? COLORS.BLUE_500 : COLORS.GRAY_500)};
+  color: ${({ step }) =>
+    step === "completed" ? ({ theme }) => theme.colors.baseLink_color : ({ theme }) => theme.colors.baseIcon_color};
+
   overflow-wrap: normal;
 `;
 
@@ -187,7 +197,6 @@ const StyledCelebrateStepCompletionImage = styled.img<StyledCelebrateStepComplet
 // END PROGRESS BAR STEPS STYLES
 
 export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
-  const { t } = useTranslator();
   const { isLoggedIn } = useLoginGuard();
   const { termsAccepted, termsAcceptedIsLoading } = useTermsAccepted();
   const {
@@ -197,6 +206,8 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
   } = useProjectsInOrganizationSeek();
   const { preferredOrgId } = useContext(authTokenContext);
   const [activeStep, setActiveStep] = useState(1);
+  const theme = useTheme();
+  const { t } = useTranslator();
 
   const progressBarSteps = [
     {
@@ -221,6 +232,8 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
     loading,
     refetch,
   } = useQuery<OrganizationShareLinksQuery>(ORGANIZATION_SHARE_LINKS_QUERY, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-and-network",
     onError: (error) => {
       logQueryError(error);
     },
@@ -308,7 +321,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
             <StyledStepWrapper key={step}>
               <StyledStep step={activeStep >= step ? "completed" : "incomplete"}>
                 {activeStep > step ? (
-                  <CheckIcon color={COLORS.BLUE_500} iconSize={FONT_SIZES.SMALL} />
+                  <CheckIcon color={theme.colors.baseLink_color} iconSize={FONT_SIZES.SMALL} />
                 ) : (
                   <StyledStepCount>{step}</StyledStepCount>
                 )}
@@ -341,9 +354,15 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
               <StyledCelebrateStepCompletionImage
                 alt={registerOrganizationCelebrateImageAlt}
                 src={"/helper-info/celebrate-high-five-fireworks.svg"}
-                width={"500px"}
               />
             )}
+
+            <StyledHasOrganizationSkipOnboarding>
+              {t("professionalOnboarding.alreadyHasOrganizationText")}
+              <Link to={routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}>
+                {t("professionalOnboarding.alreadyHasOrganizationLink")}
+              </Link>
+            </StyledHasOrganizationSkipOnboarding>
           </StyledBox>
 
           <StyledHelperInfoHeaderTextImageRightBox
@@ -380,7 +399,6 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
                 <StyledCelebrateStepCompletionImage
                   alt={startNewProjectCelebrateImageAlt}
                   src={"/helper-info/celebrate-high-five-fireworks-2.svg"}
-                  width={"500px"}
                 />
               )}
           </StyledBox>
@@ -411,6 +429,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
                     },
                   })
                 }
+                type="button"
               >
                 {t("shareLinks.createWriteShareLink")}
               </StyledButtonPrimary>
@@ -467,13 +486,14 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
           <StyledFinishOnboardingButton
             disabled={isCompleteOnboardingButtonDisabled}
             onClick={() => handleCompleteonboardingFlow()}
+            type="button"
           >
             {t("professionalOnboarding.finishOnboarding")}
           </StyledFinishOnboardingButton>
         )}
 
         {!loading && activeStep !== 3 && (
-          <StyledFinishOnboardingButton onClick={nextStep} disabled={isNextStepButtonDisabled}>
+          <StyledFinishOnboardingButton onClick={nextStep} disabled={isNextStepButtonDisabled} type="button">
             {t("professionalOnboarding.navigateForwardStep")}
           </StyledFinishOnboardingButton>
         )}

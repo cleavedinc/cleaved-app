@@ -8,7 +8,7 @@ import { HeaderMobileTopBar } from "./header-mobile-top-bar";
 import { HeaderDesktop } from "./header-desktop";
 
 const StyledHeaderMobileBottomBar = styled(HeaderMobileBottomBar)`
-  border-top: ${BORDERS.BORDER_PRIMARY};
+  border-top: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: block;
 
   ${mediaQueries.SM} {

@@ -1,45 +1,48 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 
+import { authTokenContext } from "../../contexts";
+import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 import { isMenuItemActive, NavigationButtonLabel, NavigationButton } from "@cleaved/ui";
 
-type MainNavigationLinksProps = {
-  preferredOrgId: string | null;
-};
+export const MainNavigationLinks: FunctionComponent = () => {
+  const { preferredOrgId } = useContext(authTokenContext);
+  const { t } = useTranslator();
 
-export const MainNavigationLinks: FunctionComponent<MainNavigationLinksProps> = (props) => {
-  const { preferredOrgId } = props;
+  const homeLinkName = t("menuLinkNames.home") ? t("menuLinkNames.home") : "";
+  const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
+  const teamsListLinkName = t("menuLinkNames.teamsList") ? t("menuLinkNames.teamsList") : "";
 
   return (
     <>
       <Link
         getProps={isMenuItemActive}
         to={`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`}
-        title={routeConstantsCleavedApp.home.name}
+        title={homeLinkName}
       >
         <NavigationButton>
-          <NavigationButtonLabel>{routeConstantsCleavedApp.home.name}</NavigationButtonLabel>
+          <NavigationButtonLabel>{homeLinkName}</NavigationButtonLabel>
         </NavigationButton>
       </Link>
 
       <Link
         getProps={isMenuItemActive}
         to={`/${preferredOrgId}${routeConstantsCleavedApp.projectList.route}`}
-        title={routeConstantsCleavedApp.projectList.name}
+        title={projectListLinkName}
       >
         <NavigationButton>
-          <NavigationButtonLabel>{routeConstantsCleavedApp.projectList.name}</NavigationButtonLabel>
+          <NavigationButtonLabel>{projectListLinkName}</NavigationButtonLabel>
         </NavigationButton>
       </Link>
 
       <Link
         getProps={isMenuItemActive}
         to={`/${preferredOrgId}${routeConstantsCleavedApp.teamsList.route}`}
-        title={routeConstantsCleavedApp.teamsList.name}
+        title={teamsListLinkName}
       >
         <NavigationButton>
-          <NavigationButtonLabel>{routeConstantsCleavedApp.teamsList.name}</NavigationButtonLabel>
+          <NavigationButtonLabel>{teamsListLinkName}</NavigationButtonLabel>
         </NavigationButton>
       </Link>
     </>

@@ -6,8 +6,9 @@ import { SPACING } from "@cleaved/ui";
 
 import { StyledRouterButtonLink } from "../../components";
 import { authTokenContext, PostsContext } from "../../contexts";
-import { PostProjectSeekQuery } from "../../generated-types/graphql";
+import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
 import { Post } from "./post";
@@ -29,12 +30,21 @@ const StyledAddPeopleText = styled.div`
   margin-bottom: ${SPACING.SMALL};
 `;
 
+const StyledPostListWrapper = styled.div`
+  &:last-child {
+    margin-bottom: ${SPACING.XXXLARGE};
+  }
+`;
+
 export const PostProjectList: FunctionComponent = () => {
-  const { t } = useTranslator();
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const pageSize = 20;
   const { postProjectSeekData, postProjectSeekDataLoading, postProjectSeekFetchMore } = useContext(PostsContext);
   const lastPostId = postProjectSeekData && postProjectSeekData[postProjectSeekData.length - 1]?.id;
+  const { t } = useTranslator();
+
+  const professionalInviteLinkName = t("menuLinkNames.professionalInvite") ? t("menuLinkNames.professionalInvite") : "";
 
   const handleLoadMoreData = () => {
     postProjectSeekFetchMore({
@@ -59,9 +69,9 @@ export const PostProjectList: FunctionComponent = () => {
         <>
           {postProjectSeekData.map((post) => {
             return (
-              <div key={post.id}>
+              <StyledPostListWrapper key={post.id}>
                 <Post post={post} />
-              </div>
+              </StyledPostListWrapper>
             );
           })}
 
@@ -73,13 +83,13 @@ export const PostProjectList: FunctionComponent = () => {
         </>
       )}
 
-      {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length >= 3 && (
+      {hasPermission && !postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length >= 3 && (
         <StyledEndTimelineWrapper>
           <StyledAddPeopleText>{t("teams.addNewTeamMemberHelperText")}</StyledAddPeopleText>
 
           <StyledRouterButtonLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
-            title={routeConstantsCleavedApp.professionalInvite.name}
+            title={professionalInviteLinkName}
           >
             {t("teams.addNewTeamMember")}
           </StyledRouterButtonLink>

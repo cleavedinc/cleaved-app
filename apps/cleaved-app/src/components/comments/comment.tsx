@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 
 import { getTimeSinceDate } from "@cleaved/helpers";
 import {
-  COLORS,
   FONT_SIZES,
   FONT_WEIGHTS,
   RADIUS,
@@ -15,23 +14,25 @@ import {
   StyledTooltipDark,
 } from "@cleaved/ui";
 
-import { AccountPublicView, ProjectPost } from "../../generated-types/graphql";
-import { useNavigateToProfessionalProfile, useTranslator } from "../../hooks";
+import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
+import { useNavigateToProfile, useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
+
 import { ReactionTypesAndTotalCount } from "../reactions";
 import { SeparatorDot } from "../separators";
 
 import { CommentReactions } from "./comment-reactions";
 
 type CommentProps = {
-  account: AccountPublicView;
+  account: PostProjectRepliesQuery["postProjectReplies"][0]["account"];
   commentLevel: number;
   postProjectRepliesDataRefetch?: () => void;
-  reply: ProjectPost;
+  reply: PostProjectRepliesQuery["postProjectReplies"][0];
   setIsCommentRepliesVisible: Dispatch<React.SetStateAction<boolean>>;
 };
 
 const StyledCommentDateTime = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   margin-left: auto;
   &:hover {
     text-decoration: underline;
@@ -39,12 +40,14 @@ const StyledCommentDateTime = styled.div`
 `;
 
 const StyledCommentFooterWrapper = styled.div`
+  align-items: center;
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
+  min-height: 16px;
 `;
 
 const StyledCommentBody = styled.div`
-  background-color: ${COLORS.GRAY_50};
+  background-color: ${({ theme }) => theme.colors.body_backgroundColor};
   border-radius: ${RADIUS.MEDIUM};
   margin-bottom: ${SPACING_PX.ONE};
   padding: ${SPACING.MEDIUM};
@@ -62,14 +65,15 @@ const StyledCommentWrapper = styled.div`
 
 const StyledCommentReplyButton = styled.button`
   ${removeDefaultButtonStyles}
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+
   &:hover {
     text-decoration: underline;
   }
 `;
 
 const StyledPipeSeparator = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   margin: 0 ${SPACING.SMALL};
 `;
 
@@ -79,7 +83,7 @@ const PostCommentHeaderDataWrapper = styled.div`
 
 const PostCommentHeaderWrapper = styled.div`
   align-items: center;
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.MEDIUM};
@@ -87,30 +91,31 @@ const PostCommentHeaderWrapper = styled.div`
 `;
 
 const PostCommentProfessionalName = styled.a`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseTextLink_color};
   font-size: ${FONT_SIZES.SMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
 
   &:hover {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseTextLink_colorHover};
     text-decoration: underline;
   }
 `;
 
 export const Comment: FunctionComponent<CommentProps> = (props) => {
   const { account, commentLevel, postProjectRepliesDataRefetch, reply, setIsCommentRepliesVisible } = props;
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const { profilePath } = useNavigateToProfile(account?.id);
   const { t } = useTranslator();
-  const { professionalProfilePath } = useNavigateToProfessionalProfile(account?.professionals[0]?.id);
 
   return (
     <StyledCommentWrapper>
       <StyledCommentBody>
         <PostCommentHeaderWrapper>
           <PostCommentHeaderDataWrapper>
-            <PostCommentProfessionalName href={professionalProfilePath}>
+            <PostCommentProfessionalName href={profilePath}>
               {account?.firstName} {account?.lastName}
             </PostCommentProfessionalName>
-            {account?.professionals[0]?.jobTitle && <div>{account?.professionals[0]?.jobTitle}</div>}
+            {account?.jobTitle && <div>{account?.jobTitle}</div>}
           </PostCommentHeaderDataWrapper>
         </PostCommentHeaderWrapper>
 
@@ -118,20 +123,26 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
       </StyledCommentBody>
 
       <StyledCommentFooterWrapper>
-        <CommentReactions
-          activeReaction={reply.myReaction}
-          postId={reply.id}
-          postProjectRepliesDataRefetch={postProjectRepliesDataRefetch}
-        />
+        {hasPermission && (
+          <CommentReactions
+            activeReaction={reply.myReaction}
+            postId={reply.id}
+            postProjectRepliesDataRefetch={postProjectRepliesDataRefetch}
+          />
+        )}
 
-        <SeparatorDot />
+        {reply.reactionTotalCount !== "0" && (
+          <>
+            {hasPermission && <SeparatorDot />}
 
-        <ReactionTypesAndTotalCount
-          reactionsExpressed={reply.reactionsExpressed}
-          reactionTotalCount={reply.reactionTotalCount}
-        />
+            <ReactionTypesAndTotalCount
+              reactionsExpressed={reply.reactionsExpressed}
+              reactionTotalCount={reply.reactionTotalCount}
+            />
+          </>
+        )}
 
-        {commentLevel <= 1 && (
+        {hasPermission && commentLevel <= 1 && (
           <>
             <StyledPipeSeparator>|</StyledPipeSeparator>
             <StyledCommentReplyButton type="button" onClick={() => setIsCommentRepliesVisible(true)}>

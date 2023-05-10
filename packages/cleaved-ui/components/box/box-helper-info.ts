@@ -3,6 +3,6 @@ import { RADIUS, SPACING } from "../../theme";
 
 export const BoxHelperInfo = styled.div`
   padding: ${SPACING.MEDIUM};
+  margin-bottom: ${SPACING.MEDIUM};
   border-radius: ${RADIUS.MEDIUM};
-  margin-bottom: ${SPACING.XLARGE};
 `;

@@ -2,7 +2,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { COLORS, mediaQueries } from "../../theme";
+import { mediaQueries } from "../../theme";
 
 import { LogoSVG } from "./logo-svg";
 
@@ -22,12 +22,12 @@ type StyledLogoTextProps = {
 
 const StyledLogoHref = styled.a`
   align-items: center;
-  color: ${COLORS.GRAY_900};
+  color: ${({ theme }) => theme.colors.baseLogo};
   display: flex;
   justify-content: flex-start;
 
   :hover {
-    color: ${COLORS.GRAY_900};
+    color: ${({ theme }) => theme.colors.baseLogo};
   }
 
   ${mediaQueries.SM} {

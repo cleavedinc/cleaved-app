@@ -1,18 +1,18 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { Box, COLORS, FONT_SIZES, SectionHeader, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { Box, FONT_SIZES, SectionHeader, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 
-const StyledJobTitle = styled.p`
-  color: ${COLORS.GRAY_500};
+const StyledJobTitle = styled.div`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.SMALL};
 `;
 
 const StyledProfileName = styled(SectionHeader)`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
 
   &:hover {
     text-decoration: underline;
@@ -32,7 +32,7 @@ export const MyAccountInformationDataWrapper: FunctionComponent = () => {
             {accountData?.firstName} {accountData?.lastName}
           </StyledProfileName>
 
-          <StyledJobTitle>{accountData?.professionals[0].jobTitle}</StyledJobTitle>
+          <StyledJobTitle>{accountData?.jobTitle}</StyledJobTitle>
         </div>
       </Box>
     </StickUnderHeaderDesktopOnly>

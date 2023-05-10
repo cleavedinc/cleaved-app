@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { ButtonLinkLoadMore, COLORS } from "@cleaved/ui";
+import { ButtonLinkLoadMore, FONT_SIZES, SPACING } from "@cleaved/ui";
 
 import { PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { usePostProjectReplies, useTranslator } from "../../hooks";
@@ -15,7 +15,9 @@ type CommentsListProps = {
   triggerGetComments?: number;
 };
 
-const StyledCommentAndRepliesWrapper = styled.div``;
+const StyledCommentAndRepliesWrapper = styled.div`
+  padding: 0 ${SPACING.MEDIUM};
+`;
 
 const StyledCommentListWrapper = styled.div``;
 
@@ -23,9 +25,11 @@ type StyledLoadMoreButtonProps = {
   isHidden: boolean;
 };
 
-export const StyledLoadMoreButton = styled(ButtonLinkLoadMore)<StyledLoadMoreButtonProps>`
-  color: ${COLORS.GRAY_500};
+const StyledLoadMoreButton = styled(ButtonLinkLoadMore)<StyledLoadMoreButtonProps>`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: ${(props) => (props.isHidden ? "none" : "initial")};
+  font-size: ${FONT_SIZES.SMALL};
+  margin-bottom: ${SPACING.MEDIUM};
 
   :hover {
     background-color: transparent;
@@ -38,7 +42,7 @@ export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
   const { commentLevel, commentRepliesCount, parentPostId, triggerGetComments } = props;
   const { t } = useTranslator();
   const [hideLoadMoreButton, setHideLoadMoreButton] = useState<boolean>(false);
-  const commentPageSize = 3;
+  const commentPageSize = 1000;
 
   const {
     postProjectRepliesData,
@@ -93,17 +97,19 @@ export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
           );
         })}
 
-      {!postProjectRepliesDataLoading && postProjectRepliesData && postProjectRepliesData.length >= commentPageSize && (
-        <StyledLoadMoreButton
-          isHidden={hideLoadMoreButton}
-          type="button"
-          onClick={() => {
-            handleLoadMoreCommentData(lastCommentId);
-          }}
-        >
-          {t("data.loadMoreComments")} total count: {commentRepliesCount}: state total shown: xxxxx
-        </StyledLoadMoreButton>
-      )}
+      {!postProjectRepliesDataLoading &&
+        postProjectRepliesData &&
+        postProjectRepliesData.length !== Number(commentRepliesCount) && (
+          <StyledLoadMoreButton
+            isHidden={hideLoadMoreButton}
+            type="button"
+            onClick={() => {
+              handleLoadMoreCommentData(lastCommentId);
+            }}
+          >
+            {t("data.loadMoreComments")}
+          </StyledLoadMoreButton>
+        )}
     </StyledCommentListWrapper>
   );
 };

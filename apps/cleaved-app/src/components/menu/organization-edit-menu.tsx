@@ -1,15 +1,24 @@
-import React, { FunctionComponent, useContext } from "react";
-import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
+import React, { FunctionComponent, useContext, useState } from "react";
+import { Menu, MenuItem } from "@szhsin/react-menu";
 import { useMutation } from "@apollo/react-hooks";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { CircleEditButtonSmall, COLORS, EllipsisHorizontalIcon } from "@cleaved/ui";
+import {
+  BORDERS,
+  ButtonPrimary,
+  ButtonSecondary,
+  CircleEditButtonSmall,
+  EllipsisHorizontalIcon,
+  mediaQueries,
+  Modal,
+  SPACING,
+} from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
-import { SET_PREFERRED_ORGANIZATION_MUTATION } from "../../gql-mutations";
+import { ORGANIZATION_REMOVE_ME_MUTATION } from "../../gql-mutations";
 
 import "@szhsin/react-menu/dist/index.css";
 
@@ -18,65 +27,108 @@ type OrganizationEditMenuProps = {
 };
 
 const basicItemBase = css`
-  :hover {
-    background-color: ${COLORS.GRAY_50};
+  :hover,
+  &.szh-menu__item--hover {
+    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   }
 `;
 
-const StyledBasicItem = styled(MenuItem)`
-  ${basicItemBase}
+const StyledActionWrapper = styled.div`
+  display: flex;
+  padding: ${SPACING.XXLARGE} 0 0;
+`;
+
+const StyledActionText = styled.div``;
+
+const StyledButtonPrimary = styled(ButtonPrimary)`
+  display: flex;
+  margin-left: auto;
+`;
+
+const StyledButtonSecondary = styled(ButtonSecondary)`
+  width: 150px;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    width: initial;
+  }
 `;
 
 const StyledBasicItemRed = styled(MenuItem)`
   ${basicItemBase}
-  color: ${COLORS.RED_500};
+
+  :hover {
+    color: ${({ theme }) => theme.colors.baseAlert_color};
+  }
 `;
 
 const StyledBasicMenu = styled(Menu)`
   ul {
-    color: ${COLORS.BLACK};
+    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+    color: ${({ theme }) => theme.colors.baseText_color};
   }
 `;
 
 export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> = (props) => {
   const { orgId } = props;
+  const { logOut } = useContext(authTokenContext);
+  const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
+  const theme = useTheme();
   const { t } = useTranslator();
-  const { setPreferredOrgIdOnContext } = useContext(authTokenContext);
 
-  const [setPreferredOrganization] = useMutation(SET_PREFERRED_ORGANIZATION_MUTATION, {
+  const [organizationRemoveMe] = useMutation(ORGANIZATION_REMOVE_ME_MUTATION, {
+    onCompleted: () => {
+      logOut();
+    },
     onError: (error) => {
       logQueryError(error);
     },
   });
 
-  const handleSetOrganizationId = (orgIdArg: string) => {
-    setPreferredOrganization({
+  const handleOrganizationRemoveMe = (orgIdArg: string) => {
+    organizationRemoveMe({
       variables: {
-        orgId: orgIdArg,
+        organizationId: orgIdArg,
       },
     });
-
-    setPreferredOrgIdOnContext(orgIdArg);
   };
 
+  const areYouSureRemoveMeFromOrganization = t("organizations.areYouSureRemoveMeFromOrganizationTitle")
+    ? t("organizations.areYouSureRemoveMeFromOrganizationTitle")
+    : undefined;
+
   return (
-    <StyledBasicMenu
-      menuButton={
-        <CircleEditButtonSmall>
-          <EllipsisHorizontalIcon />
-        </CircleEditButtonSmall>
-      }
-      direction={"left"}
-    >
-      <StyledBasicItem onClick={() => handleSetOrganizationId(orgId)}>
-        {t("organizations.setDefaultOrganization")}
-      </StyledBasicItem>
+    <>
+      <StyledBasicMenu
+        menuButton={
+          <CircleEditButtonSmall type="button">
+            <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
+          </CircleEditButtonSmall>
+        }
+        direction={"left"}
+      >
+        <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
+          {t("organizations.removeOrganization")}
+        </StyledBasicItemRed>
+      </StyledBasicMenu>
 
-      <MenuDivider />
+      <Modal
+        open={isConfirmRemoveModalOpen}
+        onCloseRequested={() => setIsConfirmRemoveModalOpen(false)}
+        title={areYouSureRemoveMeFromOrganization}
+      >
+        <StyledActionText>{t("organizations.areYouSureRemoveMeFromOrganizationDetails")}</StyledActionText>
 
-      <StyledBasicItemRed onClick={() => alert("Not hooked up yet")}>
-        {t("organizations.removeOrganization")}
-      </StyledBasicItemRed>
-    </StyledBasicMenu>
+        <StyledActionWrapper>
+          <StyledButtonSecondary type="button" onClick={() => handleOrganizationRemoveMe(orgId)}>
+            {t("organizations.areYouSureRemoveButtonText")}
+          </StyledButtonSecondary>
+
+          <StyledButtonPrimary type="button" onClick={() => setIsConfirmRemoveModalOpen(false)}>
+            {t("organizations.areYouSureKeepButtonText")}
+          </StyledButtonPrimary>
+        </StyledActionWrapper>
+      </Modal>
+    </>
   );
 };

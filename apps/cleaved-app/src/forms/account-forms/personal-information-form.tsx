@@ -5,8 +5,18 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, COLORS, FONT_SIZES, HeadingWrapper, RADIUS, SectionHeader, SPACING, SPACING_PX } from "@cleaved/ui";
+import {
+  BORDERS,
+  FONT_SIZES,
+  HeadingWrapper,
+  mediaQueries,
+  RADIUS,
+  SectionHeader,
+  SPACING,
+  SPACING_PX,
+} from "@cleaved/ui";
 
+import { EditAccountAvatar } from "../../components";
 import { AccountContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
@@ -16,19 +26,39 @@ import { StyledFormikAutoSave } from "./styled-formik-auto-save";
 type PersonalInformationFormType = {
   firstName?: string;
   lastName?: string;
-  middleName?: string;
 };
 
-const StyledFormWrapper = styled.div``;
+const StyledAvatarNameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    flex-direction: row;
+  }
+`;
 
 const StyledField = styled(Field)`
-  border: ${BORDERS.BORDER_PRIMARY};
+  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.MEDIUM};
+  color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.MEDIUM};
   margin-bottom: ${SPACING.MEDIUM};
+  outline: none;
   padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
   width: 100%;
 `;
+
+const StyledFirstLastNameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    width: 100%;
+  }
+`;
+
+const StyledFormWrapper = styled.div``;
 
 const StyledProjectFormWrapper = styled.div`
   display: flex;
@@ -36,7 +66,7 @@ const StyledProjectFormWrapper = styled.div`
 `;
 
 const StyledProjectFormLabel = styled.label`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING_PX.ONE};
 `;
@@ -54,10 +84,6 @@ export const PersonalInformationForm: FunctionComponent = () => {
     : undefined;
 
   const firstNamePlaceholder = t("formLabels.firstNamePlaceholder") ? t("formLabels.firstNamePlaceholder") : undefined;
-
-  const middleNamePlaceholder = t("formLabels.middleNamePlaceholder")
-    ? t("formLabels.middleNamePlaceholder")
-    : undefined;
 
   const lastNamePlaceholder = t("formLabels.lastNamePlaceholder") ? t("formLabels.lastNamePlaceholder") : undefined;
 
@@ -78,7 +104,6 @@ export const PersonalInformationForm: FunctionComponent = () => {
       initialValues={{
         firstName: accountData?.firstName || "",
         lastName: accountData?.lastName || "",
-        middleName: accountData?.middleName || "",
       }}
       onSubmit={(values: PersonalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
@@ -86,15 +111,13 @@ export const PersonalInformationForm: FunctionComponent = () => {
           variables: {
             firstName: values.firstName,
             lastName: values.lastName,
-            middleName: values.middleName,
           },
         });
         resetForm({ values });
       }}
-      validationSchema={yup.object().shape<any>({
+      validationSchema={yup.object().shape<Record<keyof PersonalInformationFormType, yup.AnySchema>>({
         firstName: yup.string().required(firstNameIsRequired),
         lastName: yup.string().required(lastNameIsRequired),
-        middleName: yup.string(),
       })}
     >
       {() => {
@@ -107,23 +130,23 @@ export const PersonalInformationForm: FunctionComponent = () => {
 
             <StyledFormWrapper>
               <Form>
-                <StyledProjectFormWrapper>
-                  <StyledProjectFormLabel htmlFor="firstName">{t("formLabels.firstName")}</StyledProjectFormLabel>
+                <StyledAvatarNameWrapper>
+                  <EditAccountAvatar account={accountData} refetchAccountData={accountDataRefetch} />
 
-                  <StyledField id="firstName" name="firstName" placeholder={firstNamePlaceholder} />
-                </StyledProjectFormWrapper>
+                  <StyledFirstLastNameWrapper>
+                    <StyledProjectFormWrapper>
+                      <StyledProjectFormLabel htmlFor="firstName">{t("formLabels.firstName")}</StyledProjectFormLabel>
 
-                <StyledProjectFormWrapper>
-                  <StyledProjectFormLabel htmlFor="middleName">{t("formLabels.middleName")}</StyledProjectFormLabel>
+                      <StyledField id="firstName" name="firstName" placeholder={firstNamePlaceholder} />
+                    </StyledProjectFormWrapper>
 
-                  <StyledField id="middleName" name="middleName" placeholder={middleNamePlaceholder} />
-                </StyledProjectFormWrapper>
+                    <StyledProjectFormWrapper>
+                      <StyledProjectFormLabel htmlFor="lastName">{t("formLabels.lastName")}</StyledProjectFormLabel>
 
-                <StyledProjectFormWrapper>
-                  <StyledProjectFormLabel htmlFor="lastName">{t("formLabels.lastName")}</StyledProjectFormLabel>
-
-                  <StyledField id="lastName" name="lastName" placeholder={lastNamePlaceholder} />
-                </StyledProjectFormWrapper>
+                      <StyledField id="lastName" name="lastName" placeholder={lastNamePlaceholder} />
+                    </StyledProjectFormWrapper>
+                  </StyledFirstLastNameWrapper>
+                </StyledAvatarNameWrapper>
               </Form>
             </StyledFormWrapper>
           </>

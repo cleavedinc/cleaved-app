@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
 import {
-  COLORS,
   CelebrationIcon,
-  CheckIcon,
-  HandshakeIcon,
+  FavoriteIcon,
   removeDefaultButtonStyles,
   SPACING_PX,
   ThumbUpIcon,
@@ -14,8 +12,6 @@ import {
 
 import { PostReactionType } from "../../generated-types/graphql";
 import { useRouteParams, useTranslator } from "../../hooks";
-
-import { celebrateIconColor, likeIconColor, reviewedIconColor, thanksIconColor } from "./reaction-colors";
 
 type PostReactionsProps = {
   postId: string;
@@ -34,7 +30,7 @@ const StyledReactionIcons = styled.button`
 
 const StyledPostReactionsWrapper = styled.div`
   display: flex;
-  background-color: ${COLORS.WHITE};
+  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   margin: 0 ${SPACING_PX.ONE};
   gap: ${SPACING_PX.THREE};
 `;
@@ -43,6 +39,7 @@ export const ReactionSelections: FunctionComponent<PostReactionsProps> = (props)
   const { postId, postProjectSetReaction } = props;
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
+  const theme = useTheme();
   const { t } = useTranslator();
 
   const reactionLikePost = () => {
@@ -55,12 +52,12 @@ export const ReactionSelections: FunctionComponent<PostReactionsProps> = (props)
     });
   };
 
-  const reactionThanksPost = () => {
+  const reactionLovePost = () => {
     postProjectSetReaction({
       variables: {
         organizationId,
         postId,
-        reactionType: PostReactionType.Thanks,
+        reactionType: PostReactionType.Love,
       },
     });
   };
@@ -75,39 +72,23 @@ export const ReactionSelections: FunctionComponent<PostReactionsProps> = (props)
     });
   };
 
-  const reactionReviewedPost = () => {
-    postProjectSetReaction({
-      variables: {
-        organizationId,
-        postId,
-        reactionType: PostReactionType.Reviewed,
-      },
-    });
-  };
-
   return (
     <StyledPostReactionsWrapper>
       <StyledTooltipDark tooltip={t("reactions.like")}>
         <StyledReactionIcons onClick={() => reactionLikePost()} type="button">
-          <ThumbUpIcon color={likeIconColor} iconSize="26px" />
+          <ThumbUpIcon color={theme.colors.iconlikeColor} iconSize="26px" />
         </StyledReactionIcons>
       </StyledTooltipDark>
 
-      <StyledTooltipDark tooltip={t("reactions.thanks")}>
-        <StyledReactionIcons onClick={() => reactionThanksPost()} type="button">
-          <HandshakeIcon color={thanksIconColor} iconSize="26px" />
+      <StyledTooltipDark tooltip={t("reactions.love")}>
+        <StyledReactionIcons onClick={() => reactionLovePost()} type="button">
+          <FavoriteIcon color={theme.colors.iconLoveColor} iconSize="26px" />
         </StyledReactionIcons>
       </StyledTooltipDark>
 
       <StyledTooltipDark tooltip={t("reactions.celebrate")}>
         <StyledReactionIcons onClick={() => reactionCelebratePost()} type="button">
-          <CelebrationIcon color={celebrateIconColor} iconSize="26px" />
-        </StyledReactionIcons>
-      </StyledTooltipDark>
-
-      <StyledTooltipDark tooltip={t("reactions.reviewed")}>
-        <StyledReactionIcons onClick={() => reactionReviewedPost()} type="button">
-          <CheckIcon color={reviewedIconColor} iconSize="26px" />
+          <CelebrationIcon color={theme.colors.iconCelebrateColor} iconSize="26px" />
         </StyledReactionIcons>
       </StyledTooltipDark>
     </StyledPostReactionsWrapper>

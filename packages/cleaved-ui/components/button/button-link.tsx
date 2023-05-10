@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { COLORS, FONT_SIZES } from "../../theme";
+import { FONT_SIZES } from "../../theme";
 
 export const ButtonLink = styled.button`
   background: none;
   border: none;
-  color: ${COLORS.BLUE_500};
+  color: ${({ theme }) => theme.colors.baseLink_color};
   cursor: pointer;
   font-size: ${FONT_SIZES.MEDIUM};
   outline: inherit;
@@ -12,6 +12,6 @@ export const ButtonLink = styled.button`
 
   &:hover,
   &:focus {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseLink_colorHover};
   }
 `;

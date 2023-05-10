@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapperMaxWidth, RightColumnWrapper } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper, RightColumnWrapper } from "@cleaved/ui";
 
 import { PostsContextProvider } from "../../contexts";
 import {
@@ -17,9 +17,9 @@ export const Project: FunctionComponent = () => {
           <AsideProjectDataWrapper />
         </LeftColumnWrapper>
 
-        <MainColumnWrapperMaxWidth>
+        <MainColumnMaxWidthWrapper>
           <ProjectDataWrapper />
-        </MainColumnWrapperMaxWidth>
+        </MainColumnMaxWidthWrapper>
       </PostsContextProvider>
 
       <RightColumnWrapper>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import styled from "styled-components";
-import { COLORS, FONT_SIZES, mediaQueries, SPACING } from "../../theme";
+import { FONT_SIZES, mediaQueries, SPACING } from "../../theme";
 
 type NavigationButtonProps = {
   children: ReactNode;
@@ -18,7 +18,7 @@ const NavigationButtonContainer = styled.li`
   position: relative;
 
   :hover {
-    background-color: ${COLORS.GRAY_50};
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
   }
 
   &.active {
@@ -29,7 +29,7 @@ const NavigationButtonContainer = styled.li`
 `;
 
 export const NavigationButtonLabel = styled.label`
-  color: ${COLORS.BLACK};
+  color: ${({ theme }) => theme.colors.baseText_color};
   cursor: inherit;
   font-size: ${FONT_SIZES.XSMALL};
 

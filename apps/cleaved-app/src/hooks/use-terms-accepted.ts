@@ -16,6 +16,8 @@ export const useTermsAccepted = (): TermsAccepted => {
   const { isLoggedIn } = useLoginGuard();
 
   const { data, loading } = useQuery<TermsAcceptedQuery>(TERMS_ACCEPTED, {
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "network-only",
     onError: (error) => {
       logQueryError(error);
     },

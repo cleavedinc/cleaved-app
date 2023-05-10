@@ -1,13 +1,9 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
-import { COLORS, CelebrationIcon, CheckIcon, HandshakeIcon, RADIUS, ThumbUpIcon } from "@cleaved/ui";
+import { BORDERS, CelebrationIcon, FavoriteIcon, RADIUS, SPACING, ThumbUpIcon } from "@cleaved/ui";
 
 import { PostReactionType } from "../../generated-types/graphql";
-
-import { SeparatorDot } from "../separators";
-
-import { celebrateIconColor, likeIconColor, reviewedIconColor, thanksIconColor } from "./reaction-colors";
 
 type ReactionTypesAndtotalCountProps = {
   reactionsExpressed: PostReactionType[];
@@ -16,7 +12,7 @@ type ReactionTypesAndtotalCountProps = {
 
 const styledReactionBase = css`
   align-items: center;
-  border: 1px solid ${COLORS.WHITE};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.white_color};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
   height: 16px;
@@ -26,13 +22,13 @@ const styledReactionBase = css`
 
 const StyledReactionLike = styled.div`
   ${styledReactionBase}
-  background-color: ${likeIconColor};
+  background-color: ${({ theme }) => theme.colors.iconlikeColor};
   z-index: 40;
 `;
 
-const StyledReactionThanks = styled.div`
+const StyledReactionLove = styled.div`
   ${styledReactionBase}
-  background-color: ${thanksIconColor};
+  background-color: ${({ theme }) => theme.colors.iconLoveColor};
   z-index: 30;
 
   :not(:first-child) {
@@ -42,7 +38,7 @@ const StyledReactionThanks = styled.div`
 
 const StyledReactionCelebrate = styled.div`
   ${styledReactionBase}
-  background-color: ${celebrateIconColor};
+  background-color: ${({ theme }) => theme.colors.iconCelebrateColor};
   z-index: 20;
 
   :not(:first-child) {
@@ -50,72 +46,57 @@ const StyledReactionCelebrate = styled.div`
   }
 `;
 
-const StyledReactionReviewed = styled.div`
-  ${styledReactionBase}
-  background-color: ${reviewedIconColor};
-  z-index: 10;
-
-  :not(:first-child) {
-    margin-left: -5px;
-  }
-`;
+const StyledReaction = styled.div``;
 
 const StyledReactionWrapper = styled.div`
   display: flex;
+  margin: ${SPACING.SMALL};
 `;
 
 const StyledReactionsCount = styled.div`
-  color: ${COLORS.GRAY_500};
+  color: ${({ theme }) => theme.colors.baseSubText_color};
   margin-left: 3px;
 `;
 
-const handleReactionTypes = (reactionIndex: number, reactionType: PostReactionType) => {
-  switch (reactionType) {
-    case PostReactionType.Like:
-      return (
-        <StyledReactionLike key={reactionIndex}>
-          <ThumbUpIcon color={COLORS.WHITE} iconSize="9px" />
-        </StyledReactionLike>
-      );
-      break;
-    case PostReactionType.Thanks:
-      return (
-        <StyledReactionThanks key={reactionIndex}>
-          <HandshakeIcon color={COLORS.WHITE} iconSize="9px" />
-        </StyledReactionThanks>
-      );
-      break;
-    case PostReactionType.Celebrate:
-      return (
-        <StyledReactionCelebrate key={reactionIndex}>
-          <CelebrationIcon color={COLORS.WHITE} iconSize="9px" />
-        </StyledReactionCelebrate>
-      );
-      break;
-    case PostReactionType.Reviewed:
-      return (
-        <StyledReactionReviewed key={reactionIndex}>
-          <CheckIcon color={COLORS.WHITE} iconSize="11px" />
-        </StyledReactionReviewed>
-      );
-      break;
-    default:
-  }
-  return false;
-};
-
 export const ReactionTypesAndTotalCount: FunctionComponent<ReactionTypesAndtotalCountProps> = (props) => {
   const { reactionsExpressed, reactionTotalCount } = props;
+  const theme = useTheme();
+
+  const handleReactionTypes = (reactionIndex: number, reactionType: PostReactionType) => {
+    switch (reactionType) {
+      case PostReactionType.Like:
+        return (
+          <StyledReactionLike key={reactionIndex}>
+            <ThumbUpIcon color={theme.colors.baseIconAlt_color} iconSize="9px" />
+          </StyledReactionLike>
+        );
+        break;
+      case PostReactionType.Love:
+        return (
+          <StyledReactionLove key={reactionIndex}>
+            <FavoriteIcon color={theme.colors.baseIconAlt_color} iconSize="9px" />
+          </StyledReactionLove>
+        );
+        break;
+      case PostReactionType.Celebrate:
+        return (
+          <StyledReactionCelebrate key={reactionIndex}>
+            <CelebrationIcon color={theme.colors.baseIconAlt_color} iconSize="9px" />
+          </StyledReactionCelebrate>
+        );
+        break;
+      default:
+    }
+    return false;
+  };
 
   return (
-    <>
-      <StyledReactionWrapper>
+    <StyledReactionWrapper>
+      <StyledReaction>
         {reactionsExpressed?.map((reaction, index) => handleReactionTypes(index, reaction))}
-      </StyledReactionWrapper>
+      </StyledReaction>
 
-      {reactionTotalCount && reactionTotalCount !== "0" && (
-        <StyledReactionsCount>{reactionTotalCount}</StyledReactionsCount>
-      )}
-    </>
+      <StyledReactionsCount>{reactionTotalCount}</StyledReactionsCount>
+    </StyledReactionWrapper>
   );
 };

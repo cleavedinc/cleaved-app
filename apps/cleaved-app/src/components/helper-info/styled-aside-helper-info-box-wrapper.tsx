@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { BoxHelperInfo, COLORS } from "@cleaved/ui";
+import { BoxHelperInfo } from "@cleaved/ui";
 
 type StyledAsideHelperInfoBoxWrapperProps = {
   backgroundColor?: string;
@@ -8,7 +8,8 @@ type StyledAsideHelperInfoBoxWrapperProps = {
 
 export const StyledAsideHelperInfoBoxWrapper = styled(BoxHelperInfo)<StyledAsideHelperInfoBoxWrapperProps>`
   align-items: center;
-  background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : COLORS.TAN_300)};
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : ({ theme }) => theme.colors.helperInfoBoxWrapper_backgroundColor};
   display: flex;
   flex-direction: column;
 `;

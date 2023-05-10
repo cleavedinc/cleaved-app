@@ -1,35 +1,86 @@
 import React, { FunctionComponent } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-import { Box, SectionHeader, SPACING } from "@cleaved/ui";
+import { BoxNoPadding, CommentIcon, FilePost, FONT_SIZES, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
 
 import { WidgetProjectDetailsMenu } from "../../components";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
+import { useProjectById, useTranslator } from "../../hooks";
+import { useOrganizationPermission } from "../../permissions";
 
-const StyledSectionHeaderWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: ${SPACING.SMALL};
+const StyledCommentCount = styled.div`
+  color: ${({ theme }) => theme.colors.baseText_color};
+  font-size: ${FONT_SIZES.XSMALL};
 `;
 
-const StyledProjectDetails = styled.div``;
+const StyledCommentIcon = styled(CommentIcon)`
+  margin-left: 2px;
+`;
+
+const StyledCommentInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledCommentInfoWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  margin-bottom: ${SPACING.MEDIUM};
+  padding: 0 ${SPACING.SMALL};
+`;
+
+const StyledFileText = styled(FilePost)`
+  margin-left: 2px;
+  margin-right: ${SPACING.SMALL};
+`;
+
+const StyledPostCount = styled.div`
+  color: ${({ theme }) => theme.colors.baseText_color};
+  font-size: ${FONT_SIZES.XSMALL};
+`;
+
+const StyledProjectDetails = styled.div`
+  padding: ${SPACING.SMALL};
+`;
+
+const StyledWidgetHeader = styled.div``;
 
 export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const projectData = useProjectById();
+  const theme = useTheme();
+  const { t } = useTranslator();
+
+  const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
+  const totalComments = t("post.totalComments") ? t("post.totalComments") : "";
+
   return (
-    <Box>
-      <StyledSectionHeaderWrapper>
-        <SectionHeader>temp. Project Name initiative thing</SectionHeader>
+    <BoxNoPadding>
+      <div>
+        <WidgetHeadingWrapper>
+          <StyledWidgetHeader>{projectData && projectData.projectByIdData?.name}</StyledWidgetHeader>
 
-        <WidgetProjectDetailsMenu />
-      </StyledSectionHeaderWrapper>
+          {hasPermission && <WidgetProjectDetailsMenu />}
+        </WidgetHeadingWrapper>
 
-      <StyledProjectDetails>
-        <p>temp. Project details, here are the project details here. Make these count at a high level.</p>
-        <p>
-          Here are some other facts. These facts are also important. Facts are what make facts so factual. I do think
-          this is a fact.
-        </p>
-        <p>A couple other things to keep in mind. one thing. Another thing.</p>
-      </StyledProjectDetails>
-    </Box>
+        <StyledCommentInfoWrapper>
+          {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalRootPostCount > 0 && (
+            <StyledCommentInfo title={totalPosts}>
+              <StyledPostCount>{projectData.projectByIdData?.totalRootPostCount}</StyledPostCount>
+              <StyledFileText iconSize={FONT_SIZES.XXSMALL} color={theme.colors.baseIcon_color} />
+            </StyledCommentInfo>
+          )}
+
+          {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalResponseCount > 0 && (
+            <StyledCommentInfo title={totalComments}>
+              <StyledCommentCount>{projectData.projectByIdData?.totalResponseCount}</StyledCommentCount>
+              <StyledCommentIcon iconSize={FONT_SIZES.XXSMALL} color={theme.colors.baseIcon_color} />
+            </StyledCommentInfo>
+          )}
+        </StyledCommentInfoWrapper>
+      </div>
+
+      <StyledProjectDetails>temp.project details needed.</StyledProjectDetails>
+    </BoxNoPadding>
   );
 };

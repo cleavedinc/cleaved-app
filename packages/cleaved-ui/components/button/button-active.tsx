@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { COLORS, FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHT, RADIUS, SPACING } from "../../theme";
+import { FONT_SIZES, FONT_WEIGHTS, LINE_HEIGHT, RADIUS, SPACING } from "../../theme";
 
 export const ButtonActive = styled.button`
-  background-color: ${COLORS.BLUE_500};
+  background-color: ${({ theme }) => theme.colors.baseLink_color};
   border: none;
   border-radius: ${RADIUS.MEDIUM};
-  color: ${COLORS.WHITE};
+  color: ${({ theme }) => theme.colors.baseTextAlt_color};
   font-size: ${FONT_SIZES.XXSMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
   line-height: ${LINE_HEIGHT.LARGE};

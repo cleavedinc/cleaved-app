@@ -1,12 +1,12 @@
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { COLORS, FONT_SIZES } from "@cleaved/ui";
+import { FONT_SIZES } from "@cleaved/ui";
 
 export const StyledRouterButtonLink = styled(Link)`
   background: none;
   border: none;
-  color: ${COLORS.BLUE_500};
+  color: ${({ theme }) => theme.colors.baseLink_color};
   cursor: pointer;
   font-size: ${FONT_SIZES.MEDIUM};
   outline: inherit;
@@ -14,6 +14,6 @@ export const StyledRouterButtonLink = styled(Link)`
 
   &:hover,
   &:focus {
-    color: ${COLORS.BLUE_500_HOVER};
+    color: ${({ theme }) => theme.colors.baseLink_colorHover};
   }
 `;
