@@ -14,6 +14,7 @@ module.exports = merge(common, {
       ),
       // "process.env.GOOGLE_TAG_MANAGER_ID": JSON.stringify("XXX-XXXXX"),
       "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("https://api.app.cleaved.com/graphql"),
+      "process.env.I18N_LOADPATH": JSON.stringify("public/locales/{{lng}}/{{ns}}.json"),
       "process.env.MEDIA_ENDPOINT": JSON.stringify("https://api.app.cleaved.com"),
     }),
   ],

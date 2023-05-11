@@ -25,6 +25,7 @@ module.exports = merge(common, {
       ),
       // "process.env.GOOGLE_TAG_MANAGER_ID": JSON.stringify("XXX-XXXXX"),
       "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("http://localhost:8080/graphql"),
+      "process.env.I18N_LOADPATH": JSON.stringify("/locales/{{lng}}/{{ns}}.json"),
       "process.env.MEDIA_ENDPOINT": JSON.stringify("http://localhost:8080"),
     }),
     new webpack.HotModuleReplacementPlugin(),
