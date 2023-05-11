@@ -80,6 +80,10 @@ Resources:
                 Action: iam:PassRole
                 Resource:
                   - !GetAtt DeployRole.Arn
+              - Effect: Allow
+                Action: codestar-connections:UseConnection
+                Resource:
+                  - !Ref ConnectionArn
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
         - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
