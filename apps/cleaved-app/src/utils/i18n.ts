@@ -16,7 +16,7 @@ i18n // eslint-disable-line import/no-named-as-default-member
     debug: false,
     backend: {
       allowMultiLoading: false,
-      loadPath: "/public/locales/{{lng}}/{{ns}}.json",
+      loadPath: process.env.I18N_LOADPATH,
     },
   });
 
