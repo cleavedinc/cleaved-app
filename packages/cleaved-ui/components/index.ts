@@ -1,5 +1,6 @@
 export * from "./account";
 export * from "./avatar";
+export * from "./blockquote";
 export * from "./box";
 export * from "./button";
 export * from "./link";
@@ -15,6 +16,7 @@ export * from "./modal";
 export * from "./navigation";
 export * from "./on-outside-click";
 export * from "./photo-collage";
+export * from "./scrollbar";
 export * from "./scroll-lock";
 export * from "./select-single-input";
 export * from "./spinner";

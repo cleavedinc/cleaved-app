@@ -37,7 +37,7 @@ const StyledPostHeaderWrapper = styled.div`
   display: flex;
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.LARGE};
-  padding: ${SPACING.SMALL} ${SPACING.SMALL} 0;
+  padding: ${SPACING.MEDIUM} ${SPACING.MEDIUM} 0;
 `;
 
 const StyledPostProfessionalInfoWrapper = styled.div`

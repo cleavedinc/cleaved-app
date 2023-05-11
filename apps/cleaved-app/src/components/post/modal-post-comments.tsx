@@ -4,13 +4,17 @@ import { Portal } from "react-portal";
 
 import {
   BORDERS,
+  boxBase,
   CloseIcon,
   CircleEditButtonSmall,
   FONT_SIZES,
   mediaQueries,
   OnOutsideClick,
-  RADIUS,
   ScrollLock,
+  scrollbar,
+  scrollbarThumb,
+  scrollbarThumbHover,
+  scrollbarTrack,
   SPACING,
 } from "@cleaved/ui";
 
@@ -53,13 +57,29 @@ const StyledContentWrapper = styled.div`
   overflow-y: auto;
   padding: 0;
 
+  ::-webkit-scrollbar {
+    ${scrollbar}
+  }
+
+  ::-webkit-scrollbar-track {
+    ${scrollbarTrack}
+  }
+
+  ::-webkit-scrollbar-thumb {
+    ${scrollbarThumb}
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    ${scrollbarThumbHover}
+  }
+
   ${mediaQueries.SM} {
     max-height: 550px;
   }
 `;
 
 const StyledModalPostCommentsContentWrapper = styled.div<ModalPostCommentsBackgroundProps>`
-  background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
+  ${boxBase}
   height: 100%;
   max-height: 100%;
   min-width: auto;
@@ -67,7 +87,6 @@ const StyledModalPostCommentsContentWrapper = styled.div<ModalPostCommentsBackgr
   width: 100%;
 
   ${mediaQueries.SM} {
-    border-radius: ${RADIUS.MEDIUM};
     height: auto;
     left: 50%;
     max-height: calc(100% - 80px);

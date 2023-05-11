@@ -20,7 +20,7 @@ export const themeLight = {
     baseLink_color: COLORS.BLUE_500,
     baseLink_colorHover: COLORS.BLUE_500_HOVER,
     baseLogo: COLORS.GRAY_900,
-    baseOverlay_backgroundColor: COLORS.BLACK_ALPHA_DARK,
+    baseOverlay_backgroundColor: COLORS.WHITE_ALPHA,
     baseOverlayImage_backgroundColor: COLORS.BLACK_ALPHA_MEDIUM,
     basePlaceholderText_color: COLORS.GRAY_500,
     baseSubText_color: COLORS.GRAY_500,
