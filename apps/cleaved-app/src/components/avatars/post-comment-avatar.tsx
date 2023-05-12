@@ -18,10 +18,10 @@ const avatartBase = css`
   border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
-  height: 40px;
+  height: 45px;
   justify-content: center;
   margin-right: ${SPACING_PX.TWO};
-  width: 40px;
+  width: 45px;
 `;
 
 const StyledAvatarImage = styled.img`

@@ -1,7 +1,20 @@
 import React, { FunctionComponent, ReactNode, useContext } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import { FONTS, FONT_WEIGHTS, SPACING_PX, themeDark, themeLight } from "@cleaved/ui";
+import {
+  blockquote,
+  blockquoteBefore,
+  blockquoteP,
+  FONTS,
+  FONT_WEIGHTS,
+  scrollbar,
+  scrollbarThumb,
+  scrollbarThumbHover,
+  scrollbarTrack,
+  SPACING,
+  themeDark,
+  themeLight,
+} from "@cleaved/ui";
 
 import { ThemeContext } from "../contexts";
 
@@ -114,6 +127,7 @@ video {
   font-family: ${FONTS.SANS_SERIF_1};
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -128,15 +142,32 @@ nav,
 section {
   display: block;
 }
+
+/* These styles are duplicated in the post-form-editor due to ReactQuill not being able to handle the styled component theme prop */
+blockquote {
+  ${blockquote}
+}
+
+blockquote:before {
+  ${blockquoteBefore}
+}
+
+blockquote p {
+  ${blockquoteP}
+}
+
 body {
   background-color: ${({ theme }) => theme.colors.body_backgroundColor};
 }
+
 div {
   overflow-wrap: anywhere;
 }
+
 p {
-  margin-bottom: ${SPACING_PX.THREE};
+  margin-bottom: ${SPACING.MEDIUM};
 }
+
 a{
   color: ${({ theme }) => theme.colors.baseLink_color};
   cursor: pointer;
@@ -146,30 +177,68 @@ a{
     color: ${({ theme }) => theme.colors.baseLink_colorHover};
   }
 }
+
 strong {
   font-weight: ${FONT_WEIGHTS.BOLD};
 }
+
 em{
   font-style: italic;
 }
+
 del {
   text-decoration: line-through;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
+/* overrides package style for image carousel */
+.react-images__blanket {
+  background-color: ${({ theme }) => theme.colors.baseOverlay_backgroundColor} !important;
+}
+
+.react-images__container {
+  background-color: transparent !important;
+
+  .react-images__header {
+    background: linear-gradient(180deg, ${({ theme }) =>
+      theme.colors.baseBordersAndShadows_color}, transparent) !important;
+
+    span {
+      button:first-child {
+        display: none;
+      }
+
+      button {
+        color: ${({ theme }) => theme.colors.baseIcon_color};
+      }
+  }
+  }
+
+  .react-images__footer {
+    color: ${({ theme }) => theme.colors.baseIcon_color};
+    background: linear-gradient(0deg, ${({ theme }) =>
+      theme.colors.baseBordersAndShadows_color}, transparent) !important;
+  }
+}
+
+/* OLD blockquote styles
 blockquote,
 q {
   quotes: none;
-}
-blockquote:before,
+} */
+
+/* blockquote:before,
 blockquote:after,
 q:before,
 q:after {
   content: "";
   content: none;
-}
+} */
+
 table {
   border-collapse: collapse;
   border-spacing: 0;

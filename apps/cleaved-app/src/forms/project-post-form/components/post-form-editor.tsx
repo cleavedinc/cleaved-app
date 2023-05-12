@@ -1,9 +1,19 @@
 import React, { FunctionComponent, useEffect, useRef } from "react";
 import { useFormikContext } from "formik";
 import styled, { useTheme } from "styled-components";
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill from "react-quill";
 
-import { FONTS, FONT_SIZES, RADIUS, SPACING, SPACING_PX, ThemeLightType, ThemeDarkType } from "@cleaved/ui";
+import {
+  BORDERS,
+  FONTS,
+  FONT_SIZES,
+  RADIUS,
+  scrollbar,
+  SPACING,
+  SPACING_PX,
+  ThemeLightType,
+  ThemeDarkType,
+} from "@cleaved/ui";
 
 import "react-quill/dist/quill.snow.css";
 
@@ -35,9 +45,32 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
   .ql-editor {
     padding: 0 ${SPACING.MEDIUM} 0 0;
 
-    /* Scroll bar styles */
+    /* These styles are duplicate (original are in cleaved/ui) due to ReactQuill not being able to handle the styled component theme prop */
+    blockquote {
+      background-color: ${({ styledComponentTheme }) => styledComponentTheme.colors.body_backgroundColor};
+      border-left: ${BORDERS.SOLID_5PX} ${({ styledComponentTheme }) => styledComponentTheme.borders.primary_color};
+      border-radius: ${RADIUS.SMALL};
+      color: ${({ styledComponentTheme }) => styledComponentTheme.colors.baseText_color};
+      margin-bottom: ${SPACING.MEDIUM};
+      padding: ${SPACING.MEDIUM};
+    }
+
+    blockquote:before {
+      color: ${({ styledComponentTheme }) => styledComponentTheme.borders.primary_color};
+      content: '"';
+      font-size: ${FONT_SIZES.XXXXLARGE};
+      line-height: 0;
+      margin-right: ${SPACING.SMALL};
+      vertical-align: -0.4em;
+    }
+
+    blockquote p {
+      display: inline;
+    }
+
+    /* Scroll bar styles - These styles are duplicates (original are in cleaved/ui) due to ReactQuill not being able to handle the styled component theme prop */
     ::-webkit-scrollbar {
-      width: 10px;
+      ${scrollbar}
     }
 
     ::-webkit-scrollbar-track {
@@ -75,6 +108,7 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
       button {
         &:first-child {
           padding-left: 0;
+          width: 22px;
         }
       }
 
@@ -143,15 +177,10 @@ export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) =>
   const theme = useTheme();
 
   const modules = {
-    toolbar: [
-      ["bold", "italic", "strike"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["blockquote", "code-block"],
-      ["link"],
-    ],
+    toolbar: [["bold", "italic", "strike", "blockquote"], [{ list: "ordered" }, { list: "bullet" }], ["link"]],
   };
 
-  const formats = ["bold", "italic", "strike", "list", "bullet", "blockquote", "code-block", "link"];
+  const formats = ["bold", "italic", "strike", "blockquote", "list", "bullet", "link"];
 
   const handleChange = (value: string) => {
     setFieldValue(name, value);

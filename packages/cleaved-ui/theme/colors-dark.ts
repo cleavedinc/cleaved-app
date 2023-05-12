@@ -19,7 +19,7 @@ export type ThemeColorsDark = {
 
 export const COLORS_DARK: ThemeColorsDark = {
   BLACK: "#F9F9F9", // base font
-  BLACK_ALPHA_DARK: "rgba(0,0,0,0.8)", // overlays
+  BLACK_ALPHA_DARK: "rgba(0,0,0,0.9)", // overlays
   BLACK_ALPHA_MEDIUM: "rgba(0,0,0,0.5)", // overlays
 
   BLUE_500: "#3BA1E5", // primary CTAs // original: #0059FF

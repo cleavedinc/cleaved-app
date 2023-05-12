@@ -41,6 +41,8 @@ export const AccountAvatarForm: FunctionComponent<AccountAvatarFormProps> = (pro
   });
 
   const handleVerifyUploadSizeIsOK = (fileSize: number) => {
+    console.log("fileSize", fileSize);
+
     const verifyImageUpload = verifyUploadSizeIsOK(fileSize);
 
     if (!verifyImageUpload) {
@@ -68,7 +70,7 @@ export const AccountAvatarForm: FunctionComponent<AccountAvatarFormProps> = (pro
         <StyledEditIconWrapper>{t("files.avatarUploadImage")}</StyledEditIconWrapper>
       </StyledTooltipWhite>
 
-      <input type="file" required onChange={onChange} />
+      <input accept="image/jpeg, image/png" type="file" required onChange={onChange} />
     </StyledFileInputLabel>
   );
 };
