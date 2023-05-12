@@ -23,12 +23,15 @@ type PostProps = {
   post: PostProjectSeekQuery["postProjectSeek"][0];
 };
 
+const StyledCommentListWrapper = styled.div`
+  padding: 0 ${SPACING.MEDIUM};
+`;
+
 const StyledProjectPostBox = styled(BoxNoPadding)``;
 
 const StyledMessage = styled(ReactMarkdown)`
-  margin-bottom: ${SPACING.SMALL};
   overflow-wrap: anywhere;
-  margin: 0 ${SPACING.SMALL};
+  padding: 0 ${SPACING.MEDIUM} ${SPACING.SMALL} ${SPACING.MEDIUM};
 
   ul,
   ol {
@@ -70,7 +73,7 @@ const StyledPostFooter = styled.div`
 
 const StyledPostInfoBarCommentCount = styled.div`
   cursor: pointer;
-  margin: ${SPACING.SMALL} ${SPACING.SMALL} ${SPACING.SMALL} auto;
+  margin: ${SPACING.SMALL} ${SPACING.MEDIUM} ${SPACING.SMALL} auto;
 
   :hover {
     text-decoration: underline;
@@ -82,7 +85,7 @@ const StyledProjectNameLink = styled(Link)`
   display: inline-block;
   font-size: ${FONT_SIZES.XXSMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
-  margin: ${SPACING.MEDIUM} ${SPACING.SMALL} ${SPACING.SMALL};
+  margin: ${SPACING.MEDIUM} ${SPACING.MEDIUM} ${SPACING.SMALL};
   text-transform: uppercase;
 `;
 
@@ -192,12 +195,14 @@ export const Post: FunctionComponent<PostProps> = (props) => {
             <StyledmodalPostFooter postRepliesCount={post.repliesCount}>{postFooterContent}</StyledmodalPostFooter>
           )}
 
-          <CommentsList
-            commentLevel={1}
-            commentRepliesCount={post.repliesCount}
-            parentPostId={post.id}
-            triggerGetComments={triggerGetComments}
-          />
+          <StyledCommentListWrapper>
+            <CommentsList
+              commentLevel={1}
+              commentRepliesCount={post.repliesCount}
+              parentPostId={post.id}
+              triggerGetComments={triggerGetComments}
+            />
+          </StyledCommentListWrapper>
         </>
       </ModalPostComments>
     </StyledProjectPostBox>

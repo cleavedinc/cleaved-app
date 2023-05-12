@@ -15,17 +15,18 @@ export type ThemeColors = {
   RED_500: string;
   TAN_300: string;
   WHITE: string;
+  WHITE_ALPHA: string;
 };
 
 export const COLORS: ThemeColors = {
   BLACK: "#050505", // base font
-  BLACK_ALPHA_DARK: "rgba(0,0,0,0.8)", // overlays
+  BLACK_ALPHA_DARK: "rgba(0,0,0,0.9)", // overlays
   BLACK_ALPHA_MEDIUM: "rgba(0,0,0,0.5)", // overlays
 
   BLUE_500: "#0095F6", // primary CTAs // original: #0059FF
   BLUE_500_HOVER: "#0086dd", // original: #337AFF
 
-  GRAY_50: "#FAFAFA", // background colors
+  GRAY_50: "#F7F7F7", // background colors
   GRAY_100: "#E5E5E5", // borders, shadows, disabled buttons
   GRAY_500: "#65676B", // sub-text, placeholder text, icons was #808080
   GRAY_900: "#1A1A1A", // cleaved logo, tooltip background
@@ -41,4 +42,5 @@ export const COLORS: ThemeColors = {
   TAN_300: "#f4ede4", // Help text boxes
 
   WHITE: "#FFF", // backgrounds, text
+  WHITE_ALPHA: "rgba(255,255,255,0.8)", // overlays
 };

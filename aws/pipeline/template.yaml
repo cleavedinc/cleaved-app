@@ -7,7 +7,7 @@ Parameters:
     Default: develop
   ConnectionArn:
     Type: String
-    Default: arn
+    Default: arn:aws:codestar-connections:us-east-1:512430622739:connection/47f21b13-9352-454a-b41e-87cf4345ab64
 
 Resources:
   Bucket:
@@ -80,12 +80,15 @@ Resources:
                 Action: iam:PassRole
                 Resource:
                   - !GetAtt DeployRole.Arn
+              - Effect: Allow
+                Action: codestar-connections:UseConnection
+                Resource:
+                  - !Ref ConnectionArn
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
         - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess
-        - arn:aws:iam::aws:policy/AWSCodeCommitFullAccess
 
   DeployRole:
     Type: AWS::IAM::Role
@@ -133,12 +136,12 @@ Resources:
               ActionTypeId:
                 Category: Source
                 Owner: AWS
-                Provider: CodeCommit
+                Provider: CodeStarSourceConnection
                 Version: 1
               Configuration:
+                ConnectionArn: !Ref ConnectionArn
+                FullRepositoryId: cleavedinc/cleaved-app
                 BranchName: !Ref Branch
-                PollForSourceChanges: false
-                RepositoryName: !Select [0, !Split ['-pipeline', !Ref AWS::StackName]]
               OutputArtifacts:
                 - Name: source
               RunOrder: 1

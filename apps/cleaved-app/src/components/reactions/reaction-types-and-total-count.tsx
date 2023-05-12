@@ -50,7 +50,7 @@ const StyledReaction = styled.div``;
 
 const StyledReactionWrapper = styled.div`
   display: flex;
-  margin: ${SPACING.SMALL};
+  margin: ${SPACING.SMALL} ${SPACING.MEDIUM};
 `;
 
 const StyledReactionsCount = styled.div`
@@ -67,21 +67,21 @@ export const ReactionTypesAndTotalCount: FunctionComponent<ReactionTypesAndtotal
       case PostReactionType.Like:
         return (
           <StyledReactionLike key={reactionIndex}>
-            <ThumbUpIcon color={theme.colors.baseIconAlt_color} iconSize="9px" />
+            <ThumbUpIcon color={theme.colors.white_color} iconSize="9px" />
           </StyledReactionLike>
         );
         break;
       case PostReactionType.Love:
         return (
           <StyledReactionLove key={reactionIndex}>
-            <FavoriteIcon color={theme.colors.baseIconAlt_color} iconSize="9px" />
+            <FavoriteIcon color={theme.colors.white_color} iconSize="9px" />
           </StyledReactionLove>
         );
         break;
       case PostReactionType.Celebrate:
         return (
           <StyledReactionCelebrate key={reactionIndex}>
-            <CelebrationIcon color={theme.colors.baseIconAlt_color} iconSize="9px" />
+            <CelebrationIcon color={theme.colors.white_color} iconSize="9px" />
           </StyledReactionCelebrate>
         );
         break;
