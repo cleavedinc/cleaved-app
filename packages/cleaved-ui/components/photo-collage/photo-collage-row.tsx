@@ -53,7 +53,7 @@ const StyledPhotoThumb = styled.div<{ thumb: string }>`
 
 const StyledTotalPhotosNotSeen = styled.div`
   position: absolute;
-  color: ${({ theme }) => theme.colors.white_color};
+  color: ${({ theme }) => theme.colors.white_always_color};
   font-size: 35px;
   left: 50%;
   top: 50%;

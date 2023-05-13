@@ -133,6 +133,10 @@
   },
   "pleaseWaitDots": "Please wait...",
   "post": {
+    "areYouSureDiscardPostModalTitle": "Are you sure?",
+    "areYouSureDiscardPostModalText": "We don't keep post drafts yet, so your content will be lost.",
+    "areYouSureDiscardPostButtonText": "Discard post",
+    "areYouSureKeepPostButtonText": "Stay and keep my post",
     "areYouSureRemovePostModalHeader": "Are you sure?",
     "areYouSureRemovePostModalText": "If you remove this post, it will be gone forever. No turning back.",
     "areYouSureRemoveButtonText": "Remove post",

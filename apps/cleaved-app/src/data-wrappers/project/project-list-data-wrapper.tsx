@@ -168,7 +168,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
               option: (styles, { isSelected }) => {
                 return {
                   ...styles,
-                  color: isSelected ? colorTheme.colors.white_color : colorTheme.colors.baseText_color,
+                  color: isSelected ? colorTheme.colors.white_always_color : colorTheme.colors.baseText_color,
                 };
               },
             }}

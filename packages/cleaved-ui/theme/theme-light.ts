@@ -1,54 +1,56 @@
-import { COLORS } from "./colors";
+import { COLORS_BASE } from "./colors-base";
+import { COLORS_LIGHT } from "./colors-light";
 
 export const themeLight = {
   borders: {
-    baseLink_color: COLORS.BLUE_500,
-    primary_color: COLORS.GRAY_100,
-    white_color: COLORS.WHITE,
+    baseLink_color: COLORS_BASE.BLUE_500,
+    primary_color: COLORS_LIGHT.GRAY_100,
+    white_always_color: COLORS_LIGHT.WHITE,
   },
   colors: {
-    baseAlert_color: COLORS.RED_500,
-    baseApproved_color: COLORS.GREEN_500,
-    baseBordersAndShadows_color: COLORS.GRAY_100,
-    baseBox_backgroundColor: COLORS.WHITE,
-    baseButtonAndIcon_backgroundColorHover: COLORS.GRAY_50,
-    baseButtonLink_color: COLORS.GRAY_500,
-    baseDropdownMenu_backgroundColor: COLORS.WHITE,
-    baseIcon_color: COLORS.GRAY_500,
-    baseIconAlt_color: COLORS.WHITE,
-    baseInput_backgroundColor: COLORS.WHITE,
-    baseLink_color: COLORS.BLUE_500,
-    baseLink_colorHover: COLORS.BLUE_500_HOVER,
-    baseLogo: COLORS.GRAY_900,
-    baseOverlay_backgroundColor: COLORS.WHITE_ALPHA,
-    baseOverlayImage_backgroundColor: COLORS.BLACK_ALPHA_MEDIUM,
-    basePlaceholderText_color: COLORS.GRAY_500,
-    baseSubText_color: COLORS.GRAY_500,
-    baseText_color: COLORS.BLACK,
-    baseTextAlt_color: COLORS.WHITE,
-    baseTextLink_color: COLORS.BLACK,
-    baseTextLink_colorHover: COLORS.BLUE_500_HOVER,
+    baseAlert_color: COLORS_BASE.RED_500,
+    baseApproved_color: COLORS_BASE.GREEN_500,
+    baseBordersAndShadows_color: COLORS_LIGHT.GRAY_100,
+    baseBox_backgroundColor: COLORS_LIGHT.WHITE,
+    baseButtonAndIcon_backgroundColorHover: COLORS_LIGHT.GRAY_50,
+    baseButtonLink_color: COLORS_LIGHT.GRAY_500,
+    baseDropdownMenu_backgroundColor: COLORS_LIGHT.WHITE,
+    baseIcon_color: COLORS_LIGHT.GRAY_500,
+    baseIconAlt_color: COLORS_LIGHT.WHITE,
+    baseInput_backgroundColor: COLORS_LIGHT.WHITE,
+    baseLink_color: COLORS_BASE.BLUE_500,
+    baseLink_colorHover: COLORS_BASE.BLUE_500_HOVER,
+    baseLogo: COLORS_LIGHT.GRAY_900,
+    baseOverlay_backgroundColor: COLORS_BASE.WHITE_ALPHA,
+    baseOverlayImage_backgroundColor: COLORS_BASE.BLACK_ALPHA_MEDIUM,
+    baseOverlayImageIcon_backgroundColor: COLORS_BASE.BLACK_ALPHA_LIGHT,
+    basePlaceholderText_color: COLORS_LIGHT.GRAY_500,
+    baseSubText_color: COLORS_LIGHT.GRAY_500,
+    baseText_color: COLORS_LIGHT.BLACK,
+    baseTextAlt_color: COLORS_LIGHT.WHITE,
+    baseTextLink_color: COLORS_LIGHT.BLACK,
+    baseTextLink_colorHover: COLORS_BASE.BLUE_500_HOVER,
 
-    body_backgroundColor: COLORS.GRAY_50,
+    body_backgroundColor: COLORS_LIGHT.GRAY_50,
 
-    iconlikeColor: COLORS.BLUE_500,
-    iconLikeInactiveColor: COLORS.GRAY_500,
-    iconLoveColor: COLORS.RED_500,
-    iconCelebrateColor: COLORS.HONEY_YELLOW_500,
+    iconlikeColor: COLORS_BASE.BLUE_500,
+    iconLikeInactiveColor: COLORS_LIGHT.GRAY_500,
+    iconLoveColor: COLORS_BASE.RED_500,
+    iconCelebrateColor: COLORS_BASE.HONEY_YELLOW_500,
 
-    helperInfoBoxWrapper_backgroundColor: COLORS.TAN_300,
+    helperInfoBoxWrapper_backgroundColor: COLORS_LIGHT.TAN_300,
 
-    white_color: COLORS.WHITE,
+    white_always_color: COLORS_BASE.WHITE_ALWAYS,
   },
 };
 
 export type ThemeLightType = typeof themeLight;
 
-// color: ${COLORS.WHITE};
-// color: ${({ theme }) => theme.borders.white_color};
+// color: ${COLORS_LIGHT.WHITE};
+// color: ${({ theme }) => theme.borders.white_always_color};
 
 //   const theme = useTheme();
 // theme.colors.baseIcon_color
 
 // FINAL CHECK:
-// COLORS
+// COLORS_LIGHT

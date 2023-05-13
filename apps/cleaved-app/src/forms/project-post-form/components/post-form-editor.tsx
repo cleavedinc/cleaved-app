@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useRef } from "react";
+import React, { FunctionComponent, memo, useContext, useEffect, useRef } from "react";
 import { useFormikContext } from "formik";
 import styled, { useTheme } from "styled-components";
 import ReactQuill from "react-quill";
@@ -14,6 +14,8 @@ import {
   ThemeLightType,
   ThemeDarkType,
 } from "@cleaved/ui";
+
+import { PostsContext } from "../../../contexts";
 
 import "react-quill/dist/quill.snow.css";
 
@@ -169,9 +171,10 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
   }
 `;
 
-export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) => {
+const PostFormEditorMemo: FunctionComponent<PostFormEditorProps> = (props) => {
   const { className, name, placeholder } = props;
-  const { values, setFieldValue } = useFormikContext();
+  const { setProjectPostFormIsDirty } = useContext(PostsContext);
+  const { dirty, isValid, setFieldValue, values } = useFormikContext();
 
   // Using the theme hook due to ReactQuill not liking the normal pros way to use styled component theme.
   const theme = useTheme();
@@ -202,6 +205,19 @@ export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) =>
     }
   }, [reactQuillRef]);
 
+  // Used to figure out if the form is dirty at the parent level
+  useEffect(() => {
+    if (isValid && dirty) {
+      console.log("dirty");
+      setProjectPostFormIsDirty(true);
+    }
+
+    if (!(isValid && dirty)) {
+      console.log("clean");
+      setProjectPostFormIsDirty(false);
+    }
+  }, [isValid, dirty]);
+
   return (
     <StyledReactQuill
       className={className}
@@ -216,3 +232,5 @@ export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) =>
     />
   );
 };
+
+export const PostFormEditor = memo(PostFormEditorMemo);

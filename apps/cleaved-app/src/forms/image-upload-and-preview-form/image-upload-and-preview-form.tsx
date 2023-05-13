@@ -5,7 +5,7 @@ import styled, { useTheme } from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, SPACING } from "@cleaved/ui";
+import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, MoveIcon, RADIUS, SPACING } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
@@ -62,26 +62,42 @@ const StyledImageThumbnailPreview = styled.img`
   height: 100%;
 `;
 
+const StyledImageThumbnailMoveButton = styled.button`
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.baseOverlayImageIcon_backgroundColor};
+  border: none;
+  border-radius: 0 ${RADIUS.MEDIUM} 0 0;
+  bottom: 0;
+  cursor: move;
+  display: flex;
+  flex-basis: 100%;
+  font: inherit;
+  height: 16px;
+  justify-content: center;
+  left: 0;
+  outline: inherit;
+  padding: 0;
+  position: absolute;
+  width: 16px;
+`;
+
 const StyledImageThumbnailRemoveButton = styled.button`
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: 0 0 0 10px;
+  background-color: ${({ theme }) => theme.colors.baseOverlayImageIcon_backgroundColor};
+  border: none;
+  border-radius: 0 0 0 ${RADIUS.MEDIUM};
   cursor: pointer;
   display: flex;
   flex-basis: 100%;
   font: inherit;
-  height: 25px;
+  height: 16px;
   justify-content: center;
   outline: inherit;
+  padding: 0;
   position: absolute;
   right: 0;
   top: 0;
-  width: 25px;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
-  }
+  width: 16px;
 `;
 
 const StyledImageUploadText = styled.div``;
@@ -236,9 +252,14 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
                     }}
                   />
                 </StyledImageThumbnailInner>
+
                 <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
-                  <CloseIcon color={theme.colors.baseIcon_color} font-size={FONT_SIZES.SMALL} />
+                  <CloseIcon color={theme.colors.white_always_color} iconSize={FONT_SIZES.XXSMALL} />
                 </StyledImageThumbnailRemoveButton>
+
+                <StyledImageThumbnailMoveButton type="button" onClick={removeFile(fileUrl)}>
+                  <MoveIcon color={theme.colors.white_always_color} iconSize={FONT_SIZES.XXSMALL} />
+                </StyledImageThumbnailMoveButton>
               </StyledImageThumbnail>
             ))}
           </StyledReactSortable>

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, createContext } from "react";
+import React, { FunctionComponent, ReactNode, createContext, useEffect, useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
@@ -17,6 +17,8 @@ type PostsContextType = {
   postProjectSeekDataLoading: boolean;
   postProjectSeekFetchMore: any; // eslint-disable-line
   postProjectSeekRefetch: () => void;
+  projectPostFormIsDirty: boolean;
+  setProjectPostFormIsDirty: (isDirty?: boolean) => void;
 };
 
 export const PostsContext = createContext<PostsContextType>({
@@ -24,6 +26,8 @@ export const PostsContext = createContext<PostsContextType>({
   postProjectSeekDataLoading: false,
   postProjectSeekFetchMore: () => {},
   postProjectSeekRefetch: () => {},
+  projectPostFormIsDirty: false,
+  setProjectPostFormIsDirty: () => {},
 });
 
 export const PostsContextProvider: FunctionComponent<PostsContextProviderType> = ({ children }) => {
@@ -32,6 +36,8 @@ export const PostsContextProvider: FunctionComponent<PostsContextProviderType> =
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId ? routeParams.projectId : null;
   const postPageSize = 20;
+
+  const [projectPostFormIsDirty, setProjectPostFormIsDirty] = useState(false);
 
   const { data, loading, fetchMore, refetch } = useQuery<PostProjectSeekQuery>(POST_PROJECT_SEEK_QUERY, {
     fetchPolicy: "network-only",
@@ -48,11 +54,17 @@ export const PostsContextProvider: FunctionComponent<PostsContextProviderType> =
     },
   });
 
+  useEffect(() => {
+    console.log("PostsContextProvider ojectPostFormIsDirty", projectPostFormIsDirty);
+  }, [projectPostFormIsDirty]);
+
   const output: PostsContextType = {
     postProjectSeekData: data?.postProjectSeek,
     postProjectSeekDataLoading: loading,
     postProjectSeekFetchMore: fetchMore,
     postProjectSeekRefetch: refetch,
+    projectPostFormIsDirty,
+    setProjectPostFormIsDirty,
   };
 
   return <PostsContext.Provider value={output}>{children}</PostsContext.Provider>;

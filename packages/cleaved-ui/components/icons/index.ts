@@ -14,6 +14,7 @@ export * from "./favorite";
 export * from "./file-post";
 export * from "./handshake";
 export * from "./image";
+export * from "./move";
 export * from "./plus";
 export * from "./search";
 export * from "./thumb-up";
