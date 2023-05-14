@@ -18,7 +18,7 @@ type PostsContextType = {
   postProjectSeekFetchMore: any; // eslint-disable-line
   postProjectSeekRefetch: () => void;
   projectPostFormIsDirty: boolean;
-  setProjectPostFormIsDirty: (isDirty?: boolean) => void;
+  setProjectPostFormIsDirty: (isDirty: boolean) => void;
 };
 
 export const PostsContext = createContext<PostsContextType>({

@@ -49,7 +49,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
 
   // fix this. A rerender seems to be happening when you have a dirty form, then trigger the function below.
   const handleCheckAndCloseProjectPostForm = () => {
-    console.log("HIT projectPostFormIsDirty", projectPostFormIsDirty);
+    console.log("ProjectDataWrapper projectPostFormIsDirty", projectPostFormIsDirty);
 
     if (projectPostFormIsDirty) {
       console.log("111111");
