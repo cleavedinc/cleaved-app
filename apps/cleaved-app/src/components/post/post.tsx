@@ -80,12 +80,16 @@ const StyledPostInfoBarCommentCount = styled.div`
   }
 `;
 
+const StyledProjectInfoWrapper = styled.div`
+  display: flex;
+`;
+
 const StyledProjectNameLink = styled(Link)`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   display: inline-block;
   font-size: ${FONT_SIZES.XXSMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
-  margin: ${SPACING.MEDIUM} ${SPACING.MEDIUM} ${SPACING.SMALL};
+  margin: ${SPACING.MEDIUM} ${SPACING.MEDIUM} ${SPACING.SMALL} auto;
   text-transform: uppercase;
 `;
 
@@ -136,12 +140,14 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
         <StyledMessage remarkPlugins={[remarkGfm]}>{post.body}</StyledMessage>
 
-        <StyledProjectNameLink
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
-          title={post.project.name}
-        >
-          {post.project.name}
-        </StyledProjectNameLink>
+        <StyledProjectInfoWrapper>
+          <StyledProjectNameLink
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
+            title={post.project.name}
+          >
+            {post.project.name}
+          </StyledProjectNameLink>
+        </StyledProjectInfoWrapper>
 
         {post.images && post.images.length > 0 && (
           <StyledReactPhotoCollage

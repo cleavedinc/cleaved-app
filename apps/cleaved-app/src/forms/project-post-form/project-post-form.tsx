@@ -19,7 +19,6 @@ import { PostFormEditor } from "./components";
 
 type ProjectPostFormProps = {
   closeForm: () => void;
-  recipientProfessionalId?: string | undefined;
   postId?: string;
 };
 

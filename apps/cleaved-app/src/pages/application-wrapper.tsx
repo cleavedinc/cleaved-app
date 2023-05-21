@@ -14,11 +14,11 @@ import { UIProvider } from "../providers";
 import { Application } from "./application";
 
 // Staging GTM Id
-const stagingGTMId = "GTM-NVBG49W";
-// const productionGTMId = "GTM-N36S8X7";
+const localDevelopGTMId = "GTM-PF2PGRP";
+const productionGTMId = "GTM-N36S8X7";
 
 const tagManagerArgs = {
-  gtmId: stagingGTMId,
+  gtmId: process.env.NODE_ENV === "production" ? productionGTMId : localDevelopGTMId,
 };
 
 TagManager.initialize(tagManagerArgs);

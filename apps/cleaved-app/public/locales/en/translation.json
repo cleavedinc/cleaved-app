@@ -133,6 +133,10 @@
   },
   "pleaseWaitDots": "Please wait...",
   "post": {
+    "areYouSureDiscardPostModalTitle": "Are you sure?",
+    "areYouSureDiscardPostModalText": "We don't keep post drafts yet, so your content will be lost.",
+    "areYouSureDiscardPostButtonText": "Discard post",
+    "areYouSureKeepPostButtonText": "Stay and keep my post",
     "areYouSureRemovePostModalHeader": "Are you sure?",
     "areYouSureRemovePostModalText": "If you remove this post, it will be gone forever. No turning back.",
     "areYouSureRemoveButtonText": "Remove post",
@@ -197,9 +201,7 @@
   "professionalShareLinkRegistration": {
     "header": "We're so glad someone invited you!",
     "logInButtonLabel": "Log in",
-    "shareLinkButtonLabel": "Invite your team",
-    "shareLinkButtonText": "Share link",
-    "shareLinkText": "We believe in you and want you to be successful. Invite your team to help them succeed with you."
+    "shareLinkText": "We believe in you and want you to be successful."
   },
   "project": {
     "projectName": "Project name",
