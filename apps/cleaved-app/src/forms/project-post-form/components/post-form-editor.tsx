@@ -1,4 +1,4 @@
-import React, { FunctionComponent, memo, useContext, useEffect, useRef } from "react";
+import React, { FunctionComponent, useContext, useEffect, useRef } from "react";
 import { useFormikContext } from "formik";
 import styled, { useTheme } from "styled-components";
 import ReactQuill from "react-quill";
@@ -171,10 +171,10 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
   }
 `;
 
-const PostFormEditorMemo: FunctionComponent<PostFormEditorProps> = (props) => {
+export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) => {
   const { className, name, placeholder } = props;
-  const { setProjectPostFormIsDirty } = useContext(PostsContext);
-  const { dirty, isValid, setFieldValue, values } = useFormikContext();
+  const { projectPostFormIsDirty, setProjectPostFormIsDirty } = useContext(PostsContext);
+  const { dirty, isValid, isValidating, setFieldValue, status, values } = useFormikContext();
 
   // Using the theme hook due to ReactQuill not liking the normal pros way to use styled component theme.
   const theme = useTheme();
@@ -207,16 +207,19 @@ const PostFormEditorMemo: FunctionComponent<PostFormEditorProps> = (props) => {
 
   // Used to figure out if the form is dirty at the parent level
   useEffect(() => {
-    if (isValid && dirty) {
-      console.log("dirty");
+    if (!isValidating && isValid && dirty) {
+      console.log("quill editor: dirty");
       setProjectPostFormIsDirty(true);
     }
 
-    if (!(isValid && dirty)) {
-      console.log("clean");
+    if (!isValidating && !(isValid && dirty)) {
+      console.log("quill editor: clean");
       setProjectPostFormIsDirty(false);
     }
-  }, [isValid, dirty]);
+
+    console.log("form values: ", values);
+    console.log("form projectPostFormIsDirty: ", projectPostFormIsDirty);
+  }, [isValid, isValidating, dirty, projectPostFormIsDirty, setProjectPostFormIsDirty, status, values]);
 
   return (
     <StyledReactQuill
@@ -232,5 +235,3 @@ const PostFormEditorMemo: FunctionComponent<PostFormEditorProps> = (props) => {
     />
   );
 };
-
-export const PostFormEditor = memo(PostFormEditorMemo);

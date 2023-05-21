@@ -54,8 +54,13 @@ export const PostsContextProvider: FunctionComponent<PostsContextProviderType> =
     },
   });
 
+  const setProjectPostFormIsDirtyOnContext = (isDirtyArg: boolean) => {
+    console.log("PostsContextProvider setProjectPostFormIsDirtyOnContext: isDirtyArg", isDirtyArg);
+    setProjectPostFormIsDirty(isDirtyArg);
+  };
+
   useEffect(() => {
-    console.log("PostsContextProvider ojectPostFormIsDirty", projectPostFormIsDirty);
+    console.log("PostsContextProvider projectPostFormIsDirty", projectPostFormIsDirty);
   }, [projectPostFormIsDirty]);
 
   const output: PostsContextType = {
@@ -64,7 +69,7 @@ export const PostsContextProvider: FunctionComponent<PostsContextProviderType> =
     postProjectSeekFetchMore: fetchMore,
     postProjectSeekRefetch: refetch,
     projectPostFormIsDirty,
-    setProjectPostFormIsDirty,
+    setProjectPostFormIsDirty: setProjectPostFormIsDirtyOnContext,
   };
 
   return <PostsContext.Provider value={output}>{children}</PostsContext.Provider>;

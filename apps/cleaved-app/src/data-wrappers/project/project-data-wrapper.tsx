@@ -86,7 +86,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
           <Modal
             open={isContentFeedFormModalOpen}
             onCloseRequested={() => handleCheckAndCloseProjectPostForm()}
-            title={postAProjectUpdate}
+            title={`1111 ${postAProjectUpdate}`}
           >
             <ProjectPostForm closeForm={() => handleCheckAndCloseProjectPostForm()} />
           </Modal>
@@ -94,7 +94,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
           <Modal
             open={isConfirmDiscardChangesModalOpen}
             onCloseRequested={() => setIsConfirmDiscardChangesModalOpen(false)}
-            title={areYouSureDiscardPostModalTitle}
+            title={`222 ${areYouSureDiscardPostModalTitle}`}
           >
             <StyledActionText>{t("post.areYouSureDiscardPostModalText")}</StyledActionText>
 
