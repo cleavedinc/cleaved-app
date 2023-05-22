@@ -39,6 +39,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
   const { accountData } = useContext(AccountContext);
   const [isContentFeedFormModalOpen, setIsContentFeedFormModalOpen] = useState(false);
   const [isConfirmDiscardChangesModalOpen, setIsConfirmDiscardChangesModalOpen] = useState(false);
+  const [closeRequested, setCloseRequested] = useState(false);
 
   const { t } = useTranslator();
 
@@ -47,24 +48,19 @@ export const ProjectDataWrapper: FunctionComponent = () => {
     setIsConfirmDiscardChangesModalOpen(false);
   };
 
-  // fix this. A rerender seems to be happening when you have a dirty form, then trigger the function below.
-  const handleCheckAndCloseProjectPostForm = () => {
-    console.log("ProjectDataWrapper projectPostFormIsDirty", projectPostFormIsDirty);
+  useEffect(() => {
+    if (closeRequested) {
+      console.log("ProjectDataWrapper projectPostFormIsDirty", projectPostFormIsDirty);
+      if (projectPostFormIsDirty) {
+        console.log("111111");
+        setIsConfirmDiscardChangesModalOpen(true);
+      }
 
-    if (projectPostFormIsDirty) {
-      console.log("111111");
-      setIsConfirmDiscardChangesModalOpen(true);
-    }
-
-    if (!projectPostFormIsDirty) {
       console.log("22222");
       setIsContentFeedFormModalOpen(false);
+      setCloseRequested(false);
     }
-  };
-
-  useEffect(() => {
-    console.log("USEEFFECT projectPostFormIsDirty", projectPostFormIsDirty);
-  }, [projectPostFormIsDirty]);
+  }, [projectPostFormIsDirty, closeRequested]);
 
   const areYouSureDiscardPostModalTitle = t("post.areYouSureDiscardPostModalTitle")
     ? t("post.areYouSureDiscardPostModalTitle")
@@ -85,10 +81,16 @@ export const ProjectDataWrapper: FunctionComponent = () => {
 
           <Modal
             open={isContentFeedFormModalOpen}
-            onCloseRequested={() => handleCheckAndCloseProjectPostForm()}
+            onCloseRequested={() => {
+              setCloseRequested(true);
+            }}
             title={`1111 ${postAProjectUpdate}`}
           >
-            <ProjectPostForm closeForm={() => handleCheckAndCloseProjectPostForm()} />
+            <ProjectPostForm
+              closeForm={() => {
+                setCloseRequested(true);
+              }}
+            />
           </Modal>
 
           <Modal

@@ -208,17 +208,12 @@ export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) =>
   // Used to figure out if the form is dirty at the parent level
   useEffect(() => {
     if (!isValidating && isValid && dirty) {
-      console.log("quill editor: dirty");
       setProjectPostFormIsDirty(true);
     }
 
     if (!isValidating && !(isValid && dirty)) {
-      console.log("quill editor: clean");
       setProjectPostFormIsDirty(false);
     }
-
-    console.log("form values: ", values);
-    console.log("form projectPostFormIsDirty: ", projectPostFormIsDirty);
   }, [isValid, isValidating, dirty, projectPostFormIsDirty, setProjectPostFormIsDirty, status, values]);
 
   return (
