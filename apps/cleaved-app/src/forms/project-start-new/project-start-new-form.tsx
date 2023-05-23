@@ -99,7 +99,7 @@ export const ProjectStartNewForm: FunctionComponent = () => {
               projectName: values.projectName,
               organizationId: preferredOrgId,
               projectId: newProjectGuid,
-              // projectDetails: values.projectDetails,
+              projectDetail: values.projectDetails,
             },
           });
 
