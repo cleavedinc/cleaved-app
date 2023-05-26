@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, useContext, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { useDropzone } from "react-dropzone";
 import { ReactSortable } from "react-sortablejs";
@@ -138,9 +138,8 @@ const StyledReactSortable = styled(ReactSortable)``;
 
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
   const { images } = props;
-  const { projectPostFormIsDirty, setProjectPostFormIsDirty, setProjectPostFormImageUploadIsDirty } =
-    useContext(PostsContext);
-  const { dirty, isValid, isValidating, setFieldValue, status, values } = useFormikContext();
+  const { setProjectPostFormImageUploadIsDirty } = useContext(PostsContext);
+  const { setFieldValue } = useFormikContext();
 
   const [savedFileUrls, setSavedFileUrls] = useState<string[]>([]);
   const [errors, setErrors] = useState<string | null>("");
@@ -230,8 +229,6 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
     if (savedFileUrls && savedFileUrls.length > 0) {
       setProjectPostFormImageUploadIsDirty(true);
     }
-
-    // TODO: add dirty form set for images here/on context
   }, [savedFileUrls]); // eslint-disable-line
 
   return (
