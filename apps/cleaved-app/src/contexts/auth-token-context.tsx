@@ -17,6 +17,11 @@ type AuthTokenContextProviderType = {
   children: ReactNode;
 };
 
+type RefreshRequest = {
+  refreshRequested: boolean;
+  refreshAction: (() => void) | null | undefined;
+};
+
 type AuthTokenContextType = {
   logOut: () => void;
   loggedIn: boolean;
@@ -45,6 +50,10 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
   const [firstLoginComplete, setFirstLoginComplete] = useState(false);
   const [preferredOrgId, setPreferredOrgId] = useState<string>("");
   const [refreshInProgress, setRefreshInProgress] = useState(false);
+  const [refreshRequested, setRefreshRequested] = useState<RefreshRequest>({
+    refreshRequested: false,
+    refreshAction: null,
+  });
 
   const logOut = () => {
     setLoggedIn(false);
@@ -83,7 +92,7 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     },
   });
 
-  const refreshOnComplete = (r: RefreshLogInMutation, postLoginRefreshAction?: () => void | null | undefined) => {
+  const refreshOnComplete = (r: RefreshLogInMutation, postLoginRefreshAction?: (() => void) | null | undefined) => {
     saveAuthorizationTokens(r.refreshLogIn.authorizationToken, r.refreshLogIn.refreshToken);
     setOrgId(r.refreshLogIn.preferredOrgId);
 
@@ -112,6 +121,25 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     }
   }, [loggedIn]);
 
+  useEffect(() => {
+    if (!refreshInProgress && refreshRequested.refreshRequested) {
+      setRefreshInProgress(true);
+      const refreshAction = refreshRequested.refreshAction;
+      const crt = GetCookie("_CRT_");
+      getRefreshLogIn({
+        variables: { refreshToken: crt ? crt : "" },
+        onCompleted: (r: RefreshLogInMutation) => {
+          refreshOnComplete(r, refreshAction);
+          setRefreshInProgress(false);
+        },
+        onError: () => {
+          setRefreshInProgress(false);
+        },
+      });
+      setRefreshRequested({ refreshRequested: false, refreshAction: null });
+    }
+  }, [refreshRequested, refreshInProgress]);
+
   const output: AuthTokenContextType = {
     logOut,
     loggedIn,
@@ -121,20 +149,8 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     },
     setAuthorizationTokens: saveAuthorizationTokens,
     loading: refreshLoading || !firstLoginComplete,
-    refreshLogin: async (postLoginRefreshAction?: () => void | null | undefined) => {
-      if (!refreshInProgress) {
-        setRefreshInProgress(true);
-        const crt = GetCookie("_CRT_");
-        getRefreshLogIn({
-          variables: { refreshToken: crt ? crt : "" },
-          onCompleted: (r: RefreshLogInMutation) => {
-            refreshOnComplete(r, postLoginRefreshAction);
-            setRefreshInProgress(false);
-          },
-        });
-      } else {
-        // console.log("double tap refresh");
-      }
+    refreshLogin: async (postLoginRefreshAction?: (() => void) | null | undefined) => {
+      setRefreshRequested({ refreshRequested: true, refreshAction: postLoginRefreshAction });
     },
   };
 
