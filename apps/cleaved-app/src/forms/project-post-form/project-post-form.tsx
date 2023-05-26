@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { ButtonPrimary, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
+import { ButtonPrimary, CloseIcon, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
 
 import { AccountContext, PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
@@ -57,10 +57,17 @@ const StyledAdditionalActionButtonWrapper = styled.div`
 
 const StyledProjectPostForm = styled.div``;
 
+const StyledRemoveAllImages = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: ${FONT_SIZES.XSMALL};
+`;
+
 export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) => {
   const { closeForm, postId } = props;
   const { accountData } = useContext(AccountContext);
-  const { postProjectSeekRefetch } = useContext(PostsContext);
+  const { postProjectSeekRefetch, setProjectPostFormIsDirty, setProjectPostFormImageUploadIsDirty } =
+    useContext(PostsContext);
   const { postProjectGetByIdData, postProjectGetByIdDataLoading } = usePostProjectGetById(postId);
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
@@ -138,48 +145,71 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
           }
 
           resetForm({});
+          setProjectPostFormIsDirty(false);
+          setProjectPostFormImageUploadIsDirty(false);
           closeForm();
         }}
         validateOnChange
         validationSchema={yup
           .object()
           .shape<Record<keyof PostProjectCreateMutationVariablesValidation, yup.AnySchema>>({
-            body: yup
-              .string()
-              .matches(/^(?=.*[a-zA-Z0-9]).+$/, notContainOnlyBlankSpaces)
-              .test("empty-body", "Body cannot be empty", (value) => {
-                if (value && value.replace(/<[^>]+>/g, "").trim().length === 0) {
-                  return false; // Invalid if value is present but only contains empty HTML elements
-                }
-                return true; // Valid if value is empty or contains non-empty text
-              })
-              .required(),
+            body: yup.string().when("imageUrls", {
+              is: (imageUrls: string[]) => !imageUrls || imageUrls.length === 0,
+              then: yup
+                .string()
+                .matches(/^(?=.*[a-zA-Z0-9]).+$/, notContainOnlyBlankSpaces)
+                .test("empty-body", "Body cannot be empty", (value) => {
+                  if (value && value.replace(/<[^>]+>/g, "").trim().length === 0) {
+                    return false; // Invalid if value is present but only contains empty HTML elements
+                  }
+                  return true; // Valid if value is empty or contains non-empty text
+                })
+                .required(),
+              otherwise: yup.string().notRequired(),
+            }),
             imageUrls: yup.array().nullable().of(yup.string()),
           })}
       >
         {({ dirty, isSubmitting, isValid, setFieldValue }) => {
+          const handleAddImagesToPost = () => {
+            setImageUploadWrapperActive(true);
+          };
+
+          // closes image upload box and clears out imageUrls values
+          const handleClearImagesFromPost = () => {
+            setFieldValue("imageUrls", []);
+            setProjectPostFormImageUploadIsDirty(false);
+            setImageUploadWrapperActive(false);
+          };
+
           return (
             <Form>
               <PostFormEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
 
               <StyledAdditionalActionsWrapper>
-                {isImageUploadWrapperActive && (
-                  <ImageUploadAndPreviewForm
-                    images={postProjectGetByIdData?.images}
-                    setFieldValue={setFieldValue}
-                    setImageUploadWrapperActive={setImageUploadWrapperActive}
-                  />
-                )}
+                {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
               </StyledAdditionalActionsWrapper>
 
               <StyledAdditionalActionButtonWrapper>
                 <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
-                  <StyledAdditionalActionsIconButton
-                    onClick={() => setImageUploadWrapperActive(!isImageUploadWrapperActive)}
-                    type="button"
-                  >
-                    <ImageIcon color={theme.colors.baseIcon_color} iconSize="30px" />
-                  </StyledAdditionalActionsIconButton>
+                  <>
+                    {/* open the image upload box */}
+                    {!isImageUploadWrapperActive && (
+                      <StyledAdditionalActionsIconButton onClick={() => handleAddImagesToPost()} type="button">
+                        <ImageIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.XLARGE} />
+                      </StyledAdditionalActionsIconButton>
+                    )}
+
+                    {/* Clear all images and close the image upload box */}
+                    {isImageUploadWrapperActive && (
+                      <StyledAdditionalActionsIconButton onClick={() => handleClearImagesFromPost()} type="button">
+                        <StyledRemoveAllImages>
+                          <CloseIcon color={theme.colors.baseAlert_color} iconSize={FONT_SIZES.SMALL} />
+                          {t("post.removeAllImages")}
+                        </StyledRemoveAllImages>
+                      </StyledAdditionalActionsIconButton>
+                    )}
+                  </>
                 </StyledTooltipDark>
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">

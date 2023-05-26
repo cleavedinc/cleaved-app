@@ -33,7 +33,7 @@ const StyledProjectPostBox = styled(Box)`
 `;
 
 export const ProjectDataWrapper: FunctionComponent = () => {
-  const { projectPostFormIsDirty } = useContext(PostsContext);
+  const { projectPostFormIsDirty, projectPostFormImageUploadIsDirty } = useContext(PostsContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { postProjectSeekData, postProjectSeekDataLoading } = useContext(PostsContext);
   const { accountData } = useContext(AccountContext);
@@ -50,17 +50,17 @@ export const ProjectDataWrapper: FunctionComponent = () => {
 
   useEffect(() => {
     if (closeRequested) {
-      console.log("ProjectDataWrapper projectPostFormIsDirty", projectPostFormIsDirty);
-      if (projectPostFormIsDirty) {
-        console.log("111111");
+      if (projectPostFormIsDirty || projectPostFormImageUploadIsDirty) {
         setIsConfirmDiscardChangesModalOpen(true);
       }
 
-      console.log("22222");
-      setIsContentFeedFormModalOpen(false);
+      if (!projectPostFormIsDirty && !projectPostFormImageUploadIsDirty) {
+        setIsContentFeedFormModalOpen(false);
+      }
+
       setCloseRequested(false);
     }
-  }, [projectPostFormIsDirty, closeRequested]);
+  }, [projectPostFormIsDirty, projectPostFormImageUploadIsDirty, closeRequested]);
 
   const areYouSureDiscardPostModalTitle = t("post.areYouSureDiscardPostModalTitle")
     ? t("post.areYouSureDiscardPostModalTitle")
@@ -84,11 +84,12 @@ export const ProjectDataWrapper: FunctionComponent = () => {
             onCloseRequested={() => {
               setCloseRequested(true);
             }}
-            title={`1111 ${postAProjectUpdate}`}
+            title={`${postAProjectUpdate}`}
           >
             <ProjectPostForm
               closeForm={() => {
                 setCloseRequested(true);
+                console.log("555");
               }}
             />
           </Modal>
@@ -96,7 +97,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
           <Modal
             open={isConfirmDiscardChangesModalOpen}
             onCloseRequested={() => setIsConfirmDiscardChangesModalOpen(false)}
-            title={`222 ${areYouSureDiscardPostModalTitle}`}
+            title={`${areYouSureDiscardPostModalTitle}`}
           >
             <StyledActionText>{t("post.areYouSureDiscardPostModalText")}</StyledActionText>
 
