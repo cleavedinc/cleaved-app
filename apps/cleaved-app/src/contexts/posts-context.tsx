@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, createContext, useEffect, useState } from "react";
+import React, { FunctionComponent, ReactNode, createContext, useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";

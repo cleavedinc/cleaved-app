@@ -6,9 +6,7 @@ import { Box, H1, SPACING } from "@cleaved/ui";
 
 import { useTranslator } from "../../hooks";
 
-const StyledLoginButtonWrapper = styled.div`
-  margin-left: auto;
-`;
+const StyledLoginButtonWrapper = styled.div``;
 
 const StyledButtonText = styled.div`
   margin-bottom: ${SPACING.SMALL};
@@ -19,8 +17,8 @@ const StyledH1 = styled(H1)`
 `;
 
 const StyledLoginWrapper = styled.div`
-  align-items: flex-start;
   display: flex;
+  justify-content: center;
 `;
 
 const StyledParagraph = styled.div`

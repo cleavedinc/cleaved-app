@@ -18,17 +18,9 @@ export const GoogleLoginWrapper: FunctionComponent = () => {
   const routeParams = useRouteParams();
   const shareLink = routeParams.shareLink;
 
-  const handlejoinWithShareLink = (orgId: string) => {
-    navigate(`/${orgId}${routeConstantsCleavedApp.home.route}`);
-  };
-
   const [joinOrganizationWithShareLink] = useMutation(JOIN_ORGANIZATION_WITH_SHARE_LINK_MUTATION, {
     variables: {
       shareLink: shareLink ? shareLink : "",
-    },
-    onCompleted: (shareLinkData) => {
-      console.log("share link shareLinkData: ", shareLinkData);
-      handlejoinWithShareLink(shareLinkData.joinOrganizationWithShareLink);
     },
     onError: (error) => {
       logQueryError(error);

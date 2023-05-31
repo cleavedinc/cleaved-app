@@ -129,6 +129,7 @@
   "people": {
     "addPerson": "Add Teammate",
     "teamListHeader": "Active Teammates",
+    "teamListHeaderHome": "Teammates",
     "viewAllPeople": "View all"
   },
   "pleaseWaitDots": "Please wait...",
@@ -210,6 +211,7 @@
     "owner": "Owner",
     "posts": "Posts",
     "edit": "Edit",
+    "editStatus": "Edit Status",
     "stateActive": "Active",
     "stateInactive": "Inactive",
     "stateArchive": "Archive"
