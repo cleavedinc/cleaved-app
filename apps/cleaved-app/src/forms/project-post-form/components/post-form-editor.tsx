@@ -39,7 +39,6 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
     font-size: ${FONT_SIZES.MEDIUM};
     height: 250px;
     outline: none;
-    overflow-y: auto;
     padding: ${SPACING.MEDIUM} 0;
     resize: none;
   }

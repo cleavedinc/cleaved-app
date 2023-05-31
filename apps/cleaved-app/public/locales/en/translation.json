@@ -129,14 +129,15 @@
   "people": {
     "addPerson": "Add Teammate",
     "teamListHeader": "Active Teammates",
+    "teamListHeaderHome": "Teammates",
     "viewAllPeople": "View all"
   },
   "pleaseWaitDots": "Please wait...",
   "post": {
     "areYouSureDiscardPostModalTitle": "Are you sure?",
-    "areYouSureDiscardPostModalText": "We don't keep post drafts yet, so your content will be lost.",
+    "areYouSureDiscardPostModalText": "We don't keep drafts yet, so your content will be lost.",
     "areYouSureDiscardPostButtonText": "Discard post",
-    "areYouSureKeepPostButtonText": "Stay and keep my post",
+    "areYouSureKeepPostButtonText": "Stay and keep writing",
     "areYouSureRemovePostModalHeader": "Are you sure?",
     "areYouSureRemovePostModalText": "If you remove this post, it will be gone forever. No turning back.",
     "areYouSureRemoveButtonText": "Remove post",
@@ -154,6 +155,7 @@
     "photoViewerToolbarMessage": "Posted by {{firstName}} {{lastName}} on ",
     "post": "Post",
     "postImageBasicAlt": "Post Image",
+    "removeAllImages": "Remove all images",
     "removePost": "Remove Post",
     "submitPost": "Post",
     "totalComments": "Total comments",
@@ -209,6 +211,7 @@
     "owner": "Owner",
     "posts": "Posts",
     "edit": "Edit",
+    "editStatus": "Edit Status",
     "stateActive": "Active",
     "stateInactive": "Inactive",
     "stateArchive": "Archive"

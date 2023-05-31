@@ -1,4 +1,5 @@
-import React, { Dispatch, FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
+import { useFormikContext } from "formik";
 import { useDropzone } from "react-dropzone";
 import { ReactSortable } from "react-sortablejs";
 import styled, { useTheme } from "styled-components";
@@ -7,6 +8,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, MoveIcon, RADIUS, SPACING } from "@cleaved/ui";
 
+import { PostsContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
 import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
@@ -14,8 +16,6 @@ import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
 type ImageUploadAndPreviewFormProps = {
   className?: string;
   images?: string[] | undefined;
-  setFieldValue: (field: string, value: string[], shouldValidate?: boolean) => void;
-  setImageUploadWrapperActive: Dispatch<React.SetStateAction<boolean>>;
 };
 
 type GetColorProps = {
@@ -137,7 +137,10 @@ const StyledReactSortable = styled(ReactSortable)``;
 // }
 
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
-  const { images, setFieldValue } = props;
+  const { images } = props;
+  const { setProjectPostFormImageUploadIsDirty } = useContext(PostsContext);
+  const { setFieldValue } = useFormikContext();
+
   const [savedFileUrls, setSavedFileUrls] = useState<string[]>([]);
   const [errors, setErrors] = useState<string | null>("");
   const maxFileUploadlimit = 10;
@@ -216,6 +219,16 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
 
   useEffect(() => {
     setFieldValue("imageUrls", savedFileUrls);
+
+    // checks to set dirty context to handle modal state (clean state)
+    if (savedFileUrls && savedFileUrls.length === 0) {
+      setProjectPostFormImageUploadIsDirty(false);
+    }
+
+    // checks to set dirty context to handle modal state (dirty state)
+    if (savedFileUrls && savedFileUrls.length > 0) {
+      setProjectPostFormImageUploadIsDirty(true);
+    }
   }, [savedFileUrls]); // eslint-disable-line
 
   return (

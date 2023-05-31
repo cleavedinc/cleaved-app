@@ -7,16 +7,25 @@ import { logError, RollbarLogLevels, logQueryError } from "@cleaved/helpers";
 
 import { authTokenContext } from "../../../contexts";
 import { GOOGLE_SSO_MUTATION } from "../gql";
-import { useJoinOrganizationWithShareLink, useRouteParams } from "../../../hooks";
+import { useRouteParams } from "../../../hooks";
+import { JOIN_ORGANIZATION_WITH_SHARE_LINK_MUTATION } from "../../../gql-mutations";
 import { routeConstantsCleavedApp } from "../../../router";
 
 import { GoogleSsoMutation } from "../../../generated-types/graphql";
 
 export const GoogleLoginWrapper: FunctionComponent = () => {
   const { logOut, setAuthorizationTokens, setPreferredOrgIdOnContext } = useContext(authTokenContext);
-  const { joinOrganizationWithShareLink } = useJoinOrganizationWithShareLink();
   const routeParams = useRouteParams();
   const shareLink = routeParams.shareLink;
+
+  const [joinOrganizationWithShareLink] = useMutation(JOIN_ORGANIZATION_WITH_SHARE_LINK_MUTATION, {
+    variables: {
+      shareLink: shareLink ? shareLink : "",
+    },
+    onError: (error) => {
+      logQueryError(error);
+    },
+  });
 
   const [getCleavedLogin] = useMutation(GOOGLE_SSO_MUTATION, {
     onCompleted: (data: GoogleSsoMutation) => {

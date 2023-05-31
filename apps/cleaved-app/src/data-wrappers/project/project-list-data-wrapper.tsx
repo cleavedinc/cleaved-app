@@ -85,12 +85,10 @@ const StyledTdWithMenuContent = styled(StyledTd)`
 
   ${mediaQueries.XS_LANDSCAPE} {
     &:first-child {
-      width: 50%;
+      width: 60%;
     }
 
     &:nth-child(2) {
-      padding-right: ${SPACING.MEDIUM};
-      text-align: end;
     }
   }
 `;
@@ -100,17 +98,12 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
 
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(4):before {
-      content: "Edit";
+      content: "Edit Status";
     }
   }
 `;
 
-const StyledThRight = styled(StyledTh)`
-  &:nth-child(2) {
-    padding-right: ${SPACING.MEDIUM};
-    text-align: end;
-  }
-`;
+const StyledThRight = styled(StyledTh)``;
 
 const StyledTrWrapper = styled(StyledTr)`
   ${mediaQueries.RESPONSIVE_TABLE} {
@@ -202,7 +195,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                 <StyledTh role="columnheader">{t("project.projectName")}</StyledTh>
                 <StyledThRight role="columnheader">{t("project.dateCreated")}</StyledThRight>
                 <StyledTh role="columnheader">{t("project.posts")}</StyledTh>
-                {hasPermission && <StyledTh role="columnheader">{t("project.edit")}</StyledTh>}
+                {hasPermission && <StyledTh role="columnheader">{t("project.editStatus")}</StyledTh>}
               </StyledTHeadTr>
             </StyledTHead>
             <StyledTBody role="rowgroup">

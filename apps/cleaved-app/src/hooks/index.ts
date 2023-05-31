@@ -1,4 +1,3 @@
-export * from "./use-join-organization-with-share-link";
 export * from "./use-login-guard";
 export * from "./use-navigate-to-professional-profile";
 export * from "./use-organization-seek-members";
