@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { BORDERS, FONT_SIZES, FONT_WEIGHTS, RADIUS, SPACING_PX } from "@cleaved/ui";
+import { FONT_SIZES, FONT_WEIGHTS, SPACING_PX } from "@cleaved/ui";
 
 import { OrganizationSeekMembersQuery, PostProjectAccountSeekQuery } from "../../generated-types/graphql";
 import { useNavigateToProfile } from "../../hooks";
+
+import { avatartBase, avatarSmall } from "../avatars/avatar-base-styles";
 
 type AsideTeamListAvatarProps = {
   account:
@@ -12,19 +14,10 @@ type AsideTeamListAvatarProps = {
     | OrganizationSeekMembersQuery["organizationSeekMembers"][0];
 };
 
-const avatartBase = css`
-  align-items: center;
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.CIRCLE};
-  display: flex;
-  height: 45px;
-  justify-content: center;
-  margin-right: ${SPACING_PX.TWO};
-  width: 45px;
-`;
-
 const StyledAvatarImage = styled.img`
   ${avatartBase}
+  ${avatarSmall}
+  margin-right: ${SPACING_PX.TWO};
 `;
 
 const StyledAvatarImageLink = styled.a`
@@ -34,7 +27,9 @@ const StyledAvatarImageLink = styled.a`
 
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
+  ${avatarSmall}
   font-size: ${FONT_SIZES.XXSMALL};
+  margin-right: ${SPACING_PX.TWO};
 `;
 
 const StyledJobTitle = styled.div`

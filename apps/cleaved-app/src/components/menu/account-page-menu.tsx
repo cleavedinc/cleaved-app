@@ -19,7 +19,7 @@ const StyledMenuList = styled.ul``;
 
 const StyledMenuListItem = styled.li`
   cursor: pointer;
-  padding: ${SPACING.BASE} ${SPACING.SMALL};
+  padding: ${SPACING.SMALL} ${SPACING.SMALL};
 
   :not(:last-child) {
     border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
@@ -78,7 +78,7 @@ export const AccountPageMenu: FunctionComponent = () => {
         </StyledMenuListItem>
       )}
 
-      {hasPermission && (
+      {/* {hasPermission && (
         <StyledMenuListItem>
           <StyledMenuLink
             getProps={isMenuItemActive}
@@ -88,7 +88,7 @@ export const AccountPageMenu: FunctionComponent = () => {
             <StyledMenuName>{accountMembershipLinkName}</StyledMenuName>
           </StyledMenuLink>
         </StyledMenuListItem>
-      )}
+      )} */}
     </StyledMenuList>
   );
 };

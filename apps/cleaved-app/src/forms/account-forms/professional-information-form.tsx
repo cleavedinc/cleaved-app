@@ -6,14 +6,23 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, FONT_SIZES, HeadingWrapper, RADIUS, SectionHeader, SPACING, SPACING_PX } from "@cleaved/ui";
+import {
+  BORDERS,
+  ButtonPrimary,
+  FONT_SIZES,
+  HeadingWrapper,
+  RADIUS,
+  SectionHeader,
+  SPACING,
+  SPACING_PX,
+  Spinner,
+} from "@cleaved/ui";
 
 import { AccountContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
 import { ProfessionalInformationFormFormikTextarea } from "./components";
 import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION } from "./gql";
-import { StyledFormikAutoSave } from "./styled-formik-auto-save";
 
 type ProfesionalInformationFormType = {
   about?: string;
@@ -44,6 +53,12 @@ const StyledProjectFormLabel = styled.label`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING_PX.ONE};
+`;
+
+const StyledSubmitButton = styled(ButtonPrimary)`
+  font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
+  margin-top: ${SPACING_PX.ONE};
 `;
 
 export const ProfesionalInformationForm: FunctionComponent = () => {
@@ -126,12 +141,11 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
         jobTitle: yup.string(),
       })}
     >
-      {() => {
+      {({ dirty, isSubmitting, isValid }) => {
         return (
           <>
             <HeadingWrapper>
               <SectionHeader>{t("hTags.professionalInformation")}</SectionHeader>
-              <StyledFormikAutoSave />
             </HeadingWrapper>
 
             <StyledFormWrapper>
@@ -159,6 +173,13 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
                     name="about"
                     placeholder={t("formLabels.aboutPlaceholder")}
                   />
+                </StyledProjectFormWrapper>
+
+                <StyledProjectFormWrapper>
+                  <StyledSubmitButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
+                    {isSubmitting ? t("pleaseWaitDots") : t("account.save")}
+                    <Spinner visible={isSubmitting} />
+                  </StyledSubmitButton>
                 </StyledProjectFormWrapper>
               </Form>
             </StyledFormWrapper>

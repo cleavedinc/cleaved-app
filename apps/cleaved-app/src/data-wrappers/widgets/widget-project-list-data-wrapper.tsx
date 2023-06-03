@@ -6,7 +6,7 @@ import { BORDERS, BoxNoPadding, FilePost, FONT_SIZES, RADIUS, SPACING, WidgetHea
 
 import { StyledRouterButton, WidgetProjectListMenu } from "../../components";
 import { authTokenContext } from "../../contexts";
-import { OrgPermissionLevel } from "../../generated-types/graphql";
+import { OrgPermissionLevel, ProjectStatus } from "../../generated-types/graphql";
 import { useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
@@ -85,7 +85,8 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
 
   const { projectsInOrganizationSeekData, projectsInOrganizationSeekDataLoading } = useProjectsInOrganizationSeek(
     null,
-    5
+    5,
+    ProjectStatus.Active
   );
 
   const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";

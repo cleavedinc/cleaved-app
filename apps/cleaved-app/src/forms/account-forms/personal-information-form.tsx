@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import {
   BORDERS,
+  ButtonPrimary,
   FONT_SIZES,
   HeadingWrapper,
   mediaQueries,
@@ -14,6 +15,7 @@ import {
   SectionHeader,
   SPACING,
   SPACING_PX,
+  Spinner,
 } from "@cleaved/ui";
 
 import { EditAccountAvatar } from "../../components";
@@ -21,7 +23,6 @@ import { AccountContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
 import { UPDATE_ACCOUNT_MUTATION } from "./gql";
-import { StyledFormikAutoSave } from "./styled-formik-auto-save";
 
 type PersonalInformationFormType = {
   firstName?: string;
@@ -71,6 +72,12 @@ const StyledProjectFormLabel = styled.label`
   margin-bottom: ${SPACING_PX.ONE};
 `;
 
+const StyledSubmitButton = styled(ButtonPrimary)`
+  font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
+  margin-top: ${SPACING_PX.ONE};
+`;
+
 export const PersonalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();
   const { accountData, accountDataRefetch } = useContext(AccountContext);
@@ -102,8 +109,8 @@ export const PersonalInformationForm: FunctionComponent = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        firstName: accountData?.firstName || "",
-        lastName: accountData?.lastName || "",
+        firstName: accountData?.firstName ?? "",
+        lastName: accountData?.lastName ?? "",
       }}
       onSubmit={(values: PersonalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
@@ -120,12 +127,11 @@ export const PersonalInformationForm: FunctionComponent = () => {
         lastName: yup.string().required(lastNameIsRequired),
       })}
     >
-      {() => {
+      {({ dirty, isSubmitting, isValid }) => {
         return (
           <>
             <HeadingWrapper>
               <SectionHeader>{t("hTags.personalInformation")}</SectionHeader>
-              <StyledFormikAutoSave />
             </HeadingWrapper>
 
             <StyledFormWrapper>
@@ -145,6 +151,11 @@ export const PersonalInformationForm: FunctionComponent = () => {
 
                       <StyledField id="lastName" name="lastName" placeholder={lastNamePlaceholder} />
                     </StyledProjectFormWrapper>
+
+                    <StyledSubmitButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
+                      {isSubmitting ? t("pleaseWaitDots") : t("account.save")}
+                      <Spinner visible={isSubmitting} />
+                    </StyledSubmitButton>
                   </StyledFirstLastNameWrapper>
                 </StyledAvatarNameWrapper>
               </Form>
