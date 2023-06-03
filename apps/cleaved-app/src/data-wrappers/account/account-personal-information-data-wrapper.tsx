@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled, { useTheme } from "styled-components";
 
-import { Box, Toggle } from "@cleaved/ui";
+import { Box, HeadingWrapper, SectionHeader, Toggle } from "@cleaved/ui";
 
 import { ThemeContext } from "../../contexts";
 import { PersonalInformationForm } from "../../forms";
@@ -12,9 +12,7 @@ const StyledBox = styled(Box)`
   flex-direction: column;
 `;
 
-const StyledToggle = styled(Toggle)`
-  margin-left: auto;
-`;
+const StyledToggle = styled(Toggle)``;
 
 export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
   const { isDarkTheme, setThemeMode } = useContext(ThemeContext);
@@ -24,16 +22,24 @@ export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
   const darkModeLabel = t("settings.darkMode") ? t("settings.darkMode") : "";
 
   return (
-    <StyledBox>
-      <PersonalInformationForm />
+    <>
+      <StyledBox>
+        <PersonalInformationForm />
+      </StyledBox>
 
-      <StyledToggle
-        callback={() => setThemeMode()}
-        label={darkModeLabel}
-        isChecked={isDarkTheme ? true : false}
-        offColor={theme.colors.baseBordersAndShadows_color}
-        onColor={theme.colors.baseApproved_color}
-      />
-    </StyledBox>
+      <StyledBox>
+        <HeadingWrapper>
+          <SectionHeader>{t("hTags.theme")}</SectionHeader>
+        </HeadingWrapper>
+
+        <StyledToggle
+          callback={() => setThemeMode()}
+          label={darkModeLabel}
+          isChecked={isDarkTheme ? true : false}
+          offColor={theme.colors.baseBordersAndShadows_color}
+          onColor={theme.colors.baseApproved_color}
+        />
+      </StyledBox>
+    </>
   );
 };

@@ -1,4 +1,7 @@
 {
+  "account": {
+    "save": "Save"
+  },
   "alerts": {
     "copiedTextToClipboard": "Copied!"
   },
@@ -87,7 +90,8 @@
   },
   "hTags": {
     "personalInformation": "Personal information",
-    "professionalInformation": "Professional information"
+    "professionalInformation": "Professional information",
+    "theme": "Theme"
   },
   "loginPage": {
     "signInHeader": "Sign up / Log in",

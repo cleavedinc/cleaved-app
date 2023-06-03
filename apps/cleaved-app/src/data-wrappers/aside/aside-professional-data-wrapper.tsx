@@ -61,7 +61,7 @@ export const AsideProfessionalDataWrapper: FunctionComponent = () => {
               <StyledProfessionalAbout>{accountData?.about}</StyledProfessionalAbout>
 
               <StyledEmaillink>
-                <a href={`mailto:${accountData?.id}`}>TEMP EMAIL LINK NEEDED {t("professional.emailLinkText")}</a>
+                <a href={`mailto:${accountData?.emailAddress}`}>{t("professional.emailLinkText")}</a>
               </StyledEmaillink>
             </StyledAsideProfessionalWrapper>
           </Box>

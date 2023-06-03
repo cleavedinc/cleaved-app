@@ -29,6 +29,6 @@ export const COLORS_BASE: ThemeColors = {
 
   RED_500: "#FF6366", // errors, private
 
-  WHITE_ALPHA: "rgba(255,255,255,0.8)", // overlays
+  WHITE_ALPHA: "rgba(255,255,255,0.9)", // overlays
   WHITE_ALWAYS: "#FFFFFF",
 };

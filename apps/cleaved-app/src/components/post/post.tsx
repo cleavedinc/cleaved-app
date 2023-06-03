@@ -99,6 +99,10 @@ const StyledReactPhotoCollage = styled(PhotoCollage)`
   }
 `;
 
+const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
+  margin: ${SPACING.SMALL} ${SPACING.MEDIUM};
+`;
+
 export const Post: FunctionComponent<PostProps> = (props) => {
   const { post } = props;
   const { preferredOrgId } = useContext(authTokenContext);
@@ -161,10 +165,12 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
         <StyledPostInfoBar>
           {post.reactionTotalCount !== "0" && (
-            <ReactionTypesAndTotalCount
-              reactionsExpressed={post.reactionsExpressed}
-              reactionTotalCount={post.reactionTotalCount}
-            />
+            <StyledReactReactionTypesAndTotalCountWrapper>
+              <ReactionTypesAndTotalCount
+                reactionsExpressed={post.reactionsExpressed}
+                reactionTotalCount={post.reactionTotalCount}
+              />
+            </StyledReactReactionTypesAndTotalCountWrapper>
           )}
 
           {post.repliesCount !== "0" && (

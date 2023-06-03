@@ -1,32 +1,27 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { BORDERS, FONT_SIZES, RADIUS } from "@cleaved/ui";
+import { FONT_SIZES } from "@cleaved/ui";
 
 import { FindMyAccountQuery } from "../../generated-types/graphql";
+
+import { avatartBase, avatarBaseSize } from "../avatars/avatar-base-styles";
 
 type HeaderMenuAvatarProps = {
   account: FindMyAccountQuery["findMyAccount"] | undefined;
 };
 
-const avatartBase = css`
-  align-items: center;
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.CIRCLE};
-  display: flex;
-  height: 56px;
-  justify-content: center;
-  margin-right: 10px;
-  width: 56px;
-`;
-
 const StyledAvatarImage = styled.img`
   ${avatartBase}
+  ${avatarBaseSize}
+  margin-right: 10px;
 `;
 
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
+  ${avatarBaseSize}
   font-size: ${FONT_SIZES.MEDIUM};
+  margin-right: 10px;
 `;
 
 export const ProjectPostButtonAvatar: FunctionComponent<HeaderMenuAvatarProps> = (props) => {

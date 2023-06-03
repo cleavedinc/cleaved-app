@@ -46,11 +46,12 @@ const StyledReactionCelebrate = styled.div`
   }
 `;
 
-const StyledReaction = styled.div``;
+const StyledReaction = styled.div`
+  display: flex;
+`;
 
 const StyledReactionWrapper = styled.div`
   display: flex;
-  margin: ${SPACING.SMALL} ${SPACING.MEDIUM};
 `;
 
 const StyledReactionsCount = styled.div`

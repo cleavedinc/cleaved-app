@@ -218,6 +218,19 @@ ul {
   }
   }
 
+  .react-images__pager{
+    .react-images__navigation {
+      button {
+        background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+        
+        svg {
+          fill: ${({ theme }) => theme.colors.baseIcon_color};
+        }
+      }
+    }
+  }
+  
+
   .react-images__footer {
     color: ${({ theme }) => theme.colors.baseIcon_color};
     background: linear-gradient(0deg, ${({ theme }) =>
