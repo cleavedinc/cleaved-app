@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 
-// import { AccountContext } from "../contexts";
+import { OrganizationMembershipsContext } from "../contexts";
 import { OrgPermissionLevel } from "../generated-types/graphql";
 
 export const useOrganizationPermission = (permissionLevels: OrgPermissionLevel[]): boolean => {
   const [hasPermission, setHasPermission] = useState(false);
-  // const { accountData } = useContext(AccountContext);
-  // const accountPermission = accountData?.permissionInOrg; // TODO: add this to the model??? Ask jeremy
-  const accountPermission = "ADMIN"; // ADMIN, VIEWER, UPDATER
+  const { organizationMembershipsData, organizationMembershipsDataLoading } =
+    useContext(OrganizationMembershipsContext);
+  const accountPermission = organizationMembershipsData && organizationMembershipsData[0].userPermissionInOrg;
 
   useEffect(() => {
     let foundPermission = false;
@@ -19,7 +19,7 @@ export const useOrganizationPermission = (permissionLevels: OrgPermissionLevel[]
     });
 
     setHasPermission(foundPermission);
-  }, [permissionLevels, accountPermission]);
+  }, [accountPermission, organizationMembershipsData, organizationMembershipsDataLoading, permissionLevels]);
 
   return hasPermission;
 };

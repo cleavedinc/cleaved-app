@@ -156,7 +156,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
         {post.images && post.images.length > 0 && (
           <StyledReactPhotoCollage
             width={"100%"}
-            height={["250px", "100px"]}
+            height={["auto", "100px"]}
             photoLayout={[1, 3]}
             photos={photoArray}
             showTotalPhotosNotSeenNumber={true}

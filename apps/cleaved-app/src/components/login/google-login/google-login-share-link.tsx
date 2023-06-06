@@ -5,19 +5,20 @@ import { useMutation } from "@apollo/react-hooks";
 import { logError, RollbarLogLevels, logQueryError } from "@cleaved/helpers";
 
 import { authTokenContext } from "../../../contexts";
-import { GOOGLE_SSO_MUTATION } from "../gql";
+import { GOOGLE_SSO_WITH_SHARE_LINK_MUTATION } from "../gql";
 
 import { GoogleSsoMutation } from "../../../generated-types/graphql";
 
-type GoogleLoginWrapperProps = {
+type GoogleLoginShareLinkWrapperProps = {
+  shareLink: string;
   triggerCallback?: () => void;
 };
 
-export const GoogleLoginWrapper: FunctionComponent<GoogleLoginWrapperProps> = (props) => {
-  const { triggerCallback } = props;
+export const GoogleLoginShareLinkWrapper: FunctionComponent<GoogleLoginShareLinkWrapperProps> = (props) => {
+  const { shareLink, triggerCallback } = props;
   const { logOut, setAuthorizationTokens, setPreferredOrgIdOnContext } = useContext(authTokenContext);
 
-  const [getCleavedLogin] = useMutation(GOOGLE_SSO_MUTATION, {
+  const [getCleavedLoginWithSharelink] = useMutation(GOOGLE_SSO_WITH_SHARE_LINK_MUTATION, {
     onCompleted: (data: GoogleSsoMutation) => {
       setAuthorizationTokens(data.googleSSO.authorizationToken, data.googleSSO.refreshToken);
       setPreferredOrgIdOnContext(data.googleSSO.preferredOrgId);
@@ -37,7 +38,7 @@ export const GoogleLoginWrapper: FunctionComponent<GoogleLoginWrapperProps> = (p
       }}
       onSuccess={(credentialResponse) => {
         if (credentialResponse && credentialResponse.credential) {
-          getCleavedLogin({ variables: { token: credentialResponse.credential } });
+          getCleavedLoginWithSharelink({ variables: { token: credentialResponse.credential, shareLink: shareLink } });
         }
 
         if (triggerCallback) {

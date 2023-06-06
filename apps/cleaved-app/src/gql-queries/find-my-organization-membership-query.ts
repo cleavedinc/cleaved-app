@@ -5,6 +5,7 @@ export const FIND_MY_ORGANIZATION_MEMBERSHIP = graphql(`
     organizationMemberships {
       id
       name
+      userPermissionInOrg
     }
   }
 `);
