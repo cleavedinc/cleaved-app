@@ -45,7 +45,7 @@ export const HomeDataWrapper: FunctionComponent = () => {
     ? t("helperInformationBoxes.collaborativeTimelineAlt")
     : "";
 
-  if (preferredOrgId) {
+  if (!preferredOrgId) {
     // if no preferredOrgId, send to onboarding screen
     navigate(routeConstantsCleavedApp.professionalOnboarding.route);
   }
