@@ -89,7 +89,6 @@ export const ProjectDataWrapper: FunctionComponent = () => {
             <ProjectPostForm
               closeForm={() => {
                 setCloseRequested(true);
-                console.log("555");
               }}
             />
           </Modal>
