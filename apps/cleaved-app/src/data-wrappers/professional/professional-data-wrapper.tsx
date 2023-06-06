@@ -1,12 +1,10 @@
-import React, { FunctionComponent, useContext } from "react";
-import { Link } from "@reach/router";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 import { Box, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideAvatar } from "../../components";
-import { AccountContext } from "../../contexts";
-import { useNavigateToProfile, useRouteParams, useTranslator } from "../../hooks";
+import { useOrganizationSeekMembers, useRouteParams, useTranslator } from "../../hooks";
 
 const StyledAsideProfessionalWrapper = styled.div`
   text-align: center;
@@ -35,33 +33,39 @@ const StyledProfessionalAbout = styled.div`
   white-space: pre-line;
 `;
 
-export const AsideProfessionalDataWrapper: FunctionComponent = () => {
-  const { accountData, accountDataLoading } = useContext(AccountContext);
+export const ProfessionalDataWrapper: FunctionComponent = () => {
   const routeParams = useRouteParams();
   const professionalId = routeParams.professionalId;
-  const { profilePath } = useNavigateToProfile(professionalId);
+
+  console.log("professionalId", professionalId);
+
+  const { organizationSeekMembersData, organizationSeekMembersDataLoading } = useOrganizationSeekMembers(
+    professionalId,
+    20
+  );
+
+  const professionalData = organizationSeekMembersData && organizationSeekMembersData[0];
+
   const { t } = useTranslator();
 
   return (
     <>
       <StickUnderHeaderDesktopOnly>
-        {!accountDataLoading && (
+        {!organizationSeekMembersDataLoading && professionalData && (
           <Box>
             <StyledAsideProfessionalWrapper>
-              <AsideAvatar account={accountData} />
+              <AsideAvatar account={professionalData} />
 
-              <Link to={profilePath}>
-                <StyledProfileName>
-                  {accountData?.firstName} {accountData?.lastName}
-                </StyledProfileName>
-              </Link>
+              <StyledProfileName>
+                {professionalData?.firstName} {professionalData?.lastName}
+              </StyledProfileName>
 
-              <StyledJobTitle>{accountData?.jobTitle}</StyledJobTitle>
+              <StyledJobTitle>{professionalData?.jobTitle}</StyledJobTitle>
 
-              <StyledProfessionalAbout>{accountData?.about}</StyledProfessionalAbout>
+              <StyledProfessionalAbout>{professionalData?.about}</StyledProfessionalAbout>
 
               <StyledEmaillink>
-                <a href={`mailto:${accountData?.emailAddress}`}>{t("professional.emailLinkText")}</a>
+                <a href={`mailto:${professionalData?.emailAddress}`}>{t("professional.emailLinkText")}</a>
               </StyledEmaillink>
             </StyledAsideProfessionalWrapper>
           </Box>

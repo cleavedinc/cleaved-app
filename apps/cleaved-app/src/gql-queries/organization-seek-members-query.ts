@@ -9,6 +9,7 @@ export const ORGANIZATION_SEEK_MEMBERS_QUERY = graphql(`
       currentAvatar
       jobTitle
       permissionInOrg
+      emailAddress
     }
   }
 `);

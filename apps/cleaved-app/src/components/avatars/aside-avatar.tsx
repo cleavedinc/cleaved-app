@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 import { FONT_SIZES, SPACING } from "@cleaved/ui";
 
-import { FindMyAccountQuery } from "../../generated-types/graphql";
+import { FindMyAccountQuery, OrganizationSeekMembersQuery } from "../../generated-types/graphql";
 
 import { avatartBase, avatarSizeLarge } from "../avatars/avatar-base-styles";
 
 type AsideAvatarProps = {
-  account: FindMyAccountQuery["findMyAccount"] | undefined;
+  account: FindMyAccountQuery["findMyAccount"] | OrganizationSeekMembersQuery["organizationSeekMembers"][0] | undefined;
 };
 
 const StyledAvatarImage = styled.img`

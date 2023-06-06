@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { GoogleLoginWrapper } from "../../components/login/google-login";
 import styled from "styled-components";
 
 import { Box, H1, SPACING } from "@cleaved/ui";
 
+import { GoogleLoginShareLinkWrapper } from "../../components/login/google-login";
 import { useTranslator } from "../../hooks";
 
 const StyledLoginButtonWrapper = styled.div``;
@@ -37,7 +37,7 @@ export const ProfessionalShareLinkDataWrapper: FunctionComponent = () => {
       <StyledLoginWrapper>
         <StyledLoginButtonWrapper>
           <StyledButtonText>{t("professionalShareLinkRegistration.logInButtonLabel")}</StyledButtonText>
-          <GoogleLoginWrapper />
+          <GoogleLoginShareLinkWrapper />
         </StyledLoginButtonWrapper>
       </StyledLoginWrapper>
     </Box>

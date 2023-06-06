@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { OrganizationMembershipsContextProvider } from "../../contexts";
 import { AsideOrganizationRegisterDataWrapper, OrganizationRegisterDataWrapper } from "../../data-wrappers";
 
 export const AccountOrganizationRegister: FunctionComponent = () => {
@@ -13,9 +12,7 @@ export const AccountOrganizationRegister: FunctionComponent = () => {
       </LeftColumnWrapper>
 
       <MainColumnMaxWidthWrapper>
-        <OrganizationMembershipsContextProvider>
-          <OrganizationRegisterDataWrapper />
-        </OrganizationMembershipsContextProvider>
+        <OrganizationRegisterDataWrapper />
       </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );

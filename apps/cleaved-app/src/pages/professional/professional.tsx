@@ -2,13 +2,13 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { AsideProfessionalDataWrapper } from "../../data-wrappers";
+import { ProfessionalDataWrapper } from "../../data-wrappers";
 
 export const Professional: FunctionComponent = () => {
   return (
     <ContentWrapper>
       <MainColumnMaxWidthWrapper>
-        <AsideProfessionalDataWrapper />
+        <ProfessionalDataWrapper />
       </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );

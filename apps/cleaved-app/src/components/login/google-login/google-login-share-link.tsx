@@ -7,14 +7,17 @@ import { logError, RollbarLogLevels, logQueryError } from "@cleaved/helpers";
 
 import { authTokenContext } from "../../../contexts";
 import { GoogleSsoMutation } from "../../../generated-types/graphql";
+import { useRouteParams } from "../../../hooks";
 import { routeConstantsCleavedApp } from "../../../router";
 
-import { GOOGLE_SSO_MUTATION } from "../gql";
+import { GOOGLE_SSO_WITH_SHARE_LINK_MUTATION } from "../gql";
 
-export const GoogleLoginWrapper: FunctionComponent = () => {
+export const GoogleLoginShareLinkWrapper: FunctionComponent = () => {
   const { logOut, setAuthorizationTokens, setPreferredOrgIdOnContext } = useContext(authTokenContext);
+  const routeParams = useRouteParams();
+  const shareLink = routeParams.shareLink;
 
-  const [getCleavedLogin] = useMutation(GOOGLE_SSO_MUTATION, {
+  const [getCleavedLoginWithSharelink] = useMutation(GOOGLE_SSO_WITH_SHARE_LINK_MUTATION, {
     onCompleted: (data: GoogleSsoMutation) => {
       setAuthorizationTokens(data.googleSSO.authorizationToken, data.googleSSO.refreshToken);
       setPreferredOrgIdOnContext(data.googleSSO.preferredOrgId);
@@ -35,7 +38,7 @@ export const GoogleLoginWrapper: FunctionComponent = () => {
       }}
       onSuccess={(credentialResponse) => {
         if (credentialResponse && credentialResponse.credential) {
-          getCleavedLogin({ variables: { token: credentialResponse.credential } });
+          getCleavedLoginWithSharelink({ variables: { token: credentialResponse.credential, shareLink: shareLink } });
         }
       }}
     />
