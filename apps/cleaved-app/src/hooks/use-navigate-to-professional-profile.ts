@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { navigate } from "@reach/router";
 
+import { authTokenContext } from "../contexts";
 import { routeConstantsCleavedApp } from "../router";
 
 type NavigateToProfileType = {
@@ -8,7 +10,8 @@ type NavigateToProfileType = {
 };
 
 export const useNavigateToProfile = (accountId: string | undefined): NavigateToProfileType => {
-  const profilePath = `${routeConstantsCleavedApp.account.route}/${accountId}`;
+  const { preferredOrgId } = useContext(authTokenContext);
+  const profilePath = `/${preferredOrgId}${routeConstantsCleavedApp.account.route}/${accountId}`;
 
   const navigateToProfile = () => {
     navigate(profilePath);

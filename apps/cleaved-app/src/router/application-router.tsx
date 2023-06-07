@@ -67,7 +67,10 @@ export const ApplicationRouter: FunctionComponent = () => (
       renderedPage={<AccountOrganizations />}
     />
 
-    <PageProtector path={`${routeConstantsCleavedApp.account.route}/:professionalId`} renderedPage={<Professional />} />
+    <PageProtector
+      path={`:orgId${routeConstantsCleavedApp.account.route}/:professionalId`}
+      renderedPage={<Professional />}
+    />
 
     <PageProtector path={`/:orgId${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
 

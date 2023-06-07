@@ -77,7 +77,7 @@
     "professionalShareLinkRegistrationText": "You are lucky enough to be invited by someone who values you. Be sure to pay it forward.",
     "projectListEmptyStateAlt": "Arrow pointing up and to the right, turning slightly left.",
     "projectListEmptyStateHeader": "Create your first post",
-    "projectListEmptyStateText": "Share a decision, update or idea with your team about this project. Get feedback and keep everything together.",    
+    "projectListEmptyStateText": "Share a decision, update or idea with your team about this project. Get feedback and keep everything together.",
     "projectslistImageAlt": "Professionals collaborating on a project together",
     "projectslistHeader": "Projects are where magic happens with your team",
     "projectslistText": "Creating a new project provides you with a platform to share decisions, receive feedback, and demonstrate progress to your team, other teams, and management.",
@@ -92,6 +92,11 @@
     "personalInformation": "Personal information",
     "professionalInformation": "Professional information",
     "theme": "Theme"
+  },
+  "language": {
+    "english": "English",
+    "languageSelectionHeader": "Language selection",
+    "spanish": "Spanish"
   },
   "loginPage": {
     "signInHeader": "Sign up / Log in",

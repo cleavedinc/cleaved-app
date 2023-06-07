@@ -12,6 +12,7 @@ export * from "./emoji-smiling-face";
 export * from "./emoji-thinking-face";
 export * from "./favorite";
 export * from "./file-post";
+export * from "./globe";
 export * from "./handshake";
 export * from "./image";
 export * from "./move";
