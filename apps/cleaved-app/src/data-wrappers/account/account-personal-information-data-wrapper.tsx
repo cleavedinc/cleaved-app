@@ -1,46 +1,21 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext, useEffect, useMemo, useState } from "react";
+import Select from "react-select";
 import styled, { useTheme } from "styled-components";
 
-import {
-  BORDERS,
-  Box,
-  GlobeIcon,
-  HeadingWrapper,
-  removeDefaultButtonStyles,
-  RADIUS,
-  SectionHeader,
-  SPACING,
-  Toggle,
-} from "@cleaved/ui";
+import { Box, HeadingWrapper, SectionHeader, SPACING, Toggle } from "@cleaved/ui";
 
 import { ThemeContext } from "../../contexts";
 import { PersonalInformationForm } from "../../forms";
 import { useTranslator } from "../../hooks";
 
+type LanguageOptionsType = {
+  value: string;
+  label: string;
+};
+
 const StyledBox = styled(Box)`
   display: flex;
   flex-direction: column;
-`;
-
-const StyledLanguageButton = styled.button`
-  ${removeDefaultButtonStyles}
-  align-items: center;
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.SMALL};
-  display: flex;
-  justify-content: center;
-  margin-right: ${SPACING.SMALL};
-  min-width: 100px;
-  padding: ${SPACING.SMALL} ${SPACING.SMALL};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
-  }
-`;
-
-const StyledLanguageButtonText = styled.div`
-  color: ${({ theme }) => theme.colors.baseButtonLink_color};
-  margin-left: ${SPACING.SMALL};
 `;
 
 const StyledLanguageWrapper = styled.div`
@@ -58,14 +33,32 @@ const StyledToggle = styled(Toggle)`
 
 export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
   const { isDarkTheme, setThemeMode } = useContext(ThemeContext);
-  const theme = useTheme();
+  const colorTheme = useTheme();
   const { i18n, t } = useTranslator();
-
+  const [currentLanguage, setCurrentLanguage] = useState<string>(i18n.language);
+  const [currentLanguageObject, setCurrentLanguageObject] = useState<LanguageOptionsType | undefined | null>(null);
   const darkModeLabel = t("settings.darkMode") ? t("settings.darkMode") : "";
+  const currentlanguage = i18n.language;
 
-  const changeLanguageHandler = (lang: string) => {
-    i18n.changeLanguage(lang);
+  const languageOptions: readonly LanguageOptionsType[] = useMemo(
+    () => [
+      { value: "en", label: t("language.english") },
+      { value: "es", label: t("language.spanish") },
+    ],
+    [currentlanguage]
+  );
+
+  const handleLanguageChange = (selectedLanguage: LanguageOptionsType | null) => {
+    if (selectedLanguage) {
+      setCurrentLanguage(selectedLanguage.value);
+      i18n.changeLanguage(selectedLanguage.value);
+    }
   };
+
+  useEffect(() => {
+    const languageObject = languageOptions.find((x: LanguageOptionsType) => x.value === currentLanguage);
+    setCurrentLanguageObject(languageObject);
+  }, [currentLanguage, languageOptions]);
 
   return (
     <>
@@ -82,22 +75,45 @@ export const AccountPersonalInformationDataWrapper: FunctionComponent = () => {
           callback={() => setThemeMode()}
           label={darkModeLabel}
           isChecked={isDarkTheme ? true : false}
-          offColor={theme.colors.baseBordersAndShadows_color}
-          onColor={theme.colors.baseApproved_color}
+          offColor={colorTheme.colors.baseBordersAndShadows_color}
+          onColor={colorTheme.colors.baseApproved_color}
         />
 
         <StyledLanguageLabel>{t("language.languageSelectionHeader")}</StyledLanguageLabel>
 
         <StyledLanguageWrapper>
-          <StyledLanguageButton onClick={() => changeLanguageHandler("en")} type="button">
-            <GlobeIcon color={theme.colors.baseIcon_color} />
-            <StyledLanguageButtonText>{t("language.english")}</StyledLanguageButtonText>
-          </StyledLanguageButton>
-
-          <StyledLanguageButton onClick={() => changeLanguageHandler("es")} type="button">
-            <GlobeIcon color={theme.colors.baseIcon_color} />
-            <StyledLanguageButtonText>{t("language.spanish")}</StyledLanguageButtonText>
-          </StyledLanguageButton>
+          <Select
+            value={currentLanguageObject}
+            isSearchable={false}
+            onChange={(onChangeValue) => handleLanguageChange(onChangeValue)}
+            options={languageOptions}
+            styles={{
+              singleValue: (baseStyles) => ({
+                ...baseStyles,
+                textTransform: "capitalize",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                textTransform: "capitalize",
+              }),
+              option: (styles, { isSelected }) => {
+                return {
+                  ...styles,
+                  color: isSelected ? colorTheme.colors.white_always_color : colorTheme.colors.baseText_color,
+                };
+              },
+            }}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                neutral0: colorTheme.colors.baseBox_backgroundColor,
+                neutral80: colorTheme.colors.baseText_color,
+                primary: colorTheme.colors.baseLink_color,
+                primary25: colorTheme.colors.baseButtonAndIcon_backgroundColorHover,
+              },
+            })}
+          />
         </StyledLanguageWrapper>
       </StyledBox>
     </>
