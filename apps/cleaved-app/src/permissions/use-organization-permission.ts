@@ -1,15 +1,16 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 
-import { OrganizationMembershipsContext } from "../contexts";
 import { OrgPermissionLevel } from "../generated-types/graphql";
+import { useMyOrganizationMembership } from "../hooks";
 
 export const useOrganizationPermission = (permissionLevels: OrgPermissionLevel[]): boolean => {
-  const { organizationMembershipsData } = useContext(OrganizationMembershipsContext);
+  const query = useMyOrganizationMembership();
 
   return useMemo(() => {
+    const organizationMembershipsData = query.data?.organizationMemberships;
     const accountPermission = organizationMembershipsData && organizationMembershipsData[0].userPermissionInOrg;
     return permissionLevels.some((pl) => pl === accountPermission);
-  }, [organizationMembershipsData, permissionLevels]);
+  }, [query, permissionLevels]);
 };
 
 /* 
