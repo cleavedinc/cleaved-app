@@ -6,7 +6,10 @@ import { useMutation } from "@apollo/react-hooks";
 import { logError, RollbarLogLevels, logQueryError } from "@cleaved/helpers";
 
 import { authTokenContext } from "../../../contexts";
-import { GoogleSsoMutation } from "../../../generated-types/graphql";
+import {
+  GoogleSsoWithShareLinkMutation,
+  GoogleSsoWithShareLinkMutationVariables,
+} from "../../../generated-types/graphql";
 import { useRouteParams } from "../../../hooks";
 import { routeConstantsCleavedApp } from "../../../router";
 
@@ -17,11 +20,14 @@ export const GoogleLoginShareLinkWrapper: FunctionComponent = () => {
   const routeParams = useRouteParams();
   const shareLink = routeParams.shareLink;
 
-  const [getCleavedLoginWithSharelink] = useMutation(GOOGLE_SSO_WITH_SHARE_LINK_MUTATION, {
-    onCompleted: (data: GoogleSsoMutation) => {
-      setAuthorizationTokens(data.googleSSO.authorizationToken, data.googleSSO.refreshToken);
-      setPreferredOrgIdOnContext(data.googleSSO.preferredOrgId);
-      navigate(`/${data.googleSSO.preferredOrgId}${routeConstantsCleavedApp.home.route}`);
+  const [getCleavedLoginWithSharelink] = useMutation<
+    GoogleSsoWithShareLinkMutation,
+    GoogleSsoWithShareLinkMutationVariables
+  >(GOOGLE_SSO_WITH_SHARE_LINK_MUTATION, {
+    onCompleted: (data) => {
+      setAuthorizationTokens(data.googleSSOWithShareLink.authorizationToken, data.googleSSOWithShareLink.refreshToken);
+      setPreferredOrgIdOnContext(data.googleSSOWithShareLink.preferredOrgId);
+      navigate(`/${data.googleSSOWithShareLink.preferredOrgId}${routeConstantsCleavedApp.home.route}`);
     },
     onError: (error) => {
       logQueryError(error);
