@@ -10,7 +10,6 @@ import { apolloClient } from "../client";
 import {
   AuthTokenContextProvider,
   AccountContextProvider,
-  OrganizationMembershipsContextProvider,
   ThemeContextProvider,
 } from "../contexts";
 import { useTranslator } from "../hooks";
@@ -59,13 +58,11 @@ export const ApplicationWrapper: FunctionComponent = () => {
         <ApolloProvider client={apolloClient}>
           <AuthTokenContextProvider>
             <AccountContextProvider>
-              <OrganizationMembershipsContextProvider>
                 <ThemeContextProvider>
                   <UIProvider>
                     <Application />
                   </UIProvider>
                 </ThemeContextProvider>
-              </OrganizationMembershipsContextProvider>
             </AccountContextProvider>
           </AuthTokenContextProvider>
         </ApolloProvider>

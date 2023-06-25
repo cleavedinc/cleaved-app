@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import { navigate } from "@reach/router";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
@@ -9,8 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonLink, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
-import { OrganizationMembershipsContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { useMyOrganizationMembership, useTranslator } from "../../hooks";
 
 import { REGISTER_ORGANIZATION_MUTATION } from "./gql";
 
@@ -57,12 +56,12 @@ const StyledProjectFormLabel = styled.label`
 
 export const OrganizationRegisterForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const { organizationMembershipsDataRefetch } = useContext(OrganizationMembershipsContext);
+  const membershipQuery = useMyOrganizationMembership();
 
   const [registerOrganization] = useMutation(REGISTER_ORGANIZATION_MUTATION, {
     onCompleted: () => {
-      if (organizationMembershipsDataRefetch) {
-        organizationMembershipsDataRefetch();
+      if (membershipQuery.refetch) {
+        membershipQuery.refetch();
       }
 
       navigate(-1);
