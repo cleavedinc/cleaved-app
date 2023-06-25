@@ -175,7 +175,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
           {post.repliesCount !== "0" && (
             <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
-              {post.repliesCount}{" "}
+              {post.repliesCount}
               <StyledPostComments>
                 {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
               </StyledPostComments>

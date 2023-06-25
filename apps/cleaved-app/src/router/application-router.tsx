@@ -15,7 +15,7 @@ import { AccountMembership } from "../pages/account/account-membership";
 import { Home } from "../pages/home";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
 import { Login } from "../pages/login/login";
-import { NotFound } from "../pages/not-found";
+// import { NotFound } from "../pages/not-found";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
 import { Professional } from "../pages/professional/professional";
 import { ProfessionalOnboarding } from "../pages/professional/professional-onboarding";
@@ -111,8 +111,6 @@ export const ApplicationRouter: FunctionComponent = () => (
       isNotProtected
     /> */}
 
-    <PageProtector path={routeConstantsCleavedApp.login.route} renderedPage={<Login />} isNotProtected />
-
     <PageProtector path={routeConstantsShared.privacyPolicy.route} renderedPage={<PrivacyPolicy />} isNotProtected />
 
     <PageProtector
@@ -134,6 +132,6 @@ export const ApplicationRouter: FunctionComponent = () => (
       isNotProtected
     />
 
-    <NotFound default />
+    <PageProtector default path={routeConstantsCleavedApp.login.route} renderedPage={<Login />} isNotProtected />
   </StyledRouter>
 );

@@ -69,7 +69,9 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
             <StyledTHead role="rowgroup">
               <StyledTHeadTr role="row">
                 <StyledTh role="columnheader">{t("organizations.organizationName")}</StyledTh>
-                <StyledTh role="columnheader">{t("organizations.edit")}</StyledTh>
+                {organizationMembershipsData.length > 1 && (
+                  <StyledTh role="columnheader">{t("organizations.edit")}</StyledTh>
+                )}
               </StyledTHeadTr>
             </StyledTHead>
             <StyledTBody role="rowgroup">
@@ -78,14 +80,16 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
                   return (
                     <StyledTr key={org.id} role="row">
                       <StyledTdWithMenuContentNameColumn role="cell">
-                        {org.name}{" "}
+                        {org.name}
                         {preferredOrgId && preferredOrgId === org.id && (
                           <StyledOrgActiveTag>(active)</StyledOrgActiveTag>
                         )}
                       </StyledTdWithMenuContentNameColumn>
-                      <StyledTdWithMenuContentEditColumn role="cell">
-                        <OrganizationEditMenu orgId={org.id} />
-                      </StyledTdWithMenuContentEditColumn>
+                      {organizationMembershipsData.length > 1 && (
+                        <StyledTdWithMenuContentEditColumn role="cell">
+                          <OrganizationEditMenu orgId={org.id} />
+                        </StyledTdWithMenuContentEditColumn>
+                      )}
                     </StyledTr>
                   );
                 })}
