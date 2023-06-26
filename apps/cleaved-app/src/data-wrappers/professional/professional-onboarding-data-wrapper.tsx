@@ -29,6 +29,7 @@ import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
 import { useLoginGuard, useProjectsInOrganizationSeek, useTermsAccepted, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 import { ORGANIZATION_SHARE_LINKS_QUERY } from "../../gql-queries";
+import image from "../../img/helper-info/organization-single-building.svg";
 
 const StyledBox = styled(Box)`
   margin-bottom: 0;
@@ -368,7 +369,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
           <StyledHelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}
             helperInfoImageAltText={t("professionalOnboarding.registerOrganizationHelperInfoImageAlt")}
-            helperInfoImageUrl={"/helper-info/organization-single-building.svg"}
+            helperInfoImageUrl={image}
             helperInfoText={t("professionalOnboarding.registerOrganizationHelperInfoText")}
             width={"150px"}
           />
