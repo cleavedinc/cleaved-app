@@ -35,7 +35,7 @@
     "dotenv": "16.0.3",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.7",
-    "file-loader": "^6.2.0",
+    "file-loader": "6.2.0",
     "formik": "2.2.9",
     "graphql": "16.6.0",
     "html-webpack-plugin": "5.5.0",
