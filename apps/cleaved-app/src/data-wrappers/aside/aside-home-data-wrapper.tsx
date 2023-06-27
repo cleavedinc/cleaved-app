@@ -7,6 +7,8 @@ import { PostsContext } from "../../contexts";
 import { WidgetProjectListDataWrapper } from "../../data-wrappers";
 import { useTranslator } from "../../hooks";
 
+import decisionsHelperImage from "../../media/helper-info/decisions-helper-image.svg";
+
 export const AsideHomeDataWrapper: FunctionComponent = () => {
   const { postProjectSeekData, postProjectSeekDataLoading } = useContext(PostsContext);
   const { t } = useTranslator();
@@ -17,7 +19,7 @@ export const AsideHomeDataWrapper: FunctionComponent = () => {
       {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 50 && (
         <AsideHelperInfoHeaderTextImageBox
           helperInfoImageAltText={t("helperInformationBoxes.collaborativeTimelineAlt")}
-          helperInfoImageUrl={"/helper-info/decisions-helper-image.svg"}
+          helperInfoImageUrl={decisionsHelperImage}
           helperInfoText={t("helperInformationBoxes.collaborativeTimelineText")}
           helperInfoTextHeader={t("helperInformationBoxes.collaborativeTimelineHeader")}
         />

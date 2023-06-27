@@ -16,6 +16,8 @@ import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
+import arrowPointingUpTowardRight from "../../media/helper-info/arrow-pointing-up-toward-right.svg";
+
 const StyledActionWrapper = styled.div`
   display: flex;
   padding: ${SPACING.XXLARGE} 0 0;
@@ -120,7 +122,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
           <HelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}
             helperInfoImageAltText={t("helperInformationBoxes.projectListEmptyStateAlt")}
-            helperInfoImageUrl={"/helper-info/arrow-pointing-up-toward-right.svg"}
+            helperInfoImageUrl={arrowPointingUpTowardRight}
             helperInfoText={t("helperInformationBoxes.projectListEmptyStateText")}
             helperInfoTextHeader={t("helperInformationBoxes.projectListEmptyStateHeader")}
             width={"150px"}

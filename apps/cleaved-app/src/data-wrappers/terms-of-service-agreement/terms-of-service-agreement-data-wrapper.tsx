@@ -16,7 +16,7 @@ export const TermsOfServiceAgreementDataWrapper: FunctionComponent = () => {
       </SectionHeader>
 
       <Paragraph>
-        {t("termsOfService.firstParagraph")}{" "}
+        {t("termsOfService.firstParagraph")}
         <Link href={routeConstantsShared.termsOfService.route} target="_blank">
           {routeConstantsShared.termsOfService.name}
         </Link>

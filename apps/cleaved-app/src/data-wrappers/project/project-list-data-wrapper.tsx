@@ -29,6 +29,8 @@ import { useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
+import projectHelperImage from "../../media/helper-info/project-helper-image.svg";
+
 type ProjectStatusType = {
   value: ProjectStatus;
   label: string;
@@ -136,7 +138,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
     <>
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.projectslistImageAlt")}
-        helperInfoImageUrl={"/helper-info/project-helper-image.svg"}
+        helperInfoImageUrl={projectHelperImage}
         helperInfoText={t("helperInformationBoxes.projectslistText")}
         helperInfoTextHeader={t("helperInformationBoxes.projectslistHeader")}
         width={"250px"}

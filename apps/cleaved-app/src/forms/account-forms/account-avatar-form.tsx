@@ -41,8 +41,6 @@ export const AccountAvatarForm: FunctionComponent<AccountAvatarFormProps> = (pro
   });
 
   const handleVerifyUploadSizeIsOK = (fileSize: number) => {
-    console.log("fileSize", fileSize);
-
     const verifyImageUpload = verifyUploadSizeIsOK(fileSize);
 
     if (!verifyImageUpload) {

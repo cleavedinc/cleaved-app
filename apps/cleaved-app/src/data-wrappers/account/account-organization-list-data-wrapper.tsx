@@ -20,6 +20,8 @@ import { HelperInfoHeaderTextImageRightBox, OrganizationEditMenu } from "../../c
 import { authTokenContext } from "../../contexts";
 import { useMyOrganizationMembership, useTranslator } from "../../hooks";
 
+import organizationsHelperImage from "../../media/helper-info/organizations-helper-image.svg";
+
 const StyledOrgActiveTag = styled.span`
   color: ${({ theme }) => theme.colors.baseApproved_color};
   font-size: ${FONT_SIZES.XSMALL};
@@ -52,7 +54,7 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
     <>
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.organizationsAlt")}
-        helperInfoImageUrl={"/helper-info/organizations-helper-image.svg"}
+        helperInfoImageUrl={organizationsHelperImage}
         helperInfoText={t("helperInformationBoxes.organizationsText")}
         helperInfoTextHeader={t("helperInformationBoxes.organizationsHeader")}
         width={"250px"}
@@ -78,14 +80,18 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
                   return (
                     <StyledTr key={org.id} role="row">
                       <StyledTdWithMenuContentNameColumn role="cell">
-                        {org.name}{" "}
+                        {org.name}
                         {preferredOrgId && preferredOrgId === org.id && (
                           <StyledOrgActiveTag>(active)</StyledOrgActiveTag>
                         )}
                       </StyledTdWithMenuContentNameColumn>
-                      <StyledTdWithMenuContentEditColumn role="cell">
-                        <OrganizationEditMenu orgId={org.id} />
-                      </StyledTdWithMenuContentEditColumn>
+                      {!membershipQuery.loading &&
+                        membershipQuery.data?.organizationMemberships &&
+                        membershipQuery.data.organizationMemberships.length > 1 && (
+                          <StyledTdWithMenuContentEditColumn role="cell">
+                            <OrganizationEditMenu orgId={org.id} />
+                          </StyledTdWithMenuContentEditColumn>
+                        )}
                     </StyledTr>
                   );
                 })}

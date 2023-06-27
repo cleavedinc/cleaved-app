@@ -7,6 +7,8 @@ import { Box, FONT_SIZES, H1, SPACING } from "@cleaved/ui";
 import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
+import getInvited from "../../media/helper-info/get-invited.svg";
+
 const StyledBox = styled(Box)`
   margin-bottom: 0;
 `;
@@ -48,7 +50,7 @@ export const ProfessionalOnboardingHasOrganizationDataWrapper: FunctionComponent
 
         <StyledMessage>{t("professionalOnboardingHasOrganization.hasOrganizationMessage")}</StyledMessage>
 
-        <StyledMessageImage src={"/helper-info/get-invited.svg"} alt={organizationGetInviteImageAlt} />
+        <StyledMessageImage src={getInvited} alt={organizationGetInviteImageAlt} />
 
         <StyledNavigateBackToOnboardingWrapper>
           {t("professionalOnboardingHasOrganization.goBackToOnboardingText")}

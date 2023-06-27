@@ -5,6 +5,8 @@ import { StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 import { AsideHelperInfoHeaderTextImageBox } from "../../components";
 import { useTranslator } from "../../hooks";
 
+import newProjectHelperImage from "../../media/helper-info/new-project-helper-image.svg";
+
 export const AsideProjectStartNewDataWrapper: FunctionComponent = () => {
   const { t } = useTranslator();
 
@@ -12,7 +14,7 @@ export const AsideProjectStartNewDataWrapper: FunctionComponent = () => {
     <StickUnderHeaderDesktopOnly>
       <AsideHelperInfoHeaderTextImageBox
         helperInfoImageAltText={t("helperInformationBoxes.projectStartNewImageAlt")}
-        helperInfoImageUrl={"/helper-info/new-project-helper-image.svg"}
+        helperInfoImageUrl={newProjectHelperImage}
         helperInfoText={t("helperInformationBoxes.projectStartNewText")}
         helperInfoTextHeader={t("helperInformationBoxes.projectStartNewHeader")}
       />
