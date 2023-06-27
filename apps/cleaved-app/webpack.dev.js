@@ -19,7 +19,7 @@ module.exports = merge(common, {
 
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.DOMAIN": JSON.stringify("localhost"),
+      "process.env.DOMAIN": JSON.stringify("localhost:4000"),
       "process.env.GOOGLE_CLIENT_ID": JSON.stringify(
         "1005196783589-i01f4cj4cfg9i7ukgl80t9e8sgnab1fl.apps.googleusercontent.com"
       ),

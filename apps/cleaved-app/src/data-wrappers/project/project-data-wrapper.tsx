@@ -10,10 +10,10 @@ import {
   StyledPostFormButton,
   StyledPostFormButtonText,
 } from "../../components";
-import { AccountContext, PostsContext } from "../../contexts";
+import { PostsContext } from "../../contexts";
 import { ProjectPostForm } from "../../forms";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useTranslator } from "../../hooks";
+import { useFindMyAccount, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 import arrowPointingUpTowardRight from "../../media/helper-info/arrow-pointing-up-toward-right.svg";
@@ -38,7 +38,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
   const { projectPostFormIsDirty, projectPostFormImageUploadIsDirty } = useContext(PostsContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { postProjectSeekData, postProjectSeekDataLoading } = useContext(PostsContext);
-  const { accountData } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
   const [isContentFeedFormModalOpen, setIsContentFeedFormModalOpen] = useState(false);
   const [isConfirmDiscardChangesModalOpen, setIsConfirmDiscardChangesModalOpen] = useState(false);
   const [closeRequested, setCloseRequested] = useState(false);
@@ -73,14 +73,13 @@ export const ProjectDataWrapper: FunctionComponent = () => {
     <>
       {hasPermission && (
         <StyledProjectPostBox>
-          <ProjectPostButtonAvatar account={accountData} />
+          <ProjectPostButtonAvatar account={accountQuery.data?.findMyAccount} />
 
           <StyledPostFormButton onClick={() => setIsContentFeedFormModalOpen(true)} type="button">
             <StyledPostFormButtonText>
-              {t("post.createProjectPostWithName", { name: accountData?.firstName })}
+              {t("post.createProjectPostWithName", { name: accountQuery.data?.findMyAccount.firstName })}
             </StyledPostFormButtonText>
           </StyledPostFormButton>
-
           <Modal
             open={isContentFeedFormModalOpen}
             onCloseRequested={() => {
@@ -94,7 +93,6 @@ export const ProjectDataWrapper: FunctionComponent = () => {
               }}
             />
           </Modal>
-
           <Modal
             open={isConfirmDiscardChangesModalOpen}
             onCloseRequested={() => setIsConfirmDiscardChangesModalOpen(false)}

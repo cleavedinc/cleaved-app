@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 
-import { ButtonLinkLoadMore, SPACING } from "@cleaved/ui";
+import { SPACING } from "@cleaved/ui";
 
 import { PostCommentAvatar } from "../../components";
-import { AccountContext } from "../../contexts";
 import { CommentForm } from "../../forms";
 import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
+import { useFindMyAccount } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 import { Comment } from "../comments/comment";
@@ -36,7 +36,7 @@ const StyledRepliesListWrapper = styled.div`
 export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props) => {
   const { commentLevel, postProjectRepliesDataRefetch, postReply } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { accountData } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
   const [isCommentRepliesVisible, setIsCommentRepliesVisible] = useState(false);
   const [triggerGetReplies, setTriggerGetReplies] = useState(0);
 
@@ -68,7 +68,7 @@ export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props
 
       {hasPermission && isCommentRepliesVisible && (
         <StyledPostCommentFormWrapper>
-          <PostCommentAvatar account={accountData} />
+          <PostCommentAvatar account={accountQuery.data?.findMyAccount} />
           <CommentForm
             postOrPostReplyId={postReply.id}
             onCommentPostedTriggerGetComments={() => setTriggerGetReplies(triggerGetReplies + 1)}

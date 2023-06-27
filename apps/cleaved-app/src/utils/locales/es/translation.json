@@ -24,7 +24,6 @@
   },
   "errorMessages": {
     "notLoggedIn": "No has iniciado sesión. Te redirigiremos a la página de inicio de sesión en un momento.",
-    "pageNotFound": "Lo siento, pero no podemos encontrar esa página en este momento. Te redirigiremos a la página de inicio en un momento.",
     "somethingWentWrongSorryAboutThat": "Algo salió mal, disculpa por eso. Si esto continúa, por favor avísanos."
   },
   "files": {
