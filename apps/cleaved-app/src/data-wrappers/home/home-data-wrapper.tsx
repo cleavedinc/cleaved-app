@@ -9,6 +9,9 @@ import { HelperInfoHeaderTextImageRightBox, PostProjectList } from "../../compon
 import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
+import decisionsHelperImage from "../../media/helper-info/decisions-helper-image.svg";
+import projectWhiteboardTwoPeople from "../../media/helper-info/project-whiteboard-two-people.svg";
+
 const StyledHelperInfoBoxWrapper = styled(BoxHelperInfo)`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.helperInfoBoxWrapper_backgroundColor};
@@ -61,7 +64,7 @@ export const HomeDataWrapper: FunctionComponent = () => {
             <StyledHelperInfoText>{t("helperInformationBoxes.collaborativeTimelineText")}</StyledHelperInfoText>
           </StyledHelperInfoTextWrapper>
 
-          <StyledHelperInfoImageRight alt={helperInfoImageRight} src={"/helper-info/decisions-helper-image.svg"} />
+          <StyledHelperInfoImageRight alt={helperInfoImageRight} src={decisionsHelperImage} />
         </StyledHelperInfoBoxWrapper>
       )}
 
@@ -72,7 +75,7 @@ export const HomeDataWrapper: FunctionComponent = () => {
           <HelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}
             helperInfoImageAltText={t("helperInformationBoxes.homePageEmptyStateAlt")}
-            helperInfoImageUrl={"/helper-info/project-whiteboard-two-people.svg"}
+            helperInfoImageUrl={projectWhiteboardTwoPeople}
             helperInfoText={t("helperInformationBoxes.homePageEmptyStateText")}
             helperInfoTextHeader={t("helperInformationBoxes.homePageEmptyStateHeader")}
             width={"150px"}

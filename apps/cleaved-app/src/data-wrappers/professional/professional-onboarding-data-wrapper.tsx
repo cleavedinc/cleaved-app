@@ -30,6 +30,12 @@ import { useLoginGuard, useProjectsInOrganizationSeek, useTermsAccepted, useTran
 import { routeConstantsCleavedApp } from "../../router";
 import { ORGANIZATION_SHARE_LINKS_QUERY } from "../../gql-queries";
 
+import celebrateHighFiveFireworks from "../../media/helper-info/celebrate-high-five-fireworks.svg";
+import celebrateHighFiveFireworks2 from "../../media/helper-info/celebrate-high-five-fireworks-2.svg";
+import organizationSingleBuilding from "../../media/helper-info/organization-single-building.svg";
+import projectWhiteboardTwoPeople from "../../media/helper-info/project-whiteboard-two-people.svg";
+import peopleTwoProfessionalsHoldingProjectElements from "../../media/helper-info/people-two-professionals-holding-project-elements.svg";
+
 const StyledBox = styled(Box)`
   margin-bottom: 0;
 `;
@@ -353,7 +359,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
             {preferredOrgId && (
               <StyledCelebrateStepCompletionImage
                 alt={registerOrganizationCelebrateImageAlt}
-                src={"/helper-info/celebrate-high-five-fireworks.svg"}
+                src={celebrateHighFiveFireworks}
               />
             )}
 
@@ -368,7 +374,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
           <StyledHelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}
             helperInfoImageAltText={t("professionalOnboarding.registerOrganizationHelperInfoImageAlt")}
-            helperInfoImageUrl={"/helper-info/organization-single-building.svg"}
+            helperInfoImageUrl={organizationSingleBuilding}
             helperInfoText={t("professionalOnboarding.registerOrganizationHelperInfoText")}
             width={"150px"}
           />
@@ -398,7 +404,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
               projectsInOrganizationSeekData?.length > 0 && (
                 <StyledCelebrateStepCompletionImage
                   alt={startNewProjectCelebrateImageAlt}
-                  src={"/helper-info/celebrate-high-five-fireworks-2.svg"}
+                  src={celebrateHighFiveFireworks2}
                 />
               )}
           </StyledBox>
@@ -406,7 +412,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
           <StyledHelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}
             helperInfoImageAltText={t("professionalOnboarding.startNewProjectHelperInfoImageAlt")}
-            helperInfoImageUrl={"/helper-info/project-whiteboard-two-people.svg"}
+            helperInfoImageUrl={projectWhiteboardTwoPeople}
             helperInfoText={t("professionalOnboarding.startNewProjectHelperInfoText")}
             width={"150px"}
           />
@@ -468,7 +474,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
           <StyledHelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}
             helperInfoImageAltText={t("professionalOnboarding.invitePeopleHelperInfoImageAlt")}
-            helperInfoImageUrl={"/helper-info/people-two-professionals-holding-project-elements.svg"}
+            helperInfoImageUrl={peopleTwoProfessionalsHoldingProjectElements}
             helperInfoText={t("professionalOnboarding.invitePeopleHelperInfoText")}
             width={"150px"}
           />

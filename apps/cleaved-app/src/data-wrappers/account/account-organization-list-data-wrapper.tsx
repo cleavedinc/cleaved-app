@@ -20,6 +20,8 @@ import { HelperInfoHeaderTextImageRightBox, OrganizationEditMenu } from "../../c
 import { authTokenContext } from "../../contexts";
 import { useMyOrganizationMembership, useTranslator } from "../../hooks";
 
+import organizationsHelperImage from "../../media/helper-info/organizations-helper-image.svg";
+
 const StyledOrgActiveTag = styled.span`
   color: ${({ theme }) => theme.colors.baseApproved_color};
   font-size: ${FONT_SIZES.XSMALL};
@@ -52,7 +54,7 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
     <>
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.organizationsAlt")}
-        helperInfoImageUrl={"/helper-info/organizations-helper-image.svg"}
+        helperInfoImageUrl={organizationsHelperImage}
         helperInfoText={t("helperInformationBoxes.organizationsText")}
         helperInfoTextHeader={t("helperInformationBoxes.organizationsHeader")}
         width={"250px"}

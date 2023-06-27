@@ -21,6 +21,8 @@ import { routeConstantsCleavedApp } from "../../router";
 
 import { TeamsListRow } from "./teams-list-row";
 
+import peopleHelperImage from "../../media/helper-info/people-helper-image.svg";
+
 const StyledInviteMorePeopleWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,7 +78,7 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
     <>
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.teamsAlt")}
-        helperInfoImageUrl={"/helper-info/people-helper-image.svg"}
+        helperInfoImageUrl={peopleHelperImage}
         helperInfoText={t("helperInformationBoxes.teamsText")}
         helperInfoTextHeader={t("helperInformationBoxes.teamsHeader")}
         width={"250px"}

@@ -30,6 +30,8 @@ import { useRouteParams, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
+import peopleHelperImage from "../../media/helper-info/people-helper-image.svg";
+
 const StyledButtonPrimary = styled(ButtonPrimary)`
   margin-right: ${SPACING.MEDIUM};
   margin-bottom: ${SPACING.SMALL};
@@ -172,7 +174,7 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
     <>
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.inviteProfessionalToOrganizationAlt")}
-        helperInfoImageUrl={"/helper-info/people-helper-image.svg"}
+        helperInfoImageUrl={peopleHelperImage}
         helperInfoText={t("helperInformationBoxes.inviteProfessionalToOrganizationText")}
         helperInfoTextHeader={t("helperInformationBoxes.inviteProfessionalToOrganizationHeader")}
         width={"250px"}
