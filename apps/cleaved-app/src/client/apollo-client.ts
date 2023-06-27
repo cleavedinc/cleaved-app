@@ -2,6 +2,9 @@ import { ApolloClient, ApolloLink, concat, from, InMemoryCache } from "@apollo/c
 import { createUploadLink } from "apollo-upload-client";
 import { onError } from "@apollo/client/link/error";
 import { navigate } from "@reach/router";
+
+import { logError, RollbarLogLevels, logQueryError } from "@cleaved/helpers";
+
 import { routeConstantsCleavedApp } from "../router";
 
 const httpLink = createUploadLink({ uri: process.env.GRAPHQL_API_SERVICE_URL, credentials: "omit" });
@@ -27,7 +30,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       }
     });
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
+  if (networkError) {
+    logError(RollbarLogLevels.error, "Network error", networkError);
+  }
 });
 
 // function offsetFromCursor(items: [any], seekKey: string, readField: any) {
