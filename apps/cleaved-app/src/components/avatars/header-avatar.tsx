@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 import { HeaderMenuAvatar } from "../../components";
-import { AccountContext } from "../../contexts";
+import { useFindMyAccount } from "../../hooks";
 
 type HeaderAvatarProps = {
   onClick?: () => void;
@@ -26,13 +26,13 @@ const AvatarWrapper = styled.button`
 
 export const HeaderAvatar: FunctionComponent<HeaderAvatarProps> = (props) => {
   const { onClick } = props;
-  const { accountData, accountDataLoading } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
 
   return (
     <>
-      {!accountDataLoading && accountData && (
+      {!accountQuery.loading && accountQuery.data?.findMyAccount && (
         <AvatarWrapper type="button" onClick={onClick}>
-          <HeaderMenuAvatar account={accountData} />
+          <HeaderMenuAvatar account={accountQuery.data?.findMyAccount} />
         </AvatarWrapper>
       )}
     </>

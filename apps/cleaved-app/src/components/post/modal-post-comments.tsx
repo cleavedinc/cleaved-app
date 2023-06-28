@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useContext } from "react";
+import React, { FunctionComponent, ReactNode } from "react";
 import styled, { useTheme } from "styled-components";
 import { Portal } from "react-portal";
 
@@ -19,10 +19,9 @@ import {
 } from "@cleaved/ui";
 
 import { PostCommentAvatar } from "../../components";
-import { AccountContext } from "../../contexts";
 import { CommentForm } from "../../forms";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useTranslator } from "../../hooks";
+import { useFindMyAccount, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 type ModalPostCommentsBackgroundProps = {
@@ -175,7 +174,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
   useOnOutsideClick = true,
 }) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { accountData } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
 
   if (!open) {
     return null;
@@ -187,7 +186,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
       <StyledContentWrapper>{children}</StyledContentWrapper>
       {hasPermission && (
         <StyledPostCommentFormWrapper>
-          <PostCommentAvatar account={accountData} />
+          <PostCommentAvatar account={accountQuery.data?.findMyAccount} />
 
           <StyledCommentForm
             postOrPostReplyId={postOrPostReplyId}

@@ -7,11 +7,7 @@ import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import { logError, RollbarLogLevels } from "@cleaved/helpers";
 
 import { apolloClient } from "../client";
-import {
-  AuthTokenContextProvider,
-  AccountContextProvider,
-  ThemeContextProvider,
-} from "../contexts";
+import { AuthTokenContextProvider, ThemeContextProvider } from "../contexts";
 import { useTranslator } from "../hooks";
 import { UIProvider } from "../providers";
 
@@ -57,13 +53,11 @@ export const ApplicationWrapper: FunctionComponent = () => {
       <GoogleOAuthProvider clientId={googleClientId}>
         <ApolloProvider client={apolloClient}>
           <AuthTokenContextProvider>
-            <AccountContextProvider>
-                <ThemeContextProvider>
-                  <UIProvider>
-                    <Application />
-                  </UIProvider>
-                </ThemeContextProvider>
-            </AccountContextProvider>
+            <ThemeContextProvider>
+              <UIProvider>
+                <Application />
+              </UIProvider>
+            </ThemeContextProvider>
           </AuthTokenContextProvider>
         </ApolloProvider>
       </GoogleOAuthProvider>

@@ -26,7 +26,6 @@ const getEntries = () => {
     home: ["./src/utils/locales/i18n.ts", "./src/pages/home.tsx"],
     login: ["./src/utils/locales/i18n.ts", "./src/pages/login/login.tsx"],
     main: ["./src/utils/locales/i18n.ts", "./src/pages/index.tsx"],
-    notFound: ["./src/utils/locales/i18n.ts", "./src/pages/not-found.tsx"],
     professionalInvite: ["./src/utils/locales/i18n.ts", "./src/pages/professional/professional-invite.tsx"],
     professionalOnboarding: ["./src/utils/locales/i18n.ts", "./src/pages/professional/professional-onboarding.tsx"],
     professionalShareLinkRegistration: [

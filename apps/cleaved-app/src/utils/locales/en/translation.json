@@ -24,7 +24,6 @@
   },
   "errorMessages": {
     "notLoggedIn": "You are not logged in. We'll bring you to the login page in a moment.",
-    "pageNotFound": "Sorry, but we couldn't find that page right now. We'll bring you back to the home page in a moment.",
     "somethingWentWrongSorryAboutThat": "Something went wrong, sorry about that. If this continues, please let us know."
   },
   "files": {

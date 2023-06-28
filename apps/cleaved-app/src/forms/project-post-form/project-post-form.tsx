@@ -7,9 +7,9 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import { ButtonPrimary, CloseIcon, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
 
-import { AccountContext, PostsContext } from "../../contexts";
+import { PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
-import { usePostProjectGetById, useRouteParams, useTranslator } from "../../hooks";
+import { useFindMyAccount, usePostProjectGetById, useRouteParams, useTranslator } from "../../hooks";
 
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
@@ -65,7 +65,7 @@ const StyledRemoveAllImages = styled.div`
 
 export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) => {
   const { closeForm, postId } = props;
-  const { accountData } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
   const { postProjectSeekRefetch, setProjectPostFormIsDirty, setProjectPostFormImageUploadIsDirty } =
     useContext(PostsContext);
   const { postProjectGetByIdData, postProjectGetByIdDataLoading } = usePostProjectGetById(postId);
@@ -81,9 +81,9 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
     : undefined;
 
   const createProjectPostWithNamePlaceholder = t("post.createProjectPostWithNamePlaceholder", {
-    name: accountData?.firstName,
+    name: accountQuery.data?.findMyAccount.firstName,
   })
-    ? t("post.createProjectPostWithNamePlaceholder", { name: accountData?.firstName })
+    ? t("post.createProjectPostWithNamePlaceholder", { name: accountQuery.data?.findMyAccount.firstName })
     : undefined;
 
   const [submitPost] = useMutation(POST_PROJECT_CREATE, {

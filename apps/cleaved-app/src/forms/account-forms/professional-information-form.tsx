@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 import { Field, Formik, Form } from "formik";
@@ -18,8 +18,7 @@ import {
   Spinner,
 } from "@cleaved/ui";
 
-import { AccountContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { useFindMyAccount, useTranslator } from "../../hooks";
 
 import { ProfessionalInformationFormFormikTextarea } from "./components";
 import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION } from "./gql";
@@ -63,7 +62,7 @@ const StyledSubmitButton = styled(ButtonPrimary)`
 
 export const ProfesionalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const { accountData, accountDataRefetch } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
 
   const professionalTitlePlaceholder = t("formLabels.professionalTitlePlaceholder")
     ? t("formLabels.professionalTitlePlaceholder")
@@ -89,9 +88,7 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
 
   const [setJobTitle] = useMutation(SET_JOB_TITLE_MUTATION, {
     onCompleted: () => {
-      if (accountDataRefetch) {
-        accountDataRefetch();
-      }
+      accountQuery.refetch();
     },
     onError: (error) => {
       logQueryError(error);
@@ -108,9 +105,9 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        about: accountData?.about || "",
-        accountEmail: accountData?.emailAddress || "",
-        jobTitle: accountData?.jobTitle || "",
+        about: accountQuery.data?.findMyAccount.about || "",
+        accountEmail: accountQuery.data?.findMyAccount.emailAddress || "",
+        jobTitle: accountQuery.data?.findMyAccount.jobTitle || "",
       }}
       onSubmit={(values: ProfesionalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
