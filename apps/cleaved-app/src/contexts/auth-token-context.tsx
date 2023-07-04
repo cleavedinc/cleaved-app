@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FunctionComponent, ReactNode, useState, createContext, useEffect } from "react";
+import React, { FunctionComponent, ReactNode, useState, createContext, useEffect, useCallback } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { useMutation } from "@apollo/react-hooks";
 import { navigate } from "@reach/router";
@@ -55,7 +55,7 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     refreshAction: null,
   });
 
-  const logOut = () => {
+  const logOut = useCallback(() => {
     setLoggedIn(false);
     DeleteCookie("_CRT_");
     navigate(`/login`);
@@ -63,28 +63,32 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     apolloClient.resetStore();
     apolloClient.cache.reset();
     googleLogout();
-  };
+  }, [setLoggedIn, DeleteCookie, navigate, apolloClient, googleLogout]);
 
-  const setOrgId = (orgIdArg: string | null | undefined) => {
-    const orgIdCheck = orgIdArg ? orgIdArg : "";
-    setPreferredOrgId(orgIdCheck);
-  };
+  const setOrgId = useCallback(
+    (orgIdArg: string | null | undefined) => {
+      setPreferredOrgId(orgIdArg ?? "");
+    },
+    [setPreferredOrgId]
+  );
 
-  const saveAuthorizationTokens = (catToken: string, crtToken: string) => {
-    const oneYearFromNow: string = dayjs().add(1, "year").utc().format();
+  const saveAuthorizationTokens = useCallback(
+    (catToken: string, crtToken: string) => {
+      const oneYearFromNow: string = dayjs().add(1, "year").utc().format();
 
-    (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
+      (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
 
-    SetCookie("_CRT_", crtToken, {
-      domain: process.env.DOMAIN,
-      expires: new Date(oneYearFromNow),
-      secure: process.env.NODE_ENV === "production",
-    });
-    setLoggedIn(true);
-    setFirstLoginComplete(true);
-  };
+      SetCookie("_CRT_", crtToken, {
+        expires: new Date(oneYearFromNow),
+        secure: process.env.NODE_ENV === "production",
+      });
+      setLoggedIn(true);
+      setFirstLoginComplete(true);
+    },
+    [SetCookie, setLoggedIn, setFirstLoginComplete]
+  );
 
-  const [getRefreshLogIn, { data: refreshData, loading: refreshLoading }] = useMutation(REFRESH_LOGIN_MUTATION, {
+  const [getRefreshLogIn, { loading: refreshLoading }] = useMutation(REFRESH_LOGIN_MUTATION, {
     onError: (error) => {
       setFirstLoginComplete(true);
       logQueryError(error);
@@ -92,14 +96,17 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     },
   });
 
-  const refreshOnComplete = (r: RefreshLogInMutation, postLoginRefreshAction?: (() => void) | null | undefined) => {
-    saveAuthorizationTokens(r.refreshLogIn.authorizationToken, r.refreshLogIn.refreshToken);
-    setOrgId(r.refreshLogIn.preferredOrgId);
+  const refreshOnComplete = useCallback(
+    (r: RefreshLogInMutation, postLoginRefreshAction?: (() => void) | null | undefined) => {
+      saveAuthorizationTokens(r.refreshLogIn.authorizationToken, r.refreshLogIn.refreshToken);
+      setOrgId(r.refreshLogIn.preferredOrgId);
 
-    if (postLoginRefreshAction) {
-      postLoginRefreshAction();
-    }
-  };
+      if (postLoginRefreshAction) {
+        postLoginRefreshAction();
+      }
+    },
+    [saveAuthorizationTokens, setOrgId]
+  );
 
   useEffect(() => {
     if (loggedIn) {
@@ -126,17 +133,19 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
       setRefreshInProgress(true);
       const refreshAction = refreshRequested.refreshAction;
       const crt = GetCookie("_CRT_");
-      getRefreshLogIn({
-        variables: { refreshToken: crt ? crt : "" },
-        onCompleted: (r: RefreshLogInMutation) => {
-          refreshOnComplete(r, refreshAction);
-          setRefreshInProgress(false);
-        },
-        onError: () => {
-          setRefreshInProgress(false);
-        },
-      });
-      setRefreshRequested({ refreshRequested: false, refreshAction: null });
+      if (crt) {
+        getRefreshLogIn({
+          variables: { refreshToken: crt },
+          onCompleted: (r: RefreshLogInMutation) => {
+            refreshOnComplete(r, refreshAction);
+            setRefreshInProgress(false);
+          },
+          onError: () => {
+            setRefreshInProgress(false);
+          },
+        });
+        setRefreshRequested({ refreshRequested: false, refreshAction: null });
+      }
     }
   }, [refreshRequested, refreshInProgress]);
 
