@@ -1,32 +1,27 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { BORDERS, FONT_SIZES, RADIUS, SPACING } from "@cleaved/ui";
+import { FONT_SIZES, SPACING } from "@cleaved/ui";
 
-import { FindMyAccountQuery } from "../../generated-types/graphql";
+import { FindMyAccountQuery, OrganizationGetMemberQuery } from "../../generated-types/graphql";
+
+import { avatartBase, avatarSizeLarge } from "../avatars/avatar-base-styles";
 
 type AsideAvatarProps = {
-  account: FindMyAccountQuery["findMyAccount"] | undefined;
+  account: FindMyAccountQuery["findMyAccount"] | OrganizationGetMemberQuery["organizationGetMember"] | undefined;
 };
-
-const avatartBase = css`
-  align-items: center;
-  border-radius: ${RADIUS.CIRCLE};
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  display: flex;
-  height: 100px;
-  justify-content: center;
-  margin: 0 auto ${SPACING.MEDIUM};
-  width: 100px;
-`;
 
 const StyledAvatarImage = styled.img`
   ${avatartBase}
+  ${avatarSizeLarge}
+  margin: 0 auto ${SPACING.MEDIUM};
 `;
 
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
+  ${avatarSizeLarge}
   font-size: ${FONT_SIZES.XXLARGE};
+  margin: 0 auto ${SPACING.MEDIUM};
 `;
 
 export const AsideAvatar: FunctionComponent<AsideAvatarProps> = (props) => {

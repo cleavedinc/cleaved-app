@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BORDERS, FONT_SIZES, SPACING } from "@cleaved/ui";
+import { BORDERS, FONT_SIZES } from "@cleaved/ui";
 
 export const StyledPostFormButton = styled.button`
   align-items: center;
@@ -11,7 +11,7 @@ export const StyledPostFormButton = styled.button`
   display: flex;
   flex-grow: 1;
   font-size: ${FONT_SIZES.MEDIUM};
-  padding: ${SPACING.MEDIUM};
+  height: 48px;
   text-align: left;
 
   &:hover {

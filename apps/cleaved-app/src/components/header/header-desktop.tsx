@@ -20,8 +20,8 @@ import {
 } from "@cleaved/ui";
 
 import { HeaderAvatar } from "../../components";
-import { AccountContext, authTokenContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { authTokenContext } from "../../contexts";
+import { useFindMyAccount, useTranslator } from "../../hooks";
 
 import { MainNavigationLinks } from "./main-navigation-links";
 import { StyledStickyHeader } from "./styled-sticky-header";
@@ -91,8 +91,8 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
   const onAccountMenuClick = () => setIsAccountMenuActive(!isAccountMenuActive);
   const handleCloseMenu = () => setIsAccountMenuActive(false);
   const { logOut, preferredOrgId } = useContext(authTokenContext);
-  const { accountData } = useContext(AccountContext);
-  const currentUserEmail = accountData?.emailAddress;
+  const accountQuery = useFindMyAccount();
+  const currentUserEmail = accountQuery.data?.findMyAccount.emailAddress;
 
   const handleLogout = () => {
     logOut();

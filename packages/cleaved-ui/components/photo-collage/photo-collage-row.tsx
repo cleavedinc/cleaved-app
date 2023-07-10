@@ -43,17 +43,15 @@ const StyledPhotoRow = styled.div<{ rowHeight: string }>`
   }
 `;
 
-const StyledPhotoThumb = styled.div<{ thumb: string }>`
-  background-image: url(${(props) => props.thumb});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  flex: 1;
+const StyledPhotoThumb = styled.img`
+  object-fit: cover;
+  object-position: top;
+  width: 100%;
 `;
 
 const StyledTotalPhotosNotSeen = styled.div`
   position: absolute;
-  color: ${({ theme }) => theme.colors.white_color};
+  color: ${({ theme }) => theme.colors.white_always_color};
   font-size: 35px;
   left: 50%;
   top: 50%;
@@ -96,7 +94,7 @@ export const PhotoCollageRow: FunctionComponent<RowPhotosProps> = (props) => {
                 </>
               )}
 
-              <StyledPhotoThumb thumb={data.source}></StyledPhotoThumb>
+              <StyledPhotoThumb src={data.source} />
             </StyledPhotoGrid>
           );
         })}

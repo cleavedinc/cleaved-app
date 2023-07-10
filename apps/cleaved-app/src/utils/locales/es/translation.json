@@ -1,0 +1,298 @@
+{
+  "account": {
+    "save": "Guardar"
+  },
+  "alerts": {
+    "copiedTextToClipboard": "¡Copiado!"
+  },
+  "buttonLabels": {
+    "giveFeedback": "Dar feedback",
+    "goHome": "Ir a inicio",
+    "logOut": "Cerrar sesión",
+    "signUpLogIn": "Registrarse / Iniciar sesión"
+  },
+  "cancel": "Cancelar",
+  "comment": {
+    "leaveCommentPlaceholder": "Escribe un comentario",
+    "reply": "Responder"
+  },
+  "companyName": "Cleaved",
+  "data": {
+    "loadingData": "Cargando...",
+    "loadMoreComments": "Cargar más comentarios",
+    "noData": "No hay datos"
+  },
+  "errorMessages": {
+    "notLoggedIn": "No has iniciado sesión. Te redirigiremos a la página de inicio de sesión en un momento.",
+    "somethingWentWrongSorryAboutThat": "Algo salió mal, disculpa por eso. Si esto continúa, por favor avísanos."
+  },
+  "files": {
+    "avatarImageSizeRecommendation": "Recomendación: 200px cuadrados",
+    "avatarUploadImage": "Subir imagen",
+    "fileSizeExceeded": "El tamaño del archivo debe ser menor a 10MB",
+    "selectAnImageToUpload": "Selecciona una imagen/gif para subir"
+  },
+  "formLabels": {
+    "about": "Acerca de",
+    "aboutPlaceholder": "Cuéntale a todos un poco sobre ti",
+    "firstName": "Nombre",
+    "firstNamePlaceholder": "Nombre",
+    "lastName": "Apellido",
+    "lastNamePlaceholder": "Apellido",
+    "middleName": "Segundo nombre",
+    "middleNamePlaceholder": "Segundo nombre",
+    "professionalEmail": "Correo electrónico profesional",
+    "professionalEmailPlaceholder": "Correo electrónico profesional",
+    "professionalTitle": "Título profesional",
+    "professionalTitlePlaceholder": "Título profesional"
+  },
+  "formValidationMessages": {
+    "aboutProfessionalCharactorLimit": "Acerca de tiene un límite máximo de 250 caracteres",
+    "firstNameIsRequired": "Se requiere el nombre",
+    "lastNameIsRequired": "Se requiere el apellido",
+    "youMustHaveAValidEmailAddress": "Debes tener una dirección de correo electrónico válida"
+  },
+  "helperInformationBoxes": {
+    "collaborativeTimelineAlt": "Persona señalando un gráfico con información",
+    "collaborativeTimelineHeader": "Línea de tiempo colaborativa",
+    "collaborativeTimelineText": "Obtén información del proyecto y brinda comentarios, todo en un solo lugar.",
+    "homePageEmptyStateAlt": "Pizarra con dos personas trabajando frente a ella",
+    "homePageEmptyStateHeader": "Sabemos que estás trabajando arduamente",
+    "homePageEmptyStateText": "Cuando tengas un minuto, publica tu actualización o idea en tu proyecto. Obtener comentarios y mantener a las personas actualizadas es importante.",
+    "inviteProfessionalToOrganizationAlt": "Flecha que apunta al formulario de invitación de profesionales",
+    "inviteProfessionalToOrganizationHeader": "Invita a personas a tu organización",
+    "inviteProfessionalToOrganizationText": "Las personas hacen que las cosas sucedan. Invita a tus compañeros de equipo a unirse a ti en todos tus proyectos.",
+    "organizationsAlt": "Tres edificios en una fila de varios tamaños",
+    "organizationsHeader": "Organizaciones, empresas o clientes",
+    "organizationsText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
+    "organizationRegisterAlt": "Flechas que apuntan al formulario de registro de una organización",
+    "organizationRegisterHeader": "Registrar una organización",
+    "organizationRegisterText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
+    "professionalOnboardingAlt": "Tres edificios en una fila de varios tamaños",
+    "professionalOnboardingHeader": "Antes de correr, caminamos",
+    "professionalOnboardingText": "Solo algunos pasos de configuración primero. Solo tomará un par de minutos, lo prometo.",
+    "professionalShareLinkRegistrationAlt": "Dos personas paradas, sosteniendo un gran círculo rojo con dos símbolos de enlace a punto de conectarse.",
+    "professionalShareLinkRegistrationHeader": "Bienvenido a Cleaved",
+    "professionalShareLinkRegistrationText": "Tienes la suerte de ser invitado por alguien que te valora. Asegúrate de devolver el favor.",
+    "projectListEmptyStateAlt": "Flecha que apunta hacia arriba y a la derecha, girando ligeramente a la izquierda.",
+    "projectListEmptyStateHeader": "Crea tu primera publicación",
+    "projectListEmptyStateText": "Comparte una decisión, actualización o idea con tu equipo sobre este proyecto. Obtén comentarios y mantén todo junto.",
+    "projectslistImageAlt": "Profesionales colaborando en un proyecto juntos",
+    "projectslistHeader": "Los proyectos son donde la magia sucede con tu equipo",
+    "projectslistText": "Crear un nuevo proyecto te proporciona una plataforma para compartir decisiones, recibir comentarios y demostrar el progreso a tu equipo, a otros equipos y a la dirección.",
+    "projectStartNewImageAlt": "Flecha que apunta al formulario para iniciar un nuevo proyecto",
+    "projectStartNewHeader": "Iniciar un nuevo proyecto",
+    "projectStartNewText": "Crear un nuevo proyecto te proporciona una plataforma para compartir decisiones, recibir comentarios y demostrar el progreso a tu equipo, a otros equipos y a la dirección.",
+    "teamsAlt": "Dos personas sosteniendo piezas de un proyecto",
+    "teamsHeader": "Las personas hacen que todo suceda",
+    "teamsText": "Invita a tus colegas para que brinden comentarios y compartan sus opiniones sobre decisiones importantes, y manténlos informados sobre hitos y plazos clave del proyecto."
+  },
+  "hTags": {
+    "personalInformation": "Información personal",
+    "professionalInformation": "Información profesional",
+    "theme": "Tema"
+  },
+  "language": {
+    "english": "Inglés",
+    "languageSelectionHeader": "Selección de idioma",
+    "spanish": "Español"
+  },
+  "loginPage": {
+    "signInHeader": "Registrarse / Iniciar sesión",
+    "signInMessage": "Crea una nueva cuenta o inicia sesión en una existente."
+  },
+  "menuLinkNames": {
+    "account": "Cuenta",
+    "accountMembership": "Membresía",
+    "accountOrganizations": "Organizaciones",
+    "accountPersonalInformation": "Información Personal",
+    "accountProfessionalInformation": "Información Profesional",
+    "home": "Inicio",
+    "projectList": "Proyectos",
+    "projectStartNew": "Iniciar un nuevo proyecto",
+    "professionalInvite": "Invitación Profesional",
+    "organizationRegister": "Registrar una nueva organización",
+    "teamsList": "Equipo"
+  },
+  "organizations": {
+    "areYouSureKeepButtonText": "Permanecer en la organización",
+    "areYouSureRemoveButtonText": "Entiendo el riesgo, abandonar la organización",
+    "areYouSureRemoveMeFromOrganizationDetails": "Si te eliminas de esta organización, ya no tendrás acceso a ella. Si eres el último miembro que abandona la organización, se eliminarán la organización y todos los datos.",
+    "areYouSureRemoveMeFromOrganizationTitle": "Ten cuidado, esto no se puede deshacer",
+    "dateCreated": "Fecha de creación",
+    "owner": "Propietario",
+    "posts": "Publicaciones",
+    "edit": "Editar",
+    "manageOrganizations": "Administrar organizaciones",
+    "organizations": "Organizaciones",
+    "organizationName": "Organización",
+    "organizationNamePlaceholder": "Nombre de la organización",
+    "organizationRegister": "Registrar organización",
+    "removeOrganization": "Eliminar organización",
+    "setDefaultOrganization": "Establecer como organización activa"
+  },
+  "organizationsStartNew": {
+    "registerNewOrganization": "Registrar una nueva organización"
+  },
+  "people": {
+    "addPerson": "Agregar compañero de equipo",
+    "teamListHeader": "Compañeros de equipo activos",
+    "teamListHeaderHome": "Compañeros de equipo",
+    "viewAllPeople": "Ver todos"
+  },
+  "pleaseWaitDots": "Por favor espera...",
+  "post": {
+    "areYouSureDiscardPostModalTitle": "¿Estás seguro?",
+    "areYouSureDiscardPostModalText": "Aún no guardamos borradores, por lo que tu contenido se perderá.",
+    "areYouSureDiscardPostButtonText": "Descartar publicación",
+    "areYouSureKeepPostButtonText": "Permanecer y seguir escribiendo",
+    "areYouSureRemovePostModalHeader": "¿Estás seguro?",
+    "areYouSureRemovePostModalText": "Si eliminas esta publicación, desaparecerá para siempre. No hay vuelta atrás.",
+    "areYouSureRemoveButtonText": "Eliminar publicación",
+    "areYouSureKeepButtonText": "Mantener mi publicación",
+    "comment": "Comentario",
+    "comments": "Comentarios",
+    "createProjectPostWithNamePlaceholder": "Crear una publicación ",
+    "editPost": "Editar publicación",
+    "endOfPostList": "¡Estás al día!",
+    "imageUploadTooltip": "foto/gif",
+    "notContainOnlyBlankSpaces": "Este campo no puede estar vacío",
+    "createProjectPostWithName": "Crear una publicación ",
+    "createProjectPost": "Crear publicación",
+    "editProjectPost": "Editar publicación",
+    "photoViewerToolbarMessage": "Publicado por el ",
+    "post": "Publicar",
+    "postImageBasicAlt": "Imagen de la publicación",
+    "removeAllImages": "Eliminar todas las imágenes",
+    "removePost": "Eliminar publicación",
+    "submitPost": "Publicar",
+    "totalComments": "Comentarios totales",
+    "totalPosts": "Publicaciones totales"
+  },
+  "postFileUpload": {
+    "addMoreImages": "Agregar más imágenes",
+    "errorFileExceedsFileSize": "Un archivo superó el tamaño de MB y no se cargó.",
+    "errorFileIncorrectType": "Un archivo no es un tipo de archivo aceptado.",
+    "dragDropAreaHelperText": "Arrastra y suelta hasta imágenes, o haz clic para seleccionar."
+  },
+  "professional": {
+    "emailLinkText": "Correo electrónico"
+  },
+  "professionalOnboarding": {
+    "alreadyHasOrganizationLink": "Omitir incorporación",
+    "alreadyHasOrganizationText": "Ya tengo una organización a la que pertenezco.",
+    "finishOnboarding": "Llévame a mi nuevo proyecto",
+    "registerOrganizationCelebrateImageAlt": "Dos personas chocando las manos con fuegos artificiales a su alrededor",
+    "registerOrganizationHelperInfoImageAlt": "Un edificio individual",
+    "registerOrganizationHelperInfoText": "Las organizaciones son la forma en que se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
+    "registerOrganizationFormHeader": "Registra tu organización",
+    "registerOrganizationFormHeaderOrgCreated": "Organización creada",
+    "startNewProjectCelebrateImageAlt": "Dos personas saltando y chocando las manos con fuegos artificiales a su alrededor",
+    "startNewProjectHelperInfoImageAlt": "Pizarra con dos personas trabajando frente a ella",
+    "startNewProjectHelperInfoText": "Los proyectos te brindan una plataforma para compartir decisiones, recibir comentarios y demostrar el progreso.",
+    "startNewProjectFormHeader": "Inicia tu primer proyecto",
+    "startNewProjectFormHeaderProjectCreated": "Proyecto creado",
+    "invitePeopleHelperInfoImageAlt": "Dos personas sosteniendo tarjetas de proyecto con un signo más entre ellas",
+    "invitePeopleHelperInfoText": "Las personas lo hacen posible. Invita a tus compañeros de equipo para que se unan a ti en todos tus proyectos.",
+    "invitePeopleFormHeader": "Invita a tu equipo",
+    "mailtoLinkEmailSubjectText": "Invitación para unirse a Cleaved",
+    "mailtoLinkEmailBodyText": "Acabo de unirme a Cleaved y configuré un nuevo proyecto llamado Temp Project Name. Únete a mí si puedes. %0D%0A %0D%0A Únete a mi equipo en Cleaved: ",
+    "mailtoLink": "Invita a tu equipo",
+    "navigateBackwardStep": "Anterior",
+    "navigateForwardStep": "Siguiente"
+  },
+  "professionalOnboardingHasOrganization": {
+    "hasOrganizationHeader": "Ponte en contacto con tu administrador para que te invite",
+    "hasOrganizationGetInviteImageAlt": "Hombre y mujer sosteniendo cartas. Texto que dice: Obtén una invitación",
+    "hasOrganizationMessage": "Si tu empresa ya utiliza nuestro servicio, tienes la suerte de trabajar allí. 🙂 Pídele a tu administrador que te invite.",
+    "goBackToOnboardingLink": "volver al proceso de incorporación",
+    "goBackToOnboardingText": "Cometí un error y quiero "
+  },
+  "professionalShareLinkRegistration": {
+    "header": "¡Nos alegra mucho que alguien te haya invitado!",
+    "logInButtonLabel": "Iniciar sesión",
+    "shareLinkText": "Creemos en ti y queremos que tengas éxito."
+  },
+  "project": {
+    "projectName": "Nombre del proyecto",
+    "dateCreated": "Fecha de creación",
+    "owner": "Propietario",
+    "posts": "Publicaciones",
+    "edit": "Editar",
+    "editStatus": "Editar estado",
+    "stateActive": "Activo",
+    "stateInactive": "Inactivo",
+    "stateArchive": "Archivo"
+  },
+  "projectStartNew": {
+    "addNewProjectHelperText": "Es una gran sensación cuando comienzas algo nuevo.",
+    "startNewProject": "Comenzar un nuevo proyecto",
+    "projectName": "Nombre del proyecto",
+    "projectNamePlaceholder": "Nombre del proyecto...",
+    "projectNameRequired": "Nombre del proyecto requerido",
+    "projectDetails": "Detalles del proyecto",
+    "projectDetailsRequired": "Detalles del proyecto requeridos",
+    "projectDetailsPlaceholder": "Detalles del proyecto..."
+  },
+  "projects": {
+    "active": "Activo",
+    "archive": "Archivo",
+    "inactive": "Inactivo"
+  },
+  "reactions": {
+    "celebrate": "Celebrar",
+    "like": "Me gusta",
+    "love": "Amor",
+    "noReaction": "Me gusta"
+  },
+  "settings": {
+    "darkMode": "Modo oscuro"
+  },
+  "shareLinks": {
+    "areYouSureRemoveButtonText": "Eliminar enlace compartido",
+    "areYouSureKeepButtonText": "Mantener mi enlace compartido",
+    "areYouSureRemoveSharelinkModalHeader": "¿Estás seguro?",
+    "areYouSureRemoveSharelinkModalText": "Si eliminas este enlace compartido, desaparecerá para siempre. No hay vuelta atrás.",
+    "createAdminShareLink": "Crear enlace de administrador",
+    "createReadShareLink": "Crear enlace de solo lectura",
+    "createWriteShareLink": "Crear enlace de lectura/escritura",
+    "editMenuGenerateNewShareLink": "Generar un nuevo enlace compartido",
+    "editMenuRemoveShareLink": "Eliminar enlace compartido",
+    "manage": "Gestionar",
+    "permissionLevel": "Nivel de permisos",
+    "professionalInviteEmptyState": "Para invitar a tu equipo, puedes crear un enlace compartido y luego compartirlo con ellos.",
+    "shareLink": "Enlace compartido"
+  },
+  "submit": "Enviar",
+  "teams": {
+    "addNewTeamMember": "Invitar a un compañero de equipo",
+    "addNewTeamMemberHelperText": "Siempre es mejor con más personas.",
+    "areYouSureKeepButtonText": "Mantener a este usuario",
+    "areYouSureRemoveButtonText": "Eliminar a este usuario de la organización",
+    "areYouSureRemoveMemberModalHeader": "¿Estás seguro?",
+    "areYouSureRemoveMemberModalText": "Si eliminas a este miembro del equipo de tu organización, no podrá acceder a ninguno de tus proyectos nuevamente. Solo recuerda que siempre puedes invitarlos de nuevo.",
+    "edit": "Editar",
+    "professionalName": "Nombre",
+    "professionalPermissions": "Permisos",
+    "professionalTitle": "Cargo",
+    "removeProfessional": "Eliminar profesional",
+    "setUserPermission": "Editar permiso de usuario"
+  },
+  "termsOfService": {
+    "acceptTermsOfService": "Acepto los términos del servicio",
+    "acceptTermsOfServiceIsRequired": "Se requiere aceptar los términos y condiciones",
+    "agreementHeader": "Acuerdo de usuario",
+    "firstParagraph": "Antes de poder utilizar nuestros servicios, debes aceptar nuestros",
+    "acceptTermsHeader": "¡Bienvenido a bordo!",
+    "acceptTermsImageAlt": "Imagen sobre aceptar términos y condiciones",
+    "acceptTermsText": "Lo primero es lo primero, debes aceptar los términos, luego podrás ponerte manos a la obra."
+  },
+  "tryAgain": "Intentar de nuevo",
+  "widget": {
+    "projectDetailsEdit": "Editar proyecto",
+    "projectsList": "Lista de proyectos",
+    "projectsListEmptyListText": "Vaya, aún no hay proyectos. ¡Vamos a crear uno!",
+    "projectsListMenuCreateProjectLink": "Crear un proyecto",
+    "projectListSeeMore": "Ver todos"
+  }
+}

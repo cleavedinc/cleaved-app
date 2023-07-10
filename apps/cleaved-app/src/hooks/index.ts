@@ -1,4 +1,4 @@
-export * from "./use-join-organization-with-share-link";
+export * from "./use-find-my-account";
 export * from "./use-login-guard";
 export * from "./use-navigate-to-professional-profile";
 export * from "./use-organization-seek-members";
@@ -11,3 +11,4 @@ export * from "./use-query-string-params";
 export * from "./use-route-params";
 export * from "./use-terms-accepted";
 export * from "./use-translator";
+export * from "./use-my-organization-membership";

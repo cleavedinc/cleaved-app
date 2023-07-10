@@ -17,8 +17,10 @@ import {
 } from "@cleaved/ui";
 
 import { HelperInfoHeaderTextImageRightBox, OrganizationEditMenu } from "../../components";
-import { authTokenContext, OrganizationMembershipsContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { authTokenContext } from "../../contexts";
+import { useMyOrganizationMembership, useTranslator } from "../../hooks";
+
+import organizationsHelperImage from "../../media/helper-info/organizations-helper-image.svg";
 
 const StyledOrgActiveTag = styled.span`
   color: ${({ theme }) => theme.colors.baseApproved_color};
@@ -45,15 +47,14 @@ const StyledTdWithMenuContentEditColumn = styled(StyledTd)`
 
 export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
-  const { organizationMembershipsData, organizationMembershipsDataLoading } =
-    useContext(OrganizationMembershipsContext);
+  const membershipQuery = useMyOrganizationMembership();
   const { t } = useTranslator();
 
   return (
     <>
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.organizationsAlt")}
-        helperInfoImageUrl={"/helper-info/organizations-helper-image.svg"}
+        helperInfoImageUrl={organizationsHelperImage}
         helperInfoText={t("helperInformationBoxes.organizationsText")}
         helperInfoTextHeader={t("helperInformationBoxes.organizationsHeader")}
         width={"250px"}
@@ -64,34 +65,39 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
           <SectionHeader>{t("organizations.organizations")}</SectionHeader>
         </HeadingWrapper>
 
-        {!organizationMembershipsDataLoading && organizationMembershipsData && organizationMembershipsData.length > 0 && (
-          <StyledTable role="table">
-            <StyledTHead role="rowgroup">
-              <StyledTHeadTr role="row">
-                <StyledTh role="columnheader">{t("organizations.organizationName")}</StyledTh>
-                <StyledTh role="columnheader">{t("organizations.edit")}</StyledTh>
-              </StyledTHeadTr>
-            </StyledTHead>
-            <StyledTBody role="rowgroup">
-              {!organizationMembershipsDataLoading &&
-                organizationMembershipsData.map((org) => {
+        {!membershipQuery.loading &&
+          membershipQuery.data?.organizationMemberships &&
+          membershipQuery.data.organizationMemberships.length > 0 && (
+            <StyledTable role="table">
+              <StyledTHead role="rowgroup">
+                <StyledTHeadTr role="row">
+                  <StyledTh role="columnheader">{t("organizations.organizationName")}</StyledTh>
+                  <StyledTh role="columnheader">{t("organizations.edit")}</StyledTh>
+                </StyledTHeadTr>
+              </StyledTHead>
+              <StyledTBody role="rowgroup">
+                {membershipQuery.data.organizationMemberships.map((org) => {
                   return (
                     <StyledTr key={org.id} role="row">
                       <StyledTdWithMenuContentNameColumn role="cell">
-                        {org.name}{" "}
+                        {org.name}
                         {preferredOrgId && preferredOrgId === org.id && (
                           <StyledOrgActiveTag>(active)</StyledOrgActiveTag>
                         )}
                       </StyledTdWithMenuContentNameColumn>
-                      <StyledTdWithMenuContentEditColumn role="cell">
-                        <OrganizationEditMenu orgId={org.id} />
-                      </StyledTdWithMenuContentEditColumn>
+                      {!membershipQuery.loading &&
+                        membershipQuery.data?.organizationMemberships &&
+                        membershipQuery.data.organizationMemberships.length > 1 && (
+                          <StyledTdWithMenuContentEditColumn role="cell">
+                            <OrganizationEditMenu orgId={org.id} />
+                          </StyledTdWithMenuContentEditColumn>
+                        )}
                     </StyledTr>
                   );
                 })}
-            </StyledTBody>
-          </StyledTable>
-        )}
+              </StyledTBody>
+            </StyledTable>
+          )}
       </Box>
     </>
   );

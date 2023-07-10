@@ -14,10 +14,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation googleSSO($token: String!) {\n    googleSSO(token: $token) {\n      authorizationToken\n      preferredOrgId\n      refreshToken\n      tokenType\n    }\n  }\n": types.GoogleSsoDocument,
+    "\n  mutation googleSSOWithShareLink($token: String!, $shareLink: ID!) {\n    googleSSOWithShareLink(token: $token, shareLink: $shareLink) {\n      authorizationToken\n      joinedOrg\n      preferredOrgId\n      refreshToken\n      tokenType\n    }\n  }\n": types.GoogleSsoWithShareLinkDocument,
     "\n  mutation refreshLogIn($refreshToken: String!) {\n    refreshLogIn(refreshToken: $refreshToken) {\n      authorizationToken\n      preferredOrgId\n      refreshToken\n      tokenType\n    }\n  }\n": types.RefreshLogInDocument,
     "\n  mutation organizationRemoveUser($organizationId: ID!, $userId: ID!) {\n    organizationRemoveUser(organizationId: $organizationId, userId: $userId)\n  }\n": types.OrganizationRemoveUserDocument,
     "\n  mutation organizationSetUserPermissionLevel(\n    $organizationId: ID!\n    $userId: ID!\n    $permissionLevel: OrgPermissionLevel!\n  ) {\n    organizationSetUserPermissionLevel(\n      organizationId: $organizationId\n      userId: $userId\n      permissionLevel: $permissionLevel\n    )\n  }\n": types.OrganizationSetUserPermissionLevelDocument,
     "\n  mutation removeOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    removeOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n": types.RemoveOrganizationShareLinkDocument,
+    "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n": types.OrganizationGetMemberDocument,
     "\n  mutation setAccountAvatar($image: Upload!) {\n    setAccountAvatar(image: $image)\n  }\n": types.SetAccountAvatarDocument,
     "\n  mutation setAccountEmail($newEmail: String!) {\n    setAccountEmail(newEmail: $newEmail)\n  }\n": types.SetAccountEmailDocument,
     "\n  mutation setJobTitle($jobTitle: String!) {\n    setMyJobTitle(jobTitle: $jobTitle)\n  }\n": types.SetJobTitleDocument,
@@ -27,10 +29,9 @@ const documents = {
     "\n  mutation registerOrganization($organizationId: ID!, $name: String) {\n    registerOrganization(organizationId: $organizationId, name: $name)\n  }\n": types.RegisterOrganizationDocument,
     "\n  mutation postProjectCreate($organizationId: ID!, $projectId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectCreate(organizationId: $organizationId, projectId: $projectId, body: $body, imageUrls: $imageUrls)\n  }\n": types.PostProjectCreateDocument,
     "\n  mutation postProjectUpdate($organizationId: ID!, $postId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectUpdate(organizationId: $organizationId, postId: $postId, body: $body, imageUrls: $imageUrls)\n  }\n": types.PostProjectUpdateDocument,
-    "\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID) {\n    projectStart(projectName: $projectName, organizationId: $organizationId, projectId: $projectId)\n  }\n": types.ProjectStartDocument,
+    "\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectStart(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n": types.ProjectStartDocument,
     "\n  mutation acceptTerms {\n    acceptTerms\n  }\n": types.AcceptTermsDocument,
     "\n  mutation generateOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    generateOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n": types.GenerateOrganizationShareLinkDocument,
-    "\n  mutation joinOrganizationWithShareLink($shareLink: ID!) {\n    joinOrganizationWithShareLink(shareLink: $shareLink)\n  }\n": types.JoinOrganizationWithShareLinkDocument,
     "\n  mutation organizationRemoveMe($organizationId: ID!) {\n    organizationRemoveMe(organizationId: $organizationId)\n  }\n": types.OrganizationRemoveMeDocument,
     "\n  mutation postProjectRemove($organizationId: ID!, $postId: ID!) {\n    postProjectRemove(organizationId: $organizationId, postId: $postId)\n  }\n": types.PostProjectRemoveDocument,
     "\n  mutation postProjectReply($organizationId: ID!, $postOrPostReplyId: ID!, $body: String!) {\n    postProjectReply(organizationId: $organizationId, postOrPostReplyId: $postOrPostReplyId, body: $body)\n  }\n": types.PostProjectReplyDocument,
@@ -38,14 +39,14 @@ const documents = {
     "\n  mutation projectSetStatus($projectId: ID!, $organizationId: ID!, $status: ProjectStatus!) {\n    projectSetStatus(projectId: $projectId, organizationId: $organizationId, status: $status)\n  }\n": types.ProjectSetStatusDocument,
     "\n  mutation setPreferredOrgId($orgId: ID!) {\n    setPreferredOrgId(orgId: $orgId)\n  }\n": types.SetPreferredOrgIdDocument,
     "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n      middleName\n    }\n  }\n": types.FindMyAccountDocument,
-    "\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n    }\n  }\n": types.OrganizationMembershipsDocument,
+    "\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n      userPermissionInOrg\n    }\n  }\n": types.OrganizationMembershipsDocument,
     "\n  query organizationSeekMembers($organizationId: ID!, $seekKey: ID, $pageSize: Int) {\n    organizationSeekMembers(organizationId: $organizationId, seekKey: $seekKey, pageSize: $pageSize) {\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n      permissionInOrg\n    }\n  }\n": types.OrganizationSeekMembersDocument,
     "\n  query organizationShareLinks($organizationId: ID!) {\n    organizationShareLinks(organizationId: $organizationId) {\n      id\n      shareLink\n      permission\n    }\n  }\n": types.OrganizationShareLinksDocument,
     "\n  query postProjectAccountSeek($organizationId: ID!, $projectId: ID!, $seekKey: ID, $pageSize: Int) {\n    postProjectAccountSeek(\n      organizationId: $organizationId\n      projectId: $projectId\n      seekKey: $seekKey\n      pageSize: $pageSize\n    ) {\n      id\n      currentAvatar\n      firstName\n      jobTitle\n      lastName\n    }\n  }\n": types.PostProjectAccountSeekDocument,
     "\n  query postProjectGetById($organizationId: ID!, $id: ID!) {\n    postProjectGetById(organizationId: $organizationId, id: $id) {\n      id\n      body\n      accountId\n      date\n      account {\n        currentAvatar\n        firstName\n        id\n        jobTitle\n        lastName\n      }\n      images\n    }\n  }\n": types.PostProjectGetByIdDocument,
     "\n  query postProjectReplies($organizationId: ID!, $parentPostId: ID!, $seekKey: ID, $pageSize: Int) {\n    postProjectReplies(\n      organizationId: $organizationId\n      parentPostId: $parentPostId\n      seekKey: $seekKey\n      pageSize: $pageSize\n    ) {\n      id\n      body\n      date\n      account {\n        id\n        firstName\n        lastName\n        jobTitle\n        currentAvatar\n      }\n      reactionTotalCount\n      reactionsExpressed\n      myReaction\n      initialReplies {\n        id\n        body\n        date\n        account {\n          id\n          firstName\n          lastName\n          jobTitle\n          currentAvatar\n        }\n        reactionTotalCount\n        reactionsExpressed\n        myReaction\n        repliesCount\n        nestedRepliesCount\n        images\n      }\n      repliesCount\n      nestedRepliesCount\n      images\n    }\n  }\n": types.PostProjectRepliesDocument,
     "\n  query postProjectSeek($organizationId: ID!, $projectId: ID, $seekKey: ID, $pageSize: Int) {\n    postProjectSeek(organizationId: $organizationId, projectId: $projectId, seekKey: $seekKey, pageSize: $pageSize) {\n      id\n      body\n      accountId\n      date\n      account {\n        id\n        firstName\n        lastName\n        jobTitle\n        currentAvatar\n      }\n      reactionTotalCount\n      reactionsExpressed\n      myReaction\n      repliesCount\n      images\n      project {\n        id\n        name\n      }\n    }\n  }\n": types.PostProjectSeekDocument,
-    "\n  query projectById($projectId: ID!, $organizationId: ID!) {\n    projectById(projectId: $projectId, organizationId: $organizationId) {\n      id\n      name\n      totalRootPostCount\n      totalResponseCount\n    }\n  }\n": types.ProjectByIdDocument,
+    "\n  query projectById($projectId: ID!, $organizationId: ID!) {\n    projectById(projectId: $projectId, organizationId: $organizationId) {\n      id\n      name\n      projectDetails\n      totalRootPostCount\n      totalResponseCount\n    }\n  }\n": types.ProjectByIdDocument,
     "\n  query projectsInOrgSeek($organizationId: ID!, $seekKey: ID, $pageSize: Int, $statusFilter: [ProjectStatus!]) {\n    projectsInOrgSeek(\n      organizationId: $organizationId\n      seekKey: $seekKey\n      pageSize: $pageSize\n      statusFilter: $statusFilter\n    ) {\n      createdAt\n      id\n      name\n      status\n      totalRootPostCount\n    }\n  }\n": types.ProjectsInOrgSeekDocument,
     "\n  query termsAccepted {\n    termsAccepted\n  }\n": types.TermsAcceptedDocument,
 };
@@ -71,6 +72,10 @@ export function graphql(source: "\n  mutation googleSSO($token: String!) {\n    
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation googleSSOWithShareLink($token: String!, $shareLink: ID!) {\n    googleSSOWithShareLink(token: $token, shareLink: $shareLink) {\n      authorizationToken\n      joinedOrg\n      preferredOrgId\n      refreshToken\n      tokenType\n    }\n  }\n"): (typeof documents)["\n  mutation googleSSOWithShareLink($token: String!, $shareLink: ID!) {\n    googleSSOWithShareLink(token: $token, shareLink: $shareLink) {\n      authorizationToken\n      joinedOrg\n      preferredOrgId\n      refreshToken\n      tokenType\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation refreshLogIn($refreshToken: String!) {\n    refreshLogIn(refreshToken: $refreshToken) {\n      authorizationToken\n      preferredOrgId\n      refreshToken\n      tokenType\n    }\n  }\n"): (typeof documents)["\n  mutation refreshLogIn($refreshToken: String!) {\n    refreshLogIn(refreshToken: $refreshToken) {\n      authorizationToken\n      preferredOrgId\n      refreshToken\n      tokenType\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -84,6 +89,10 @@ export function graphql(source: "\n  mutation organizationSetUserPermissionLevel
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation removeOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    removeOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n"): (typeof documents)["\n  mutation removeOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    removeOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"): (typeof documents)["\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -123,7 +132,7 @@ export function graphql(source: "\n  mutation postProjectUpdate($organizationId:
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID) {\n    projectStart(projectName: $projectName, organizationId: $organizationId, projectId: $projectId)\n  }\n"): (typeof documents)["\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID) {\n    projectStart(projectName: $projectName, organizationId: $organizationId, projectId: $projectId)\n  }\n"];
+export function graphql(source: "\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectStart(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n"): (typeof documents)["\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectStart(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -132,10 +141,6 @@ export function graphql(source: "\n  mutation acceptTerms {\n    acceptTerms\n  
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation generateOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    generateOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n"): (typeof documents)["\n  mutation generateOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    generateOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation joinOrganizationWithShareLink($shareLink: ID!) {\n    joinOrganizationWithShareLink(shareLink: $shareLink)\n  }\n"): (typeof documents)["\n  mutation joinOrganizationWithShareLink($shareLink: ID!) {\n    joinOrganizationWithShareLink(shareLink: $shareLink)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -167,7 +172,7 @@ export function graphql(source: "\n  query findMyAccount {\n    findMyAccount {\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n    }\n  }\n"];
+export function graphql(source: "\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n      userPermissionInOrg\n    }\n  }\n"): (typeof documents)["\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n      userPermissionInOrg\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -195,7 +200,7 @@ export function graphql(source: "\n  query postProjectSeek($organizationId: ID!,
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query projectById($projectId: ID!, $organizationId: ID!) {\n    projectById(projectId: $projectId, organizationId: $organizationId) {\n      id\n      name\n      totalRootPostCount\n      totalResponseCount\n    }\n  }\n"): (typeof documents)["\n  query projectById($projectId: ID!, $organizationId: ID!) {\n    projectById(projectId: $projectId, organizationId: $organizationId) {\n      id\n      name\n      totalRootPostCount\n      totalResponseCount\n    }\n  }\n"];
+export function graphql(source: "\n  query projectById($projectId: ID!, $organizationId: ID!) {\n    projectById(projectId: $projectId, organizationId: $organizationId) {\n      id\n      name\n      projectDetails\n      totalRootPostCount\n      totalResponseCount\n    }\n  }\n"): (typeof documents)["\n  query projectById($projectId: ID!, $organizationId: ID!) {\n    projectById(projectId: $projectId, organizationId: $organizationId) {\n      id\n      name\n      projectDetails\n      totalRootPostCount\n      totalResponseCount\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

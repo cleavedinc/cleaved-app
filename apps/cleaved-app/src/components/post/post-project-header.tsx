@@ -1,13 +1,12 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 import { FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
 import { getTimeSinceDate } from "@cleaved/helpers";
 
 import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
-import { AccountContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
-import { useNavigateToProfile } from "../../hooks";
+import { useFindMyAccount, useNavigateToProfile } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 type PostProjectHeaderProps = {
@@ -62,7 +61,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
   const { account, accountId, className, date, isPostOpenInModal, postId } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { profilePath } = useNavigateToProfile(account?.id);
-  const { accountData, accountDataLoading } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
 
   return (
     <StyledPostHeaderWrapper className={className}>
@@ -78,11 +77,14 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
         {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
       </StyledPostProfessionalInfoWrapper>
 
-      {hasPermission && !isPostOpenInModal && !accountDataLoading && accountData?.id === accountId && (
-        <StyledPostDateWrapper>
-          <PostEditMenu postId={postId} />
-        </StyledPostDateWrapper>
-      )}
+      {hasPermission &&
+        !isPostOpenInModal &&
+        !accountQuery.loading &&
+        accountQuery.data?.findMyAccount.id === accountId && (
+          <StyledPostDateWrapper>
+            <PostEditMenu postId={postId} />
+          </StyledPostDateWrapper>
+        )}
     </StyledPostHeaderWrapper>
   );
 };

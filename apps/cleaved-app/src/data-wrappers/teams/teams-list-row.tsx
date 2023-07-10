@@ -1,12 +1,11 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 import { mediaQueries, SPACING, StyledTd } from "@cleaved/ui";
 
 import { HeaderMenuAvatar, TeamsEditMenu } from "../../components";
-import { AccountContext } from "../../contexts";
 import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../generated-types/graphql";
-import { useNavigateToProfile } from "../../hooks";
+import { useFindMyAccount, useNavigateToProfile } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 type TeamsListRowProps = {
@@ -68,7 +67,7 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
 export const TeamsListRow: FunctionComponent<TeamsListRowProps> = (props) => {
   const { member, organizationSeekMembersDataRefetch } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const { accountData } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
   const { profilePath } = useNavigateToProfile(member?.id);
 
   return (
@@ -86,7 +85,7 @@ export const TeamsListRow: FunctionComponent<TeamsListRowProps> = (props) => {
       </StyledTdWithMenuContent>
       {hasPermission && (
         <StyledTdWithMenuContentEdit role="cell">
-          {accountData?.id !== member.id && (
+          {accountQuery.data?.findMyAccount.id !== member.id && (
             <TeamsEditMenu member={member} organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch} />
           )}
         </StyledTdWithMenuContentEdit>

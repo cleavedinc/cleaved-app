@@ -101,6 +101,10 @@ const PostCommentProfessionalName = styled.a`
   }
 `;
 
+const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
+  margin: 0 ${SPACING.SMALL} 0 ${SPACING.SMALL};
+`;
+
 export const Comment: FunctionComponent<CommentProps> = (props) => {
   const { account, commentLevel, postProjectRepliesDataRefetch, reply, setIsCommentRepliesVisible } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
@@ -134,11 +138,12 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
         {reply.reactionTotalCount !== "0" && (
           <>
             {hasPermission && <SeparatorDot />}
-
-            <ReactionTypesAndTotalCount
-              reactionsExpressed={reply.reactionsExpressed}
-              reactionTotalCount={reply.reactionTotalCount}
-            />
+            <StyledReactReactionTypesAndTotalCountWrapper>
+              <ReactionTypesAndTotalCount
+                reactionsExpressed={reply.reactionsExpressed}
+                reactionTotalCount={reply.reactionTotalCount}
+              />
+            </StyledReactReactionTypesAndTotalCountWrapper>
           </>
         )}
 

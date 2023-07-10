@@ -80,7 +80,9 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
         </StyledCommentInfoWrapper>
       </div>
 
-      <StyledProjectDetails>temp.project details needed.</StyledProjectDetails>
+      {projectData && projectData.projectByIdData && projectData.projectByIdData?.projectDetails && (
+        <StyledProjectDetails>{projectData.projectByIdData?.projectDetails}</StyledProjectDetails>
+      )}
     </BoxNoPadding>
   );
 };

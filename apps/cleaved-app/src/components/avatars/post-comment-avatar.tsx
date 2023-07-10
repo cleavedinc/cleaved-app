@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { BORDERS, FONT_SIZES, RADIUS, SPACING_PX } from "@cleaved/ui";
+import { FONT_SIZES, SPACING_PX } from "@cleaved/ui";
 
 import { FindMyAccountQuery, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useNavigateToProfile } from "../../hooks";
+
+import { avatartBase, avatarBaseSize } from "../avatars/avatar-base-styles";
 
 type PostHeaderAvatarProps = {
   account:
@@ -13,19 +15,10 @@ type PostHeaderAvatarProps = {
     | undefined;
 };
 
-const avatartBase = css`
-  align-items: center;
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.CIRCLE};
-  display: flex;
-  height: 45px;
-  justify-content: center;
-  margin-right: ${SPACING_PX.TWO};
-  width: 45px;
-`;
-
 const StyledAvatarImage = styled.img`
   ${avatartBase}
+  ${avatarBaseSize}
+  margin-right: ${SPACING_PX.TWO};
 `;
 
 const StyledAvatarImageLink = styled.a`
@@ -35,7 +28,9 @@ const StyledAvatarImageLink = styled.a`
 
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
+  ${avatarBaseSize}
   font-size: ${FONT_SIZES.SMALL};
+  margin-right: ${SPACING_PX.TWO};
 `;
 
 export const PostCommentAvatar: FunctionComponent<PostHeaderAvatarProps> = (props) => {

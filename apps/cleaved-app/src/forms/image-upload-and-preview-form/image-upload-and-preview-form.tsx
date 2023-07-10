@@ -1,12 +1,14 @@
-import React, { Dispatch, FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
+import { useFormikContext } from "formik";
 import { useDropzone } from "react-dropzone";
 import { ReactSortable } from "react-sortablejs";
 import styled, { useTheme } from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, SPACING } from "@cleaved/ui";
+import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, MoveIcon, RADIUS, SPACING } from "@cleaved/ui";
 
+import { PostsContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
 import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
@@ -14,8 +16,6 @@ import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
 type ImageUploadAndPreviewFormProps = {
   className?: string;
   images?: string[] | undefined;
-  setFieldValue: (field: string, value: string[], shouldValidate?: boolean) => void;
-  setImageUploadWrapperActive: Dispatch<React.SetStateAction<boolean>>;
 };
 
 type GetColorProps = {
@@ -62,26 +62,42 @@ const StyledImageThumbnailPreview = styled.img`
   height: 100%;
 `;
 
+const StyledImageThumbnailMoveButton = styled.button`
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.baseOverlayImageIcon_backgroundColor};
+  border: none;
+  border-radius: 0 ${RADIUS.MEDIUM} 0 0;
+  bottom: 0;
+  cursor: move;
+  display: flex;
+  flex-basis: 100%;
+  font: inherit;
+  height: 16px;
+  justify-content: center;
+  left: 0;
+  outline: inherit;
+  padding: 0;
+  position: absolute;
+  width: 16px;
+`;
+
 const StyledImageThumbnailRemoveButton = styled.button`
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: 0 0 0 10px;
+  background-color: ${({ theme }) => theme.colors.baseOverlayImageIcon_backgroundColor};
+  border: none;
+  border-radius: 0 0 0 ${RADIUS.MEDIUM};
   cursor: pointer;
   display: flex;
   flex-basis: 100%;
   font: inherit;
-  height: 25px;
+  height: 16px;
   justify-content: center;
   outline: inherit;
+  padding: 0;
   position: absolute;
   right: 0;
   top: 0;
-  width: 25px;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
-  }
+  width: 16px;
 `;
 
 const StyledImageUploadText = styled.div``;
@@ -121,7 +137,10 @@ const StyledReactSortable = styled(ReactSortable)``;
 // }
 
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
-  const { images, setFieldValue } = props;
+  const { images } = props;
+  const { setProjectPostFormImageUploadIsDirty } = useContext(PostsContext);
+  const { setFieldValue } = useFormikContext();
+
   const [savedFileUrls, setSavedFileUrls] = useState<string[]>([]);
   const [errors, setErrors] = useState<string | null>("");
   const maxFileUploadlimit = 10;
@@ -200,6 +219,16 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
 
   useEffect(() => {
     setFieldValue("imageUrls", savedFileUrls);
+
+    // checks to set dirty context to handle modal state (clean state)
+    if (savedFileUrls && savedFileUrls.length === 0) {
+      setProjectPostFormImageUploadIsDirty(false);
+    }
+
+    // checks to set dirty context to handle modal state (dirty state)
+    if (savedFileUrls && savedFileUrls.length > 0) {
+      setProjectPostFormImageUploadIsDirty(true);
+    }
   }, [savedFileUrls]); // eslint-disable-line
 
   return (
@@ -236,9 +265,14 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
                     }}
                   />
                 </StyledImageThumbnailInner>
+
                 <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
-                  <CloseIcon color={theme.colors.baseIcon_color} font-size={FONT_SIZES.SMALL} />
+                  <CloseIcon color={theme.colors.white_always_color} iconSize={FONT_SIZES.XXSMALL} />
                 </StyledImageThumbnailRemoveButton>
+
+                <StyledImageThumbnailMoveButton type="button" onClick={removeFile(fileUrl)}>
+                  <MoveIcon color={theme.colors.white_always_color} iconSize={FONT_SIZES.XXSMALL} />
+                </StyledImageThumbnailMoveButton>
               </StyledImageThumbnail>
             ))}
           </StyledReactSortable>

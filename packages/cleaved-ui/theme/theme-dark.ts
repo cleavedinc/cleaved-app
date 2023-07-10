@@ -1,15 +1,15 @@
-import { COLORS } from "./colors";
+import { COLORS_BASE } from "./colors-base";
 import { COLORS_DARK } from "./colors-dark";
 
 export const themeDark = {
   borders: {
-    baseLink_color: COLORS_DARK.BLUE_500,
+    baseLink_color: COLORS_BASE.BLUE_500,
     primary_color: COLORS_DARK.GRAY_100,
-    white_color: COLORS_DARK.WHITE,
+    white_always_color: COLORS_DARK.WHITE,
   },
   colors: {
-    baseAlert_color: COLORS_DARK.RED_500,
-    baseApproved_color: COLORS_DARK.GREEN_500,
+    baseAlert_color: COLORS_BASE.RED_500,
+    baseApproved_color: COLORS_BASE.GREEN_500,
     baseBordersAndShadows_color: COLORS_DARK.GRAY_100,
     baseBox_backgroundColor: COLORS_DARK.WHITE,
     baseButtonAndIcon_backgroundColorHover: COLORS_DARK.GRAY_50,
@@ -18,28 +18,29 @@ export const themeDark = {
     baseIcon_color: COLORS_DARK.GRAY_500,
     baseIconAlt_color: COLORS_DARK.WHITE,
     baseInput_backgroundColor: COLORS_DARK.WHITE,
-    baseLink_color: COLORS_DARK.BLUE_500,
-    baseLink_colorHover: COLORS_DARK.BLUE_500_HOVER,
+    baseLink_color: COLORS_BASE.BLUE_500,
+    baseLink_colorHover: COLORS_BASE.BLUE_500_HOVER,
     baseLogo: COLORS_DARK.GRAY_900,
-    baseOverlay_backgroundColor: COLORS_DARK.BLACK_ALPHA_DARK,
-    baseOverlayImage_backgroundColor: COLORS_DARK.BLACK_ALPHA_MEDIUM,
+    baseOverlay_backgroundColor: COLORS_BASE.BLACK_ALPHA_DARK,
+    baseOverlayImage_backgroundColor: COLORS_BASE.BLACK_ALPHA_MEDIUM,
+    baseOverlayImageIcon_backgroundColor: COLORS_BASE.BLACK_ALPHA_LIGHT,
     basePlaceholderText_color: COLORS_DARK.GRAY_500,
     baseSubText_color: COLORS_DARK.GRAY_500,
     baseText_color: COLORS_DARK.BLACK,
     baseTextAlt_color: COLORS_DARK.WHITE,
     baseTextLink_color: COLORS_DARK.BLACK,
-    baseTextLink_colorHover: COLORS_DARK.BLUE_500_HOVER,
+    baseTextLink_colorHover: COLORS_BASE.BLUE_500_HOVER,
 
     body_backgroundColor: COLORS_DARK.GRAY_50,
 
-    iconlikeColor: COLORS_DARK.BLUE_500,
+    iconlikeColor: COLORS_BASE.BLUE_500,
     iconLikeInactiveColor: COLORS_DARK.GRAY_500,
-    iconLoveColor: COLORS_DARK.RED_500,
-    iconCelebrateColor: COLORS_DARK.HONEY_YELLOW_500,
+    iconLoveColor: COLORS_BASE.RED_500,
+    iconCelebrateColor: COLORS_BASE.HONEY_YELLOW_500,
 
     helperInfoBoxWrapper_backgroundColor: COLORS_DARK.TAN_300,
 
-    white_color: COLORS.WHITE,
+    white_always_color: COLORS_BASE.WHITE_ALWAYS,
   },
 };
 

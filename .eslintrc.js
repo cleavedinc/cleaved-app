@@ -15,6 +15,7 @@ module.exports = exports = {
     "plugin:prettier/recommended",
     "prettier",
   ],
+  ignorePatterns: ["**/src/**/*.json"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "./tsconfig.json",

@@ -32,7 +32,7 @@ export const AsideHomeOrganizationMembersDataWrapper: FunctionComponent = () => 
   return (
     <StickUnderHeaderDesktopOnly>
       <StyledPeopleListHeaderWrapper>
-        <StyledPeopleListHeader>{t("people.teamListHeader")}</StyledPeopleListHeader>
+        <StyledPeopleListHeader>{t("people.teamListHeaderHome")}</StyledPeopleListHeader>
         <MembersListMenu />
       </StyledPeopleListHeaderWrapper>
 

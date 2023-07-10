@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { Field, Formik, Form } from "formik";
 import * as yup from "yup";
@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import {
   BORDERS,
+  ButtonPrimary,
   FONT_SIZES,
   HeadingWrapper,
   mediaQueries,
@@ -14,14 +15,13 @@ import {
   SectionHeader,
   SPACING,
   SPACING_PX,
+  Spinner,
 } from "@cleaved/ui";
 
 import { EditAccountAvatar } from "../../components";
-import { AccountContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { useFindMyAccount, useTranslator } from "../../hooks";
 
 import { UPDATE_ACCOUNT_MUTATION } from "./gql";
-import { StyledFormikAutoSave } from "./styled-formik-auto-save";
 
 type PersonalInformationFormType = {
   firstName?: string;
@@ -71,9 +71,15 @@ const StyledProjectFormLabel = styled.label`
   margin-bottom: ${SPACING_PX.ONE};
 `;
 
+const StyledSubmitButton = styled(ButtonPrimary)`
+  font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
+  margin-top: ${SPACING_PX.ONE};
+`;
+
 export const PersonalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const { accountData, accountDataRefetch } = useContext(AccountContext);
+  const accountQuery = useFindMyAccount();
 
   const firstNameIsRequired = t("formValidationMessages.firstNameIsRequired")
     ? t("formValidationMessages.firstNameIsRequired")
@@ -89,9 +95,7 @@ export const PersonalInformationForm: FunctionComponent = () => {
 
   const [updateAccount] = useMutation(UPDATE_ACCOUNT_MUTATION, {
     onCompleted: () => {
-      if (accountDataRefetch) {
-        accountDataRefetch();
-      }
+      accountQuery.refetch();
     },
     onError: (error) => {
       logQueryError(error);
@@ -102,8 +106,8 @@ export const PersonalInformationForm: FunctionComponent = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        firstName: accountData?.firstName || "",
-        lastName: accountData?.lastName || "",
+        firstName: accountQuery.data?.findMyAccount.firstName ?? "",
+        lastName: accountQuery.data?.findMyAccount.lastName ?? "",
       }}
       onSubmit={(values: PersonalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
@@ -120,18 +124,20 @@ export const PersonalInformationForm: FunctionComponent = () => {
         lastName: yup.string().required(lastNameIsRequired),
       })}
     >
-      {() => {
+      {({ dirty, isSubmitting, isValid }) => {
         return (
           <>
             <HeadingWrapper>
               <SectionHeader>{t("hTags.personalInformation")}</SectionHeader>
-              <StyledFormikAutoSave />
             </HeadingWrapper>
 
             <StyledFormWrapper>
               <Form>
                 <StyledAvatarNameWrapper>
-                  <EditAccountAvatar account={accountData} refetchAccountData={accountDataRefetch} />
+                  <EditAccountAvatar
+                    account={accountQuery.data?.findMyAccount}
+                    refetchAccountData={accountQuery.refetch}
+                  />
 
                   <StyledFirstLastNameWrapper>
                     <StyledProjectFormWrapper>
@@ -145,6 +151,11 @@ export const PersonalInformationForm: FunctionComponent = () => {
 
                       <StyledField id="lastName" name="lastName" placeholder={lastNamePlaceholder} />
                     </StyledProjectFormWrapper>
+
+                    <StyledSubmitButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
+                      {isSubmitting ? t("pleaseWaitDots") : t("account.save")}
+                      <Spinner visible={isSubmitting} />
+                    </StyledSubmitButton>
                   </StyledFirstLastNameWrapper>
                 </StyledAvatarNameWrapper>
               </Form>

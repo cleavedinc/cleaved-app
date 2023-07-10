@@ -80,12 +80,16 @@ const StyledPostInfoBarCommentCount = styled.div`
   }
 `;
 
+const StyledProjectInfoWrapper = styled.div`
+  display: flex;
+`;
+
 const StyledProjectNameLink = styled(Link)`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   display: inline-block;
   font-size: ${FONT_SIZES.XXSMALL};
   font-weight: ${FONT_WEIGHTS.MEDIUM};
-  margin: ${SPACING.MEDIUM} ${SPACING.MEDIUM} ${SPACING.SMALL};
+  margin: ${SPACING.MEDIUM} ${SPACING.MEDIUM} ${SPACING.SMALL} auto;
   text-transform: uppercase;
 `;
 
@@ -93,6 +97,10 @@ const StyledReactPhotoCollage = styled(PhotoCollage)`
   & > div {
     border: none !important;
   }
+`;
+
+const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
+  margin: ${SPACING.SMALL} ${SPACING.MEDIUM};
 `;
 
 export const Post: FunctionComponent<PostProps> = (props) => {
@@ -136,17 +144,19 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
         <StyledMessage remarkPlugins={[remarkGfm]}>{post.body}</StyledMessage>
 
-        <StyledProjectNameLink
-          to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
-          title={post.project.name}
-        >
-          {post.project.name}
-        </StyledProjectNameLink>
+        <StyledProjectInfoWrapper>
+          <StyledProjectNameLink
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
+            title={post.project.name}
+          >
+            {post.project.name}
+          </StyledProjectNameLink>
+        </StyledProjectInfoWrapper>
 
         {post.images && post.images.length > 0 && (
           <StyledReactPhotoCollage
             width={"100%"}
-            height={["250px", "100px"]}
+            height={["auto", "100px"]}
             photoLayout={[1, 3]}
             photos={photoArray}
             showTotalPhotosNotSeenNumber={true}
@@ -155,15 +165,17 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
         <StyledPostInfoBar>
           {post.reactionTotalCount !== "0" && (
-            <ReactionTypesAndTotalCount
-              reactionsExpressed={post.reactionsExpressed}
-              reactionTotalCount={post.reactionTotalCount}
-            />
+            <StyledReactReactionTypesAndTotalCountWrapper>
+              <ReactionTypesAndTotalCount
+                reactionsExpressed={post.reactionsExpressed}
+                reactionTotalCount={post.reactionTotalCount}
+              />
+            </StyledReactReactionTypesAndTotalCountWrapper>
           )}
 
           {post.repliesCount !== "0" && (
             <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
-              {post.repliesCount}{" "}
+              {post.repliesCount}
               <StyledPostComments>
                 {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
               </StyledPostComments>

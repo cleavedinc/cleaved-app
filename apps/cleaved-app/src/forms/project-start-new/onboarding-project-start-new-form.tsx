@@ -90,7 +90,7 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
             variables: {
               projectName: values.projectName,
               organizationId: preferredOrgId,
-              // projectDetails: values.projectDetails,
+              projectDetail: values.projectDetails,
             },
           });
 

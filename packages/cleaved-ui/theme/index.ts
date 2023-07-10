@@ -1,7 +1,6 @@
 export * from "./animations";
 export * from "./borders";
 export * from "./breakpoints";
-export * from "./colors";
 export * from "./constants";
 export * from "./fonts";
 export * from "./font-sizes";

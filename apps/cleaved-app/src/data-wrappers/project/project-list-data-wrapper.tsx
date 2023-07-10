@@ -29,6 +29,8 @@ import { useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
+import projectHelperImage from "../../media/helper-info/project-helper-image.svg";
+
 type ProjectStatusType = {
   value: ProjectStatus;
   label: string;
@@ -85,12 +87,10 @@ const StyledTdWithMenuContent = styled(StyledTd)`
 
   ${mediaQueries.XS_LANDSCAPE} {
     &:first-child {
-      width: 50%;
+      width: 60%;
     }
 
     &:nth-child(2) {
-      padding-right: ${SPACING.MEDIUM};
-      text-align: end;
     }
   }
 `;
@@ -100,17 +100,12 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
 
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(4):before {
-      content: "Edit";
+      content: "Edit Status";
     }
   }
 `;
 
-const StyledThRight = styled(StyledTh)`
-  &:nth-child(2) {
-    padding-right: ${SPACING.MEDIUM};
-    text-align: end;
-  }
-`;
+const StyledThRight = styled(StyledTh)``;
 
 const StyledTrWrapper = styled(StyledTr)`
   ${mediaQueries.RESPONSIVE_TABLE} {
@@ -143,7 +138,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
     <>
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.projectslistImageAlt")}
-        helperInfoImageUrl={"/helper-info/project-helper-image.svg"}
+        helperInfoImageUrl={projectHelperImage}
         helperInfoText={t("helperInformationBoxes.projectslistText")}
         helperInfoTextHeader={t("helperInformationBoxes.projectslistHeader")}
         width={"250px"}
@@ -168,7 +163,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
               option: (styles, { isSelected }) => {
                 return {
                   ...styles,
-                  color: isSelected ? colorTheme.colors.white_color : colorTheme.colors.baseText_color,
+                  color: isSelected ? colorTheme.colors.white_always_color : colorTheme.colors.baseText_color,
                 };
               },
             }}
@@ -202,7 +197,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                 <StyledTh role="columnheader">{t("project.projectName")}</StyledTh>
                 <StyledThRight role="columnheader">{t("project.dateCreated")}</StyledThRight>
                 <StyledTh role="columnheader">{t("project.posts")}</StyledTh>
-                {hasPermission && <StyledTh role="columnheader">{t("project.edit")}</StyledTh>}
+                {hasPermission && <StyledTh role="columnheader">{t("project.editStatus")}</StyledTh>}
               </StyledTHeadTr>
             </StyledTHead>
             <StyledTBody role="rowgroup">
