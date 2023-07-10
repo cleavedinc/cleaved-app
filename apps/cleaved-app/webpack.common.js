@@ -28,6 +28,10 @@ const getEntries = () => {
     main: ["./src/utils/locales/i18n.ts", "./src/pages/index.tsx"],
     professionalInvite: ["./src/utils/locales/i18n.ts", "./src/pages/professional/professional-invite.tsx"],
     professionalOnboarding: ["./src/utils/locales/i18n.ts", "./src/pages/professional/professional-onboarding.tsx"],
+    professionalOnboardingHasOrganization: [
+      "./src/utils/locales/i18n.ts",
+      "./src/pages/professional/professional-onboarding-has-organization.tsx",
+    ],
     professionalShareLinkRegistration: [
       "./src/utils/locales/i18n.ts",
       "./src/pages/professional/professional-share-link-registration.tsx",
