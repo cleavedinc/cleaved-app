@@ -15,7 +15,7 @@ export const CircleEditButtonSmall = styled.button`
   min-width: 30px;
   padding: 0;
 
-  :hover {
+  /* :hover { // disabled due to mobile hover issue (hover stops button from functioning)
     background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
-  }
+  } */
 `;

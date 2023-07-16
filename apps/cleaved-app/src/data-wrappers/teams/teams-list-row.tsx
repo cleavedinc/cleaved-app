@@ -32,6 +32,8 @@ const StyledPermission = styled.div`
 `;
 
 const StyledTdWithMenuContent = styled(StyledTd)`
+  vertical-align: middle; /* Fixes a double bottom border in safari */
+
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(1):before {
       content: "Name";
