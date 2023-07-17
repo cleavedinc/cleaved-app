@@ -48,6 +48,7 @@ const StyledMessage = styled(ReactMarkdown)`
 `;
 
 const StyledPostComments = styled.span`
+  margin-left: 3px;
   text-transform: lowercase;
 `;
 
@@ -73,6 +74,7 @@ const StyledPostFooter = styled.div`
 
 const StyledPostInfoBarCommentCount = styled.div`
   cursor: pointer;
+  display: flex;
   margin: ${SPACING.SMALL} ${SPACING.MEDIUM} ${SPACING.SMALL} auto;
 
   :hover {
@@ -175,7 +177,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
           {post.repliesCount !== "0" && (
             <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
-              {post.repliesCount}
+              <div>{post.repliesCount}</div>
               <StyledPostComments>
                 {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
               </StyledPostComments>

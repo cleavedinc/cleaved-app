@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FONT_SIZES, RADIUS } from "../../theme";
+import { FONT_SIZES } from "../../theme";
 
 export const ButtonLinkLoadMore = styled.button`
   background: none;
@@ -9,10 +9,4 @@ export const ButtonLinkLoadMore = styled.button`
   font-size: ${FONT_SIZES.MEDIUM};
   outline: inherit;
   padding: 5px;
-
-  &:hover,
-  &:focus {
-    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
-    border-radius: ${RADIUS.SMALL};
-  }
 `;
