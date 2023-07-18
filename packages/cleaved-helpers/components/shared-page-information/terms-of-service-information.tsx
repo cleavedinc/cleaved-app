@@ -72,44 +72,13 @@ export const TermsOfServiceInformation: FunctionComponent = () => {
               another person's birthdate, home address, or telephone number.
             </OrderedListItemCounters>
             <OrderedListItemCounters>
-              The content complies with the Cleaved Community Guidelines. You are responsible for your use of the
-              Services and for any content that you post. Cleaved does not endorse, support, represent, or affirm the
-              completeness, truthfulness, accuracy, or reliability of any of the content posted through the Services,
-              nor does Cleaved endorse any opinions expressed through the Services. All content is the sole
-              responsibility of the person who originated the content, and Cleaved does not take responsibility for such
-              content.
+              You are responsible for your use of the Services and for any content that you post. Cleaved does not
+              endorse, support, represent, or affirm the completeness, truthfulness, accuracy, or reliability of any of
+              the content posted through the Services, nor does Cleaved endorse any opinions expressed through the
+              Services. All content is the sole responsibility of the person who originated the content, and Cleaved
+              does not take responsibility for such content.
             </OrderedListItemCounters>
           </OrderedListCounters>
-        </OrderedListItemCounters>
-
-        <OrderedListItemCounters>
-          <Bold>Right to Distribute.</Bold> You grant to Cleaved a license to any content posted by you to the Services,
-          including a worldwide, non-exclusive, royalty-free license (with the right to sublicense) to use, copy,
-          reproduce, process, adapt, modify, publish, transmit, display and distribute your content. You agree that
-          Cleaved or its service providers or partners may display advertising in connection with your content and
-          otherwise monetize your content without compensation to you. You warrant that you have all rights necessary to
-          grant these rights to Cleaved and other members of the Cleaved community. You also grant a limited
-          non-exclusive, royalty-free license to any Cleaved community member to use, copy, reproduce, process, adapt,
-          modify, publish, transmit, display, and distribute any content posted by you to the Services solely in
-          connection with that member's use of the Services. The licenses granted by you hereunder do not include any
-          moral rights or right of attribution.
-        </OrderedListItemCounters>
-
-        <OrderedListItemCounters>
-          <Bold>Copyright infringement is not allowed on the Services,</Bold> and Cleaved will, in appropriate
-          circumstances, terminate the account of any repeat infringer. If your copyright has been infringed by any
-          content on the Services and you did not grant a license for this use by uploading your copyrighted work to the
-          Services, you may submit a notice that meets all of the requirements of the Digital Millennium Copyright Act
-          (DMCA), 17 U.S.C 512(c)(3), to our Copyright Manager at abuse@cleaved.com or 209 S. Stephanie St., B212,
-          Henderson, NV 89012. Your notice must include: (1) electronic or physical signature of the copyrighted work
-          owner (or person authorized by the copyright owner), (2) a description of the copyrighted work, including the
-          URL where the infringing content is available, or a copy of it, (3) contact details of the person submitting
-          the notice, including email address, telephone, and mailing address, (4) statement in "good faith belief" that
-          the work is not authorized by the copyright owner, and (5) a statement by the sender that all of the above
-          information is accurate, and that the person sending the notice is either the copyright owner or is authorized
-          to act on behalf of the copyright owner. Upon receiving a notice satisfying these requirements, Cleaved will
-          take whatever action, in its sole discretion, it deems appropriate, including removal of the challenged
-          content from the services.
         </OrderedListItemCounters>
 
         <OrderedListItemCounters>
@@ -124,15 +93,14 @@ export const TermsOfServiceInformation: FunctionComponent = () => {
 
         <OrderedListItemCounters>
           <Bold>Cleaved may remove any content and terminate your access to the Services</Bold> at any time and for any
-          reason to the extent Cleaved reasonably believes (a) you have violated these Terms or Cleaved's Community
-          Guidelines, (b) you create risk or possible legal exposure for Cleaved, or (c) you are otherwise engaging in
-          unlawful conduct—although Cleaved endeavors to allow all free speech that is lawful and does not infringe the
-          legal rights of others. Any invitation made by Cleaved to you to use the Services or submit content to the
-          Services, or the fact that Cleaved may receive a benefit from your use of the Services or provision of content
-          to the Services, will not obligate Cleaved to maintain any content or maintain your access to the Services.
-          Cleaved will have no liability to you for removing any content, for terminating your access to the Services,
-          or for modifying or terminating the Services. In addition, accounts which are inactive (without login) for
-          nine (9) months are subject to username relinquishment or account removal.
+          reason to the extent Cleaved reasonably believes (a) you create risk or possible legal exposure for Cleaved,
+          or (b) you are otherwise engaging in unlawful conduct—although Cleaved endeavors to allow all free speech that
+          is lawful and does not infringe the legal rights of others. Any invitation made by Cleaved to you to use the
+          Services or submit content to the Services, or the fact that Cleaved may receive a benefit from your use of
+          the Services or provision of content to the Services, will not obligate Cleaved to maintain any content or
+          maintain your access to the Services. Cleaved will have no liability to you for removing any content, for
+          terminating your access to the Services, or for modifying or terminating the Services. In addition, accounts
+          which are inactive (without login) for twelve (12) months are subject account removal.
         </OrderedListItemCounters>
 
         <OrderedListItemCounters>
