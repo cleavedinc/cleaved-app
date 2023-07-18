@@ -29,7 +29,7 @@
   "files": {
     "avatarImageSizeRecommendation": "Suggested 200px square",
     "avatarUploadImage": "Upload image",
-    "fileSizeExceeded": "The file size must be smaller than 10MB",
+    "fileSizeExceeded": "The file size must be smaller than 5MB",
     "selectAnImageToUpload": "Select an image/gif to upload"
   },
   "formLabels": {
