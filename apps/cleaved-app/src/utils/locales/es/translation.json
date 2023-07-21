@@ -60,8 +60,8 @@
     "homePageEmptyStateHeader": "Sabemos que estás trabajando arduamente",
     "homePageEmptyStateText": "Cuando tengas un minuto, publica tu actualización o idea en tu proyecto. Obtener comentarios y mantener a las personas actualizadas es importante.",
     "inviteProfessionalToOrganizationAlt": "Flecha que apunta al formulario de invitación de profesionales",
-    "inviteProfessionalToOrganizationHeader": "Invita a gerentes a tu organización",
-    "inviteProfessionalToOrganizationText": "Invita a tus colegas a unirse contigo en todos tus proyectos.",
+    "inviteProfessionalToOrganizationHeader": "Invita a tus líderes a unirse a tu organización.",
+    "inviteProfessionalToOrganizationText": "Invita a tus líderes a unirse a ti en todos tus proyectos.",
     "organizationsAlt": "Tres edificios en una fila de varios tamaños",
     "organizationsHeader": "Organizaciones, empresas o clientes",
     "organizationsText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
@@ -84,8 +84,8 @@
     "projectStartNewHeader": "Iniciar un nuevo proyecto",
     "projectStartNewText": "Crear un nuevo proyecto te proporciona una plataforma para compartir decisiones, recibir retroalimentación y demostrar progreso.",
     "teamsAlt": "Dos personas sosteniendo piezas de un proyecto",
-    "teamsHeader": "Los gerentes lo hacen posible",
-    "teamsText": "Invita a tus colegas para que brinden comentarios y compartan sus opiniones sobre decisiones importantes, y manténlos informados sobre hitos y plazos clave del proyecto."
+    "teamsHeader": "Los líderes hacen que suceda",
+    "teamsText": "Invita a tus líderes a proporcionar retroalimentación y compartir sus opiniones sobre decisiones cruciales, y mantenlos informados sobre los hitos y plazos clave del proyecto."
   },
   "hTags": {
     "personalInformation": "Información personal",
@@ -135,9 +135,9 @@
     "registerNewOrganization": "Registrar una nueva organización"
   },
   "people": {
-    "addPerson": "Agregar Gerente",
-    "teamListHeader": "Gerentes activos",
-    "teamListHeaderHome": "Gerentes",
+    "addPerson": "Agregar un líder.",
+    "teamListHeader": "Líderes activos",
+    "teamListHeaderHome": "Líderes",
     "viewAllPeople": "Ver todos"
   },
   "pleaseWaitDots": "Por favor espera...",
@@ -193,11 +193,11 @@
     "startNewProjectFormHeader": "Inicia tu primer proyecto",
     "startNewProjectFormHeaderProjectCreated": "Proyecto creado",
     "invitePeopleHelperInfoImageAlt": "Dos personas sosteniendo tarjetas de proyecto con un signo más entre ellas",
-    "invitePeopleHelperInfoText": "Invita a tus colegas a unirse contigo en todos tus proyectos.",
-    "invitePeopleFormHeader": "Invita a tus colegas",
+    "invitePeopleHelperInfoText": "Invita a tus líderes a unirse contigo en todos tus proyectos.",
+    "invitePeopleFormHeader": "Invita a tus líderes",
     "mailtoLinkEmailSubjectText": "Invitación para unirse a Cleaved",
     "mailtoLinkEmailBodyText": "Acabo de unirme a Cleaved y configuré un nuevo proyecto. Ven a unirte conmigo.",
-    "mailtoLink": "Invita a tus colegas",
+    "mailtoLink": "Invita a tus líderes",
     "navigateBackwardStep": "Anterior",
     "navigateForwardStep": "Siguiente"
   },
@@ -260,12 +260,12 @@
     "editMenuRemoveShareLink": "Eliminar enlace compartido",
     "manage": "Gestionar",
     "permissionLevel": "Nivel de permisos",
-    "professionalInviteEmptyState": "Para invitar a tus colegas, puedes crear un enlace para compartir y luego compartirlo con ellos.",
+    "professionalInviteEmptyState": "Para invitar a tus líderes, puedes crear un enlace para compartir y luego compartirlo con ellos.",
     "shareLink": "Enlace compartido"
   },
   "submit": "Enviar",
   "teams": {
-    "addNewTeamMember": "Invita a un colega.",
+    "addNewTeamMember": "Invita a un líder.",
     "addNewTeamMemberHelperText": "Siempre es mejor con más personas.",
     "areYouSureKeepButtonText": "Mantener a este usuario",
     "areYouSureRemoveButtonText": "Eliminar a este usuario de la organización",
