@@ -7,7 +7,7 @@ export const PrivacyPolicyInformation: FunctionComponent = () => {
   return (
     <Box>
       <SectionHeader>Cleaved Privacy Policy</SectionHeader>
-      <Paragraph>Last Updated: January 1, 2022</Paragraph>
+      <Paragraph>Last Updated: July 1, 2023</Paragraph>
 
       <Paragraph>
         Cleaved, Inc. and its affiliates ("Company," "we," "our," and/or "us") value the privacy of individuals who use
@@ -321,7 +321,7 @@ export const PrivacyPolicyInformation: FunctionComponent = () => {
 
       <Paragraph>
         You can update your account and profile information through your account settings. You can delete your account
-        by selecting that option via our online Cleaved Privacy Request portal, which is accessible by clicking here.
+        by emailing privacy@cleaved.com.
       </Paragraph>
 
       <Paragraph>10. Changes to the Privacy Policy</Paragraph>
@@ -344,11 +344,6 @@ export const PrivacyPolicyInformation: FunctionComponent = () => {
         Information, and for your convenience, we have provided the following chart summarizing what categories we
         collect as another way of covering the information set forth in Section 1 "Information We Collect":
       </Paragraph>
-
-      <Paragraph>ADD TABLE OR SIMILAR HERE!!!! - ADD TABLE OR SIMILAR HERE!!!!</Paragraph>
-      <Paragraph>ADD TABLE OR SIMILAR HERE!!!! - ADD TABLE OR SIMILAR HERE!!!!</Paragraph>
-      <Paragraph>ADD TABLE OR SIMILAR HERE!!!! - ADD TABLE OR SIMILAR HERE!!!!</Paragraph>
-      <Paragraph>ADD TABLE OR SIMILAR HERE!!!! - ADD TABLE OR SIMILAR HERE!!!!</Paragraph>
 
       <Paragraph>
         All of the categories collected above may be provided to third parties as described in Section 3 "How We Share
@@ -433,8 +428,7 @@ export const PrivacyPolicyInformation: FunctionComponent = () => {
       <Paragraph>Exercising Your Rights to Know or Delete</Paragraph>
 
       <Paragraph>
-        To exercise your rights to know or delete described above, please submit a request via our online Cleaved
-        Privacy Request portal, which is accessible by clicking here.
+        To exercise your rights to know or delete described above, please submit a request to privacy@cleaved.com.
       </Paragraph>
 
       <Paragraph>
