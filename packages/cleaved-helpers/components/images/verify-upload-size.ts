@@ -1,5 +1,5 @@
 export const verifyUploadSizeIsOK = (fileSize: number): boolean => {
-  const MaxSizeInBytes = 10485760; // 10MB limit
+  const MaxSizeInBytes = 485760; // 5MB limit
 
   if (fileSize < MaxSizeInBytes) {
     return true;
