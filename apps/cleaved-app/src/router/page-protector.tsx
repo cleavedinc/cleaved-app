@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactNode, useContext, useEffect } from "react";
-import { RouteComponentProps } from "@reach/router";
 
 import { LoginGuard } from "../components";
 import { authTokenContext } from "../contexts";
+import { RouteComponentProps } from "@reach/router";
 
 type PageProtectorProps = RouteComponentProps & {
   isNotProtected?: boolean;
@@ -18,6 +18,7 @@ export const PageProtector: FunctionComponent<PageProtectorProps> = ({ isNotProt
   }, [isNotProtected]); // eslint-disable-line
 
   useEffect(() => {
+    console.log(isNotProtected, loggedIn, loading);
     if (!isNotProtected && !loggedIn && !loading) {
       logOut();
     }
