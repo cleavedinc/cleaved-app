@@ -56,13 +56,14 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
   });
 
   const logOut = useCallback(() => {
+    console.log("logging out");
     setLoggedIn(false);
     DeleteCookie("_CRT_");
-    navigate(`/login`);
     // clear apollo cache to ensure new user gets fresh data
     apolloClient.resetStore();
     apolloClient.cache.reset();
     googleLogout();
+    navigate(`/login`);
   }, [setLoggedIn, DeleteCookie, navigate, apolloClient, googleLogout]);
 
   const setOrgId = useCallback(
@@ -127,6 +128,27 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
       };
     }
   }, [loggedIn]);
+
+  useEffect(() => {
+    setRefreshInProgress(true);
+    const refreshAction = refreshRequested.refreshAction;
+    const crt = GetCookie("_CRT_");
+    if (crt) {
+      getRefreshLogIn({
+        variables: { refreshToken: crt },
+        onCompleted: (r: RefreshLogInMutation) => {
+          refreshOnComplete(r, refreshAction);
+          setRefreshInProgress(false);
+        },
+        onError: () => {
+          setRefreshInProgress(false);
+        },
+      });
+      setRefreshRequested({ refreshRequested: false, refreshAction: null });
+    } else {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     if (!refreshInProgress && refreshRequested.refreshRequested) {
