@@ -1,7 +1,9 @@
 import { logQueryError } from "@cleaved/helpers";
 import { ApolloError, QueryResult, useQuery } from "@apollo/client";
+
 import { OrganizationMembershipsQuery } from "../generated-types/graphql";
 import { ORGANIZATION_MEMBERSHIPS } from "../gql-queries";
+
 import { useLoginGuard } from "./use-login-guard";
 
 export const useOrganizationMemberships = (): QueryResult<OrganizationMembershipsQuery> => {

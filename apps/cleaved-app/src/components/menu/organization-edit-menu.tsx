@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext, useState } from "react";
-import { Menu, MenuItem } from "@szhsin/react-menu";
+import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
 import { useMutation } from "@apollo/react-hooks";
 import styled, { css, useTheme } from "styled-components";
 
@@ -18,7 +18,7 @@ import {
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
-import { ORGANIZATION_REMOVE_ME_MUTATION } from "../../gql-mutations";
+import { ORGANIZATION_REMOVE_ME_MUTATION, SET_PREFERRED_ORGANIZATION_MUTATION } from "../../gql-mutations";
 
 import "@szhsin/react-menu/dist/index.css";
 
@@ -40,17 +40,8 @@ const StyledActionWrapper = styled.div`
 
 const StyledActionText = styled.div``;
 
-const StyledButtonPrimary = styled(ButtonPrimary)`
-  display: flex;
-  margin-left: auto;
-`;
-
-const StyledButtonSecondary = styled(ButtonSecondary)`
-  width: 150px;
-
-  ${mediaQueries.XS_LANDSCAPE} {
-    width: initial;
-  }
+const StyledBasicItem = styled(MenuItem)`
+  ${basicItemBase}
 `;
 
 const StyledBasicItemRed = styled(MenuItem)`
@@ -69,9 +60,22 @@ const StyledBasicMenu = styled(Menu)`
   }
 `;
 
+const StyledButtonPrimary = styled(ButtonPrimary)`
+  display: flex;
+  margin-left: auto;
+`;
+
+const StyledButtonSecondary = styled(ButtonSecondary)`
+  width: 150px;
+
+  ${mediaQueries.XS_LANDSCAPE} {
+    width: initial;
+  }
+`;
+
 export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> = (props) => {
   const { orgId } = props;
-  const { logOut } = useContext(authTokenContext);
+  const { logOut, setPreferredOrgIdOnContext } = useContext(authTokenContext);
   const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
   const theme = useTheme();
   const { t } = useTranslator();
@@ -85,12 +89,28 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
     },
   });
 
+  const [setPreferredOrganization] = useMutation(SET_PREFERRED_ORGANIZATION_MUTATION, {
+    onError: (error) => {
+      logQueryError(error);
+    },
+  });
+
   const handleOrganizationRemoveMe = (orgIdArg: string) => {
     organizationRemoveMe({
       variables: {
         organizationId: orgIdArg,
       },
     });
+  };
+
+  const handleSetOrganizationId = (orgIdArg: string) => {
+    setPreferredOrganization({
+      variables: {
+        orgId: orgIdArg,
+      },
+    });
+
+    setPreferredOrgIdOnContext(orgIdArg);
   };
 
   const areYouSureRemoveMeFromOrganization = t("organizations.areYouSureRemoveMeFromOrganizationTitle")
@@ -107,6 +127,12 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
         }
         direction={"left"}
       >
+        <StyledBasicItem onClick={() => handleSetOrganizationId(orgId)}>
+          {t("organizations.setDefaultOrganization")}
+        </StyledBasicItem>
+
+        <MenuDivider />
+
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
           {t("organizations.removeOrganization")}
         </StyledBasicItemRed>
