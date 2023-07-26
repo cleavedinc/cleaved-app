@@ -8,7 +8,7 @@ import { useNavigateToProfile } from "../../hooks";
 
 import { avatartBase, avatarSmall } from "../avatars/avatar-base-styles";
 
-type AsideTeamListAvatarProps = {
+type AsidePeopleListAvatarProps = {
   account:
     | PostProjectAccountSeekQuery["postProjectAccountSeek"][0]
     | OrganizationSeekMembersQuery["organizationSeekMembers"][0];
@@ -55,7 +55,7 @@ const StyledPostProfessionalInfoWrapper = styled.div`
   justify-content: center;
 `;
 
-export const AsideTeamListAvatarLink: FunctionComponent<AsideTeamListAvatarProps> = (props) => {
+export const AsidePeopleListAvatarLink: FunctionComponent<AsidePeopleListAvatarProps> = (props) => {
   const { account } = props;
   const { profilePath } = useNavigateToProfile(account.id);
   const firstNameInitial = account?.firstName?.charAt(0).toUpperCase() || "";

@@ -23,6 +23,9 @@ export const routeConstantsCleavedApp = {
   login: {
     route: "/login",
   },
+  peopleList: {
+    route: "/people-list",
+  },
   project: {
     route: "/project",
   },
@@ -36,7 +39,7 @@ export const routeConstantsCleavedApp = {
     route: "/project-list/start-new-project",
   },
   professionalInvite: {
-    route: "/teams-list/professional-invite",
+    route: "/people-list/professional-invite",
   },
   professionalShareLinkRegistration: {
     route: "/professional-share-link-registration",
@@ -46,9 +49,6 @@ export const routeConstantsCleavedApp = {
   },
   professionalOnboardingHasOrganization: {
     route: "/professional-onboarding-has-organization",
-  },
-  teamsList: {
-    route: "/teams-list",
   },
   termsOfServiceAgreement: {
     route: "/terms-of-service-agreement",

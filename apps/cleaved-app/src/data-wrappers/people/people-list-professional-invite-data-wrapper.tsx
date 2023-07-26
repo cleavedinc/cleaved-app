@@ -127,7 +127,7 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)`
   }
 `;
 
-export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
+export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
@@ -177,8 +177,8 @@ export const TeamslistProfessionalInviteDataWrapper: FunctionComponent = () => {
       <HelperInfoHeaderTextImageRightBox
         helperInfoImageAltText={t("helperInformationBoxes.inviteProfessionalToOrganizationAlt")}
         helperInfoImageUrl={peopleHelperImage}
-        helperInfoText={t("helperInformationBoxes.inviteProfessionalToOrganizationText")}
-        helperInfoTextHeader={t("helperInformationBoxes.inviteProfessionalToOrganizationHeader")}
+        helperInfoText={t("helperInformationBoxes.peopleText")}
+        helperInfoTextHeader={t("helperInformationBoxes.peopleHeader")}
         width={"250px"}
       />
 

@@ -19,7 +19,7 @@ import { useOrganizationSeekMembers, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
-import { TeamsListRow } from "./teams-list-row";
+import { PeopleListRow } from "./people-list-row";
 
 import peopleHelperImage from "../../media/helper-info/people-helper-image.svg";
 
@@ -43,7 +43,7 @@ const StyledRouterButtonRight = styled(StyledRouterButton)`
   margin-left: auto;
 `;
 
-const StyledTeamListHeader = styled.div`
+const StyledPeopleListHeader = styled.div`
   display: flex;
   margin: ${SPACING.XLARGE} 0 ${SPACING.MEDIUM};
 
@@ -65,7 +65,7 @@ const StyledTrWrapper = styled(StyledTr)`
   }
 `;
 
-export const TeamsListDataWrapper: FunctionComponent = () => {
+export const PeopleListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { organizationSeekMembersData, organizationSeekMembersDataLoading, organizationSeekMembersDataRefetch } =
@@ -77,38 +77,38 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
   return (
     <>
       <HelperInfoHeaderTextImageRightBox
-        helperInfoImageAltText={t("helperInformationBoxes.teamsAlt")}
+        helperInfoImageAltText={t("helperInformationBoxes.peopleAlt")}
         helperInfoImageUrl={peopleHelperImage}
-        helperInfoText={t("helperInformationBoxes.teamsText")}
-        helperInfoTextHeader={t("helperInformationBoxes.teamsHeader")}
+        helperInfoText={t("helperInformationBoxes.peopleText")}
+        helperInfoTextHeader={t("helperInformationBoxes.peopleHeader")}
         width={"250px"}
       />
 
       {hasPermission && (
-        <StyledTeamListHeader>
+        <StyledPeopleListHeader>
           <StyledRouterButtonRight
             to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
             title={professionalInviteLinkName}
           >
-            {t("teams.addNewTeamMember")}
+            {t("people.addNewUser")}
           </StyledRouterButtonRight>
-        </StyledTeamListHeader>
+        </StyledPeopleListHeader>
       )}
 
       {!organizationSeekMembersDataLoading && organizationSeekMembersData && organizationSeekMembersData?.length > 0 && (
         <StyledTable role="table">
           <StyledTHead role="rowgroup">
             <StyledTHeadTr role="row">
-              <StyledTh role="columnheader">{t("teams.professionalName")}</StyledTh>
-              <StyledThRight role="columnheader">{t("teams.professionalPermissions")}</StyledThRight>
-              {hasPermission && <StyledTh role="columnheader">{t("teams.edit")}</StyledTh>}
+              <StyledTh role="columnheader">{t("people.professionalName")}</StyledTh>
+              <StyledThRight role="columnheader">{t("people.professionalPermissions")}</StyledThRight>
+              {hasPermission && <StyledTh role="columnheader">{t("people.edit")}</StyledTh>}
             </StyledTHeadTr>
           </StyledTHead>
           <StyledTBody role="rowgroup">
             {organizationSeekMembersData.map((member) => {
               return (
                 <StyledTrWrapper key={member.id} role="row">
-                  <TeamsListRow
+                  <PeopleListRow
                     member={member}
                     organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch}
                   />
@@ -124,13 +124,13 @@ export const TeamsListDataWrapper: FunctionComponent = () => {
         organizationSeekMembersData &&
         organizationSeekMembersData?.length > 0 && (
           <StyledInviteMorePeopleWrapper>
-            <StyledAddPeopleText>{t("teams.addNewTeamMemberHelperText")}</StyledAddPeopleText>
+            <StyledAddPeopleText>{t("people.addNewUserHelperText")}</StyledAddPeopleText>
 
             <StyledRouterButtonLink
               to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
               title={professionalInviteLinkName}
             >
-              {t("teams.addNewTeamMember")}
+              {t("people.addNewUser")}
             </StyledRouterButtonLink>
           </StyledInviteMorePeopleWrapper>
         )}

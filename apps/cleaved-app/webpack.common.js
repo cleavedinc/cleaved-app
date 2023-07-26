@@ -10,48 +10,8 @@ const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 
 const sharedPlugins = [HTMLWebpackPluginConfig];
 
-const getEntries = () => {
-  const entries = {
-    accountMembership: ["./src/utils/locales/i18n.ts", "./src/pages/account/account-membership.tsx"],
-    accountOrganizations: ["./src/utils/locales/i18n.ts", "./src/pages/account/account-organizations.tsx"],
-    accountOrganizationRegister: [
-      "./src/utils/locales/i18n.ts",
-      "./src/pages/account/account-organization-register.tsx",
-    ],
-    accountPersonalInformation: ["./src/utils/locales/i18n.ts", "./src/pages/account/account-personal-information.tsx"],
-    accountProfessionalInformation: [
-      "./src/utils/locales/i18n.ts",
-      "./src/pages/account/account-professional-information.tsx",
-    ],
-    home: ["./src/utils/locales/i18n.ts", "./src/pages/home.tsx"],
-    login: ["./src/utils/locales/i18n.ts", "./src/pages/login/login.tsx"],
-    main: ["./src/utils/locales/i18n.ts", "./src/pages/index.tsx"],
-    professionalInvite: ["./src/utils/locales/i18n.ts", "./src/pages/professional/professional-invite.tsx"],
-    professionalOnboarding: ["./src/utils/locales/i18n.ts", "./src/pages/professional/professional-onboarding.tsx"],
-    professionalOnboardingHasOrganization: [
-      "./src/utils/locales/i18n.ts",
-      "./src/pages/professional/professional-onboarding-has-organization.tsx",
-    ],
-    professionalShareLinkRegistration: [
-      "./src/utils/locales/i18n.ts",
-      "./src/pages/professional/professional-share-link-registration.tsx",
-    ],
-    professional: ["./src/utils/locales/i18n.ts", "./src/pages/professional/professional.tsx"],
-    privacyPolicy: ["./src/utils/locales/i18n.ts", "./src/pages/agreements/privacy-policy.tsx"],
-    projectList: ["./src/utils/locales/i18n.ts", "./src/pages/project/project-list.tsx"],
-    projectStartNew: ["./src/utils/locales/i18n.ts", "./src/pages/project/project-start-new.tsx"],
-    project: ["./src/utils/locales/i18n.ts", "./src/pages/project/project.tsx"],
-    search: ["./src/utils/locales/i18n.ts", "./src/pages/search.tsx"],
-    teamsList: ["./src/utils/locales/i18n.ts", "./src/pages/teams/teams-list.tsx"],
-    termsOfService: ["./src/utils/locales/i18n.ts", "./src/pages/agreements/terms-of-service.tsx"],
-    termsOfServiceAgreement: ["./src/utils/locales/i18n.ts", "./src/pages/agreements/terms-of-service-agreement.tsx"],
-  };
-
-  return entries;
-};
-
 module.exports = {
-  entry: getEntries(),
+  entry: ["./src/utils/locales/i18n.ts", "./src/pages/index.tsx"],
 
   devtool: "inline-source-map",
 

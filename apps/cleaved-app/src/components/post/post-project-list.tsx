@@ -39,7 +39,7 @@ const StyledPostListWrapper = styled.div`
 export const PostProjectList: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const pageSize = 20;
+  const pageSize = 50;
   const { postProjectSeekData, postProjectSeekDataLoading, postProjectSeekFetchMore } = useContext(PostsContext);
   const lastPostId = postProjectSeekData && postProjectSeekData[postProjectSeekData.length - 1]?.id;
   const { t } = useTranslator();
@@ -85,13 +85,13 @@ export const PostProjectList: FunctionComponent = () => {
 
       {hasPermission && !postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length >= 3 && (
         <StyledEndTimelineWrapper>
-          <StyledAddPeopleText>{t("teams.addNewTeamMemberHelperText")}</StyledAddPeopleText>
+          <StyledAddPeopleText>{t("people.addNewUserHelperText")}</StyledAddPeopleText>
 
           <StyledRouterButtonLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
             title={professionalInviteLinkName}
           >
-            {t("teams.addNewTeamMember")}
+            {t("people.addNewUser")}
           </StyledRouterButtonLink>
         </StyledEndTimelineWrapper>
       )}

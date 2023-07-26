@@ -30,16 +30,16 @@ const StyledBasicMenu = styled(Menu)`
   }
 `;
 
-export const MembersListMenu: FunctionComponent = () => {
+export const PeopleListMenu: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
   const theme = useTheme();
   const { t } = useTranslator();
 
-  const handleRouteToTeamsPage = () => {
-    navigate(`/${preferredOrgId}${routeConstantsCleavedApp.teamsList.route}`);
+  const handleRouteToPeoplePage = () => {
+    navigate(`/${preferredOrgId}${routeConstantsCleavedApp.peopleList.route}`);
   };
 
-  const handleRouteToAddNewTeammate = () => {
+  const handleRouteToAddNewUser = () => {
     navigate(`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`);
   };
 
@@ -52,8 +52,8 @@ export const MembersListMenu: FunctionComponent = () => {
       }
       direction={"left"}
     >
-      <StyledBasicItem onClick={() => handleRouteToAddNewTeammate()}>{t("people.addPerson")}</StyledBasicItem>
-      <StyledBasicItem onClick={() => handleRouteToTeamsPage()}>{t("people.viewAllPeople")}</StyledBasicItem>
+      <StyledBasicItem onClick={() => handleRouteToAddNewUser()}>{t("people.addPerson")}</StyledBasicItem>
+      <StyledBasicItem onClick={() => handleRouteToPeoplePage()}>{t("people.viewAllPeople")}</StyledBasicItem>
     </StyledBasicMenu>
   );
 };

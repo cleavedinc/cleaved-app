@@ -20,8 +20,8 @@ import { ProfessionalOnboardingHasOrganization } from "../pages/professional/pro
 import { Project } from "../pages/project/project";
 import { ProjectList } from "../pages/project/project-list";
 import { ProjectStartNew } from "../pages/project/project-start-new";
-import { TeamsList } from "../pages/teams/teams-list";
-import { TeamsListProfessionalInvite } from "../pages/professional/professional-invite";
+import { PeopleList } from "../pages/people/people-list";
+import { PeopleListProfessionalInvite } from "../pages/professional/professional-invite";
 import { TermsOfService } from "../pages/agreements/terms-of-service";
 import { TermsOfServiceAgreement } from "../pages/agreements/terms-of-service-agreement";
 import { routeConstantsCleavedApp } from "../router";
@@ -93,7 +93,7 @@ export const ApplicationRouter: FunctionComponent = () => (
       renderedPage={<ProjectStartNew />}
     />
 
-    <PageProtector path={`:orgId${routeConstantsCleavedApp.teamsList.route}`} renderedPage={<TeamsList />} />
+    <PageProtector path={`:orgId${routeConstantsCleavedApp.peopleList.route}`} renderedPage={<PeopleList />} />
 
     <PageProtector path={routeConstantsShared.privacyPolicy.route} renderedPage={<PrivacyPolicy />} isNotProtected />
 
@@ -105,7 +105,7 @@ export const ApplicationRouter: FunctionComponent = () => (
 
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.professionalInvite.route}`}
-      renderedPage={<TeamsListProfessionalInvite />}
+      renderedPage={<PeopleListProfessionalInvite />}
     />
 
     <PageProtector path={routeConstantsShared.termsOfService.route} renderedPage={<TermsOfService />} isNotProtected />

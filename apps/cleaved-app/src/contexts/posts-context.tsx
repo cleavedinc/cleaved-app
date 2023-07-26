@@ -39,7 +39,7 @@ export const PostsContextProvider: FunctionComponent<PostsContextProviderType> =
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId ? routeParams.projectId : null;
-  const postPageSize = 20;
+  const postPageSize = 50;
 
   const [projectPostFormIsDirty, setProjectPostFormIsDirty] = useState(false);
   const [projectPostFormImageUploadIsDirty, setProjectPostFormImageUploadIsDirty] = useState(false);

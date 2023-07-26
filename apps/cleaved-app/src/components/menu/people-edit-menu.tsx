@@ -23,7 +23,7 @@ import { ORGANIZATION_REMOVE_USER_MUTATION, ORGANIZATION_SET_USER_PERMISSION_LEV
 
 import "@szhsin/react-menu/dist/index.css";
 
-type TeamsEditMenuProps = {
+type PeopleEditMenuProps = {
   member: OrganizationSeekMembersQuery["organizationSeekMembers"][0];
   organizationSeekMembersDataRefetch?: () => void;
 };
@@ -79,7 +79,7 @@ const StyledPermission = styled.div`
   }
 `;
 
-export const TeamsEditMenu: FunctionComponent<TeamsEditMenuProps> = (props) => {
+export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
   const { member, organizationSeekMembersDataRefetch } = props;
   const { preferredOrgId } = useContext(authTokenContext);
@@ -111,8 +111,8 @@ export const TeamsEditMenu: FunctionComponent<TeamsEditMenuProps> = (props) => {
     },
   });
 
-  const areYouSureRemovePost = t("teams.areYouSureRemoveMemberModalHeader")
-    ? t("teams.areYouSureRemoveMemberModalHeader")
+  const areYouSureRemovePost = t("people.areYouSureRemoveMemberModalHeader")
+    ? t("people.areYouSureRemoveMemberModalHeader")
     : undefined;
 
   return (
@@ -159,7 +159,7 @@ export const TeamsEditMenu: FunctionComponent<TeamsEditMenuProps> = (props) => {
         )}
 
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
-          {t("teams.removeProfessional")}
+          {t("people.removeProfessional")}
         </StyledBasicItemRed>
       </StyledBasicMenu>
 
@@ -169,7 +169,7 @@ export const TeamsEditMenu: FunctionComponent<TeamsEditMenuProps> = (props) => {
         onCloseRequested={() => setIsConfirmRemoveModalOpen(false)}
         title={areYouSureRemovePost}
       >
-        <StyledActionText>{t("teams.areYouSureRemoveMemberModalText")}</StyledActionText>
+        <StyledActionText>{t("people.areYouSureRemoveMemberModalText")}</StyledActionText>
 
         <StyledActionWrapper>
           <ButtonSecondary
@@ -183,11 +183,11 @@ export const TeamsEditMenu: FunctionComponent<TeamsEditMenuProps> = (props) => {
               })
             }
           >
-            {t("teams.areYouSureRemoveButtonText")}
+            {t("people.areYouSureRemoveButtonText")}
           </ButtonSecondary>
 
           <StyledButtonPrimary type="button" onClick={() => setIsConfirmRemoveModalOpen(false)}>
-            {t("teams.areYouSureKeepButtonText")}
+            {t("people.areYouSureKeepButtonText")}
           </StyledButtonPrimary>
         </StyledActionWrapper>
       </Modal>

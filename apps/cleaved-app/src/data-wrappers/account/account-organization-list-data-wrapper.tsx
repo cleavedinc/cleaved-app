@@ -18,7 +18,7 @@ import {
 
 import { HelperInfoHeaderTextImageRightBox, OrganizationEditMenu } from "../../components";
 import { authTokenContext } from "../../contexts";
-import { useMyOrganizationMembership, useTranslator } from "../../hooks";
+import { useOrganizationMemberships, useTranslator } from "../../hooks";
 
 import organizationsHelperImage from "../../media/helper-info/organizations-helper-image.svg";
 
@@ -47,7 +47,7 @@ const StyledTdWithMenuContentEditColumn = styled(StyledTd)`
 
 export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
-  const membershipQuery = useMyOrganizationMembership();
+  const organizationMemberships = useOrganizationMemberships();
   const { t } = useTranslator();
 
   return (
@@ -65,9 +65,9 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
           <SectionHeader>{t("organizations.organizations")}</SectionHeader>
         </HeadingWrapper>
 
-        {!membershipQuery.loading &&
-          membershipQuery.data?.organizationMemberships &&
-          membershipQuery.data.organizationMemberships.length > 0 && (
+        {!organizationMemberships.loading &&
+          organizationMemberships.data?.organizationMemberships &&
+          organizationMemberships.data.organizationMemberships.length > 0 && (
             <StyledTable role="table">
               <StyledTHead role="rowgroup">
                 <StyledTHeadTr role="row">
@@ -76,18 +76,18 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
                 </StyledTHeadTr>
               </StyledTHead>
               <StyledTBody role="rowgroup">
-                {membershipQuery.data.organizationMemberships.map((org) => {
+                {organizationMemberships.data.organizationMemberships.map((org) => {
                   return (
                     <StyledTr key={org.id} role="row">
                       <StyledTdWithMenuContentNameColumn role="cell">
-                        {org.name}
+                        {org.name}{" "}
                         {preferredOrgId && preferredOrgId === org.id && (
-                          <StyledOrgActiveTag>(active)</StyledOrgActiveTag>
+                          <StyledOrgActiveTag>({t("active")})</StyledOrgActiveTag>
                         )}
                       </StyledTdWithMenuContentNameColumn>
-                      {!membershipQuery.loading &&
-                        membershipQuery.data?.organizationMemberships &&
-                        membershipQuery.data.organizationMemberships.length > 1 && (
+                      {!organizationMemberships.loading &&
+                        organizationMemberships.data?.organizationMemberships &&
+                        organizationMemberships.data.organizationMemberships.length > 1 && (
                           <StyledTdWithMenuContentEditColumn role="cell">
                             <OrganizationEditMenu orgId={org.id} />
                           </StyledTdWithMenuContentEditColumn>

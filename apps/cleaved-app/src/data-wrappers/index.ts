@@ -5,6 +5,6 @@ export * from "./login";
 export * from "./organization";
 export * from "./professional";
 export * from "./project";
-export * from "./teams";
+export * from "./people";
 export * from "./terms-of-service-agreement";
 export * from "./widgets";
