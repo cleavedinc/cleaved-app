@@ -72,9 +72,9 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     ? t("formLabels.professionalEmailPlaceholder")
     : undefined;
 
-  const aboutProfessionalCharactorLimit = t("formValidationMessages.aboutProfessionalCharactorLimit")
-    ? t("formValidationMessages.aboutProfessionalCharactorLimit")
-    : undefined;
+  // const aboutProfessionalCharactorLimit = t("formValidationMessages.aboutProfessionalCharactorLimit")
+  //   ? t("formValidationMessages.aboutProfessionalCharactorLimit")
+  //   : undefined;
 
   const youMustHaveAValidEmailAddress = t("formValidationMessages.youMustHaveAValidEmailAddress")
     ? t("formValidationMessages.youMustHaveAValidEmailAddress")
@@ -133,7 +133,7 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
         resetForm({ values });
       }}
       validationSchema={yup.object().shape<Record<keyof ProfesionalInformationFormType, yup.AnySchema>>({
-        about: yup.string().max(250, aboutProfessionalCharactorLimit),
+        about: yup.string(),
         accountEmail: yup.string().email(youMustHaveAValidEmailAddress),
         jobTitle: yup.string(),
       })}

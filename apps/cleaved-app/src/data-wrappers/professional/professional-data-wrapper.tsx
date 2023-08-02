@@ -33,7 +33,7 @@ const StyledProfileName = styled(SectionHeader)`
 `;
 
 const StyledProfessionalAbout = styled.div`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
+  color: ${({ theme }) => theme.colors.baseText_color};
   margin-bottom: ${SPACING.MEDIUM};
   white-space: pre-line;
 `;

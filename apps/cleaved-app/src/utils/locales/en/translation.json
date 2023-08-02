@@ -69,7 +69,7 @@
     "organizationRegisterText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
     "professionalOnboardingAlt": "Three buildings in a row of various sizes",
     "professionalOnboardingHeader": "Before you run, we walk",
-    "professionalOnboardingText": "Just a few set up steps first. It will only take a couple minutes, promise.",
+    "professionalOnboardingText": "Let's create your organization, first project and invite your coworkers. It will take about a minutes, promise.",
     "professionalShareLinkRegistrationAlt": "Two people standing, holding a large red circle with two link symbols about to connect.",
     "professionalShareLinkRegistrationHeader": "Welcome to cleaved",
     "professionalShareLinkRegistrationText": "You are lucky enough to be invited by someone who values you. Be sure to pay it forward.",
@@ -87,9 +87,8 @@
     "peopleText": "Receive feedback and keep those you care about up to date on all your projects."
   },
   "hTags": {
-    "personalInformation": "Personal information",
     "professionalInformation": "Professional information",
-    "theme": "Theme"
+    "generalSettings": "General Settings"
   },
   "language": {
     "english": "English",
@@ -107,6 +106,7 @@
     "accountPersonalInformation": "Personal Information",
     "accountProfessionalInformation": "Professional Information",
     "home": "Home",
+    "profile": "Profile",
     "projectList": "Projects",
     "projectStartNew": "Start a new project",
     "professionalInvite": "Professional Invite",
@@ -267,6 +267,7 @@
     "createAdminShareLink": "Create admin link",
     "createReadShareLink": "Create view only link",
     "createWriteShareLink": "Create read/write link",
+    "createWriteShareLinkText": "Create a share link that will allow your coworkers to create projects and give feedback.",
     "editMenuGenerateNewShareLink": "Generate a new {{shareLinkPermission}} share link",
     "editMenuRemoveShareLink": "Remove {{shareLinkPermission}} share link",
     "manage": "Manage",

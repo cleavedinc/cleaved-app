@@ -56,7 +56,6 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
   });
 
   const logOut = useCallback(() => {
-    console.log("logging out");
     setLoggedIn(false);
     DeleteCookie("_CRT_");
     // clear apollo cache to ensure new user gets fresh data

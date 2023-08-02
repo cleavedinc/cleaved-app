@@ -34,7 +34,7 @@ export const AccountAvatarForm: FunctionComponent<AccountAvatarFormProps> = (pro
   const { className, refetchAccountData } = props;
   const { t } = useTranslator();
 
-  const [setAccountAvatar] = useMutation(SET_ACCOUNT_AVATAR_MUTATION, {
+  const [setAccountAvatar, { loading }] = useMutation(SET_ACCOUNT_AVATAR_MUTATION, {
     onError: (error) => {
       logQueryError(error);
     },
@@ -68,7 +68,7 @@ export const AccountAvatarForm: FunctionComponent<AccountAvatarFormProps> = (pro
         <StyledEditIconWrapper>{t("files.avatarUploadImage")}</StyledEditIconWrapper>
       </StyledTooltipWhite>
 
-      <input accept="image/jpeg, image/png" type="file" required onChange={onChange} />
+      <input accept="image/jpeg, image/png" type="file" required onChange={onChange} disabled={loading} />
     </StyledFileInputLabel>
   );
 };

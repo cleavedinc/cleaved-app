@@ -90,6 +90,8 @@ export type Mutation = {
   organizationRemoveUser?: Maybe<Scalars['Void']>;
   organizationSetUserPermissionLevel?: Maybe<Scalars['Void']>;
   postProjectCreate?: Maybe<Scalars['Void']>;
+  postProjectPin?: Maybe<Scalars['Void']>;
+  postProjectPinRemove?: Maybe<Scalars['Void']>;
   postProjectRemove?: Maybe<Scalars['Void']>;
   postProjectReply?: Maybe<Scalars['Void']>;
   postProjectSetReaction?: Maybe<Scalars['Void']>;
@@ -158,6 +160,18 @@ export type MutationPostProjectCreateArgs = {
   imageUrls?: InputMaybe<Array<Scalars['ImagePath']>>;
   organizationId: Scalars['ID'];
   projectId: Scalars['ID'];
+};
+
+
+export type MutationPostProjectPinArgs = {
+  organizationId: Scalars['ID'];
+  postId: Scalars['ID'];
+};
+
+
+export type MutationPostProjectPinRemoveArgs = {
+  organizationId: Scalars['ID'];
+  postId: Scalars['ID'];
 };
 
 
@@ -372,6 +386,7 @@ export type ProjectPost = {
   images: Array<Scalars['ImagePath']>;
   /** Retrieves first few most-recent comments on this post. To load more replies, use query repliesToPost */
   initialReplies: Array<ProjectPost>;
+  isPostProjectPinned?: Maybe<Scalars['Boolean']>;
   myReaction: PostReactionType;
   /** Count of all direct and indirect replies to this post counting nested replies */
   nestedRepliesCount: Scalars['String'];

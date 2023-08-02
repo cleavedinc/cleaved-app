@@ -69,7 +69,7 @@
     "organizationRegisterText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
     "professionalOnboardingAlt": "Tres edificios en una fila de varios tamaños",
     "professionalOnboardingHeader": "Antes de correr, caminamos",
-    "professionalOnboardingText": "Solo algunos pasos de configuración primero. Solo tomará un par de minutos, lo prometo.",
+    "professionalOnboardingText": "Creemos tu organización, primer proyecto e invitemos a tus compañeros de trabajo. Tomará aproximadamente un minuto, lo prometo.",
     "professionalShareLinkRegistrationAlt": "Dos personas paradas, sosteniendo un gran círculo rojo con dos símbolos de enlace a punto de conectarse.",
     "professionalShareLinkRegistrationHeader": "Bienvenido a Cleaved",
     "professionalShareLinkRegistrationText": "Tienes la suerte de ser invitado por alguien que te valora. Asegúrate de devolver el favor.",
@@ -87,9 +87,8 @@
     "peopleText": "Recibe retroalimentación y mantén al tanto a quienes te importan sobre todos tus proyectos."
   },
   "hTags": {
-    "personalInformation": "Información personal",
     "professionalInformation": "Información profesional",
-    "theme": "Tema"
+    "generalSettings": "Configuración general"
   },
   "language": {
     "english": "Inglés",
@@ -107,6 +106,7 @@
     "accountPersonalInformation": "Información Personal",
     "accountProfessionalInformation": "Información Profesional",
     "home": "Inicio",
+    "profile": "Perfil",
     "projectList": "Proyectos",
     "projectStartNew": "Iniciar un nuevo proyecto",
     "professionalInvite": "Invitación Profesional",
@@ -267,6 +267,7 @@
     "createAdminShareLink": "Crear enlace de administrador",
     "createReadShareLink": "Crear enlace de solo vista",
     "createWriteShareLink": "Crear enlace de lectura/escritura",
+    "createWriteShareLinkText": "Crea un enlace para compartir que permita a tus compañeros de trabajo crear proyectos y dar retroalimentación.",
     "editMenuGenerateNewShareLink": "Generar un nuevo enlace compartido",
     "editMenuRemoveShareLink": "Eliminar enlace compartido",
     "manage": "Gestionar",

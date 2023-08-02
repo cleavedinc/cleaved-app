@@ -127,10 +127,6 @@ export const PersonalInformationForm: FunctionComponent = () => {
       {({ dirty, isSubmitting, isValid }) => {
         return (
           <>
-            <HeadingWrapper>
-              <SectionHeader>{t("hTags.personalInformation")}</SectionHeader>
-            </HeadingWrapper>
-
             <StyledFormWrapper>
               <Form>
                 <StyledAvatarNameWrapper>

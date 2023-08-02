@@ -36,7 +36,6 @@ const StyledTextarea = styled.textarea`
   min-height: 100px;
   outline: none;
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
-  resize: none;
   width: 100%;
 
   &::placeholder {

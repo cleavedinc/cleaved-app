@@ -1,19 +1,35 @@
 import React, { FunctionComponent } from "react";
+import styled from "styled-components";
 
-import { ContentWrapper, LeftColumnWrapper, MainColumnWrapper } from "@cleaved/ui";
+import { Box, ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { AsideAccountDataWrapper, AccountProfessionalInformationDataWrapper } from "../../data-wrappers";
+import { AccountLegalLinks, AccountMembershipPlan } from "../../components";
+import { AccountGeneralSettingsDataWrapper } from "../../data-wrappers";
+import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
+
+const StyledBox = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const AccountProfessionalInformation: FunctionComponent = () => {
   return (
     <ContentWrapper>
-      <LeftColumnWrapper>
-        <AsideAccountDataWrapper />
-      </LeftColumnWrapper>
+      <MainColumnMaxWidthWrapper>
+        {/* <AccountMembershipPlan /> */}
 
-      <MainColumnWrapper>
-        <AccountProfessionalInformationDataWrapper />
-      </MainColumnWrapper>
+        <StyledBox>
+          <PersonalInformationForm />
+        </StyledBox>
+
+        <StyledBox>
+          <ProfesionalInformationForm />
+        </StyledBox>
+
+        <AccountGeneralSettingsDataWrapper />
+
+        <AccountLegalLinks />
+      </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );
 };

@@ -6,7 +6,6 @@ import { routeConstantsShared } from "@cleaved/helpers";
 import { mediaQueries } from "@cleaved/ui";
 
 import { AccountOrganizationRegister } from "../pages/account/account-organization-register";
-import { AccountPersonalInformation } from "../pages/account/account-personal-information";
 import { AccountProfessionalInformation } from "../pages/account/account-professional-information";
 import { AccountOrganizations } from "../pages/account/account-organizations";
 import { AccountMembership } from "../pages/account/account-membership";
@@ -42,11 +41,6 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.accountOrganizationRegister.route}`}
       renderedPage={<AccountOrganizationRegister />}
-    />
-
-    <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.accountPersonalInformation.route}`}
-      renderedPage={<AccountPersonalInformation />}
     />
 
     <PageProtector

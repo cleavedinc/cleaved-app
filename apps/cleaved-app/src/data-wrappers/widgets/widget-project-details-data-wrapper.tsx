@@ -41,6 +41,7 @@ const StyledPostCount = styled.div`
 
 const StyledProjectDetails = styled.div`
   padding: ${SPACING.SMALL};
+  white-space: pre-wrap;
 `;
 
 const StyledWidgetHeader = styled.div``;
