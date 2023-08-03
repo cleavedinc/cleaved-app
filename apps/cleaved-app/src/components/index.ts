@@ -1,7 +1,6 @@
 export * from "./account";
 export * from "./avatars";
 export * from "./comments";
-export * from "./footer";
 export * from "./header";
 export * from "./helper-info";
 export * from "./links";

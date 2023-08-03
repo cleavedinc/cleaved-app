@@ -34,18 +34,16 @@
     "selectAnImageToUpload": "Selecciona una imagen/gif para subir"
   },
   "formLabels": {
-    "about": "Acerca de",
-    "aboutPlaceholder": "Cuéntale a todos un poco sobre ti",
+    "about": "Lo que me importa",
+    "aboutPlaceholder": "Comparte lo que te importa con los demás.",
     "firstName": "Nombre",
-    "firstNamePlaceholder": "Nombre",
+    "firstNamePlaceholder": "¿Cuál es tu nombre de pila?",
     "lastName": "Apellido",
-    "lastNamePlaceholder": "Apellido",
-    "middleName": "Segundo nombre",
-    "middleNamePlaceholder": "Segundo nombre",
-    "professionalEmail": "Correo electrónico profesional",
-    "professionalEmailPlaceholder": "Correo electrónico profesional",
-    "professionalTitle": "Título profesional",
-    "professionalTitlePlaceholder": "Título profesional"
+    "lastNamePlaceholder": "¿Cuál es tu apellido?",
+    "professionalEmail": "Correo electrónico",
+    "professionalEmailPlaceholder": "micorreoelectrónico@empresaincreíble.com",
+    "professionalTitle": "Mi cargo",
+    "professionalTitlePlaceholder": "C..., VP..., Director..., Gerente..."
   },
   "formValidationMessages": {
     "aboutProfessionalCharactorLimit": "Acerca de tiene un límite máximo de 250 caracteres",
@@ -142,6 +140,7 @@
     "areYouSureRemoveMemberModalHeader": "¿Estás seguro?",
     "areYouSureRemoveMemberModalText": "Si eliminas a este usuario de tu organización, no podrá acceder a ninguno de tus proyectos nuevamente. Solo recuerda que siempre puedes invitarlos de nuevo.",
     "edit": "Editar",
+    "jobTitle": "Cargo",
     "peopleListHeader": "Gente",
     "peopleListHeaderHome": "Gente",
     "professionalName": "Nombre",
@@ -186,8 +185,9 @@
     "errorFileIncorrectType": "Un archivo no es un tipo de archivo aceptado.",
     "dragDropAreaHelperText": "Arrastra y suelta hasta imágenes, o haz clic para seleccionar."
   },
+  "privacyPolicy": "Política de privacidad",
   "professional": {
-    "emailLinkText": "Correo electrónico"
+    "about": "Lo que me importa"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Omitir incorporación",
@@ -283,7 +283,8 @@
     "firstParagraph": "Antes de poder utilizar nuestros servicios, debes aceptar nuestros",
     "acceptTermsHeader": "¡Bienvenido a bordo!",
     "acceptTermsImageAlt": "Imagen sobre aceptar términos y condiciones",
-    "acceptTermsText": "Lo primero es lo primero, debes aceptar los términos, luego podrás ponerte manos a la obra."
+    "acceptTermsText": "Lo primero es lo primero, debes aceptar los términos, luego podrás ponerte manos a la obra.",
+    "termsOfService": "Términos de servicio"
   },
   "tryAgain": "Intentar de nuevo",
   "widget": {

@@ -67,7 +67,6 @@ const StyledPostProfessionalName = styled.a`
 `;
 
 const StyledProjectNameLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
   display: inline-block;
 `;
 
@@ -94,10 +93,6 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
         {account?.jobTitle && <StyledJobTitle>{account?.jobTitle}</StyledJobTitle>}
 
         <StyledDateProjectInfo>
-          {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
-
-          {date && postProjectName && postProjectId && <StyledSeparatorDot />}
-
           {postProjectName && postProjectId && (
             <StyledProjectNameLink
               to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${postProjectId}${routeConstantsCleavedApp.projectBoard.route}`}
@@ -106,6 +101,10 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
               {postProjectName}
             </StyledProjectNameLink>
           )}
+
+          {date && postProjectName && postProjectId && <StyledSeparatorDot />}
+
+          {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
         </StyledDateProjectInfo>
       </StyledPostProfessionalInfoWrapper>
 

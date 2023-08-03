@@ -5,12 +5,22 @@ import { mediaQueries, SPACING, StyledTd } from "@cleaved/ui";
 
 import { HeaderMenuAvatar, PeopleEditMenu } from "../../components";
 import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../generated-types/graphql";
-import { useFindMyAccount, useNavigateToProfile } from "../../hooks";
+import { useFindMyAccount, useNavigateToProfile, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 type PeopleListRowProps = {
   member: OrganizationSeekMembersQuery["organizationSeekMembers"][0];
   organizationSeekMembersDataRefetch?: () => void;
+};
+
+type StyledTdWithMenuContentProps = {
+  name?: string;
+  jobTitle?: string;
+  permissions?: string;
+};
+
+type StyledTdWithMenuContentEditProps = {
+  edit?: string;
 };
 
 const StyledPersonNameLink = styled.a`
@@ -31,16 +41,20 @@ const StyledPermission = styled.div`
   }
 `;
 
-const StyledTdWithMenuContent = styled(StyledTd)`
+const StyledTdWithMenuContent = styled(StyledTd)<StyledTdWithMenuContentProps>`
   vertical-align: middle; /* Fixes a double bottom border in safari */
 
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(1):before {
-      content: "Name";
+      content: ${(props) => (props.name ? `"${props.name}"` : null)};
     }
 
     &:nth-of-type(2):before {
-      content: "Permissions";
+      content: ${(props) => (props.jobTitle ? `"${props.jobTitle}"` : null)};
+    }
+
+    &:nth-of-type(3):before {
+      content: ${(props) => (props.permissions ? `"${props.permissions}"` : null)};
     }
   }
 
@@ -48,20 +62,16 @@ const StyledTdWithMenuContent = styled(StyledTd)`
     &:first-child {
       /* width: 50%; */
     }
-
-    &:nth-child(2) {
-      padding-right: ${SPACING.MEDIUM};
-      text-align: end;
-    }
   }
 `;
 
-const StyledTdWithMenuContentEdit = styled(StyledTd)`
+const StyledTdWithMenuContentEdit = styled(StyledTd)<StyledTdWithMenuContentEditProps>`
+  min-height: 50px;
   width: 100px;
 
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(4):before {
-      content: "Edit";
+      content: ${(props) => (props.edit ? `"${props.edit}"` : null)};
     }
   }
 `;
@@ -71,10 +81,16 @@ export const PeopleListRow: FunctionComponent<PeopleListRowProps> = (props) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const accountQuery = useFindMyAccount();
   const { profilePath } = useNavigateToProfile(member?.id);
+  const { t } = useTranslator();
+
+  const professionalName = t("people.professionalName") ? t("people.professionalName") : undefined;
+  const jobTitle = t("people.jobTitle") ? t("people.jobTitle") : undefined;
+  const permissions = t("people.professionalPermissions") ? t("people.professionalPermissions") : undefined;
+  const edit = t("people.edit") ? t("people.edit") : undefined;
 
   return (
     <>
-      <StyledTdWithMenuContent role="cell">
+      <StyledTdWithMenuContent name={professionalName} role="cell">
         <StyledPersonLinkWrapper>
           <HeaderMenuAvatar account={member} />
           <StyledPersonNameLink href={profilePath}>
@@ -82,11 +98,14 @@ export const PeopleListRow: FunctionComponent<PeopleListRowProps> = (props) => {
           </StyledPersonNameLink>
         </StyledPersonLinkWrapper>
       </StyledTdWithMenuContent>
-      <StyledTdWithMenuContent role="cell">
+      <StyledTdWithMenuContent jobTitle={jobTitle} role="cell">
+        <StyledPermission>{member?.jobTitle}</StyledPermission>
+      </StyledTdWithMenuContent>
+      <StyledTdWithMenuContent permissions={permissions} role="cell">
         <StyledPermission>{member?.permissionInOrg}</StyledPermission>
       </StyledTdWithMenuContent>
       {hasPermission && (
-        <StyledTdWithMenuContentEdit role="cell">
+        <StyledTdWithMenuContentEdit edit={edit} role="cell">
           {accountQuery.data?.findMyAccount.id !== member.id && (
             <PeopleEditMenu member={member} organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch} />
           )}

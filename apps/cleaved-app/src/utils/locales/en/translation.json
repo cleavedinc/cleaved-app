@@ -34,18 +34,16 @@
     "selectAnImageToUpload": "Select an image/gif to upload"
   },
   "formLabels": {
-    "about": "About",
-    "aboutPlaceholder": "Tell everyone a litle about you",
+    "about": "What I care about",
+    "aboutPlaceholder": "Share what you care about with others.",
     "firstName": "First name",
-    "firstNamePlaceholder": "First name",
+    "firstNamePlaceholder": "What is your first name?",
     "lastName": "Last name",
-    "lastNamePlaceholder": "Last name",
-    "middleName": "Middle",
-    "middleNamePlaceholder": "Middle",
-    "professionalEmail": "Professional email",
-    "professionalEmailPlaceholder": "Professional email",
-    "professionalTitle": "Professional title",
-    "professionalTitlePlaceholder": "Professional title"
+    "lastNamePlaceholder": "What is your last name?",
+    "professionalEmail": "Email",
+    "professionalEmailPlaceholder": "myemail@awesomecompany.com",
+    "professionalTitle": "My job title",
+    "professionalTitlePlaceholder": "C..., VP..., Director..., Manager..."
   },
   "formValidationMessages": {
     "aboutProfessionalCharactorLimit": "About has a maximum limit of 250 characters",
@@ -142,6 +140,7 @@
     "areYouSureRemoveMemberModalHeader": "Are you sure?",
     "areYouSureRemoveMemberModalText": "If you remove this user from your organization, they will not be able to access any of your projects again. Just remember, you can always invite tehm back.",
     "edit": "Edit",
+    "jobTitle": "Job title",
     "peopleListHeader": "People",
     "peopleListHeaderHome": "People",
     "professionalName": "Name",
@@ -186,8 +185,9 @@
     "errorFileIncorrectType": "One file is not an accepted file type.",
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
   },
+  "privacyPolicy": "Privacy Policy",
   "professional": {
-    "emailLinkText": "Email"
+    "about": "What I care about"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Skip onboarding",
@@ -283,7 +283,8 @@
     "firstParagraph": "Before you are able to use our services, you must agree to our",
     "acceptTermsHeader": "Welcome aboard!",
     "acceptTermsImageAlt": "Picture about accepting terms and conditions",
-    "acceptTermsText": "First things first, you need to accept the terms, then you can get down to business."
+    "acceptTermsText": "First things first, you need to accept the terms, then you can get down to business.",
+    "termsOfService": "Terms of Service"
   },
   "tryAgain": "Try again",
   "widget": {

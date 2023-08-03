@@ -52,13 +52,6 @@ const StyledPeopleListHeader = styled.div`
   }
 `;
 
-const StyledThRight = styled(StyledTh)`
-  &:nth-child(2) {
-    padding-right: ${SPACING.MEDIUM};
-    text-align: end;
-  }
-`;
-
 const StyledTrWrapper = styled(StyledTr)`
   ${mediaQueries.RESPONSIVE_TABLE} {
     margin-bottom: ${SPACING.LARGE};
@@ -100,7 +93,8 @@ export const PeopleListDataWrapper: FunctionComponent = () => {
           <StyledTHead role="rowgroup">
             <StyledTHeadTr role="row">
               <StyledTh role="columnheader">{t("people.professionalName")}</StyledTh>
-              <StyledThRight role="columnheader">{t("people.professionalPermissions")}</StyledThRight>
+              <StyledTh role="columnheader">{t("people.jobTitle")}</StyledTh>
+              <StyledTh role="columnheader">{t("people.professionalPermissions")}</StyledTh>
               {hasPermission && <StyledTh role="columnheader">{t("people.edit")}</StyledTh>}
             </StyledTHeadTr>
           </StyledTHead>

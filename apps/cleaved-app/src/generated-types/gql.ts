@@ -38,7 +38,7 @@ const documents = {
     "\n  mutation postProjectSetReaction($organizationId: ID!, $postId: ID!, $reactionType: PostReactionType!) {\n    postProjectSetReaction(organizationId: $organizationId, postId: $postId, reactionType: $reactionType)\n  }\n": types.PostProjectSetReactionDocument,
     "\n  mutation projectSetStatus($projectId: ID!, $organizationId: ID!, $status: ProjectStatus!) {\n    projectSetStatus(projectId: $projectId, organizationId: $organizationId, status: $status)\n  }\n": types.ProjectSetStatusDocument,
     "\n  mutation setPreferredOrgId($orgId: ID!) {\n    setPreferredOrgId(orgId: $orgId)\n  }\n": types.SetPreferredOrgIdDocument,
-    "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n      middleName\n    }\n  }\n": types.FindMyAccountDocument,
+    "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n    }\n  }\n": types.FindMyAccountDocument,
     "\n  query organizationGetMembership($organizationId: ID!) {\n    organizationGetMembership(organizationId: $organizationId) {\n      id\n      name\n      userPermissionInOrg\n    }\n  }\n": types.OrganizationGetMembershipDocument,
     "\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n      userPermissionInOrg\n    }\n  }\n": types.OrganizationMembershipsDocument,
     "\n  query organizationSeekMembers($organizationId: ID!, $seekKey: ID, $pageSize: Int) {\n    organizationSeekMembers(organizationId: $organizationId, seekKey: $seekKey, pageSize: $pageSize) {\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n      permissionInOrg\n    }\n  }\n": types.OrganizationSeekMembersDocument,
@@ -169,7 +169,7 @@ export function graphql(source: "\n  mutation setPreferredOrgId($orgId: ID!) {\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n      middleName\n    }\n  }\n"): (typeof documents)["\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n      middleName\n    }\n  }\n"];
+export function graphql(source: "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n    }\n  }\n"): (typeof documents)["\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

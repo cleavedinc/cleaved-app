@@ -4,7 +4,6 @@ import { StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
 import { AsideHelperInfoHeaderTextImageBox } from "../../components";
 import { PostsContext } from "../../contexts";
-import { WidgetProjectListDataWrapper } from "../../data-wrappers";
 import { useTranslator } from "../../hooks";
 
 import decisionsHelperImage from "../../media/helper-info/decisions-helper-image.svg";
@@ -24,8 +23,6 @@ export const AsideHomeDataWrapper: FunctionComponent = () => {
           helperInfoTextHeader={t("helperInformationBoxes.collaborativeTimelineHeader")}
         />
       )}
-
-      <WidgetProjectListDataWrapper />
     </StickUnderHeaderDesktopOnly>
   );
 };
