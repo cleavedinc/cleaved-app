@@ -144,7 +144,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
     { value: ProjectStatus.Archived, label: t("projects.archive") },
   ];
 
-  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
+  const projectStartNewLinkName = t("menuLinkNames.projectForm") ? t("menuLinkNames.projectForm") : "";
 
   const projectName = t("project.projectName") ? t("project.projectName") : "";
   const dateCreated = t("project.dateCreated") ? t("project.dateCreated") : "";
@@ -197,10 +197,10 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
           />
 
           <StyledRouterButtonLeft
-            to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`}
             title={projectStartNewLinkName}
           >
-            {t("projectStartNew.startNewProject")}
+            {t("projectForm.startNewProject")}
           </StyledRouterButtonLeft>
         </StyledProjectListHeader>
       )}
@@ -256,13 +256,13 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         projectsInOrganizationSeekData &&
         projectsInOrganizationSeekData.length >= 0 && (
           <StyledInviteMorePeopleWrapper>
-            <StyledAddPeopleText>{t("projectStartNew.addNewProjectHelperText")}</StyledAddPeopleText>
+            <StyledAddPeopleText>{t("projectForm.addNewProjectHelperText")}</StyledAddPeopleText>
 
             <StyledRouterButtonLink
-              to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`}
               title={projectStartNewLinkName}
             >
-              {t("projectStartNew.startNewProject")}
+              {t("projectForm.startNewProject")}
             </StyledRouterButtonLink>
           </StyledInviteMorePeopleWrapper>
         )}

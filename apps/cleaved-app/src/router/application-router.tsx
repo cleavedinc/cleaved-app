@@ -18,7 +18,7 @@ import { ProfessionalOnboarding } from "../pages/professional/professional-onboa
 import { ProfessionalOnboardingHasOrganization } from "../pages/professional/professional-onboarding-has-organization";
 import { Project } from "../pages/project/project";
 import { ProjectList } from "../pages/project/project-list";
-import { ProjectStartNew } from "../pages/project/project-start-new";
+import { ProjectForm } from "../pages/project/project-form";
 import { PeopleList } from "../pages/people/people-list";
 import { PeopleListProfessionalInvite } from "../pages/professional/professional-invite";
 import { TermsOfService } from "../pages/agreements/terms-of-service";
@@ -83,8 +83,13 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector path={`:orgId${routeConstantsCleavedApp.projectList.route}`} renderedPage={<ProjectList />} />
 
     <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.projectStartNew.route}`}
-      renderedPage={<ProjectStartNew />}
+      path={`:orgId${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`}
+      renderedPage={<ProjectForm />}
+    />
+
+    <PageProtector
+      path={`:orgId${routeConstantsCleavedApp.project.route}/:projectId${routeConstantsCleavedApp.projectForm.route}`}
+      renderedPage={<ProjectForm />}
     />
 
     <PageProtector path={`:orgId${routeConstantsCleavedApp.peopleList.route}`} renderedPage={<PeopleList />} />

@@ -106,7 +106,7 @@
     "home": "Home",
     "profile": "Profile",
     "projectList": "Projects",
-    "projectStartNew": "Start a new project",
+    "projectForm": "Start a new project",
     "professionalInvite": "Professional Invite",
     "organizationRegister": "Register a new organization",
     "peopleList": "People"
@@ -235,15 +235,16 @@
     "stateInactive": "Inactive",
     "stateArchive": "Archive"
   },
-  "projectStartNew": {
+  "projectForm": {
     "addNewProjectHelperText": "It's a great feeling when you start something new.",
-    "startNewProject": "Start a new project",
+    "projectFormSubmitButton": "Save",
     "projectName": "Project name",
     "projectNamePlaceholder": "Project name...",
     "projectNameRequired": "Project name required",
     "projectDetails": "Project details",
     "projectDetailsRequired": "Project details required",
-    "projectDetailsPlaceholder": "Project details..."
+    "projectDetailsPlaceholder": "Project details...",
+    "startNewProject": "Start a new project"
   },
   "projects": {
     "active": "Active",

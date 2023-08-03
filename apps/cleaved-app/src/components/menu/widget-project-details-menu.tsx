@@ -1,10 +1,13 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext } from "react";
+import { navigate } from "@reach/router";
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import styled, { useTheme } from "styled-components";
 
 import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
 
-import { useTranslator } from "../../hooks";
+import { authTokenContext } from "../../contexts";
+import { useRouteParams, useTranslator } from "../../hooks";
+import { routeConstantsCleavedApp } from "../../router";
 
 import "@szhsin/react-menu/dist/index.css";
 
@@ -28,11 +31,16 @@ const StyledBasicMenu = styled(Menu)`
 `;
 
 export const WidgetProjectDetailsMenu: FunctionComponent = () => {
+  const { preferredOrgId } = useContext(authTokenContext);
+  const routeParams = useRouteParams();
+  const projectId = routeParams.projectId ? routeParams.projectId : null;
   const theme = useTheme();
   const { t } = useTranslator();
 
   const handleRouteToProjectStartNew = () => {
-    alert("not hooked up yet");
+    navigate(
+      `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectId}${routeConstantsCleavedApp.projectForm.route}`
+    );
   };
 
   return (

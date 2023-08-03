@@ -35,8 +35,8 @@ export const routeConstantsCleavedApp = {
   projectList: {
     route: "/project-list",
   },
-  projectStartNew: {
-    route: "/project-list/start-new-project",
+  projectForm: {
+    route: "/project-form",
   },
   professionalInvite: {
     route: "/people-list/professional-invite",

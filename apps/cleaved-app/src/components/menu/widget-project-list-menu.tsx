@@ -36,7 +36,9 @@ export const WidgetProjectListMenu: FunctionComponent = () => {
   const { t } = useTranslator();
 
   const handleRouteToProjectStartNew = () => {
-    navigate(`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`);
+    navigate(
+      `/${preferredOrgId}${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`
+    );
   };
 
   return (
@@ -49,7 +51,7 @@ export const WidgetProjectListMenu: FunctionComponent = () => {
       direction={"left"}
     >
       <StyledBasicItem onClick={() => handleRouteToProjectStartNew()}>
-        {t("projectStartNew.startNewProject")}
+        {t("projectForm.projectFormSubmitButton")}
       </StyledBasicItem>
     </StyledBasicMenu>
   );

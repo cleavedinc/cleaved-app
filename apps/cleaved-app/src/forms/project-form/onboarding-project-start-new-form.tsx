@@ -1,34 +1,26 @@
-import React, { FunctionComponent, useContext, useEffect, useState } from "react";
-import { navigate } from "@reach/router";
+import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
-import { v4 as uuidv4 } from "uuid";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonPrimary, ButtonLink, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
+import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
-import { routeConstantsCleavedApp } from "../../router";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
 import { PROJECT_START_NEW } from "./gql";
 
-type ProjectNameType = {
+type OnboardingProjectStartNewFormProps = {
+  projectsInOrgSeekRefetch?: (() => void) | undefined;
+};
+
+type OnboardingProjectStartNewFormType = {
+  projectDetails: string;
   projectName: string;
 };
-
-type ProjectDetailsType = {
-  projectDetails: string;
-};
-
-type ProjectStartNewFormType = ProjectNameType & ProjectDetailsType;
-
-const StyledButtonLink = styled(ButtonLink)`
-  color: ${({ theme }) => theme.colors.baseButtonLink_color};
-`;
 
 const StyledButtonPrimaryWrapper = styled.div`
   display: flex;
@@ -63,26 +55,21 @@ const StyledProjectFormLabel = styled.label`
   margin-bottom: ${SPACING_PX.ONE};
 `;
 
-export const ProjectStartNewForm: FunctionComponent = () => {
+export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectStartNewFormProps> = (props) => {
+  const { projectsInOrgSeekRefetch } = props;
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
-  const [newProjectGuid, setNewProjectGuid] = useState<string | null>();
 
   const [projectStart] = useMutation(PROJECT_START_NEW, {
     onCompleted: () => {
-      navigate(
-        `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${newProjectGuid}${routeConstantsCleavedApp.projectBoard.route}`
-      );
+      if (projectsInOrgSeekRefetch) {
+        projectsInOrgSeekRefetch();
+      }
     },
     onError: (error) => {
       logQueryError(error);
     },
   });
-
-  useEffect(() => {
-    const newGuid = uuidv4();
-    setNewProjectGuid(newGuid);
-  }, []);
 
   return (
     <>
@@ -91,14 +78,13 @@ export const ProjectStartNewForm: FunctionComponent = () => {
           projectName: "",
           projectDetails: "",
         }}
-        onSubmit={(values: ProjectStartNewFormType, { resetForm, setSubmitting }) => {
+        onSubmit={(values: OnboardingProjectStartNewFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
           projectStart({
             variables: {
               projectName: values.projectName,
               organizationId: preferredOrgId,
-              projectId: newProjectGuid,
               projectDetail: values.projectDetails,
             },
           });
@@ -106,44 +92,38 @@ export const ProjectStartNewForm: FunctionComponent = () => {
           resetForm({});
         }}
         validateOnChange
-        validationSchema={yup.object().shape<Record<keyof ProjectNameType, yup.AnySchema>>({
+        validationSchema={yup.object().shape<Record<keyof OnboardingProjectStartNewFormType, yup.AnySchema>>({
           projectName: yup.string().required(),
+          projectDetails: yup.string(),
         })}
       >
         {({ dirty, isSubmitting, isValid }) => {
           return (
             <Form>
               <StyledProjectFormWrapper>
-                <StyledProjectFormLabel htmlFor="projectName">
-                  {t("projectStartNew.projectName")}
-                </StyledProjectFormLabel>
+                <StyledProjectFormLabel htmlFor="projectName">{t("projectForm.projectName")}</StyledProjectFormLabel>
 
                 <StyledField
-                  autoFocus={true}
                   id="projectName"
                   name="projectName"
-                  placeholder={t("projectStartNew.projectNamePlaceholder")}
+                  placeholder={t("projectForm.projectNamePlaceholder")}
                 />
               </StyledProjectFormWrapper>
 
               <StyledProjectFormWrapper>
                 <StyledProjectFormLabel htmlFor="projectDetails">
-                  {t("projectStartNew.projectDetails")}
+                  {t("projectForm.projectDetails")}
                 </StyledProjectFormLabel>
 
                 <ProjectStartNewFormFormikTextarea
                   name="projectDetails"
-                  placeholder={t("projectStartNew.projectDetailsPlaceholder")}
+                  placeholder={t("projectForm.projectDetailsPlaceholder")}
                 />
               </StyledProjectFormWrapper>
 
               <StyledButtonPrimaryWrapper>
-                <StyledButtonLink onClick={() => navigate(-1)} type="button">
-                  {t("cancel")}
-                </StyledButtonLink>
-
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
-                  {isSubmitting ? t("pleaseWaitDots") : t("projectStartNew.startNewProject")}
+                  {isSubmitting ? t("pleaseWaitDots") : t("projectForm.projectFormSubmitButton")}
                   <Spinner visible={isSubmitting} />
                 </StyledPostButton>
               </StyledButtonPrimaryWrapper>

@@ -106,7 +106,7 @@
     "home": "Inicio",
     "profile": "Perfil",
     "projectList": "Proyectos",
-    "projectStartNew": "Iniciar un nuevo proyecto",
+    "projectForm": "Iniciar un nuevo proyecto",
     "professionalInvite": "Invitación Profesional",
     "organizationRegister": "Registrar una nueva organización",
     "peopleList": "Gente"
@@ -235,15 +235,16 @@
     "stateInactive": "Inactivo",
     "stateArchive": "Archivo"
   },
-  "projectStartNew": {
+  "projectForm": {
     "addNewProjectHelperText": "Es una gran sensación cuando comienzas algo nuevo.",
-    "startNewProject": "Comenzar un nuevo proyecto",
+    "projectFormSubmitButton": "Guardar",
     "projectName": "Nombre del proyecto",
     "projectNamePlaceholder": "Nombre del proyecto...",
     "projectNameRequired": "Nombre del proyecto requerido",
     "projectDetails": "Detalles del proyecto",
     "projectDetailsRequired": "Detalles del proyecto requeridos",
-    "projectDetailsPlaceholder": "Detalles del proyecto..."
+    "projectDetailsPlaceholder": "Detalles del proyecto...",
+    "startNewProject": "Comenzar un nuevo proyecto"
   },
   "projects": {
     "active": "Activo",
