@@ -70,7 +70,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
   const projectData = useProjectById(projectId);
   const [newProjectGuid, setNewProjectGuid] = useState<string | null>();
 
-  const [projectStart] = useMutation(PROJECT_START_NEW, {
+  const [projectCreate] = useMutation(PROJECT_START_NEW, {
     onCompleted: () => {
       navigate(
         `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${newProjectGuid}${routeConstantsCleavedApp.projectBoard.route}`
@@ -109,7 +109,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
         onSubmit={(values: ProjectFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
-          projectStart({
+          projectCreate({
             variables: {
               projectName: values.projectName,
               organizationId: preferredOrgId,

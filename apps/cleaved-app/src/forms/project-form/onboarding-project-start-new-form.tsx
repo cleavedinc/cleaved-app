@@ -60,7 +60,7 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
 
-  const [projectStart] = useMutation(PROJECT_START_NEW, {
+  const [projectCreate] = useMutation(PROJECT_START_NEW, {
     onCompleted: () => {
       if (projectsInOrgSeekRefetch) {
         projectsInOrgSeekRefetch();
@@ -81,7 +81,7 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
         onSubmit={(values: OnboardingProjectStartNewFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
-          projectStart({
+          projectCreate({
             variables: {
               projectName: values.projectName,
               organizationId: preferredOrgId,

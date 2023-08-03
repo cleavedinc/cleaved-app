@@ -27,9 +27,9 @@ const documents = {
     "\n  mutation updateAccount($firstName: String, $lastName: String, $middleName: String) {\n    updateAccount(firstName: $firstName, lastName: $lastName, middleName: $middleName)\n  }\n": types.UpdateAccountDocument,
     "\n  mutation postUploadImage($image: Upload!) {\n    postUploadImage(image: $image)\n  }\n": types.PostUploadImageDocument,
     "\n  mutation registerOrganization($organizationId: ID!, $name: String) {\n    registerOrganization(organizationId: $organizationId, name: $name)\n  }\n": types.RegisterOrganizationDocument,
+    "\n  mutation projectCreate($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectCreate(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n": types.ProjectCreateDocument,
     "\n  mutation postProjectCreate($organizationId: ID!, $projectId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectCreate(organizationId: $organizationId, projectId: $projectId, body: $body, imageUrls: $imageUrls)\n  }\n": types.PostProjectCreateDocument,
     "\n  mutation postProjectUpdate($organizationId: ID!, $postId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectUpdate(organizationId: $organizationId, postId: $postId, body: $body, imageUrls: $imageUrls)\n  }\n": types.PostProjectUpdateDocument,
-    "\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectStart(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n": types.ProjectStartDocument,
     "\n  mutation acceptTerms {\n    acceptTerms\n  }\n": types.AcceptTermsDocument,
     "\n  mutation generateOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    generateOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n": types.GenerateOrganizationShareLinkDocument,
     "\n  mutation organizationRemoveMe($organizationId: ID!) {\n    organizationRemoveMe(organizationId: $organizationId)\n  }\n": types.OrganizationRemoveMeDocument,
@@ -125,15 +125,15 @@ export function graphql(source: "\n  mutation registerOrganization($organization
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation projectCreate($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectCreate(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n"): (typeof documents)["\n  mutation projectCreate($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectCreate(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation postProjectCreate($organizationId: ID!, $projectId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectCreate(organizationId: $organizationId, projectId: $projectId, body: $body, imageUrls: $imageUrls)\n  }\n"): (typeof documents)["\n  mutation postProjectCreate($organizationId: ID!, $projectId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectCreate(organizationId: $organizationId, projectId: $projectId, body: $body, imageUrls: $imageUrls)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation postProjectUpdate($organizationId: ID!, $postId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectUpdate(organizationId: $organizationId, postId: $postId, body: $body, imageUrls: $imageUrls)\n  }\n"): (typeof documents)["\n  mutation postProjectUpdate($organizationId: ID!, $postId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectUpdate(organizationId: $organizationId, postId: $postId, body: $body, imageUrls: $imageUrls)\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectStart(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n"): (typeof documents)["\n  mutation projectStart($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectStart(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
