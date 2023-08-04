@@ -78,8 +78,8 @@
     "projectslistHeader": "Projects are where magic happens",
     "projectslistText": "Creating a new project provides you with a platform to share decisions, receive feedback, and demonstrate progress.",
     "projectStartNewImageAlt": "Arrow pointing to the start a new project form",
-    "projectStartNewHeader": "Start a new project",
-    "projectStartNewText": "Creating a new project provides you with a platform to share decisions, receive feedback, and demonstrate progress.",
+    "projectHeader": "Let's go!",
+    "projectText": "Projects provides you with a platform to share decisions, receive feedback, and demonstrate progress.",
     "peopleAlt": "Two people holding pieces of a project",
     "peopleHeader": "Invite your coworkers into your organization",
     "peopleText": "Receive feedback and keep those you care about up to date on all your projects."
@@ -237,6 +237,7 @@
   },
   "projectForm": {
     "addNewProjectHelperText": "It's a great feeling when you start something new.",
+    "project": "Project",
     "projectFormSubmitButton": "Save",
     "projectName": "Project name",
     "projectNamePlaceholder": "Project name...",

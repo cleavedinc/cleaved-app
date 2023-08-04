@@ -14,7 +14,7 @@ import { useProjectById, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
-import { PROJECT_START_NEW } from "./gql";
+import { PROJECT_CREATE, PROJECT_UPDATE } from "./gql";
 
 type ProjectFormType = {
   projectDetails: string;
@@ -22,7 +22,6 @@ type ProjectFormType = {
 };
 
 type ProjectFormProps = {
-  organizationId?: string;
   projectId?: string;
 };
 
@@ -64,13 +63,13 @@ const StyledProjectFormLabel = styled.label`
 `;
 
 export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
-  const { organizationId, projectId } = props;
+  const { projectId } = props;
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
   const projectData = useProjectById(projectId);
   const [newProjectGuid, setNewProjectGuid] = useState<string | null>();
 
-  const [projectCreate] = useMutation(PROJECT_START_NEW, {
+  const [projectCreate] = useMutation(PROJECT_CREATE, {
     onCompleted: () => {
       navigate(
         `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${newProjectGuid}${routeConstantsCleavedApp.projectBoard.route}`
@@ -81,17 +80,20 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
     },
   });
 
-  // Need to build the backend out for this mutation
-  // const [projectUpdate] = useMutation(PROJECT_START_NEW, {
-  //   onCompleted: () => {
-  //     navigate(
-  //       `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${newProjectGuid}${routeConstantsCleavedApp.projectBoard.route}`
-  //     );
-  //   },
-  //   onError: (error) => {
-  //     logQueryError(error);
-  //   },
-  // });
+  const [projectUpdate] = useMutation(PROJECT_UPDATE, {
+    onCompleted: () => {
+      if (projectData && projectData.projectByIdDataRefetch) {
+        projectData.projectByIdDataRefetch();
+      }
+
+      navigate(
+        `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectId}${routeConstantsCleavedApp.projectBoard.route}`
+      );
+    },
+    onError: (error) => {
+      logQueryError(error);
+    },
+  });
 
   useEffect(() => {
     const newGuid = uuidv4();
@@ -109,14 +111,25 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
         onSubmit={(values: ProjectFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
-          projectCreate({
-            variables: {
-              projectName: values.projectName,
-              organizationId: preferredOrgId,
-              projectId: newProjectGuid,
-              projectDetail: values.projectDetails,
-            },
-          });
+          if (projectId) {
+            projectUpdate({
+              variables: {
+                organizationId: preferredOrgId,
+                projectId,
+                projectDetail: values.projectDetails,
+                projectName: values.projectName,
+              },
+            });
+          } else {
+            projectCreate({
+              variables: {
+                projectName: values.projectName,
+                organizationId: preferredOrgId,
+                projectId: newProjectGuid,
+                projectDetail: values.projectDetails,
+              },
+            });
+          }
 
           resetForm({});
         }}

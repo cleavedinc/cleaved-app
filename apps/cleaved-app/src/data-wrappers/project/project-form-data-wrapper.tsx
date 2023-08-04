@@ -15,15 +15,14 @@ const StyledH1 = styled(H1)`
 export const ProjectFormDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const routeParams = useRouteParams();
-  const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId;
   const { t } = useTranslator();
 
   return (
     <Box>
-      <StyledH1>{t("projectForm.startNewProject")}</StyledH1>
+      <StyledH1>{t("projectForm.project")}</StyledH1>
 
-      {hasPermission && <ProjectForm organizationId={organizationId} projectId={projectId} />}
+      {hasPermission && <ProjectForm projectId={projectId} />}
     </Box>
   );
 };

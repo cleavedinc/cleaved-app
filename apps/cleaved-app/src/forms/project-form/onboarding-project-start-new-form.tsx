@@ -11,7 +11,7 @@ import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
-import { PROJECT_START_NEW } from "./gql";
+import { PROJECT_CREATE } from "./gql";
 
 type OnboardingProjectStartNewFormProps = {
   projectsInOrgSeekRefetch?: (() => void) | undefined;
@@ -60,7 +60,7 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
 
-  const [projectCreate] = useMutation(PROJECT_START_NEW, {
+  const [projectCreate] = useMutation(PROJECT_CREATE, {
     onCompleted: () => {
       if (projectsInOrgSeekRefetch) {
         projectsInOrgSeekRefetch();

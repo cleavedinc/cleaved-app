@@ -78,8 +78,8 @@
     "projectslistHeader": "Los proyectos son donde la magia",
     "projectslistText": "Crear un nuevo proyecto te proporciona una plataforma para compartir decisiones, recibir retroalimentación y demostrar progreso.",
     "projectStartNewImageAlt": "Flecha que apunta al formulario para iniciar un nuevo proyecto",
-    "projectStartNewHeader": "Iniciar un nuevo proyecto",
-    "projectStartNewText": "Crear un nuevo proyecto te proporciona una plataforma para compartir decisiones, recibir retroalimentación y demostrar progreso.",
+    "projectHeader": "¡Vámonos!",
+    "projectText": "Los proyectos te ofrecen una plataforma para compartir decisiones, recibir retroalimentación y demostrar el progreso.",
     "peopleAlt": "Dos personas sosteniendo piezas de un proyecto",
     "peopleHeader": "Invita a tus compañeros de trabajo a unirse a tu organización",
     "peopleText": "Recibe retroalimentación y mantén al tanto a quienes te importan sobre todos tus proyectos."
@@ -237,6 +237,7 @@
   },
   "projectForm": {
     "addNewProjectHelperText": "Es una gran sensación cuando comienzas algo nuevo.",
+    "project": "Proyecto",
     "projectFormSubmitButton": "Guardar",
     "projectName": "Nombre del proyecto",
     "projectNamePlaceholder": "Nombre del proyecto...",
