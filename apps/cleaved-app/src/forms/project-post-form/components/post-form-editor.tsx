@@ -39,35 +39,24 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
     font-size: ${FONT_SIZES.MEDIUM};
     height: 250px;
     outline: none;
-    padding: ${SPACING.MEDIUM} 0;
+    overflow: hidden;
+    padding: ${SPACING.MEDIUM} 0 ${SPACING.LARGE};
     resize: none;
+
+    .ql-tooltip.ql-editing {
+      border-radius: ${RADIUS.MEDIUM};
+      left: 0 !important;
+      transform: translateY(0);
+      z-index: 99999;
+
+      input {
+        border-radius: ${RADIUS.MEDIUM};
+      }
+    }
   }
 
   .ql-editor {
     padding: 0 ${SPACING.MEDIUM} 0 0;
-
-    /* These styles are duplicate (original are in cleaved/ui) due to ReactQuill not being able to handle the styled component theme prop */
-    blockquote {
-      background-color: ${({ styledComponentTheme }) => styledComponentTheme.colors.body_backgroundColor};
-      border-left: ${BORDERS.SOLID_5PX} ${({ styledComponentTheme }) => styledComponentTheme.borders.primary_color};
-      border-radius: ${RADIUS.SMALL};
-      color: ${({ styledComponentTheme }) => styledComponentTheme.colors.baseText_color};
-      margin-bottom: ${SPACING.MEDIUM};
-      padding: ${SPACING.MEDIUM};
-    }
-
-    blockquote:before {
-      color: ${({ styledComponentTheme }) => styledComponentTheme.borders.primary_color};
-      content: '"';
-      font-size: ${FONT_SIZES.XXXXLARGE};
-      line-height: 0;
-      margin-right: ${SPACING.SMALL};
-      vertical-align: -0.4em;
-    }
-
-    blockquote p {
-      display: inline;
-    }
 
     /* Scroll bar styles - These styles are duplicates (original are in cleaved/ui) due to ReactQuill not being able to handle the styled component theme prop */
     ::-webkit-scrollbar {
@@ -179,10 +168,10 @@ export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) =>
   const theme = useTheme();
 
   const modules = {
-    toolbar: [["bold", "italic", "strike", "blockquote"], [{ list: "ordered" }, { list: "bullet" }], ["link"]],
+    toolbar: [["bold", "italic", "strike"], [{ list: "ordered" }, { list: "bullet" }], ["link"]],
   };
 
-  const formats = ["bold", "italic", "strike", "blockquote", "list", "bullet", "link"];
+  const formats = ["bold", "italic", "strike", "list", "bullet", "link"];
 
   const handleChange = (value: string) => {
     setFieldValue(name, value);

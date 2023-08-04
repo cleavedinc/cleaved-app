@@ -129,7 +129,9 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           />
         )}
 
-        <StyledMessage remarkPlugins={[remarkGfm]}>{post.body}</StyledMessage>
+        <StyledMessage remarkPlugins={[remarkGfm]} linkTarget={"_blank"}>
+          {post.body}
+        </StyledMessage>
 
         {post.images && post.images.length > 0 && (
           <StyledReactPhotoCollage

@@ -11,7 +11,7 @@ export const useOrganizationPermission = (permissionLevels: OrgPermissionLevel[]
   const { isLoggedIn } = useLoginGuard();
   const { preferredOrgId } = useContext(authTokenContext);
 
-  const { data, loading, refetch } = useQuery<OrganizationGetMembershipQuery>(ORGANIZATION_GET_MEMBERSHIP, {
+  const { data } = useQuery<OrganizationGetMembershipQuery>(ORGANIZATION_GET_MEMBERSHIP, {
     fetchPolicy: "cache-and-network",
     nextFetchPolicy: "cache-and-network",
     onError: (error: ApolloError) => {
@@ -23,7 +23,10 @@ export const useOrganizationPermission = (permissionLevels: OrgPermissionLevel[]
 
   return useMemo(() => {
     const organizationGetMembershipData = data?.organizationGetMembership;
-    const accountPermission = organizationGetMembershipData && organizationGetMembershipData.userPermissionInOrg;
+    const accountPermission =
+      organizationGetMembershipData &&
+      organizationGetMembershipData.userPermissionInOrg &&
+      organizationGetMembershipData.userPermissionInOrg;
 
     return permissionLevels.some((pl) => pl === accountPermission);
   }, [data, permissionLevels]);
