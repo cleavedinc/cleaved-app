@@ -3,19 +3,9 @@ import { useFormikContext } from "formik";
 import styled, { useTheme } from "styled-components";
 import ReactQuill from "react-quill";
 
-import {
-  BORDERS,
-  FONTS,
-  FONT_SIZES,
-  RADIUS,
-  scrollbar,
-  SPACING,
-  SPACING_PX,
-  ThemeLightType,
-  ThemeDarkType,
-} from "@cleaved/ui";
+import { SPACING, ThemeLightType, ThemeDarkType } from "@cleaved/ui";
 
-import { PostsContext } from "../../../contexts";
+import { PostsContext } from "../../contexts";
 
 import "react-quill/dist/quill.snow.css";
 
@@ -30,62 +20,6 @@ type StyledReactQuillProps = {
 };
 
 const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
-  margin-bottom: ${SPACING.MEDIUM};
-
-  .ql-container {
-    background-color: transparent;
-    border: none;
-    font-family: ${FONTS.SANS_SERIF_1};
-    font-size: ${FONT_SIZES.MEDIUM};
-    height: 250px;
-    outline: none;
-    overflow: hidden;
-    padding: ${SPACING.MEDIUM} 0 ${SPACING.LARGE};
-    resize: none;
-
-    .ql-tooltip.ql-editing {
-      border-radius: ${RADIUS.MEDIUM};
-      left: 0 !important;
-      transform: translateY(0);
-      z-index: 99999;
-
-      input {
-        border-radius: ${RADIUS.MEDIUM};
-      }
-    }
-  }
-
-  .ql-editor {
-    padding: 0 ${SPACING.MEDIUM} 0 0;
-
-    /* Scroll bar styles - These styles are duplicates (original are in cleaved/ui) due to ReactQuill not being able to handle the styled component theme prop */
-    ::-webkit-scrollbar {
-      ${scrollbar}
-    }
-
-    ::-webkit-scrollbar-track {
-      background-color: ${({ styledComponentTheme }) => styledComponentTheme.colors.body_backgroundColor};
-      border-radius: ${RADIUS.MEDIUM};
-    }
-
-    ::-webkit-scrollbar-thumb {
-      border-radius: ${RADIUS.MEDIUM};
-      box-shadow: inset 0 0 50px ${({ styledComponentTheme }) => styledComponentTheme.colors.baseIcon_color};
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      box-shadow: inset 0 0 50px ${({ styledComponentTheme }) => styledComponentTheme.colors.baseIcon_color};
-    }
-
-    /* placeholder */
-    &::before {
-      color: ${({ styledComponentTheme }) => styledComponentTheme.colors.basePlaceholderText_color};
-      left: 0;
-      font-style: initial;
-      right: 0;
-    }
-  }
-
   .ql-toolbar {
     border: none;
     padding-left: 0;
@@ -135,31 +69,9 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
       }
     }
   }
-
-  a {
-    color: ${({ styledComponentTheme }) => styledComponentTheme.colors.baseLink_color};
-
-    &:hover {
-      color: ${({ styledComponentTheme }) => styledComponentTheme.colors.baseLink_colorHover};
-    }
-  }
-
-  del {
-    text-decoration: line-through;
-  }
-
-  p {
-    margin-bottom: ${SPACING_PX.THREE};
-  }
-
-  ul,
-  ol {
-    margin: 0 0 ${SPACING.MEDIUM} ${SPACING.XLARGE};
-    padding-left: 0;
-  }
 `;
 
-export const PostFormEditor: FunctionComponent<PostFormEditorProps> = (props) => {
+export const MarkdownEditor: FunctionComponent<PostFormEditorProps> = (props) => {
   const { className, name, placeholder } = props;
   const { projectPostFormIsDirty, setProjectPostFormIsDirty } = useContext(PostsContext);
   const { dirty, isValid, isValidating, setFieldValue, status, values } = useFormikContext();

@@ -1,11 +1,9 @@
 import React, { FunctionComponent, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import styled from "styled-components";
 
 import { BORDERS, BoxNoPadding, FONT_SIZES, PhotoCollage, SPACING } from "@cleaved/ui";
 
-import { PostReactions, ReactionTypesAndTotalCount } from "../../components";
+import { DisplayMarkdown, PostReactions, ReactionTypesAndTotalCount } from "../../components";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
@@ -25,24 +23,6 @@ const StyledCommentListWrapper = styled.div`
 `;
 
 const StyledProjectPostBox = styled(BoxNoPadding)``;
-
-const StyledMessage = styled(ReactMarkdown)`
-  overflow-wrap: anywhere;
-  padding: 0 ${SPACING.MEDIUM} ${SPACING.SMALL} ${SPACING.MEDIUM};
-
-  ul,
-  ol {
-    margin: 0 0 ${SPACING.MEDIUM} ${SPACING.XLARGE};
-  }
-
-  ul {
-    list-style: disc;
-  }
-
-  ol {
-    list-style: decimal;
-  }
-`;
 
 const StyledPostComments = styled.span`
   margin-left: 3px;
@@ -129,9 +109,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
           />
         )}
 
-        <StyledMessage remarkPlugins={[remarkGfm]} linkTarget={"_blank"}>
-          {post.body}
-        </StyledMessage>
+        <DisplayMarkdown message={post.body} />
 
         {post.images && post.images.length > 0 && (
           <StyledReactPhotoCollage

@@ -119,7 +119,7 @@ const StyledImageUploadWrapper = styled.section<GetColorProps>`
   color: ${({ theme }) => theme.colors.baseText_color};
   display: flex;
   flex: 1;
-  height: 200px;
+  height: 120px;
   justify-content: center;
   outline: none;
   flex-direction: column;
@@ -267,11 +267,11 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
                 </StyledImageThumbnailInner>
 
                 <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
-                  <CloseIcon color={theme.colors.white_always_color} iconSize={FONT_SIZES.XXSMALL} />
+                  <CloseIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.XXSMALL} />
                 </StyledImageThumbnailRemoveButton>
 
                 <StyledImageThumbnailMoveButton type="button" onClick={removeFile(fileUrl)}>
-                  <MoveIcon color={theme.colors.white_always_color} iconSize={FONT_SIZES.XXSMALL} />
+                  <MoveIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.XXSMALL} />
                 </StyledImageThumbnailMoveButton>
               </StyledImageThumbnail>
             ))}

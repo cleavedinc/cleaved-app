@@ -62,9 +62,7 @@ const StyledInviteMorePeopleWrapper = styled.div`
   }
 `;
 
-const StyledProjectLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.baseTextLink_color};
-`;
+const StyledProjectLink = styled(Link)``;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
   margin-left: auto;
@@ -180,7 +178,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
               option: (styles, { isSelected }) => {
                 return {
                   ...styles,
-                  color: isSelected ? colorTheme.colors.white_always_color : colorTheme.colors.baseText_color,
+                  color: isSelected ? colorTheme.colors.always_white_color : colorTheme.colors.baseText_color,
                 };
               },
             }}

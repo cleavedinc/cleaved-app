@@ -13,9 +13,8 @@ import { useFindMyAccount, usePostProjectGetById, useRouteParams, useTranslator 
 
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
-import { htmlToMarkdown, markdownToHtml } from "./components/markdown-parser";
+import { htmlToMarkdown, markdownToHtml, MarkdownEditor, markdownStylesBase } from "../markdown";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
-import { PostFormEditor } from "./components";
 
 type ProjectPostFormProps = {
   closeForm: () => void;
@@ -44,15 +43,23 @@ const StyledAdditionalActionsIconButton = styled.button`
   outline: inherit;
 `;
 
+const StyledAdditionalActionButtonWrapper = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+const StyledMarkdownEditorWrapper = styled.div`
+  ${markdownStylesBase}
+
+  .ql-container {
+    max-height: 40vh;
+  }
+`;
+
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
   margin-left: auto;
   margin-top: ${SPACING_PX.ONE};
-`;
-
-const StyledAdditionalActionButtonWrapper = styled.div`
-  align-items: center;
-  display: flex;
 `;
 
 const StyledProjectPostForm = styled.div``;
@@ -184,33 +191,33 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
 
           return (
             <Form>
-              <PostFormEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
+              <StyledMarkdownEditorWrapper>
+                <MarkdownEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
+              </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionsWrapper>
                 {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
               </StyledAdditionalActionsWrapper>
 
               <StyledAdditionalActionButtonWrapper>
-                <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
-                  <>
-                    {/* open the image upload box */}
-                    {!isImageUploadWrapperActive && (
-                      <StyledAdditionalActionsIconButton onClick={() => handleAddImagesToPost()} type="button">
-                        <ImageIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.XLARGE} />
-                      </StyledAdditionalActionsIconButton>
-                    )}
+                {/* open the image upload box */}
+                {!isImageUploadWrapperActive && (
+                  <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
+                    <StyledAdditionalActionsIconButton onClick={() => handleAddImagesToPost()} type="button">
+                      <ImageIcon color={theme.colors.always_green_color} iconSize={FONT_SIZES.XXLARGE} />
+                    </StyledAdditionalActionsIconButton>
+                  </StyledTooltipDark>
+                )}
 
-                    {/* Clear all images and close the image upload box */}
-                    {isImageUploadWrapperActive && (
-                      <StyledAdditionalActionsIconButton onClick={() => handleClearImagesFromPost()} type="button">
-                        <StyledRemoveAllImages>
-                          <CloseIcon color={theme.colors.baseAlert_color} iconSize={FONT_SIZES.SMALL} />
-                          {t("post.removeAllImages")}
-                        </StyledRemoveAllImages>
-                      </StyledAdditionalActionsIconButton>
-                    )}
-                  </>
-                </StyledTooltipDark>
+                {/* Clear all images and close the image upload box */}
+                {isImageUploadWrapperActive && (
+                  <StyledAdditionalActionsIconButton onClick={() => handleClearImagesFromPost()} type="button">
+                    <StyledRemoveAllImages>
+                      <CloseIcon color={theme.colors.baseAlert_color} iconSize={FONT_SIZES.SMALL} />
+                      {t("post.removeAllImages")}
+                    </StyledRemoveAllImages>
+                  </StyledAdditionalActionsIconButton>
+                )}
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}

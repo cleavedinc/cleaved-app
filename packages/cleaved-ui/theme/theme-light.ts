@@ -5,9 +5,12 @@ export const themeLight = {
   borders: {
     baseLink_color: COLORS_BASE.BLUE_500,
     primary_color: COLORS_LIGHT.GRAY_100,
-    white_always_color: COLORS_LIGHT.WHITE,
+    always_white_color: COLORS_LIGHT.WHITE,
   },
   colors: {
+    always_white_color: COLORS_BASE.ALWAYS_WHITE,
+    always_green_color: COLORS_BASE.ALWAYS_GREEN,
+
     baseAlert_color: COLORS_BASE.RED_500,
     baseApproved_color: COLORS_BASE.GREEN_500,
     baseBordersAndShadows_color: COLORS_LIGHT.GRAY_100,
@@ -39,15 +42,13 @@ export const themeLight = {
     iconCelebrateColor: COLORS_BASE.HONEY_YELLOW_500,
 
     helperInfoBoxWrapper_backgroundColor: COLORS_LIGHT.TAN_300,
-
-    white_always_color: COLORS_BASE.WHITE_ALWAYS,
   },
 };
 
 export type ThemeLightType = typeof themeLight;
 
 // color: ${COLORS_LIGHT.WHITE};
-// color: ${({ theme }) => theme.borders.white_always_color};
+// color: ${({ theme }) => theme.borders.always_white_color};
 
 //   const theme = useTheme();
 // theme.colors.baseIcon_color

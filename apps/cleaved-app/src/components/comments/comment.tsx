@@ -14,6 +14,7 @@ import {
   StyledTooltipDark,
 } from "@cleaved/ui";
 
+import { DisplayMarkdown } from "../../components";
 import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useNavigateToProfile, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
@@ -51,10 +52,6 @@ const StyledCommentBody = styled.div`
   border-radius: ${RADIUS.MEDIUM};
   margin-bottom: ${SPACING_PX.ONE};
   padding: ${SPACING.MEDIUM};
-`;
-
-const StyledCommentBodyText = styled.div`
-  white-space: pre-line;
 `;
 
 const StyledCommentWrapper = styled.div`
@@ -123,7 +120,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
           </PostCommentHeaderDataWrapper>
         </PostCommentHeaderWrapper>
 
-        <StyledCommentBodyText>{reply.body}</StyledCommentBodyText>
+        <DisplayMarkdown message={reply.body} />
       </StyledCommentBody>
 
       <StyledCommentFooterWrapper>

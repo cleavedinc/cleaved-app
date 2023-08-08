@@ -7,6 +7,6 @@ export const LinkButtonPrimary = styled.a`
   ${buttonPrimaryBase}
 
   &:hover {
-    color: ${({ theme }) => theme.colors.white_always_color};
+    color: ${({ theme }) => theme.colors.always_white_color};
   }
 `;

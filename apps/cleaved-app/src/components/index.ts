@@ -5,6 +5,7 @@ export * from "./header";
 export * from "./helper-info";
 export * from "./links";
 export * from "./login";
+export * from "./markdown";
 export * from "./menu";
 export * from "./post";
 export * from "./post-form";

@@ -24,7 +24,6 @@ type StyledTdWithMenuContentEditProps = {
 };
 
 const StyledPersonNameLink = styled.a`
-  color: ${({ theme }) => theme.colors.baseTextLink_color};
   margin-left: ${SPACING.SMALL};
 `;
 
