@@ -7,6 +7,7 @@ export * from "./links";
 export * from "./login";
 export * from "./markdown";
 export * from "./menu";
+export * from "./modal";
 export * from "./post";
 export * from "./post-form";
 export * from "./reactions";

@@ -6,7 +6,7 @@ import styled, { useTheme } from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, MoveIcon, RADIUS, SPACING } from "@cleaved/ui";
+import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, RADIUS, SPACING } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -15,6 +15,7 @@ import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
 
 type ImageUploadAndPreviewFormProps = {
   className?: string;
+  closeImageUploadWrapper?: () => void;
   images?: string[] | undefined;
 };
 
@@ -25,6 +26,7 @@ type GetColorProps = {
 };
 
 const StyledAddFileButton = styled(ButtonLink)`
+  font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.SMALL};
 `;
 
@@ -37,8 +39,6 @@ const StyledErrorMessage = styled.div`
 const StyledImageThumbnail = styled.div`
   cursor: move;
   display: inline-flex;
-  border-radius: 2px;
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   box-sizing: border-box;
   height: 75px;
   margin: 0 ${SPACING.SMALL} ${SPACING.SMALL} 0;
@@ -51,6 +51,8 @@ const StyledImageThumbnailContainer = styled.aside`
 `;
 
 const StyledImageThumbnailInner = styled.div`
+  border-radius: ${RADIUS.MEDIUM};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
   min-width: 0;
   overflow: hidden;
@@ -62,42 +64,22 @@ const StyledImageThumbnailPreview = styled.img`
   height: 100%;
 `;
 
-const StyledImageThumbnailMoveButton = styled.button`
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.baseOverlayImageIcon_backgroundColor};
-  border: none;
-  border-radius: 0 ${RADIUS.MEDIUM} 0 0;
-  bottom: 0;
-  cursor: move;
-  display: flex;
-  flex-basis: 100%;
-  font: inherit;
-  height: 16px;
-  justify-content: center;
-  left: 0;
-  outline: inherit;
-  padding: 0;
-  position: absolute;
-  width: 16px;
-`;
-
 const StyledImageThumbnailRemoveButton = styled.button`
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.baseOverlayImageIcon_backgroundColor};
-  border: none;
-  border-radius: 0 0 0 ${RADIUS.MEDIUM};
+  background-color: ${({ theme }) => theme.colors.baseIcon_color};
+  border: ${BORDERS.SOLID_2PX} ${({ theme }) => theme.colors.baseBox_backgroundColor};
+  border-radius: ${RADIUS.CIRCLE};
   cursor: pointer;
   display: flex;
   flex-basis: 100%;
-  font: inherit;
-  height: 16px;
+  height: 20px;
   justify-content: center;
   outline: inherit;
   padding: 0;
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 16px;
+  right: -5px;
+  top: -10px;
+  width: 20px;
 `;
 
 const StyledImageUploadText = styled.div``;
@@ -137,9 +119,20 @@ const StyledReactSortable = styled(ReactSortable)``;
 // }
 
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
-  const { images } = props;
+  const { closeImageUploadWrapper, images } = props;
   const { setProjectPostFormImageUploadIsDirty } = useContext(PostsContext);
   const { setFieldValue } = useFormikContext();
+
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
+
+  const handleMouseOver = (index: number) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseOut = () => {
+    console.log("hi there");
+    setHoveredIndex(-1);
+  };
 
   const [savedFileUrls, setSavedFileUrls] = useState<string[]>([]);
   const [errors, setErrors] = useState<string | null>("");
@@ -207,6 +200,11 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
   const removeFile = (fileToRemove: string) => () => {
     setSavedFileUrls((existingArray) => {
       const newSavedFileUrlsArray = existingArray.filter((fileUrl) => fileUrl != fileToRemove);
+
+      if (closeImageUploadWrapper && !newSavedFileUrlsArray.length) {
+        closeImageUploadWrapper();
+      }
+
       return newSavedFileUrlsArray;
     });
   };
@@ -254,27 +252,31 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
 
         {savedFileUrls && (
           <StyledReactSortable list={savedFileUrls} setList={setSavedFileUrls}>
-            {savedFileUrls.map((fileUrl) => (
-              <StyledImageThumbnail key={fileUrl}>
-                <StyledImageThumbnailInner>
-                  <StyledImageThumbnailPreview
-                    src={`${process.env.MEDIA_ENDPOINT}/${fileUrl}`}
-                    // Revoke data uri after image is loaded
-                    onLoad={() => {
-                      URL.revokeObjectURL(fileUrl);
-                    }}
-                  />
-                </StyledImageThumbnailInner>
+            {savedFileUrls.map((fileUrl, index) => {
+              return (
+                <StyledImageThumbnail
+                  key={fileUrl}
+                  onMouseEnter={() => handleMouseOver(index)}
+                  onMouseLeave={() => handleMouseOut()}
+                >
+                  <StyledImageThumbnailInner>
+                    <StyledImageThumbnailPreview
+                      src={`${process.env.MEDIA_ENDPOINT}/${fileUrl}`}
+                      // Revoke data uri after image is loaded
+                      onLoad={() => {
+                        URL.revokeObjectURL(fileUrl);
+                      }}
+                    />
+                  </StyledImageThumbnailInner>
 
-                <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
-                  <CloseIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.XXSMALL} />
-                </StyledImageThumbnailRemoveButton>
-
-                <StyledImageThumbnailMoveButton type="button" onClick={removeFile(fileUrl)}>
-                  <MoveIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.XXSMALL} />
-                </StyledImageThumbnailMoveButton>
-              </StyledImageThumbnail>
-            ))}
+                  {hoveredIndex === index && (
+                    <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
+                      <CloseIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.XSMALL} />
+                    </StyledImageThumbnailRemoveButton>
+                  )}
+                </StyledImageThumbnail>
+              );
+            })}
           </StyledReactSortable>
         )}
       </StyledImageThumbnailContainer>

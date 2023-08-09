@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { ButtonPrimary, CloseIcon, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
+import { ButtonPrimary, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
@@ -46,6 +46,7 @@ const StyledAdditionalActionsIconButton = styled.button`
 const StyledAdditionalActionButtonWrapper = styled.div`
   align-items: center;
   display: flex;
+  margin-top: ${SPACING_PX.ONE};
 `;
 
 const StyledMarkdownEditorWrapper = styled.div`
@@ -59,16 +60,9 @@ const StyledMarkdownEditorWrapper = styled.div`
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
   margin-left: auto;
-  margin-top: ${SPACING_PX.ONE};
 `;
 
 const StyledProjectPostForm = styled.div``;
-
-const StyledRemoveAllImages = styled.div`
-  align-items: center;
-  display: flex;
-  font-size: ${FONT_SIZES.XSMALL};
-`;
 
 export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) => {
   const { closeForm, postId } = props;
@@ -182,13 +176,6 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
             setImageUploadWrapperActive(true);
           };
 
-          // closes image upload box and clears out imageUrls values
-          const handleClearImagesFromPost = () => {
-            setFieldValue("imageUrls", []);
-            setProjectPostFormImageUploadIsDirty(false);
-            setImageUploadWrapperActive(false);
-          };
-
           return (
             <Form>
               <StyledMarkdownEditorWrapper>
@@ -196,28 +183,20 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
               </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionsWrapper>
-                {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
+                {isImageUploadWrapperActive && (
+                  <ImageUploadAndPreviewForm
+                    closeImageUploadWrapper={() => setImageUploadWrapperActive(false)}
+                    images={postProjectGetByIdData?.images}
+                  />
+                )}
               </StyledAdditionalActionsWrapper>
 
               <StyledAdditionalActionButtonWrapper>
-                {/* open the image upload box */}
-                {!isImageUploadWrapperActive && (
-                  <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
-                    <StyledAdditionalActionsIconButton onClick={() => handleAddImagesToPost()} type="button">
-                      <ImageIcon color={theme.colors.always_green_color} iconSize={FONT_SIZES.XXLARGE} />
-                    </StyledAdditionalActionsIconButton>
-                  </StyledTooltipDark>
-                )}
-
-                {/* Clear all images and close the image upload box */}
-                {isImageUploadWrapperActive && (
-                  <StyledAdditionalActionsIconButton onClick={() => handleClearImagesFromPost()} type="button">
-                    <StyledRemoveAllImages>
-                      <CloseIcon color={theme.colors.baseAlert_color} iconSize={FONT_SIZES.SMALL} />
-                      {t("post.removeAllImages")}
-                    </StyledRemoveAllImages>
+                <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
+                  <StyledAdditionalActionsIconButton onClick={() => handleAddImagesToPost()} type="button">
+                    <ImageIcon color={theme.colors.always_green_color} iconSize={FONT_SIZES.XXLARGE} />
                   </StyledAdditionalActionsIconButton>
-                )}
+                </StyledTooltipDark>
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}

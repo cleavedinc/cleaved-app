@@ -1,10 +1,13 @@
 import React, { FunctionComponent, ReactNode } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Portal } from "react-portal";
 
 import {
   BORDERS,
   boxBase,
+  CloseIcon,
+  CircleEditButtonSmall,
+  FONT_SIZES,
   mediaQueries,
   OnOutsideClick,
   ScrollLock,
@@ -18,11 +21,17 @@ import {
 import { PostCommentAvatar } from "../../components";
 import { CommentForm } from "../../forms";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useFindMyAccount } from "../../hooks";
+import { useFindMyAccount, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 type ModalPostCommentsBackgroundProps = {
   backgroundColor?: string;
+};
+
+type ModalPostCommentsHeaderProps = ModalPostCommentsBackgroundProps & {
+  hidden: boolean;
+  onCloseRequested?: () => void;
+  title?: string;
 };
 
 type ModalPostCommentsProps = ModalPostCommentsBackgroundProps & {
@@ -35,6 +44,10 @@ type ModalPostCommentsProps = ModalPostCommentsBackgroundProps & {
   title?: string;
   useOnOutsideClick?: boolean;
 };
+
+const StyledCircleEditButtonSmall = styled(CircleEditButtonSmall)`
+  margin-left: auto;
+`;
 
 const StyledCommentForm = styled(CommentForm)``;
 
@@ -113,12 +126,51 @@ const StyledScrollLock = styled(ScrollLock)`
   display: flex;
 `;
 
+const StyledModalPostCommentsHeaderWrapper = styled.div<ModalPostCommentsBackgroundProps>`
+  align-items: center;
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${SPACING.MEDIUM};
+  padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM} ${SPACING.SMALL};
+  position: sticky;
+  top: 0;
+`;
+
+const StyledModalPostCommentsTitle = styled.div`
+  font-size: ${FONT_SIZES.LARGE};
+`;
+
+const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> = ({
+  hidden,
+  onCloseRequested,
+  title,
+}) => {
+  const theme = useTheme();
+  const { t } = useTranslator();
+
+  if (hidden) {
+    return null;
+  }
+
+  return (
+    <StyledModalPostCommentsHeaderWrapper>
+      <StyledModalPostCommentsTitle>{`${title}'s ${t("post.post")}`}</StyledModalPostCommentsTitle>
+      <StyledCircleEditButtonSmall onClick={() => onCloseRequested && onCloseRequested()} type="button">
+        <CloseIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+      </StyledCircleEditButtonSmall>
+    </StyledModalPostCommentsHeaderWrapper>
+  );
+};
+
 export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
   children,
+  forceOpen = false,
   onCloseRequested,
   onCommentPostedTriggerGetComments,
   open,
   postOrPostReplyId,
+  title,
   useOnOutsideClick = true,
 }) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
@@ -130,6 +182,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
 
   const content = (
     <>
+      <ModalPostCommentsHeader hidden={forceOpen} onCloseRequested={onCloseRequested} title={title} />
       <StyledContentWrapper>{children}</StyledContentWrapper>
       {hasPermission && (
         <StyledPostCommentFormWrapper>

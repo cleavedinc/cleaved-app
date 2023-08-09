@@ -28,6 +28,7 @@ export type CommentFormProps = {
 const StyledAdditionalActionButtonWrapper = styled.div`
   align-items: center;
   display: flex;
+  margin-top: ${SPACING_PX.ONE};
 `;
 
 const StyledCommentForm = styled.div`
@@ -46,7 +47,6 @@ const StyledMarkdownEditorWrapper = styled.div`
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
   margin-left: auto;
-  margin-top: ${SPACING_PX.ONE};
 `;
 
 export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {

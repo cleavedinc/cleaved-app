@@ -4,16 +4,9 @@ import { useMutation } from "@apollo/react-hooks";
 import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  ButtonSecondary,
-  CircleEditButtonSmall,
-  EllipsisHorizontalIcon,
-  Modal,
-  SPACING,
-} from "@cleaved/ui";
+import { BORDERS, ButtonPrimary, CircleEditButtonSmall, EllipsisHorizontalIcon, Modal, SPACING } from "@cleaved/ui";
 
+import { AreYouSureModal } from "../../components";
 import { PostsContext } from "../../contexts";
 import { ProjectPostForm } from "../../forms";
 import { useRouteParams, useTranslator } from "../../hooks";
@@ -96,8 +89,19 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
   };
 
   const editProjectPost = t("post.editProjectPost") ? t("post.editProjectPost") : undefined;
+
+  const areYouSureKeepButtonText = t("post.areYouSureKeepButtonText") ? t("post.areYouSureKeepButtonText") : undefined;
+
+  const areYouSureRemoveButtonText = t("post.areYouSureRemoveButtonText")
+    ? t("post.areYouSureRemoveButtonText")
+    : undefined;
+
   const areYouSureRemovePost = t("post.areYouSureRemovePostModalHeader")
     ? t("post.areYouSureRemovePostModalHeader")
+    : undefined;
+
+  const areYouSureRemovePostModalText = t("post.areYouSureRemovePostModalText")
+    ? t("post.areYouSureRemovePostModalText")
     : undefined;
 
   return (
@@ -127,23 +131,15 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
         <ProjectPostForm closeForm={() => setIsPostEditFormModalOpen(false)} postId={postId} />
       </Modal>
 
-      <Modal
-        open={isConfirmRemoveModalOpen}
-        onCloseRequested={() => setIsConfirmRemoveModalOpen(false)}
-        title={areYouSureRemovePost}
-      >
-        <StyledActionText>{t("post.areYouSureRemovePostModalText")}</StyledActionText>
-
-        <StyledActionWrapper>
-          <ButtonSecondary type="button" onClick={() => handlePostProjectRemove(postId)}>
-            {t("post.areYouSureRemoveButtonText")}
-          </ButtonSecondary>
-
-          <StyledButtonPrimary type="button" onClick={() => setIsConfirmRemoveModalOpen(false)}>
-            {t("post.areYouSureKeepButtonText")}
-          </StyledButtonPrimary>
-        </StyledActionWrapper>
-      </Modal>
+      <AreYouSureModal
+        areYouSureConfirmButtonText={areYouSureRemoveButtonText}
+        areYouSureRejectButtonText={areYouSureKeepButtonText}
+        areYouSureDescription={areYouSureRemovePostModalText}
+        areYouSureTitle={areYouSureRemovePost}
+        handleConfirmAction={() => handlePostProjectRemove(postId)}
+        isAreYouSureModalOpen={isConfirmRemoveModalOpen}
+        setIsAreYouSureModalOpen={setIsConfirmRemoveModalOpen}
+      />
     </>
   );
 };
