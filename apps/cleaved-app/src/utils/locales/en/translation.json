@@ -59,9 +59,7 @@
     "homePageEmptyStateHeader": "We know you're working hard",
     "homePageEmptyStateText": "When you have a minute, post your update or idea to your project. Getting feedback and keeping people updated is important.",
     "inviteProfessionalToOrganizationAlt": "Arrow pointing to the invite professional form",
-    "organizationsAlt": "Three buildings in a row of various sizes",
-    "organizationsHeader": "Organizations, companies or clients",
-    "organizationsText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "asideOrganizationMembersEmptyStateAlt": "People working",
     "organizationRegisterAlt": "Arrows pointing to the register an organization form",
     "organizationRegisterHeader": "Register an organization",
     "organizationRegisterText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
@@ -183,6 +181,7 @@
     "addMoreImages": "Add more images",
     "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",
     "errorFileIncorrectType": "One file is not an accepted file type.",
+    "errorTooManyFilesType": "Too many files. The upload limit is {{maxFileUploadlimit}}",
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
   },
   "privacyPolicy": "Privacy Policy",

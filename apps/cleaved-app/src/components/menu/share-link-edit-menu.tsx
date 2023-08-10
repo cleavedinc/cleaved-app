@@ -4,16 +4,9 @@ import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
 import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  ButtonSecondary,
-  CircleEditButtonSmall,
-  EllipsisHorizontalIcon,
-  Modal,
-  SPACING,
-} from "@cleaved/ui";
+import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
 
+import { AreYouSureModal } from "../../components";
 import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useRouteParams, useTranslator } from "../../hooks";
@@ -52,18 +45,6 @@ const StyledBasicMenu = styled(Menu)`
     border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     color: ${({ theme }) => theme.colors.baseText_color};
   }
-`;
-
-const StyledActionWrapper = styled.div`
-  display: flex;
-  padding: ${SPACING.XXLARGE} 0 0;
-`;
-
-const StyledActionText = styled.div``;
-
-const StyledButtonPrimary = styled(ButtonPrimary)`
-  display: flex;
-  margin-left: auto;
 `;
 
 export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (props) => {
@@ -108,6 +89,18 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
     });
   };
 
+  const areYouSureKeepButtonText = t("shareLinks.areYouSureKeepButtonText")
+    ? t("shareLinks.areYouSureKeepButtonText")
+    : undefined;
+
+  const areYouSureRemoveSharelinkModalText = t("shareLinks.areYouSureRemoveSharelinkModalText")
+    ? t("shareLinks.areYouSureRemoveSharelinkModalText")
+    : undefined;
+
+  const areYouSureRemoveButtonText = t("shareLinks.areYouSureRemoveButtonText")
+    ? t("shareLinks.areYouSureRemoveButtonText")
+    : undefined;
+
   const areYouSureRemoveOrganiationSharelink = t("shareLinks.areYouSureRemoveSharelinkModalHeader")
     ? t("shareLinks.areYouSureRemoveSharelinkModalHeader")
     : undefined;
@@ -142,23 +135,15 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
         </StyledBasicItemRed>
       </StyledBasicMenu>
 
-      <Modal
-        open={isConfirmRemoveModalOpen}
-        onCloseRequested={() => setIsConfirmRemoveModalOpen(false)}
-        title={areYouSureRemoveOrganiationSharelink}
-      >
-        <StyledActionText>{t("shareLinks.areYouSureRemoveSharelinkModalText")}</StyledActionText>
-
-        <StyledActionWrapper>
-          <ButtonSecondary type="button" onClick={() => handleRemoveOrganizationShareLink()}>
-            {t("shareLinks.areYouSureRemoveButtonText")}
-          </ButtonSecondary>
-
-          <StyledButtonPrimary type="button" onClick={() => setIsConfirmRemoveModalOpen(false)}>
-            {t("shareLinks.areYouSureKeepButtonText")}
-          </StyledButtonPrimary>
-        </StyledActionWrapper>
-      </Modal>
+      <AreYouSureModal
+        areYouSureConfirmButtonText={areYouSureRemoveButtonText}
+        areYouSureRejectButtonText={areYouSureKeepButtonText}
+        areYouSureDescription={areYouSureRemoveSharelinkModalText}
+        areYouSureTitle={areYouSureRemoveOrganiationSharelink}
+        handleConfirmAction={() => handleRemoveOrganizationShareLink()}
+        isAreYouSureModalOpen={isConfirmRemoveModalOpen}
+        setIsAreYouSureModalOpen={setIsConfirmRemoveModalOpen}
+      />
     </>
   );
 };

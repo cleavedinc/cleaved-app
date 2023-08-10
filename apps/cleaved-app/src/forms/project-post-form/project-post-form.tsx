@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { ButtonPrimary, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
+import { ButtonPrimary, FONT_SIZES, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
@@ -13,6 +13,7 @@ import { useFindMyAccount, usePostProjectGetById, useRouteParams, useTranslator 
 
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
+import { ImagesControl } from "../action-controls";
 import { htmlToMarkdown, markdownToHtml, MarkdownEditor, markdownStylesBase } from "../markdown";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
 
@@ -30,17 +31,6 @@ const StyledAdditionalActionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-`;
-
-const StyledAdditionalActionsIconButton = styled.button`
-  background: none;
-  color: inherit;
-  display: flex;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
 `;
 
 const StyledAdditionalActionButtonWrapper = styled.div`
@@ -74,7 +64,6 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId;
   const [isImageUploadWrapperActive, setImageUploadWrapperActive] = useState(false);
-  const theme = useTheme();
   const { t } = useTranslator();
 
   const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
@@ -192,11 +181,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
               </StyledAdditionalActionsWrapper>
 
               <StyledAdditionalActionButtonWrapper>
-                <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
-                  <StyledAdditionalActionsIconButton onClick={() => handleAddImagesToPost()} type="button">
-                    <ImageIcon color={theme.colors.always_green_color} iconSize={FONT_SIZES.XXLARGE} />
-                  </StyledAdditionalActionsIconButton>
-                </StyledTooltipDark>
+                <ImagesControl handleActionButton={handleAddImagesToPost} />
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}

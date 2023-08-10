@@ -59,9 +59,7 @@
     "homePageEmptyStateHeader": "Sabemos que estás trabajando arduamente",
     "homePageEmptyStateText": "Cuando tengas un minuto, publica tu actualización o idea en tu proyecto. Obtener comentarios y mantener a las personas actualizadas es importante.",
     "inviteProfessionalToOrganizationAlt": "Flecha que apunta al formulario de invitación de profesionales",
-    "organizationsAlt": "Tres edificios en una fila de varios tamaños",
-    "organizationsHeader": "Organizaciones, empresas o clientes",
-    "organizationsText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
+    "asideOrganizationMembersEmptyStateAlt": "Personas trabajando",
     "organizationRegisterAlt": "Flechas que apuntan al formulario de registro de una organización",
     "organizationRegisterHeader": "Registrar una organización",
     "organizationRegisterText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
@@ -183,6 +181,7 @@
     "addMoreImages": "Agregar más imágenes",
     "errorFileExceedsFileSize": "Un archivo superó el tamaño de MB y no se cargó.",
     "errorFileIncorrectType": "Un archivo no es un tipo de archivo aceptado.",
+    "errorTooManyFilesType": "Demasiados archivos. El límite de carga es de {{maxFileUploadlimit}}",
     "dragDropAreaHelperText": "Arrastra y suelta hasta imágenes, o haz clic para seleccionar."
   },
   "privacyPolicy": "Política de privacidad",

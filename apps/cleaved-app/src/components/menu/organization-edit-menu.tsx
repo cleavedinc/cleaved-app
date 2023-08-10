@@ -4,17 +4,9 @@ import { useMutation } from "@apollo/react-hooks";
 import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  ButtonSecondary,
-  CircleEditButtonSmall,
-  EllipsisHorizontalIcon,
-  mediaQueries,
-  Modal,
-  SPACING,
-} from "@cleaved/ui";
+import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
 
+import { AreYouSureModal } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
@@ -33,13 +25,6 @@ const basicItemBase = css`
   }
 `;
 
-const StyledActionWrapper = styled.div`
-  display: flex;
-  padding: ${SPACING.XXLARGE} 0 0;
-`;
-
-const StyledActionText = styled.div``;
-
 const StyledBasicItem = styled(MenuItem)`
   ${basicItemBase}
 `;
@@ -57,19 +42,6 @@ const StyledBasicMenu = styled(Menu)`
     background-color: ${({ theme }) => theme.colors.body_backgroundColor};
     border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     color: ${({ theme }) => theme.colors.baseText_color};
-  }
-`;
-
-const StyledButtonPrimary = styled(ButtonPrimary)`
-  display: flex;
-  margin-left: auto;
-`;
-
-const StyledButtonSecondary = styled(ButtonSecondary)`
-  width: 150px;
-
-  ${mediaQueries.XS_LANDSCAPE} {
-    width: initial;
   }
 `;
 
@@ -113,8 +85,20 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
     setPreferredOrgIdOnContext(orgIdArg);
   };
 
+  const areYouSureKeepButtonText = t("organizations.areYouSureKeepButtonText")
+    ? t("organizations.areYouSureKeepButtonText")
+    : undefined;
+
+  const areYouSureRemoveButtonText = t("organizations.areYouSureRemoveButtonText")
+    ? t("organizations.areYouSureRemoveButtonText")
+    : undefined;
+
   const areYouSureRemoveMeFromOrganization = t("organizations.areYouSureRemoveMeFromOrganizationTitle")
     ? t("organizations.areYouSureRemoveMeFromOrganizationTitle")
+    : undefined;
+
+  const areYouSureRemoveMeFromOrganizationDetails = t("organizations.areYouSureRemoveMeFromOrganizationDetails")
+    ? t("organizations.areYouSureRemoveMeFromOrganizationDetails")
     : undefined;
 
   return (
@@ -138,23 +122,15 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
         </StyledBasicItemRed>
       </StyledBasicMenu>
 
-      <Modal
-        open={isConfirmRemoveModalOpen}
-        onCloseRequested={() => setIsConfirmRemoveModalOpen(false)}
-        title={areYouSureRemoveMeFromOrganization}
-      >
-        <StyledActionText>{t("organizations.areYouSureRemoveMeFromOrganizationDetails")}</StyledActionText>
-
-        <StyledActionWrapper>
-          <StyledButtonSecondary type="button" onClick={() => handleOrganizationRemoveMe(orgId)}>
-            {t("organizations.areYouSureRemoveButtonText")}
-          </StyledButtonSecondary>
-
-          <StyledButtonPrimary type="button" onClick={() => setIsConfirmRemoveModalOpen(false)}>
-            {t("organizations.areYouSureKeepButtonText")}
-          </StyledButtonPrimary>
-        </StyledActionWrapper>
-      </Modal>
+      <AreYouSureModal
+        areYouSureConfirmButtonText={areYouSureRemoveButtonText}
+        areYouSureRejectButtonText={areYouSureKeepButtonText}
+        areYouSureDescription={areYouSureRemoveMeFromOrganizationDetails}
+        areYouSureTitle={areYouSureRemoveMeFromOrganization}
+        handleConfirmAction={() => handleOrganizationRemoveMe(orgId)}
+        isAreYouSureModalOpen={isConfirmRemoveModalOpen}
+        setIsAreYouSureModalOpen={setIsConfirmRemoveModalOpen}
+      />
     </>
   );
 };

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Box, ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { AccountLegalLinks, AccountMembershipPlan } from "../../components";
-import { AccountGeneralSettingsDataWrapper } from "../../data-wrappers";
+import { AccountGeneralSettingsDataWrapper, AccountOrganizationListDataWrapper } from "../../data-wrappers";
 import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
 
 const StyledBox = styled(Box)`
@@ -27,6 +27,8 @@ export const AccountProfessionalInformation: FunctionComponent = () => {
         </StyledBox>
 
         <AccountGeneralSettingsDataWrapper />
+
+        <AccountOrganizationListDataWrapper />
 
         <AccountLegalLinks />
       </MainColumnMaxWidthWrapper>

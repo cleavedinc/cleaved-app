@@ -2,8 +2,6 @@ import { css } from "styled-components";
 import { FONTS, FONT_SIZES, RADIUS, scrollbar, SPACING } from "@cleaved/ui";
 
 export const markdownStylesBase = css`
-  margin-bottom: ${SPACING.MEDIUM};
-
   .ql-container {
     background-color: transparent;
     border: none;
@@ -67,6 +65,10 @@ export const markdownStylesBase = css`
 
   del {
     text-decoration: line-through;
+  }
+
+  p {
+    margin-bottom: ${SPACING.MEDIUM};
   }
 
   ul,

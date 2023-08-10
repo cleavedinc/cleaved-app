@@ -6,7 +6,7 @@ import styled, { useTheme } from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, RADIUS, SPACING } from "@cleaved/ui";
+import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -27,11 +27,10 @@ type GetColorProps = {
 
 const StyledAddFileButton = styled(ButtonLink)`
   font-size: ${FONT_SIZES.XSMALL};
-  margin-bottom: ${SPACING.SMALL};
 `;
 
 const StyledErrorMessage = styled.div`
-  color: ${({ theme }) => theme.colors.baseAlert_color}
+  color: ${({ theme }) => theme.colors.baseAlert_color};
   font-size: ${FONT_SIZES.XSMALL};
   height: 15px;
 `;
@@ -64,7 +63,11 @@ const StyledImageThumbnailPreview = styled.img`
   height: 100%;
 `;
 
-const StyledImageThumbnailRemoveButton = styled.button`
+type StyledImageThumbnailRemoveButtonProps = {
+  isRemoveButtonDisplayed: boolean;
+};
+
+const StyledImageThumbnailRemoveButton = styled.button<StyledImageThumbnailRemoveButtonProps>`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.baseIcon_color};
   border: ${BORDERS.SOLID_2PX} ${({ theme }) => theme.colors.baseBox_backgroundColor};
@@ -80,6 +83,10 @@ const StyledImageThumbnailRemoveButton = styled.button`
   right: -5px;
   top: -10px;
   width: 20px;
+
+  ${mediaQueries.SM_MD} {
+    display: ${(props) => (props.isRemoveButtonDisplayed ? `"flex"` : "none")};
+  }
 `;
 
 const StyledImageUploadText = styled.div``;
@@ -130,7 +137,6 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
   };
 
   const handleMouseOut = () => {
-    console.log("hi there");
     setHoveredIndex(-1);
   };
 
@@ -170,6 +176,10 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
       "image/webp": [".webp"],
     },
     onDrop: (acceptedFiles, fileRejections) => {
+      if (acceptedFiles.length > 0) {
+        setErrors("");
+      }
+
       // Handle file upload
       acceptedFiles.map((file) => {
         uploadPostImage({ variables: { image: file } });
@@ -185,6 +195,10 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
 
           if (err.code === "file-invalid-type") {
             setErrors(t("postFileUpload.errorFileIncorrectType"));
+          }
+
+          if (err.code === "too-many-files") {
+            setErrors(t("postFileUpload.errorTooManyFilesType", { maxFileUploadlimit: maxFileUploadlimit }));
           }
         });
       });
@@ -241,15 +255,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
         </StyledImageUploadWrapper>
       )}
 
-      {errors && <StyledErrorMessage>{errors}</StyledErrorMessage>}
-
       <StyledImageThumbnailContainer>
-        {savedFileUrls && savedFileUrls.length > 0 && savedFileUrls.length < maxFileUploadlimit && (
-          <StyledAddFileButton type="button" onClick={() => openImagePicker()}>
-            {t("postFileUpload.addMoreImages")}
-          </StyledAddFileButton>
-        )}
-
         {savedFileUrls && (
           <StyledReactSortable list={savedFileUrls} setList={setSavedFileUrls}>
             {savedFileUrls.map((fileUrl, index) => {
@@ -269,17 +275,27 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
                     />
                   </StyledImageThumbnailInner>
 
-                  {hoveredIndex === index && (
-                    <StyledImageThumbnailRemoveButton type="button" onClick={removeFile(fileUrl)}>
-                      <CloseIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.XSMALL} />
-                    </StyledImageThumbnailRemoveButton>
-                  )}
+                  <StyledImageThumbnailRemoveButton
+                    isRemoveButtonDisplayed={hoveredIndex === index}
+                    type="button"
+                    onClick={removeFile(fileUrl)}
+                  >
+                    <CloseIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.XSMALL} />
+                  </StyledImageThumbnailRemoveButton>
                 </StyledImageThumbnail>
               );
             })}
           </StyledReactSortable>
         )}
       </StyledImageThumbnailContainer>
+
+      {savedFileUrls && savedFileUrls.length > 0 && savedFileUrls.length < maxFileUploadlimit && (
+        <StyledAddFileButton type="button" onClick={() => openImagePicker()}>
+          {t("postFileUpload.addMoreImages")}
+        </StyledAddFileButton>
+      )}
+
+      {errors && <StyledErrorMessage>{errors}</StyledErrorMessage>}
     </div>
   );
 };

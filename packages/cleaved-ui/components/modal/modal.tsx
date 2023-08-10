@@ -66,18 +66,13 @@ const StyledModalContentWrapper = styled.div<ModalBackgroundProps>`
 const StyledModalHeaderWrapper = styled.div<ModalBackgroundProps>`
   align-items: center;
   display: flex;
-  margin-bottom: ${SPACING.SMALL};
-  padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
   position: sticky;
   top: 0;
 `;
 
 const StyledModalTitle = styled.div`
   font-size: ${FONT_SIZES.LARGE};
-
-  ${mediaQueries.XS_LANDSCAPE} {
-    font-size: ${FONT_SIZES.LARGE};
-  }
 `;
 
 const StyledModalWrapper = styled.div`

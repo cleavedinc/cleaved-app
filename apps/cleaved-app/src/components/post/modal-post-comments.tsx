@@ -131,8 +131,7 @@ const StyledModalPostCommentsHeaderWrapper = styled.div<ModalPostCommentsBackgro
   border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   display: flex;
   justify-content: center;
-  margin-bottom: ${SPACING.MEDIUM};
-  padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM} ${SPACING.SMALL};
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
   position: sticky;
   top: 0;
 `;

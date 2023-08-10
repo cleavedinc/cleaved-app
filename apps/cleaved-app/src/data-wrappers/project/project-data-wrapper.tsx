@@ -82,6 +82,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
               {t("post.createProjectPostWithName", { name: accountQuery.data?.findMyAccount.firstName })}
             </StyledPostFormButtonText>
           </StyledPostFormButton>
+
           <Modal
             open={isContentFeedFormModalOpen}
             onCloseRequested={() => {
@@ -95,6 +96,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
               }}
             />
           </Modal>
+
           <AreYouSureModal
             areYouSureConfirmButtonText={areYouSureConfirmButtonText}
             areYouSureRejectButtonText={areYouSureRejectButtonText}

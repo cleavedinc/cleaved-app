@@ -3,8 +3,10 @@ import styled from "styled-components";
 
 import { SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
-import { AsidePeopleListAvatarLink, PeopleListMenu } from "../../components";
+import { AsideHelperInfoHeaderTextImageBox, AsidePeopleListAvatarLink, PeopleListMenu } from "../../components";
 import { usePostProjectAccountSeek, useRouteParams, useTranslator } from "../../hooks";
+
+import peopleListHelperImage from "../../media/helper-info/people-list-helper-image.svg";
 
 const PostHeaderWrapper = styled.div`
   align-items: center;
@@ -57,6 +59,15 @@ export const AsideProjectOrganizationMembersDataWrapper: FunctionComponent = () 
             })}
         </PeopleListItem>
       </PeopleList>
+
+      {!postProjectAccountSeekDataLoading && postProjectAccountSeekData && postProjectAccountSeekData.length <= 0 && (
+        <AsideHelperInfoHeaderTextImageBox
+          backgroundColor={"transparent"}
+          helperInfoText={"People that interact with this project appear here"}
+          helperInfoImageAltText={t("helperInformationBoxes.asideOrganizationMembersEmptyStateAlt")}
+          helperInfoImageUrl={peopleListHelperImage}
+        />
+      )}
     </StickUnderHeaderDesktopOnly>
   );
 };

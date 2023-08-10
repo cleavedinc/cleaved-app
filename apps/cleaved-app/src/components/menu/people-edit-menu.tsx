@@ -4,16 +4,9 @@ import { Menu, MenuDivider, MenuItem, MenuRadioGroup, SubMenu } from "@szhsin/re
 import styled, { css, useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  ButtonSecondary,
-  CircleEditButtonSmall,
-  EllipsisHorizontalIcon,
-  Modal,
-  SPACING,
-} from "@cleaved/ui";
+import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
 
+import { AreYouSureModal } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
@@ -59,18 +52,6 @@ const StyledBasicMenu = styled(Menu)`
   }
 `;
 
-const StyledActionWrapper = styled.div`
-  display: flex;
-  padding: ${SPACING.XXLARGE} 0 0;
-`;
-
-const StyledActionText = styled.div``;
-
-const StyledButtonPrimary = styled(ButtonPrimary)`
-  display: flex;
-  margin-left: auto;
-`;
-
 const StyledPermission = styled.div`
   text-transform: lowercase;
 
@@ -110,6 +91,27 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
       logQueryError(error);
     },
   });
+
+  const handleOrganizationRemoveUser = () => {
+    organizationRemoveUser({
+      variables: {
+        organizationId: preferredOrgId,
+        userId: member.id,
+      },
+    });
+  };
+
+  const areYouSureKeepButtonText = t("people.areYouSureKeepButtonText")
+    ? t("people.areYouSureKeepButtonText")
+    : undefined;
+
+  const areYouSureRemoveButtonText = t("people.areYouSureRemoveButtonText")
+    ? t("people.areYouSureRemoveButtonText")
+    : undefined;
+
+  const areYouSureRemoveMemberModalText = t("people.areYouSureRemoveMemberModalText")
+    ? t("people.areYouSureRemoveMemberModalText")
+    : undefined;
 
   const areYouSureRemovePost = t("people.areYouSureRemoveMemberModalHeader")
     ? t("people.areYouSureRemoveMemberModalHeader")
@@ -163,34 +165,15 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
         </StyledBasicItemRed>
       </StyledBasicMenu>
 
-      {/* // Remove user are you sure modal */}
-      <Modal
-        open={isConfirmRemoveModalOpen}
-        onCloseRequested={() => setIsConfirmRemoveModalOpen(false)}
-        title={areYouSureRemovePost}
-      >
-        <StyledActionText>{t("people.areYouSureRemoveMemberModalText")}</StyledActionText>
-
-        <StyledActionWrapper>
-          <ButtonSecondary
-            type="button"
-            onClick={() =>
-              organizationRemoveUser({
-                variables: {
-                  organizationId: preferredOrgId,
-                  userId: member.id,
-                },
-              })
-            }
-          >
-            {t("people.areYouSureRemoveButtonText")}
-          </ButtonSecondary>
-
-          <StyledButtonPrimary type="button" onClick={() => setIsConfirmRemoveModalOpen(false)}>
-            {t("people.areYouSureKeepButtonText")}
-          </StyledButtonPrimary>
-        </StyledActionWrapper>
-      </Modal>
+      <AreYouSureModal
+        areYouSureConfirmButtonText={areYouSureRemoveButtonText}
+        areYouSureRejectButtonText={areYouSureKeepButtonText}
+        areYouSureDescription={areYouSureRemoveMemberModalText}
+        areYouSureTitle={areYouSureRemovePost}
+        handleConfirmAction={() => handleOrganizationRemoveUser()}
+        isAreYouSureModalOpen={isConfirmRemoveModalOpen}
+        setIsAreYouSureModalOpen={setIsConfirmRemoveModalOpen}
+      />
     </>
   );
 };
