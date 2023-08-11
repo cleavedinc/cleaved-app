@@ -1,33 +1,29 @@
 import React, { FunctionComponent, useContext } from "react";
-import { navigate } from "@reach/router";
-import { Menu, MenuItem } from "@szhsin/react-menu";
 import styled, { useTheme } from "styled-components";
+import { navigate } from "@reach/router";
 
-import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
+import {
+  CircleEditButtonSmall,
+  EllipsisHorizontalIcon,
+  FONT_SIZES,
+  PeopleAltOutlineIcon,
+  PersonAddOutlineIcon,
+} from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
+import { basicItemIconBase, StyledBasicItem, StyledBasicMenu } from "./components";
+
 import "@szhsin/react-menu/dist/index.css";
 
-const StyledBasicItem = styled(MenuItem)`
-  font-size: ${FONT_SIZES.SMALL};
-
-  :hover,
-  &.szh-menu__item--hover {
-    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
-  }
+const StyledPeopleAltOutlineIcon = styled(PeopleAltOutlineIcon)`
+  ${basicItemIconBase};
 `;
 
-const StyledBasicMenu = styled(Menu)`
-  margin-left: auto;
-
-  ul {
-    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
-    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-    color: ${({ theme }) => theme.colors.baseText_color};
-  }
+const StyledPersonAddOutlineIcon = styled(PersonAddOutlineIcon)`
+  ${basicItemIconBase};
 `;
 
 export const PeopleListMenu: FunctionComponent = () => {
@@ -45,6 +41,7 @@ export const PeopleListMenu: FunctionComponent = () => {
 
   return (
     <StyledBasicMenu
+      arrow={true}
       menuButton={
         <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
@@ -52,8 +49,14 @@ export const PeopleListMenu: FunctionComponent = () => {
       }
       direction={"left"}
     >
-      <StyledBasicItem onClick={() => handleRouteToAddNewUser()}>{t("people.addPerson")}</StyledBasicItem>
-      <StyledBasicItem onClick={() => handleRouteToPeoplePage()}>{t("people.viewAllPeople")}</StyledBasicItem>
+      <StyledBasicItem onClick={() => handleRouteToAddNewUser()}>
+        <StyledPersonAddOutlineIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+        {t("people.addPerson")}
+      </StyledBasicItem>
+      <StyledBasicItem onClick={() => handleRouteToPeoplePage()}>
+        <StyledPeopleAltOutlineIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+        {t("people.viewAllPeople")}
+      </StyledBasicItem>
     </StyledBasicMenu>
   );
 };

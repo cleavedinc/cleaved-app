@@ -28,7 +28,7 @@ const StyledAvatarImageLink = styled.a`
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
   ${avatarSmall}
-  font-size: ${FONT_SIZES.XXSMALL};
+  font-size: ${FONT_SIZES.XSMALL};
   margin-right: ${SPACING_PX.TWO};
 `;
 

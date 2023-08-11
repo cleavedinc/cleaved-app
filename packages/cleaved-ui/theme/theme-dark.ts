@@ -5,11 +5,12 @@ export const themeDark = {
   borders: {
     baseLink_color: COLORS_BASE.BLUE_500,
     primary_color: COLORS_DARK.GRAY_100,
-    always_white_color: COLORS_DARK.WHITE,
+    primary_white: COLORS_DARK.WHITE,
   },
   colors: {
     always_white_color: COLORS_BASE.ALWAYS_WHITE,
     always_green_color: COLORS_BASE.ALWAYS_GREEN,
+    always_red_color: COLORS_BASE.RED_500,
 
     baseAlert_color: COLORS_BASE.RED_500,
     baseApproved_color: COLORS_BASE.GREEN_500,

@@ -5,11 +5,12 @@ export const themeLight = {
   borders: {
     baseLink_color: COLORS_BASE.BLUE_500,
     primary_color: COLORS_LIGHT.GRAY_100,
-    always_white_color: COLORS_LIGHT.WHITE,
+    primary_white: COLORS_LIGHT.WHITE,
   },
   colors: {
     always_white_color: COLORS_BASE.ALWAYS_WHITE,
     always_green_color: COLORS_BASE.ALWAYS_GREEN,
+    always_red_color: COLORS_BASE.RED_500,
 
     baseAlert_color: COLORS_BASE.RED_500,
     baseApproved_color: COLORS_BASE.GREEN_500,
@@ -46,12 +47,3 @@ export const themeLight = {
 };
 
 export type ThemeLightType = typeof themeLight;
-
-// color: ${COLORS_LIGHT.WHITE};
-// color: ${({ theme }) => theme.borders.always_white_color};
-
-//   const theme = useTheme();
-// theme.colors.baseIcon_color
-
-// FINAL CHECK:
-// COLORS_LIGHT

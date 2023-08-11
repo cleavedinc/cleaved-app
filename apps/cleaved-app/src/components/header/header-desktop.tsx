@@ -24,6 +24,8 @@ type HeaderDesktopProps = {
 const StyledFeedbackButton = styled(ButtonSecondary)`
   color: ${({ theme }) => theme.colors.baseTextLink_color};
   margin-right: ${SPACING.MEDIUM};
+  min-height: 0;
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
 `;
 
 const MainNavigationLinksWrapper = styled(NavigationLinksWrapper)`

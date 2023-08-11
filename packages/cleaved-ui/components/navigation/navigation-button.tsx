@@ -13,7 +13,7 @@ const NavigationButtonContainer = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: ${SPACING.SMALL} 0;
+  margin: 0;
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
   position: relative;
 

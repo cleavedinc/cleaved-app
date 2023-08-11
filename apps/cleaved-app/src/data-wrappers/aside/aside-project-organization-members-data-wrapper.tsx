@@ -1,12 +1,15 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { FONT_SIZES, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
-import { AsideHelperInfoHeaderTextImageBox, AsidePeopleListAvatarLink, PeopleListMenu } from "../../components";
+import { AsidePeopleListAvatarLink, PeopleListMenu } from "../../components";
 import { usePostProjectAccountSeek, useRouteParams, useTranslator } from "../../hooks";
 
-import peopleListHelperImage from "../../media/helper-info/people-list-helper-image.svg";
+const StyledPeopleListEmptyState = styled.div`
+  font-size: ${FONT_SIZES.SMALL};
+  font-style: italic;
+`;
 
 const PostHeaderWrapper = styled.div`
   align-items: center;
@@ -61,12 +64,7 @@ export const AsideProjectOrganizationMembersDataWrapper: FunctionComponent = () 
       </PeopleList>
 
       {!postProjectAccountSeekDataLoading && postProjectAccountSeekData && postProjectAccountSeekData.length <= 0 && (
-        <AsideHelperInfoHeaderTextImageBox
-          backgroundColor={"transparent"}
-          helperInfoText={"People that interact with this project appear here"}
-          helperInfoImageAltText={t("helperInformationBoxes.asideOrganizationMembersEmptyStateAlt")}
-          helperInfoImageUrl={peopleListHelperImage}
-        />
+        <StyledPeopleListEmptyState>{t("people.peopleListHelperInfoText")}</StyledPeopleListEmptyState>
       )}
     </StickUnderHeaderDesktopOnly>
   );

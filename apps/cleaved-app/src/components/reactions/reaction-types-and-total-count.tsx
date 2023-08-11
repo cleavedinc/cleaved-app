@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled, { css, useTheme } from "styled-components";
 
-import { BORDERS, CelebrationIcon, FavoriteIcon, RADIUS, SPACING, ThumbUpIcon } from "@cleaved/ui";
+import { BORDERS, CelebrationIcon, FavoriteIcon, RADIUS, ThumbUpIcon } from "@cleaved/ui";
 
 import { PostReactionType } from "../../generated-types/graphql";
 
@@ -12,7 +12,7 @@ type ReactionTypesAndtotalCountProps = {
 
 const styledReactionBase = css`
   align-items: center;
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.always_white_color};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_white};
   border-radius: ${RADIUS.CIRCLE};
   display: flex;
   height: 16px;
@@ -23,7 +23,7 @@ const styledReactionBase = css`
 const StyledReactionLike = styled.div`
   ${styledReactionBase}
   background-color: ${({ theme }) => theme.colors.iconlikeColor};
-  z-index: 40;
+  z-index: 20;
 `;
 
 const StyledReactionLove = styled.div`
@@ -32,17 +32,17 @@ const StyledReactionLove = styled.div`
   z-index: 30;
 
   :not(:first-child) {
-    margin-left: -5px;
+    margin-left: -3px;
   }
 `;
 
 const StyledReactionCelebrate = styled.div`
   ${styledReactionBase}
   background-color: ${({ theme }) => theme.colors.iconCelebrateColor};
-  z-index: 20;
+  z-index: 40;
 
   :not(:first-child) {
-    margin-left: -5px;
+    margin-left: -3px;
   }
 `;
 

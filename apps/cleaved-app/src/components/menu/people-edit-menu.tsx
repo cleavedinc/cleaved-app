@@ -1,10 +1,9 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { Menu, MenuDivider, MenuItem, MenuRadioGroup, SubMenu } from "@szhsin/react-menu";
-import styled, { css, useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
+import { CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
 
 import { AreYouSureModal } from "../../components";
 import { authTokenContext } from "../../contexts";
@@ -12,6 +11,15 @@ import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../generate
 import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
+import {
+  StyledBasicItemRed,
+  StyledBasicMenu,
+  StyledDeleteIcon,
+  StyledEditIcon,
+  StyledMenuRadioGroupNoBorder,
+  StyledRadioGroupBasicItem,
+  StyledSubMenu,
+} from "./components";
 import { ORGANIZATION_REMOVE_USER_MUTATION, ORGANIZATION_SET_USER_PERMISSION_LEVEL_MUTATION } from "./gql";
 
 import "@szhsin/react-menu/dist/index.css";
@@ -20,37 +28,6 @@ type PeopleEditMenuProps = {
   member: OrganizationSeekMembersQuery["organizationSeekMembers"][0];
   organizationSeekMembersDataRefetch?: () => void;
 };
-
-const basicItemBase = css`
-  :hover,
-  &.szh-menu__item--hover {
-    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
-  }
-`;
-
-const StyledBasicItem = styled(MenuItem)`
-  ${basicItemBase}
-`;
-
-const StyledSubMenu = styled(SubMenu)`
-  ${basicItemBase}
-`;
-
-const StyledBasicItemRed = styled(MenuItem)`
-  ${basicItemBase}
-
-  :hover {
-    color: ${({ theme }) => theme.colors.baseAlert_color};
-  }
-`;
-
-const StyledBasicMenu = styled(Menu)`
-  ul {
-    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
-    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-    color: ${({ theme }) => theme.colors.baseText_color};
-  }
-`;
 
 const StyledPermission = styled.div`
   text-transform: lowercase;
@@ -117,9 +94,17 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
     ? t("people.areYouSureRemoveMemberModalHeader")
     : undefined;
 
+  const EditUserPermissionLabel = () => (
+    <>
+      <StyledEditIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+      {t("people.editPermission")}
+    </>
+  );
+
   return (
     <>
       <StyledBasicMenu
+        arrow={true}
         menuButton={
           <CircleEditButtonSmall type="button">
             <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
@@ -129,8 +114,8 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
       >
         {hasPermission && (
           <>
-            <StyledSubMenu label="Edit Permission">
-              <MenuRadioGroup
+            <StyledSubMenu arrow={true} label={EditUserPermissionLabel}>
+              <StyledMenuRadioGroupNoBorder
                 value={member.permissionInOrg}
                 onRadioChange={(e) =>
                   organizationSetUserPermissionLevel({
@@ -142,25 +127,24 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
                   })
                 }
               >
-                <StyledBasicItem type="radio" value={OrgPermissionLevel.Viewer}>
+                <StyledRadioGroupBasicItem type="radio" value={OrgPermissionLevel.Viewer}>
                   <StyledPermission>{OrgPermissionLevel.Viewer}</StyledPermission>
-                </StyledBasicItem>
+                </StyledRadioGroupBasicItem>
 
-                <StyledBasicItem type="radio" value={OrgPermissionLevel.Updater}>
+                <StyledRadioGroupBasicItem type="radio" value={OrgPermissionLevel.Updater}>
                   <StyledPermission>{OrgPermissionLevel.Updater}</StyledPermission>
-                </StyledBasicItem>
+                </StyledRadioGroupBasicItem>
 
-                <StyledBasicItem type="radio" value={OrgPermissionLevel.Admin}>
+                <StyledRadioGroupBasicItem type="radio" value={OrgPermissionLevel.Admin}>
                   <StyledPermission>{OrgPermissionLevel.Admin}</StyledPermission>
-                </StyledBasicItem>
-              </MenuRadioGroup>
+                </StyledRadioGroupBasicItem>
+              </StyledMenuRadioGroupNoBorder>
             </StyledSubMenu>
-
-            <MenuDivider />
           </>
         )}
 
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
+          <StyledDeleteIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
           {t("people.removeProfessional")}
         </StyledBasicItemRed>
       </StyledBasicMenu>

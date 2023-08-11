@@ -1,16 +1,22 @@
 import React, { FunctionComponent, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { Menu, MenuDivider, MenuItem } from "@szhsin/react-menu";
-import styled, { css, useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
+import { CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES, RefreshIcon } from "@cleaved/ui";
 
 import { AreYouSureModal } from "../../components";
 import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useRouteParams, useTranslator } from "../../hooks";
 
+import {
+  basicItemIconBase,
+  StyledBasicItem,
+  StyledBasicItemRed,
+  StyledBasicMenu,
+  StyledDeleteIcon,
+} from "./components";
 import { REMOVE_ORGANIZATION_SHARE_LINK_MUTATION } from "./gql";
 
 import "@szhsin/react-menu/dist/index.css";
@@ -20,31 +26,8 @@ type ShareLinkEditMenuProps = {
   shareLinkPermission: OrgPermissionLevel;
 };
 
-const basicItemBase = css`
-  :hover,
-  &.szh-menu__item--hover {
-    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
-  }
-`;
-
-const StyledBasicItem = styled(MenuItem)`
-  ${basicItemBase}
-`;
-
-const StyledBasicItemRed = styled(MenuItem)`
-  ${basicItemBase}
-
-  :hover {
-    color: ${({ theme }) => theme.colors.baseAlert_color};
-  }
-`;
-
-const StyledBasicMenu = styled(Menu)`
-  ul {
-    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
-    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-    color: ${({ theme }) => theme.colors.baseText_color};
-  }
+const StyledRefreshIconIcon = styled(RefreshIcon)`
+  ${basicItemIconBase};
 `;
 
 export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (props) => {
@@ -108,6 +91,7 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
   return (
     <>
       <StyledBasicMenu
+        arrow={true}
         menuButton={
           <CircleEditButtonSmall type="button">
             <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
@@ -125,12 +109,12 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
             })
           }
         >
+          <StyledRefreshIconIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
           {t("shareLinks.editMenuGenerateNewShareLink", { shareLinkPermission: shareLinkPermissionText })}
         </StyledBasicItem>
 
-        <MenuDivider />
-
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
+          <StyledDeleteIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
           {t("shareLinks.editMenuRemoveShareLink", { shareLinkPermission: shareLinkPermissionText })}
         </StyledBasicItemRed>
       </StyledBasicMenu>

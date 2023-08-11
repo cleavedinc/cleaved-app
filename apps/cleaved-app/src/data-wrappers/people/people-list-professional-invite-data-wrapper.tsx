@@ -7,8 +7,8 @@ import styled from "styled-components";
 import { alertCopied, logQueryError } from "@cleaved/helpers";
 import {
   BORDERS,
+  ButtonDanger,
   ButtonPrimary,
-  ButtonSecondary,
   CopyIcon,
   mediaQueries,
   RADIUS,
@@ -37,7 +37,7 @@ const StyledButtonPrimary = styled(ButtonPrimary)`
   margin-bottom: ${SPACING.SMALL};
 `;
 
-const StyledButtonSecondary = styled(ButtonSecondary)`
+const StyledButtonDanger = styled(ButtonDanger)`
   margin-right: ${SPACING.MEDIUM};
   margin-bottom: ${SPACING.SMALL};
 `;
@@ -216,7 +216,7 @@ export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => 
         )}
 
         {hasPermission && !loading && !isPermissionAdminCreated && (
-          <StyledButtonSecondary
+          <StyledButtonDanger
             onClick={() =>
               generateOrganizationShareLink({
                 variables: {
@@ -227,7 +227,7 @@ export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => 
             }
           >
             {t("shareLinks.createAdminShareLink")}
-          </StyledButtonSecondary>
+          </StyledButtonDanger>
         )}
       </StyledProfessionalInviteListHeader>
 
