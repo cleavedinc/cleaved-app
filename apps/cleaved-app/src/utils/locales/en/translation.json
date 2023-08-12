@@ -109,6 +109,9 @@
     "organizationRegister": "Register a new organization",
     "peopleList": "People"
   },
+  "notFound": {
+    "pageMessage": "Oops, looks like we took a wrong turn! Use the menu at the top to try again."
+  },
   "organizations": {
     "areYouSureKeepButtonText": "Stay in organization",
     "areYouSureRemoveButtonText": "I understand the risk, leave organization",
