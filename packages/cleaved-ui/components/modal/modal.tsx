@@ -72,7 +72,7 @@ const StyledModalHeaderWrapper = styled.div<ModalBackgroundProps>`
 `;
 
 const StyledModalTitle = styled.div`
-  font-size: ${FONT_SIZES.LARGE};
+  font-size: ${FONT_SIZES.MEDIUM};
 `;
 
 const StyledModalWrapper = styled.div`

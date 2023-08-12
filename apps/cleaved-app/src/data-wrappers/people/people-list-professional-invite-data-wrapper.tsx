@@ -1,28 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { debounce } from "ts-debounce";
-import styled from "styled-components";
 
 import { alertCopied, logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonDanger,
-  ButtonPrimary,
-  CopyIcon,
-  mediaQueries,
-  RADIUS,
-  SPACING,
-  StyledTable,
-  StyledTBody,
-  StyledTd,
-  StyledTh,
-  StyledTHeadTr,
-  StyledTHead,
-  StyledTr,
-} from "@cleaved/ui";
 
-import { HelperInfoHeaderTextImageRightBox, ShareLinkEditMenu } from "../../components";
 import { OrgPermissionLevel, OrganizationShareLinksQuery } from "../../generated-types/graphql";
 import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
 import { ORGANIZATION_SHARE_LINKS_QUERY } from "../../gql-queries";
@@ -30,102 +11,7 @@ import { useRouteParams, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
-import peopleHelperImage from "../../media/helper-info/people-helper-image.svg";
-
-const StyledButtonPrimary = styled(ButtonPrimary)`
-  margin-right: ${SPACING.MEDIUM};
-  margin-bottom: ${SPACING.SMALL};
-`;
-
-const StyledButtonDanger = styled(ButtonDanger)`
-  margin-right: ${SPACING.MEDIUM};
-  margin-bottom: ${SPACING.SMALL};
-`;
-
-const StyledCreateShareLinkWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: ${SPACING.XLARGE} ${SPACING.MEDIUM};
-  text-align: center;
-
-  ${mediaQueries.SM_MD} {
-    margin: ${SPACING.XXXLARGE} ${SPACING.MEDIUM};
-  }
-`;
-
-const StyledCreateShareLinkText = styled.div`
-  margin-bottom: ${SPACING.SMALL};
-`;
-
-const StyledPermissionLevel = styled.div`
-  text-transform: lowercase;
-
-  &::first-letter {
-    text-transform: uppercase;
-  }
-`;
-
-const StyledPermissionLevelTh = styled(StyledTh)`
-  width: 150px;
-`;
-
-const StyledProfessionalInviteListHeader = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: ${SPACING.MEDIUM};
-
-  ${mediaQueries.RESPONSIVE_TABLE} {
-    flex-direction: column;
-    margin-top: ${SPACING.SMALL};
-  }
-`;
-
-const StyledShareLinkIcon = styled(CopyIcon)`
-  cursor: pointer;
-  margin-right: ${SPACING.SMALL};
-`;
-
-const StyledShareLinkWrapper = styled.div`
-  align-items: center;
-  display: flex;
-`;
-
-const StyledShareLinkInputReadOnly = styled.input`
-  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.MEDIUM};
-  color: ${({ theme }) => theme.colors.baseLink_color};
-  cursor: pointer;
-  display: flex;
-  margin-right: ${SPACING.SMALL};
-  padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
-  width: 100%;
-`;
-
-const StyledTdWithMenuContent = styled(StyledTd)`
-  vertical-align: middle; /* Fixes a double bottom border in safari */
-
-  ${mediaQueries.RESPONSIVE_TABLE} {
-    &:nth-of-type(1):before {
-      content: "Permission level";
-    }
-
-    &:nth-of-type(2):before {
-      content: "Share link";
-    }
-  }
-`;
-
-const StyledTdWithMenuContentEdit = styled(StyledTd)`
-  width: 100px;
-
-  ${mediaQueries.RESPONSIVE_TABLE} {
-    &:nth-of-type(4):before {
-      content: "Manage";
-    }
-  }
-`;
+import { SharelinkCard } from "./components";
 
 export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
@@ -174,110 +60,83 @@ export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => 
 
   return (
     <>
-      <HelperInfoHeaderTextImageRightBox
-        helperInfoImageAltText={t("helperInformationBoxes.inviteProfessionalToOrganizationAlt")}
-        helperInfoImageUrl={peopleHelperImage}
-        helperInfoText={t("helperInformationBoxes.peopleText")}
-        helperInfoTextHeader={t("helperInformationBoxes.peopleHeader")}
-        width={"250px"}
-      />
-
-      <StyledProfessionalInviteListHeader>
-        {hasPermission && !loading && !isPermissionReadCreated && (
-          <StyledButtonPrimary
-            onClick={() =>
-              generateOrganizationShareLink({
-                variables: {
-                  organizationId,
-                  permission: OrgPermissionLevel.Viewer,
-                },
-              })
-            }
-            type="button"
-          >
-            {t("shareLinks.createReadShareLink")}
-          </StyledButtonPrimary>
-        )}
-
-        {hasPermission && !loading && !isPermissionWriteCreated && (
-          <StyledButtonPrimary
-            onClick={() =>
-              generateOrganizationShareLink({
-                variables: {
-                  organizationId,
-                  permission: OrgPermissionLevel.Updater,
-                },
-              })
-            }
-            type="button"
-          >
-            {t("shareLinks.createWriteShareLink")}
-          </StyledButtonPrimary>
-        )}
-
-        {hasPermission && !loading && !isPermissionAdminCreated && (
-          <StyledButtonDanger
-            onClick={() =>
-              generateOrganizationShareLink({
-                variables: {
-                  organizationId,
-                  permission: OrgPermissionLevel.Admin,
-                },
-              })
-            }
-          >
-            {t("shareLinks.createAdminShareLink")}
-          </StyledButtonDanger>
-        )}
-      </StyledProfessionalInviteListHeader>
-
-      {hasPermission && !loading && shareLinkArray && shareLinkArray.length > 0 && (
-        <>
-          <StyledTable role="table">
-            <StyledTHead role="rowgroup">
-              <StyledTHeadTr role="row">
-                <StyledPermissionLevelTh role="columnheader">{t("shareLinks.permissionLevel")}</StyledPermissionLevelTh>
-                <StyledTh role="columnheader">{t("shareLinks.shareLink")}</StyledTh>
-                <StyledTh role="columnheader">{t("shareLinks.manage")}</StyledTh>
-              </StyledTHeadTr>
-            </StyledTHead>
-            <StyledTBody role="rowgroup">
-              {shareLinkArray.map((shareLink) => {
-                return (
-                  <StyledTr key={shareLink.id} role="row">
-                    <StyledTdWithMenuContent role="cell">
-                      <StyledPermissionLevel>{shareLink.permission}</StyledPermissionLevel>
-                    </StyledTdWithMenuContent>
-                    <StyledTdWithMenuContent role="cell">
-                      <CopyToClipboard
-                        text={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${shareLink.shareLink}`}
-                        onCopy={() => handleAlertCopied(t("alerts.copiedTextToClipboard"))}
-                      >
-                        <StyledShareLinkWrapper>
-                          <StyledShareLinkIcon />
-                          <StyledShareLinkInputReadOnly
-                            value={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${shareLink.shareLink}`}
-                            readOnly
-                          />
-                        </StyledShareLinkWrapper>
-                      </CopyToClipboard>
-                    </StyledTdWithMenuContent>
-                    <StyledTdWithMenuContentEdit role="cell">
-                      <ShareLinkEditMenu refetchSharelinkData={refetch} shareLinkPermission={shareLink.permission} />
-                    </StyledTdWithMenuContentEdit>
-                  </StyledTr>
-                );
-              })}
-            </StyledTBody>
-          </StyledTable>
-        </>
+      {/* VIEWER Share Link */}
+      {hasPermission && !loading && (
+        <SharelinkCard
+          copyToClipboardOnCopy={() => handleAlertCopied(t("alerts.copiedTextToClipboard"))}
+          createShareLinkButtonText={t("shareLinks.createReadShareLink")}
+          createShareLink={() =>
+            generateOrganizationShareLink({
+              variables: {
+                organizationId,
+                permission: OrgPermissionLevel.Viewer,
+              },
+            })
+          }
+          hasPermission={hasPermission}
+          isPermissionCreated={isPermissionReadCreated}
+          loading={loading}
+          refetch={refetch}
+          shareLink={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${
+            isPermissionReadCreated && isPermissionReadCreated.shareLink
+          }`}
+          shareLinkDescription={t("shareLinks.readOnlyDescription")}
+          shareLinkTitle={t("shareLinks.readOnly")}
+        />
       )}
+      {/* VIEWER Share Link */}
 
-      {hasPermission && !loading && shareLinkArray && shareLinkArray.length <= 0 && (
-        <StyledCreateShareLinkWrapper>
-          <StyledCreateShareLinkText>{t("shareLinks.professionalInviteEmptyState")}</StyledCreateShareLinkText>
-        </StyledCreateShareLinkWrapper>
+      {/* UPDATER Share Link */}
+      {hasPermission && !loading && (
+        <SharelinkCard
+          copyToClipboardOnCopy={() => handleAlertCopied(t("alerts.copiedTextToClipboard"))}
+          createShareLinkButtonText={t("shareLinks.createWriteShareLink")}
+          createShareLink={() =>
+            generateOrganizationShareLink({
+              variables: {
+                organizationId,
+                permission: OrgPermissionLevel.Updater,
+              },
+            })
+          }
+          hasPermission={hasPermission}
+          isPermissionCreated={isPermissionWriteCreated}
+          loading={loading}
+          refetch={refetch}
+          shareLink={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${
+            isPermissionWriteCreated && isPermissionWriteCreated.shareLink
+          }`}
+          shareLinkDescription={t("shareLinks.readWriteOnlyDescription")}
+          shareLinkTitle={t("shareLinks.readWriteOnly")}
+        />
       )}
+      {/* UPDATER Share Link  */}
+
+      {/* ADMIN Share Link */}
+      {hasPermission && !loading && (
+        <SharelinkCard
+          copyToClipboardOnCopy={() => handleAlertCopied(t("alerts.copiedTextToClipboard"))}
+          createShareLinkButtonText={t("shareLinks.createAdminShareLink")}
+          createShareLink={() =>
+            generateOrganizationShareLink({
+              variables: {
+                organizationId,
+                permission: OrgPermissionLevel.Admin,
+              },
+            })
+          }
+          hasPermission={hasPermission}
+          isPermissionCreated={isPermissionAdminCreated}
+          loading={loading}
+          refetch={refetch}
+          shareLink={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${
+            isPermissionAdminCreated && isPermissionAdminCreated.shareLink
+          }`}
+          shareLinkDescription={t("shareLinks.adminDescription")}
+          shareLinkTitle={t("shareLinks.admin")}
+        />
+      )}
+      {/* ADMIN Share Link  */}
     </>
   );
 };

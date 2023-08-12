@@ -137,7 +137,7 @@ const StyledModalPostCommentsHeaderWrapper = styled.div<ModalPostCommentsBackgro
 `;
 
 const StyledModalPostCommentsTitle = styled.div`
-  font-size: ${FONT_SIZES.LARGE};
+  font-size: ${FONT_SIZES.MEDIUM};
 `;
 
 const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> = ({
