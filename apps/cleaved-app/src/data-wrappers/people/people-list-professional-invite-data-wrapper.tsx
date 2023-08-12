@@ -74,7 +74,7 @@ export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => 
             })
           }
           hasPermission={hasPermission}
-          isPermissionCreated={isPermissionReadCreated}
+          permission={isPermissionReadCreated}
           loading={loading}
           refetch={refetch}
           shareLink={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${
@@ -100,7 +100,7 @@ export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => 
             })
           }
           hasPermission={hasPermission}
-          isPermissionCreated={isPermissionWriteCreated}
+          permission={isPermissionWriteCreated}
           loading={loading}
           refetch={refetch}
           shareLink={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${
@@ -126,7 +126,7 @@ export const PeopleListProfessionalInviteDataWrapper: FunctionComponent = () => 
             })
           }
           hasPermission={hasPermission}
-          isPermissionCreated={isPermissionAdminCreated}
+          permission={isPermissionAdminCreated}
           loading={loading}
           refetch={refetch}
           shareLink={`${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${

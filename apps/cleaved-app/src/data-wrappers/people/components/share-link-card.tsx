@@ -5,18 +5,17 @@ import styled, { useTheme } from "styled-components";
 import { BORDERS, Box, ButtonPrimary, CopyIcon, FONT_SIZES, Paragraph, RADIUS, SPACING } from "@cleaved/ui";
 
 import { ShareLinkEditMenu } from "../../../components";
-import { OrgPermissionLevel, OrganizationShareLinksQuery } from "../../../generated-types/graphql";
-import { routeConstantsCleavedApp } from "../../../router";
+import { OrganizationShareLinksQuery } from "../../../generated-types/graphql";
 
 type SharelinkCardProps = {
   copyToClipboardOnCopy: () => void;
-  createShareLinkButtonText: any;
+  createShareLinkButtonText: string;
   createShareLink: () => void;
   hasPermission: boolean;
-  isPermissionCreated: any;
+  permission: OrganizationShareLinksQuery["organizationShareLinks"][0] | undefined;
   loading: boolean;
-  refetch: any;
-  shareLink: any;
+  refetch: (() => void) | undefined;
+  shareLink: string;
   shareLinkDescription: string;
   shareLinkTitle: string;
 };
@@ -66,7 +65,7 @@ export const SharelinkCard: FunctionComponent<SharelinkCardProps> = (props) => {
     createShareLinkButtonText,
     createShareLink,
     hasPermission,
-    isPermissionCreated,
+    permission,
     loading,
     refetch,
     shareLinkDescription,
@@ -81,13 +80,13 @@ export const SharelinkCard: FunctionComponent<SharelinkCardProps> = (props) => {
 
       <StyledShareLinkDescription>{shareLinkDescription}</StyledShareLinkDescription>
 
-      {hasPermission && !loading && !isPermissionCreated && (
+      {hasPermission && !loading && !permission && (
         <StyledButtonPrimary onClick={createShareLink} type="button">
           {createShareLinkButtonText}
         </StyledButtonPrimary>
       )}
 
-      {hasPermission && !loading && isPermissionCreated && (
+      {hasPermission && !loading && permission && (
         <StyledShareLinkWrapper>
           <CopyToClipboard text={shareLink} onCopy={copyToClipboardOnCopy}>
             <StyledShareLinkCopyToClipboardWrapper>
@@ -96,7 +95,7 @@ export const SharelinkCard: FunctionComponent<SharelinkCardProps> = (props) => {
             </StyledShareLinkCopyToClipboardWrapper>
           </CopyToClipboard>
 
-          <ShareLinkEditMenu refetchSharelinkData={refetch} shareLinkPermission={isPermissionCreated.permission} />
+          <ShareLinkEditMenu refetchSharelinkData={refetch} shareLinkPermission={permission.permission} />
         </StyledShareLinkWrapper>
       )}
     </Box>

@@ -22,7 +22,7 @@ import { REMOVE_ORGANIZATION_SHARE_LINK_MUTATION } from "./gql";
 import "@szhsin/react-menu/dist/index.css";
 
 type ShareLinkEditMenuProps = {
-  refetchSharelinkData: () => void;
+  refetchSharelinkData: (() => void) | undefined;
   shareLinkPermission: OrgPermissionLevel;
 };
 
