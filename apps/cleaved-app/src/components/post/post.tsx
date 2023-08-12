@@ -1,17 +1,12 @@
-import React, { FunctionComponent, useContext, useState } from "react";
-import { Link } from "@reach/router";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 
-import { BORDERS, BoxNoPadding, FONT_SIZES, FONT_WEIGHTS, PhotoCollage, SPACING } from "@cleaved/ui";
+import { BORDERS, BoxNoPadding, FONT_SIZES, PhotoCollage, SPACING } from "@cleaved/ui";
 
-import { PostReactions, ReactionTypesAndTotalCount } from "../../components";
-import { authTokenContext } from "../../contexts";
+import { DisplayMarkdown, PostReactions, ReactionTypesAndTotalCount } from "../../components";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
-import { routeConstantsCleavedApp } from "../../router";
 
 import { CommentsList } from "../comments/comments-list";
 
@@ -28,24 +23,6 @@ const StyledCommentListWrapper = styled.div`
 `;
 
 const StyledProjectPostBox = styled(BoxNoPadding)``;
-
-const StyledMessage = styled(ReactMarkdown)`
-  overflow-wrap: anywhere;
-  padding: 0 ${SPACING.MEDIUM} ${SPACING.SMALL} ${SPACING.MEDIUM};
-
-  ul,
-  ol {
-    margin: 0 0 ${SPACING.MEDIUM} ${SPACING.XLARGE};
-  }
-
-  ul {
-    list-style: disc;
-  }
-
-  ol {
-    list-style: decimal;
-  }
-`;
 
 const StyledPostComments = styled.span`
   margin-left: 3px;
@@ -82,19 +59,6 @@ const StyledPostInfoBarCommentCount = styled.div`
   }
 `;
 
-const StyledProjectInfoWrapper = styled.div`
-  display: flex;
-`;
-
-const StyledProjectNameLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
-  display: inline-block;
-  font-size: ${FONT_SIZES.XXSMALL};
-  font-weight: ${FONT_WEIGHTS.MEDIUM};
-  margin: ${SPACING.MEDIUM} ${SPACING.MEDIUM} ${SPACING.SMALL} auto;
-  text-transform: uppercase;
-`;
-
 const StyledReactPhotoCollage = styled(PhotoCollage)`
   & > div {
     border: none !important;
@@ -107,7 +71,6 @@ const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
 
 export const Post: FunctionComponent<PostProps> = (props) => {
   const { post } = props;
-  const { preferredOrgId } = useContext(authTokenContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
@@ -141,19 +104,12 @@ export const Post: FunctionComponent<PostProps> = (props) => {
             date={post.date}
             isPostOpenInModal={isCommentsVisible}
             postId={post.id}
+            postProjectId={post.project.id}
+            postProjectName={post.project.name}
           />
         )}
 
-        <StyledMessage remarkPlugins={[remarkGfm]}>{post.body}</StyledMessage>
-
-        <StyledProjectInfoWrapper>
-          <StyledProjectNameLink
-            to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
-            title={post.project.name}
-          >
-            {post.project.name}
-          </StyledProjectNameLink>
-        </StyledProjectInfoWrapper>
+        <DisplayMarkdown message={post.body} />
 
         {post.images && post.images.length > 0 && (
           <StyledReactPhotoCollage

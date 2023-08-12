@@ -1,34 +1,16 @@
 import React, { FunctionComponent, useContext } from "react";
 import { navigate } from "@reach/router";
-import { Menu, MenuItem } from "@szhsin/react-menu";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
 
-import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
+import { CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
+import { StyledBasicItem, StyledBasicMenu } from "./components";
+
 import "@szhsin/react-menu/dist/index.css";
-
-const StyledBasicItem = styled(MenuItem)`
-  font-size: ${FONT_SIZES.SMALL};
-
-  :hover,
-  &.szh-menu__item--hover {
-    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
-  }
-`;
-
-const StyledBasicMenu = styled(Menu)`
-  margin-left: auto;
-
-  ul {
-    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
-    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-    color: ${({ theme }) => theme.colors.baseText_color};
-  }
-`;
 
 export const WidgetProjectListMenu: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
@@ -36,11 +18,14 @@ export const WidgetProjectListMenu: FunctionComponent = () => {
   const { t } = useTranslator();
 
   const handleRouteToProjectStartNew = () => {
-    navigate(`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`);
+    navigate(
+      `/${preferredOrgId}${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`
+    );
   };
 
   return (
     <StyledBasicMenu
+      arrow={true}
       menuButton={
         <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
@@ -49,7 +34,7 @@ export const WidgetProjectListMenu: FunctionComponent = () => {
       direction={"left"}
     >
       <StyledBasicItem onClick={() => handleRouteToProjectStartNew()}>
-        {t("projectStartNew.startNewProject")}
+        {t("projectForm.projectFormSubmitButton")}
       </StyledBasicItem>
     </StyledBasicMenu>
   );

@@ -33,10 +33,9 @@ const StyledTextarea = styled.textarea`
   color: ${({ theme }) => theme.colors.baseText_color};
   font-family: ${FONTS.SANS_SERIF_1};
   font-size: ${FONT_SIZES.MEDIUM};
-  min-height: 100px;
+  min-height: 250px;
   outline: none;
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
-  resize: none;
   width: 100%;
 
   &::placeholder {

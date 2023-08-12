@@ -1,4 +1,6 @@
 export type ThemeColors = {
+  ALWAYS_WHITE: string;
+  ALWAYS_GREEN: string;
   BLACK_ALPHA_DARK: string;
   BLACK_ALPHA_MEDIUM: string;
   BLACK_ALPHA_LIGHT: string;
@@ -10,10 +12,12 @@ export type ThemeColors = {
   HONEY_YELLOW_500: string;
   RED_500: string;
   WHITE_ALPHA: string;
-  WHITE_ALWAYS: string;
 };
 
 export const COLORS_BASE: ThemeColors = {
+  ALWAYS_WHITE: "#FFFFFF",
+  ALWAYS_GREEN: "#6DC246",
+
   BLACK_ALPHA_DARK: "rgba(0,0,0,0.9)", // overlays
   BLACK_ALPHA_MEDIUM: "rgba(0,0,0,0.5)", // overlays
   BLACK_ALPHA_LIGHT: "rgba(0,0,0,0.2)", // overlays
@@ -30,5 +34,4 @@ export const COLORS_BASE: ThemeColors = {
   RED_500: "#FF6366", // errors, private
 
   WHITE_ALPHA: "rgba(255,255,255,0.9)", // overlays
-  WHITE_ALWAYS: "#FFFFFF",
 };

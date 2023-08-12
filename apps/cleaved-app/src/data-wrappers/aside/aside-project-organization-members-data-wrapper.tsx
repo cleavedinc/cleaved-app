@@ -1,10 +1,15 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { FONT_SIZES, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
-import { AsideTeamListAvatarLink, MembersListMenu } from "../../components";
+import { AsidePeopleListAvatarLink, PeopleListMenu } from "../../components";
 import { usePostProjectAccountSeek, useRouteParams, useTranslator } from "../../hooks";
+
+const StyledPeopleListEmptyState = styled.div`
+  font-size: ${FONT_SIZES.SMALL};
+  font-style: italic;
+`;
 
 const PostHeaderWrapper = styled.div`
   align-items: center;
@@ -39,8 +44,8 @@ export const AsideProjectOrganizationMembersDataWrapper: FunctionComponent = () 
   return (
     <StickUnderHeaderDesktopOnly>
       <StyledPeopleListHeaderWrapper>
-        <StyledPeopleListHeader>{t("people.teamListHeader")}</StyledPeopleListHeader>
-        <MembersListMenu />
+        <StyledPeopleListHeader>{t("people.peopleListHeader")}</StyledPeopleListHeader>
+        <PeopleListMenu />
       </StyledPeopleListHeaderWrapper>
 
       <PeopleList>
@@ -51,12 +56,16 @@ export const AsideProjectOrganizationMembersDataWrapper: FunctionComponent = () 
             postProjectAccountSeekData.map((member) => {
               return (
                 <PostHeaderWrapper key={member.id}>
-                  <AsideTeamListAvatarLink account={member} />
+                  <AsidePeopleListAvatarLink account={member} />
                 </PostHeaderWrapper>
               );
             })}
         </PeopleListItem>
       </PeopleList>
+
+      {!postProjectAccountSeekDataLoading && postProjectAccountSeekData && postProjectAccountSeekData.length <= 0 && (
+        <StyledPeopleListEmptyState>{t("people.peopleListHelperInfoText")}</StyledPeopleListEmptyState>
+      )}
     </StickUnderHeaderDesktopOnly>
   );
 };

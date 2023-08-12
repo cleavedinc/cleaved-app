@@ -10,8 +10,8 @@ import { DeleteCookie, GetCookie, logQueryError, SetCookie } from "@cleaved/help
 
 import { apolloClient } from "../client";
 import { RefreshLogInMutation } from "../generated-types/graphql";
-
 import { REFRESH_LOGIN_MUTATION } from "../components/login/gql";
+import { routeConstantsCleavedApp } from "../router";
 
 type AuthTokenContextProviderType = {
   children: ReactNode;
@@ -56,7 +56,6 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
   });
 
   const logOut = useCallback(() => {
-    console.log("logging out");
     setLoggedIn(false);
     DeleteCookie("_CRT_");
     // clear apollo cache to ensure new user gets fresh data
@@ -131,8 +130,10 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
 
   useEffect(() => {
     setRefreshInProgress(true);
+    const currentPathParts = window.location.pathname.split("/")[1];
     const refreshAction = refreshRequested.refreshAction;
     const crt = GetCookie("_CRT_");
+
     if (crt) {
       getRefreshLogIn({
         variables: { refreshToken: crt },
@@ -145,6 +146,8 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
         },
       });
       setRefreshRequested({ refreshRequested: false, refreshAction: null });
+    } else if (`/${currentPathParts}` === routeConstantsCleavedApp.professionalShareLinkRegistration.route) {
+      return;
     } else {
       navigate("/login");
     }

@@ -1,14 +1,21 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, MainColumnWrapper } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnWrapper } from "@cleaved/ui";
 
-import { TeamslistProfessionalInviteDataWrapper } from "../../data-wrappers";
+import { AsideSharelinkInviteDataWrapper, PeopleListProfessionalInviteDataWrapper } from "../../data-wrappers";
+import { useTranslator } from "../../hooks";
 
-export const TeamsListProfessionalInvite: FunctionComponent = () => {
+export const PeopleListProfessionalInvite: FunctionComponent = () => {
+  const { t } = useTranslator();
+
   return (
     <ContentWrapper>
+      <LeftColumnWrapper>
+        <AsideSharelinkInviteDataWrapper />
+      </LeftColumnWrapper>
+
       <MainColumnWrapper>
-        <TeamslistProfessionalInviteDataWrapper />
+        <PeopleListProfessionalInviteDataWrapper />
       </MainColumnWrapper>
     </ContentWrapper>
   );

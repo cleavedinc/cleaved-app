@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { ButtonPrimary, CloseIcon, ImageIcon, FONT_SIZES, SPACING_PX, Spinner, StyledTooltipDark } from "@cleaved/ui";
+import { ButtonPrimary, FONT_SIZES, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
@@ -13,9 +13,9 @@ import { useFindMyAccount, usePostProjectGetById, useRouteParams, useTranslator 
 
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
-import { htmlToMarkdown, markdownToHtml } from "./components/markdown-parser";
+import { ImagesControl } from "../action-controls";
+import { htmlToMarkdown, markdownToHtml, MarkdownEditor, markdownStylesBase } from "../markdown";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
-import { PostFormEditor } from "./components";
 
 type ProjectPostFormProps = {
   closeForm: () => void;
@@ -33,35 +33,26 @@ const StyledAdditionalActionsWrapper = styled.div`
   position: relative;
 `;
 
-const StyledAdditionalActionsIconButton = styled.button`
-  background: none;
-  color: inherit;
+const StyledAdditionalActionButtonWrapper = styled.div`
+  align-items: center;
   display: flex;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+  margin-top: ${SPACING_PX.ONE};
+`;
+
+const StyledMarkdownEditorWrapper = styled.div`
+  ${markdownStylesBase}
+
+  .ql-container {
+    max-height: 40vh;
+  }
 `;
 
 const StyledPostButton = styled(ButtonPrimary)`
   font-size: ${FONT_SIZES.MEDIUM};
   margin-left: auto;
-  margin-top: ${SPACING_PX.ONE};
-`;
-
-const StyledAdditionalActionButtonWrapper = styled.div`
-  align-items: center;
-  display: flex;
 `;
 
 const StyledProjectPostForm = styled.div``;
-
-const StyledRemoveAllImages = styled.div`
-  align-items: center;
-  display: flex;
-  font-size: ${FONT_SIZES.XSMALL};
-`;
 
 export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) => {
   const { closeForm, postId } = props;
@@ -73,7 +64,6 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId;
   const [isImageUploadWrapperActive, setImageUploadWrapperActive] = useState(false);
-  const theme = useTheme();
   const { t } = useTranslator();
 
   const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
@@ -175,42 +165,23 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
             setImageUploadWrapperActive(true);
           };
 
-          // closes image upload box and clears out imageUrls values
-          const handleClearImagesFromPost = () => {
-            setFieldValue("imageUrls", []);
-            setProjectPostFormImageUploadIsDirty(false);
-            setImageUploadWrapperActive(false);
-          };
-
           return (
             <Form>
-              <PostFormEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
+              <StyledMarkdownEditorWrapper>
+                <MarkdownEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
+              </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionsWrapper>
-                {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
+                {isImageUploadWrapperActive && (
+                  <ImageUploadAndPreviewForm
+                    closeImageUploadWrapper={() => setImageUploadWrapperActive(false)}
+                    images={postProjectGetByIdData?.images}
+                  />
+                )}
               </StyledAdditionalActionsWrapper>
 
               <StyledAdditionalActionButtonWrapper>
-                <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
-                  <>
-                    {/* open the image upload box */}
-                    {!isImageUploadWrapperActive && (
-                      <StyledAdditionalActionsIconButton onClick={() => handleAddImagesToPost()} type="button">
-                        <ImageIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.XLARGE} />
-                      </StyledAdditionalActionsIconButton>
-                    )}
-
-                    {/* Clear all images and close the image upload box */}
-                    {isImageUploadWrapperActive && (
-                      <StyledAdditionalActionsIconButton onClick={() => handleClearImagesFromPost()} type="button">
-                        <StyledRemoveAllImages>
-                          <CloseIcon color={theme.colors.baseAlert_color} iconSize={FONT_SIZES.SMALL} />
-                          {t("post.removeAllImages")}
-                        </StyledRemoveAllImages>
-                      </StyledAdditionalActionsIconButton>
-                    )}
-                  </>
-                </StyledTooltipDark>
+                <ImagesControl handleActionButton={handleAddImagesToPost} />
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}

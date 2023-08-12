@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
-import { AsideTeamListAvatarLink, MembersListMenu } from "../../components";
+import { AsidePeopleListAvatarLink, PeopleListMenu } from "../../components";
 import { useOrganizationSeekMembers, useTranslator } from "../../hooks";
 
 const PostHeaderWrapper = styled.div`
@@ -32,8 +32,8 @@ export const AsideHomeOrganizationMembersDataWrapper: FunctionComponent = () => 
   return (
     <StickUnderHeaderDesktopOnly>
       <StyledPeopleListHeaderWrapper>
-        <StyledPeopleListHeader>{t("people.teamListHeaderHome")}</StyledPeopleListHeader>
-        <MembersListMenu />
+        <StyledPeopleListHeader>{t("people.peopleListHeaderHome")}</StyledPeopleListHeader>
+        <PeopleListMenu />
       </StyledPeopleListHeaderWrapper>
 
       <PeopleList>
@@ -44,7 +44,7 @@ export const AsideHomeOrganizationMembersDataWrapper: FunctionComponent = () => 
             organizationSeekMembersData.map((member) => {
               return (
                 <PostHeaderWrapper key={member.id}>
-                  <AsideTeamListAvatarLink account={member} />
+                  <AsidePeopleListAvatarLink account={member} />
                 </PostHeaderWrapper>
               );
             })}

@@ -1,13 +1,16 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext } from "react";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 
 import { FONT_SIZES, FONT_WEIGHTS, SPACING } from "@cleaved/ui";
 import { getTimeSinceDate } from "@cleaved/helpers";
 
-import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
+import { PostEditMenu, PostHeaderAvatarLink, SeparatorDot } from "../../components";
+import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useFindMyAccount, useNavigateToProfile } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
+import { routeConstantsCleavedApp } from "../../router";
 
 type PostProjectHeaderProps = {
   account: PostProjectSeekQuery["postProjectSeek"][0]["account"];
@@ -16,7 +19,13 @@ type PostProjectHeaderProps = {
   date: string | null;
   isPostOpenInModal: boolean;
   postId: string;
+  postProjectId: string;
+  postProjectName: string;
 };
+
+const StyledDateProjectInfo = styled.div`
+  display: flex;
+`;
 
 const StyledJobTitle = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
@@ -57,8 +66,17 @@ const StyledPostProfessionalName = styled.a`
   }
 `;
 
+const StyledProjectNameLink = styled(Link)`
+  display: inline-block;
+`;
+
+const StyledSeparatorDot = styled(SeparatorDot)`
+  margin: 0 ${SPACING.SMALL};
+`;
+
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
-  const { account, accountId, className, date, isPostOpenInModal, postId } = props;
+  const { account, accountId, className, date, isPostOpenInModal, postId, postProjectId, postProjectName } = props;
+  const { preferredOrgId } = useContext(authTokenContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { profilePath } = useNavigateToProfile(account?.id);
   const accountQuery = useFindMyAccount();
@@ -74,7 +92,20 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
 
         {account?.jobTitle && <StyledJobTitle>{account?.jobTitle}</StyledJobTitle>}
 
-        {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
+        <StyledDateProjectInfo>
+          {postProjectName && postProjectId && (
+            <StyledProjectNameLink
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${postProjectId}${routeConstantsCleavedApp.projectBoard.route}`}
+              title={postProjectName}
+            >
+              {postProjectName}
+            </StyledProjectNameLink>
+          )}
+
+          {date && postProjectName && postProjectId && <StyledSeparatorDot />}
+
+          {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
+        </StyledDateProjectInfo>
       </StyledPostProfessionalInfoWrapper>
 
       {hasPermission &&

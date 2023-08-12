@@ -5,7 +5,7 @@ import { BoxNoPadding, CommentIcon, FilePost, FONT_SIZES, SPACING, WidgetHeading
 
 import { WidgetProjectDetailsMenu } from "../../components";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useProjectById, useTranslator } from "../../hooks";
+import { useProjectById, useRouteParams, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 const StyledCommentCount = styled.div`
@@ -41,13 +41,16 @@ const StyledPostCount = styled.div`
 
 const StyledProjectDetails = styled.div`
   padding: ${SPACING.SMALL};
+  white-space: pre-wrap;
 `;
 
 const StyledWidgetHeader = styled.div``;
 
 export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const projectData = useProjectById();
+  const routeParams = useRouteParams();
+  const projectId = routeParams.projectId;
+  const projectData = useProjectById(projectId);
   const theme = useTheme();
   const { t } = useTranslator();
 

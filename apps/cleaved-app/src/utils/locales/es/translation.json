@@ -2,6 +2,7 @@
   "account": {
     "save": "Guardar"
   },
+  "active": "Activo",
   "alerts": {
     "copiedTextToClipboard": "¡Copiado!"
   },
@@ -33,18 +34,16 @@
     "selectAnImageToUpload": "Selecciona una imagen/gif para subir"
   },
   "formLabels": {
-    "about": "Acerca de",
-    "aboutPlaceholder": "Cuéntale a todos un poco sobre ti",
+    "about": "Lo que me importa",
+    "aboutPlaceholder": "Comparte lo que te importa con los demás.",
     "firstName": "Nombre",
-    "firstNamePlaceholder": "Nombre",
+    "firstNamePlaceholder": "¿Cuál es tu nombre de pila?",
     "lastName": "Apellido",
-    "lastNamePlaceholder": "Apellido",
-    "middleName": "Segundo nombre",
-    "middleNamePlaceholder": "Segundo nombre",
-    "professionalEmail": "Correo electrónico profesional",
-    "professionalEmailPlaceholder": "Correo electrónico profesional",
-    "professionalTitle": "Título profesional",
-    "professionalTitlePlaceholder": "Título profesional"
+    "lastNamePlaceholder": "¿Cuál es tu apellido?",
+    "professionalEmail": "Correo electrónico",
+    "professionalEmailPlaceholder": "micorreoelectrónico@empresaincreíble.com",
+    "professionalTitle": "Mi cargo",
+    "professionalTitlePlaceholder": "C..., VP..., Director..., Gerente..."
   },
   "formValidationMessages": {
     "aboutProfessionalCharactorLimit": "Acerca de tiene un límite máximo de 250 caracteres",
@@ -60,17 +59,13 @@
     "homePageEmptyStateHeader": "Sabemos que estás trabajando arduamente",
     "homePageEmptyStateText": "Cuando tengas un minuto, publica tu actualización o idea en tu proyecto. Obtener comentarios y mantener a las personas actualizadas es importante.",
     "inviteProfessionalToOrganizationAlt": "Flecha que apunta al formulario de invitación de profesionales",
-    "inviteProfessionalToOrganizationHeader": "Invita a tus líderes a unirse a tu organización.",
-    "inviteProfessionalToOrganizationText": "Invita a tus líderes a unirse a ti en todos tus proyectos.",
-    "organizationsAlt": "Tres edificios en una fila de varios tamaños",
-    "organizationsHeader": "Organizaciones, empresas o clientes",
-    "organizationsText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
+    "asideOrganizationMembersEmptyStateAlt": "Personas trabajando",
     "organizationRegisterAlt": "Flechas que apuntan al formulario de registro de una organización",
     "organizationRegisterHeader": "Registrar una organización",
     "organizationRegisterText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
     "professionalOnboardingAlt": "Tres edificios en una fila de varios tamaños",
     "professionalOnboardingHeader": "Antes de correr, caminamos",
-    "professionalOnboardingText": "Solo algunos pasos de configuración primero. Solo tomará un par de minutos, lo prometo.",
+    "professionalOnboardingText": "Creemos tu organización, primer proyecto e invitemos a tus compañeros de trabajo. Tomará aproximadamente un minuto, lo prometo.",
     "professionalShareLinkRegistrationAlt": "Dos personas paradas, sosteniendo un gran círculo rojo con dos símbolos de enlace a punto de conectarse.",
     "professionalShareLinkRegistrationHeader": "Bienvenido a Cleaved",
     "professionalShareLinkRegistrationText": "Tienes la suerte de ser invitado por alguien que te valora. Asegúrate de devolver el favor.",
@@ -81,16 +76,15 @@
     "projectslistHeader": "Los proyectos son donde la magia",
     "projectslistText": "Crear un nuevo proyecto te proporciona una plataforma para compartir decisiones, recibir retroalimentación y demostrar progreso.",
     "projectStartNewImageAlt": "Flecha que apunta al formulario para iniciar un nuevo proyecto",
-    "projectStartNewHeader": "Iniciar un nuevo proyecto",
-    "projectStartNewText": "Crear un nuevo proyecto te proporciona una plataforma para compartir decisiones, recibir retroalimentación y demostrar progreso.",
-    "teamsAlt": "Dos personas sosteniendo piezas de un proyecto",
-    "teamsHeader": "Los líderes hacen que suceda",
-    "teamsText": "Invita a tus líderes a proporcionar retroalimentación y compartir sus opiniones sobre decisiones cruciales, y mantenlos informados sobre los hitos y plazos clave del proyecto."
+    "projectHeader": "¡Vámonos!",
+    "projectText": "Los proyectos te ofrecen una plataforma para compartir decisiones, recibir retroalimentación y demostrar el progreso.",
+    "peopleAlt": "Dos personas sosteniendo piezas de un proyecto",
+    "peopleHeader": "Invita a tus compañeros de trabajo a unirse a tu organización",
+    "peopleText": "Recibe retroalimentación y mantén al tanto a quienes te importan sobre todos tus proyectos."
   },
   "hTags": {
-    "personalInformation": "Información personal",
     "professionalInformation": "Información profesional",
-    "theme": "Tema"
+    "generalSettings": "Configuración general"
   },
   "language": {
     "english": "Inglés",
@@ -108,11 +102,12 @@
     "accountPersonalInformation": "Información Personal",
     "accountProfessionalInformation": "Información Profesional",
     "home": "Inicio",
+    "profile": "Perfil",
     "projectList": "Proyectos",
-    "projectStartNew": "Iniciar un nuevo proyecto",
+    "projectForm": "Iniciar un nuevo proyecto",
     "professionalInvite": "Invitación Profesional",
     "organizationRegister": "Registrar una nueva organización",
-    "teamsList": "Equipo"
+    "peopleList": "Gente"
   },
   "organizations": {
     "areYouSureKeepButtonText": "Permanecer en la organización",
@@ -135,9 +130,24 @@
     "registerNewOrganization": "Registrar una nueva organización"
   },
   "people": {
-    "addPerson": "Agregar un líder.",
-    "teamListHeader": "Líderes activos",
-    "teamListHeaderHome": "Líderes",
+    "addNewUser": "Agregar usuario",
+    "addNewUserHelperText": "Siempre es mejor con más personas.",
+    "addPerson": "Agregar usuario",
+    "areYouSureKeepButtonText": "Mantener a este usuario",
+    "areYouSureRemoveButtonText": "Eliminar a este usuario de la organización",
+    "areYouSureRemoveMemberModalHeader": "¿Estás seguro?",
+    "areYouSureRemoveMemberModalText": "Si eliminas a este usuario de tu organización, no podrá acceder a ninguno de tus proyectos nuevamente. Solo recuerda que siempre puedes invitarlos de nuevo.",
+    "edit": "Editar",
+    "editPermission": "Permiso para Editar",
+    "jobTitle": "Cargo",
+    "peopleListHeader": "Personas activas",
+    "peopleListHeaderHome": "Gente",
+    "peopleListHelperInfoText": "A medida que las personas interactúan con este proyecto, aparecerán en esta lista.",
+    "professionalName": "Nombre",
+    "professionalPermissions": "Permisos",
+    "professionalTitle": "Cargo",
+    "removeProfessional": "Eliminar usuario",
+    "setUserPermission": "Editar permiso de usuario",
     "viewAllPeople": "Ver todos"
   },
   "pleaseWaitDots": "Por favor espera...",
@@ -160,6 +170,7 @@
     "createProjectPostWithName": "Crear una publicación ",
     "createProjectPost": "Crear publicación",
     "editProjectPost": "Editar publicación",
+    "pinPost": "Anclar al proyecto",
     "photoViewerToolbarMessage": "Publicado por el ",
     "post": "Publicar",
     "postImageBasicAlt": "Imagen de la publicación",
@@ -173,10 +184,12 @@
     "addMoreImages": "Agregar más imágenes",
     "errorFileExceedsFileSize": "Un archivo superó el tamaño de MB y no se cargó.",
     "errorFileIncorrectType": "Un archivo no es un tipo de archivo aceptado.",
+    "errorTooManyFilesType": "Demasiados archivos. El límite de carga es de {{maxFileUploadlimit}}",
     "dragDropAreaHelperText": "Arrastra y suelta hasta imágenes, o haz clic para seleccionar."
   },
+  "privacyPolicy": "Política de privacidad",
   "professional": {
-    "emailLinkText": "Correo electrónico"
+    "about": "Me importa:"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Omitir incorporación",
@@ -193,11 +206,11 @@
     "startNewProjectFormHeader": "Inicia tu primer proyecto",
     "startNewProjectFormHeaderProjectCreated": "Proyecto creado",
     "invitePeopleHelperInfoImageAlt": "Dos personas sosteniendo tarjetas de proyecto con un signo más entre ellas",
-    "invitePeopleHelperInfoText": "Invita a tus líderes a unirse contigo en todos tus proyectos.",
-    "invitePeopleFormHeader": "Invita a tus líderes",
+    "invitePeopleHelperInfoText": "Invita a tus compañeros de trabajo a unirse contigo en todos tus proyectos.",
+    "invitePeopleFormHeader": "Invita a tus compañeros de trabajo",
     "mailtoLinkEmailSubjectText": "Invitación para unirse a Cleaved",
     "mailtoLinkEmailBodyText": "Acabo de unirme a Cleaved y configuré un nuevo proyecto. Ven a unirte conmigo.",
-    "mailtoLink": "Invita a tus líderes",
+    "mailtoLink": "Invita a tus compañeros de trabajo",
     "navigateBackwardStep": "Anterior",
     "navigateForwardStep": "Siguiente"
   },
@@ -224,15 +237,17 @@
     "stateInactive": "Inactivo",
     "stateArchive": "Archivo"
   },
-  "projectStartNew": {
+  "projectForm": {
     "addNewProjectHelperText": "Es una gran sensación cuando comienzas algo nuevo.",
-    "startNewProject": "Comenzar un nuevo proyecto",
+    "project": "Proyecto",
+    "projectFormSubmitButton": "Guardar",
     "projectName": "Nombre del proyecto",
     "projectNamePlaceholder": "Nombre del proyecto...",
     "projectNameRequired": "Nombre del proyecto requerido",
     "projectDetails": "Detalles del proyecto",
     "projectDetailsRequired": "Detalles del proyecto requeridos",
-    "projectDetailsPlaceholder": "Detalles del proyecto..."
+    "projectDetailsPlaceholder": "Detalles del proyecto...",
+    "startNewProject": "Comenzar un nuevo proyecto"
   },
   "projects": {
     "active": "Activo",
@@ -249,35 +264,28 @@
     "darkMode": "Modo oscuro"
   },
   "shareLinks": {
+    "admin": "Permiso de administrador",
+    "adminDescription": "Proporciona al usuario acceso para gestionar personas, cuentas e información de facturación.",
     "areYouSureRemoveButtonText": "Eliminar enlace compartido",
     "areYouSureKeepButtonText": "Mantener mi enlace compartido",
     "areYouSureRemoveSharelinkModalHeader": "¿Estás seguro?",
     "areYouSureRemoveSharelinkModalText": "Si eliminas este enlace compartido, desaparecerá para siempre. No hay vuelta atrás.",
-    "createAdminShareLink": "Crear enlace de administrador",
-    "createReadShareLink": "Crear enlace de solo vista",
-    "createWriteShareLink": "Crear enlace de lectura/escritura",
+    "createAdminShareLink": "Crear un enlace de uso compartido de administrador",
+    "createReadShareLink": "Crear un enlace de compartir de solo lectura",
+    "createWriteShareLink": "Crear un enlace de compartir de lectura y escritura",
+    "createWriteShareLinkText": "Crea un enlace para compartir que permita a tus compañeros de trabajo crear proyectos y dar retroalimentación.",
     "editMenuGenerateNewShareLink": "Generar un nuevo enlace compartido",
     "editMenuRemoveShareLink": "Eliminar enlace compartido",
     "manage": "Gestionar",
+    "permission": "permiso",
     "permissionLevel": "Nivel de permisos",
-    "professionalInviteEmptyState": "Para invitar a tus líderes, puedes crear un enlace para compartir y luego compartirlo con ellos.",
+    "readOnly": "Permiso de solo lectura",
+    "readOnlyDescription": "Proporciona al usuario acceso solo para ver el contenido del proyecto.",
+    "readWriteOnly": "Permiso de lectura y escritura",
+    "readWriteOnlyDescription": "Proporciona al usuario acceso para crear, ver e interactuar con el contenido del proyecto.",
     "shareLink": "Enlace compartido"
   },
   "submit": "Enviar",
-  "teams": {
-    "addNewTeamMember": "Invita a un líder.",
-    "addNewTeamMemberHelperText": "Siempre es mejor con más personas.",
-    "areYouSureKeepButtonText": "Mantener a este usuario",
-    "areYouSureRemoveButtonText": "Eliminar a este usuario de la organización",
-    "areYouSureRemoveMemberModalHeader": "¿Estás seguro?",
-    "areYouSureRemoveMemberModalText": "Si eliminas a este usuario de tu organización, no podrá acceder a ninguno de tus proyectos nuevamente. Solo recuerda que siempre puedes invitarlos de nuevo.",
-    "edit": "Editar",
-    "professionalName": "Nombre",
-    "professionalPermissions": "Permisos",
-    "professionalTitle": "Cargo",
-    "removeProfessional": "Eliminar usuario",
-    "setUserPermission": "Editar permiso de usuario"
-  },
   "termsOfService": {
     "acceptTermsOfService": "Acepto los términos del servicio",
     "acceptTermsOfServiceIsRequired": "Se requiere aceptar los términos y condiciones",
@@ -285,7 +293,8 @@
     "firstParagraph": "Antes de poder utilizar nuestros servicios, debes aceptar nuestros",
     "acceptTermsHeader": "¡Bienvenido a bordo!",
     "acceptTermsImageAlt": "Imagen sobre aceptar términos y condiciones",
-    "acceptTermsText": "Lo primero es lo primero, debes aceptar los términos, luego podrás ponerte manos a la obra."
+    "acceptTermsText": "Lo primero es lo primero, debes aceptar los términos, luego podrás ponerte manos a la obra.",
+    "termsOfService": "Términos de servicio"
   },
   "tryAgain": "Intentar de nuevo",
   "widget": {

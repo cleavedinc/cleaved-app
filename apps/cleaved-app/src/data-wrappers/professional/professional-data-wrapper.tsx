@@ -11,11 +11,11 @@ import { useLoginGuard, useRouteParams, useTranslator } from "../../hooks";
 
 import { ORGANIZATION_GET_MEMBER_QUERY } from "./gql";
 
-const StyledAsideProfessionalWrapper = styled.div`
+const StyledProfessionalInformationWrapper = styled.div`
   text-align: center;
 `;
 
-const StyledEmaillink = styled.div``;
+const StyledProfessionalAboutWrapper = styled.div``;
 
 const StyledJobTitle = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
@@ -33,9 +33,14 @@ const StyledProfileName = styled(SectionHeader)`
 `;
 
 const StyledProfessionalAbout = styled.div`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
+  color: ${({ theme }) => theme.colors.baseText_color};
   margin-bottom: ${SPACING.MEDIUM};
   white-space: pre-line;
+`;
+
+const StyledAboutLabel = styled.label`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  font-size: ${FONT_SIZES.XSMALL};
 `;
 
 export const ProfessionalDataWrapper: FunctionComponent = () => {
@@ -61,7 +66,7 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
       <StickUnderHeaderDesktopOnly>
         {!loading && data && data.organizationGetMember && (
           <Box>
-            <StyledAsideProfessionalWrapper>
+            <StyledProfessionalInformationWrapper>
               <AsideAvatar account={data.organizationGetMember} />
 
               <StyledProfileName>
@@ -69,15 +74,15 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
               </StyledProfileName>
 
               <StyledJobTitle>{data.organizationGetMember.jobTitle}</StyledJobTitle>
+            </StyledProfessionalInformationWrapper>
+
+            <StyledProfessionalAboutWrapper>
+              <StyledAboutLabel>{t("professional.about")}</StyledAboutLabel>
 
               {data.organizationGetMember.about && (
                 <StyledProfessionalAbout>{data.organizationGetMember.about}</StyledProfessionalAbout>
               )}
-
-              <StyledEmaillink>
-                <a href={`mailto:${data.organizationGetMember.emailAddress}`}>{t("professional.emailLinkText")}</a>
-              </StyledEmaillink>
-            </StyledAsideProfessionalWrapper>
+            </StyledProfessionalAboutWrapper>
           </Box>
         )}
       </StickUnderHeaderDesktopOnly>

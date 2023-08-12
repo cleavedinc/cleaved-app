@@ -4,11 +4,14 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
-import { FormikTextareaNoErrorFields, logQueryError } from "@cleaved/helpers";
+import { logQueryError } from "@cleaved/helpers";
+import { ButtonPrimary, FONT_SIZES, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { POST_PROJECT_REPLY } from "../../gql-mutations";
 import { useRouteParams, useTranslator } from "../../hooks";
+
+import { htmlToMarkdown, MarkdownEditor, markdownStylesBase } from "../markdown";
 
 type CommentFormType = {
   organizationId: string;
@@ -23,9 +26,28 @@ export type CommentFormProps = {
   setIsCommentRepliesVisible?: Dispatch<React.SetStateAction<boolean>>;
 };
 
+const StyledAdditionalActionButtonWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  margin-top: ${SPACING_PX.ONE};
+`;
+
 const StyledCommentForm = styled.div`
   background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   width: 100%;
+`;
+
+const StyledMarkdownEditorWrapper = styled.div`
+  ${markdownStylesBase}
+
+  .ql-container {
+    max-height: 20vh;
+  }
+`;
+
+const StyledPostButton = styled(ButtonPrimary)`
+  font-size: ${FONT_SIZES.MEDIUM};
+  margin-left: auto;
 `;
 
 export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
@@ -39,6 +61,14 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
   const { t } = useTranslator();
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
+
+  const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
+    ? t("post.notContainOnlyBlankSpaces")
+    : undefined;
+
+  const leaveCommentPlaceholder = t("comment.leaveCommentPlaceholder")
+    ? t("comment.leaveCommentPlaceholder")
+    : undefined;
 
   const [postProjectReply] = useMutation(POST_PROJECT_REPLY, {
     onCompleted: () => {
@@ -75,11 +105,14 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
         onSubmit={(values: CommentFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
+          // convert editor html to markdown to be saved
+          const bodyMarkdown = htmlToMarkdown(values.body);
+
           postProjectReply({
             variables: {
               organizationId: values.organizationId,
               postOrPostReplyId: values.postOrPostReplyId,
-              body: values.body,
+              body: bodyMarkdown,
             },
           });
 
@@ -87,40 +120,35 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
         }}
         validateOnChange
         validationSchema={yup.object().shape<Record<keyof { body: string }, yup.AnySchema>>({
-          body: yup.string(),
+          body: yup.string().when("imageUrls", {
+            is: (imageUrls: string[]) => !imageUrls || imageUrls.length === 0,
+            then: yup
+              .string()
+              .matches(/^(?=.*[a-zA-Z0-9]).+$/, notContainOnlyBlankSpaces)
+              .test("empty-body", "Body cannot be empty", (value) => {
+                if (value && value.replace(/<[^>]+>/g, "").trim().length === 0) {
+                  return false; // Invalid if value is present but only contains empty HTML elements
+                }
+                return true; // Valid if value is empty or contains non-empty text
+              })
+              .required(),
+            otherwise: yup.string().notRequired(),
+          }),
         })}
       >
-        {({ submitForm, values }) => {
+        {({ dirty, isSubmitting, isValid }) => {
           return (
             <Form>
-              <FormikTextareaNoErrorFields
-                autoFocus
-                hasBorder
-                minHeight="60px"
-                name="body"
-                onKeyPress={(e: React.KeyboardEvent) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                  }
-                }}
-                onKeyUp={(e: React.KeyboardEvent): false | undefined => {
-                  if (
-                    e.key === "Enter" &&
-                    !e.shiftKey &&
-                    values.body.trim() !== "" &&
-                    values.body.trim() !== undefined &&
-                    values.body.trim() !== null
-                  ) {
-                    e.preventDefault();
-                    submitForm();
-                    return false;
-                  }
+              <StyledMarkdownEditorWrapper>
+                <MarkdownEditor name="body" placeholder={leaveCommentPlaceholder} />
+              </StyledMarkdownEditorWrapper>
 
-                  return false;
-                }}
-                placeholder={t("comment.leaveCommentPlaceholder")}
-                type="textarea"
-              />
+              <StyledAdditionalActionButtonWrapper>
+                <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
+                  {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}
+                  <Spinner visible={isSubmitting} />
+                </StyledPostButton>
+              </StyledAdditionalActionButtonWrapper>
             </Form>
           );
         }}

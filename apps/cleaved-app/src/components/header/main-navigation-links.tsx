@@ -12,7 +12,7 @@ export const MainNavigationLinks: FunctionComponent = () => {
 
   const homeLinkName = t("menuLinkNames.home") ? t("menuLinkNames.home") : "";
   const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
-  const teamsListLinkName = t("menuLinkNames.teamsList") ? t("menuLinkNames.teamsList") : "";
+  const peopleListLinkName = t("menuLinkNames.peopleList") ? t("menuLinkNames.peopleList") : "";
 
   return (
     <>
@@ -38,11 +38,11 @@ export const MainNavigationLinks: FunctionComponent = () => {
 
       <Link
         getProps={isMenuItemActive}
-        to={`/${preferredOrgId}${routeConstantsCleavedApp.teamsList.route}`}
-        title={teamsListLinkName}
+        to={`/${preferredOrgId}${routeConstantsCleavedApp.peopleList.route}`}
+        title={peopleListLinkName}
       >
         <NavigationButton>
-          <NavigationButtonLabel>{teamsListLinkName}</NavigationButtonLabel>
+          <NavigationButtonLabel>{peopleListLinkName}</NavigationButtonLabel>
         </NavigationButton>
       </Link>
     </>

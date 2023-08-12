@@ -6,7 +6,7 @@ import { FONT_SIZES, SPACING_PX } from "@cleaved/ui";
 import { FindMyAccountQuery, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useNavigateToProfile } from "../../hooks";
 
-import { avatartBase, avatarBaseSize } from "../avatars/avatar-base-styles";
+import { avatartBase, avatarSmall } from "../avatars/avatar-base-styles";
 
 type PostHeaderAvatarProps = {
   account:
@@ -17,7 +17,7 @@ type PostHeaderAvatarProps = {
 
 const StyledAvatarImage = styled.img`
   ${avatartBase}
-  ${avatarBaseSize}
+  ${avatarSmall}
   margin-right: ${SPACING_PX.TWO};
 `;
 
@@ -28,7 +28,7 @@ const StyledAvatarImageLink = styled.a`
 
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
-  ${avatarBaseSize}
+  ${avatarSmall}
   font-size: ${FONT_SIZES.SMALL};
   margin-right: ${SPACING_PX.TWO};
 `;

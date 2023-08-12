@@ -164,9 +164,7 @@ div {
   overflow-wrap: anywhere;
 }
 
-p {
-  margin-bottom: ${SPACING.MEDIUM};
-}
+p {}
 
 a{
   color: ${({ theme }) => theme.colors.baseLink_color};

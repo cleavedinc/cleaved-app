@@ -1,42 +1,33 @@
-import React, { FunctionComponent } from "react";
-import { Menu, MenuItem } from "@szhsin/react-menu";
-import styled, { useTheme } from "styled-components";
+import React, { FunctionComponent, useContext } from "react";
+import { navigate } from "@reach/router";
+import { useTheme } from "styled-components";
 
-import { BORDERS, CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
+import { CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
 
-import { useTranslator } from "../../hooks";
+import { authTokenContext } from "../../contexts";
+import { useRouteParams, useTranslator } from "../../hooks";
+import { routeConstantsCleavedApp } from "../../router";
+
+import { StyledBasicItem, StyledBasicMenu, StyledEditIcon } from "./components";
 
 import "@szhsin/react-menu/dist/index.css";
 
-const StyledBasicItem = styled(MenuItem)`
-  font-size: ${FONT_SIZES.SMALL};
-
-  :hover,
-  &.szh-menu__item--hover {
-    background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
-  }
-`;
-
-const StyledBasicMenu = styled(Menu)`
-  margin-left: auto;
-
-  ul {
-    background-color: ${({ theme }) => theme.colors.body_backgroundColor};
-    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-    color: ${({ theme }) => theme.colors.baseText_color};
-  }
-`;
-
 export const WidgetProjectDetailsMenu: FunctionComponent = () => {
+  const { preferredOrgId } = useContext(authTokenContext);
+  const routeParams = useRouteParams();
+  const projectId = routeParams.projectId ? routeParams.projectId : null;
   const theme = useTheme();
   const { t } = useTranslator();
 
   const handleRouteToProjectStartNew = () => {
-    alert("not hooked up yet");
+    navigate(
+      `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectId}${routeConstantsCleavedApp.projectForm.route}`
+    );
   };
 
   return (
     <StyledBasicMenu
+      arrow={true}
       menuButton={
         <CircleEditButtonSmall type="button">
           <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
@@ -44,7 +35,10 @@ export const WidgetProjectDetailsMenu: FunctionComponent = () => {
       }
       direction={"left"}
     >
-      <StyledBasicItem onClick={() => handleRouteToProjectStartNew()}>{t("widget.projectDetailsEdit")}</StyledBasicItem>
+      <StyledBasicItem onClick={() => handleRouteToProjectStartNew()}>
+        <StyledEditIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+        {t("widget.projectDetailsEdit")}
+      </StyledBasicItem>
     </StyledBasicMenu>
   );
 };

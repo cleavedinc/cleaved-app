@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonLink, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
-import { useMyOrganizationMembership, useTranslator } from "../../hooks";
+import { useOrganizationMemberships, useTranslator } from "../../hooks";
 
 import { REGISTER_ORGANIZATION_MUTATION } from "./gql";
 
@@ -56,12 +56,12 @@ const StyledProjectFormLabel = styled.label`
 
 export const OrganizationRegisterForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const membershipQuery = useMyOrganizationMembership();
+  const organizationMemberships = useOrganizationMemberships();
 
   const [registerOrganization] = useMutation(REGISTER_ORGANIZATION_MUTATION, {
     onCompleted: () => {
-      if (membershipQuery.refetch) {
-        membershipQuery.refetch();
+      if (organizationMemberships.refetch) {
+        organizationMemberships.refetch();
       }
 
       navigate(-1);

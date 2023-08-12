@@ -8,7 +8,7 @@ export const DropdownMenu = styled.nav`
   display: none;
   position: absolute;
   right: ${SPACING.MEDIUM};
-  top: 48px;
+  top: 40px;
   width: 300px;
   z-index: 999;
 

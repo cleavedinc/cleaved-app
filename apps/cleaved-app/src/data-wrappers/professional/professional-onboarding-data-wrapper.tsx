@@ -34,17 +34,18 @@ import celebrateHighFiveFireworks from "../../media/helper-info/celebrate-high-f
 import celebrateHighFiveFireworks2 from "../../media/helper-info/celebrate-high-five-fireworks-2.svg";
 import organizationSingleBuilding from "../../media/helper-info/organization-single-building.svg";
 import projectWhiteboardTwoPeople from "../../media/helper-info/project-whiteboard-two-people.svg";
-import peopleTwoProfessionalsHoldingProjectElements from "../../media/helper-info/people-two-professionals-holding-project-elements.svg";
 
 const StyledBox = styled(Box)`
   margin-bottom: 0;
 `;
 
-const StyledButtonPrimary = styled(ButtonPrimary)``;
+const StyledButtonPrimary = styled(ButtonPrimary)`
+  background-color: ${({ theme }) => theme.colors.baseButtonLink_color};
+`;
 
 const StyledButtonPrimaryWrapper = styled.div`
   display: flex;
-  margin-bottom: ${SPACING.XLARGE};
+  margin-top: ${SPACING.MEDIUM};
 `;
 
 const StyledFinishOnboardingButton = styled(ButtonPrimary)`
@@ -59,13 +60,18 @@ const StyledHasOrganizationSkipOnboarding = styled.div`
 `;
 
 const StyledHelperInfoHeaderTextImageRightBox = styled(HelperInfoHeaderTextImageRightBox)`
-  margin-bottom: ${SPACING.MEDIUM};
+  margin-bottom: 0;
+  margin-top: ${SPACING.MEDIUM};
   padding-left: 0;
   padding-right: 0;
 `;
 
 const StyledH1 = styled(H1)`
   margin-bottom: ${SPACING.MEDIUM};
+`;
+
+const StyledLinkButtonPrimary = styled(LinkButtonPrimary)`
+  background-color: ${({ theme }) => theme.colors.baseButtonLink_color};
 `;
 
 const StyledShareLinkIcon = styled(CopyIcon)`
@@ -315,8 +321,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
 
   const isCompleteOnboardingButtonDisabled =
     (activeStep === 1 && !preferredOrgId) ||
-    (activeStep === 2 && projectsInOrganizationSeekData && projectsInOrganizationSeekData?.length === 0) ||
-    (activeStep === 3 && shareLinkObject?.permission !== OrgPermissionLevel.Updater);
+    (activeStep === 2 && projectsInOrganizationSeekData && projectsInOrganizationSeekData?.length === 0);
 
   return (
     <>
@@ -363,21 +368,25 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
               />
             )}
 
-            <StyledHasOrganizationSkipOnboarding>
-              {t("professionalOnboarding.alreadyHasOrganizationText")}
-              <Link to={routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}>
-                {t("professionalOnboarding.alreadyHasOrganizationLink")}
-              </Link>
-            </StyledHasOrganizationSkipOnboarding>
+            {!preferredOrgId && (
+              <StyledHasOrganizationSkipOnboarding>
+                {t("professionalOnboarding.alreadyHasOrganizationText")}
+                <Link to={routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}>
+                  {t("professionalOnboarding.alreadyHasOrganizationLink")}
+                </Link>
+              </StyledHasOrganizationSkipOnboarding>
+            )}
           </StyledBox>
 
-          <StyledHelperInfoHeaderTextImageRightBox
-            backgroundColor={"transparent"}
-            helperInfoImageAltText={t("professionalOnboarding.registerOrganizationHelperInfoImageAlt")}
-            helperInfoImageUrl={organizationSingleBuilding}
-            helperInfoText={t("professionalOnboarding.registerOrganizationHelperInfoText")}
-            width={"150px"}
-          />
+          {!preferredOrgId && (
+            <StyledHelperInfoHeaderTextImageRightBox
+              backgroundColor={"transparent"}
+              helperInfoImageAltText={t("professionalOnboarding.registerOrganizationHelperInfoImageAlt")}
+              helperInfoImageUrl={organizationSingleBuilding}
+              helperInfoText={t("professionalOnboarding.registerOrganizationHelperInfoText")}
+              width={"150px"}
+            />
+          )}
         </>
       )}
 
@@ -409,13 +418,17 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
               )}
           </StyledBox>
 
-          <StyledHelperInfoHeaderTextImageRightBox
-            backgroundColor={"transparent"}
-            helperInfoImageAltText={t("professionalOnboarding.startNewProjectHelperInfoImageAlt")}
-            helperInfoImageUrl={projectWhiteboardTwoPeople}
-            helperInfoText={t("professionalOnboarding.startNewProjectHelperInfoText")}
-            width={"150px"}
-          />
+          {!projectsInOrganizationSeekDataLoading &&
+            projectsInOrganizationSeekData &&
+            projectsInOrganizationSeekData?.length <= 0 && (
+              <StyledHelperInfoHeaderTextImageRightBox
+                backgroundColor={"transparent"}
+                helperInfoImageAltText={t("professionalOnboarding.startNewProjectHelperInfoImageAlt")}
+                helperInfoImageUrl={projectWhiteboardTwoPeople}
+                helperInfoText={t("professionalOnboarding.startNewProjectHelperInfoText")}
+                width={"150px"}
+              />
+            )}
         </>
       )}
 
@@ -424,6 +437,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
         <>
           <StyledBox>
             <StyledH1>{t("professionalOnboarding.invitePeopleFormHeader")}</StyledH1>
+            <p>{t("shareLinks.createWriteShareLinkText")}</p>
 
             {!loading && shareLinkArray && shareLinkArray?.length === 0 && (
               <StyledButtonPrimary
@@ -461,23 +475,15 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
               })}
 
             {!loading && shareLinkArray && shareLinkArray?.length > 0 && (
-              <LinkButtonPrimary
+              <StyledLinkButtonPrimary
                 href={`mailto:?subject=${t("professionalOnboarding.mailtoLinkEmailSubjectText")}&body=${t(
                   "professionalOnboarding.mailtoLinkEmailBodyText"
                 )} ${shareLinkUrl}`}
               >
                 {t("professionalOnboarding.mailtoLink")}
-              </LinkButtonPrimary>
+              </StyledLinkButtonPrimary>
             )}
           </StyledBox>
-
-          <StyledHelperInfoHeaderTextImageRightBox
-            backgroundColor={"transparent"}
-            helperInfoImageAltText={t("professionalOnboarding.invitePeopleHelperInfoImageAlt")}
-            helperInfoImageUrl={peopleTwoProfessionalsHoldingProjectElements}
-            helperInfoText={t("professionalOnboarding.invitePeopleHelperInfoText")}
-            width={"150px"}
-          />
         </>
       )}
 

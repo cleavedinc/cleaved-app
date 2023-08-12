@@ -6,7 +6,6 @@ import { routeConstantsShared } from "@cleaved/helpers";
 import { mediaQueries } from "@cleaved/ui";
 
 import { AccountOrganizationRegister } from "../pages/account/account-organization-register";
-import { AccountPersonalInformation } from "../pages/account/account-personal-information";
 import { AccountProfessionalInformation } from "../pages/account/account-professional-information";
 import { AccountOrganizations } from "../pages/account/account-organizations";
 import { AccountMembership } from "../pages/account/account-membership";
@@ -19,9 +18,9 @@ import { ProfessionalOnboarding } from "../pages/professional/professional-onboa
 import { ProfessionalOnboardingHasOrganization } from "../pages/professional/professional-onboarding-has-organization";
 import { Project } from "../pages/project/project";
 import { ProjectList } from "../pages/project/project-list";
-import { ProjectStartNew } from "../pages/project/project-start-new";
-import { TeamsList } from "../pages/teams/teams-list";
-import { TeamsListProfessionalInvite } from "../pages/professional/professional-invite";
+import { ProjectForm } from "../pages/project/project-form";
+import { PeopleList } from "../pages/people/people-list";
+import { PeopleListProfessionalInvite } from "../pages/professional/professional-invite";
 import { TermsOfService } from "../pages/agreements/terms-of-service";
 import { TermsOfServiceAgreement } from "../pages/agreements/terms-of-service-agreement";
 import { routeConstantsCleavedApp } from "../router";
@@ -42,11 +41,6 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.accountOrganizationRegister.route}`}
       renderedPage={<AccountOrganizationRegister />}
-    />
-
-    <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.accountPersonalInformation.route}`}
-      renderedPage={<AccountPersonalInformation />}
     />
 
     <PageProtector
@@ -89,11 +83,16 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector path={`:orgId${routeConstantsCleavedApp.projectList.route}`} renderedPage={<ProjectList />} />
 
     <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.projectStartNew.route}`}
-      renderedPage={<ProjectStartNew />}
+      path={`:orgId${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`}
+      renderedPage={<ProjectForm />}
     />
 
-    <PageProtector path={`:orgId${routeConstantsCleavedApp.teamsList.route}`} renderedPage={<TeamsList />} />
+    <PageProtector
+      path={`:orgId${routeConstantsCleavedApp.project.route}/:projectId${routeConstantsCleavedApp.projectForm.route}`}
+      renderedPage={<ProjectForm />}
+    />
+
+    <PageProtector path={`:orgId${routeConstantsCleavedApp.peopleList.route}`} renderedPage={<PeopleList />} />
 
     <PageProtector path={routeConstantsShared.privacyPolicy.route} renderedPage={<PrivacyPolicy />} isNotProtected />
 
@@ -105,7 +104,7 @@ export const ApplicationRouter: FunctionComponent = () => (
 
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.professionalInvite.route}`}
-      renderedPage={<TeamsListProfessionalInvite />}
+      renderedPage={<PeopleListProfessionalInvite />}
     />
 
     <PageProtector path={routeConstantsShared.termsOfService.route} renderedPage={<TermsOfService />} isNotProtected />

@@ -36,6 +36,16 @@ type ProjectStatusType = {
   label: string;
 };
 
+type StyledTdWithMenuContentProps = {
+  projectName?: string;
+  dateCreated?: string;
+  posts?: string;
+};
+
+type StyledTdWithMenuContentEditProps = {
+  editStatus?: string;
+};
+
 const StyledAddPeopleText = styled.div`
   margin-bottom: ${SPACING.SMALL};
 `;
@@ -52,9 +62,7 @@ const StyledInviteMorePeopleWrapper = styled.div`
   }
 `;
 
-const StyledProjectLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.baseTextLink_color};
-`;
+const StyledProjectLink = styled(Link)``;
 
 const StyledRouterButtonLeft = styled(StyledRouterButton)`
   margin-left: auto;
@@ -70,20 +78,20 @@ const StyledProjectListHeader = styled.div`
   }
 `;
 
-const StyledTdWithMenuContent = styled(StyledTd)`
+const StyledTdWithMenuContent = styled(StyledTd)<StyledTdWithMenuContentProps>`
   vertical-align: middle; /* Fixes a double bottom border in safari */
 
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(1):before {
-      content: "Project name";
+      content: ${(props) => (props.projectName ? `"${props.projectName}"` : null)}; // "Project name";
     }
 
     &:nth-of-type(2):before {
-      content: "Date created";
+      content: ${(props) => (props.dateCreated ? `"${props.dateCreated}"` : null)}; // "Date created";
     }
 
     &:nth-of-type(3):before {
-      content: "Posts";
+      content: ${(props) => (props.posts ? `"${props.posts}"` : null)}; // "Posts";
     }
   }
 
@@ -97,12 +105,12 @@ const StyledTdWithMenuContent = styled(StyledTd)`
   }
 `;
 
-const StyledTdWithMenuContentEdit = styled(StyledTd)`
+const StyledTdWithMenuContentEdit = styled(StyledTd)<StyledTdWithMenuContentEditProps>`
   width: 100px;
 
   ${mediaQueries.RESPONSIVE_TABLE} {
     &:nth-of-type(4):before {
-      content: "Edit Status";
+      content: ${(props) => (props.editStatus ? `"${props.editStatus}"` : null)}; // "Edit Status";
     }
   }
 `;
@@ -134,7 +142,12 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
     { value: ProjectStatus.Archived, label: t("projects.archive") },
   ];
 
-  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
+  const projectStartNewLinkName = t("menuLinkNames.projectForm") ? t("menuLinkNames.projectForm") : "";
+
+  const projectName = t("project.projectName") ? t("project.projectName") : "";
+  const dateCreated = t("project.dateCreated") ? t("project.dateCreated") : "";
+  const posts = t("project.posts") ? t("project.posts") : "";
+  const editStatus = t("project.editStatus") ? t("project.editStatus") : "";
 
   return (
     <>
@@ -165,7 +178,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
               option: (styles, { isSelected }) => {
                 return {
                   ...styles,
-                  color: isSelected ? colorTheme.colors.white_always_color : colorTheme.colors.baseText_color,
+                  color: isSelected ? colorTheme.colors.always_white_color : colorTheme.colors.baseText_color,
                 };
               },
             }}
@@ -182,10 +195,10 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
           />
 
           <StyledRouterButtonLeft
-            to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`}
             title={projectStartNewLinkName}
           >
-            {t("projectStartNew.startNewProject")}
+            {t("projectForm.startNewProject")}
           </StyledRouterButtonLeft>
         </StyledProjectListHeader>
       )}
@@ -206,7 +219,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
               {projectsInOrganizationSeekData.map((project) => {
                 return (
                   <StyledTrWrapper key={project.id} role="row">
-                    <StyledTdWithMenuContent role="cell">
+                    <StyledTdWithMenuContent projectName={projectName} role="cell">
                       <StyledProjectLink
                         to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${project.id}${routeConstantsCleavedApp.projectBoard.route}`}
                         title={project.name}
@@ -214,12 +227,14 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
                         {project.name}
                       </StyledProjectLink>
                     </StyledTdWithMenuContent>
-                    <StyledTdWithMenuContent role="cell">
+                    <StyledTdWithMenuContent dateCreated={dateCreated} role="cell">
                       {dayjs(project.createdAt).format("MMMM DD, YYYY")}
                     </StyledTdWithMenuContent>
-                    <StyledTdWithMenuContent role="cell">{project.totalRootPostCount}</StyledTdWithMenuContent>
+                    <StyledTdWithMenuContent posts={posts} role="cell">
+                      {project.totalRootPostCount}
+                    </StyledTdWithMenuContent>
                     {hasPermission && (
-                      <StyledTdWithMenuContentEdit role="cell">
+                      <StyledTdWithMenuContentEdit editStatus={editStatus} role="cell">
                         <ProjectsEditMenu
                           projectId={project.id}
                           projectStatus={project.status}
@@ -239,13 +254,13 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
         projectsInOrganizationSeekData &&
         projectsInOrganizationSeekData.length >= 0 && (
           <StyledInviteMorePeopleWrapper>
-            <StyledAddPeopleText>{t("projectStartNew.addNewProjectHelperText")}</StyledAddPeopleText>
+            <StyledAddPeopleText>{t("projectForm.addNewProjectHelperText")}</StyledAddPeopleText>
 
             <StyledRouterButtonLink
-              to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`}
               title={projectStartNewLinkName}
             >
-              {t("projectStartNew.startNewProject")}
+              {t("projectForm.startNewProject")}
             </StyledRouterButtonLink>
           </StyledInviteMorePeopleWrapper>
         )}

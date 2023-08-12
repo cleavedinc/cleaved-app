@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { BORDERS, RADIUS, SPACING } from "../../theme";
+import { BORDERS, FONT_SIZES, RADIUS, SPACING } from "../../theme";
 
 import { Tooltip } from "./tooltip";
 
@@ -9,5 +9,6 @@ export const StyledTooltipWhite = styled(Tooltip)`
   background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   border-radius: ${RADIUS.PILL};
-  padding: ${SPACING.SMALL};
+  font-size: ${FONT_SIZES.SMALL};
+  padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
 `;
