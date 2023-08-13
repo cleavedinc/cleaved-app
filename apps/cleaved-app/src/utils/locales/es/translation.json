@@ -109,6 +109,9 @@
     "organizationRegister": "Registrar una nueva organización",
     "peopleList": "Gente"
   },
+  "notFound": {
+    "pageMessage": "¡Ups! Parece que tomamos un camino equivocado. Utiliza el menú en la parte superior para intentarlo de nuevo."
+  },
   "organizations": {
     "areYouSureKeepButtonText": "Permanecer en la organización",
     "areYouSureRemoveButtonText": "Entiendo el riesgo, abandonar la organización",
