@@ -173,6 +173,7 @@
     "createProjectPostWithName": "Create a post {{name}}",
     "createProjectPost": "Create post",
     "editProjectPost": "Edit post",
+    "pinned": "Pinned",
     "pinPost": "Pin to the project",
     "photoViewerToolbarMessage": "Posted by {{firstName}} {{lastName}} on ",
     "post": "Post",
@@ -181,7 +182,8 @@
     "removePost": "Delete Post",
     "submitPost": "Post",
     "totalComments": "Total comments",
-    "totalPosts": "Total posts"
+    "totalPosts": "Total posts",
+    "unpinPost": "Unpin from the project"
   },
   "postFileUpload": {
     "addMoreImages": "Add more images",

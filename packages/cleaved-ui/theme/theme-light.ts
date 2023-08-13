@@ -18,6 +18,7 @@ export const themeLight = {
     baseBox_backgroundColor: COLORS_LIGHT.WHITE,
     baseButtonAndIcon_backgroundColorHover: COLORS_LIGHT.GRAY_50,
     baseButtonLink_color: COLORS_LIGHT.GRAY_500,
+    baseButtonSecondaryLink_color: COLORS_LIGHT.GRAY_100,
     baseDropdownMenu_backgroundColor: COLORS_LIGHT.WHITE,
     baseIcon_color: COLORS_LIGHT.GRAY_500,
     baseIconAlt_color: COLORS_LIGHT.WHITE,

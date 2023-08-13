@@ -14,6 +14,7 @@ export const POST_PROJECT_SEEK_QUERY = graphql(`
         jobTitle
         currentAvatar
       }
+      isPinned
       reactionTotalCount
       reactionsExpressed
       myReaction

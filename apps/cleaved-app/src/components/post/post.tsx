@@ -98,15 +98,18 @@ export const Post: FunctionComponent<PostProps> = (props) => {
     return (
       <>
         {post && (
-          <PostProjectHeader
-            account={post.account}
-            accountId={post.accountId}
-            date={post.date}
-            isPostOpenInModal={isCommentsVisible}
-            postId={post.id}
-            postProjectId={post.project.id}
-            postProjectName={post.project.name}
-          />
+          <>
+            <PostProjectHeader
+              account={post.account}
+              accountId={post.accountId}
+              date={post.date}
+              isPinned={post.isPinned}
+              isPostOpenInModal={isCommentsVisible}
+              postId={post.id}
+              postProjectId={post.project.id}
+              postProjectName={post.project.name}
+            />
+          </>
         )}
 
         <DisplayMarkdown message={post.body} />

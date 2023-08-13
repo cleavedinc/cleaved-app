@@ -173,6 +173,7 @@
     "createProjectPostWithName": "Crear una publicación ",
     "createProjectPost": "Crear publicación",
     "editProjectPost": "Editar publicación",
+    "pinned": "Prender con alfileres",
     "pinPost": "Anclar al proyecto",
     "photoViewerToolbarMessage": "Publicado por el ",
     "post": "Publicar",
@@ -181,7 +182,8 @@
     "removePost": "Eliminar publicación",
     "submitPost": "Publicar",
     "totalComments": "Comentarios totales",
-    "totalPosts": "Publicaciones totales"
+    "totalPosts": "Publicaciones totales",
+    "unpinPost": "Desanclar del proyecto"
   },
   "postFileUpload": {
     "addMoreImages": "Agregar más imágenes",

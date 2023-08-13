@@ -17,6 +17,7 @@ import {
   H1,
   LinkButtonPrimary,
   mediaQueries,
+  Paragraph,
   RADIUS,
   SPACING,
 } from "@cleaved/ui";
@@ -39,8 +40,9 @@ const StyledBox = styled(Box)`
   margin-bottom: 0;
 `;
 
-const StyledButtonPrimary = styled(ButtonPrimary)`
-  background-color: ${({ theme }) => theme.colors.baseButtonLink_color};
+const StyledButtonPrimary = styled(ButtonSecondary)`
+  background-color: ${({ theme }) => theme.colors.baseButtonSecondaryLink_color};
+  color: ${({ theme }) => theme.colors.baseText_color};
 `;
 
 const StyledButtonPrimaryWrapper = styled.div`
@@ -71,7 +73,8 @@ const StyledH1 = styled(H1)`
 `;
 
 const StyledLinkButtonPrimary = styled(LinkButtonPrimary)`
-  background-color: ${({ theme }) => theme.colors.baseButtonLink_color};
+  background-color: ${({ theme }) => theme.colors.baseButtonSecondaryLink_color};
+  color: ${({ theme }) => theme.colors.baseText_color};
 `;
 
 const StyledShareLinkIcon = styled(CopyIcon)`
@@ -437,7 +440,7 @@ export const ProfessionalOnboardingDataWrapper: FunctionComponent = () => {
         <>
           <StyledBox>
             <StyledH1>{t("professionalOnboarding.invitePeopleFormHeader")}</StyledH1>
-            <p>{t("shareLinks.createWriteShareLinkText")}</p>
+            <Paragraph>{t("shareLinks.createWriteShareLinkText")}</Paragraph>
 
             {!loading && shareLinkArray && shareLinkArray?.length === 0 && (
               <StyledButtonPrimary
