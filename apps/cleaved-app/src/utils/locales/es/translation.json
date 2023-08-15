@@ -92,6 +92,7 @@
     "spanish": "Español"
   },
   "loginPage": {
+    "errorSingleOrgJoinLimit": "Sólo se puede asociar 1 correo electrónico a una cuenta dividida.",
     "signInHeader": "Registrarse / Iniciar sesión",
     "signInMessage": "Crea una nueva cuenta o inicia sesión en una existente."
   },

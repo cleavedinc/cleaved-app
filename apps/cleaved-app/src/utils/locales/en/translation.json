@@ -92,6 +92,7 @@
     "spanish": "Spanish"
   },
   "loginPage": {
+    "errorSingleOrgJoinLimit": "Only 1 email can be associated with a cleaved account.",
     "signInHeader": "Sign up / Log in",
     "signInMessage": "Create a new account, or log in to an existing one."
   },

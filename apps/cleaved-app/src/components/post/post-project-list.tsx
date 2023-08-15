@@ -13,6 +13,10 @@ import { routeConstantsCleavedApp } from "../../router";
 
 import { Post } from "./post";
 
+type PostProjectListProps = {
+  showPinnedStatus?: boolean;
+};
+
 const StyledWaypointTriggerMessage = styled.div`
   margin: ${SPACING.MEDIUM};
   text-align: center;
@@ -36,7 +40,8 @@ const StyledPostListWrapper = styled.div`
   }
 `;
 
-export const PostProjectList: FunctionComponent = () => {
+export const PostProjectList: FunctionComponent<PostProjectListProps> = (props) => {
+  const { showPinnedStatus } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const pageSize = 50;
@@ -70,7 +75,7 @@ export const PostProjectList: FunctionComponent = () => {
           {postProjectSeekData.map((post) => {
             return (
               <StyledPostListWrapper key={post.id}>
-                <Post post={post} />
+                <Post post={post} showPinnedStatus={showPinnedStatus} />
               </StyledPostListWrapper>
             );
           })}

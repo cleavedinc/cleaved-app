@@ -11,7 +11,7 @@ import {
   StyledPostFormButton,
   StyledPostFormButtonText,
 } from "../../components";
-import { PostsContext } from "../../contexts";
+import { PostFormContext, PostsContext } from "../../contexts";
 import { ProjectPostForm } from "../../forms";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useFindMyAccount, useTranslator } from "../../hooks";
@@ -24,7 +24,7 @@ const StyledProjectPostBox = styled(Box)`
 `;
 
 export const ProjectDataWrapper: FunctionComponent = () => {
-  const { projectPostFormIsDirty, projectPostFormImageUploadIsDirty } = useContext(PostsContext);
+  const { projectPostFormIsDirty, projectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { postProjectSeekData, postProjectSeekDataLoading } = useContext(PostsContext);
   const accountQuery = useFindMyAccount();
@@ -109,7 +109,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
         </StyledProjectPostBox>
       )}
 
-      <PostProjectList />
+      <PostProjectList showPinnedStatus={true} />
 
       {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 0 && (
         <>

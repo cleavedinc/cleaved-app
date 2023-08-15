@@ -22,6 +22,7 @@ type PostProjectHeaderProps = {
   postId: string;
   postProjectId: string;
   postProjectName: string;
+  showPinnedStatus?: boolean;
 };
 
 const StyledPinnedWrapper = styled.div`
@@ -90,8 +91,18 @@ const StyledSeparatorDot = styled(SeparatorDot)`
 `;
 
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
-  const { account, accountId, className, date, isPinned, isPostOpenInModal, postId, postProjectId, postProjectName } =
-    props;
+  const {
+    account,
+    accountId,
+    className,
+    date,
+    isPinned,
+    isPostOpenInModal,
+    postId,
+    postProjectId,
+    postProjectName,
+    showPinnedStatus,
+  } = props;
   const { preferredOrgId } = useContext(authTokenContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { profilePath } = useNavigateToProfile(account?.id);
@@ -101,7 +112,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
 
   return (
     <StyledPostHeaderWrapper className={className}>
-      {isPinned && (
+      {showPinnedStatus && isPinned && (
         <StyledPinnedWrapper>
           <StyledPushPinIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.SMALL} />
           {t("post.pinned")}
