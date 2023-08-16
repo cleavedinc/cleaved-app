@@ -124,11 +124,10 @@
     "edit": "Edit",
     "manageOrganizations": "Manage organizations",
     "organizations": "Organizations",
-    "organizationName": "Organization",
+    "organization": "Organization",
     "organizationNamePlaceholder": "Organization name",
     "organizationRegister": "Register organization",
-    "removeOrganization": "Delete organization",
-    "setDefaultOrganization": "Set as active organization"
+    "removeOrganization": "Delete organization"
   },
   "organizationsStartNew": {
     "registerNewOrganization": "Register a new organization"

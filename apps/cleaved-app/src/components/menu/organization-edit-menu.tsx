@@ -3,15 +3,15 @@ import { useMutation } from "@apollo/react-hooks";
 import { useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { CircleEditButtonSmall, EllipsisHorizontalIcon } from "@cleaved/ui";
+import { CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES } from "@cleaved/ui";
 
 import { AreYouSureModal } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
-import { ORGANIZATION_REMOVE_ME_MUTATION, SET_PREFERRED_ORGANIZATION_MUTATION } from "../../gql-mutations";
+import { ORGANIZATION_REMOVE_ME_MUTATION } from "../../gql-mutations";
 
-import { StyledBasicItem, StyledBasicItemRed, StyledBasicMenu } from "./components";
+import { StyledBasicItemRed, StyledBasicMenu, StyledDeleteIcon } from "./components";
 
 import "@szhsin/react-menu/dist/index.css";
 
@@ -21,7 +21,7 @@ type OrganizationEditMenuProps = {
 
 export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> = (props) => {
   const { orgId } = props;
-  const { logOut, setPreferredOrgIdOnContext } = useContext(authTokenContext);
+  const { logOut } = useContext(authTokenContext);
   const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
   const theme = useTheme();
   const { t } = useTranslator();
@@ -35,28 +35,12 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
     },
   });
 
-  const [setPreferredOrganization] = useMutation(SET_PREFERRED_ORGANIZATION_MUTATION, {
-    onError: (error) => {
-      logQueryError(error);
-    },
-  });
-
   const handleOrganizationRemoveMe = (orgIdArg: string) => {
     organizationRemoveMe({
       variables: {
         organizationId: orgIdArg,
       },
     });
-  };
-
-  const handleSetOrganizationId = (orgIdArg: string) => {
-    setPreferredOrganization({
-      variables: {
-        orgId: orgIdArg,
-      },
-    });
-
-    setPreferredOrgIdOnContext(orgIdArg);
   };
 
   const areYouSureKeepButtonText = t("organizations.areYouSureKeepButtonText")
@@ -86,11 +70,8 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
         }
         direction={"left"}
       >
-        <StyledBasicItem onClick={() => handleSetOrganizationId(orgId)}>
-          {t("organizations.setDefaultOrganization")}
-        </StyledBasicItem>
-
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
+          <StyledDeleteIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
           {t("organizations.removeOrganization")}
         </StyledBasicItemRed>
       </StyledBasicMenu>

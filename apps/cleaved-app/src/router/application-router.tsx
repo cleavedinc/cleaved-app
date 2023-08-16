@@ -5,9 +5,7 @@ import { Router } from "@reach/router";
 import { routeConstantsShared } from "@cleaved/helpers";
 import { mediaQueries } from "@cleaved/ui";
 
-import { AccountOrganizationRegister } from "../pages/account/account-organization-register";
 import { AccountProfessionalInformation } from "../pages/account/account-professional-information";
-import { AccountOrganizations } from "../pages/account/account-organizations";
 import { AccountMembership } from "../pages/account/account-membership";
 import { Home } from "../pages/home";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
@@ -40,11 +38,6 @@ const StyledRouter = styled(Router)`
 export const ApplicationRouter: FunctionComponent = () => (
   <StyledRouter primary={false}>
     <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.accountOrganizationRegister.route}`}
-      renderedPage={<AccountOrganizationRegister />}
-    />
-
-    <PageProtector
       path={`:orgId${routeConstantsCleavedApp.accountProfessionalInformation.route}`}
       renderedPage={<AccountProfessionalInformation />}
     />
@@ -52,11 +45,6 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.accountMembership.route}`}
       renderedPage={<AccountMembership />}
-    />
-
-    <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.accountOrganizations.route}`}
-      renderedPage={<AccountOrganizations />}
     />
 
     <PageProtector

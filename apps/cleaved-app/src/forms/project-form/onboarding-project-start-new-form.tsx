@@ -8,7 +8,7 @@ import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { useProductEngagementLogEvent, useTranslator } from "../../hooks";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
 import { PROJECT_CREATE } from "./gql";
@@ -57,11 +57,14 @@ const StyledProjectFormLabel = styled.label`
 
 export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectStartNewFormProps> = (props) => {
   const { projectsInOrgSeekRefetch } = props;
+  const logEvent = useProductEngagementLogEvent();
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
 
   const [projectCreate] = useMutation(PROJECT_CREATE, {
     onCompleted: () => {
+      logEvent("PROJECT_CREATE");
+
       if (projectsInOrgSeekRefetch) {
         projectsInOrgSeekRefetch();
       }
