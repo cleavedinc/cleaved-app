@@ -202,7 +202,7 @@
     "finishOnboarding": "Take me to my new project",
     "registerOrganizationCelebrateImageAlt": "Two people high-fiving with fireworks around them",
     "registerOrganizationHelperInfoImageAlt": "A single building",
-    "registerOrganizationHelperInfoText": "Organizations are how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "registerOrganizationHelperInfoText": "Organizations are how your projects, teams, and everything else are organized.",
     "registerOrganizationFormHeader": "Register your organization",
     "registerOrganizationFormHeaderOrgCreated": "Organization created",
     "startNewProjectCelebrateImageAlt": "Two people jumping and high-fiving with fireworks around them",

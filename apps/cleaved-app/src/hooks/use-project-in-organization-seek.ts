@@ -35,7 +35,7 @@ export const useProjectsInOrganizationSeek = (
   });
 
   return {
-    projectsInOrganizationSeekData: data?.projectsInOrgSeek,
+    projectsInOrganizationSeekData: data && data?.projectsInOrgSeek,
     projectsInOrganizationSeekDataLoading: loading,
     projectsInOrganizationSeekDataRefetch: refetch,
   };

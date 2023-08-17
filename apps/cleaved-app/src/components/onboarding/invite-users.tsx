@@ -55,9 +55,7 @@ export const InviteUsers: FunctionComponent = () => {
   const { termsAccepted, termsAcceptedIsLoading } = useTermsAccepted();
   const { projectsInOrganizationSeekData } = useProjectsInOrganizationSeek();
   const { preferredOrgId } = useContext(authTokenContext);
-
   const [shareLinkArray, setShareLinkArray] = useState<OrganizationShareLinksQuery["organizationShareLinks"]>([]);
-
   const { t } = useTranslator();
 
   const { data, loading, refetch, error } = useQuery<OrganizationShareLinksQuery>(ORGANIZATION_SHARE_LINKS_QUERY, {

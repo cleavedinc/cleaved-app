@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react";
+import { navigate } from "@reach/router";
 
 import { OnboardingProjectStartNewForm } from "../../forms";
 import { useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
 
-import projectWhiteboardTwoPeople from "../../media/helper-info/project-whiteboard-two-people.svg";
+import { routeConstantsCleavedApp } from "../../router";
 
-import { StyledBox, StyledH1, StyledHelperInfoHeaderTextImageRightBox } from "./components";
+import { StyledBox, StyledH1, StyledButtonPrimaryWrapper, StyledNextStepButton } from "./components";
 
 export const CreateFirstProject: FunctionComponent = () => {
   const {
@@ -15,35 +16,33 @@ export const CreateFirstProject: FunctionComponent = () => {
   } = useProjectsInOrganizationSeek();
   const { t } = useTranslator();
 
+  const handleRouteToNextOnboardingStep = () => {
+    navigate(
+      `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingInviteUsers.route}`
+    );
+  };
+
   return (
     <>
       <StyledBox>
-        <StyledH1>
-          {!projectsInOrganizationSeekDataLoading &&
-          projectsInOrganizationSeekData &&
-          projectsInOrganizationSeekData?.length <= 0
-            ? t("professionalOnboarding.startNewProjectFormHeader")
-            : t("professionalOnboarding.startNewProjectFormHeaderProjectCreated")}
-        </StyledH1>
+        <StyledH1>{t("professionalOnboarding.startNewProjectFormHeader")}</StyledH1>
 
-        {!projectsInOrganizationSeekDataLoading &&
-          projectsInOrganizationSeekData &&
-          projectsInOrganizationSeekData?.length <= 0 && (
-            <OnboardingProjectStartNewForm projectsInOrgSeekRefetch={projectsInOrganizationSeekDataRefetch} />
-          )}
+        <OnboardingProjectStartNewForm projectsInOrgSeekRefetch={projectsInOrganizationSeekDataRefetch} />
       </StyledBox>
 
-      {!projectsInOrganizationSeekDataLoading &&
-        projectsInOrganizationSeekData &&
-        projectsInOrganizationSeekData?.length <= 0 && (
-          <StyledHelperInfoHeaderTextImageRightBox
-            backgroundColor={"transparent"}
-            helperInfoImageAltText={t("professionalOnboarding.startNewProjectHelperInfoImageAlt")}
-            helperInfoImageUrl={projectWhiteboardTwoPeople}
-            helperInfoText={t("professionalOnboarding.startNewProjectHelperInfoText")}
-            width={"150px"}
-          />
-        )}
+      <StyledButtonPrimaryWrapper>
+        <StyledNextStepButton
+          onClick={() => handleRouteToNextOnboardingStep()}
+          type="button"
+          disabled={
+            !projectsInOrganizationSeekDataLoading &&
+            projectsInOrganizationSeekData &&
+            projectsInOrganizationSeekData?.length === 0
+          }
+        >
+          {t("professionalOnboarding.navigateForwardStep")}
+        </StyledNextStepButton>
+      </StyledButtonPrimaryWrapper>
     </>
   );
 };

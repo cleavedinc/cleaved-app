@@ -62,7 +62,7 @@ export const HomeDataWrapper: FunctionComponent = () => {
 
       <PostProjectList />
 
-      {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 0 && (
+      {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length === 0 && (
         <BoxNoPadding>
           <HelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}

@@ -111,7 +111,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
 
       <PostProjectList showPinnedStatus={true} />
 
-      {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 0 && (
+      {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length === 0 && (
         <>
           <HelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}

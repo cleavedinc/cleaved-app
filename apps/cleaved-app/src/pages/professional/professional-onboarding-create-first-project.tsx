@@ -3,13 +3,13 @@ import React, { FunctionComponent } from "react";
 import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { ProgressBar, CreateFirstProject } from "../../components";
-import { AsideProfessionalOnboardingDataWrapper } from "../../data-wrappers";
+import { AsideProfessionalOnboardingCreateFirstProjectDataWrapper } from "../../data-wrappers";
 
 export const ProfessionalOnboardingCreateFirstProject: FunctionComponent = () => {
   return (
     <ContentWrapper>
       <LeftColumnWrapper>
-        <AsideProfessionalOnboardingDataWrapper />
+        <AsideProfessionalOnboardingCreateFirstProjectDataWrapper />
       </LeftColumnWrapper>
 
       <MainColumnMaxWidthWrapper>

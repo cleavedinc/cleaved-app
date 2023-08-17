@@ -4,7 +4,7 @@ import { navigate } from "@reach/router";
 import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { ProgressBar, RegisterOrganization } from "../../components";
-import { AsideProfessionalOnboardingDataWrapper } from "../../data-wrappers";
+import { AsideProfessionalOnboardingRegisterOrganizationDataWrapper } from "../../data-wrappers";
 import { useTermsAccepted } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
@@ -25,7 +25,7 @@ export const ProfessionalOnboardingRegisterOrganization: FunctionComponent = () 
   return (
     <ContentWrapper>
       <LeftColumnWrapper>
-        <AsideProfessionalOnboardingDataWrapper />
+        <AsideProfessionalOnboardingRegisterOrganizationDataWrapper />
       </LeftColumnWrapper>
 
       <MainColumnMaxWidthWrapper>

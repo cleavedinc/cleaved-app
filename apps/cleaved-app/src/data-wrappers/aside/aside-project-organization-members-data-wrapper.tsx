@@ -63,7 +63,7 @@ export const AsideProjectOrganizationMembersDataWrapper: FunctionComponent = () 
         </PeopleListItem>
       </PeopleList>
 
-      {!postProjectAccountSeekDataLoading && postProjectAccountSeekData && postProjectAccountSeekData.length <= 0 && (
+      {!postProjectAccountSeekDataLoading && postProjectAccountSeekData && postProjectAccountSeekData.length === 0 && (
         <StyledPeopleListEmptyState>{t("people.peopleListHelperInfoText")}</StyledPeopleListEmptyState>
       )}
     </StickUnderHeaderDesktopOnly>

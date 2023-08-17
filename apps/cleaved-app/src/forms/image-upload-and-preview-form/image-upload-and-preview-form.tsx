@@ -245,7 +245,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
 
   return (
     <div className="container">
-      {savedFileUrls && savedFileUrls.length <= 0 && (
+      {savedFileUrls && savedFileUrls.length === 0 && (
         <StyledImageUploadWrapper {...getRootProps({ className: "dropzone", isFocused, isDragAccept, isDragReject })}>
           <input {...getInputProps()} />
 
