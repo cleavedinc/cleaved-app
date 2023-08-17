@@ -107,7 +107,7 @@ export const InviteUsers: FunctionComponent = () => {
 
   const handleCompleteonboardingFlow = () => {
     navigate(
-      `${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectsInOrganizationSeekData?.[0].id}${routeConstantsCleavedApp.projectBoard.route}`
+      `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectsInOrganizationSeekData?.[0].id}${routeConstantsCleavedApp.projectBoard.route}`
     );
   };
 

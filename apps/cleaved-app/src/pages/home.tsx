@@ -15,7 +15,9 @@ export const Home: FunctionComponent = () => {
 
   if (!preferredOrgId) {
     // if no preferredOrgId, send to onboarding screen
-    navigate(routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route);
+    navigate(
+      `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`
+    );
   }
 
   if (termsAcceptedIsLoading || !termsAccepted) {

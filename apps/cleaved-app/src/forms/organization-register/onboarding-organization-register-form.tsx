@@ -62,7 +62,9 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
     onCompleted: () => {
       logEvent("REGISTER_ORGANIZATION");
       refreshLogin();
-      navigate(routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route);
+      navigate(
+        `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`
+      );
     },
   });
 

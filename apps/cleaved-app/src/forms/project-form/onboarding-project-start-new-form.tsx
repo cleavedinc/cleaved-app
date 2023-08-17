@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext, useEffect } from "react";
 import { navigate } from "@reach/router";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
@@ -63,7 +63,7 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
 
-  const [projectCreate] = useMutation(PROJECT_CREATE, {
+  const [projectCreate, { loading, error }] = useMutation(PROJECT_CREATE, {
     onCompleted: () => {
       logEvent("PROJECT_CREATE");
 
@@ -71,12 +71,22 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
         projectsInOrgSeekRefetch();
       }
 
-      navigate(routeConstantsCleavedApp.professionalOnboardingInviteUsers.route);
-    },
-    onError: (error) => {
-      logQueryError(error);
+      navigate(
+        `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingInviteUsers.route}`
+      );
     },
   });
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+
+    if (error) {
+      logQueryError(error);
+      return;
+    }
+  }, [loading, error]);
 
   return (
     <>

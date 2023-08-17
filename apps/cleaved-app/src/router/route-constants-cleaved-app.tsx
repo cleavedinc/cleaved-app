@@ -44,14 +44,17 @@ export const routeConstantsCleavedApp = {
   professionalShareLinkRegistration: {
     route: "/professional-share-link-registration",
   },
+  professionalOnboarding: {
+    route: "/professional-onboarding",
+  },
   professionalOnboardingCreateFirstProject: {
-    route: "/professional-onboarding-create-first-project",
+    route: "/create-first-project",
   },
   professionalOnboardingInviteUsers: {
-    route: "/professional-onboarding-invite-users",
+    route: "/invite-users",
   },
   professionalOnboardingRegisterOrganization: {
-    route: "/professional-onboarding-register-organization",
+    route: "/register-organization",
   },
   professionalOnboardingHasOrganization: {
     route: "/professional-onboarding-has-organization",

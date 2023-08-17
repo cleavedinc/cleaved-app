@@ -57,17 +57,17 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector path={`/:orgId${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
 
     <PageProtector
-      path={routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}
+      path={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`}
       renderedPage={<ProfessionalOnboardingCreateFirstProject />}
     />
 
     <PageProtector
-      path={routeConstantsCleavedApp.professionalOnboardingInviteUsers.route}
+      path={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingInviteUsers.route}`}
       renderedPage={<ProfessionalOnboardingInviteUsers />}
     />
 
     <PageProtector
-      path={routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}
+      path={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`}
       renderedPage={<ProfessionalOnboardingRegisterOrganization />}
     />
 
