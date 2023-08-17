@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
+import { navigate } from "@reach/router";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
@@ -9,7 +10,8 @@ import { logError, logQueryError, RollbarLogLevels } from "@cleaved/helpers";
 import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { useProductEngagementLogEvent, useTranslator } from "../../hooks";
+import { routeConstantsCleavedApp } from "../../router";
 
 import { REGISTER_ORGANIZATION_MUTATION } from "./gql";
 
@@ -53,16 +55,27 @@ const StyledProjectFormLabel = styled.label`
 export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
   const { t } = useTranslator();
   const { refreshLogin } = useContext(authTokenContext);
+  const logEvent = useProductEngagementLogEvent();
   const [newOrganizationGuid, setNewOrganizationGuid] = useState<string | null>();
 
-  const [registerOrganization] = useMutation(REGISTER_ORGANIZATION_MUTATION, {
+  const [registerOrganization, { loading, error }] = useMutation(REGISTER_ORGANIZATION_MUTATION, {
     onCompleted: () => {
+      logEvent("REGISTER_ORGANIZATION");
       refreshLogin();
-    },
-    onError: (error) => {
-      logQueryError(error);
+      navigate(routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route);
     },
   });
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+
+    if (error) {
+      logQueryError(error);
+      return;
+    }
+  }, [loading, error]);
 
   useEffect(() => {
     const newGuid = uuidv4();

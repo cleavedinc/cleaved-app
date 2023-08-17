@@ -29,6 +29,7 @@ type AuthTokenContextType = {
   refreshLogin: (action?: () => void | null | undefined) => Promise<void>;
   loading: boolean;
   preferredOrgId: string;
+  saveAccessToken: (catToken: string) => void;
   setPreferredOrgIdOnContext: (orgId: string | null | undefined) => void;
 };
 
@@ -42,6 +43,7 @@ export const authTokenContext = createContext<AuthTokenContextType>({
   refreshLogin: async () => {},
   loading: true,
   preferredOrgId: "",
+  saveAccessToken: () => {},
   setPreferredOrgIdOnContext: () => {},
 });
 
@@ -72,11 +74,15 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     [setPreferredOrgId]
   );
 
+  const saveAccessToken = (catToken: string) => {
+    (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
+  };
+
   const saveAuthorizationTokens = useCallback(
     (catToken: string, crtToken: string) => {
       const oneYearFromNow: string = dayjs().add(1, "year").utc().format();
 
-      (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
+      saveAccessToken(catToken);
 
       SetCookie("_CRT_", crtToken, {
         expires: new Date(oneYearFromNow),
@@ -178,6 +184,7 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     logOut,
     loggedIn,
     preferredOrgId,
+    saveAccessToken,
     setPreferredOrgIdOnContext: (orgId: string | null | undefined) => {
       setOrgId(orgId);
     },

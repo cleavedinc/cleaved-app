@@ -62,6 +62,7 @@ export const GoogleLoginShareLinkWrapper: FunctionComponent = () => {
           getCleavedLoginWithSharelink({ variables: { token: credentialResponse.credential, shareLink: shareLink } });
         }
       }}
+      // ux_mode={"redirect"}
     />
   );
 };

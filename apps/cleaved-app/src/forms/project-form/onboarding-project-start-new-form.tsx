@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useContext } from "react";
+import { navigate } from "@reach/router";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
@@ -9,6 +10,7 @@ import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinne
 
 import { authTokenContext } from "../../contexts";
 import { useProductEngagementLogEvent, useTranslator } from "../../hooks";
+import { routeConstantsCleavedApp } from "../../router";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
 import { PROJECT_CREATE } from "./gql";
@@ -68,6 +70,8 @@ export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectS
       if (projectsInOrgSeekRefetch) {
         projectsInOrgSeekRefetch();
       }
+
+      navigate(routeConstantsCleavedApp.professionalOnboardingInviteUsers.route);
     },
     onError: (error) => {
       logQueryError(error);

@@ -1,13 +1,11 @@
 import React, { FunctionComponent, useContext } from "react";
-import { navigate } from "@reach/router";
 import styled from "styled-components";
 
 import { BoxHelperInfo, BoxNoPadding, FONT_WEIGHTS, mediaQueries, SectionHeader, SPACING } from "@cleaved/ui";
 
-import { authTokenContext, PostsContext } from "../../contexts";
+import { PostsContext } from "../../contexts";
 import { HelperInfoHeaderTextImageRightBox, PostProjectList } from "../../components";
 import { useTranslator } from "../../hooks";
-import { routeConstantsCleavedApp } from "../../router";
 
 import decisionsHelperImage from "../../media/helper-info/decisions-helper-image.svg";
 import projectWhiteboardTwoPeople from "../../media/helper-info/project-whiteboard-two-people.svg";
@@ -40,18 +38,12 @@ const StyledHelperInfoTextHeader = styled(SectionHeader)`
 const StyledHelperInfoTextWrapper = styled.div``;
 
 export const HomeDataWrapper: FunctionComponent = () => {
-  const { preferredOrgId } = useContext(authTokenContext);
   const { postProjectSeekData, postProjectSeekDataLoading } = useContext(PostsContext);
   const { t } = useTranslator();
 
   const helperInfoImageRight = t("helperInformationBoxes.collaborativeTimelineAlt")
     ? t("helperInformationBoxes.collaborativeTimelineAlt")
     : "";
-
-  if (!preferredOrgId) {
-    // if no preferredOrgId, send to onboarding screen
-    navigate(routeConstantsCleavedApp.professionalOnboarding.route);
-  }
 
   return (
     <>

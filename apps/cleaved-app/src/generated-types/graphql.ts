@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  AccessToken: any;
   Date: any;
   GraphQLInt: any;
   ISODateTime: any;
@@ -81,7 +82,7 @@ export type LogInResultWithJoinOrgView = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  acceptTerms?: Maybe<Scalars['Void']>;
+  acceptTerms: Scalars['AccessToken'];
   generateOrganizationShareLink: Scalars['ID'];
   googleSSO: LogInResultView;
   googleSSOWithShareLink: LogInResultWithJoinOrgView;
@@ -681,7 +682,7 @@ export type PostProjectUpdateMutation = { __typename?: 'Mutation', postProjectUp
 export type AcceptTermsMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AcceptTermsMutation = { __typename?: 'Mutation', acceptTerms?: any | null };
+export type AcceptTermsMutation = { __typename?: 'Mutation', acceptTerms: any };
 
 export type GenerateOrganizationShareLinkMutationVariables = Exact<{
   organizationId: Scalars['ID'];

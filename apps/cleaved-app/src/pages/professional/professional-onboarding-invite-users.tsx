@@ -2,9 +2,10 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { AsideProfessionalOnboardingDataWrapper, ProfessionalOnboardingDataWrapper } from "../../data-wrappers";
+import { ProgressBar, InviteUsers } from "../../components";
+import { AsideProfessionalOnboardingDataWrapper } from "../../data-wrappers";
 
-export const ProfessionalOnboarding: FunctionComponent = () => {
+export const ProfessionalOnboardingInviteUsers: FunctionComponent = () => {
   return (
     <ContentWrapper>
       <LeftColumnWrapper>
@@ -12,7 +13,9 @@ export const ProfessionalOnboarding: FunctionComponent = () => {
       </LeftColumnWrapper>
 
       <MainColumnMaxWidthWrapper>
-        <ProfessionalOnboardingDataWrapper />
+        <ProgressBar activeStep={3} />
+
+        <InviteUsers />
       </MainColumnMaxWidthWrapper>
     </ContentWrapper>
   );

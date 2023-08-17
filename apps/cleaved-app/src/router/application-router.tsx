@@ -13,7 +13,9 @@ import { Login } from "../pages/login/login";
 import { NotFound } from "../pages/not-found";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
 import { Professional } from "../pages/professional/professional";
-import { ProfessionalOnboarding } from "../pages/professional/professional-onboarding";
+import { ProfessionalOnboardingRegisterOrganization } from "../pages/professional/professional-onboarding-register-organization";
+import { ProfessionalOnboardingCreateFirstProject } from "../pages/professional/professional-onboarding-create-first-project";
+import { ProfessionalOnboardingInviteUsers } from "../pages/professional/professional-onboarding-invite-users";
 import { ProfessionalOnboardingHasOrganization } from "../pages/professional/professional-onboarding-has-organization";
 import { Project } from "../pages/project/project";
 import { ProjectList } from "../pages/project/project-list";
@@ -55,8 +57,18 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector path={`/:orgId${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
 
     <PageProtector
-      path={routeConstantsCleavedApp.professionalOnboarding.route}
-      renderedPage={<ProfessionalOnboarding />}
+      path={routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}
+      renderedPage={<ProfessionalOnboardingCreateFirstProject />}
+    />
+
+    <PageProtector
+      path={routeConstantsCleavedApp.professionalOnboardingInviteUsers.route}
+      renderedPage={<ProfessionalOnboardingInviteUsers />}
+    />
+
+    <PageProtector
+      path={routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}
+      renderedPage={<ProfessionalOnboardingRegisterOrganization />}
     />
 
     <PageProtector
