@@ -5,9 +5,7 @@ import { Router } from "@reach/router";
 import { routeConstantsShared } from "@cleaved/helpers";
 import { mediaQueries } from "@cleaved/ui";
 
-import { AccountOrganizationRegister } from "../pages/account/account-organization-register";
 import { AccountProfessionalInformation } from "../pages/account/account-professional-information";
-import { AccountOrganizations } from "../pages/account/account-organizations";
 import { AccountMembership } from "../pages/account/account-membership";
 import { Home } from "../pages/home";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
@@ -15,7 +13,9 @@ import { Login } from "../pages/login/login";
 import { NotFound } from "../pages/not-found";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
 import { Professional } from "../pages/professional/professional";
-import { ProfessionalOnboarding } from "../pages/professional/professional-onboarding";
+import { ProfessionalOnboardingRegisterOrganization } from "../pages/professional/professional-onboarding-register-organization";
+import { ProfessionalOnboardingCreateFirstProject } from "../pages/professional/professional-onboarding-create-first-project";
+import { ProfessionalOnboardingInviteUsers } from "../pages/professional/professional-onboarding-invite-users";
 import { ProfessionalOnboardingHasOrganization } from "../pages/professional/professional-onboarding-has-organization";
 import { Project } from "../pages/project/project";
 import { ProjectList } from "../pages/project/project-list";
@@ -40,11 +40,6 @@ const StyledRouter = styled(Router)`
 export const ApplicationRouter: FunctionComponent = () => (
   <StyledRouter primary={false}>
     <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.accountOrganizationRegister.route}`}
-      renderedPage={<AccountOrganizationRegister />}
-    />
-
-    <PageProtector
       path={`:orgId${routeConstantsCleavedApp.accountProfessionalInformation.route}`}
       renderedPage={<AccountProfessionalInformation />}
     />
@@ -55,11 +50,6 @@ export const ApplicationRouter: FunctionComponent = () => (
     />
 
     <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.accountOrganizations.route}`}
-      renderedPage={<AccountOrganizations />}
-    />
-
-    <PageProtector
       path={`:orgId${routeConstantsCleavedApp.account.route}/:professionalId`}
       renderedPage={<Professional />}
     />
@@ -67,8 +57,18 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector path={`/:orgId${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
 
     <PageProtector
-      path={routeConstantsCleavedApp.professionalOnboarding.route}
-      renderedPage={<ProfessionalOnboarding />}
+      path={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`}
+      renderedPage={<ProfessionalOnboardingCreateFirstProject />}
+    />
+
+    <PageProtector
+      path={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingInviteUsers.route}`}
+      renderedPage={<ProfessionalOnboardingInviteUsers />}
+    />
+
+    <PageProtector
+      path={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`}
+      renderedPage={<ProfessionalOnboardingRegisterOrganization />}
     />
 
     <PageProtector

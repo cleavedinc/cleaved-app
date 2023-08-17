@@ -54,7 +54,9 @@ export const ProfessionalOnboardingHasOrganizationDataWrapper: FunctionComponent
 
         <StyledNavigateBackToOnboardingWrapper>
           {t("professionalOnboardingHasOrganization.goBackToOnboardingText")}
-          <Link to={routeConstantsCleavedApp.professionalOnboarding.route}>
+          <Link
+            to={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`}
+          >
             {t("professionalOnboardingHasOrganization.goBackToOnboardingLink")}
           </Link>
         </StyledNavigateBackToOnboardingWrapper>

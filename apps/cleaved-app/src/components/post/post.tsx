@@ -16,6 +16,7 @@ import { PostProjectHeader } from "./post-project-header";
 
 type PostProps = {
   post: PostProjectSeekQuery["postProjectSeek"][0];
+  showPinnedStatus?: boolean;
 };
 
 const StyledCommentListWrapper = styled.div`
@@ -70,7 +71,7 @@ const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
 `;
 
 export const Post: FunctionComponent<PostProps> = (props) => {
-  const { post } = props;
+  const { post, showPinnedStatus } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
@@ -98,15 +99,19 @@ export const Post: FunctionComponent<PostProps> = (props) => {
     return (
       <>
         {post && (
-          <PostProjectHeader
-            account={post.account}
-            accountId={post.accountId}
-            date={post.date}
-            isPostOpenInModal={isCommentsVisible}
-            postId={post.id}
-            postProjectId={post.project.id}
-            postProjectName={post.project.name}
-          />
+          <>
+            <PostProjectHeader
+              account={post.account}
+              accountId={post.accountId}
+              date={post.date}
+              isPinned={post.isPinned}
+              isPostOpenInModal={isCommentsVisible}
+              postId={post.id}
+              postProjectId={post.project.id}
+              postProjectName={post.project.name}
+              showPinnedStatus={showPinnedStatus}
+            />
+          </>
         )}
 
         <DisplayMarkdown message={post.body} />

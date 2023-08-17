@@ -9,7 +9,7 @@ import { ButtonPrimary, FONT_SIZES, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { PostsContext } from "../../contexts";
 import { POST_PROJECT_REPLY } from "../../gql-mutations";
-import { useRouteParams, useTranslator } from "../../hooks";
+import { useProductEngagementLogEvent, useRouteParams, useTranslator } from "../../hooks";
 
 import { htmlToMarkdown, MarkdownEditor, markdownStylesBase } from "../markdown";
 
@@ -61,6 +61,7 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
   const { t } = useTranslator();
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
+  const logEvent = useProductEngagementLogEvent();
 
   const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
     ? t("post.notContainOnlyBlankSpaces")
@@ -72,6 +73,8 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
 
   const [postProjectReply] = useMutation(POST_PROJECT_REPLY, {
     onCompleted: () => {
+      logEvent("POST_PROJECT_REPLY");
+
       if (postProjectSeekRefetch) {
         postProjectSeekRefetch();
       }

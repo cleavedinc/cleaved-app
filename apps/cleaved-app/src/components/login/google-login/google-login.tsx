@@ -38,6 +38,7 @@ export const GoogleLoginWrapper: FunctionComponent = () => {
           getCleavedLogin({ variables: { token: credentialResponse.credential } });
         }
       }}
+      // ux_mode={"redirect"}
     />
   );
 };

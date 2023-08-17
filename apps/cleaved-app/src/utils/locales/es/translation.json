@@ -92,6 +92,7 @@
     "spanish": "Español"
   },
   "loginPage": {
+    "errorSingleOrgJoinLimit": "Sólo se puede asociar 1 correo electrónico a una cuenta dividida.",
     "signInHeader": "Registrarse / Iniciar sesión",
     "signInMessage": "Crea una nueva cuenta o inicia sesión en una existente."
   },
@@ -123,11 +124,10 @@
     "edit": "Editar",
     "manageOrganizations": "Administrar organizaciones",
     "organizations": "Organizaciones",
-    "organizationName": "Organización",
+    "organization": "Organización",
     "organizationNamePlaceholder": "Nombre de la organización",
     "organizationRegister": "Registrar organización",
-    "removeOrganization": "Eliminar organización",
-    "setDefaultOrganization": "Establecer como organización activa"
+    "removeOrganization": "Eliminar organización"
   },
   "organizationsStartNew": {
     "registerNewOrganization": "Registrar una nueva organización"
@@ -173,6 +173,7 @@
     "createProjectPostWithName": "Crear una publicación ",
     "createProjectPost": "Crear publicación",
     "editProjectPost": "Editar publicación",
+    "pinned": "Prender con alfileres",
     "pinPost": "Anclar al proyecto",
     "photoViewerToolbarMessage": "Publicado por el ",
     "post": "Publicar",
@@ -181,7 +182,8 @@
     "removePost": "Eliminar publicación",
     "submitPost": "Publicar",
     "totalComments": "Comentarios totales",
-    "totalPosts": "Publicaciones totales"
+    "totalPosts": "Publicaciones totales",
+    "unpinPost": "Desanclar del proyecto"
   },
   "postFileUpload": {
     "addMoreImages": "Agregar más imágenes",
@@ -200,7 +202,7 @@
     "finishOnboarding": "Llévame a mi nuevo proyecto",
     "registerOrganizationCelebrateImageAlt": "Dos personas chocando las manos con fuegos artificiales a su alrededor",
     "registerOrganizationHelperInfoImageAlt": "Un edificio individual",
-    "registerOrganizationHelperInfoText": "Las organizaciones son la forma en que se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
+    "registerOrganizationHelperInfoText": "Las organizaciones son la forma en que se organizan tus proyectos, equipos y todo lo demás.",
     "registerOrganizationFormHeader": "Registra tu organización",
     "registerOrganizationFormHeaderOrgCreated": "Organización creada",
     "startNewProjectCelebrateImageAlt": "Dos personas saltando y chocando las manos con fuegos artificiales a su alrededor",

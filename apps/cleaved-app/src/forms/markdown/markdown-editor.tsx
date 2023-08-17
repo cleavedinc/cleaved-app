@@ -5,7 +5,7 @@ import ReactQuill from "react-quill";
 
 import { SPACING, ThemeLightType, ThemeDarkType } from "@cleaved/ui";
 
-import { PostsContext } from "../../contexts";
+import { PostFormContext } from "../../contexts";
 
 import "react-quill/dist/quill.snow.css";
 
@@ -73,7 +73,7 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
 
 export const MarkdownEditor: FunctionComponent<PostFormEditorProps> = (props) => {
   const { className, name, placeholder } = props;
-  const { projectPostFormIsDirty, setProjectPostFormIsDirty } = useContext(PostsContext);
+  const { projectPostFormIsDirty, setProjectPostFormIsDirty } = useContext(PostFormContext);
   const { dirty, isValid, isValidating, setFieldValue, status, values } = useFormikContext();
 
   // Using the theme hook due to ReactQuill not liking the normal pros way to use styled component theme.

@@ -7,9 +7,15 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import { ButtonPrimary, FONT_SIZES, SPACING_PX, Spinner } from "@cleaved/ui";
 
-import { PostsContext } from "../../contexts";
+import { PostFormContext, PostsContext } from "../../contexts";
 import { PostProjectCreateMutationVariables } from "../../generated-types/graphql";
-import { useFindMyAccount, usePostProjectGetById, useRouteParams, useTranslator } from "../../hooks";
+import {
+  useFindMyAccount,
+  usePostProjectGetById,
+  useProductEngagementLogEvent,
+  useRouteParams,
+  useTranslator,
+} from "../../hooks";
 
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
@@ -57,13 +63,14 @@ const StyledProjectPostForm = styled.div``;
 export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) => {
   const { closeForm, postId } = props;
   const accountQuery = useFindMyAccount();
-  const { postProjectSeekRefetch, setProjectPostFormIsDirty, setProjectPostFormImageUploadIsDirty } =
-    useContext(PostsContext);
+  const { postProjectSeekRefetch } = useContext(PostsContext);
+  const { setProjectPostFormIsDirty, setProjectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const { postProjectGetByIdData, postProjectGetByIdDataLoading } = usePostProjectGetById(postId);
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId;
   const [isImageUploadWrapperActive, setImageUploadWrapperActive] = useState(false);
+  const logEvent = useProductEngagementLogEvent();
   const { t } = useTranslator();
 
   const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
@@ -77,7 +84,10 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
     : undefined;
 
   const [submitPost] = useMutation(POST_PROJECT_CREATE, {
-    onCompleted: () => postProjectSeekRefetch(),
+    onCompleted: () => {
+      postProjectSeekRefetch();
+      logEvent("POST_PROJECT_CREATE");
+    },
     onError: (error) => {
       logQueryError(error);
     },

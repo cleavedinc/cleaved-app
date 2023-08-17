@@ -92,6 +92,7 @@
     "spanish": "Spanish"
   },
   "loginPage": {
+    "errorSingleOrgJoinLimit": "Only 1 email can be associated with a cleaved account.",
     "signInHeader": "Sign up / Log in",
     "signInMessage": "Create a new account, or log in to an existing one."
   },
@@ -123,11 +124,10 @@
     "edit": "Edit",
     "manageOrganizations": "Manage organizations",
     "organizations": "Organizations",
-    "organizationName": "Organization",
+    "organization": "Organization",
     "organizationNamePlaceholder": "Organization name",
     "organizationRegister": "Register organization",
-    "removeOrganization": "Delete organization",
-    "setDefaultOrganization": "Set as active organization"
+    "removeOrganization": "Delete organization"
   },
   "organizationsStartNew": {
     "registerNewOrganization": "Register a new organization"
@@ -173,6 +173,7 @@
     "createProjectPostWithName": "Create a post {{name}}",
     "createProjectPost": "Create post",
     "editProjectPost": "Edit post",
+    "pinned": "Pinned",
     "pinPost": "Pin to the project",
     "photoViewerToolbarMessage": "Posted by {{firstName}} {{lastName}} on ",
     "post": "Post",
@@ -181,7 +182,8 @@
     "removePost": "Delete Post",
     "submitPost": "Post",
     "totalComments": "Total comments",
-    "totalPosts": "Total posts"
+    "totalPosts": "Total posts",
+    "unpinPost": "Unpin from the project"
   },
   "postFileUpload": {
     "addMoreImages": "Add more images",
@@ -200,7 +202,7 @@
     "finishOnboarding": "Take me to my new project",
     "registerOrganizationCelebrateImageAlt": "Two people high-fiving with fireworks around them",
     "registerOrganizationHelperInfoImageAlt": "A single building",
-    "registerOrganizationHelperInfoText": "Organizations are how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "registerOrganizationHelperInfoText": "Organizations are how your projects, teams, and everything else are organized.",
     "registerOrganizationFormHeader": "Register your organization",
     "registerOrganizationFormHeaderOrgCreated": "Organization created",
     "startNewProjectCelebrateImageAlt": "Two people jumping and high-fiving with fireworks around them",

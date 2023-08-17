@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext, useEffect } from "react";
+import { navigate } from "@reach/router";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
@@ -8,7 +9,8 @@ import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
-import { useTranslator } from "../../hooks";
+import { useProductEngagementLogEvent, useTranslator } from "../../hooks";
+import { routeConstantsCleavedApp } from "../../router";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
 import { PROJECT_CREATE } from "./gql";
@@ -57,19 +59,34 @@ const StyledProjectFormLabel = styled.label`
 
 export const OnboardingProjectStartNewForm: FunctionComponent<OnboardingProjectStartNewFormProps> = (props) => {
   const { projectsInOrgSeekRefetch } = props;
+  const logEvent = useProductEngagementLogEvent();
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
 
-  const [projectCreate] = useMutation(PROJECT_CREATE, {
+  const [projectCreate, { loading, error }] = useMutation(PROJECT_CREATE, {
     onCompleted: () => {
+      logEvent("PROJECT_CREATE");
+
       if (projectsInOrgSeekRefetch) {
         projectsInOrgSeekRefetch();
       }
-    },
-    onError: (error) => {
-      logQueryError(error);
+
+      navigate(
+        `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingInviteUsers.route}`
+      );
     },
   });
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+
+    if (error) {
+      logQueryError(error);
+      return;
+    }
+  }, [loading, error]);
 
   return (
     <>

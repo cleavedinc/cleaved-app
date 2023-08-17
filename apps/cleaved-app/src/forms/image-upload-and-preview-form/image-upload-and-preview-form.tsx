@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "@cleaved/ui";
 
-import { PostsContext } from "../../contexts";
+import { PostFormContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 
 import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
@@ -127,7 +127,7 @@ const StyledReactSortable = styled(ReactSortable)``;
 
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
   const { closeImageUploadWrapper, images } = props;
-  const { setProjectPostFormImageUploadIsDirty } = useContext(PostsContext);
+  const { setProjectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const { setFieldValue } = useFormikContext();
 
   const [hoveredIndex, setHoveredIndex] = useState(-1);
@@ -245,7 +245,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
 
   return (
     <div className="container">
-      {savedFileUrls && savedFileUrls.length <= 0 && (
+      {savedFileUrls && savedFileUrls.length === 0 && (
         <StyledImageUploadWrapper {...getRootProps({ className: "dropzone", isFocused, isDragAccept, isDragReject })}>
           <input {...getInputProps()} />
 

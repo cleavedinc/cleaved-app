@@ -3,10 +3,12 @@ import React, { FunctionComponent, useContext, useEffect, useState } from "react
 import { AlertContainer } from "@cleaved/helpers";
 import { Header, HeaderLoggedOut } from "../components";
 import { authTokenContext } from "../contexts";
+import { useTermsAccepted } from "../hooks";
 import { ApplicationRouter, routeConstantsCleavedApp } from "../router";
 
 export const Application: FunctionComponent = () => {
   const { loading, loggedIn, refreshLogin } = useContext(authTokenContext);
+  const { termsAccepted, termsAcceptedIsLoading } = useTermsAccepted();
   const [hasAuthRefreshed, setHasAuthRefreshed] = useState<boolean>(false);
 
   const currentPath = window.location.pathname;
@@ -20,10 +22,11 @@ export const Application: FunctionComponent = () => {
 
   return (
     <>
-      {loggedIn &&
+      {!termsAcceptedIsLoading &&
+      loggedIn &&
+      termsAccepted &&
       currentPath !== routeConstantsCleavedApp.professionalOnboarding.route &&
-      currentPath !== routeConstantsCleavedApp.professionalOnboardingHasOrganization.route &&
-      currentPath !== routeConstantsCleavedApp.termsOfServiceAgreement.route ? (
+      currentPath !== routeConstantsCleavedApp.professionalOnboardingHasOrganization.route ? (
         <Header />
       ) : (
         <HeaderLoggedOut />

@@ -10,7 +10,7 @@ import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonPrimary, ButtonLink, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
-import { useProjectById, useTranslator } from "../../hooks";
+import { useProjectById, useProductEngagementLogEvent, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
 import { ProjectStartNewFormFormikTextarea } from "./components";
@@ -66,11 +66,13 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
   const { projectId } = props;
   const { t } = useTranslator();
   const { preferredOrgId } = useContext(authTokenContext);
+  const logEvent = useProductEngagementLogEvent();
   const projectData = useProjectById(projectId);
   const [newProjectGuid, setNewProjectGuid] = useState<string | null>();
 
   const [projectCreate] = useMutation(PROJECT_CREATE, {
     onCompleted: () => {
+      logEvent("PROJECT_CREATE");
       navigate(
         `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${newProjectGuid}${routeConstantsCleavedApp.projectBoard.route}`
       );

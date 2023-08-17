@@ -47,6 +47,15 @@ export const routeConstantsCleavedApp = {
   professionalOnboarding: {
     route: "/professional-onboarding",
   },
+  professionalOnboardingCreateFirstProject: {
+    route: "/create-first-project",
+  },
+  professionalOnboardingInviteUsers: {
+    route: "/invite-users",
+  },
+  professionalOnboardingRegisterOrganization: {
+    route: "/register-organization",
+  },
   professionalOnboardingHasOrganization: {
     route: "/professional-onboarding-has-organization",
   },

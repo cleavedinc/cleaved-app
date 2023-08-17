@@ -21,6 +21,7 @@ export * from "./move";
 export * from "./people-alt-outline";
 export * from "./person-add-outline";
 export * from "./plus";
+export * from "./push-pin";
 export * from "./push-pin-outline";
 export * from "./refresh";
 export * from "./search";

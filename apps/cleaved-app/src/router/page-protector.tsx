@@ -1,8 +1,9 @@
 import React, { FunctionComponent, ReactNode, useContext, useEffect } from "react";
-import { RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, useLocation } from "@reach/router";
 
 import { LoginGuard } from "../components";
 import { authTokenContext } from "../contexts";
+import { useProductEngagementLogEvent } from "../hooks";
 
 type PageProtectorProps = RouteComponentProps & {
   isNotProtected?: boolean;
@@ -11,6 +12,9 @@ type PageProtectorProps = RouteComponentProps & {
 
 export const PageProtector: FunctionComponent<PageProtectorProps> = ({ isNotProtected, renderedPage }) => {
   const { logOut, refreshLogin, loggedIn, loading } = useContext(authTokenContext);
+  const location = useLocation();
+  const logEvent = useProductEngagementLogEvent();
+
   useEffect(() => {
     if (!isNotProtected) {
       refreshLogin();
@@ -22,6 +26,11 @@ export const PageProtector: FunctionComponent<PageProtectorProps> = ({ isNotProt
       logOut();
     }
   }, [isNotProtected, loggedIn, loading]); // eslint-disable-line
+
+  // Log new page view
+  useEffect(() => {
+    logEvent("PAGE_VIEW");
+  }, [location]);
 
   if (isNotProtected) {
     return <>{renderedPage}</>;
