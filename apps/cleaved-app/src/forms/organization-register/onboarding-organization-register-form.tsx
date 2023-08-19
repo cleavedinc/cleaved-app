@@ -54,14 +54,14 @@ const StyledProjectFormLabel = styled.label`
 
 export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const { refreshLogin } = useContext(authTokenContext);
+  const { setPreferredOrgIdOnContext } = useContext(authTokenContext);
   const logEvent = useProductEngagementLogEvent();
   const [newOrganizationGuid, setNewOrganizationGuid] = useState<string | null>();
 
   const [registerOrganization, { loading, error }] = useMutation(REGISTER_ORGANIZATION_MUTATION, {
     onCompleted: () => {
       logEvent("REGISTER_ORGANIZATION");
-      refreshLogin();
+      setPreferredOrgIdOnContext(newOrganizationGuid);
       navigate(
         `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`
       );

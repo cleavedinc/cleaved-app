@@ -53,7 +53,7 @@ const StyledShareLinkWrapper = styled.div`
 export const InviteUsers: FunctionComponent = () => {
   const { isLoggedIn } = useLoginGuard();
   const { termsAccepted, termsAcceptedIsLoading } = useTermsAccepted();
-  const { projectsInOrganizationSeekData } = useProjectsInOrganizationSeek();
+  const { projectsInOrganizationSeekDataLoading, projectsInOrganizationSeekData } = useProjectsInOrganizationSeek();
   const { preferredOrgId } = useContext(authTokenContext);
   const [shareLinkArray, setShareLinkArray] = useState<OrganizationShareLinksQuery["organizationShareLinks"]>([]);
   const { t } = useTranslator();
@@ -104,9 +104,13 @@ export const InviteUsers: FunctionComponent = () => {
   const shareLinkUrl = `${process.env.DOMAIN}${routeConstantsCleavedApp.professionalShareLinkRegistration.route}/${shareLinkObject?.shareLink}`;
 
   const handleCompleteonboardingFlow = () => {
-    navigate(
-      `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectsInOrganizationSeekData?.[0].id}${routeConstantsCleavedApp.projectBoard.route}`
-    );
+    if (projectsInOrganizationSeekData && projectsInOrganizationSeekData?.[0]) {
+      navigate(
+        `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectsInOrganizationSeekData?.[0].id}${routeConstantsCleavedApp.projectBoard.route}`
+      );
+    } else {
+      navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`);
+    }
   };
 
   const handleAlertCopied = debounce(
@@ -169,11 +173,13 @@ export const InviteUsers: FunctionComponent = () => {
         )}
       </StyledBox>
 
-      <StyledButtonPrimaryWrapper>
-        <StyledNextStepButton onClick={() => handleCompleteonboardingFlow()} type="button">
-          {t("professionalOnboarding.finishOnboarding")}
-        </StyledNextStepButton>
-      </StyledButtonPrimaryWrapper>
+      {!projectsInOrganizationSeekDataLoading && (
+        <StyledButtonPrimaryWrapper>
+          <StyledNextStepButton onClick={() => handleCompleteonboardingFlow()} type="button">
+            {t("professionalOnboarding.finishOnboarding")}
+          </StyledNextStepButton>
+        </StyledButtonPrimaryWrapper>
+      )}
     </>
   );
 };
