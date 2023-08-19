@@ -3,7 +3,7 @@ import { createUploadLink } from "apollo-upload-client";
 import { onError } from "@apollo/client/link/error";
 import { navigate } from "@reach/router";
 
-import { logError, RollbarLogLevels, logQueryError } from "@cleaved/helpers";
+import { logError, RollbarLogLevels } from "@cleaved/helpers";
 
 import { routeConstantsCleavedApp } from "../router";
 

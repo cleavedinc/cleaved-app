@@ -14,6 +14,7 @@ import { routeConstantsCleavedApp } from "../../router";
 import { Post } from "./post";
 
 type PostProjectListProps = {
+  showPinnedMenuButton?: boolean;
   showPinnedStatus?: boolean;
 };
 
@@ -41,7 +42,7 @@ const StyledPostListWrapper = styled.div`
 `;
 
 export const PostProjectList: FunctionComponent<PostProjectListProps> = (props) => {
-  const { showPinnedStatus } = props;
+  const { showPinnedMenuButton, showPinnedStatus } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const pageSize = 50;
@@ -75,7 +76,7 @@ export const PostProjectList: FunctionComponent<PostProjectListProps> = (props) 
           {postProjectSeekData.map((post) => {
             return (
               <StyledPostListWrapper key={post.id}>
-                <Post post={post} showPinnedStatus={showPinnedStatus} />
+                <Post post={post} showPinnedMenuButton={showPinnedMenuButton} showPinnedStatus={showPinnedStatus} />
               </StyledPostListWrapper>
             );
           })}

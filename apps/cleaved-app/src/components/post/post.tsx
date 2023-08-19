@@ -16,6 +16,7 @@ import { PostProjectHeader } from "./post-project-header";
 
 type PostProps = {
   post: PostProjectSeekQuery["postProjectSeek"][0];
+  showPinnedMenuButton?: boolean;
   showPinnedStatus?: boolean;
 };
 
@@ -71,7 +72,7 @@ const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
 `;
 
 export const Post: FunctionComponent<PostProps> = (props) => {
-  const { post, showPinnedStatus } = props;
+  const { post, showPinnedMenuButton, showPinnedStatus } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
@@ -109,6 +110,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
               postId={post.id}
               postProjectId={post.project.id}
               postProjectName={post.project.name}
+              showPinnedMenuButton={showPinnedMenuButton}
               showPinnedStatus={showPinnedStatus}
             />
           </>

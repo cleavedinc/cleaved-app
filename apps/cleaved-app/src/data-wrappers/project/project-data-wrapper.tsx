@@ -109,7 +109,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
         </StyledProjectPostBox>
       )}
 
-      <PostProjectList showPinnedStatus={true} />
+      <PostProjectList showPinnedMenuButton={true} showPinnedStatus={true} />
 
       {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length === 0 && (
         <>

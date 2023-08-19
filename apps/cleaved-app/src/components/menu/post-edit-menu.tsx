@@ -26,6 +26,7 @@ import "@szhsin/react-menu/dist/index.css";
 type PostEditMenuProps = {
   isPinned: boolean;
   postId: string;
+  showPinnedMenuButton?: boolean;
 };
 
 const StyledPushPinOutlineIcon = styled(PushPinOutlineIcon)`
@@ -33,7 +34,7 @@ const StyledPushPinOutlineIcon = styled(PushPinOutlineIcon)`
 `;
 
 export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
-  const { isPinned, postId } = props;
+  const { showPinnedMenuButton, isPinned, postId } = props;
   const { postProjectSeekRefetch } = useContext(PostsContext);
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
@@ -138,7 +139,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
           {t("post.removePost")}
         </StyledBasicItemRed>
 
-        {!isPinned && (
+        {showPinnedMenuButton && !isPinned && (
           <StyledBasicItem onClick={() => handlePostProjectPin(postId)}>
             <StyledPushPinOutlineIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
 
@@ -146,7 +147,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
           </StyledBasicItem>
         )}
 
-        {isPinned && (
+        {showPinnedMenuButton && isPinned && (
           <StyledBasicItem onClick={() => handlePostProjectPinRemove(postId)}>
             <StyledPushPinOutlineIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
             {t("post.unpinPost")}

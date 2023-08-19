@@ -5,7 +5,7 @@ import styled, { useTheme } from "styled-components";
 import { FONT_SIZES, FONT_WEIGHTS, PushPinIcon, SPACING } from "@cleaved/ui";
 import { getTimeSinceDate } from "@cleaved/helpers";
 
-import { PostEditMenu, PostHeaderAvatarLink, SeparatorDot } from "../../components";
+import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useFindMyAccount, useNavigateToProfile, useTranslator } from "../../hooks";
@@ -22,6 +22,7 @@ type PostProjectHeaderProps = {
   postId: string;
   postProjectId: string;
   postProjectName: string;
+  showPinnedMenuButton?: boolean;
   showPinnedStatus?: boolean;
 };
 
@@ -69,6 +70,7 @@ const StyledPostProfessionalInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 `;
 
 const StyledPostProfessionalName = styled.a`
@@ -86,10 +88,6 @@ const StyledProjectNameLink = styled(Link)`
   display: inline-block;
 `;
 
-const StyledSeparatorDot = styled(SeparatorDot)`
-  margin: 0 ${SPACING.SMALL};
-`;
-
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
   const {
     account,
@@ -101,6 +99,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
     postId,
     postProjectId,
     postProjectName,
+    showPinnedMenuButton,
     showPinnedStatus,
   } = props;
   const { preferredOrgId } = useContext(authTokenContext);
@@ -138,11 +137,9 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
                 {postProjectName}
               </StyledProjectNameLink>
             )}
-
-            {date && postProjectName && postProjectId && <StyledSeparatorDot />}
-
-            {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
           </StyledDateProjectInfo>
+
+          {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
         </StyledPostProfessionalInfoWrapper>
 
         {hasPermission &&
@@ -150,7 +147,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
           !accountQuery.loading &&
           accountQuery.data?.findMyAccount.id === accountId && (
             <StyledPostDateWrapper>
-              <PostEditMenu isPinned={isPinned} postId={postId} />
+              <PostEditMenu isPinned={isPinned} postId={postId} showPinnedMenuButton={showPinnedMenuButton} />
             </StyledPostDateWrapper>
           )}
       </StyledPostHeaderContentWrapper>
