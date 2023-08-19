@@ -6,10 +6,11 @@ import { routeConstantsShared } from "@cleaved/helpers";
 import { mediaQueries } from "@cleaved/ui";
 
 import { AccountProfessionalInformation } from "../pages/account/account-professional-information";
-import { AccountMembership } from "../pages/account/account-membership";
+import { Checkout } from "../pages/membership/checkout";
 import { Home } from "../pages/home";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
 import { Login } from "../pages/login/login";
+import { Membership } from "../pages/membership/membership";
 import { NotFound } from "../pages/not-found";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
 import { Professional } from "../pages/professional/professional";
@@ -44,10 +45,9 @@ export const ApplicationRouter: FunctionComponent = () => (
       renderedPage={<AccountProfessionalInformation />}
     />
 
-    <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.accountMembership.route}`}
-      renderedPage={<AccountMembership />}
-    />
+    <PageProtector path={`:orgId${routeConstantsCleavedApp.checkout.route}/:productId`} renderedPage={<Checkout />} />
+
+    <PageProtector path={`:orgId${routeConstantsCleavedApp.membership.route}`} renderedPage={<Membership />} />
 
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.account.route}/:professionalId`}

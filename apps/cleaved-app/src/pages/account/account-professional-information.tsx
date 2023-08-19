@@ -16,7 +16,7 @@ export const AccountProfessionalInformation: FunctionComponent = () => {
   return (
     <ContentWrapper>
       <MainColumnMaxWidthWrapper>
-        {/* <AccountMembershipPlan /> */}
+        <AccountMembershipPlan />
 
         <StyledBox>
           <PersonalInformationForm />
