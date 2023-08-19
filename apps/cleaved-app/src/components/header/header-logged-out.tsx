@@ -22,8 +22,10 @@ const StyledLogoWrapper = styled.div`
   display: flex;
 `;
 
-const StyledLoggedoutStickyHeader = styled(StyledStickyHeader)`
-  padding: 0.75rem ${SPACING.MEDIUM};
+const StyledLoggedoutStickyHeader = styled(StyledStickyHeader)``;
+
+const StyledNavigationWrapper = styled(NavigationWrapper)`
+  min-height: 35px;
 `;
 
 export const HeaderLoggedOut: FunctionComponent = () => {
@@ -34,7 +36,7 @@ export const HeaderLoggedOut: FunctionComponent = () => {
 
   return (
     <StyledLoggedoutStickyHeader hasBoxShadow>
-      <NavigationWrapper>
+      <StyledNavigationWrapper>
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
@@ -59,7 +61,7 @@ export const HeaderLoggedOut: FunctionComponent = () => {
             </StyledLoginLink>
           </NavigationButtonWrapper>
         )}
-      </NavigationWrapper>
+      </StyledNavigationWrapper>
     </StyledLoggedoutStickyHeader>
   );
 };

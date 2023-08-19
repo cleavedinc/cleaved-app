@@ -12,6 +12,8 @@ export const Application: FunctionComponent = () => {
   const [hasAuthRefreshed, setHasAuthRefreshed] = useState<boolean>(false);
 
   const currentPath = window.location.pathname;
+  const matcher = new RegExp(`${routeConstantsCleavedApp.professionalOnboarding.route}/.*`);
+  const isOnboardingPages = matcher.test(currentPath);
 
   useEffect(() => {
     if (!loading && !loggedIn && !hasAuthRefreshed) {
@@ -22,15 +24,7 @@ export const Application: FunctionComponent = () => {
 
   return (
     <>
-      {!termsAcceptedIsLoading &&
-      loggedIn &&
-      termsAccepted &&
-      currentPath !== routeConstantsCleavedApp.professionalOnboarding.route &&
-      currentPath !== routeConstantsCleavedApp.professionalOnboardingHasOrganization.route ? (
-        <Header />
-      ) : (
-        <HeaderLoggedOut />
-      )}
+      {!termsAcceptedIsLoading && !isOnboardingPages && loggedIn && termsAccepted ? <Header /> : <HeaderLoggedOut />}
 
       <ApplicationRouter />
       <AlertContainer />
