@@ -45,7 +45,7 @@ export const CheckoutDataWrapper: FunctionComponent = () => {
 
   return (
     <StyledBox>
-      membership plans outlined here.
+      check out form for specific plan
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
