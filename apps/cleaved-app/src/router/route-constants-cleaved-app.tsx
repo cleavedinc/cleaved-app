@@ -2,9 +2,6 @@ export const routeConstantsCleavedApp = {
   account: {
     route: "/account",
   },
-  accountMembership: {
-    route: "/account-membership",
-  },
   accountOrganizationRegister: {
     route: "/account-organizations/register-organization",
   },
@@ -17,11 +14,17 @@ export const routeConstantsCleavedApp = {
   accountOrganizations: {
     route: "/account-organizations",
   },
+  checkout: {
+    route: "/checkout",
+  },
   home: {
     route: "/home",
   },
   login: {
     route: "/login",
+  },
+  membership: {
+    route: "/membership",
   },
   peopleList: {
     route: "/people-list",

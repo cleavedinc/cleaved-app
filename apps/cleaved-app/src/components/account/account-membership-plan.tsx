@@ -19,12 +19,12 @@ export const AccountMembershipPlan: FunctionComponent = () => {
 
   return (
     <StyledBox>
-      Here is your plan (or) go sign up for a membership.{" "}
+      temp Here is your plan (or) go sign up for a membership.
       <StyledMembershipLink
-        to={`/${preferredOrgId}${routeConstantsCleavedApp.accountMembership.route}`}
-        title={"Membership Plans"}
+        to={`/${preferredOrgId}${routeConstantsCleavedApp.membership.route}`}
+        title={"temp change membership plan"}
       >
-        Membership plans
+        temp change membership plan
       </StyledMembershipLink>
     </StyledBox>
   );
