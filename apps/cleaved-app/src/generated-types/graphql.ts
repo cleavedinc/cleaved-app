@@ -103,7 +103,7 @@ export type Mutation = {
   projectUpdate?: Maybe<Scalars['Void']>;
   refreshLogIn: LogInResultView;
   /** Basic registration for a new organization. This will get more interesting itterations in the future. */
-  registerOrganization?: Maybe<Scalars['Void']>;
+  registerOrganization: Scalars['AccessToken'];
   removeOrganizationShareLink?: Maybe<Scalars['Void']>;
   setAccountAvatar?: Maybe<Scalars['Void']>;
   setAccountEmail?: Maybe<Scalars['Void']>;
@@ -637,7 +637,7 @@ export type RegisterOrganizationMutationVariables = Exact<{
 }>;
 
 
-export type RegisterOrganizationMutation = { __typename?: 'Mutation', registerOrganization?: any | null };
+export type RegisterOrganizationMutation = { __typename?: 'Mutation', registerOrganization: any };
 
 export type ProjectCreateMutationVariables = Exact<{
   projectName: Scalars['String'];

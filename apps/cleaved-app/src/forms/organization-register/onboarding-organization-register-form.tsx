@@ -54,22 +54,16 @@ const StyledProjectFormLabel = styled.label`
 
 export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const { setPreferredOrgIdOnContext } = useContext(authTokenContext);
+  const { setPreferredOrgIdOnContext, saveAccessToken } = useContext(authTokenContext);
   const logEvent = useProductEngagementLogEvent();
   const [newOrganizationGuid, setNewOrganizationGuid] = useState<string | null>();
 
-  const [registerOrganization, { loading, error }] = useMutation(REGISTER_ORGANIZATION_MUTATION, {
-    onCompleted: () => {
-      logEvent("REGISTER_ORGANIZATION");
-      setPreferredOrgIdOnContext(newOrganizationGuid);
-      navigate(
-        `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`
-      );
-    },
-  });
+  const [registerOrganization, { loading, error, called, data }] = useMutation(REGISTER_ORGANIZATION_MUTATION, {});
+
+  console.log(loading, error, called, data);
 
   useEffect(() => {
-    if (loading) {
+    if (loading || !called) {
       return;
     }
 
@@ -77,7 +71,16 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
       logQueryError(error);
       return;
     }
-  }, [loading, error]);
+
+    if (data?.registerOrganization) {
+      logEvent("REGISTER_ORGANIZATION");
+      setPreferredOrgIdOnContext(newOrganizationGuid);
+      saveAccessToken(data.registerOrganization);
+      navigate(
+        `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`
+      );
+    }
+  }, [loading, error, called, data, saveAccessToken, newOrganizationGuid, logEvent, setPreferredOrgIdOnContext]);
 
   useEffect(() => {
     const newGuid = uuidv4();
