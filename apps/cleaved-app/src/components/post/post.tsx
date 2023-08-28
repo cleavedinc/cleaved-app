@@ -1,12 +1,15 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useContext, useState } from "react";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 
 import { BORDERS, BoxNoPadding, FONT_SIZES, PhotoCollage, SPACING } from "@cleaved/ui";
 
 import { DisplayMarkdown, PostReactions, ReactionTypesAndTotalCount } from "../../components";
+import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
+import { routeConstantsCleavedApp } from "../../router";
 
 import { CommentsList } from "../comments/comments-list";
 
@@ -29,6 +32,18 @@ const StyledProjectPostBox = styled(BoxNoPadding)``;
 const StyledPostComments = styled.span`
   margin-left: 3px;
   text-transform: lowercase;
+`;
+
+const StyledPostProjectLink = styled(Link)`
+  display: inline-block;
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  font-size: ${FONT_SIZES.XSMALL};
+  padding: 0 ${SPACING.MEDIUM} ${SPACING.SMALL} ${SPACING.MEDIUM};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.baseTextLink_colorHover};
+    text-decoration: underline;
+  }
 `;
 
 const StyledPostInfoBar = styled.div`
@@ -73,6 +88,7 @@ const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
 
 export const Post: FunctionComponent<PostProps> = (props) => {
   const { post, showPinnedMenuButton, showPinnedStatus } = props;
+  const { preferredOrgId } = useContext(authTokenContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
@@ -108,8 +124,6 @@ export const Post: FunctionComponent<PostProps> = (props) => {
               isPinned={post.isPinned}
               isPostOpenInModal={isCommentsVisible}
               postId={post.id}
-              postProjectId={post.project.id}
-              postProjectName={post.project.name}
               showPinnedMenuButton={showPinnedMenuButton}
               showPinnedStatus={showPinnedStatus}
             />
@@ -117,6 +131,15 @@ export const Post: FunctionComponent<PostProps> = (props) => {
         )}
 
         <DisplayMarkdown message={post.body} />
+
+        {post && post?.project && post?.project?.name && post?.project?.id && (
+          <StyledPostProjectLink
+            to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${post.project.id}${routeConstantsCleavedApp.projectBoard.route}`}
+            title={post.project.name}
+          >
+            {post.project.name}
+          </StyledPostProjectLink>
+        )}
 
         {post.images && post.images.length > 0 && (
           <StyledReactPhotoCollage
@@ -140,9 +163,8 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
           {post.repliesCount !== "0" && (
             <StyledPostInfoBarCommentCount onClick={() => handleShowCommentsmodal()}>
-              <div>{post.repliesCount}</div>
               <StyledPostComments>
-                {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
+                {post.repliesCount} {post.repliesCount === "1" ? t("post.comment") : t("post.comments")}
               </StyledPostComments>
             </StyledPostInfoBarCommentCount>
           )}
