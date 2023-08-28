@@ -10,5 +10,4 @@ export * from "./use-product-engagement-log-event";
 export * from "./use-project-by-id";
 export * from "./use-project-in-organization-seek";
 export * from "./use-route-params";
-export * from "./use-terms-accepted";
 export * from "./use-translator";

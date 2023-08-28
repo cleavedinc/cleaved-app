@@ -5,23 +5,17 @@ import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper, RightColu
 
 import { authTokenContext, PostFormContextProvider, PostsContextProvider } from "../contexts";
 import { AsideHomeDataWrapper, AsideHomeOrganizationMembersDataWrapper, HomeDataWrapper } from "../data-wrappers";
-import { useTermsAccepted } from "../hooks";
 
 import { routeConstantsCleavedApp } from "../router";
 
 export const Home: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
-  const { termsAccepted, termsAcceptedIsLoading } = useTermsAccepted();
 
   if (!preferredOrgId) {
     // if no preferredOrgId, send to onboarding screen
     navigate(
       `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`
     );
-  }
-
-  if (termsAcceptedIsLoading || !termsAccepted) {
-    return null;
   }
 
   return (

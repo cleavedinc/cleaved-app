@@ -11,7 +11,7 @@ import { BORDERS, ButtonSecondary, CopyIcon, LinkButtonPrimary, Paragraph, RADIU
 import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, OrganizationShareLinksQuery } from "../../generated-types/graphql";
 import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
-import { useLoginGuard, useProjectsInOrganizationSeek, useTermsAccepted, useTranslator } from "../../hooks";
+import { useLoginGuard, useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 import { ORGANIZATION_SHARE_LINKS_QUERY } from "../../gql-queries";
 
@@ -52,7 +52,6 @@ const StyledShareLinkWrapper = styled.div`
 
 export const InviteUsers: FunctionComponent = () => {
   const { isLoggedIn } = useLoginGuard();
-  const { termsAccepted, termsAcceptedIsLoading } = useTermsAccepted();
   const { projectsInOrganizationSeekDataLoading, projectsInOrganizationSeekData } = useProjectsInOrganizationSeek();
   const { preferredOrgId } = useContext(authTokenContext);
   const [shareLinkArray, setShareLinkArray] = useState<OrganizationShareLinksQuery["organizationShareLinks"]>([]);
@@ -61,7 +60,7 @@ export const InviteUsers: FunctionComponent = () => {
   const { data, loading, refetch, error } = useQuery<OrganizationShareLinksQuery>(ORGANIZATION_SHARE_LINKS_QUERY, {
     fetchPolicy: "cache-and-network",
     nextFetchPolicy: "cache-and-network",
-    skip: !isLoggedIn || termsAcceptedIsLoading || !termsAccepted || !preferredOrgId,
+    skip: !isLoggedIn || !preferredOrgId,
     variables: { organizationId: preferredOrgId },
   });
 
