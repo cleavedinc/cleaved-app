@@ -17,9 +17,11 @@ type CommentReactionsProps = {
   postProjectRepliesDataRefetch?: () => void;
 };
 
-const StyledCommentFooterButtonButton = styled.button`
+type StyledCommentFooterButtonButtonProps = Pick<CommentReactionsProps, "activeReaction">;
+
+const StyledCommentFooterButtonButton = styled.button<StyledCommentFooterButtonButtonProps>`
   ${removeDefaultButtonStyles}
-  margin-right: ${SPACING.SMALL};
+  ${(props) => (props.activeReaction === PostReactionType.NoReaction ? null : `margin-right: ${SPACING.SMALL}`)};
 
   &:hover {
     text-decoration: underline;
@@ -55,6 +57,7 @@ export const CommentReactions: FunctionComponent<CommentReactionsProps> = (props
         tooltip={<ReactionSelections postId={postId} postProjectSetReaction={setPostProjectSetReaction} />}
       >
         <StyledCommentFooterButtonButton
+          activeReaction={activeReaction}
           onClick={() => handleSetPostReaction(activeReaction, organizationId, postId, setPostProjectSetReaction)}
           type="button"
         >

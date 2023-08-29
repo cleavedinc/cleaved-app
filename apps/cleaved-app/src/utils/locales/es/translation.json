@@ -7,7 +7,7 @@
     "copiedTextToClipboard": "¡Copiado!"
   },
   "buttonLabels": {
-    "giveFeedback": "Dar feedback",
+    "giveFeedback": "Infórmenos",
     "goHome": "Ir a inicio",
     "logOut": "Cerrar sesión",
     "signUpLogIn": "Registrarse / Iniciar sesión"
@@ -180,7 +180,7 @@
     "removeAllImages": "Eliminar todas las imágenes",
     "removePost": "Eliminar publicación",
     "submitPost": "Publicar",
-    "totalComments": "Comentarios totales",
+    "totalComments": "Respuestas totales",
     "totalPosts": "Publicaciones totales",
     "unpinPost": "Desanclar del proyecto"
   },

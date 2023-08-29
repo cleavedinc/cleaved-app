@@ -11,7 +11,7 @@ type DisplayMarkdownProps = {
 
 const StyledMessage = styled(ReactMarkdown)`
   overflow-wrap: anywhere;
-  padding: 0 ${SPACING.MEDIUM} ${SPACING.SMALL} ${SPACING.MEDIUM};
+  padding: 0 ${SPACING.MEDIUM} ${SPACING.MEDIUM} ${SPACING.MEDIUM};
   white-space: pre-line;
 
   ul,

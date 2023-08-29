@@ -60,8 +60,6 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
 
   const [registerOrganization, { loading, error, called, data }] = useMutation(REGISTER_ORGANIZATION_MUTATION, {});
 
-  console.log(loading, error, called, data);
-
   useEffect(() => {
     if (loading || !called) {
       return;

@@ -1,16 +1,13 @@
-import React, { FunctionComponent, useContext } from "react";
-import { Link } from "@reach/router";
+import React, { FunctionComponent } from "react";
 import styled, { useTheme } from "styled-components";
 
 import { FONT_SIZES, FONT_WEIGHTS, PushPinIcon, SPACING } from "@cleaved/ui";
 import { getTimeSinceDate } from "@cleaved/helpers";
 
 import { PostEditMenu, PostHeaderAvatarLink } from "../../components";
-import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useFindMyAccount, useNavigateToProfile, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
-import { routeConstantsCleavedApp } from "../../router";
 
 type PostProjectHeaderProps = {
   account: PostProjectSeekQuery["postProjectSeek"][0]["account"];
@@ -20,8 +17,6 @@ type PostProjectHeaderProps = {
   isPinned: boolean;
   isPostOpenInModal: boolean;
   postId: string;
-  postProjectId: string;
-  postProjectName: string;
   showPinnedMenuButton?: boolean;
   showPinnedStatus?: boolean;
 };
@@ -35,10 +30,6 @@ const StyledPinnedWrapper = styled.div`
 
 const StyledPushPinIcon = styled(PushPinIcon)`
   margin-right: ${SPACING.BASE};
-`;
-
-const StyledDateProjectInfo = styled.div`
-  display: flex;
 `;
 
 const StyledJobTitle = styled.div`
@@ -84,10 +75,6 @@ const StyledPostProfessionalName = styled.a`
   }
 `;
 
-const StyledProjectNameLink = styled(Link)`
-  display: inline-block;
-`;
-
 export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (props) => {
   const {
     account,
@@ -97,12 +84,9 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
     isPinned,
     isPostOpenInModal,
     postId,
-    postProjectId,
-    postProjectName,
     showPinnedMenuButton,
     showPinnedStatus,
   } = props;
-  const { preferredOrgId } = useContext(authTokenContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { profilePath } = useNavigateToProfile(account?.id);
   const accountQuery = useFindMyAccount();
@@ -127,17 +111,6 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
           </StyledPostProfessionalName>
 
           {account?.jobTitle && <StyledJobTitle>{account?.jobTitle}</StyledJobTitle>}
-
-          <StyledDateProjectInfo>
-            {postProjectName && postProjectId && (
-              <StyledProjectNameLink
-                to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${postProjectId}${routeConstantsCleavedApp.projectBoard.route}`}
-                title={postProjectName}
-              >
-                {postProjectName}
-              </StyledProjectNameLink>
-            )}
-          </StyledDateProjectInfo>
 
           {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
         </StyledPostProfessionalInfoWrapper>
