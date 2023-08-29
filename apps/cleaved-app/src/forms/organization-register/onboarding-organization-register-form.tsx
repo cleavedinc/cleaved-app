@@ -73,9 +73,10 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
     if (data?.registerOrganization) {
       logEvent("REGISTER_ORGANIZATION");
       setPreferredOrgIdOnContext(newOrganizationGuid);
-      saveAccessToken(data.registerOrganization);
-      navigate(
-        `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`
+      saveAccessToken(data.registerOrganization, () =>
+        navigate(
+          `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingCreateFirstProject.route}`
+        )
       );
     }
   }, [loading, error, called, data, saveAccessToken, newOrganizationGuid, logEvent, setPreferredOrgIdOnContext]);

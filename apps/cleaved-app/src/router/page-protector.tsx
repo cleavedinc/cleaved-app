@@ -30,7 +30,7 @@ export const PageProtector: FunctionComponent<PageProtectorProps> = ({ isNotProt
   // Log new page view
   useEffect(() => {
     logEvent("PAGE_VIEW");
-  }, [location]);
+  }, [location]); // eslint-disable-line
 
   if (isNotProtected) {
     return <>{renderedPage}</>;

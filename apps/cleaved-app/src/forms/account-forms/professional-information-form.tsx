@@ -62,7 +62,7 @@ const StyledSubmitButton = styled(ButtonPrimary)`
 
 export const ProfesionalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData, findMyAccountDataRefetch } = useFindMyAccount();
 
   const professionalTitlePlaceholder = t("formLabels.professionalTitlePlaceholder")
     ? t("formLabels.professionalTitlePlaceholder")
@@ -88,7 +88,9 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
 
   const [setJobTitle] = useMutation(SET_JOB_TITLE_MUTATION, {
     onCompleted: () => {
-      accountQuery.refetch();
+      if (findMyAccountDataRefetch) {
+        findMyAccountDataRefetch();
+      }
     },
     onError: (error) => {
       logQueryError(error);
@@ -105,9 +107,9 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        about: accountQuery.data?.findMyAccount.about || "",
-        accountEmail: accountQuery.data?.findMyAccount.emailAddress || "",
-        jobTitle: accountQuery.data?.findMyAccount.jobTitle || "",
+        about: findMyAccountData?.about || "",
+        accountEmail: findMyAccountData?.emailAddress || "",
+        jobTitle: findMyAccountData?.jobTitle || "",
       }}
       onSubmit={(values: ProfesionalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);

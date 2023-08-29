@@ -89,7 +89,7 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
   } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { profilePath } = useNavigateToProfile(account?.id);
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData, findMyAccountDataLoading } = useFindMyAccount();
   const theme = useTheme();
   const { t } = useTranslator();
 
@@ -115,14 +115,11 @@ export const PostProjectHeader: FunctionComponent<PostProjectHeaderProps> = (pro
           {date && <StyledPostDate>{getTimeSinceDate(date)}</StyledPostDate>}
         </StyledPostProfessionalInfoWrapper>
 
-        {hasPermission &&
-          !isPostOpenInModal &&
-          !accountQuery.loading &&
-          accountQuery.data?.findMyAccount.id === accountId && (
-            <StyledPostDateWrapper>
-              <PostEditMenu isPinned={isPinned} postId={postId} showPinnedMenuButton={showPinnedMenuButton} />
-            </StyledPostDateWrapper>
-          )}
+        {hasPermission && !isPostOpenInModal && !findMyAccountDataLoading && findMyAccountData?.id === accountId && (
+          <StyledPostDateWrapper>
+            <PostEditMenu isPinned={isPinned} postId={postId} showPinnedMenuButton={showPinnedMenuButton} />
+          </StyledPostDateWrapper>
+        )}
       </StyledPostHeaderContentWrapper>
     </StyledPostHeaderWrapper>
   );

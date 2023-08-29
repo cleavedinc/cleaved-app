@@ -7,7 +7,8 @@ import { mediaQueries } from "@cleaved/ui";
 
 import { AccountProfessionalInformation } from "../pages/account/account-professional-information";
 import { Checkout } from "../pages/membership/checkout";
-import { Home } from "../pages/home";
+import { Home } from "../pages/home/home";
+import { HomeRouting } from "../pages/home/home-routing";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
 import { Login } from "../pages/login/login";
 import { Membership } from "../pages/membership/membership";
@@ -53,6 +54,8 @@ export const ApplicationRouter: FunctionComponent = () => (
       path={`:orgId${routeConstantsCleavedApp.account.route}/:professionalId`}
       renderedPage={<Professional />}
     />
+
+    <PageProtector path={`${routeConstantsCleavedApp.homeRouting.route}`} renderedPage={<HomeRouting />} />
 
     <PageProtector path={`/:orgId${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
 

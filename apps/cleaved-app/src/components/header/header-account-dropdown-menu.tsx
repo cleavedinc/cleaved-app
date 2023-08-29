@@ -57,8 +57,8 @@ const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
 
 export const HeaderAccountDropdownMenu: FunctionComponent = () => {
   const { t } = useTranslator();
-  const accountQuery = useFindMyAccount();
-  const accountId = accountQuery.data?.findMyAccount.id;
+  const { findMyAccountData } = useFindMyAccount();
+  const accountId = findMyAccountData?.id;
   const { profilePath } = useNavigateToProfile(accountId);
   const [isAccountMenuActive, setIsAccountMenuActive] = useState(false);
   const onAccountMenuClick = () => setIsAccountMenuActive(!isAccountMenuActive);

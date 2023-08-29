@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { FeedbackFish } from "@feedback-fish/react";
 
 import {
-  BREAKPOINTS,
   ButtonSecondary,
   NavigationButtonWrapper,
   SPACING,
@@ -40,12 +39,8 @@ const StyledHeaderWidthWrapper = styled.div`
   margin: auto;
   width: 100%;
 
-  ${mediaQueries.SM} {
-    width: 745px;
-  }
-
   ${mediaQueries.LG} {
-    width: 1110px;
+    max-width: 1450px;
   }
 `;
 
@@ -57,8 +52,8 @@ const StyledLogoWrapper = styled.div`
 export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
   const { className } = props;
   const { t } = useTranslator();
-  const accountQuery = useFindMyAccount();
-  const currentUserEmail = accountQuery.data?.findMyAccount.emailAddress;
+  const { findMyAccountData } = useFindMyAccount();
+  const currentUserEmail = findMyAccountData?.emailAddress;
 
   return (
     <StyledStickyHeader className={className} hasBoxShadow>

@@ -6,7 +6,7 @@ import { logError, RollbarLogLevels } from "@cleaved/helpers";
 
 type ProductEngagementType = (
   event: string,
-  data?: any,
+  data?: any, // eslint-disable-line
   callback?: amplitude.Callback | undefined,
   errorCallback?: amplitude.Callback | undefined,
   outOfSession?: boolean | undefined
@@ -21,7 +21,7 @@ export const useProductEngagementLogEvent = (): ProductEngagementType => {
 
   return (
     event: string,
-    data?: any,
+    data?: any, // eslint-disable-line
     callback?: amplitude.Callback | undefined,
     errorCallback?: amplitude.Callback | undefined,
     outOfSession?: boolean | undefined

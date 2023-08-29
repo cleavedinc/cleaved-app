@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { ButtonLink, Logo, SPACING, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
+import { ButtonLink, Logo, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";

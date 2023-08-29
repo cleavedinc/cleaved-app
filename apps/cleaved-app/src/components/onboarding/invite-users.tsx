@@ -108,7 +108,7 @@ export const InviteUsers: FunctionComponent = () => {
         `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectsInOrganizationSeekData?.[0].id}${routeConstantsCleavedApp.projectBoard.route}`
       );
     } else {
-      navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`);
+      navigate(routeConstantsCleavedApp.homeRouting.route);
     }
   };
 

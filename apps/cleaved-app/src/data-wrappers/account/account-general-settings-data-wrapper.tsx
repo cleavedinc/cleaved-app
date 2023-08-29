@@ -44,7 +44,7 @@ export const AccountGeneralSettingsDataWrapper: FunctionComponent = () => {
       { value: "en", label: t("language.english") },
       { value: "es", label: t("language.spanish") },
     ],
-    [currentlanguage]
+    [currentlanguage, t] // eslint-disable-line
   );
 
   const handleLanguageChange = (selectedLanguage: LanguageOptionsType | null) => {

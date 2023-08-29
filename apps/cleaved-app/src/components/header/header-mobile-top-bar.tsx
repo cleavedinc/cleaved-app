@@ -12,7 +12,8 @@ type HeaderMobileTopBarProps = {
 };
 
 const StyledHeaderMobileTopBarStickyHeader = styled(StyledStickyHeader)`
-  padding: ${SPACING.SMALL};
+  height: 36px;
+  padding: 0 ${SPACING.MEDIUM};
 `;
 
 const StyledLogoWrapper = styled.div`

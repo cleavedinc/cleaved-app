@@ -53,7 +53,7 @@ export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
     if (triggerGetComments && triggerGetComments > 0 && postProjectRepliesDataRefetch) {
       postProjectRepliesDataRefetch();
     }
-  }, [triggerGetComments]);
+  }, [triggerGetComments, postProjectRepliesDataRefetch]);
 
   const handleLoadMoreCommentData = (lastCommentIdArg: string | undefined) => {
     postProjectRepliesDataFetchMore({

@@ -21,35 +21,43 @@ export const GoogleLoginShareLinkWrapper: FunctionComponent = () => {
   const shareLink = routeParams.shareLink;
   const { t } = useTranslator();
 
-  const [getCleavedLoginWithSharelink, response] = useMutation<
+  const [getCleavedLoginWithSharelink, { loading, error, called, data }] = useMutation<
     GoogleSsoWithShareLinkMutation,
     GoogleSsoWithShareLinkMutationVariables
-  >(GOOGLE_SSO_WITH_SHARE_LINK_MUTATION, {
-    onCompleted: (data) => {
-      setAuthorizationTokens(data.googleSSOWithShareLink.authorizationToken, data.googleSSOWithShareLink.refreshToken);
-      setPreferredOrgIdOnContext(data.googleSSOWithShareLink.preferredOrgId);
-      navigate(`/${data.googleSSOWithShareLink.preferredOrgId}${routeConstantsCleavedApp.home.route}`);
-    },
-  });
+  >(GOOGLE_SSO_WITH_SHARE_LINK_MUTATION, {});
 
   useEffect(() => {
-    // Alert user if they try to join multiple orgs
-    if (
-      !response.loading &&
-      response.error &&
-      response?.error?.graphQLErrors[0]?.extensions?.code === "SINGLE_ORG_JOIN_LIMIT"
-    ) {
+    if (loading || !called) {
+      return;
+    }
+
+    if (!loading && error && error?.graphQLErrors[0]?.extensions?.code === "SINGLE_ORG_JOIN_LIMIT") {
       alertError(t("loginPage.errorSingleOrgJoinLimit"));
       return;
     }
 
-    // Log user out if there is any error with logging in
-    if (!response.loading && response.error) {
-      logError(RollbarLogLevels.error, "Single org join limit was hit", response && response?.error?.clientErrors);
+    if (error) {
+      logError(RollbarLogLevels.error, "Single org join limit was hit", error);
       logOut();
       googleLogout();
+      return;
     }
-  }, [response]);
+
+    if (data?.googleSSOWithShareLink) {
+      if (data.googleSSOWithShareLink.authorizationToken && data.googleSSOWithShareLink.refreshToken) {
+        setAuthorizationTokens(
+          data.googleSSOWithShareLink.authorizationToken,
+          data.googleSSOWithShareLink.refreshToken
+        );
+      }
+
+      if (data?.googleSSOWithShareLink?.preferredOrgId) {
+        setPreferredOrgIdOnContext(data.googleSSOWithShareLink.preferredOrgId);
+      }
+
+      navigate(routeConstantsCleavedApp.homeRouting.route);
+    }
+  }, [loading, error, called, data, setAuthorizationTokens, setPreferredOrgIdOnContext, logOut, t]);
 
   return (
     <GoogleLogin

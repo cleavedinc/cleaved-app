@@ -27,10 +27,16 @@ export const GoogleLoginWrapper: FunctionComponent = () => {
       return;
     }
 
-    if (data?.googleSSO?.authorizationToken && data?.googleSSO?.refreshToken && data?.googleSSO?.preferredOrgId) {
-      setAuthorizationTokens(data.googleSSO.authorizationToken, data.googleSSO.refreshToken);
-      setPreferredOrgIdOnContext(data.googleSSO.preferredOrgId);
-      navigate(`/${data.googleSSO.preferredOrgId}${routeConstantsCleavedApp.home.route}`);
+    if (data?.googleSSO) {
+      if (data.googleSSO.authorizationToken && data.googleSSO.refreshToken) {
+        setAuthorizationTokens(data.googleSSO.authorizationToken, data.googleSSO.refreshToken);
+      }
+
+      if (data?.googleSSO?.preferredOrgId) {
+        setPreferredOrgIdOnContext(data.googleSSO.preferredOrgId);
+      }
+
+      navigate(routeConstantsCleavedApp.homeRouting.route);
     }
   }, [loading, error, called, data, setAuthorizationTokens, setPreferredOrgIdOnContext, logOut]);
 

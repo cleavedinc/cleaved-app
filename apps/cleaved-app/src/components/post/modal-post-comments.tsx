@@ -173,7 +173,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
   useOnOutsideClick = true,
 }) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData } = useFindMyAccount();
 
   if (!open) {
     return null;
@@ -185,7 +185,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
       <StyledContentWrapper>{children}</StyledContentWrapper>
       {hasPermission && (
         <StyledPostCommentFormWrapper>
-          <PostCommentAvatar account={accountQuery.data?.findMyAccount} />
+          <PostCommentAvatar account={findMyAccountData} />
 
           <StyledCommentForm
             postOrPostReplyId={postOrPostReplyId}

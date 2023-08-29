@@ -26,13 +26,13 @@ const AvatarWrapper = styled.button`
 
 export const HeaderAvatar: FunctionComponent<HeaderAvatarProps> = (props) => {
   const { onClick } = props;
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData, findMyAccountDataLoading } = useFindMyAccount();
 
   return (
     <>
-      {!accountQuery.loading && accountQuery.data?.findMyAccount && (
+      {!findMyAccountDataLoading && findMyAccountData && (
         <AvatarWrapper type="button" onClick={onClick}>
-          <HeaderMenuAvatar account={accountQuery.data?.findMyAccount} />
+          <HeaderMenuAvatar account={findMyAccountData} />
         </AvatarWrapper>
       )}
     </>

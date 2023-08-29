@@ -10,8 +10,10 @@ export const Application: FunctionComponent = () => {
   const [hasAuthRefreshed, setHasAuthRefreshed] = useState<boolean>(false);
 
   const currentPath = window.location.pathname;
-  const matcher = new RegExp(`${routeConstantsCleavedApp.professionalOnboarding.route}/.*`);
-  const isOnboardingPages = matcher.test(currentPath);
+  const matcherProfessionalOnboarding = new RegExp(`${routeConstantsCleavedApp.professionalOnboarding.route}/.*`);
+  const matcherTermsOfServiceAgreement = new RegExp(`${routeConstantsCleavedApp.termsOfServiceAgreement.route}`);
+  const isOnboardingPages = matcherProfessionalOnboarding.test(currentPath);
+  const isTOSPage = matcherTermsOfServiceAgreement.test(currentPath);
 
   useEffect(() => {
     if (!loading && !loggedIn && !hasAuthRefreshed) {
@@ -22,7 +24,7 @@ export const Application: FunctionComponent = () => {
 
   return (
     <>
-      {!isOnboardingPages && loggedIn ? <Header /> : <HeaderLoggedOut />}
+      {!isTOSPage && !isOnboardingPages && loggedIn ? <Header /> : <HeaderLoggedOut />}
 
       <ApplicationRouter />
       <AlertContainer />

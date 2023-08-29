@@ -8,7 +8,7 @@ type AreYouSureModalProps = {
   areYouSureRejectButtonText?: string;
   areYouSureDescription?: string;
   areYouSureTitle?: string;
-  handleConfirmAction: (...args: any[]) => void;
+  handleConfirmAction: (...args: any[]) => void; // eslint-disable-line
   isAreYouSureModalOpen: boolean;
   setIsAreYouSureModalOpen: Dispatch<React.SetStateAction<boolean>>;
 };
