@@ -56,8 +56,10 @@ export const TermsOfServiceAgreementForm: FunctionComponent = () => {
         navigate(
           `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`
         );
-      } else {
-        navigate(routeConstantsCleavedApp.home.route);
+      }
+
+      if (preferredOrgId) {
+        navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`);
       }
     }
   }, [data, error, loading, preferredOrgId, saveAccessToken]);
