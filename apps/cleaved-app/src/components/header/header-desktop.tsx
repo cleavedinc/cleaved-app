@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { FeedbackFish } from "@feedback-fish/react";
 
 import {
+  BREAKPOINTS,
   ButtonSecondary,
   NavigationButtonWrapper,
   SPACING,
+  mediaQueries,
   NavigationLinksWrapper,
   NavigationWrapper,
 } from "@cleaved/ui";
@@ -34,6 +36,19 @@ const MainNavigationLinksWrapper = styled(NavigationLinksWrapper)`
   margin-left: 50px;
 `;
 
+const StyledHeaderWidthWrapper = styled.div`
+  margin: auto;
+  width: 100%;
+
+  ${mediaQueries.SM} {
+    width: 745px;
+  }
+
+  ${mediaQueries.LG} {
+    width: 1110px;
+  }
+`;
+
 const StyledLogoWrapper = styled.div`
   align-items: center;
   display: flex;
@@ -47,23 +62,25 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
 
   return (
     <StyledStickyHeader className={className} hasBoxShadow>
-      <NavigationWrapper>
-        <StyledLogoWrapper>
-          <HeaderLogo />
-        </StyledLogoWrapper>
+      <StyledHeaderWidthWrapper>
+        <NavigationWrapper>
+          <StyledLogoWrapper>
+            <HeaderLogo />
+          </StyledLogoWrapper>
 
-        <MainNavigationLinksWrapper>
-          <MainNavigationLinks />
-        </MainNavigationLinksWrapper>
+          <MainNavigationLinksWrapper>
+            <MainNavigationLinks />
+          </MainNavigationLinksWrapper>
 
-        <NavigationButtonWrapper>
-          <FeedbackFish projectId="eb621b958df978" userId={currentUserEmail}>
-            <StyledFeedbackButton>{t("buttonLabels.giveFeedback")}</StyledFeedbackButton>
-          </FeedbackFish>
+          <NavigationButtonWrapper>
+            <FeedbackFish projectId="eb621b958df978" userId={currentUserEmail}>
+              <StyledFeedbackButton>{t("buttonLabels.giveFeedback")}</StyledFeedbackButton>
+            </FeedbackFish>
 
-          <HeaderAccountDropdownMenu />
-        </NavigationButtonWrapper>
-      </NavigationWrapper>
+            <HeaderAccountDropdownMenu />
+          </NavigationButtonWrapper>
+        </NavigationWrapper>
+      </StyledHeaderWidthWrapper>
     </StyledStickyHeader>
   );
 };
