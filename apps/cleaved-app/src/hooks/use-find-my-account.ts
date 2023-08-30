@@ -1,13 +1,21 @@
 import { logQueryError } from "@cleaved/helpers";
-import { ApolloError, QueryResult, useQuery } from "@apollo/client";
+import { ApolloError, useQuery } from "@apollo/client";
 import { FindMyAccountQuery } from "../generated-types/graphql";
 import { FIND_MY_ACCOUNT } from "../gql-queries";
 import { useLoginGuard } from "./use-login-guard";
 
-export const useFindMyAccount = (): QueryResult<FindMyAccountQuery> => {
+type FindMyAccountCustomType = FindMyAccountQuery["findMyAccount"];
+
+type UseFindMyAccountType = {
+  findMyAccountData: FindMyAccountCustomType | undefined;
+  findMyAccountDataLoading: boolean;
+  findMyAccountDataRefetch: (() => void) | undefined;
+};
+
+export const useFindMyAccount = (): UseFindMyAccountType => {
   const { isLoggedIn } = useLoginGuard();
 
-  return useQuery<FindMyAccountQuery>(FIND_MY_ACCOUNT, {
+  const { data, loading, refetch } = useQuery<FindMyAccountQuery>(FIND_MY_ACCOUNT, {
     fetchPolicy: "cache-and-network",
     nextFetchPolicy: "cache-and-network",
     onError: (error: ApolloError) => {
@@ -15,4 +23,10 @@ export const useFindMyAccount = (): QueryResult<FindMyAccountQuery> => {
     },
     skip: !isLoggedIn,
   });
+
+  return {
+    findMyAccountData: data?.findMyAccount,
+    findMyAccountDataLoading: loading,
+    findMyAccountDataRefetch: refetch,
+  };
 };

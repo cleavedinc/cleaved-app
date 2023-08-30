@@ -20,6 +20,9 @@ export const routeConstantsCleavedApp = {
   home: {
     route: "/home",
   },
+  homeRouting: {
+    route: "/home-routing",
+  },
   login: {
     route: "/login",
   },

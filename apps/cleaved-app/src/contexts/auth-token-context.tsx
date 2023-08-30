@@ -29,7 +29,7 @@ type AuthTokenContextType = {
   refreshLogin: (action?: () => void | null | undefined) => Promise<void>;
   loading: boolean;
   preferredOrgId: string;
-  saveAccessToken: (catToken: string) => void;
+  saveAccessToken: (catToken: string, callback?: any) => void; // eslint-disable-line
   setPreferredOrgIdOnContext: (orgId: string | null | undefined) => void;
 };
 
@@ -74,8 +74,12 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     [setPreferredOrgId]
   );
 
-  const saveAccessToken = (catToken: string) => {
+  const saveAccessToken = (catToken: string, callback?: () => void) => {
     (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
+
+    if (callback) {
+      callback();
+    }
   };
 
   const saveAuthorizationTokens = useCallback(

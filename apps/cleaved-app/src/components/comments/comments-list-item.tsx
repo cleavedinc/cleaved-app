@@ -36,7 +36,7 @@ const StyledRepliesListWrapper = styled.div`
 export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props) => {
   const { commentLevel, postProjectRepliesDataRefetch, postReply } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData } = useFindMyAccount();
   const [isCommentRepliesVisible, setIsCommentRepliesVisible] = useState(false);
   const [triggerGetReplies, setTriggerGetReplies] = useState(0);
 
@@ -68,7 +68,7 @@ export const CommentsListItem: FunctionComponent<CommentsListItemProps> = (props
 
       {hasPermission && isCommentRepliesVisible && (
         <StyledPostCommentFormWrapper>
-          <PostCommentAvatar account={accountQuery.data?.findMyAccount} />
+          <PostCommentAvatar account={findMyAccountData} />
           <CommentForm
             postOrPostReplyId={postReply.id}
             onCommentPostedTriggerGetComments={() => setTriggerGetReplies(triggerGetReplies + 1)}

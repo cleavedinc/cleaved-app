@@ -62,7 +62,7 @@ const StyledProjectPostForm = styled.div``;
 
 export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) => {
   const { closeForm, postId } = props;
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData } = useFindMyAccount();
   const { postProjectSeekRefetch } = useContext(PostsContext);
   const { setProjectPostFormIsDirty, setProjectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const { postProjectGetByIdData, postProjectGetByIdDataLoading } = usePostProjectGetById(postId);
@@ -78,9 +78,9 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
     : undefined;
 
   const createProjectPostWithNamePlaceholder = t("post.createProjectPostWithNamePlaceholder", {
-    name: accountQuery.data?.findMyAccount.firstName,
+    name: findMyAccountData?.firstName,
   })
-    ? t("post.createProjectPostWithNamePlaceholder", { name: accountQuery.data?.findMyAccount.firstName })
+    ? t("post.createProjectPostWithNamePlaceholder", { name: findMyAccountData?.firstName })
     : undefined;
 
   const [submitPost] = useMutation(POST_PROJECT_CREATE, {
@@ -170,7 +170,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
             imageUrls: yup.array().nullable().of(yup.string()),
           })}
       >
-        {({ dirty, isSubmitting, isValid, setFieldValue }) => {
+        {({ dirty, isSubmitting, isValid }) => {
           const handleAddImagesToPost = () => {
             setImageUploadWrapperActive(true);
           };

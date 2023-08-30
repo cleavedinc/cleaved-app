@@ -5,18 +5,7 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  FONT_SIZES,
-  HeadingWrapper,
-  mediaQueries,
-  RADIUS,
-  SectionHeader,
-  SPACING,
-  SPACING_PX,
-  Spinner,
-} from "@cleaved/ui";
+import { BORDERS, ButtonPrimary, FONT_SIZES, mediaQueries, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
 import { EditAccountAvatar } from "../../components";
 import { useFindMyAccount, useTranslator } from "../../hooks";
@@ -79,7 +68,7 @@ const StyledSubmitButton = styled(ButtonPrimary)`
 
 export const PersonalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData, findMyAccountDataRefetch } = useFindMyAccount();
 
   const firstNameIsRequired = t("formValidationMessages.firstNameIsRequired")
     ? t("formValidationMessages.firstNameIsRequired")
@@ -95,7 +84,9 @@ export const PersonalInformationForm: FunctionComponent = () => {
 
   const [updateAccount] = useMutation(UPDATE_ACCOUNT_MUTATION, {
     onCompleted: () => {
-      accountQuery.refetch();
+      if (findMyAccountDataRefetch) {
+        findMyAccountDataRefetch();
+      }
     },
     onError: (error) => {
       logQueryError(error);
@@ -106,8 +97,8 @@ export const PersonalInformationForm: FunctionComponent = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        firstName: accountQuery.data?.findMyAccount.firstName ?? "",
-        lastName: accountQuery.data?.findMyAccount.lastName ?? "",
+        firstName: findMyAccountData?.firstName ?? "",
+        lastName: findMyAccountData?.lastName ?? "",
       }}
       onSubmit={(values: PersonalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
@@ -130,10 +121,7 @@ export const PersonalInformationForm: FunctionComponent = () => {
             <StyledFormWrapper>
               <Form>
                 <StyledAvatarNameWrapper>
-                  <EditAccountAvatar
-                    account={accountQuery.data?.findMyAccount}
-                    refetchAccountData={accountQuery.refetch}
-                  />
+                  <EditAccountAvatar account={findMyAccountData} refetchAccountData={findMyAccountDataRefetch} />
 
                   <StyledFirstLastNameWrapper>
                     <StyledProjectFormWrapper>

@@ -9,4 +9,3 @@ export * from "./post-project-replies-query";
 export * from "./post-project-seek-query";
 export * from "./project-by-id-query";
 export * from "./projects-in-organization-query";
-export * from "./terms-accepted-query";

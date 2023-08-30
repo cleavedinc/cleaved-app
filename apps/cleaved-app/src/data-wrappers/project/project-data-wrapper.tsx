@@ -27,7 +27,7 @@ export const ProjectDataWrapper: FunctionComponent = () => {
   const { projectPostFormIsDirty, projectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { postProjectSeekData, postProjectSeekDataLoading } = useContext(PostsContext);
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData } = useFindMyAccount();
   const [isContentFeedFormModalOpen, setIsContentFeedFormModalOpen] = useState(false);
   const [isAreYouSureModalOpen, setIsAreYouSureModalOpen] = useState(false);
   const [closeRequested, setCloseRequested] = useState(false);
@@ -75,11 +75,11 @@ export const ProjectDataWrapper: FunctionComponent = () => {
     <>
       {hasPermission && (
         <StyledProjectPostBox>
-          <ProjectPostButtonAvatar account={accountQuery.data?.findMyAccount} />
+          <ProjectPostButtonAvatar account={findMyAccountData} />
 
           <StyledPostFormButton onClick={() => setIsContentFeedFormModalOpen(true)} type="button">
             <StyledPostFormButtonText>
-              {t("post.createProjectPostWithName", { name: accountQuery.data?.findMyAccount.firstName })}
+              {t("post.createProjectPostWithName", { name: findMyAccountData?.firstName })}
             </StyledPostFormButtonText>
           </StyledPostFormButton>
 

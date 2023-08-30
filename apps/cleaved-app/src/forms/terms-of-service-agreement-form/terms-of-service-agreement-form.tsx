@@ -49,16 +49,8 @@ export const TermsOfServiceAgreementForm: FunctionComponent = () => {
       return;
     }
 
-    if (data && data.acceptTerms) {
-      saveAccessToken(data.acceptTerms);
-
-      if (!preferredOrgId) {
-        navigate(
-          `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`
-        );
-      } else {
-        navigate(routeConstantsCleavedApp.home.route);
-      }
+    if (data) {
+      saveAccessToken(data.acceptTerms, () => navigate(routeConstantsCleavedApp.homeRouting.route));
     }
   }, [data, error, loading, preferredOrgId, saveAccessToken]);
 

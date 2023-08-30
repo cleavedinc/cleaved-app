@@ -17,7 +17,7 @@ const StyledOrganizationWrapper = styled.div`
 `;
 
 export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
-  const organizationMemberships = useOrganizationMemberships();
+  const { organizationMembershipsData, organizationMembershipsDataLoading } = useOrganizationMemberships();
   const { t } = useTranslator();
 
   return (
@@ -26,20 +26,18 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
         <SectionHeader>{t("organizations.organization")}</SectionHeader>
       </HeadingWrapper>
 
-      {!organizationMemberships.loading &&
-        organizationMemberships.data?.organizationMemberships &&
-        organizationMemberships.data.organizationMemberships.length > 0 && (
-          <>
-            {organizationMemberships.data.organizationMemberships.map((org) => {
-              return (
-                <StyledOrganizationWrapper key={org.id}>
-                  {org.name}
-                  <OrganizationEditMenu orgId={org.id} />
-                </StyledOrganizationWrapper>
-              );
-            })}
-          </>
-        )}
+      {!organizationMembershipsDataLoading && organizationMembershipsData && organizationMembershipsData.length > 0 && (
+        <>
+          {organizationMembershipsData.map((org) => {
+            return (
+              <StyledOrganizationWrapper key={org.id}>
+                {org.name}
+                <OrganizationEditMenu orgId={org.id} />
+              </StyledOrganizationWrapper>
+            );
+          })}
+        </>
+      )}
     </StyledBox>
   );
 };
