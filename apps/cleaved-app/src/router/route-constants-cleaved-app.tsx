@@ -21,7 +21,7 @@ export const routeConstantsCleavedApp = {
     route: "/home",
   },
   homeRouting: {
-    route: "/home-routing",
+    route: "/home",
   },
   login: {
     route: "/login",
