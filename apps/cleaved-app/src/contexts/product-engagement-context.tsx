@@ -16,11 +16,7 @@ export const ProductEngagementContext = createContext<ProductEngagementContextTy
 export const ProductEngagementContextProvider: FunctionComponent<ProductEngagementContextProviderType> = ({
   children,
 }) => {
-  const localDevelopmentAmplitudeAPIKey = "a2f344672df634b57ddd17188b6da8b7";
-  const productionAmplitudeAPIKey = "cf64e20a4ee03c3eec95b78f6b7527d7";
-  const amplitudeAPIKey =
-    process.env.NODE_ENV === "production" ? productionAmplitudeAPIKey : localDevelopmentAmplitudeAPIKey;
-
+  const amplitudeAPIKey = process.env.AMPLITUDE_API_KEY || "";
   amplitude.getInstance().init(amplitudeAPIKey);
 
   const output: ProductEngagementContextType = {
