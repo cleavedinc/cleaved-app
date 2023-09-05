@@ -1,23 +1,25 @@
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { navigate } from "@reach/router";
 
-import { authTokenContext } from "../../contexts";
 import { routeConstantsCleavedApp } from "../../router";
+import { useOrganizationMemberships } from "../../hooks";
 
 export const HomeRouting: FunctionComponent = () => {
-  const { preferredOrgId } = useContext(authTokenContext);
+  const data = useOrganizationMemberships();
 
   useEffect(() => {
-    if (!preferredOrgId) {
+    if (
+      data.organizationMembershipsData &&
+      data.organizationMembershipsData[0] &&
+      data.organizationMembershipsData[0].id
+    ) {
+      navigate(`/${data.organizationMembershipsData[0].id}${routeConstantsCleavedApp.home.route}`);
+    } else if (!data.organizationMembershipsDataLoading) {
       navigate(
         `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`
       );
     }
-
-    if (preferredOrgId) {
-      navigate(`/${preferredOrgId}${routeConstantsCleavedApp.home.route}`);
-    }
-  }, [preferredOrgId]);
+  }, [data]);
 
   return <></>;
 };

@@ -12,7 +12,6 @@ import { HomeRouting } from "../pages/home/home-routing";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
 import { Login } from "../pages/login/login";
 import { Membership } from "../pages/membership/membership";
-import { NotFound } from "../pages/not-found";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
 import { Professional } from "../pages/professional/professional";
 import { ProfessionalOnboardingRegisterOrganization } from "../pages/professional/professional-onboarding-register-organization";
@@ -55,7 +54,7 @@ export const ApplicationRouter: FunctionComponent = () => (
       renderedPage={<Professional />}
     />
 
-    <PageProtector path={`${routeConstantsCleavedApp.homeRouting.route}`} renderedPage={<HomeRouting />} />
+    <PageProtector default path={`${routeConstantsCleavedApp.homeRouting.route}`} renderedPage={<HomeRouting />} />
 
     <PageProtector path={`/:orgId${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
 
@@ -120,7 +119,5 @@ export const ApplicationRouter: FunctionComponent = () => (
     />
 
     <PageProtector path={routeConstantsCleavedApp.login.route} renderedPage={<Login />} isNotProtected />
-
-    <PageProtector default renderedPage={<NotFound />} isNotProtected />
   </StyledRouter>
 );
