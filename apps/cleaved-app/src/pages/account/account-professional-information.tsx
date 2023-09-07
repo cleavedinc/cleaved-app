@@ -6,6 +6,8 @@ import { Box, ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 import { AccountLegalLinks, AccountMembershipPlan } from "../../components";
 import { AccountGeneralSettingsDataWrapper, AccountOrganizationListDataWrapper } from "../../data-wrappers";
 import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
+import { useOrganizationPermission } from "../../permissions";
 
 const StyledBox = styled(Box)`
   display: flex;
@@ -13,10 +15,12 @@ const StyledBox = styled(Box)`
 `;
 
 export const AccountProfessionalInformation: FunctionComponent = () => {
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
+
   return (
     <ContentWrapper>
       <MainColumnMaxWidthWrapper>
-        <AccountMembershipPlan />
+        {hasPermission && <AccountMembershipPlan />}
 
         <StyledBox>
           <PersonalInformationForm />

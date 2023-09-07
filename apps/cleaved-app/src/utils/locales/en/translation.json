@@ -126,7 +126,7 @@
     "organization": "Organization",
     "organizationNamePlaceholder": "Organization name",
     "organizationRegister": "Register organization",
-    "removeOrganization": "Delete organization"
+    "removeOrganization": "Remove me from organization"
   },
   "organizationsStartNew": {
     "registerNewOrganization": "Register a new organization"
