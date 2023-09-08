@@ -185,7 +185,6 @@
     "unpinPost": "Desanclar del proyecto"
   },
   "postFileUpload": {
-    "addMoreImages": "Agregar más imágenes",
     "errorFileExceedsFileSize": "Un archivo superó el tamaño de MB y no se cargó.",
     "errorFileIncorrectType": "Un archivo no es un tipo de archivo aceptado.",
     "errorTooManyFilesType": "Demasiados archivos. El límite de carga es de {{maxFileUploadlimit}}",

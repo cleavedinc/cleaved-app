@@ -185,7 +185,6 @@
     "unpinPost": "Unpin from the project"
   },
   "postFileUpload": {
-    "addMoreImages": "Add more images",
     "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",
     "errorFileIncorrectType": "One file is not an accepted file type.",
     "errorTooManyFilesType": "Too many files. The upload limit is {{maxFileUploadlimit}}",
