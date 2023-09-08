@@ -6,6 +6,7 @@ import { useTranslator } from "../../hooks";
 
 type ImagesControlProps = {
   handleActionButton: () => void;
+  isImageUploadWrapperActive: boolean;
 };
 
 const StyledAdditionalActionsIconButton = styled.button`
@@ -20,14 +21,19 @@ const StyledAdditionalActionsIconButton = styled.button`
 `;
 
 export const ImagesControl: FunctionComponent<ImagesControlProps> = (props) => {
-  const { handleActionButton } = props;
+  const { handleActionButton, isImageUploadWrapperActive } = props;
   const { t } = useTranslator();
   const theme = useTheme();
 
   return (
     <StyledTooltipDark allowHTML tooltip={t("post.imageUploadTooltip")} zIndex={999999}>
       <StyledAdditionalActionsIconButton onClick={() => handleActionButton()} type="button">
-        <ImageIcon color={theme.colors.always_green_color} iconSize={FONT_SIZES.XXLARGE} />
+        <ImageIcon
+          color={
+            isImageUploadWrapperActive ? theme.colors.baseButtonSecondaryLink_color : theme.colors.always_green_color
+          }
+          iconSize={FONT_SIZES.XXLARGE}
+        />
       </StyledAdditionalActionsIconButton>
     </StyledTooltipDark>
   );

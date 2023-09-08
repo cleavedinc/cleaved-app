@@ -172,7 +172,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
       >
         {({ dirty, isSubmitting, isValid }) => {
           const handleAddImagesToPost = () => {
-            setImageUploadWrapperActive(true);
+            setImageUploadWrapperActive(!isImageUploadWrapperActive);
           };
 
           return (
@@ -182,16 +182,14 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
               </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionsWrapper>
-                {isImageUploadWrapperActive && (
-                  <ImageUploadAndPreviewForm
-                    closeImageUploadWrapper={() => setImageUploadWrapperActive(false)}
-                    images={postProjectGetByIdData?.images}
-                  />
-                )}
+                {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
               </StyledAdditionalActionsWrapper>
 
               <StyledAdditionalActionButtonWrapper>
-                <ImagesControl handleActionButton={handleAddImagesToPost} />
+                <ImagesControl
+                  handleActionButton={handleAddImagesToPost}
+                  isImageUploadWrapperActive={isImageUploadWrapperActive}
+                />
 
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}

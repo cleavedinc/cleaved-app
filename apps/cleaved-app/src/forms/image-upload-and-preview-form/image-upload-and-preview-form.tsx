@@ -15,7 +15,6 @@ import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
 
 type ImageUploadAndPreviewFormProps = {
   className?: string;
-  closeImageUploadWrapper?: () => void;
   images?: string[] | undefined;
 };
 
@@ -126,7 +125,7 @@ const StyledReactSortable = styled(ReactSortable)``;
 // }
 
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
-  const { closeImageUploadWrapper, images } = props;
+  const { images } = props;
   const { setProjectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const { setFieldValue } = useFormikContext();
 
@@ -171,7 +170,6 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
       "image/gif": [".gif"],
       "image/jpeg": [".jpeg", ".jpg"],
       "image/png": [".png"],
-      "image/svg+xml": [".svg"],
       "image/tiff": [".tif", ".tiff"],
       "image/webp": [".webp"],
     },
@@ -207,17 +205,9 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
     maxSize: 15728640,
   });
 
-  const openImagePicker = () => {
-    open();
-  };
-
   const removeFile = (fileToRemove: string) => () => {
     setSavedFileUrls((existingArray) => {
       const newSavedFileUrlsArray = existingArray.filter((fileUrl) => fileUrl != fileToRemove);
-
-      if (closeImageUploadWrapper && !newSavedFileUrlsArray.length) {
-        closeImageUploadWrapper();
-      }
 
       return newSavedFileUrlsArray;
     });
@@ -290,7 +280,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
       </StyledImageThumbnailContainer>
 
       {savedFileUrls && savedFileUrls.length > 0 && savedFileUrls.length < maxFileUploadlimit && (
-        <StyledAddFileButton type="button" onClick={() => openImagePicker()}>
+        <StyledAddFileButton type="button" onClick={open}>
           {t("postFileUpload.addMoreImages")}
         </StyledAddFileButton>
       )}

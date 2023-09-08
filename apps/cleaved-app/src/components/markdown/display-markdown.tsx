@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { SPACING } from "@cleaved/ui";
+import { FONT_SIZES, SPACING } from "@cleaved/ui";
 
 type DisplayMarkdownProps = {
   message: string;
@@ -16,8 +16,12 @@ const StyledMessage = styled(ReactMarkdown)`
 
   ul,
   ol {
-    margin: 0 0 ${SPACING.MEDIUM} ${SPACING.XLARGE};
+    margin: 0 0 0 ${SPACING.XLARGE};
     padding-left: 0;
+
+    li {
+      line-height: ${FONT_SIZES.XXXSMALL};
+    }
   }
 
   ul {
