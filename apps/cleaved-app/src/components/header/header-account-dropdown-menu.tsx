@@ -57,6 +57,10 @@ const StyledDropdownMenuNavigationButton = styled(NavigationButton)`
   }
 `;
 
+const StyledOnOutsideClick = styled(OnOutsideClick)`
+  position: relative;
+`;
+
 export const HeaderAccountDropdownMenu: FunctionComponent = () => {
   const { t } = useTranslator();
   const { findMyAccountData } = useFindMyAccount();
@@ -76,7 +80,7 @@ export const HeaderAccountDropdownMenu: FunctionComponent = () => {
   const profileLinkName = t("menuLinkNames.profile") ? t("menuLinkNames.profile") : "";
 
   return (
-    <OnOutsideClick
+    <StyledOnOutsideClick
       onOutsideClick={() => {
         setIsAccountMenuActive(false);
       }}
@@ -111,6 +115,6 @@ export const HeaderAccountDropdownMenu: FunctionComponent = () => {
           </StyledMenuUnorderedList>
         </DropdownMenu>
       </>
-    </OnOutsideClick>
+    </StyledOnOutsideClick>
   );
 };
