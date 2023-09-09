@@ -94,6 +94,8 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
     ? t("people.areYouSureRemoveMemberModalHeader")
     : undefined;
 
+  const editPermissionButton = t("people.editPermission") ? t("people.editPermission") : undefined;
+
   const EditUserPermissionLabel = () => (
     <>
       <StyledEditIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
@@ -106,7 +108,7 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
       <StyledBasicMenu
         arrow={true}
         menuButton={
-          <CircleEditButtonSmall type="button">
+          <CircleEditButtonSmall type="button" aria-label={editPermissionButton}>
             <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
           </CircleEditButtonSmall>
         }

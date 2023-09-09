@@ -124,6 +124,7 @@
     "manageOrganizations": "Manage organizations",
     "organizations": "Organizations",
     "organization": "Organization",
+    "organizationMenu": "Organization menu",
     "organizationNamePlaceholder": "Organization name",
     "organizationRegister": "Register organization",
     "removeOrganization": "Remove me from organization"
@@ -145,6 +146,7 @@
     "peopleListHeader": "Active People",
     "peopleListHeaderHome": "People",
     "peopleListHelperInfoText": "As people interact with this project, they will appear in this list.",
+    "peopleListMenu": "People list menu",
     "professionalName": "Name",
     "professionalPermissions": "Permissions",
     "professionalTitle": "Job title",
@@ -212,7 +214,7 @@
     "invitePeopleHelperInfoText": "Invite your coworkers to come join you on all your projects.",
     "invitePeopleFormHeader": "Invite your coworkers",
     "mailtoLinkEmailSubjectText": "Invitation to join Cleaved",
-    "mailtoLinkEmailBodyText": "I just joined Cleaved and set up a new project. Come join me.",
+    "mailtoLinkEmailBodyText": "I just joined Cleaved, a leadership platform for our company. Use this link to join me:",
     "mailtoLink": "Invite your coworkers",
     "navigateBackwardStep": "Previous",
     "navigateForwardStep": "Next"
@@ -235,7 +237,9 @@
     "owner": "Owner",
     "posts": "Posts",
     "edit": "Edit",
+    "editProject": "Edit Project",
     "editStatus": "Edit Status",
+    "projectStatusSelect": "Project status select",
     "stateActive": "Active",
     "stateInactive": "Inactive",
     "stateArchive": "Archive"
@@ -301,6 +305,7 @@
   },
   "tryAgain": "Try again",
   "widget": {
+    "editProjectDetailsMenu": "Edit project details menu",
     "projectDetailsEdit": "Edit project",
     "projectsList": "Projects List",
     "projectsListEmptyListText": "Awe shucks, no project yet. Let's go create one!",

@@ -59,12 +59,16 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
     ? t("organizations.areYouSureRemoveMeFromOrganizationDetails")
     : undefined;
 
+  const editOrganizationMenuButton = t("organizations.organizationMenu")
+    ? t("organizations.organizationMenu")
+    : undefined;
+
   return (
     <>
       <StyledBasicMenu
         arrow={true}
         menuButton={
-          <CircleEditButtonSmall type="button">
+          <CircleEditButtonSmall type="button" aria-label={editOrganizationMenuButton}>
             <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
           </CircleEditButtonSmall>
         }

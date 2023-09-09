@@ -123,6 +123,7 @@
     "edit": "Editar",
     "manageOrganizations": "Administrar organizaciones",
     "organizations": "Organizaciones",
+    "organizationMenu": "Menú de organización",
     "organization": "Organización",
     "organizationNamePlaceholder": "Nombre de la organización",
     "organizationRegister": "Registrar organización",
@@ -145,6 +146,7 @@
     "peopleListHeader": "Personas activas",
     "peopleListHeaderHome": "Gente",
     "peopleListHelperInfoText": "A medida que las personas interactúan con este proyecto, aparecerán en esta lista.",
+    "peopleListMenu": "Menú de lista de personas",
     "professionalName": "Nombre",
     "professionalPermissions": "Permisos",
     "professionalTitle": "Cargo",
@@ -212,7 +214,7 @@
     "invitePeopleHelperInfoText": "Invita a tus compañeros de trabajo a unirse contigo en todos tus proyectos.",
     "invitePeopleFormHeader": "Invita a tus compañeros de trabajo",
     "mailtoLinkEmailSubjectText": "Invitación para unirse a Cleaved",
-    "mailtoLinkEmailBodyText": "Acabo de unirme a Cleaved y configuré un nuevo proyecto. Ven a unirte conmigo.",
+    "mailtoLinkEmailBodyText": "Me acabo de unir a Cleaved, una plataforma de liderazgo para nuestra empresa. Utiliza este enlace para unirte a mí:",
     "mailtoLink": "Invita a tus compañeros de trabajo",
     "navigateBackwardStep": "Anterior",
     "navigateForwardStep": "Siguiente"
@@ -235,7 +237,9 @@
     "owner": "Propietario",
     "posts": "Publicaciones",
     "edit": "Editar",
+    "editProject": "Editar Proyecto",
     "editStatus": "Editar estado",
+    "projectStatusSelect": "Selección de estado del proyecto",
     "stateActive": "Activo",
     "stateInactive": "Inactivo",
     "stateArchive": "Archivo"
@@ -301,6 +305,7 @@
   },
   "tryAgain": "Intentar de nuevo",
   "widget": {
+    "editProjectDetailsMenu": "Menú de edición de detalles del proyecto",
     "projectDetailsEdit": "Editar proyecto",
     "projectsList": "Lista de proyectos",
     "projectsListEmptyListText": "Vaya, aún no hay proyectos. ¡Vamos a crear uno!",

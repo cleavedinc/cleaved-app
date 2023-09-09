@@ -6,6 +6,7 @@ import { BORDERS, Box, ButtonPrimary, CopyIcon, FONT_SIZES, Paragraph, RADIUS, S
 
 import { ShareLinkEditMenu } from "../../../components";
 import { OrganizationShareLinksQuery } from "../../../generated-types/graphql";
+import { useTranslator } from "../../../hooks";
 
 type SharelinkCardProps = {
   copyToClipboardOnCopy: () => void;
@@ -72,7 +73,10 @@ export const SharelinkCard: FunctionComponent<SharelinkCardProps> = (props) => {
     shareLink,
     shareLinkTitle,
   } = props;
+  const { t } = useTranslator();
   const theme = useTheme();
+
+  const sharelinkInput = t("shareLinks.shareLink") ? t("shareLinks.shareLink") : "";
 
   return (
     <Box>
@@ -91,7 +95,7 @@ export const SharelinkCard: FunctionComponent<SharelinkCardProps> = (props) => {
           <CopyToClipboard text={shareLink} onCopy={copyToClipboardOnCopy}>
             <StyledShareLinkCopyToClipboardWrapper>
               <StyledShareLinkIcon color={theme.colors.baseLink_color} />
-              <StyledShareLinkInputReadOnly value={shareLink} readOnly />
+              <StyledShareLinkInputReadOnly value={shareLink} aria-label={sharelinkInput} readOnly />
             </StyledShareLinkCopyToClipboardWrapper>
           </CopyToClipboard>
 

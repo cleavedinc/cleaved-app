@@ -25,6 +25,10 @@ const StyledButtonPrimary = styled(ButtonSecondary)`
 const StyledLinkButtonPrimary = styled(LinkButtonPrimary)`
   background-color: ${({ theme }) => theme.colors.baseButtonSecondaryLink_color};
   color: ${({ theme }) => theme.colors.baseText_color};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.baseText_color};
+  }
 `;
 
 const StyledShareLinkIcon = styled(CopyIcon)`
@@ -120,6 +124,8 @@ export const InviteUsers: FunctionComponent = () => {
     { isImmediate: true }
   );
 
+  const sharelinkInput = t("shareLinks.shareLink") ? t("shareLinks.shareLink") : "";
+
   return (
     <>
       <StyledBox>
@@ -154,7 +160,7 @@ export const InviteUsers: FunctionComponent = () => {
                 >
                   <StyledShareLinkWrapper>
                     <StyledShareLinkIcon />
-                    <StyledShareLinkInputReadOnly value={shareLinkUrl} readOnly />
+                    <StyledShareLinkInputReadOnly value={shareLinkUrl} aria-label={sharelinkInput} readOnly />
                   </StyledShareLinkWrapper>
                 </CopyToClipboard>
               </span>
