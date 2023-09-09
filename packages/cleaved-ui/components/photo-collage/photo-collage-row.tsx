@@ -94,7 +94,7 @@ export const PhotoCollageRow: FunctionComponent<RowPhotosProps> = (props) => {
                 </>
               )}
 
-              <StyledPhotoThumb src={data.source} />
+              <StyledPhotoThumb alt={data?.source} src={data.source} />
             </StyledPhotoGrid>
           );
         })}

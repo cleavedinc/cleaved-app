@@ -88,12 +88,14 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
     ? t("shareLinks.areYouSureRemoveSharelinkModalHeader")
     : undefined;
 
+  const editShareLinkMenuButton = t("shareLinks.shareLinkMenu") ? t("shareLinks.shareLinkMenu") : undefined;
+
   return (
     <>
       <StyledBasicMenu
         arrow={true}
         menuButton={
-          <CircleEditButtonSmall type="button">
+          <CircleEditButtonSmall type="button" aria-label={editShareLinkMenuButton}>
             <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
           </CircleEditButtonSmall>
         }

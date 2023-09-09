@@ -13,26 +13,16 @@ import { UIProvider } from "../providers";
 
 import { Application } from "./application";
 
-// GTM
-const localDevelopGTMId = "GTM-PF2PGRP";
-const productionGTMId = "GTM-N36S8X7";
-const tagManagerArgs = {
-  gtmId: process.env.NODE_ENV === "production" ? productionGTMId : localDevelopGTMId,
-};
-TagManager.initialize(tagManagerArgs);
-
-// // Amplitude
-// const localDevelopmentAmplitudeAPIKey = "a2f344672df634b57ddd17188b6da8b7";
-// const productionAmplitudeAPIKey = "cf64e20a4ee03c3eec95b78f6b7527d7";
-// const amplitudeAPIKey =
-//   process.env.NODE_ENV === "production" ? productionAmplitudeAPIKey : localDevelopmentAmplitudeAPIKey;
-// amplitude.init(amplitudeAPIKey);
-
 export const ApplicationWrapper: FunctionComponent = () => {
   const googleClientId = process.env.GOOGLE_CLIENT_ID as string;
-  const { t } = useTranslator();
 
-  // amplitude.track("Page View");
+  // GTM
+  const tagManagerArgs = {
+    gtmId: process.env.GOOGLE_TAG_MANAGER_ID || "",
+  };
+  TagManager.initialize(tagManagerArgs);
+
+  const { t } = useTranslator();
 
   const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
     return (

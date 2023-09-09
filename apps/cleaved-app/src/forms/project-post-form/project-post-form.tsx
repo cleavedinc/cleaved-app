@@ -182,12 +182,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
               </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionsWrapper>
-                {isImageUploadWrapperActive && (
-                  <ImageUploadAndPreviewForm
-                    closeImageUploadWrapper={() => setImageUploadWrapperActive(false)}
-                    images={postProjectGetByIdData?.images}
-                  />
-                )}
+                {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
               </StyledAdditionalActionsWrapper>
 
               <StyledAdditionalActionButtonWrapper>

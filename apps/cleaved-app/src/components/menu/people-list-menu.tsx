@@ -39,11 +39,13 @@ export const PeopleListMenu: FunctionComponent = () => {
     navigate(`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`);
   };
 
+  const editPeopleListButton = t("people.peopleListMenu") ? t("people.peopleListMenu") : undefined;
+
   return (
     <StyledBasicMenu
       arrow={true}
       menuButton={
-        <CircleEditButtonSmall type="button">
+        <CircleEditButtonSmall type="button" aria-label={editPeopleListButton}>
           <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
         </CircleEditButtonSmall>
       }

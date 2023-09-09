@@ -77,7 +77,7 @@ const StyledTdWithMenuContentEdit = styled(StyledTd)<StyledTdWithMenuContentEdit
 
 export const PeopleListRow: FunctionComponent<PeopleListRowProps> = (props) => {
   const { member, organizationSeekMembersDataRefetch } = props;
-  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
   const { findMyAccountData } = useFindMyAccount();
   const { profilePath } = useNavigateToProfile(member?.id);
   const { t } = useTranslator();

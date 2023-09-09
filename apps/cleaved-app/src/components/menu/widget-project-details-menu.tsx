@@ -25,11 +25,13 @@ export const WidgetProjectDetailsMenu: FunctionComponent = () => {
     );
   };
 
+  const editPostButton = t("widget.editProjectDetailsMenu") ? t("widget.editProjectDetailsMenu") : undefined;
+
   return (
     <StyledBasicMenu
       arrow={true}
       menuButton={
-        <CircleEditButtonSmall type="button">
+        <CircleEditButtonSmall type="button" aria-label={editPostButton}>
           <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
         </CircleEditButtonSmall>
       }

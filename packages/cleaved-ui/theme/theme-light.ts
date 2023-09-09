@@ -41,7 +41,7 @@ export const themeLight = {
     iconlikeColor: COLORS_BASE.BLUE_500,
     iconLikeInactiveColor: COLORS_LIGHT.GRAY_500,
     iconLoveColor: COLORS_BASE.RED_500,
-    iconCelebrateColor: COLORS_BASE.HONEY_YELLOW_500,
+    iconCelebrateColor: COLORS_BASE.ALWAYS_GREEN,
 
     helperInfoBoxWrapper_backgroundColor: COLORS_LIGHT.TAN_300,
   },

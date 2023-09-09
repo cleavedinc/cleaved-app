@@ -72,10 +72,6 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     ? t("formLabels.professionalEmailPlaceholder")
     : undefined;
 
-  // const aboutProfessionalCharactorLimit = t("formValidationMessages.aboutProfessionalCharactorLimit")
-  //   ? t("formValidationMessages.aboutProfessionalCharactorLimit")
-  //   : undefined;
-
   const youMustHaveAValidEmailAddress = t("formValidationMessages.youMustHaveAValidEmailAddress")
     ? t("formValidationMessages.youMustHaveAValidEmailAddress")
     : undefined;

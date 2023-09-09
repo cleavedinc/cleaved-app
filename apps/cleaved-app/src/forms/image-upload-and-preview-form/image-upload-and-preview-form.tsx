@@ -6,7 +6,7 @@ import styled, { useTheme } from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonLink, CloseIcon, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "@cleaved/ui";
+import { BORDERS, CloseIcon, FONT_SIZES, mediaQueries, RADIUS, SPACING } from "@cleaved/ui";
 
 import { PostFormContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -15,7 +15,6 @@ import { POST_UPLOAD_IMAGE_MUTATION } from "./gql";
 
 type ImageUploadAndPreviewFormProps = {
   className?: string;
-  closeImageUploadWrapper?: () => void;
   images?: string[] | undefined;
 };
 
@@ -24,10 +23,6 @@ type GetColorProps = {
   isDragReject: boolean;
   isFocused: boolean;
 };
-
-const StyledAddFileButton = styled(ButtonLink)`
-  font-size: ${FONT_SIZES.XSMALL};
-`;
 
 const StyledErrorMessage = styled.div`
   color: ${({ theme }) => theme.colors.baseAlert_color};
@@ -108,7 +103,7 @@ const StyledImageUploadWrapper = styled.section<GetColorProps>`
   color: ${({ theme }) => theme.colors.baseText_color};
   display: flex;
   flex: 1;
-  height: 120px;
+  height: 50px;
   justify-content: center;
   outline: none;
   flex-direction: column;
@@ -126,7 +121,7 @@ const StyledReactSortable = styled(ReactSortable)``;
 // }
 
 export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewFormProps> = (props) => {
-  const { closeImageUploadWrapper, images } = props;
+  const { images } = props;
   const { setProjectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const { setFieldValue } = useFormikContext();
 
@@ -164,14 +159,13 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
     },
   });
 
-  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject, open } = useDropzone({
+  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
     accept: {
       "image/avif": [".avif"],
       "image/bmp": [".bmp"],
       "image/gif": [".gif"],
       "image/jpeg": [".jpeg", ".jpg"],
       "image/png": [".png"],
-      "image/svg+xml": [".svg"],
       "image/tiff": [".tif", ".tiff"],
       "image/webp": [".webp"],
     },
@@ -207,17 +201,9 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
     maxSize: 15728640,
   });
 
-  const openImagePicker = () => {
-    open();
-  };
-
   const removeFile = (fileToRemove: string) => () => {
     setSavedFileUrls((existingArray) => {
       const newSavedFileUrlsArray = existingArray.filter((fileUrl) => fileUrl != fileToRemove);
-
-      if (closeImageUploadWrapper && !newSavedFileUrlsArray.length) {
-        closeImageUploadWrapper();
-      }
 
       return newSavedFileUrlsArray;
     });
@@ -245,18 +231,8 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
 
   return (
     <div className="container">
-      {savedFileUrls && savedFileUrls.length === 0 && (
-        <StyledImageUploadWrapper {...getRootProps({ className: "dropzone", isFocused, isDragAccept, isDragReject })}>
-          <input {...getInputProps()} />
-
-          <StyledImageUploadText>
-            {t("postFileUpload.dragDropAreaHelperText", { imageUploadLimit: maxFileUploadlimit })}
-          </StyledImageUploadText>
-        </StyledImageUploadWrapper>
-      )}
-
-      <StyledImageThumbnailContainer>
-        {savedFileUrls && (
+      {savedFileUrls && (
+        <StyledImageThumbnailContainer>
           <StyledReactSortable list={savedFileUrls} setList={setSavedFileUrls}>
             {savedFileUrls.map((fileUrl, index) => {
               return (
@@ -286,13 +262,19 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
               );
             })}
           </StyledReactSortable>
-        )}
-      </StyledImageThumbnailContainer>
+        </StyledImageThumbnailContainer>
+      )}
 
-      {savedFileUrls && savedFileUrls.length > 0 && savedFileUrls.length < maxFileUploadlimit && (
-        <StyledAddFileButton type="button" onClick={() => openImagePicker()}>
-          {t("postFileUpload.addMoreImages")}
-        </StyledAddFileButton>
+      {savedFileUrls && savedFileUrls.length < maxFileUploadlimit && (
+        <StyledImageUploadWrapper {...getRootProps({ className: "dropzone", isFocused, isDragAccept, isDragReject })}>
+          <input {...getInputProps()} />
+
+          <StyledImageUploadText>
+            {t("postFileUpload.dragDropAreaHelperText", {
+              imageUploadLimit: maxFileUploadlimit - savedFileUrls.length,
+            })}
+          </StyledImageUploadText>
+        </StyledImageUploadWrapper>
       )}
 
       {errors && <StyledErrorMessage>{errors}</StyledErrorMessage>}

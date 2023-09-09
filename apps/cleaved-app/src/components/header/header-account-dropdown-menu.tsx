@@ -5,6 +5,7 @@ import { Link } from "@reach/router";
 import { routeConstantsCleavedApp } from "../../router";
 import {
   BORDERS,
+  FONT_SIZES,
   isMenuItemActive,
   NavigationButtonLabel,
   NavigationButton,
@@ -38,6 +39,7 @@ const StyledLogoutButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.colors.baseTextLink_color};
   cursor: pointer;
+  font-size: ${FONT_SIZES.SMALL};
   padding: ${SPACING.MEDIUM};
   text-align: center;
   width: 100%;

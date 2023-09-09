@@ -119,10 +119,11 @@ export const PersonalInformationForm: FunctionComponent = () => {
         return (
           <>
             <StyledFormWrapper>
-              <Form>
-                <StyledAvatarNameWrapper>
-                  <EditAccountAvatar account={findMyAccountData} refetchAccountData={findMyAccountDataRefetch} />
+              <StyledAvatarNameWrapper>
+                <EditAccountAvatar account={findMyAccountData} refetchAccountData={findMyAccountDataRefetch} />
 
+                {/* Only add form elements within the Form wrapper, or it will break safari form submission */}
+                <Form>
                   <StyledFirstLastNameWrapper>
                     <StyledProjectFormWrapper>
                       <StyledProjectFormLabel htmlFor="firstName">{t("formLabels.firstName")}</StyledProjectFormLabel>
@@ -141,8 +142,8 @@ export const PersonalInformationForm: FunctionComponent = () => {
                       <Spinner visible={isSubmitting} />
                     </StyledSubmitButton>
                   </StyledFirstLastNameWrapper>
-                </StyledAvatarNameWrapper>
-              </Form>
+                </Form>
+              </StyledAvatarNameWrapper>
             </StyledFormWrapper>
           </>
         );

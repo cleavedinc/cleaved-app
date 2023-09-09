@@ -47,11 +47,13 @@ export const ProjectsEditMenu: FunctionComponent<ProjectEditMenuProps> = (props)
     });
   };
 
+  const editProjectButton = t("projects.editProject") ? t("projects.editProject") : undefined;
+
   return (
     <StyledBasicMenu
       arrow={true}
       menuButton={
-        <CircleEditButtonSmall type="button">
+        <CircleEditButtonSmall type="button" aria-label={editProjectButton}>
           <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
         </CircleEditButtonSmall>
       }

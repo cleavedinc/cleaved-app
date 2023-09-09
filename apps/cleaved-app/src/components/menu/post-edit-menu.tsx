@@ -123,12 +123,14 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
     ? t("post.areYouSureRemovePostModalText")
     : undefined;
 
+  const editPostButton = t("post.editPost") ? t("post.editPost") : undefined;
+
   return (
     <>
       <StyledBasicMenu
         arrow={true}
         menuButton={
-          <CircleEditButtonSmall type="button">
+          <CircleEditButtonSmall type="button" aria-label={editPostButton}>
             <EllipsisHorizontalIcon color={theme.colors.baseIcon_color} />
           </CircleEditButtonSmall>
         }

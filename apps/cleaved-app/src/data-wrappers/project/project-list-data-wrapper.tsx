@@ -148,6 +148,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
   const dateCreated = t("project.dateCreated") ? t("project.dateCreated") : "";
   const posts = t("project.posts") ? t("project.posts") : "";
   const editStatus = t("project.editStatus") ? t("project.editStatus") : "";
+  const projectStatusSelect = t("project.projectStatusSelect") ? t("project.projectStatusSelect") : "";
 
   return (
     <>
@@ -162,6 +163,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
       {hasPermission && (
         <StyledProjectListHeader>
           <Select
+            aria-label={projectStatusSelect}
             defaultValue={projectStatusOptions[0]}
             isSearchable={false}
             onChange={(projectStatusFilter) => projectStatusFilter && setProjectStatus(projectStatusFilter.value)}

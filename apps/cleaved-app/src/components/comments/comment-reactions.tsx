@@ -21,7 +21,7 @@ type StyledCommentFooterButtonButtonProps = Pick<CommentReactionsProps, "activeR
 
 const StyledCommentFooterButtonButton = styled.button<StyledCommentFooterButtonButtonProps>`
   ${removeDefaultButtonStyles}
-  ${(props) => (props.activeReaction === PostReactionType.NoReaction ? null : `margin-right: ${SPACING.SMALL}`)};
+  margin-right: ${SPACING.SMALL};
 
   &:hover {
     text-decoration: underline;

@@ -59,7 +59,7 @@ const StyledTrWrapper = styled(StyledTr)`
 `;
 
 export const PeopleListDataWrapper: FunctionComponent = () => {
-  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { organizationSeekMembersData, organizationSeekMembersDataLoading, organizationSeekMembersDataRefetch } =
     useOrganizationSeekMembers(null, 20);
