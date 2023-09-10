@@ -157,7 +157,7 @@
   "pleaseWaitDots": "Please wait...",
   "post": {
     "areYouSureDiscardPostModalTitle": "Are you sure?",
-    "areYouSureDiscardPostModalText": "We don't keep drafts yet, so your content will be lost.",
+    "areYouSureDiscardPostModalText": "We don't keep drafts, so your content will be lost.",
     "areYouSureDiscardPostButtonText": "Discard post",
     "areYouSureKeepPostButtonText": "Stay and keep writing",
     "areYouSureRemovePostModalHeader": "Are you sure?",

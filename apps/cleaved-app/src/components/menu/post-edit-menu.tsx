@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import styled, { useTheme } from "styled-components";
 
@@ -6,7 +6,7 @@ import { logQueryError } from "@cleaved/helpers";
 import { CircleEditButtonSmall, EllipsisHorizontalIcon, FONT_SIZES, Modal, PushPinOutlineIcon } from "@cleaved/ui";
 
 import { AreYouSureModal } from "../../components";
-import { PostsContext } from "../../contexts";
+import { PostsContext, PostFormContext } from "../../contexts";
 import { ProjectPostForm } from "../../forms";
 import { useRouteParams, useTranslator } from "../../hooks";
 import { POST_PROJECT_REMOVE_MUTATION } from "../../gql-mutations";
@@ -36,9 +36,11 @@ const StyledPushPinOutlineIcon = styled(PushPinOutlineIcon)`
 export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
   const { showPinnedMenuButton, isPinned, postId } = props;
   const { postProjectSeekRefetch } = useContext(PostsContext);
+  const { projectPostFormIsDirty, setProjectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const [isPostEditFormModalOpen, setIsPostEditFormModalOpen] = useState(false);
+  const [closeRequested, setCloseRequested] = useState(false);
   const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
   const theme = useTheme();
 
@@ -107,18 +109,64 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
     });
   };
 
+  const [isAreYouSureModalOpen, setIsAreYouSureModalOpen] = useState(false);
+
+  const handleConfirmAction = () => {
+    setIsAreYouSureModalOpen(false);
+    setIsPostEditFormModalOpen(false);
+
+    /**
+     * The way images are set on the post modal makes the imageupload dirty.
+     * settig setProjectPostFormImageUploadIsDirty to false ensures teh context is reset for future use.
+     * I know this needs refactoring. Choosing not to do it at this time.
+     * this is also set in the useEffect()
+     **/
+    setProjectPostFormImageUploadIsDirty(false);
+  };
+
+  useEffect(() => {
+    if (closeRequested) {
+      if (projectPostFormIsDirty) {
+        setIsAreYouSureModalOpen(true);
+      }
+
+      if (!projectPostFormIsDirty) {
+        setIsPostEditFormModalOpen(false);
+
+        /**
+         * The way images are set on the post modal makes the imageupload dirty.
+         * settig setProjectPostFormImageUploadIsDirty to false ensures teh context is reset for future use.
+         * I know this needs refactoring. Choosing not to do it at this time.
+         * this is also set in the handleConfirmAction()
+         **/
+        setProjectPostFormImageUploadIsDirty(false);
+      }
+
+      setCloseRequested(false);
+    }
+  }, [projectPostFormIsDirty, closeRequested]);
+
+  const areYouSureConfirmButtonText = t("post.areYouSureDiscardPostButtonText")
+    ? t("post.areYouSureDiscardPostButtonText")
+    : undefined;
+  const areYouSureRejectButtonText = t("post.areYouSureKeepPostButtonText")
+    ? t("post.areYouSureKeepPostButtonText")
+    : undefined;
+  const areYouSureDiscardPostModalText = t("post.areYouSureDiscardPostModalText")
+    ? t("post.areYouSureDiscardPostModalText")
+    : undefined;
+  const areYouSureDiscardPostModalTitle = t("post.areYouSureDiscardPostModalTitle")
+    ? t("post.areYouSureDiscardPostModalTitle")
+    : undefined;
+
   const editProjectPost = t("post.editProjectPost") ? t("post.editProjectPost") : undefined;
-
   const areYouSureKeepButtonText = t("post.areYouSureKeepButtonText") ? t("post.areYouSureKeepButtonText") : undefined;
-
   const areYouSureRemoveButtonText = t("post.areYouSureRemoveButtonText")
     ? t("post.areYouSureRemoveButtonText")
     : undefined;
-
   const areYouSureRemovePost = t("post.areYouSureRemovePostModalHeader")
     ? t("post.areYouSureRemovePostModalHeader")
     : undefined;
-
   const areYouSureRemovePostModalText = t("post.areYouSureRemovePostModalText")
     ? t("post.areYouSureRemovePostModalText")
     : undefined;
@@ -162,14 +210,22 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
         </StyledBasicItem>
       </StyledBasicMenu>
 
-      <Modal
-        open={isPostEditFormModalOpen}
-        onCloseRequested={() => setIsPostEditFormModalOpen(false)}
-        title={editProjectPost}
-      >
-        <ProjectPostForm closeForm={() => setIsPostEditFormModalOpen(false)} postId={postId} />
+      <Modal open={isPostEditFormModalOpen} onCloseRequested={() => setCloseRequested(true)} title={editProjectPost}>
+        <ProjectPostForm closeForm={() => setCloseRequested(true)} postId={postId} />
       </Modal>
 
+      {/* discard text changes gaurd */}
+      <AreYouSureModal
+        areYouSureConfirmButtonText={areYouSureConfirmButtonText}
+        areYouSureRejectButtonText={areYouSureRejectButtonText}
+        areYouSureDescription={areYouSureDiscardPostModalText}
+        areYouSureTitle={areYouSureDiscardPostModalTitle}
+        handleConfirmAction={handleConfirmAction}
+        isAreYouSureModalOpen={isAreYouSureModalOpen}
+        setIsAreYouSureModalOpen={setIsAreYouSureModalOpen}
+      />
+
+      {/* delete post gaurd */}
       <AreYouSureModal
         areYouSureConfirmButtonText={areYouSureRemoveButtonText}
         areYouSureRejectButtonText={areYouSureKeepButtonText}

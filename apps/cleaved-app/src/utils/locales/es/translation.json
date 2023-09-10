@@ -157,7 +157,7 @@
   "pleaseWaitDots": "Por favor espera...",
   "post": {
     "areYouSureDiscardPostModalTitle": "¿Estás seguro?",
-    "areYouSureDiscardPostModalText": "Aún no guardamos borradores, por lo que tu contenido se perderá.",
+    "areYouSureDiscardPostModalText": "No guardamos borradores, por lo que tu contenido se perderá.",
     "areYouSureDiscardPostButtonText": "Descartar publicación",
     "areYouSureKeepPostButtonText": "Permanecer y seguir escribiendo",
     "areYouSureRemovePostModalHeader": "¿Estás seguro?",
