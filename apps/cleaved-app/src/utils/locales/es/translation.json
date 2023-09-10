@@ -157,7 +157,7 @@
   "pleaseWaitDots": "Por favor espera...",
   "post": {
     "areYouSureDiscardPostModalTitle": "¿Estás seguro?",
-    "areYouSureDiscardPostModalText": "Aún no guardamos borradores, por lo que tu contenido se perderá.",
+    "areYouSureDiscardPostModalText": "No guardamos borradores, por lo que tu contenido se perderá.",
     "areYouSureDiscardPostButtonText": "Descartar publicación",
     "areYouSureKeepPostButtonText": "Permanecer y seguir escribiendo",
     "areYouSureRemovePostModalHeader": "¿Estás seguro?",
@@ -214,7 +214,7 @@
     "invitePeopleHelperInfoText": "Invita a tus compañeros de trabajo a unirse contigo en todos tus proyectos.",
     "invitePeopleFormHeader": "Invita a tus compañeros de trabajo",
     "mailtoLinkEmailSubjectText": "Invitación para unirse a Cleaved",
-    "mailtoLinkEmailBodyText": "Me acabo de unir a Cleaved, una plataforma de liderazgo para nuestra empresa. Utiliza este enlace para unirte a mí:",
+    "mailtoLinkEmailBodyText": "Me uní a Cleaved, una plataforma de liderazgo para nuestra empresa. Quiero que te unas a mí para que podamos colaborar juntos. Usa este enlace para ingresar:",
     "mailtoLink": "Invita a tus compañeros de trabajo",
     "navigateBackwardStep": "Anterior",
     "navigateForwardStep": "Siguiente"

@@ -9,4 +9,9 @@ export const ButtonLink = styled.button`
   font-size: ${FONT_SIZES.MEDIUM};
   outline: inherit;
   padding: 0;
+
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.baseLink_colorHover};
+  }
 `;

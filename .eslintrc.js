@@ -2,13 +2,13 @@ module.exports = exports = {
   env: {
     browser: true,
     es6: true,
-    jest: true,
     node: true,
   },
   extends: [
     "airbnb-typescript",
     "eslint:recommended",
     "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -21,7 +21,7 @@ module.exports = exports = {
     project: "./tsconfig.json",
     tsconfigRootDir: __dirname,
   },
-  plugins: ["@typescript-eslint", "jest", "prettier", "react", "react-hooks"],
+  plugins: ["@typescript-eslint", "prettier", "react", "react-hooks"],
   rules: {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-var-requires": 0,

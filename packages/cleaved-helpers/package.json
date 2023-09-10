@@ -4,15 +4,12 @@
   "license": "UNLICENSED",
   "sideEffects": false,
   "scripts": {
-    "lint": "eslint -c configs/.eslintrc.js . --ext .js,.jsx,.ts,.tsx",
-    "test": "jest --config configs/jest.config.js --passWithNoTests"
+    "lint": "eslint -c configs/.eslintrc.js . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@apollo/client": "3.7.9",
     "@cleaved/ui": "*",
     "dayjs": "1.11.7",
-    "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.7",
     "formik": "2.2.9",
     "javascript-time-ago": "2.5.9",
     "js-cookie": "3.0.1",
@@ -24,8 +21,6 @@
     "yup": "0.32.11"
   },
   "devDependencies": {
-    "@types/enzyme": "3.10.12",
-    "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/javascript-time-ago": "2.0.3",
     "@types/js-cookie": "3.0.2",
     "@types/react": "18.0.28",

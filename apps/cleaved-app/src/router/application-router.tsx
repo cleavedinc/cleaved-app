@@ -74,7 +74,7 @@ export const ApplicationRouter: FunctionComponent = () => (
     />
 
     <PageProtector
-      path={routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}
+      path={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}`}
       renderedPage={<ProfessionalOnboardingHasOrganization />}
     />
 

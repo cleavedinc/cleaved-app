@@ -8,4 +8,9 @@ export const ButtonSecondary = styled.button`
   background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
   border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
   color: ${({ theme }) => theme.colors.baseText_color};
+
+  &:hover:not([disabled]) {
+    background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
+    color: ${({ theme }) => theme.colors.baseText_color};
+  }
 `;

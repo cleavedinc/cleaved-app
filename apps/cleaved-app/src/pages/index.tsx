@@ -7,6 +7,7 @@ import { ApplicationWrapper } from "./application-wrapper";
 const container = document.getElementById("root");
 const root = createRoot(container!); // eslint-disable-line
 
+// Logs accessibility errors to the console in non-production mode
 if (process.env.NODE_ENV !== "production") {
   const config = {
     rules: [

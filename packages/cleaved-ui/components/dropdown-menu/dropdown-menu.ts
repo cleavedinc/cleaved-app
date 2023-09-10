@@ -7,7 +7,7 @@ export const DropdownMenu = styled.nav`
   border-radius: ${RADIUS.MEDIUM};
   display: none;
   position: absolute;
-  right: ${SPACING.MEDIUM};
+  right: ${SPACING.BASE};
   top: 40px;
   width: 300px;
   z-index: 999;

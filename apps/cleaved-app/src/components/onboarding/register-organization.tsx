@@ -41,7 +41,9 @@ export const RegisterOrganization: FunctionComponent = () => {
 
         <StyledHasOrganizationSkipOnboarding>
           {t("professionalOnboarding.alreadyHasOrganizationText")}
-          <Link to={routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}>
+          <Link
+            to={`${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingHasOrganization.route}`}
+          >
             {t("professionalOnboarding.alreadyHasOrganizationLink")}
           </Link>
         </StyledHasOrganizationSkipOnboarding>
