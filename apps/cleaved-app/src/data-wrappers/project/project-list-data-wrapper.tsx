@@ -134,7 +134,7 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
     projectsInOrganizationSeekData,
     projectsInOrganizationSeekDataLoading,
     projectsInOrganizationSeekDataRefetch,
-  } = useProjectsInOrganizationSeek(null, 100, [projectStatus]);
+  } = useProjectsInOrganizationSeek(null, 500, [projectStatus]);
 
   const projectStatusOptions: readonly ProjectStatusType[] = [
     { value: ProjectStatus.Active, label: t("projects.active") },

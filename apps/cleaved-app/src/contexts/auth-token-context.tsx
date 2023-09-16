@@ -64,6 +64,7 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     apolloClient.resetStore();
     apolloClient.cache.reset();
     googleLogout();
+    setPreferredOrgId("");
     navigate(`/login`);
   }, [setLoggedIn, DeleteCookie, navigate, apolloClient, googleLogout]);
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Box, ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { AccountLegalLinks, AccountMembershipPlan } from "../../components";
+import { AccountLegalLinks, AccountMembershipPlan, Header } from "../../components";
 import { AccountGeneralSettingsDataWrapper, AccountOrganizationListDataWrapper } from "../../data-wrappers";
 import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
 // import { OrgPermissionLevel } from "../../generated-types/graphql";
@@ -18,24 +18,28 @@ export const AccountProfessionalInformation: FunctionComponent = () => {
   // const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
 
   return (
-    <ContentWrapper>
-      <MainColumnMaxWidthWrapper>
-        {/* {hasPermission && <AccountMembershipPlan />} */}
+    <>
+      <Header />
 
-        <StyledBox>
-          <PersonalInformationForm />
-        </StyledBox>
+      <ContentWrapper>
+        <MainColumnMaxWidthWrapper>
+          {/* {hasPermission && <AccountMembershipPlan />} */}
 
-        <StyledBox>
-          <ProfesionalInformationForm />
-        </StyledBox>
+          <StyledBox>
+            <PersonalInformationForm />
+          </StyledBox>
 
-        <AccountGeneralSettingsDataWrapper />
+          <StyledBox>
+            <ProfesionalInformationForm />
+          </StyledBox>
 
-        <AccountOrganizationListDataWrapper />
+          <AccountGeneralSettingsDataWrapper />
 
-        <AccountLegalLinks />
-      </MainColumnMaxWidthWrapper>
-    </ContentWrapper>
+          <AccountOrganizationListDataWrapper />
+
+          <AccountLegalLinks />
+        </MainColumnMaxWidthWrapper>
+      </ContentWrapper>
+    </>
   );
 };

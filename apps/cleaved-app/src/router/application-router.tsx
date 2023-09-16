@@ -31,6 +31,7 @@ import { PageProtector } from "./page-protector";
 
 const StyledRouter = styled(Router)`
   display: flex;
+  flex-direction: column;
   flex: 1;
 
   ${mediaQueries.SM} {

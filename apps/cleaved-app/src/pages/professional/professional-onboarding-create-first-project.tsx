@@ -2,21 +2,25 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { ProgressBar, CreateFirstProject } from "../../components";
+import { ProgressBar, CreateFirstProject, HeaderLoggedOut } from "../../components";
 import { AsideProfessionalOnboardingCreateFirstProjectDataWrapper } from "../../data-wrappers";
 
 export const ProfessionalOnboardingCreateFirstProject: FunctionComponent = () => {
   return (
-    <ContentWrapper>
-      <LeftColumnWrapper>
-        <AsideProfessionalOnboardingCreateFirstProjectDataWrapper />
-      </LeftColumnWrapper>
+    <>
+      <HeaderLoggedOut />
 
-      <MainColumnMaxWidthWrapper>
-        <ProgressBar activeStep={2} />
+      <ContentWrapper>
+        <LeftColumnWrapper>
+          <AsideProfessionalOnboardingCreateFirstProjectDataWrapper />
+        </LeftColumnWrapper>
 
-        <CreateFirstProject />
-      </MainColumnMaxWidthWrapper>
-    </ContentWrapper>
+        <MainColumnMaxWidthWrapper>
+          <ProgressBar activeStep={2} />
+
+          <CreateFirstProject />
+        </MainColumnMaxWidthWrapper>
+      </ContentWrapper>
+    </>
   );
 };
