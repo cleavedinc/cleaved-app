@@ -2,14 +2,19 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
+import { Header } from "../../components";
 import { MembershipDataWrapper } from "../../data-wrappers";
 
 export const Membership: FunctionComponent = () => {
   return (
-    <ContentWrapper>
-      <MainColumnMaxWidthWrapper>
-        <MembershipDataWrapper />
-      </MainColumnMaxWidthWrapper>
-    </ContentWrapper>
+    <>
+      <Header />
+
+      <ContentWrapper>
+        <MainColumnMaxWidthWrapper>
+          <MembershipDataWrapper />
+        </MainColumnMaxWidthWrapper>
+      </ContentWrapper>
+    </>
   );
 };

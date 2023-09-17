@@ -62,7 +62,7 @@ export const PeopleListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { organizationSeekMembersData, organizationSeekMembersDataLoading, organizationSeekMembersDataRefetch } =
-    useOrganizationSeekMembers(null, 20);
+    useOrganizationSeekMembers(null, 500); // If we need to change this to a higher # or lazy load users, we're doing alright!!!
   const { t } = useTranslator();
 
   const professionalInviteLinkName = t("menuLinkNames.professionalInvite") ? t("menuLinkNames.professionalInvite") : "";

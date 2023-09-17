@@ -13,5 +13,6 @@ export const MainColumnMaxWidthWrapper = styled.div`
     margin-top: ${SPACING.MEDIUM_LARGE};
     min-width: 450px;
     max-width: 450px;
+    min-height: 400px;
   }
 `;

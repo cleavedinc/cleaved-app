@@ -5,6 +5,7 @@ import { Waypoint } from "react-waypoint";
 import { SPACING } from "@cleaved/ui";
 
 import { StyledRouterButtonLink } from "../../components";
+import { postPageSize } from "../../constants";
 import { authTokenContext, PostsContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
@@ -45,7 +46,6 @@ export const PostProjectList: FunctionComponent<PostProjectListProps> = (props) 
   const { showPinnedMenuButton, showPinnedStatus } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const pageSize = 50;
   const { postProjectSeekData, postProjectSeekDataLoading, postProjectSeekFetchMore } = useContext(PostsContext);
   const lastPostId = postProjectSeekData && postProjectSeekData[postProjectSeekData.length - 1]?.id;
   const { t } = useTranslator();
@@ -81,7 +81,7 @@ export const PostProjectList: FunctionComponent<PostProjectListProps> = (props) 
             );
           })}
 
-          {!postProjectSeekDataLoading && postProjectSeekData.length >= pageSize && (
+          {!postProjectSeekDataLoading && postProjectSeekData.length >= postPageSize && (
             <Waypoint onEnter={() => handleLoadMoreData()}>
               <StyledWaypointTriggerMessage />
             </Waypoint>

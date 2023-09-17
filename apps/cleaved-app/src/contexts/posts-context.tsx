@@ -3,9 +3,9 @@ import { useQuery } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
 
+import { postPageSize } from "../constants";
 import { PostProjectSeekQuery } from "../generated-types/graphql";
 import { POST_PROJECT_SEEK_QUERY } from "../gql-queries";
-
 import { useLoginGuard, useRouteParams } from "../hooks";
 
 type PostsContextProviderType = {
@@ -32,7 +32,6 @@ export const PostsContextProvider: FunctionComponent<PostsContextProviderType> =
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const projectId = routeParams.projectId ? routeParams.projectId : null;
-  const postPageSize = 50;
 
   const { data, loading, fetchMore, refetch } = useQuery<PostProjectSeekQuery>(POST_PROJECT_SEEK_QUERY, {
     fetchPolicy: "network-only",
