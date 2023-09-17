@@ -38,6 +38,8 @@
     "aboutPlaceholder": "Comparte lo que te importa con los demás.",
     "firstName": "Nombre",
     "firstNamePlaceholder": "¿Cuál es tu nombre de pila?",
+    "goals": "Mis objetivos empresariales",
+    "goalsPlaceholder": "¿Cuáles son los objetivos hacia los que estás trabajando?",
     "lastName": "Apellido",
     "lastNamePlaceholder": "¿Cuál es tu apellido?",
     "professionalEmail": "Correo electrónico",
@@ -194,7 +196,8 @@
   },
   "privacyPolicy": "Política de privacidad",
   "professional": {
-    "about": "Me importa:"
+    "about": "Me importa:",
+    "goals": "Mis objetivos empresariales"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Omitir incorporación",

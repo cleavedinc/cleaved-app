@@ -7,6 +7,7 @@ export const ORGANIZATION_GET_MEMBER_QUERY = graphql(`
       emailAddress
       id
       firstName
+      goals
       lastName
       currentAvatar
       jobTitle

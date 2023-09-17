@@ -38,6 +38,8 @@
     "aboutPlaceholder": "Share what you care about with others.",
     "firstName": "First name",
     "firstNamePlaceholder": "What is your first name?",
+    "goals": "My company goals",
+    "goalsPlaceholder": "What are the goals you are working towards?",
     "lastName": "Last name",
     "lastNamePlaceholder": "What is your last name?",
     "professionalEmail": "Email",
@@ -194,7 +196,8 @@
   },
   "privacyPolicy": "Privacy Policy",
   "professional": {
-    "about": "I care about:"
+    "about": "I care about:",
+    "goals": "My company goals"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Skip onboarding",

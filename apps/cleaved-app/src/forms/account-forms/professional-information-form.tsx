@@ -21,11 +21,12 @@ import {
 import { useFindMyAccount, useTranslator } from "../../hooks";
 
 import { ProfessionalInformationFormFormikTextarea } from "./components";
-import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION } from "./gql";
+import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION, SET_GOALS_MUTATION } from "./gql";
 
 type ProfesionalInformationFormType = {
   about?: string;
   accountEmail?: string;
+  goals?: string;
   jobTitle?: string;
 };
 
@@ -99,12 +100,19 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     },
   });
 
+  const [setGoals] = useMutation(SET_GOALS_MUTATION, {
+    onError: (error) => {
+      logQueryError(error);
+    },
+  });
+
   return (
     <Formik
       enableReinitialize
       initialValues={{
         about: findMyAccountData?.about || "",
         accountEmail: findMyAccountData?.emailAddress || "",
+        goals: findMyAccountData?.goals || "",
         jobTitle: findMyAccountData?.jobTitle || "",
       }}
       onSubmit={(values: ProfesionalInformationFormType, { resetForm, setSubmitting }) => {
@@ -128,11 +136,18 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
           },
         });
 
+        setGoals({
+          variables: {
+            goals: values.goals ? values.goals : "",
+          },
+        });
+
         resetForm({ values });
       }}
       validationSchema={yup.object().shape<Record<keyof ProfesionalInformationFormType, yup.AnySchema>>({
         about: yup.string(),
         accountEmail: yup.string().email(youMustHaveAValidEmailAddress),
+        goals: yup.string(),
         jobTitle: yup.string(),
       })}
     >
@@ -167,6 +182,15 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
                   <ProfessionalInformationFormFormikTextarea
                     name="about"
                     placeholder={t("formLabels.aboutPlaceholder")}
+                  />
+                </StyledProjectFormWrapper>
+
+                <StyledProjectFormWrapper>
+                  <StyledProjectFormLabel htmlFor="goals">{t("formLabels.goals")}</StyledProjectFormLabel>
+
+                  <ProfessionalInformationFormFormikTextarea
+                    name="goals"
+                    placeholder={t("formLabels.goalsPlaceholder")}
                   />
                 </StyledProjectFormWrapper>
 
