@@ -65,7 +65,6 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
 
           {hasPermission && <WidgetProjectDetailsMenu />}
         </WidgetHeadingWrapper>
-
         <StyledCommentInfoWrapper>
           {projectData && projectData?.projectByIdData && projectData?.projectByIdData?.totalRootPostCount > 0 && (
             <StyledCommentInfo title={totalPosts}>

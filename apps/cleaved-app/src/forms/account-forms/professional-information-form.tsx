@@ -25,7 +25,7 @@ import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION,
 
 type ProfesionalInformationFormType = {
   about?: string;
-  accountEmail?: string;
+  // accountEmail?: string;
   goals?: string;
   jobTitle?: string;
 };
@@ -69,19 +69,19 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     ? t("formLabels.professionalTitlePlaceholder")
     : undefined;
 
-  const professionalEmailPlaceholder = t("formLabels.professionalEmailPlaceholder")
-    ? t("formLabels.professionalEmailPlaceholder")
-    : undefined;
+  // const professionalEmailPlaceholder = t("formLabels.professionalEmailPlaceholder")
+  //   ? t("formLabels.professionalEmailPlaceholder")
+  //   : undefined;
 
-  const youMustHaveAValidEmailAddress = t("formValidationMessages.youMustHaveAValidEmailAddress")
-    ? t("formValidationMessages.youMustHaveAValidEmailAddress")
-    : undefined;
+  // const youMustHaveAValidEmailAddress = t("formValidationMessages.youMustHaveAValidEmailAddress")
+  //   ? t("formValidationMessages.youMustHaveAValidEmailAddress")
+  //   : undefined;
 
-  const [setAccountEmail] = useMutation(SET_ACCOUNT_EMAIL_MUTATION, {
-    onError: (error) => {
-      logQueryError(error);
-    },
-  });
+  // const [setAccountEmail] = useMutation(SET_ACCOUNT_EMAIL_MUTATION, {
+  //   onError: (error) => {
+  //     logQueryError(error);
+  //   },
+  // });
 
   const [setJobTitle] = useMutation(SET_JOB_TITLE_MUTATION, {
     onCompleted: () => {
@@ -118,11 +118,11 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
       onSubmit={(values: ProfesionalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
 
-        setAccountEmail({
-          variables: {
-            newEmail: values.accountEmail ? values.accountEmail : "",
-          },
-        });
+        // setAccountEmail({
+        //   variables: {
+        //     newEmail: values.accountEmail ? values.accountEmail : "",
+        //   },
+        // });
 
         setJobTitle({
           variables: {
@@ -146,7 +146,7 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
       }}
       validationSchema={yup.object().shape<Record<keyof ProfesionalInformationFormType, yup.AnySchema>>({
         about: yup.string(),
-        accountEmail: yup.string().email(youMustHaveAValidEmailAddress),
+        // accountEmail: yup.string().email(youMustHaveAValidEmailAddress),
         goals: yup.string(),
         jobTitle: yup.string(),
       })}
@@ -168,13 +168,13 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
                   <StyledField id="jobTitle" name="jobTitle" placeholder={professionalTitlePlaceholder} />
                 </StyledProjectFormWrapper>
 
-                <StyledProjectFormWrapper>
-                  <StyledProjectFormLabel htmlFor="accountEmail">
-                    {t("formLabels.professionalEmail")}
-                  </StyledProjectFormLabel>
+                {/* <StyledProjectFormWrapper>
+                <StyledProjectFormLabel htmlFor="accountEmail">
+                  {t("formLabels.professionalEmail")}
+                </StyledProjectFormLabel>
 
-                  <StyledField id="accountEmail" name="accountEmail" placeholder={professionalEmailPlaceholder} />
-                </StyledProjectFormWrapper>
+                <StyledField id="accountEmail" name="accountEmail" placeholder={professionalEmailPlaceholder} />
+              </StyledProjectFormWrapper> */}
 
                 <StyledProjectFormWrapper>
                   <StyledProjectFormLabel htmlFor="about">{t("formLabels.about")}</StyledProjectFormLabel>

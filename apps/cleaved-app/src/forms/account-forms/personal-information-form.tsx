@@ -5,7 +5,18 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonPrimary, FONT_SIZES, mediaQueries, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
+import {
+  BORDERS,
+  ButtonPrimary,
+  FONT_SIZES,
+  HeadingWrapper,
+  SectionHeader,
+  mediaQueries,
+  RADIUS,
+  SPACING,
+  SPACING_PX,
+  Spinner,
+} from "@cleaved/ui";
 
 import { EditAccountAvatar } from "../../components";
 import { useFindMyAccount, useTranslator } from "../../hooks";
@@ -45,6 +56,10 @@ const StyledFirstLastNameWrapper = styled.div`
   ${mediaQueries.XS_LANDSCAPE} {
     width: 100%;
   }
+`;
+
+const StyledForm = styled(Form)`
+  width: 100%;
 `;
 
 const StyledFormWrapper = styled.div``;
@@ -118,12 +133,16 @@ export const PersonalInformationForm: FunctionComponent = () => {
       {({ dirty, isSubmitting, isValid }) => {
         return (
           <>
+            <HeadingWrapper>
+              <SectionHeader>{t("hTags.profile")}</SectionHeader>
+            </HeadingWrapper>
+
             <StyledFormWrapper>
               <StyledAvatarNameWrapper>
                 <EditAccountAvatar account={findMyAccountData} refetchAccountData={findMyAccountDataRefetch} />
 
                 {/* Only add form elements within the Form wrapper, or it will break safari form submission */}
-                <Form>
+                <StyledForm>
                   <StyledFirstLastNameWrapper>
                     <StyledProjectFormWrapper>
                       <StyledProjectFormLabel htmlFor="firstName">{t("formLabels.firstName")}</StyledProjectFormLabel>
@@ -142,7 +161,7 @@ export const PersonalInformationForm: FunctionComponent = () => {
                       <Spinner visible={isSubmitting} />
                     </StyledSubmitButton>
                   </StyledFirstLastNameWrapper>
-                </Form>
+                </StyledForm>
               </StyledAvatarNameWrapper>
             </StyledFormWrapper>
           </>

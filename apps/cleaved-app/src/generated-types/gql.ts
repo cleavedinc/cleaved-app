@@ -32,6 +32,7 @@ const documents = {
     "\n  mutation registerOrganization($organizationId: ID!, $name: String) {\n    registerOrganization(organizationId: $organizationId, name: $name)\n  }\n": types.RegisterOrganizationDocument,
     "\n  mutation projectCreate($projectName: String!, $organizationId: ID!, $projectId: ID, $projectDetail: String) {\n    projectCreate(\n      projectName: $projectName\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n    )\n  }\n": types.ProjectCreateDocument,
     "\n  mutation projectUpdate($organizationId: ID!, $projectId: ID!, $projectDetail: String, $projectName: String!) {\n    projectUpdate(\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n      projectName: $projectName\n    )\n  }\n": types.ProjectUpdateDocument,
+    "\n  mutation projectSetPercentComplete($projectId: ID!, $organizationId: ID!, $percentComplete: PercentComplete!) {\n    projectSetPercentComplete(projectId: $projectId, organizationId: $organizationId, percentComplete: $percentComplete)\n  }\n": types.ProjectSetPercentCompleteDocument,
     "\n  mutation postProjectCreate($organizationId: ID!, $projectId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectCreate(organizationId: $organizationId, projectId: $projectId, body: $body, imageUrls: $imageUrls)\n  }\n": types.PostProjectCreateDocument,
     "\n  mutation postProjectUpdate($organizationId: ID!, $postId: ID!, $body: String!, $imageUrls: [ImagePath!]) {\n    postProjectUpdate(organizationId: $organizationId, postId: $postId, body: $body, imageUrls: $imageUrls)\n  }\n": types.PostProjectUpdateDocument,
     "\n  mutation acceptTerms {\n    acceptTerms\n  }\n": types.AcceptTermsDocument,
@@ -145,6 +146,10 @@ export function graphql(source: "\n  mutation projectCreate($projectName: String
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation projectUpdate($organizationId: ID!, $projectId: ID!, $projectDetail: String, $projectName: String!) {\n    projectUpdate(\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n      projectName: $projectName\n    )\n  }\n"): (typeof documents)["\n  mutation projectUpdate($organizationId: ID!, $projectId: ID!, $projectDetail: String, $projectName: String!) {\n    projectUpdate(\n      organizationId: $organizationId\n      projectId: $projectId\n      projectDetail: $projectDetail\n      projectName: $projectName\n    )\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation projectSetPercentComplete($projectId: ID!, $organizationId: ID!, $percentComplete: PercentComplete!) {\n    projectSetPercentComplete(projectId: $projectId, organizationId: $organizationId, percentComplete: $percentComplete)\n  }\n"): (typeof documents)["\n  mutation projectSetPercentComplete($projectId: ID!, $organizationId: ID!, $percentComplete: PercentComplete!) {\n    projectSetPercentComplete(projectId: $projectId, organizationId: $organizationId, percentComplete: $percentComplete)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

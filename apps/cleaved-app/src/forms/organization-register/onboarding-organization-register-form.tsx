@@ -123,7 +123,6 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
                   </StyledProjectFormLabel>
 
                   <StyledField
-                    autoFocus={true}
                     id="organization"
                     name="organization"
                     placeholder={t("organizations.organizationNamePlaceholder")}

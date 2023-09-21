@@ -148,7 +148,6 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
                 <StyledProjectFormLabel htmlFor="projectName">{t("projectForm.projectName")}</StyledProjectFormLabel>
 
                 <StyledField
-                  autoFocus={true}
                   id="projectName"
                   name="projectName"
                   placeholder={t("projectForm.projectNamePlaceholder")}
