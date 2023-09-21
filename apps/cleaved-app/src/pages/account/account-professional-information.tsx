@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
-import { Box, ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
+import { BORDERS, Box, ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper, SPACING } from "@cleaved/ui";
 
 import { AccountLegalLinks, AccountMembershipPlan, Header } from "../../components";
-import { AccountGeneralSettingsDataWrapper, AccountOrganizationListDataWrapper } from "../../data-wrappers";
+import {
+  AccountGeneralSettingsDataWrapper,
+  AccountOrganizationListDataWrapper,
+  AsideAccountDataWrapper,
+} from "../../data-wrappers";
 import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
 // import { OrgPermissionLevel } from "../../generated-types/graphql";
 // import { useOrganizationPermission } from "../../permissions";
@@ -12,6 +16,11 @@ import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms
 const StyledBox = styled(Box)`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledLineSeperator = styled.div`
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+  margin: ${SPACING.XXLARGE} 0;
 `;
 
 export const AccountProfessionalInformation: FunctionComponent = () => {
@@ -22,14 +31,18 @@ export const AccountProfessionalInformation: FunctionComponent = () => {
       <Header />
 
       <ContentWrapper>
+        <LeftColumnWrapper>
+          <AsideAccountDataWrapper />
+        </LeftColumnWrapper>
+
         <MainColumnMaxWidthWrapper>
           {/* {hasPermission && <AccountMembershipPlan />} */}
 
           <StyledBox>
             <PersonalInformationForm />
-          </StyledBox>
 
-          <StyledBox>
+            <StyledLineSeperator />
+
             <ProfesionalInformationForm />
           </StyledBox>
 

@@ -28,13 +28,12 @@ const StyledFormikTextarea = styled(FormField)``;
 export const FormikTextarea: FunctionComponent<FormikTextareaProps> = ({ hideLabel = false, ...props }) => {
   const [field, { touched, error }] = useField(props);
   const {
-    autoFocus,
     backgroundColor,
     hasBorder,
     hint,
     label,
     minHeight,
-    onKeyPress,
+    onKeyDown,
     onKeyUp,
     placeholder,
     tag,
@@ -57,7 +56,6 @@ export const FormikTextarea: FunctionComponent<FormikTextareaProps> = ({ hideLab
         </FormFieldLabel>
       )}
       <Textarea
-        autoFocus={autoFocus}
         aria-label={ariaLabel}
         backgroundColor={backgroundColor}
         hasBorder={hasBorder}
@@ -65,7 +63,7 @@ export const FormikTextarea: FunctionComponent<FormikTextareaProps> = ({ hideLab
         name={field.name}
         onBlur={field.onBlur}
         onChange={field.onChange}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
         placeholder={placeholder}
         type={inputType}

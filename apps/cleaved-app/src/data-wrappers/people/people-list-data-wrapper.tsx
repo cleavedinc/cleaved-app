@@ -88,30 +88,32 @@ export const PeopleListDataWrapper: FunctionComponent = () => {
         </StyledPeopleListHeader>
       )}
 
-      {!organizationSeekMembersDataLoading && organizationSeekMembersData && organizationSeekMembersData?.length > 0 && (
-        <StyledTable role="table">
-          <StyledTHead role="rowgroup">
-            <StyledTHeadTr role="row">
-              <StyledTh role="columnheader">{t("people.professionalName")}</StyledTh>
-              <StyledTh role="columnheader">{t("people.jobTitle")}</StyledTh>
-              <StyledTh role="columnheader">{t("people.professionalPermissions")}</StyledTh>
-              {hasPermission && <StyledTh role="columnheader">{t("people.edit")}</StyledTh>}
-            </StyledTHeadTr>
-          </StyledTHead>
-          <StyledTBody role="rowgroup">
-            {organizationSeekMembersData.map((member) => {
-              return (
-                <StyledTrWrapper key={member.id} role="row">
-                  <PeopleListRow
-                    member={member}
-                    organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch}
-                  />
-                </StyledTrWrapper>
-              );
-            })}
-          </StyledTBody>
-        </StyledTable>
-      )}
+      {!organizationSeekMembersDataLoading &&
+        organizationSeekMembersData &&
+        organizationSeekMembersData?.length > 0 && (
+          <StyledTable role="table">
+            <StyledTHead role="rowgroup">
+              <StyledTHeadTr role="row">
+                <StyledTh role="columnheader">{t("people.professionalName")}</StyledTh>
+                <StyledTh role="columnheader">{t("people.jobTitle")}</StyledTh>
+                <StyledTh role="columnheader">{t("people.professionalPermissions")}</StyledTh>
+                {hasPermission && <StyledTh role="columnheader">{t("people.edit")}</StyledTh>}
+              </StyledTHeadTr>
+            </StyledTHead>
+            <StyledTBody role="rowgroup">
+              {organizationSeekMembersData.map((member) => {
+                return (
+                  <StyledTrWrapper key={member.id} role="row">
+                    <PeopleListRow
+                      member={member}
+                      organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch}
+                    />
+                  </StyledTrWrapper>
+                );
+              })}
+            </StyledTBody>
+          </StyledTable>
+        )}
 
       {hasPermission &&
         !organizationSeekMembersDataLoading &&

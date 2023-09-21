@@ -19,19 +19,18 @@ const StyledFormikTextareaNoErrorFields = styled(FormField)``;
 
 export const FormikTextareaNoErrorFields: FunctionComponent<FormikTextareaNoErrorFieldsProps> = ({ ...props }) => {
   const [field] = useField(props);
-  const { autoFocus, backgroundColor, hasBorder, minHeight, onKeyPress, onKeyUp, placeholder, type: inputType } = props;
+  const { backgroundColor, hasBorder, minHeight, onKeyDown, onKeyUp, placeholder, type: inputType } = props;
 
   return (
     <StyledFormikTextareaNoErrorFields>
       <Textarea
-        autoFocus={autoFocus}
         backgroundColor={backgroundColor}
         hasBorder={hasBorder}
         minHeight={minHeight}
         name={field.name}
         onBlur={field.onBlur}
         onChange={field.onChange}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
         placeholder={placeholder}
         type={inputType}

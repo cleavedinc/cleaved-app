@@ -29,7 +29,7 @@ export const HeaderMobileBottomBar: FunctionComponent<HeaderMobileBottomBarProps
   const { className } = props;
 
   return (
-    <StyledStickyHeader className={className} hasBoxShadow>
+    <StyledStickyHeader className={className}>
       <NavigationWrapper>
         <MainNavigationLinksWrapper>
           <MainNavigationLinks />

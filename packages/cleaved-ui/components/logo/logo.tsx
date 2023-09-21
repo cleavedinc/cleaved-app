@@ -17,7 +17,7 @@ type LogoProps = StyledLogoTextProps & {
 };
 
 type StyledLogoTextProps = {
-  isLogoTextVisible?: boolean;
+  logoTextVisible?: string;
 };
 
 const StyledLogoHref = styled.a`
@@ -36,16 +36,16 @@ const StyledLogoHref = styled.a`
 `;
 
 const StyledLogoText = styled.span<StyledLogoTextProps>`
-  display: ${(props) => (props.isLogoTextVisible ? "inline-block" : "none")};
+  display: ${(props) => (props.logoTextVisible === "true" ? "inline-block" : "none")};
 `;
 
 export const Logo: FunctionComponent<LogoProps> = (props) => {
-  const { className, color, companyName, height, isLogoTextVisible, margin, url, width } = props;
+  const { className, color, companyName, height, logoTextVisible, margin, url, width } = props;
 
   return (
     <StyledLogoHref className={className} href={url}>
       <LogoSVG className={className} color={color} height={height} margin={margin} width={width} />
-      <StyledLogoText isLogoTextVisible={isLogoTextVisible}>{companyName}</StyledLogoText>
+      <StyledLogoText logoTextVisible={logoTextVisible}>{companyName}</StyledLogoText>
     </StyledLogoHref>
   );
 };

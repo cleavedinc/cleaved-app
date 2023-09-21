@@ -7,23 +7,23 @@
     "lint": "eslint -c configs/.eslintrc.js . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@apollo/client": "3.7.9",
+    "@apollo/client": "3.8.4",
     "@cleaved/ui": "*",
-    "dayjs": "1.11.7",
+    "dayjs": "1.11.10",
     "formik": "2.2.9",
     "javascript-time-ago": "2.5.9",
-    "js-cookie": "3.0.1",
+    "js-cookie": "3.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-toastify": "9.1.1",
+    "react-toastify": "9.1.3",
     "styled-components": "5.3.6",
     "ts-debounce": "4.0.0",
     "yup": "0.32.11"
   },
   "devDependencies": {
-    "@types/javascript-time-ago": "2.0.3",
-    "@types/js-cookie": "3.0.2",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11"
+    "@types/javascript-time-ago": "2.0.4",
+    "@types/js-cookie": "3.0.4",
+    "@types/react": "18.2.22",
+    "@types/react-dom": "18.2.7"
   }
 }

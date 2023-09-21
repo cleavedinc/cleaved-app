@@ -38,6 +38,8 @@
     "aboutPlaceholder": "Share what you care about with others.",
     "firstName": "First name",
     "firstNamePlaceholder": "What is your first name?",
+    "goals": "My company goals",
+    "goalsPlaceholder": "What are the goals you are working towards?",
     "lastName": "Last name",
     "lastNamePlaceholder": "What is your last name?",
     "professionalEmail": "Email",
@@ -52,6 +54,7 @@
     "youMustHaveAValidEmailAddress": "You must have a valid email address"
   },
   "helperInformationBoxes": {
+    "asideOrganizationMembersEmptyStateAlt": "People working",
     "collaborativeTimelineAlt": "Person pointing to a chart with some information on it",
     "collaborativeTimelineHeader": "Collaborative Timeline",
     "collaborativeTimelineText": "Get project insights and provide feedback, all in one place.",
@@ -59,7 +62,9 @@
     "homePageEmptyStateHeader": "We know you're working hard",
     "homePageEmptyStateText": "When you have a minute, post your update or idea to your project. Getting feedback and keeping people updated is important.",
     "inviteProfessionalToOrganizationAlt": "Arrow pointing to the invite professional form",
-    "asideOrganizationMembersEmptyStateAlt": "People working",
+    "manageUpAlt": "Two thin gray arrows arching in a half circle, pointing at a pie chart. Two dotted half circles below the arrows.",
+    "manageUpHeader": "Build your profile, it's important",
+    "manageUpText": "One of the best things you can do is sharing your goals and what you care about with others. This helps others support your success.",
     "organizationRegisterAlt": "Arrows pointing to the register an organization form",
     "organizationRegisterHeader": "Register an organization",
     "organizationRegisterText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
@@ -83,7 +88,8 @@
     "peopleText": "Receive feedback and keep those you care about up to date on all your projects."
   },
   "hTags": {
-    "professionalInformation": "Professional information",
+    "professionalInformation": "Professional Information",
+    "profile": "Profile",
     "generalSettings": "General Settings"
   },
   "language": {
@@ -194,7 +200,8 @@
   },
   "privacyPolicy": "Privacy Policy",
   "professional": {
-    "about": "I care about:"
+    "about": "I care about:",
+    "goals": "My company goals"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Skip onboarding",

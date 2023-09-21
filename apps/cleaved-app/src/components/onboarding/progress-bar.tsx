@@ -21,7 +21,7 @@ const StyledStepContainer = styled.div<StyledStepContainerProps>`
   justify-content: space-between;
   position: relative;
 
-  :before {
+  &::before {
     content: "";
     position: absolute;
     background: ${({ theme }) => theme.colors.baseBordersAndShadows_color};
@@ -32,7 +32,7 @@ const StyledStepContainer = styled.div<StyledStepContainerProps>`
     left: 0;
   }
 
-  :after {
+  &::after {
     content: "";
     position: absolute;
     background: ${({ theme }) => theme.colors.baseLink_color};

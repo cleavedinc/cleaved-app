@@ -38,6 +38,8 @@
     "aboutPlaceholder": "Comparte lo que te importa con los demás.",
     "firstName": "Nombre",
     "firstNamePlaceholder": "¿Cuál es tu nombre de pila?",
+    "goals": "Mis objetivos empresariales",
+    "goalsPlaceholder": "¿Cuáles son los objetivos hacia los que estás trabajando?",
     "lastName": "Apellido",
     "lastNamePlaceholder": "¿Cuál es tu apellido?",
     "professionalEmail": "Correo electrónico",
@@ -52,6 +54,7 @@
     "youMustHaveAValidEmailAddress": "Debes tener una dirección de correo electrónico válida"
   },
   "helperInformationBoxes": {
+    "asideOrganizationMembersEmptyStateAlt": "Personas trabajando",
     "collaborativeTimelineAlt": "Persona señalando un gráfico con información",
     "collaborativeTimelineHeader": "Línea de tiempo colaborativa",
     "collaborativeTimelineText": "Obtén información del proyecto y brinda comentarios, todo en un solo lugar.",
@@ -59,7 +62,9 @@
     "homePageEmptyStateHeader": "Sabemos que estás trabajando arduamente",
     "homePageEmptyStateText": "Cuando tengas un minuto, publica tu actualización o idea en tu proyecto. Obtener comentarios y mantener a las personas actualizadas es importante.",
     "inviteProfessionalToOrganizationAlt": "Flecha que apunta al formulario de invitación de profesionales",
-    "asideOrganizationMembersEmptyStateAlt": "Personas trabajando",
+    "manageUpAlt": "Dos flechas delgadas de color gris formando un semicírculo, apuntando hacia un gráfico de sectores. Dos semicírculos punteados debajo de las flechas.",
+    "manageUpHeader": "Construye tu perfil, es importante",
+    "manageUpText": "Una de las mejores cosas que puedes hacer es compartir tus metas y lo que te importa con otros. Esto ayuda a que otros apoyen tu éxito.",
     "organizationRegisterAlt": "Flechas que apuntan al formulario de registro de una organización",
     "organizationRegisterHeader": "Registrar una organización",
     "organizationRegisterText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
@@ -83,7 +88,8 @@
     "peopleText": "Recibe retroalimentación y mantén al tanto a quienes te importan sobre todos tus proyectos."
   },
   "hTags": {
-    "professionalInformation": "Información profesional",
+    "professionalInformation": "Información Profesional",
+    "profile": "Perfil",
     "generalSettings": "Configuración general"
   },
   "language": {
@@ -194,7 +200,8 @@
   },
   "privacyPolicy": "Política de privacidad",
   "professional": {
-    "about": "Me importa:"
+    "about": "Me importa:",
+    "goals": "Mis objetivos empresariales"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Omitir incorporación",

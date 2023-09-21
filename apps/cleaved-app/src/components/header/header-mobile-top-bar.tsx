@@ -26,7 +26,7 @@ export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (p
   const { className } = props;
 
   return (
-    <StyledHeaderMobileTopBarStickyHeader className={className} hasBoxShadow>
+    <StyledHeaderMobileTopBarStickyHeader className={className}>
       <NavigationWrapper>
         <StyledLogoWrapper>
           <HeaderLogo />

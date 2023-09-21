@@ -38,7 +38,7 @@ const StyledReactQuill = styled(ReactQuill)<StyledReactQuillProps>`
 
       /* pipe between toolbar sections */
       &:not(:last-child) {
-        ::after {
+        &::after {
           color: ${({ styledComponentTheme }) => styledComponentTheme.colors.baseBordersAndShadows_color};
           content: "|";
           display: inline-block;

@@ -59,7 +59,7 @@ const StyledImageThumbnailPreview = styled.img`
 `;
 
 type StyledImageThumbnailRemoveButtonProps = {
-  isRemoveButtonDisplayed: boolean;
+  removeButtonDisplayed: boolean;
 };
 
 const StyledImageThumbnailRemoveButton = styled.button<StyledImageThumbnailRemoveButtonProps>`
@@ -80,7 +80,7 @@ const StyledImageThumbnailRemoveButton = styled.button<StyledImageThumbnailRemov
   width: 20px;
 
   ${mediaQueries.SM_MD} {
-    display: ${(props) => (props.isRemoveButtonDisplayed ? `"flex"` : "none")};
+    display: ${(props) => (props.removeButtonDisplayed ? `"flex"` : "none")};
   }
 `;
 
@@ -252,7 +252,7 @@ export const ImageUploadAndPreviewForm: FunctionComponent<ImageUploadAndPreviewF
                   </StyledImageThumbnailInner>
 
                   <StyledImageThumbnailRemoveButton
-                    isRemoveButtonDisplayed={hoveredIndex === index}
+                    removeButtonDisplayed={hoveredIndex === index}
                     type="button"
                     onClick={removeFile(fileUrl)}
                   >

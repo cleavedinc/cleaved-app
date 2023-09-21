@@ -21,9 +21,10 @@ const documents = {
     "\n  mutation postProjectPin($organizationId: ID!, $postId: ID!) {\n    postProjectPin(organizationId: $organizationId, postId: $postId)\n  }\n": types.PostProjectPinDocument,
     "\n  mutation postProjectPinRemove($organizationId: ID!, $postId: ID!) {\n    postProjectPinRemove(organizationId: $organizationId, postId: $postId)\n  }\n": types.PostProjectPinRemoveDocument,
     "\n  mutation removeOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    removeOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n": types.RemoveOrganizationShareLinkDocument,
-    "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n": types.OrganizationGetMemberDocument,
+    "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      goals\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n": types.OrganizationGetMemberDocument,
     "\n  mutation setAccountAvatar($image: Upload!) {\n    setAccountAvatar(image: $image)\n  }\n": types.SetAccountAvatarDocument,
     "\n  mutation setAccountEmail($newEmail: String!) {\n    setAccountEmail(newEmail: $newEmail)\n  }\n": types.SetAccountEmailDocument,
+    "\n  mutation setMyGoals($goals: String!) {\n    setMyGoals(goals: $goals)\n  }\n": types.SetMyGoalsDocument,
     "\n  mutation setJobTitle($jobTitle: String!) {\n    setMyJobTitle(jobTitle: $jobTitle)\n  }\n": types.SetJobTitleDocument,
     "\n  mutation setMyAbout($about: String!) {\n    setMyAbout(about: $about)\n  }\n": types.SetMyAboutDocument,
     "\n  mutation updateAccount($firstName: String, $lastName: String, $middleName: String) {\n    updateAccount(firstName: $firstName, lastName: $lastName, middleName: $middleName)\n  }\n": types.UpdateAccountDocument,
@@ -41,7 +42,7 @@ const documents = {
     "\n  mutation postProjectSetReaction($organizationId: ID!, $postId: ID!, $reactionType: PostReactionType!) {\n    postProjectSetReaction(organizationId: $organizationId, postId: $postId, reactionType: $reactionType)\n  }\n": types.PostProjectSetReactionDocument,
     "\n  mutation projectSetStatus($projectId: ID!, $organizationId: ID!, $status: ProjectStatus!) {\n    projectSetStatus(projectId: $projectId, organizationId: $organizationId, status: $status)\n  }\n": types.ProjectSetStatusDocument,
     "\n  mutation setPreferredOrgId($orgId: ID!) {\n    setPreferredOrgId(orgId: $orgId)\n  }\n": types.SetPreferredOrgIdDocument,
-    "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n    }\n  }\n": types.FindMyAccountDocument,
+    "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      goals\n      id\n      jobTitle\n      lastName\n    }\n  }\n": types.FindMyAccountDocument,
     "\n  query organizationGetMembership($organizationId: ID!) {\n    organizationGetMembership(organizationId: $organizationId) {\n      id\n      name\n      userPermissionInOrg\n    }\n  }\n": types.OrganizationGetMembershipDocument,
     "\n  query organizationMemberships {\n    organizationMemberships {\n      id\n      name\n      userPermissionInOrg\n    }\n  }\n": types.OrganizationMembershipsDocument,
     "\n  query organizationSeekMembers($organizationId: ID!, $seekKey: ID, $pageSize: Int) {\n    organizationSeekMembers(organizationId: $organizationId, seekKey: $seekKey, pageSize: $pageSize) {\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n      permissionInOrg\n    }\n  }\n": types.OrganizationSeekMembersDocument,
@@ -103,7 +104,7 @@ export function graphql(source: "\n  mutation removeOrganizationShareLink($organ
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"): (typeof documents)["\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"];
+export function graphql(source: "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      goals\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"): (typeof documents)["\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      goals\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -112,6 +113,10 @@ export function graphql(source: "\n  mutation setAccountAvatar($image: Upload!) 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation setAccountEmail($newEmail: String!) {\n    setAccountEmail(newEmail: $newEmail)\n  }\n"): (typeof documents)["\n  mutation setAccountEmail($newEmail: String!) {\n    setAccountEmail(newEmail: $newEmail)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation setMyGoals($goals: String!) {\n    setMyGoals(goals: $goals)\n  }\n"): (typeof documents)["\n  mutation setMyGoals($goals: String!) {\n    setMyGoals(goals: $goals)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -183,7 +188,7 @@ export function graphql(source: "\n  mutation setPreferredOrgId($orgId: ID!) {\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n    }\n  }\n"): (typeof documents)["\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      id\n      jobTitle\n      lastName\n    }\n  }\n"];
+export function graphql(source: "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      goals\n      id\n      jobTitle\n      lastName\n    }\n  }\n"): (typeof documents)["\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      goals\n      id\n      jobTitle\n      lastName\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

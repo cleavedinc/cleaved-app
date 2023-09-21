@@ -51,13 +51,12 @@ export const ProfessionalInformationFormFormikTextarea: FunctionComponent<
 > = ({ hideLabel = false, ...props }) => {
   const [field, { touched, error }] = useField(props);
   const {
-    autoFocus,
     backgroundColor,
     hasBorder,
     hint,
     label,
     minHeight,
-    onKeyPress,
+    onKeyDown,
     onKeyUp,
     placeholder,
     tag,
@@ -76,12 +75,11 @@ export const ProfessionalInformationFormFormikTextarea: FunctionComponent<
     <StyledFormikTextarea hasError={hasError}>
       <StyledTextarea
         {...rest}
-        autoFocus={false}
         aria-label={ariaLabel}
         name={field.name}
         onBlur={field.onBlur}
         onChange={field.onChange}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
         placeholder={placeholder}
         ref={textAreaRef}
