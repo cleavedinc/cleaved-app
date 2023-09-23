@@ -1,3 +1,5 @@
+export * from "./archive";
+export * from "./bars-progress";
 export * from "./celebration";
 export * from "./check-circle";
 export * from "./check";

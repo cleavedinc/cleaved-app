@@ -21,11 +21,11 @@ import {
 import { useFindMyAccount, useTranslator } from "../../hooks";
 
 import { ProfessionalInformationFormFormikTextarea } from "./components";
-import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION } from "./gql";
+import { SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION, SET_GOALS_MUTATION } from "./gql";
 
 type ProfesionalInformationFormType = {
   about?: string;
-  accountEmail?: string;
+  goals?: string;
   jobTitle?: string;
 };
 
@@ -68,20 +68,6 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     ? t("formLabels.professionalTitlePlaceholder")
     : undefined;
 
-  const professionalEmailPlaceholder = t("formLabels.professionalEmailPlaceholder")
-    ? t("formLabels.professionalEmailPlaceholder")
-    : undefined;
-
-  const youMustHaveAValidEmailAddress = t("formValidationMessages.youMustHaveAValidEmailAddress")
-    ? t("formValidationMessages.youMustHaveAValidEmailAddress")
-    : undefined;
-
-  const [setAccountEmail] = useMutation(SET_ACCOUNT_EMAIL_MUTATION, {
-    onError: (error) => {
-      logQueryError(error);
-    },
-  });
-
   const [setJobTitle] = useMutation(SET_JOB_TITLE_MUTATION, {
     onCompleted: () => {
       if (findMyAccountDataRefetch) {
@@ -99,22 +85,22 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     },
   });
 
+  const [setGoals] = useMutation(SET_GOALS_MUTATION, {
+    onError: (error) => {
+      logQueryError(error);
+    },
+  });
+
   return (
     <Formik
       enableReinitialize
       initialValues={{
         about: findMyAccountData?.about || "",
-        accountEmail: findMyAccountData?.emailAddress || "",
+        goals: findMyAccountData?.goals || "",
         jobTitle: findMyAccountData?.jobTitle || "",
       }}
       onSubmit={(values: ProfesionalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
-
-        setAccountEmail({
-          variables: {
-            newEmail: values.accountEmail ? values.accountEmail : "",
-          },
-        });
 
         setJobTitle({
           variables: {
@@ -128,11 +114,17 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
           },
         });
 
+        setGoals({
+          variables: {
+            goals: values.goals ? values.goals : "",
+          },
+        });
+
         resetForm({ values });
       }}
       validationSchema={yup.object().shape<Record<keyof ProfesionalInformationFormType, yup.AnySchema>>({
         about: yup.string(),
-        accountEmail: yup.string().email(youMustHaveAValidEmailAddress),
+        goals: yup.string(),
         jobTitle: yup.string(),
       })}
     >
@@ -154,19 +146,20 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
                 </StyledProjectFormWrapper>
 
                 <StyledProjectFormWrapper>
-                  <StyledProjectFormLabel htmlFor="accountEmail">
-                    {t("formLabels.professionalEmail")}
-                  </StyledProjectFormLabel>
-
-                  <StyledField id="accountEmail" name="accountEmail" placeholder={professionalEmailPlaceholder} />
-                </StyledProjectFormWrapper>
-
-                <StyledProjectFormWrapper>
                   <StyledProjectFormLabel htmlFor="about">{t("formLabels.about")}</StyledProjectFormLabel>
 
                   <ProfessionalInformationFormFormikTextarea
                     name="about"
                     placeholder={t("formLabels.aboutPlaceholder")}
+                  />
+                </StyledProjectFormWrapper>
+
+                <StyledProjectFormWrapper>
+                  <StyledProjectFormLabel htmlFor="goals">{t("formLabels.goals")}</StyledProjectFormLabel>
+
+                  <ProfessionalInformationFormFormikTextarea
+                    name="goals"
+                    placeholder={t("formLabels.goalsPlaceholder")}
                   />
                 </StyledProjectFormWrapper>
 

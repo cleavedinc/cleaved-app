@@ -53,13 +53,12 @@ export const ProjectStartNewFormFormikTextarea: FunctionComponent<ProjectStartNe
 }) => {
   const [field, { touched, error }] = useField(props);
   const {
-    autoFocus,
     backgroundColor,
     hasBorder,
     hint,
     label,
     minHeight,
-    onKeyPress,
+    onKeyDown,
     onKeyUp,
     placeholder,
     tag,
@@ -78,12 +77,11 @@ export const ProjectStartNewFormFormikTextarea: FunctionComponent<ProjectStartNe
     <StyledFormikTextarea hasError={hasError}>
       <StyledTextarea
         {...rest}
-        autoFocus={false}
         aria-label={ariaLabel}
         name={field.name}
         onBlur={field.onBlur}
         onChange={field.onChange}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
         placeholder={placeholder}
         ref={textAreaRef}

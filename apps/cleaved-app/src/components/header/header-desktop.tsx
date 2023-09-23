@@ -1,17 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import { FeedbackFish } from "@feedback-fish/react";
 
-import {
-  ButtonSecondary,
-  NavigationButtonWrapper,
-  SPACING,
-  mediaQueries,
-  NavigationLinksWrapper,
-  NavigationWrapper,
-} from "@cleaved/ui";
-
-import { useFindMyAccount, useTranslator } from "../../hooks";
+import { NavigationButtonWrapper, mediaQueries, NavigationLinksWrapper, NavigationWrapper } from "@cleaved/ui";
 
 import { HeaderAccountDropdownMenu } from "./header-account-dropdown-menu";
 import { HeaderLogo } from "./header-logo";
@@ -21,13 +11,6 @@ import { StyledStickyHeader } from "./styled-sticky-header";
 type HeaderDesktopProps = {
   className?: string;
 };
-
-const StyledFeedbackButton = styled(ButtonSecondary)`
-  color: ${({ theme }) => theme.colors.baseTextLink_color};
-  margin-right: ${SPACING.MEDIUM};
-  min-height: 0;
-  padding: ${SPACING.BASE} ${SPACING.SMALL};
-`;
 
 const MainNavigationLinksWrapper = styled(NavigationLinksWrapper)`
   align-items: center;
@@ -51,12 +34,9 @@ const StyledLogoWrapper = styled.div`
 
 export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
   const { className } = props;
-  const { t } = useTranslator();
-  const { findMyAccountData } = useFindMyAccount();
-  const currentUserEmail = findMyAccountData?.emailAddress;
 
   return (
-    <StyledStickyHeader className={className} hasBoxShadow>
+    <StyledStickyHeader className={className}>
       <StyledHeaderWidthWrapper>
         <NavigationWrapper>
           <StyledLogoWrapper>
@@ -68,10 +48,6 @@ export const HeaderDesktop: FunctionComponent<HeaderDesktopProps> = (props) => {
           </MainNavigationLinksWrapper>
 
           <NavigationButtonWrapper>
-            <FeedbackFish projectId="eb621b958df978" userId={currentUserEmail}>
-              <StyledFeedbackButton>{t("buttonLabels.giveFeedback")}</StyledFeedbackButton>
-            </FeedbackFish>
-
             <HeaderAccountDropdownMenu />
           </NavigationButtonWrapper>
         </NavigationWrapper>

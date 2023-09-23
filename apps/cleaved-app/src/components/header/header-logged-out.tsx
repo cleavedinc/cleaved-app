@@ -35,13 +35,13 @@ export const HeaderLoggedOut: FunctionComponent = () => {
   const signUpLogIn = t("buttonLabels.signUpLogIn") ? t("buttonLabels.signUpLogIn") : "";
 
   return (
-    <StyledLoggedoutStickyHeader hasBoxShadow>
+    <StyledLoggedoutStickyHeader>
       <StyledNavigationWrapper>
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
             height="15px"
-            isLogoTextVisible
+            logoTextVisible="true"
             margin={`0 0.3rem 0 0`}
             url={"/"}
             width="15px"

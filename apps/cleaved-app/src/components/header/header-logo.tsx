@@ -12,7 +12,7 @@ export const HeaderLogo: FunctionComponent = () => {
     <Logo
       companyName={t("companyName")}
       height="15px"
-      isLogoTextVisible={true}
+      logoTextVisible="true"
       margin={`0 0.3rem 0 0`}
       url={routeConstantsCleavedApp.homeRouting.route}
       width="15px"

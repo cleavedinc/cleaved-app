@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mediaQueries, SPACING } from "../../theme";
+import { BORDERS, mediaQueries, SPACING } from "../../theme";
 
 export const StyledTd = styled.td`
   padding: ${SPACING.MEDIUM} 0 ${SPACING.MEDIUM} ${SPACING.SMALL};
@@ -18,7 +18,7 @@ export const StyledTd = styled.td`
     padding-left: 50%;
 
     :not(:last-child) {
-      border-bottom: 1px solid #eee;
+      border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
     }
 
     &:before {

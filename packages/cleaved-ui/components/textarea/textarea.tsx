@@ -40,7 +40,7 @@ export const TextareaWrapper = styled.div<TextareaWrapperProps>`
 `;
 
 export const Textarea: FunctionComponent<TextareaProps> = (props) => {
-  const { autoFocus, backgroundColor, className, hasBorder, minHeight, onKeyPress, onKeyUp, ...rest } = props;
+  const { backgroundColor, className, hasBorder, minHeight, onKeyDown, onKeyUp, ...rest } = props;
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   /* eslint-disable */
@@ -51,7 +51,7 @@ export const Textarea: FunctionComponent<TextareaProps> = (props) => {
       hasBorder={hasBorder}
       minHeight={minHeight}
     >
-      <textarea {...rest} autoFocus={autoFocus} onKeyPress={onKeyPress} onKeyUp={onKeyUp} ref={textAreaRef} rows={1} />
+      <textarea {...rest} onKeyDown={onKeyDown} onKeyUp={onKeyUp} ref={textAreaRef} rows={1} />
     </TextareaWrapper>
   );
 };

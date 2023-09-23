@@ -5,7 +5,18 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import { BORDERS, ButtonPrimary, FONT_SIZES, mediaQueries, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
+import {
+  BORDERS,
+  ButtonPrimary,
+  FONT_SIZES,
+  HeadingWrapper,
+  mediaQueries,
+  RADIUS,
+  SectionHeader,
+  SPACING,
+  SPACING_PX,
+  Spinner,
+} from "@cleaved/ui";
 
 import { EditAccountAvatar } from "../../components";
 import { useFindMyAccount, useTranslator } from "../../hooks";
@@ -41,6 +52,7 @@ const StyledField = styled(Field)`
 const StyledFirstLastNameWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   ${mediaQueries.XS_LANDSCAPE} {
     width: 100%;
@@ -118,6 +130,10 @@ export const PersonalInformationForm: FunctionComponent = () => {
       {({ dirty, isSubmitting, isValid }) => {
         return (
           <>
+            <HeadingWrapper>
+              <SectionHeader>{t("hTags.profile")}</SectionHeader>
+            </HeadingWrapper>
+
             <StyledFormWrapper>
               <StyledAvatarNameWrapper>
                 <EditAccountAvatar account={findMyAccountData} refetchAccountData={findMyAccountDataRefetch} />

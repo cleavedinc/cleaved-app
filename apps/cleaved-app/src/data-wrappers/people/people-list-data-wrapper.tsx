@@ -1,16 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import {
-  mediaQueries,
-  SPACING,
-  StyledTable,
-  StyledTBody,
-  StyledTh,
-  StyledTHeadTr,
-  StyledTHead,
-  StyledTr,
-} from "@cleaved/ui";
+import { mediaQueries, SPACING } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { HelperInfoHeaderTextImageRightBox, StyledRouterButton, StyledRouterButtonLink } from "../../components";
@@ -19,7 +10,7 @@ import { useOrganizationSeekMembers, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
-import { PeopleListRow } from "./people-list-row";
+import { PeopleCard } from "./components";
 
 import peopleHelperImage from "../../media/helper-info/people-helper-image.svg";
 
@@ -52,17 +43,21 @@ const StyledPeopleListHeader = styled.div`
   }
 `;
 
-const StyledTrWrapper = styled(StyledTr)`
-  ${mediaQueries.RESPONSIVE_TABLE} {
-    margin-bottom: ${SPACING.LARGE};
+const StyledPeopleCardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  ${mediaQueries.SM} {
+    flex-direction: row;
+    margin-right: -10px;
   }
 `;
 
 export const PeopleListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const { organizationSeekMembersData, organizationSeekMembersDataLoading, organizationSeekMembersDataRefetch } =
-    useOrganizationSeekMembers(null, 500); // If we need to change this to a higher # or lazy load users, we're doing alright!!!
+  const { organizationSeekMembersData, organizationSeekMembersDataLoading } = useOrganizationSeekMembers(null, 500); // If we need to change this to a higher # or lazy load users, we're doing alright!!!
   const { t } = useTranslator();
 
   const professionalInviteLinkName = t("menuLinkNames.professionalInvite") ? t("menuLinkNames.professionalInvite") : "";
@@ -88,30 +83,14 @@ export const PeopleListDataWrapper: FunctionComponent = () => {
         </StyledPeopleListHeader>
       )}
 
-      {!organizationSeekMembersDataLoading && organizationSeekMembersData && organizationSeekMembersData?.length > 0 && (
-        <StyledTable role="table">
-          <StyledTHead role="rowgroup">
-            <StyledTHeadTr role="row">
-              <StyledTh role="columnheader">{t("people.professionalName")}</StyledTh>
-              <StyledTh role="columnheader">{t("people.jobTitle")}</StyledTh>
-              <StyledTh role="columnheader">{t("people.professionalPermissions")}</StyledTh>
-              {hasPermission && <StyledTh role="columnheader">{t("people.edit")}</StyledTh>}
-            </StyledTHeadTr>
-          </StyledTHead>
-          <StyledTBody role="rowgroup">
-            {organizationSeekMembersData.map((member) => {
-              return (
-                <StyledTrWrapper key={member.id} role="row">
-                  <PeopleListRow
-                    member={member}
-                    organizationSeekMembersDataRefetch={organizationSeekMembersDataRefetch}
-                  />
-                </StyledTrWrapper>
-              );
-            })}
-          </StyledTBody>
-        </StyledTable>
-      )}
+      <StyledPeopleCardWrapper>
+        {!organizationSeekMembersDataLoading &&
+          organizationSeekMembersData &&
+          organizationSeekMembersData?.length > 0 &&
+          organizationSeekMembersData.map((member) => {
+            return <PeopleCard key={member.id} member={member} />;
+          })}
+      </StyledPeopleCardWrapper>
 
       {hasPermission &&
         !organizationSeekMembersDataLoading &&

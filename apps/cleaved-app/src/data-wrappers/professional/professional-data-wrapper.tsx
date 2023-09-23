@@ -83,6 +83,14 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
                 <StyledProfessionalAbout>{data.organizationGetMember.about}</StyledProfessionalAbout>
               )}
             </StyledProfessionalAboutWrapper>
+
+            <StyledProfessionalAboutWrapper>
+              <StyledAboutLabel>{t("professional.goals")}</StyledAboutLabel>
+
+              {data.organizationGetMember.goals && (
+                <StyledProfessionalAbout>{data.organizationGetMember.goals}</StyledProfessionalAbout>
+              )}
+            </StyledProfessionalAboutWrapper>
           </Box>
         )}
       </StickUnderHeaderDesktopOnly>

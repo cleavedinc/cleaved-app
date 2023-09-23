@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import { BORDERS, mediaQueries, SPACING } from "../../theme";
 
-export type StickyHeaderProps = {
-  hasBoxShadow?: boolean;
-};
-
-export const StickyHeader = styled.header<StickyHeaderProps>`
+export const StickyHeader = styled.header`
   background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   top: 0;
   border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};

@@ -1,5 +1,6 @@
 export * from "./basic-item-base-styles";
 export * from "./basic-item-icon-base-styles";
+export * from "./styled-archive-icon";
 export * from "./styled-basic-item";
 export * from "./styled-basic-item-red";
 export * from "./styled-basic-menu";

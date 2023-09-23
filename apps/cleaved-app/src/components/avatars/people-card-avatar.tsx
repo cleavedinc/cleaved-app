@@ -11,7 +11,7 @@ import {
 
 import { avatartBase, avatarSizeLarge } from "../avatars/avatar-base-styles";
 
-type AsideAvatarProps = {
+type PeopleCardAvatarProps = {
   account:
     | FindMyAccountQuery["findMyAccount"]
     | OrganizationGetMemberQuery["organizationGetMember"]
@@ -22,17 +22,17 @@ type AsideAvatarProps = {
 const StyledAvatarImage = styled.img`
   ${avatartBase}
   ${avatarSizeLarge}
-  margin: 0 auto ${SPACING.MEDIUM};
+  margin-right: ${SPACING.MEDIUM};
 `;
 
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
   ${avatarSizeLarge}
   font-size: ${FONT_SIZES.XXLARGE};
-  margin: 0 auto ${SPACING.MEDIUM};
+  margin-right: ${SPACING.MEDIUM};
 `;
 
-export const AsideAvatar: FunctionComponent<AsideAvatarProps> = (props) => {
+export const PeopleCardAvatar: FunctionComponent<PeopleCardAvatarProps> = (props) => {
   const { account } = props;
   const firstNameInitial = account?.firstName?.charAt(0).toUpperCase() || "";
   const lastNameInitial = account?.lastName?.charAt(0).toUpperCase() || "";

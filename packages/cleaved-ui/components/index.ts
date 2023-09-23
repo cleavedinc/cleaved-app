@@ -18,7 +18,6 @@ export * from "./on-outside-click";
 export * from "./photo-collage";
 export * from "./scrollbar";
 export * from "./scroll-lock";
-export * from "./select-single-input";
 export * from "./spinner";
 export * from "./sticky";
 export * from "./table";
