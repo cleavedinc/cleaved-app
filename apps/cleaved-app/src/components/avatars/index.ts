@@ -3,6 +3,7 @@ export * from "./aside-avatar";
 export * from "./aside-people-list-avatar-link";
 export * from "./header-avatar";
 export * from "./header-menu-avatar";
+export * from "./people-card-avatar";
 export * from "./post-comment-avatar";
 export * from "./post-header-avatar-link";
 export * from "./project-post-button-avatar";
