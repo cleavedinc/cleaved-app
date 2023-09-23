@@ -99,9 +99,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
         projectData.projectByIdDataRefetch();
       }
 
-      navigate(
-        `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectId}${routeConstantsCleavedApp.projectBoard.route}`
-      );
+      navigate(-1);
     },
     onError: (error) => {
       logQueryError(error);

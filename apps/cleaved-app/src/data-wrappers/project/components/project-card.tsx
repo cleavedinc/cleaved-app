@@ -67,11 +67,8 @@ const StyledProjectCardBox = styled(Box)`
   width: 100%;
 
   ${mediaQueries.MD} {
-    :not(:last-child) {
-      flex-basis: calc(50% - 10px);
-      margin-right: 10px;
-    }
-
+    flex-basis: calc(50% - 10px);
+    margin-right: 10px;
     width: 50%;
   }
 `;
