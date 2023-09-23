@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { navigate } from "@reach/router";
-import styled from "styled-components";
+import Select from "react-select";
+import styled, { useTheme } from "styled-components";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
@@ -9,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { logQueryError } from "@cleaved/helpers";
 import { BORDERS, ButtonPrimary, ButtonLink, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
 
+import { ProjectProgressOptions } from "../../constants";
 import { authTokenContext } from "../../contexts";
 import { useProjectById, useProductEngagementLogEvent, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
@@ -19,6 +21,7 @@ import { PROJECT_CREATE, PROJECT_UPDATE } from "./gql";
 type ProjectFormType = {
   projectDetails: string;
   projectName: string;
+  projectProgress: string;
 };
 
 type ProjectFormProps = {
@@ -56,6 +59,12 @@ const StyledProjectFormWrapper = styled.div`
   flex-direction: column;
 `;
 
+const StyledProjectSelectFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: ${SPACING.MEDIUM};
+`;
+
 const StyledProjectFormLabel = styled.label`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
@@ -69,6 +78,8 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
   const logEvent = useProductEngagementLogEvent();
   const projectData = useProjectById(projectId);
   const [newProjectGuid, setNewProjectGuid] = useState<string | null>();
+  const projectProgressOptions = ProjectProgressOptions();
+  const colorTheme = useTheme();
 
   const [projectCreate] = useMutation(PROJECT_CREATE, {
     onCompleted: () => {
@@ -102,6 +113,8 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
     setNewProjectGuid(newGuid);
   }, []);
 
+  const projectProgress = t("project.progress") ? t("project.progress") : "";
+
   return (
     <>
       <Formik
@@ -109,6 +122,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
         initialValues={{
           projectName: projectData.projectByIdData?.name ?? "",
           projectDetails: projectData.projectByIdData?.projectDetails ?? "",
+          projectProgress: projectData.projectByIdData?.projectProgress ?? "",
         }}
         onSubmit={(values: ProjectFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
@@ -120,6 +134,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
                 projectId,
                 projectDetail: values.projectDetails,
                 projectName: values.projectName,
+                projectProgress: values.projectProgress,
               },
             });
           } else {
@@ -129,6 +144,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
                 organizationId: preferredOrgId,
                 projectId: newProjectGuid,
                 projectDetail: values.projectDetails,
+                projectProgress: values.projectProgress,
               },
             });
           }
@@ -139,9 +155,10 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
         validationSchema={yup.object().shape<Record<keyof ProjectFormType, yup.AnySchema>>({
           projectName: yup.string().required(),
           projectDetails: yup.string(),
+          projectProgress: yup.string(),
         })}
       >
-        {({ dirty, isSubmitting, isValid }) => {
+        {({ dirty, isSubmitting, isValid, values, setFieldTouched, setFieldValue }) => {
           return (
             <Form>
               <StyledProjectFormWrapper>
@@ -164,6 +181,31 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
                   placeholder={t("projectForm.projectDetailsPlaceholder")}
                 />
               </StyledProjectFormWrapper>
+
+              <StyledProjectSelectFormWrapper>
+                <StyledProjectFormLabel htmlFor="projectProgress">{projectProgress}</StyledProjectFormLabel>
+
+                <Select
+                  aria-label={projectProgress}
+                  isSearchable={true}
+                  value={projectProgressOptions.find((option) => option.value === values.projectProgress) || null}
+                  options={projectProgressOptions}
+                  onChange={(selectedOption) => {
+                    setFieldValue("projectProgress", selectedOption ? selectedOption.value : "");
+                    setFieldTouched("projectProgress", true);
+                  }}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      neutral0: colorTheme.colors.baseBox_backgroundColor,
+                      neutral80: colorTheme.colors.baseText_color,
+                      primary: colorTheme.colors.baseLink_color,
+                      primary25: colorTheme.colors.baseButtonAndIcon_backgroundColorHover,
+                    },
+                  })}
+                />
+              </StyledProjectSelectFormWrapper>
 
               <StyledButtonPrimaryWrapper>
                 <StyledButtonLink onClick={() => navigate(-1)} type="button">

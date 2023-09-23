@@ -243,10 +243,12 @@
     "dateCreated": "Date created",
     "owner": "Owner",
     "posts": "Posts",
+    "progress": "Project progress",
     "edit": "Edit",
     "editProject": "Edit Project",
     "editStatus": "Edit Status",
     "projectStatusSelect": "Project status select",
+    "setProjectStatus": "Set project status",
     "stateActive": "Active",
     "stateInactive": "Inactive",
     "stateArchive": "Archive"
@@ -262,6 +264,12 @@
     "projectDetailsRequired": "Project details required",
     "projectDetailsPlaceholder": "Project details...",
     "startNewProject": "Start a new project"
+  },
+  "projectProgressOptions": {
+    "complete": "Complete",
+    "kickOff": "Kick Off",
+    "notStarted": "Not Started",
+    "prePlanning": "Pre-Planning"
   },
   "projects": {
     "active": "Active",

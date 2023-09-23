@@ -11,7 +11,9 @@ export const PROJECTS_IN_ORGANIZATION = graphql(`
       createdAt
       id
       name
+      projectProgress
       status
+      totalResponseCount
       totalRootPostCount
     }
   }

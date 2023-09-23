@@ -1,11 +1,10 @@
 import { SubMenu } from "@szhsin/react-menu";
 import styled from "styled-components";
 
-import { FONT_SIZES, SPACING } from "@cleaved/ui";
+import { basicItemBase } from "./basic-item-base-styles";
 
 export const StyledSubMenu = styled(SubMenu)`
-  font-size: ${FONT_SIZES.SMALL};
-  padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
+  ${basicItemBase}
 
   :hover,
   &.szh-menu__item--hover {
@@ -22,7 +21,7 @@ export const StyledSubMenu = styled(SubMenu)`
     padding-top: 0;
 
     &:after {
-      display: none;
+      /* display: none; */
     }
   }
 `;

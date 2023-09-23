@@ -19,7 +19,7 @@ export const WidgetProjectDetailsMenu: FunctionComponent = () => {
   const theme = useTheme();
   const { t } = useTranslator();
 
-  const handleRouteToProjectStartNew = () => {
+  const handleRouteToProjectEdit = () => {
     navigate(
       `/${preferredOrgId}${routeConstantsCleavedApp.project.route}/${projectId}${routeConstantsCleavedApp.projectForm.route}`
     );
@@ -37,7 +37,7 @@ export const WidgetProjectDetailsMenu: FunctionComponent = () => {
       }
       direction={"left"}
     >
-      <StyledBasicItem onClick={() => handleRouteToProjectStartNew()}>
+      <StyledBasicItem onClick={() => handleRouteToProjectEdit()}>
         <StyledEditIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
         {t("widget.projectDetailsEdit")}
       </StyledBasicItem>

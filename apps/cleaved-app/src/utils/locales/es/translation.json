@@ -243,10 +243,12 @@
     "dateCreated": "Fecha de creación",
     "owner": "Propietario",
     "posts": "Publicaciones",
+    "progress": "Progreso del proyecto",
     "edit": "Editar",
     "editProject": "Editar Proyecto",
     "editStatus": "Editar estado",
     "projectStatusSelect": "Selección de estado del proyecto",
+    "setProjectStatus": "Establecer estado del proyecto",
     "stateActive": "Activo",
     "stateInactive": "Inactivo",
     "stateArchive": "Archivo"
@@ -262,6 +264,12 @@
     "projectDetailsRequired": "Detalles del proyecto requeridos",
     "projectDetailsPlaceholder": "Detalles del proyecto...",
     "startNewProject": "Comenzar un nuevo proyecto"
+  },
+  "projectProgressOptions": {
+    "complete": "Completado",
+    "kickOff": "Comenzar",
+    "notStarted": "No Comenzado",
+    "prePlanning": "Preplanificación"
   },
   "projects": {
     "active": "Activo",
