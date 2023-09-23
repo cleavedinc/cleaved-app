@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 import { ContentWrapper, LeftColumnWrapper, MainColumnWrapper } from "@cleaved/ui";
 
 import { Header } from "../components";
-// import { AsideDataWrapper } from "../data-wrappers";
+import { SearchResultsDataWrapper } from "../data-wrappers";
 
 export const Search: FunctionComponent = () => {
   return (
@@ -14,7 +14,7 @@ export const Search: FunctionComponent = () => {
         <LeftColumnWrapper>{/* <AsideDataWrapper /> */}</LeftColumnWrapper>
 
         <MainColumnWrapper>
-          <p>something here</p>
+          <SearchResultsDataWrapper />
         </MainColumnWrapper>
       </ContentWrapper>
     </>

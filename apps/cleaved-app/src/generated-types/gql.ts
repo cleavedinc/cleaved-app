@@ -22,6 +22,7 @@ const documents = {
     "\n  mutation postProjectPinRemove($organizationId: ID!, $postId: ID!) {\n    postProjectPinRemove(organizationId: $organizationId, postId: $postId)\n  }\n": types.PostProjectPinRemoveDocument,
     "\n  mutation removeOrganizationShareLink($organizationId: ID!, $permission: OrgPermissionLevel!) {\n    removeOrganizationShareLink(organizationId: $organizationId, permission: $permission)\n  }\n": types.RemoveOrganizationShareLinkDocument,
     "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      goals\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n": types.OrganizationGetMemberDocument,
+    "\n  query seekAccount($filter: SearchFilter, $pageSize: Int, $searchTerm: String!, $seekKey: ID) {\n    seekAccount(filter: $filter, pageSize: $pageSize, searchTerm: $searchTerm, seekKey: $seekKey) {\n      currentAvatar\n      firstName\n      id\n      lastName\n    }\n  }\n": types.SeekAccountDocument,
     "\n  mutation setAccountAvatar($image: Upload!) {\n    setAccountAvatar(image: $image)\n  }\n": types.SetAccountAvatarDocument,
     "\n  mutation setAccountEmail($newEmail: String!) {\n    setAccountEmail(newEmail: $newEmail)\n  }\n": types.SetAccountEmailDocument,
     "\n  mutation setMyGoals($goals: String!) {\n    setMyGoals(goals: $goals)\n  }\n": types.SetMyGoalsDocument,
@@ -105,6 +106,10 @@ export function graphql(source: "\n  mutation removeOrganizationShareLink($organ
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      goals\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"): (typeof documents)["\n  query organizationGetMember($organizationId: ID!, $memberId: ID!) {\n    organizationGetMember(organizationId: $organizationId, memberId: $memberId) {\n      about\n      emailAddress\n      id\n      firstName\n      goals\n      lastName\n      currentAvatar\n      jobTitle\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query seekAccount($filter: SearchFilter, $pageSize: Int, $searchTerm: String!, $seekKey: ID) {\n    seekAccount(filter: $filter, pageSize: $pageSize, searchTerm: $searchTerm, seekKey: $seekKey) {\n      currentAvatar\n      firstName\n      id\n      lastName\n    }\n  }\n"): (typeof documents)["\n  query seekAccount($filter: SearchFilter, $pageSize: Int, $searchTerm: String!, $seekKey: ID) {\n    seekAccount(filter: $filter, pageSize: $pageSize, searchTerm: $searchTerm, seekKey: $seekKey) {\n      currentAvatar\n      firstName\n      id\n      lastName\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

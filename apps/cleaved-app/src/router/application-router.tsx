@@ -23,6 +23,7 @@ import { ProjectList } from "../pages/project/project-list";
 import { ProjectForm } from "../pages/project/project-form";
 import { PeopleList } from "../pages/people/people-list";
 import { PeopleListProfessionalInvite } from "../pages/professional/professional-invite";
+import { Search } from "../pages/search";
 import { TermsOfService } from "../pages/agreements/terms-of-service";
 import { TermsOfServiceAgreement } from "../pages/agreements/terms-of-service-agreement";
 import { routeConstantsCleavedApp } from "../router";
@@ -109,6 +110,12 @@ export const ApplicationRouter: FunctionComponent = () => (
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.professionalInvite.route}`}
       renderedPage={<PeopleListProfessionalInvite />}
+    />
+
+    <PageProtector
+      path={`:orgId${routeConstantsCleavedApp.search.route}/:searchterm`}
+      renderedPage={<Search />}
+      isNotProtected
     />
 
     <PageProtector path={routeConstantsShared.termsOfService.route} renderedPage={<TermsOfService />} isNotProtected />

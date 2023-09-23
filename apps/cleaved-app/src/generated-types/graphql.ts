@@ -448,6 +448,7 @@ export type Query = {
   postProjectSeek: Array<ProjectPost>;
   projectById: Project;
   projectsInOrgSeek: Array<Project>;
+  seekAccount: Array<AccountPublicView>;
   termsAccepted: Scalars['Boolean']['output'];
 };
 
@@ -525,6 +526,14 @@ export type QueryProjectsInOrgSeekArgs = {
   statusFilter?: InputMaybe<Array<ProjectStatus>>;
 };
 
+
+export type QuerySeekAccountArgs = {
+  filter?: InputMaybe<SearchFilter>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  searchTerm: Scalars['String']['input'];
+  seekKey?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export enum RequestSource {
   Web = 'WEB'
 }
@@ -532,6 +541,12 @@ export enum RequestSource {
 export enum Scope {
   Organization = 'ORGANIZATION',
   Project = 'PROJECT'
+}
+
+export enum SearchFilter {
+  All = 'ALL',
+  InNetwork = 'IN_NETWORK',
+  OutOfNetwork = 'OUT_OF_NETWORK'
 }
 
 export type GoogleSsoMutationVariables = Exact<{
@@ -604,6 +619,16 @@ export type OrganizationGetMemberQueryVariables = Exact<{
 
 
 export type OrganizationGetMemberQuery = { __typename?: 'Query', organizationGetMember?: { __typename?: 'AccountMemberView', about?: string | null, emailAddress: string, id: string, firstName?: string | null, goals?: string | null, lastName?: string | null, currentAvatar?: string | null, jobTitle?: string | null } | null };
+
+export type SeekAccountQueryVariables = Exact<{
+  filter?: InputMaybe<SearchFilter>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  searchTerm: Scalars['String']['input'];
+  seekKey?: InputMaybe<Scalars['ID']['input']>;
+}>;
+
+
+export type SeekAccountQuery = { __typename?: 'Query', seekAccount: Array<{ __typename?: 'AccountPublicView', currentAvatar?: string | null, firstName?: string | null, id: string, lastName?: string | null }> };
 
 export type SetAccountAvatarMutationVariables = Exact<{
   image: Scalars['Upload']['input'];
@@ -868,6 +893,7 @@ export const PostProjectPinDocument = {"kind":"Document","definitions":[{"kind":
 export const PostProjectPinRemoveDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"postProjectPinRemove"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"postProjectPinRemove"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"organizationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}}},{"kind":"Argument","name":{"kind":"Name","value":"postId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postId"}}}]}]}}]} as unknown as DocumentNode<PostProjectPinRemoveMutation, PostProjectPinRemoveMutationVariables>;
 export const RemoveOrganizationShareLinkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"removeOrganizationShareLink"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"permission"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrgPermissionLevel"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removeOrganizationShareLink"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"organizationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}}},{"kind":"Argument","name":{"kind":"Name","value":"permission"},"value":{"kind":"Variable","name":{"kind":"Name","value":"permission"}}}]}]}}]} as unknown as DocumentNode<RemoveOrganizationShareLinkMutation, RemoveOrganizationShareLinkMutationVariables>;
 export const OrganizationGetMemberDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"organizationGetMember"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organizationGetMember"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"organizationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}}},{"kind":"Argument","name":{"kind":"Name","value":"memberId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"emailAddress"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"goals"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"currentAvatar"}},{"kind":"Field","name":{"kind":"Name","value":"jobTitle"}}]}}]}}]} as unknown as DocumentNode<OrganizationGetMemberQuery, OrganizationGetMemberQueryVariables>;
+export const SeekAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"seekAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"SearchFilter"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pageSize"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"searchTerm"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"seekKey"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seekAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}},{"kind":"Argument","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pageSize"}}},{"kind":"Argument","name":{"kind":"Name","value":"searchTerm"},"value":{"kind":"Variable","name":{"kind":"Name","value":"searchTerm"}}},{"kind":"Argument","name":{"kind":"Name","value":"seekKey"},"value":{"kind":"Variable","name":{"kind":"Name","value":"seekKey"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"currentAvatar"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]} as unknown as DocumentNode<SeekAccountQuery, SeekAccountQueryVariables>;
 export const SetAccountAvatarDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"setAccountAvatar"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"image"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setAccountAvatar"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"image"},"value":{"kind":"Variable","name":{"kind":"Name","value":"image"}}}]}]}}]} as unknown as DocumentNode<SetAccountAvatarMutation, SetAccountAvatarMutationVariables>;
 export const SetAccountEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"setAccountEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newEmail"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setAccountEmail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newEmail"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newEmail"}}}]}]}}]} as unknown as DocumentNode<SetAccountEmailMutation, SetAccountEmailMutationVariables>;
 export const SetMyGoalsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"setMyGoals"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"goals"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setMyGoals"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"goals"},"value":{"kind":"Variable","name":{"kind":"Name","value":"goals"}}}]}]}}]} as unknown as DocumentNode<SetMyGoalsMutation, SetMyGoalsMutationVariables>;

@@ -65,6 +65,9 @@ export const routeConstantsCleavedApp = {
   professionalOnboardingHasOrganization: {
     route: "/professional-onboarding-has-organization",
   },
+  search: {
+    route: "/search",
+  },
   termsOfServiceAgreement: {
     route: "/terms-of-service-agreement",
   },

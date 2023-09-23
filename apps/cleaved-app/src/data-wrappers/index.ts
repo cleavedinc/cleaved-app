@@ -6,5 +6,6 @@ export * from "./membership";
 export * from "./professional";
 export * from "./project";
 export * from "./people";
+export * from "./search";
 export * from "./terms-of-service-agreement";
 export * from "./widgets";
