@@ -52,6 +52,11 @@ const StyledPostButton = styled(ButtonPrimary)`
   margin-left: auto;
 `;
 
+const StyledReplyingToLabel = styled.span`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  font-size: ${FONT_SIZES.XSMALL};
+`;
+
 export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
   const {
     nameOfProfessionalReplyingTo,
@@ -114,7 +119,7 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
         initialValues={{
           organizationId,
           postOrPostReplyId: postOrPostReply && postOrPostReply.id,
-          body: (nameOfProfessionalReplyingTo && `${nameOfProfessionalReplyingTo}`) || "",
+          body: (nameOfProfessionalReplyingTo && nameOfProfessionalReplyingTo) || "",
         }}
         onSubmit={(values: CommentFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
@@ -158,6 +163,10 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
               </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionButtonWrapper>
+                {nameOfProfessionalReplyingTo && (
+                  <StyledReplyingToLabel>Replying to {nameOfProfessionalReplyingTo}</StyledReplyingToLabel>
+                )}
+
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                   {isSubmitting ? t("pleaseWaitDots") : t("post.submitPost")}
                   <Spinner visible={isSubmitting} />
