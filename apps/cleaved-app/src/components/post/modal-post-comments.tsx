@@ -24,6 +24,8 @@ import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useFindMyAccount, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
+import { PostOrPostReplyType } from "../post/types";
+
 type ModalPostCommentsBackgroundProps = {
   backgroundColor?: string;
 };
@@ -37,10 +39,11 @@ type ModalPostCommentsHeaderProps = ModalPostCommentsBackgroundProps & {
 type ModalPostCommentsProps = ModalPostCommentsBackgroundProps & {
   children: ReactNode;
   forceOpen?: boolean;
+  nameOfProfessionalReplyingTo?: string;
   onCommentPostedTriggerGetComments: () => void;
   onCloseRequested?: () => void;
   open: boolean;
-  postOrPostReplyId: string;
+  postOrPostReply: PostOrPostReplyType;
   title?: string;
   useOnOutsideClick?: boolean;
 };
@@ -163,10 +166,11 @@ const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> =
 export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
   children,
   forceOpen = false,
+  nameOfProfessionalReplyingTo,
   onCloseRequested,
   onCommentPostedTriggerGetComments,
   open,
-  postOrPostReplyId,
+  postOrPostReply,
   title,
   useOnOutsideClick = true,
 }) => {
@@ -186,7 +190,8 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
           <PostCommentAvatar account={findMyAccountData} />
 
           <CommentForm
-            postOrPostReplyId={postOrPostReplyId}
+            nameOfProfessionalReplyingTo={nameOfProfessionalReplyingTo}
+            postOrPostReply={postOrPostReply}
             onCommentPostedTriggerGetComments={onCommentPostedTriggerGetComments}
           />
         </StyledPostCommentFormWrapper>

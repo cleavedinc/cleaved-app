@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { PostCommentAvatar } from "../../components";
 // import { CommentForm } from "../../forms";
+import { PostOrPostReplyType } from "../../components/post/types";
 import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useFindMyAccount } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
@@ -14,7 +15,7 @@ import { CommentsList } from "../comments/comments-list";
 
 type CommentsListItemProps = {
   commentLevel: number;
-  handleCommentReply: (replyId: string) => void;
+  handleCommentReply: (reply: PostOrPostReplyType) => void;
   postProjectRepliesDataRefetch?: () => void;
   postReply: PostProjectRepliesQuery["postProjectReplies"][0];
 };

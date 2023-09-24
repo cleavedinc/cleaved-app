@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { logQueryError } from "@cleaved/helpers";
 import { ButtonPrimary, FONT_SIZES, SPACING_PX, Spinner } from "@cleaved/ui";
 
+import { PostOrPostReplyType } from "../../components/post/types";
 import { PostsContext } from "../../contexts";
 import { POST_PROJECT_REPLY } from "../../gql-mutations";
 import { useProductEngagementLogEvent, useRouteParams, useTranslator } from "../../hooks";
@@ -20,7 +21,8 @@ type CommentFormType = {
 };
 
 export type CommentFormProps = {
-  postOrPostReplyId: string;
+  nameOfProfessionalReplyingTo?: string;
+  postOrPostReply: PostOrPostReplyType;
   postProjectRepliesDataRefetch?: () => void;
   onCommentPostedTriggerGetComments?: () => void;
   setIsCommentRepliesVisible?: Dispatch<React.SetStateAction<boolean>>;
@@ -52,7 +54,8 @@ const StyledPostButton = styled(ButtonPrimary)`
 
 export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
   const {
-    postOrPostReplyId,
+    nameOfProfessionalReplyingTo,
+    postOrPostReply,
     postProjectRepliesDataRefetch,
     onCommentPostedTriggerGetComments,
     setIsCommentRepliesVisible,
@@ -74,6 +77,8 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
   const [postProjectReply] = useMutation(POST_PROJECT_REPLY, {
     onCompleted: () => {
       logEvent("POST_PROJECT_REPLY");
+
+      console.log("comment form: postProjectReply HIT");
 
       if (postProjectSeekRefetch) {
         console.log("comment form: postProjectSeekRefetch");
@@ -108,8 +113,8 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
         enableReinitialize
         initialValues={{
           organizationId,
-          postOrPostReplyId: postOrPostReplyId,
-          body: "",
+          postOrPostReplyId: postOrPostReply && postOrPostReply.id,
+          body: (nameOfProfessionalReplyingTo && `${nameOfProfessionalReplyingTo}`) || "",
         }}
         onSubmit={(values: CommentFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);

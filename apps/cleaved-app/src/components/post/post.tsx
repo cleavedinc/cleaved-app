@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
@@ -16,6 +16,8 @@ import { CommentsList } from "../comments/comments-list";
 import { ModalPostComments } from "./modal-post-comments";
 import { PostProjectComment } from "./post-project-comment";
 import { PostProjectHeader } from "./post-project-header";
+
+import { PostOrPostReplyType } from "./types";
 
 type PostProps = {
   post: PostProjectSeekQuery["postProjectSeek"][0];
@@ -92,17 +94,31 @@ export const Post: FunctionComponent<PostProps> = (props) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
-  const [postOrPostReplyId, setPostOrPostReplyId] = useState(post.id);
+  const [postOrPostReply, setPostOrPostReply] = useState<PostOrPostReplyType>(post);
+  const [nameOfProfessionalReplyingTo, setnameOfProfessionalReplyingTo] = useState("");
   const { t } = useTranslator();
+
+  const handleResetCommentForm = () => {
+    setPostOrPostReply(post); // reset the postId state to top level postId
+    setnameOfProfessionalReplyingTo("");
+  };
 
   const handleShowCommentsmodal = () => {
     setIsCommentsVisible(true);
-    setPostOrPostReplyId(post.id); // reset the postId state to top level postId
+    handleResetCommentForm();
   };
 
-  const handleCommentReply = (replyId: string) => {
-    setPostOrPostReplyId(replyId);
+  const handleCommentReply = (reply: PostOrPostReplyType) => {
+    setPostOrPostReply(reply);
   };
+
+  useEffect(() => {
+    if (post.id !== postOrPostReply?.id) {
+      setnameOfProfessionalReplyingTo(
+        `@${postOrPostReply?.account.firstName}${postOrPostReply?.account.lastName}` + String.fromCharCode(32)
+      );
+    }
+  }, [postOrPostReply, post]);
 
   const postFooterContent = (
     <>
@@ -185,12 +201,13 @@ export const Post: FunctionComponent<PostProps> = (props) => {
       {hasPermission && <StyledPostFooter>{postFooterContent}</StyledPostFooter>}
 
       <ModalPostComments
+        nameOfProfessionalReplyingTo={nameOfProfessionalReplyingTo}
         onCommentPostedTriggerGetComments={() => {
           setTriggerGetComments(triggerGetComments + 1);
         }}
         open={isCommentsVisible}
         onCloseRequested={() => setIsCommentsVisible(false)}
-        postOrPostReplyId={postOrPostReplyId}
+        postOrPostReply={postOrPostReply}
         title={`${post?.account?.firstName} ${post?.account?.lastName}`}
       >
         <>

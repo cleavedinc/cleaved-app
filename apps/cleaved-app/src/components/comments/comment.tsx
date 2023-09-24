@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 import dayjs from "dayjs";
@@ -15,6 +15,7 @@ import {
 } from "@cleaved/ui";
 
 import { DisplayMarkdown } from "../../components";
+import { PostOrPostReplyType } from "../../components/post/types";
 import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useNavigateToProfile, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
@@ -29,7 +30,7 @@ type CommentProps = {
   commentLevel: number;
   postProjectRepliesDataRefetch?: () => void;
   reply: PostProjectRepliesQuery["postProjectReplies"][0];
-  handleCommentReply: (replyId: string) => void;
+  handleCommentReply: (reply: PostOrPostReplyType) => void;
 };
 
 const StyledCommentDateTime = styled.div`
@@ -147,7 +148,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
         {hasPermission && commentLevel <= 1 && (
           <>
             <StyledPipeSeparator>|</StyledPipeSeparator>
-            <StyledCommentReplyButton type="button" onClick={() => handleCommentReply(reply.id)}>
+            <StyledCommentReplyButton type="button" onClick={() => handleCommentReply(reply)}>
               {t("comment.reply")}
             </StyledCommentReplyButton>
           </>

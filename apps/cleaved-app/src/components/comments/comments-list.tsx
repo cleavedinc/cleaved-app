@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ButtonLinkLoadMore, FONT_SIZES, SPACING } from "@cleaved/ui";
 
 import { commentPageSize } from "../../constants";
+import { PostOrPostReplyType } from "../../components/post/types";
 import { PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { usePostProjectReplies, useTranslator } from "../../hooks";
 
@@ -12,7 +13,7 @@ import { CommentsListItem } from "../comments/comments-list-item";
 type CommentsListProps = {
   commentLevel: number;
   commentRepliesCount: string;
-  handleCommentReply: (replyId: string) => void;
+  handleCommentReply: (reply: PostOrPostReplyType) => void;
   parentPostId: string;
   triggerGetComments?: number;
 };
