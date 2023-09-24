@@ -49,15 +49,17 @@ export const RegisterOrganization: FunctionComponent = () => {
         </StyledHasOrganizationSkipOnboarding>
       </StyledBox>
 
-      <StyledButtonPrimaryWrapper>
-        <StyledNextStepButton
-          onClick={() => handleRouteToNextOnboardingStep()}
-          type="button"
-          disabled={preferredOrgId === ""}
-        >
-          {t("professionalOnboarding.navigateForwardStep")}
-        </StyledNextStepButton>
-      </StyledButtonPrimaryWrapper>
+      {preferredOrgId && (
+        <StyledButtonPrimaryWrapper>
+          <StyledNextStepButton
+            onClick={() => handleRouteToNextOnboardingStep()}
+            type="button"
+            disabled={preferredOrgId === ""}
+          >
+            {t("professionalOnboarding.navigateForwardStep")}
+          </StyledNextStepButton>
+        </StyledButtonPrimaryWrapper>
+      )}
     </>
   );
 };
