@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { ButtonLinkLoadMore, FONT_SIZES, SPACING } from "@cleaved/ui";
 
+import { commentPageSize } from "../../constants";
 import { PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { usePostProjectReplies, useTranslator } from "../../hooks";
 
@@ -11,6 +12,7 @@ import { CommentsListItem } from "../comments/comments-list-item";
 type CommentsListProps = {
   commentLevel: number;
   commentRepliesCount: string;
+  handleCommentReply: (replyId: string) => void;
   parentPostId: string;
   triggerGetComments?: number;
 };
@@ -37,10 +39,9 @@ const StyledLoadMoreButton = styled(ButtonLinkLoadMore)<StyledLoadMoreButtonProp
 
 // Recursive component for comments and replies
 export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
-  const { commentLevel, commentRepliesCount, parentPostId, triggerGetComments } = props;
+  const { commentLevel, commentRepliesCount, handleCommentReply, parentPostId, triggerGetComments } = props;
   const { t } = useTranslator();
   const [hideLoadMoreButton, setHideLoadMoreButton] = useState<boolean>(false);
-  const commentPageSize = 1000;
 
   const {
     postProjectRepliesData,
@@ -88,6 +89,7 @@ export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
             <StyledCommentAndRepliesWrapper key={postReply.id}>
               <CommentsListItem
                 commentLevel={commentLevel}
+                handleCommentReply={handleCommentReply}
                 postProjectRepliesDataRefetch={postProjectRepliesDataRefetch}
                 postReply={postReply}
               />

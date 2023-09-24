@@ -35,7 +35,7 @@ const StyledCommentInfo = styled.div`
   align-items: center;
 
   :not(:first-child) {
-    margin-left: ${SPACING.SMALL};
+    margin-left: ${SPACING.MEDIUM};
   }
 `;
 

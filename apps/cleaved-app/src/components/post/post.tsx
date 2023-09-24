@@ -92,10 +92,16 @@ export const Post: FunctionComponent<PostProps> = (props) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
   const [triggerGetComments, setTriggerGetComments] = useState(0);
+  const [postOrPostReplyId, setPostOrPostReplyId] = useState(post.id);
   const { t } = useTranslator();
 
   const handleShowCommentsmodal = () => {
     setIsCommentsVisible(true);
+    setPostOrPostReplyId(post.id); // reset the postId state to top level postId
+  };
+
+  const handleCommentReply = (replyId: string) => {
+    setPostOrPostReplyId(replyId);
   };
 
   const postFooterContent = (
@@ -184,7 +190,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
         }}
         open={isCommentsVisible}
         onCloseRequested={() => setIsCommentsVisible(false)}
-        postOrPostReplyId={post.id}
+        postOrPostReplyId={postOrPostReplyId}
         title={`${post?.account?.firstName} ${post?.account?.lastName}`}
       >
         <>
@@ -198,6 +204,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
             <CommentsList
               commentLevel={1}
               commentRepliesCount={post.repliesCount}
+              handleCommentReply={handleCommentReply}
               parentPostId={post.id}
               triggerGetComments={triggerGetComments}
             />

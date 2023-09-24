@@ -11,7 +11,7 @@ import { useRouteParams } from "./use-route-params";
 
 type ProjectRepliesCustomType = PostProjectRepliesQuery["postProjectReplies"];
 
-type UsePostProjectRepliesType = {
+export type UsePostProjectRepliesType = {
   postProjectRepliesData: ProjectRepliesCustomType | undefined;
   postProjectRepliesDataLoading: boolean;
   postProjectRepliesDataFetchMore: any; // eslint-disable-line

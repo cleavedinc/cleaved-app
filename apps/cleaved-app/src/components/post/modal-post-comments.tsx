@@ -49,8 +49,6 @@ const StyledCircleEditButtonSmall = styled(CircleEditButtonSmall)`
   margin-left: auto;
 `;
 
-const StyledCommentForm = styled(CommentForm)``;
-
 const StyledContentWrapper = styled.div`
   min-height: 100px;
   overflow-y: auto;
@@ -187,7 +185,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
         <StyledPostCommentFormWrapper>
           <PostCommentAvatar account={findMyAccountData} />
 
-          <StyledCommentForm
+          <CommentForm
             postOrPostReplyId={postOrPostReplyId}
             onCommentPostedTriggerGetComments={onCommentPostedTriggerGetComments}
           />

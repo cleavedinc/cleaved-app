@@ -29,7 +29,7 @@ type CommentProps = {
   commentLevel: number;
   postProjectRepliesDataRefetch?: () => void;
   reply: PostProjectRepliesQuery["postProjectReplies"][0];
-  setIsCommentRepliesVisible: Dispatch<React.SetStateAction<boolean>>;
+  handleCommentReply: (replyId: string) => void;
 };
 
 const StyledCommentDateTime = styled.div`
@@ -103,7 +103,7 @@ const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
 `;
 
 export const Comment: FunctionComponent<CommentProps> = (props) => {
-  const { account, commentLevel, postProjectRepliesDataRefetch, reply, setIsCommentRepliesVisible } = props;
+  const { account, commentLevel, postProjectRepliesDataRefetch, reply, handleCommentReply } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { profilePath } = useNavigateToProfile(account?.id);
   const { t } = useTranslator();
@@ -147,7 +147,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
         {hasPermission && commentLevel <= 1 && (
           <>
             <StyledPipeSeparator>|</StyledPipeSeparator>
-            <StyledCommentReplyButton type="button" onClick={() => setIsCommentRepliesVisible(true)}>
+            <StyledCommentReplyButton type="button" onClick={() => handleCommentReply(reply.id)}>
               {t("comment.reply")}
             </StyledCommentReplyButton>
           </>

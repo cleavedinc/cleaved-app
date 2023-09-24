@@ -76,18 +76,24 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
       logEvent("POST_PROJECT_REPLY");
 
       if (postProjectSeekRefetch) {
+        console.log("comment form: postProjectSeekRefetch");
+
         postProjectSeekRefetch();
       }
 
       if (postProjectRepliesDataRefetch) {
+        console.log("comment form: postProjectRepliesDataRefetch");
         postProjectRepliesDataRefetch();
       }
 
       if (onCommentPostedTriggerGetComments) {
+        console.log("comment form: onCommentPostedTriggerGetComments");
         onCommentPostedTriggerGetComments();
       }
 
       if (setIsCommentRepliesVisible) {
+        console.log("comment form: setIsCommentRepliesVisible");
+
         setIsCommentRepliesVisible(false);
       }
     },
