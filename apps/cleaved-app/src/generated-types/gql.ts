@@ -53,6 +53,7 @@ const documents = {
     "\n  query postProjectSeek($organizationId: ID!, $projectId: ID, $seekKey: ID, $pageSize: Int, $pinnedFirst: Boolean) {\n    postProjectSeek(\n      organizationId: $organizationId\n      projectId: $projectId\n      seekKey: $seekKey\n      pageSize: $pageSize\n      pinnedFirst: $pinnedFirst\n    ) {\n      id\n      body\n      accountId\n      date\n      account {\n        id\n        firstName\n        lastName\n        jobTitle\n        currentAvatar\n      }\n      isPinned\n      reactionTotalCount\n      reactionsExpressed\n      myReaction\n      repliesCount\n      images\n      project {\n        id\n        name\n      }\n    }\n  }\n": types.PostProjectSeekDocument,
     "\n  query projectById($projectId: ID!, $organizationId: ID!) {\n    projectById(projectId: $projectId, organizationId: $organizationId) {\n      id\n      name\n      projectProgress\n      projectDetails\n      totalRootPostCount\n      totalResponseCount\n    }\n  }\n": types.ProjectByIdDocument,
     "\n  query projectsInOrgSeek($organizationId: ID!, $seekKey: ID, $pageSize: Int, $statusFilter: [ProjectStatus!]) {\n    projectsInOrgSeek(\n      organizationId: $organizationId\n      seekKey: $seekKey\n      pageSize: $pageSize\n      statusFilter: $statusFilter\n    ) {\n      createdAt\n      id\n      name\n      projectProgress\n      status\n      totalResponseCount\n      totalRootPostCount\n    }\n  }\n": types.ProjectsInOrgSeekDocument,
+    "\n  query termsAccepted {\n    termsAccepted\n  }\n": types.TermsAcceptedDocument,
 };
 
 /**
@@ -229,6 +230,10 @@ export function graphql(source: "\n  query projectById($projectId: ID!, $organiz
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query projectsInOrgSeek($organizationId: ID!, $seekKey: ID, $pageSize: Int, $statusFilter: [ProjectStatus!]) {\n    projectsInOrgSeek(\n      organizationId: $organizationId\n      seekKey: $seekKey\n      pageSize: $pageSize\n      statusFilter: $statusFilter\n    ) {\n      createdAt\n      id\n      name\n      projectProgress\n      status\n      totalResponseCount\n      totalRootPostCount\n    }\n  }\n"): (typeof documents)["\n  query projectsInOrgSeek($organizationId: ID!, $seekKey: ID, $pageSize: Int, $statusFilter: [ProjectStatus!]) {\n    projectsInOrgSeek(\n      organizationId: $organizationId\n      seekKey: $seekKey\n      pageSize: $pageSize\n      statusFilter: $statusFilter\n    ) {\n      createdAt\n      id\n      name\n      projectProgress\n      status\n      totalResponseCount\n      totalRootPostCount\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query termsAccepted {\n    termsAccepted\n  }\n"): (typeof documents)["\n  query termsAccepted {\n    termsAccepted\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

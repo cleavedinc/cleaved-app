@@ -11,4 +11,5 @@ export * from "./use-project-by-id";
 export * from "./use-project-in-organization-seek";
 export * from "./use-project-progress-options";
 export * from "./use-route-params";
+export * from "./use-terms-accepted";
 export * from "./use-translator";

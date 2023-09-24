@@ -45,6 +45,13 @@ const StyledCommentInfoWrapper = styled.div`
   margin-bottom: ${SPACING.MEDIUM};
 `;
 
+const StyledDateCreated = styled.div``;
+
+const StyledDateCreatedLabel = styled.div`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  font-size: ${FONT_SIZES.XSMALL};
+`;
+
 const StyledFileTextIcon = styled(FilePost)`
   margin-right: 3px;
 `;
@@ -66,10 +73,19 @@ const StyledPostCount = styled.div`
 const StyledProjectCardBox = styled(Box)`
   width: 100%;
 
-  ${mediaQueries.MD} {
+  ${mediaQueries.SM} {
     flex-basis: calc(50% - 10px);
     margin-right: 10px;
     width: 50%;
+  }
+
+  ${mediaQueries.MD} {
+    flex-basis: calc(33% - 10px);
+    width: 33%;
+  }
+  ${mediaQueries.LG} {
+    flex-basis: calc(25% - 10px);
+    width: 25%;
   }
 `;
 
@@ -81,8 +97,6 @@ const StyledProjectProgress = styled.div`
   color: ${({ theme }) => theme.colors.baseText_color};
   font-size: ${FONT_SIZES.SMALL};
 `;
-
-const StyledDateCreated = styled.div``;
 
 export const ProjectCard: FunctionComponent<ProjectCardProps> = (props) => {
   const { project, refetchData } = props;
@@ -142,6 +156,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = (props) => {
       </StyledCommentInfoWrapper>
 
       <StyledDateCreated title={projectDateCreatedLabel}>
+        <StyledDateCreatedLabel>{projectDateCreatedLabel}</StyledDateCreatedLabel>
         {dayjs(project.createdAt).format("MMMM DD, YYYY")}
       </StyledDateCreated>
     </StyledProjectCardBox>

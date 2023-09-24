@@ -4,8 +4,16 @@ import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@c
 
 import { HeaderLoggedOut, ProgressBar, RegisterOrganization } from "../../components";
 import { AsideProfessionalOnboardingRegisterOrganizationDataWrapper } from "../../data-wrappers";
+import { useTermsAccepted } from "../../hooks";
 
 export const ProfessionalOnboardingRegisterOrganization: FunctionComponent = () => {
+  // useTermsAccepted triggers tos check so apollo client can route to tos page (if needed)
+  const { termsAcceptedData, termsAcceptedDataLoading } = useTermsAccepted();
+
+  if (termsAcceptedDataLoading || !termsAcceptedData) {
+    return;
+  }
+
   return (
     <>
       <HeaderLoggedOut />

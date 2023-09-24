@@ -22,13 +22,14 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
+  if (graphQLErrors) {
     graphQLErrors.forEach(({ extensions }) => {
       // navigate users to the TOS page it not accepted
       if (extensions.code === "TERMS_NOT_ACCEPTED") {
         navigate(routeConstantsCleavedApp.termsOfServiceAgreement.route);
       }
     });
+  }
 
   if (networkError) {
     logError(RollbarLogLevels.error, "Network error", networkError);

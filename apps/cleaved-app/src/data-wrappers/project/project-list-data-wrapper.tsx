@@ -46,7 +46,7 @@ const StyledProjectCardWrapper = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
 
-  ${mediaQueries.MD} {
+  ${mediaQueries.SM} {
     flex-direction: row;
     margin-right: -10px;
   }
