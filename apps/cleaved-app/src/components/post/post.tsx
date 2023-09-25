@@ -114,9 +114,7 @@ export const Post: FunctionComponent<PostProps> = (props) => {
 
   useEffect(() => {
     if (post.id !== postOrPostReply?.id) {
-      setnameOfProfessionalReplyingTo(
-        `${postOrPostReply?.account.firstName} ${postOrPostReply?.account.lastName},` + String.fromCharCode(32)
-      );
+      setnameOfProfessionalReplyingTo(`${postOrPostReply?.account.firstName} ${postOrPostReply?.account.lastName}`);
     }
   }, [postOrPostReply, post]);
 
