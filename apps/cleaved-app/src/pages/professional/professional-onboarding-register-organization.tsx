@@ -8,11 +8,11 @@ import { useTermsAccepted } from "../../hooks";
 
 export const ProfessionalOnboardingRegisterOrganization: FunctionComponent = () => {
   // useTermsAccepted triggers tos check so apollo client can route to tos page (if needed)
-  const { termsAcceptedData, termsAcceptedDataLoading } = useTermsAccepted();
+  // const { termsAcceptedData, termsAcceptedDataLoading } = useTermsAccepted();
 
-  if (termsAcceptedDataLoading || !termsAcceptedData) {
-    return;
-  }
+  // if (termsAcceptedDataLoading || !termsAcceptedData) {
+  //   return;
+  // }
 
   return (
     <>
