@@ -9,8 +9,6 @@ export const HomeRouting: FunctionComponent = () => {
     useOrganizationMemberships();
 
   useEffect(() => {
-    console.log("Home Route");
-
     if (organizationMembershipsError) {
       return;
     }
