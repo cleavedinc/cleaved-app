@@ -6,10 +6,11 @@ import { ORGANIZATION_MEMBERSHIPS } from "../gql-queries";
 
 import { useLoginGuard } from "./use-login-guard";
 
-type OrganizationMembershipsCustomType = OrganizationMembershipsQuery["organizationMemberships"];
+type OrganizationMembershipsCustomType = OrganizationMembershipsQuery["organizationMemberships"][0];
 
 type OrganizationMembershipsType = {
   organizationMembershipsData: OrganizationMembershipsCustomType | undefined;
+  organizationMembershipsError: ApolloError | undefined;
   organizationMembershipsDataLoading: boolean;
   organizationMembershipsDataRefetch: (() => void) | undefined;
 };
@@ -17,17 +18,18 @@ type OrganizationMembershipsType = {
 export const useOrganizationMemberships = (): OrganizationMembershipsType => {
   const { isLoggedIn } = useLoginGuard();
 
-  const { data, loading, refetch } = useQuery<OrganizationMembershipsQuery>(ORGANIZATION_MEMBERSHIPS, {
+  const { data, error, loading, refetch } = useQuery<OrganizationMembershipsQuery>(ORGANIZATION_MEMBERSHIPS, {
     fetchPolicy: "cache-and-network",
     nextFetchPolicy: "cache-and-network",
-    onError: (error: ApolloError) => {
-      logQueryError(error);
+    onError: (error2: ApolloError) => {
+      logQueryError(error2);
     },
     skip: !isLoggedIn,
   });
 
   return {
-    organizationMembershipsData: data?.organizationMemberships,
+    organizationMembershipsData: data?.organizationMemberships[0],
+    organizationMembershipsError: error,
     organizationMembershipsDataLoading: loading,
     organizationMembershipsDataRefetch: refetch,
   };

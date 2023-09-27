@@ -6,7 +6,7 @@ import { Box, HeadingWrapper, SectionHeader } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { routeConstantsCleavedApp } from "../../router";
-// import { useTranslator } from "../../hooks";
+import { useTranslator } from "../../hooks";
 
 const StyledBox = styled(Box)`
   display: flex;
@@ -15,23 +15,19 @@ const StyledBox = styled(Box)`
 
 export const MembershipDataWrapper: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
-  //   const { t } = useTranslator();
+  const { t } = useTranslator();
 
   return (
     <StyledBox>
       <HeadingWrapper>
-        <SectionHeader>TEMP: membership plans listed here (with organization plan highlighted)</SectionHeader>
+        <SectionHeader>{t("membership.membershipDetails")}</SectionHeader>
       </HeadingWrapper>
-
-      <div> Free forever plan (selected if org has no membership plan</div>
-
-      <div>-</div>
-
+      temp: organizations current subscription. last payment, other data that may be useful???
       <Link
-        to={`/${preferredOrgId}${routeConstantsCleavedApp.checkout.route}/:tempStarterProductId`}
-        title={"temp link to checkout with starter plan productId querystring param"}
+        to={`/${preferredOrgId}${routeConstantsCleavedApp.membershipPlans.route}`}
+        title={t("membership.changeMembership")}
       >
-        temp link to checkout with starter plan productId querystring param
+        {t("membership.changeMembership")}
       </Link>
     </StyledBox>
   );

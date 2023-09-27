@@ -26,17 +26,11 @@ export const AccountOrganizationListDataWrapper: FunctionComponent = () => {
         <SectionHeader>{t("organizations.organization")}</SectionHeader>
       </HeadingWrapper>
 
-      {!organizationMembershipsDataLoading && organizationMembershipsData && organizationMembershipsData.length > 0 && (
-        <>
-          {organizationMembershipsData.map((org) => {
-            return (
-              <StyledOrganizationWrapper key={org.id}>
-                {org.name}
-                <OrganizationEditMenu orgId={org.id} />
-              </StyledOrganizationWrapper>
-            );
-          })}
-        </>
+      {!organizationMembershipsDataLoading && organizationMembershipsData && (
+        <StyledOrganizationWrapper key={organizationMembershipsData.id}>
+          {organizationMembershipsData.name}
+          <OrganizationEditMenu orgId={organizationMembershipsData.id} />
+        </StyledOrganizationWrapper>
       )}
     </StyledBox>
   );

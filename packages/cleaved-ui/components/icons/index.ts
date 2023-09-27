@@ -19,6 +19,7 @@ export * from "./file-post";
 export * from "./globe";
 export * from "./handshake";
 export * from "./image";
+export * from "./link-external";
 export * from "./move";
 export * from "./people-alt-outline";
 export * from "./person-add-outline";

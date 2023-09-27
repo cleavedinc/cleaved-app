@@ -10,8 +10,8 @@ import {
   AsideAccountDataWrapper,
 } from "../../data-wrappers";
 import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
-// import { OrgPermissionLevel } from "../../generated-types/graphql";
-// import { useOrganizationPermission } from "../../permissions";
+import { OrgPermissionLevel } from "../../generated-types/graphql";
+import { useOrganizationPermission } from "../../permissions";
 
 const StyledBox = styled(Box)`
   display: flex;
@@ -24,7 +24,7 @@ const StyledLineSeperator = styled.div`
 `;
 
 export const AccountProfessionalInformation: FunctionComponent = () => {
-  // const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
 
   return (
     <>
@@ -36,7 +36,7 @@ export const AccountProfessionalInformation: FunctionComponent = () => {
         </LeftColumnWrapper>
 
         <MainColumnMaxWidthWrapper>
-          {/* {hasPermission && <AccountMembershipPlan />} */}
+          {hasPermission && <AccountMembershipPlan />}
 
           <StyledBox>
             <PersonalInformationForm />

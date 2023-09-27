@@ -102,6 +102,14 @@
     "signInHeader": "Registrarse / Iniciar sesión",
     "signInMessage": "Crea una nueva cuenta o inicia sesión en una existente."
   },
+  "membership": {
+    "changeMembership": "Cambiar membresía",
+    "currentPlan": "Membresía actual:",
+    "membership": "Membresía",
+    "membershipDetails": "Detalles de Membresía",
+    "manageMembership": "Administrar membresía",
+    "upgradeMembership": "Mejorar membresía"
+  },
   "menuLinkNames": {
     "account": "Cuenta",
     "accountOrganizations": "Organizaciones",

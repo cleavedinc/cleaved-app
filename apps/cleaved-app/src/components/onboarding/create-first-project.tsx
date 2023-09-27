@@ -30,19 +30,23 @@ export const CreateFirstProject: FunctionComponent = () => {
         <OnboardingProjectStartNewForm projectsInOrgSeekRefetch={projectsInOrganizationSeekDataRefetch} />
       </StyledBox>
 
-      <StyledButtonPrimaryWrapper>
-        <StyledNextStepButton
-          onClick={() => handleRouteToNextOnboardingStep()}
-          type="button"
-          disabled={
-            !projectsInOrganizationSeekDataLoading &&
-            projectsInOrganizationSeekData &&
-            projectsInOrganizationSeekData?.length === 0
-          }
-        >
-          {t("professionalOnboarding.navigateForwardStep")}
-        </StyledNextStepButton>
-      </StyledButtonPrimaryWrapper>
+      {!projectsInOrganizationSeekDataLoading &&
+        projectsInOrganizationSeekData &&
+        projectsInOrganizationSeekData?.length > 0 && (
+          <StyledButtonPrimaryWrapper>
+            <StyledNextStepButton
+              onClick={() => handleRouteToNextOnboardingStep()}
+              type="button"
+              disabled={
+                !projectsInOrganizationSeekDataLoading &&
+                projectsInOrganizationSeekData &&
+                projectsInOrganizationSeekData?.length === 0
+              }
+            >
+              {t("professionalOnboarding.navigateForwardStep")}
+            </StyledNextStepButton>
+          </StyledButtonPrimaryWrapper>
+        )}
     </>
   );
 };
