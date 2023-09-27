@@ -6,6 +6,9 @@ export const ORGANIZATION_MEMBERSHIPS = graphql(`
       id
       name
       userPermissionInOrg
+      projectCount
+      activeProjectCount
+      billingTier
     }
   }
 `);

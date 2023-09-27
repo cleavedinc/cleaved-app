@@ -5,21 +5,22 @@ import { routeConstantsCleavedApp } from "../../router";
 import { useOrganizationMemberships } from "../../hooks";
 
 export const HomeRouting: FunctionComponent = () => {
-  const data = useOrganizationMemberships();
+  const { organizationMembershipsDataLoading, organizationMembershipsData, organizationMembershipsError } =
+    useOrganizationMemberships();
 
   useEffect(() => {
-    if (
-      data.organizationMembershipsData &&
-      data.organizationMembershipsData[0] &&
-      data.organizationMembershipsData[0].id
-    ) {
-      navigate(`/${data.organizationMembershipsData[0].id}${routeConstantsCleavedApp.home.route}`);
-    } else if (!data.organizationMembershipsDataLoading) {
+    if (organizationMembershipsError) {
+      return;
+    }
+
+    if (organizationMembershipsData && organizationMembershipsData.id) {
+      navigate(`/${organizationMembershipsData.id}${routeConstantsCleavedApp.home.route}`);
+    } else if (!organizationMembershipsDataLoading) {
       navigate(
         `${routeConstantsCleavedApp.professionalOnboarding.route}${routeConstantsCleavedApp.professionalOnboardingRegisterOrganization.route}`
       );
     }
-  }, [data]);
+  }, [organizationMembershipsDataLoading, organizationMembershipsData, organizationMembershipsError]);
 
   return <></>;
 };

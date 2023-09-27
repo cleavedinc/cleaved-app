@@ -102,6 +102,14 @@
     "signInHeader": "Sign up / Log in",
     "signInMessage": "Create a new account, or log in to an existing one."
   },
+  "membership": {
+    "changeMembership": "Change membership",
+    "currentPlan": "Current membership:",
+    "membership": "Membership",
+    "membershipDetails": "Membership Details",
+    "manageMembership": "Manage membership",
+    "upgradeMembership": "Upgrade membership"
+  },
   "menuLinkNames": {
     "account": "Account",
     "accountOrganizations": "Organizations",

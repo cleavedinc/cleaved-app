@@ -27,6 +27,7 @@ module.exports = merge(common, {
       "process.env.GOOGLE_TAG_MANAGER_ID": JSON.stringify("GTM-PF2PGRP"),
       "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("http://localhost:8080/graphql"),
       "process.env.MEDIA_ENDPOINT": JSON.stringify("http://localhost:8080"),
+      "process.env.STRIPE_PUBLISHABLE_KEY": JSON.stringify("pk_test_VX53iabGnIXBis1UmYQsWQ7B00yqMWnlmT"),
     }),
     new webpack.HotModuleReplacementPlugin(),
     // new BundleAnalyzerPlugin()

@@ -17,10 +17,16 @@ const StyledProfessionalInformationWrapper = styled.div`
 
 const StyledProfessionalAboutWrapper = styled.div``;
 
+const StyledEmailAddress = styled.div`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  font-size: ${FONT_SIZES.XSMALL};
+  margin-bottom: ${SPACING.MEDIUM};
+`;
+
 const StyledJobTitle = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.SMALL};
-  margin-bottom: ${SPACING.MEDIUM};
+  margin-bottom: ${SPACING.BASE};
 `;
 
 const StyledProfileName = styled(SectionHeader)`
@@ -74,6 +80,8 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
               </StyledProfileName>
 
               <StyledJobTitle>{data.organizationGetMember.jobTitle}</StyledJobTitle>
+
+              <StyledEmailAddress>{data.organizationGetMember.emailAddress}</StyledEmailAddress>
             </StyledProfessionalInformationWrapper>
 
             <StyledProfessionalAboutWrapper>

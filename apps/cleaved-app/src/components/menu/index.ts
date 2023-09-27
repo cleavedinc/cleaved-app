@@ -1,6 +1,7 @@
 export * from "./account-organizations-menu";
 export * from "./people-list-menu";
 export * from "./organization-edit-menu";
+export * from "./organization-membership-menu";
 export * from "./post-edit-menu";
 export * from "./projects-edit-menu";
 export * from "./share-link-edit-menu";

@@ -14,9 +14,6 @@ export const routeConstantsCleavedApp = {
   accountOrganizations: {
     route: "/account-organizations",
   },
-  checkout: {
-    route: "/checkout",
-  },
   home: {
     route: "/home",
   },
@@ -28,6 +25,9 @@ export const routeConstantsCleavedApp = {
   },
   membership: {
     route: "/membership",
+  },
+  membershipPlans: {
+    route: "/membership-plans",
   },
   peopleList: {
     route: "/people-list",
