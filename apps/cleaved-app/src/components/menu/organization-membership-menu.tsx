@@ -8,7 +8,7 @@ import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
-import { StyledBasicItem, StyledBasicMenu, StyledEditIcon, StyledLinkExternalIcon } from "./components";
+import { StyledBasicItem, StyledBasicMenu, StyledAwardIcon } from "./components";
 
 import "@szhsin/react-menu/dist/index.css";
 
@@ -17,13 +17,13 @@ export const OrganizationMembershipMenu: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
   const { t } = useTranslator();
 
-  const handleRouteToStripeManageSubscription = () => {
-    const stripeSubscriptionPortalUrl = "https://billing.stripe.com/p/login/test_aEU4jH2hj9Niek0288";
-    window.open(stripeSubscriptionPortalUrl, "_blank");
-  };
+  // const handleRouteToStripeManageSubscription = () => {
+  //   const stripeSubscriptionPortalUrl = "https://billing.stripe.com/p/login/test_aEU4jH2hj9Niek0288";
+  //   window.open(stripeSubscriptionPortalUrl, "_blank");
+  // };
 
   const handleRouteToChangeMembership = () => {
-    navigate(`/${preferredOrgId}${routeConstantsCleavedApp.membershipPlans.route}`);
+    navigate(`/${preferredOrgId}${routeConstantsCleavedApp.membership.route}`);
   };
 
   const editPostButton = t("widget.editProjectDetailsMenu") ? t("widget.editProjectDetailsMenu") : undefined;
@@ -39,14 +39,14 @@ export const OrganizationMembershipMenu: FunctionComponent = () => {
       direction={"left"}
     >
       <StyledBasicItem onClick={() => handleRouteToChangeMembership()}>
-        <StyledEditIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
-        {t("membership.changeMembership")}
+        <StyledAwardIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+        {t("membership.membershipDetails")}
       </StyledBasicItem>
 
-      <StyledBasicItem onClick={() => handleRouteToStripeManageSubscription()}>
+      {/* <StyledBasicItem onClick={() => handleRouteToStripeManageSubscription()}>
         <StyledLinkExternalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
         {t("membership.manageMembership")}
-      </StyledBasicItem>
+      </StyledBasicItem> */}
     </StyledBasicMenu>
   );
 };

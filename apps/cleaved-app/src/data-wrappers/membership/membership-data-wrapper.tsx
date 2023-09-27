@@ -20,7 +20,7 @@ export const MembershipDataWrapper: FunctionComponent = () => {
   return (
     <StyledBox>
       <HeadingWrapper>
-        <SectionHeader>{t("membership.membershipDetails")}</SectionHeader>
+        <SectionHeader>{t("membership.membership")}</SectionHeader>
       </HeadingWrapper>
       temp: organizations current subscription. last payment, other data that may be useful???
       <Link
