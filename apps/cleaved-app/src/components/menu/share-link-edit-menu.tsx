@@ -10,13 +10,7 @@ import { GENERATE_ORGANIZATION_SHARE_LINK_MUTATION } from "../../gql-mutations";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useRouteParams, useTranslator } from "../../hooks";
 
-import {
-  basicItemIconBase,
-  StyledBasicItem,
-  StyledBasicItemRed,
-  StyledBasicMenu,
-  StyledDeleteIcon,
-} from "./components";
+import { basicItemIconBase, StyledBasicItem, StyledBasicItemRed, StyledBasicMenu, StyledTrashIcon } from "./components";
 import { REMOVE_ORGANIZATION_SHARE_LINK_MUTATION } from "./gql";
 
 import "@szhsin/react-menu/dist/index.css";
@@ -116,7 +110,7 @@ export const ShareLinkEditMenu: FunctionComponent<ShareLinkEditMenuProps> = (pro
         </StyledBasicItem>
 
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
-          <StyledDeleteIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
+          <StyledTrashIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
           {t("shareLinks.editMenuRemoveShareLink", { shareLinkPermission: shareLinkPermissionText })}
         </StyledBasicItemRed>
       </StyledBasicMenu>

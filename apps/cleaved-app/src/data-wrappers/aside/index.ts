@@ -1,6 +1,7 @@
 export * from "./aside-account-data-wrapper";
 export * from "./aside-home-data-wrapper";
 export * from "./aside-home-organization-members-data-wrapper";
+export * from "./aside-membership-data-wrapper";
 export * from "./aside-professional-onboarding-create-first-project-data-wrapper";
 export * from "./aside-professional-onboarding-invite-users-data-wrapper";
 export * from "./aside-professional-onboarding-register-organization-data-wrapper";

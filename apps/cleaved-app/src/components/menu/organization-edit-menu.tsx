@@ -11,7 +11,7 @@ import { useTranslator } from "../../hooks";
 
 import { ORGANIZATION_REMOVE_ME_MUTATION } from "../../gql-mutations";
 
-import { StyledBasicItemRed, StyledBasicMenu, StyledDeleteIcon } from "./components";
+import { StyledBasicItemRed, StyledBasicMenu, StyledTrashIcon } from "./components";
 
 import "@szhsin/react-menu/dist/index.css";
 
@@ -75,7 +75,7 @@ export const OrganizationEditMenu: FunctionComponent<OrganizationEditMenuProps> 
         direction={"left"}
       >
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
-          <StyledDeleteIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
+          <StyledTrashIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
           {t("organizations.removeOrganization")}
         </StyledBasicItemRed>
       </StyledBasicMenu>

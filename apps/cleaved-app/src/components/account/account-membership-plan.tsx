@@ -24,6 +24,10 @@ const StyledCurrentPlanLabel = styled.div`
   margin-bottom: ${SPACING.BASE};
 `;
 
+const StyledRouterButtonInline = styled(StyledRouterButton)`
+  align-self: flex-start;
+`;
+
 export const AccountMembershipPlan: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
   const { organizationMembershipsData, organizationMembershipsDataLoading } = useOrganizationMemberships();
@@ -50,12 +54,12 @@ export const AccountMembershipPlan: FunctionComponent = () => {
       {organizationMembershipsData &&
         organizationMembershipsData.billingTier &&
         organizationMembershipsData.billingTier === BillingTier.Free && (
-          <StyledRouterButton
+          <StyledRouterButtonInline
             to={`/${preferredOrgId}${routeConstantsCleavedApp.membershipPlans.route}`}
             title={t("membership.upgradeMembership")}
           >
             {t("membership.upgradeMembership")}
-          </StyledRouterButton>
+          </StyledRouterButtonInline>
         )}
     </StyledBox>
   );

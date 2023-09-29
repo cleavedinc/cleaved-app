@@ -14,7 +14,7 @@ import { useOrganizationPermission } from "../../permissions";
 import {
   StyledBasicItemRed,
   StyledBasicMenu,
-  StyledDeleteIcon,
+  StyledTrashIcon,
   StyledEditIcon,
   StyledMenuRadioGroupNoBorder,
   StyledRadioGroupBasicItem,
@@ -146,7 +146,7 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
         )}
 
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
-          <StyledDeleteIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
+          <StyledTrashIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
           {t("people.removeProfessional")}
         </StyledBasicItemRed>
       </StyledBasicMenu>
