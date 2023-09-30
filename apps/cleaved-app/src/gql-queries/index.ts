@@ -1,3 +1,4 @@
+export * from "./admin-only-organization-memberships-query";
 export * from "./find-my-account-query";
 export * from "./organization-get-membership-query";
 export * from "./organization-memberships-query";

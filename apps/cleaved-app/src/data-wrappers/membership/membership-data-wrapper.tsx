@@ -15,7 +15,7 @@ import {
 import { StyledRouterButton } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { BillingTier } from "../../generated-types/graphql";
-import { useOrganizationMemberships, useTranslator } from "../../hooks";
+import { useAdminOnlyOrganizationMemberships, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
 const StyledBillingTier = styled.div`
@@ -49,7 +49,8 @@ const StyledSettingsIcon = styled(SettingsIcon)`
 
 export const MembershipDataWrapper: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
-  const { organizationMembershipsData, organizationMembershipsDataLoading } = useOrganizationMemberships();
+  const { adminOnlyOrganizationMembershipsData, adminOnlyOrganizationMembershipsDataLoading } =
+    useAdminOnlyOrganizationMemberships();
   const { t } = useTranslator();
   const theme = useTheme();
 
@@ -59,10 +60,10 @@ export const MembershipDataWrapper: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    if (organizationMembershipsData) {
-      console.log("organizationMembershipsData.billingTier", organizationMembershipsData.billingTier);
+    if (adminOnlyOrganizationMembershipsData) {
+      console.log("organizationMembershipsData.billingTier", adminOnlyOrganizationMembershipsData.billingTier);
     }
-  }, [organizationMembershipsData]);
+  }, [adminOnlyOrganizationMembershipsData]);
 
   return (
     <StyledBox>
@@ -70,19 +71,19 @@ export const MembershipDataWrapper: FunctionComponent = () => {
         <SectionHeader>{t("membership.membership")}</SectionHeader>
       </HeadingWrapper>
 
-      {!organizationMembershipsDataLoading &&
-        organizationMembershipsData &&
-        organizationMembershipsData.billingTier && (
+      {!adminOnlyOrganizationMembershipsDataLoading &&
+        adminOnlyOrganizationMembershipsData &&
+        adminOnlyOrganizationMembershipsData.billingTier && (
           <>
             <StyledCurrentPlanLabel>{t("membership.currentPlan")}</StyledCurrentPlanLabel>
-            <StyledBillingTier>{organizationMembershipsData.billingTier}</StyledBillingTier>
+            <StyledBillingTier>{adminOnlyOrganizationMembershipsData.billingTier}</StyledBillingTier>
           </>
         )}
 
-      {!organizationMembershipsDataLoading &&
-        organizationMembershipsData &&
-        organizationMembershipsData.billingTier &&
-        organizationMembershipsData.billingTier === BillingTier.Free && (
+      {!adminOnlyOrganizationMembershipsDataLoading &&
+        adminOnlyOrganizationMembershipsData &&
+        adminOnlyOrganizationMembershipsData.billingTier &&
+        adminOnlyOrganizationMembershipsData.billingTier === BillingTier.Free && (
           <StyledRouterButtonInline
             to={`/${preferredOrgId}${routeConstantsCleavedApp.membershipPlans.route}`}
             title={t("membership.upgradeMembership")}
@@ -91,11 +92,11 @@ export const MembershipDataWrapper: FunctionComponent = () => {
           </StyledRouterButtonInline>
         )}
 
-      {!organizationMembershipsDataLoading &&
-        organizationMembershipsData &&
-        organizationMembershipsData.billingTier &&
-        (organizationMembershipsData.billingTier === BillingTier.Professional ||
-          organizationMembershipsData.billingTier === BillingTier.Enterprise) && (
+      {!adminOnlyOrganizationMembershipsDataLoading &&
+        adminOnlyOrganizationMembershipsData &&
+        adminOnlyOrganizationMembershipsData.billingTier &&
+        (adminOnlyOrganizationMembershipsData.billingTier === BillingTier.Professional ||
+          adminOnlyOrganizationMembershipsData.billingTier === BillingTier.Enterprise) && (
           <StyledButtonPrimary onClick={() => handleRouteToStripeManageSubscription()}>
             <StyledSettingsIcon color={theme.colors.always_white_color} iconSize={FONT_SIZES.LARGE} />
             {t("membership.manageMembership")}
