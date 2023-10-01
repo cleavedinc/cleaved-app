@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { Header } from "../../components";
-import { MembershipDataWrapper } from "../../data-wrappers";
+import { AsideMembershipDataWrapper, MembershipDataWrapper } from "../../data-wrappers";
 
 export const Membership: FunctionComponent = () => {
   return (
@@ -11,6 +11,10 @@ export const Membership: FunctionComponent = () => {
       <Header />
 
       <ContentWrapper>
+        <LeftColumnWrapper>
+          <AsideMembershipDataWrapper />
+        </LeftColumnWrapper>
+
         <MainColumnMaxWidthWrapper>
           <MembershipDataWrapper />
         </MainColumnMaxWidthWrapper>

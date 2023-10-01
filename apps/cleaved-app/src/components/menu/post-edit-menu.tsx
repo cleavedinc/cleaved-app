@@ -16,7 +16,7 @@ import {
   StyledBasicItem,
   StyledBasicItemRed,
   StyledBasicMenu,
-  StyledDeleteIcon,
+  StyledTrashIcon,
   StyledEditIcon,
 } from "./components";
 import { POST_PROJECT_PIN_MUTATION, POST_PROJECT_PIN_REMOVE_MUTATION } from "./gql";
@@ -185,7 +185,7 @@ export const PostEditMenu: FunctionComponent<PostEditMenuProps> = (props) => {
         direction={"left"}
       >
         <StyledBasicItemRed onClick={() => setIsConfirmRemoveModalOpen(true)}>
-          <StyledDeleteIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
+          <StyledTrashIcon color={theme.colors.always_red_color} iconSize={FONT_SIZES.LARGE} />
           {t("post.removePost")}
         </StyledBasicItemRed>
 

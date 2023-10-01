@@ -17,11 +17,6 @@ export const OrganizationMembershipMenu: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
   const { t } = useTranslator();
 
-  // const handleRouteToStripeManageSubscription = () => {
-  //   const stripeSubscriptionPortalUrl = "https://billing.stripe.com/p/login/test_aEU4jH2hj9Niek0288";
-  //   window.open(stripeSubscriptionPortalUrl, "_blank");
-  // };
-
   const handleRouteToChangeMembership = () => {
     navigate(`/${preferredOrgId}${routeConstantsCleavedApp.membership.route}`);
   };
@@ -42,11 +37,6 @@ export const OrganizationMembershipMenu: FunctionComponent = () => {
         <StyledAwardIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
         {t("membership.membershipDetails")}
       </StyledBasicItem>
-
-      {/* <StyledBasicItem onClick={() => handleRouteToStripeManageSubscription()}>
-        <StyledLinkExternalIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
-        {t("membership.manageMembership")}
-      </StyledBasicItem> */}
     </StyledBasicMenu>
   );
 };

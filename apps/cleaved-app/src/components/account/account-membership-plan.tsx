@@ -6,7 +6,7 @@ import { Box, FONT_SIZES, HeadingWrapper, SectionHeader, SPACING } from "@cleave
 import { StyledRouterButton, OrganizationMembershipMenu } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { BillingTier } from "../../generated-types/graphql";
-import { useOrganizationMemberships, useTranslator } from "../../hooks";
+import { useAdminOnlyOrganizationMemberships, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
 const StyledBox = styled(Box)`
@@ -24,9 +24,14 @@ const StyledCurrentPlanLabel = styled.div`
   margin-bottom: ${SPACING.BASE};
 `;
 
+const StyledRouterButtonInline = styled(StyledRouterButton)`
+  align-self: flex-start;
+`;
+
 export const AccountMembershipPlan: FunctionComponent = () => {
   const { preferredOrgId } = useContext(authTokenContext);
-  const { organizationMembershipsData, organizationMembershipsDataLoading } = useOrganizationMemberships();
+  const { adminOnlyOrganizationMembershipsData, adminOnlyOrganizationMembershipsDataLoading } =
+    useAdminOnlyOrganizationMemberships();
 
   const { t } = useTranslator();
 
@@ -38,24 +43,24 @@ export const AccountMembershipPlan: FunctionComponent = () => {
         <OrganizationMembershipMenu />
       </HeadingWrapper>
 
-      {!organizationMembershipsDataLoading &&
-        organizationMembershipsData &&
-        organizationMembershipsData.billingTier && (
+      {!adminOnlyOrganizationMembershipsDataLoading &&
+        adminOnlyOrganizationMembershipsData &&
+        adminOnlyOrganizationMembershipsData.billingTier && (
           <>
             <StyledCurrentPlanLabel>{t("membership.currentPlan")}</StyledCurrentPlanLabel>
-            <StyledCurrentPlan>{organizationMembershipsData.billingTier}</StyledCurrentPlan>
+            <StyledCurrentPlan>{adminOnlyOrganizationMembershipsData.billingTier}</StyledCurrentPlan>
           </>
         )}
 
-      {organizationMembershipsData &&
-        organizationMembershipsData.billingTier &&
-        organizationMembershipsData.billingTier === BillingTier.Free && (
-          <StyledRouterButton
+      {adminOnlyOrganizationMembershipsData &&
+        adminOnlyOrganizationMembershipsData.billingTier &&
+        adminOnlyOrganizationMembershipsData.billingTier === BillingTier.Free && (
+          <StyledRouterButtonInline
             to={`/${preferredOrgId}${routeConstantsCleavedApp.membershipPlans.route}`}
             title={t("membership.upgradeMembership")}
           >
             {t("membership.upgradeMembership")}
-          </StyledRouterButton>
+          </StyledRouterButtonInline>
         )}
     </StyledBox>
   );
