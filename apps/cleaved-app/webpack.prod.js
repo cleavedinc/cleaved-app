@@ -17,7 +17,8 @@ module.exports = merge(common, {
       "process.env.GOOGLE_TAG_MANAGER_ID": JSON.stringify("GTM-N36S8X7"),
       "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("https://api.app.cleaved.com/graphql"),
       "process.env.MEDIA_ENDPOINT": JSON.stringify("https://api.app.cleaved.com"),
-      "process.env.STRIPE_PUBLISHABLE_KEY": JSON.stringify("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"), // TODO: REPLACE THIS ith PROD KEY
+      "process.env.STRIPE_PUBLISHABLE_KEY": JSON.stringify("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"),
+      "process.env.STRIPE_PRICING_TABLE_ID": JSON.stringify("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"),
     }),
     new CopyPlugin({
       patterns: [{ from: "public", to: "public" }],

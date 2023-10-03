@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import styled, { useTheme } from "styled-components";
 
 import {
@@ -58,12 +58,6 @@ export const MembershipDataWrapper: FunctionComponent = () => {
     const stripeSubscriptionPortalUrl = "https://billing.stripe.com/p/login/test_aEU4jH2hj9Niek0288";
     window.open(stripeSubscriptionPortalUrl, "_blank");
   };
-
-  useEffect(() => {
-    if (adminOnlyOrganizationMembershipsData) {
-      console.log("organizationMembershipsData.billingTier", adminOnlyOrganizationMembershipsData.billingTier);
-    }
-  }, [adminOnlyOrganizationMembershipsData]);
 
   return (
     <StyledBox>
