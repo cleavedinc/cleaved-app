@@ -26,6 +26,9 @@ export const routeConstantsCleavedApp = {
   membership: {
     route: "/membership",
   },
+  membershipLimit: {
+    route: "/membership-limit",
+  },
   membershipPlans: {
     route: "/membership-plans",
   },

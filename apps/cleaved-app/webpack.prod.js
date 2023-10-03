@@ -19,6 +19,7 @@ module.exports = merge(common, {
       "process.env.MEDIA_ENDPOINT": JSON.stringify("https://api.app.cleaved.com"),
       "process.env.STRIPE_PUBLISHABLE_KEY": JSON.stringify("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"),
       "process.env.STRIPE_PRICING_TABLE_ID": JSON.stringify("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"),
+      "process.env.STRIPE_SUBSCRIPTION_PORTAL_URL": JSON.stringify("xxxxxxxxxxxx"),
     }),
     new CopyPlugin({
       patterns: [{ from: "public", to: "public" }],
