@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { Box, FONT_SIZES, mediaQueries, SPACING } from "@cleaved/ui";
+import { Box, FONT_SIZES, SPACING } from "@cleaved/ui";
 
 import { PeopleCardAvatar } from "../../../components";
 import { OrganizationSeekMembersQuery } from "../../../generated-types/graphql";
@@ -26,22 +26,6 @@ const StyledPeopleInfoWrapper = styled.div`
 const StyledPeopleCardBox = styled(Box)`
   display: flex;
   width: 100%;
-
-  ${mediaQueries.SM} {
-    flex-basis: calc(50% - 10px);
-    margin-right: 10px;
-    width: 50%;
-  }
-
-  ${mediaQueries.MD} {
-    flex-basis: calc(33% - 10px);
-    width: 33%;
-  }
-
-  ${mediaQueries.LG} {
-    flex-basis: calc(25% - 10px);
-    width: 25%;
-  }
 `;
 
 const StyledProfessionalLink = styled(Link)`

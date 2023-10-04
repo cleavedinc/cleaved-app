@@ -3,7 +3,7 @@ import { Link } from "@reach/router";
 import dayjs from "dayjs";
 import styled, { useTheme } from "styled-components";
 
-import { BarsProgressIcon, Box, CommentIcon, FilePost, FONT_SIZES, mediaQueries, SPACING } from "@cleaved/ui";
+import { BarsProgressIcon, Box, CommentIcon, FilePost, FONT_SIZES, SPACING } from "@cleaved/ui";
 
 import { ProjectsEditMenu } from "../../../components";
 import { authTokenContext } from "../../../contexts";
@@ -72,22 +72,6 @@ const StyledPostCount = styled.div`
 
 const StyledProjectCardBox = styled(Box)`
   width: 100%;
-
-  ${mediaQueries.SM} {
-    flex-basis: calc(50% - 10px);
-    margin-right: 10px;
-    width: 50%;
-  }
-
-  ${mediaQueries.MD} {
-    flex-basis: calc(33% - 10px);
-    width: 33%;
-  }
-
-  ${mediaQueries.LG} {
-    flex-basis: calc(25% - 10px);
-    width: 25%;
-  }
 `;
 
 const StyledProjectLink = styled(Link)`

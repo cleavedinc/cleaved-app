@@ -9,7 +9,7 @@ import {
   OrganizationSeekMembersQuery,
 } from "../../generated-types/graphql";
 
-import { avatartBase, avatarSizeLarge } from "../avatars/avatar-base-styles";
+import { avatartBase, avatarSizeMedium } from "../avatars/avatar-base-styles";
 
 type PeopleCardAvatarProps = {
   account:
@@ -21,13 +21,13 @@ type PeopleCardAvatarProps = {
 
 const StyledAvatarImage = styled.img`
   ${avatartBase}
-  ${avatarSizeLarge}
+  ${avatarSizeMedium}
   margin-right: ${SPACING.MEDIUM};
 `;
 
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
-  ${avatarSizeLarge}
+  ${avatarSizeMedium}
   font-size: ${FONT_SIZES.XXLARGE};
   margin-right: ${SPACING.MEDIUM};
 `;
