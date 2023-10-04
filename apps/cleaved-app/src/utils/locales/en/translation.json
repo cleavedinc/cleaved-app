@@ -18,6 +18,10 @@
     "reply": "Reply"
   },
   "companyName": "Cleaved",
+  "contactUs": {
+    "mailtoUpgradeMembershipPlanSubjectText": "Please upgrade my cleaved account",
+    "mailtoUpgradeMembershipPlanEmailBodyText": "Hey Chris, my company (Your company name) needs to add more users and projects. We would ideally like (Your ideal number) users and (Your ideal number) projects. Thank you."
+  },
   "data": {
     "loadingData": "Loading...",
     "loadMoreComments": "Load more comments",
@@ -115,8 +119,11 @@
     "changeMembership": "Change membership",
     "currentPlan": "Current membership:",
     "membership": "Membership",
+    "membershipContactUs": "Contact us to upgrade your membership.",
+    "membershipContactUsText": "We're still figuring out our next membership plan. Until then, email us your needs and we'll take care of you.",
     "membershipDetails": "Membership Details",
-    "membershipLimitNonAdminText": "You see the value and need more from us. Please ask your admin to upgrade your plan for more awesomeness.",
+    "membershipLimitAdminText": "You have hit your membership limit. Please upgrade your account below, or contact us if you need more than our membership plan offers.",
+    "membershipLimitNonAdminText": "You're membership limit has been hit. Please ask your admin to upgrade your plan for more awesomeness.",
     "manageMembership": "Manage membership",
     "upgradeMembership": "Upgrade membership"
   },

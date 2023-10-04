@@ -18,6 +18,10 @@
     "reply": "Responder"
   },
   "companyName": "Cleaved",
+  "contactUs": {
+    "mailtoUpgradeMembershipPlanSubjectText": "Por favor, actualiza mi cuenta de Cleaved",
+    "mailtoUpgradeMembershipPlanEmailBodyText": "Hola Chris, mi empresa (nombre de tu empresa) necesita agregar más usuarios y proyectos. Idealmente, nos gustaría tener (tu número ideal) usuarios y (tu número ideal) proyectos. Gracias."
+  },
   "data": {
     "loadingData": "Cargando...",
     "loadMoreComments": "Cargar más comentarios",
@@ -115,8 +119,11 @@
     "changeMembership": "Cambiar membresía",
     "currentPlan": "Membresía actual:",
     "membership": "Membresía",
+    "membershipContactUs": "Contáctanos para mejorar tu membresía.",
+    "membershipContactUsText": "Aún estamos ideando nuestro próximo plan de membresía. Mientras tanto, envíanos un correo electrónico con tus necesidades y nos encargaremos de ti.",
     "membershipDetails": "Detalles de Membresía",
-    "membershipLimitNonAdminText": "Ves el valor y necesitas más de nosotros. Por favor, pide a tu administrador que actualice tu plan para obtener más cosas increíbles.",
+    "membershipLimitAdminText": "Has alcanzado el límite de tu membresía. Por favor, actualiza tu cuenta a continuación o contáctanos si necesitas más de lo que ofrece nuestro plan de membresía.",
+    "membershipLimitNonAdminText": "Has alcanzado el límite de tu membresía. Por favor, solicita a tu administrador que actualice tu plan para obtener más funcionalidades increíbles.",
     "manageMembership": "Administrar membresía",
     "upgradeMembership": "Mejorar membresía"
   },

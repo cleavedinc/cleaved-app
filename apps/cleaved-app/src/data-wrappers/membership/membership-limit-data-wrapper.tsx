@@ -1,24 +1,65 @@
 import React, { FunctionComponent } from "react";
 
-import { Box } from "@cleaved/ui";
+import { LinkButtonPrimary, LinkButtonSecondary, Box, Paragraph } from "@cleaved/ui";
 
-import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useTranslator } from "../../hooks";
+import { BillingTier, OrgPermissionLevel } from "../../generated-types/graphql";
+import { useOrganizationMembershipPermissionBillingCounts, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 
 import { MembershipData } from "./components";
 
 export const MembershipLimitDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
+  const {
+    organizationMembershipPermissionBillingCountsData,
+    organizationMembershipPermissionBillingCountsDataLoading,
+  } = useOrganizationMembershipPermissionBillingCounts();
   const { t } = useTranslator();
 
-  if (!hasPermission) {
+  if (!organizationMembershipPermissionBillingCountsDataLoading && !hasPermission) {
+    return <Box>{t("membership.membershipLimitNonAdminText")}</Box>;
+  }
+
+  if (
+    !organizationMembershipPermissionBillingCountsDataLoading &&
+    hasPermission &&
+    organizationMembershipPermissionBillingCountsData?.billingTier === BillingTier.Professional
+  ) {
     return (
       <Box>
-        <div>{t("membership.membershipLimitNonAdminText")}</div>
+        <Paragraph>{t("membership.membershipContactUsText")}</Paragraph>
+
+        <LinkButtonPrimary
+          href={`mailto:?subject=${t("contactUs.mailtoUpgradeMembershipPlanSubjectText")}&body=${t(
+            "contactUs.mailtoUpgradeMembershipPlanEmailBodyText"
+          )}`}
+        >
+          {t("membership.membershipContactUs")}
+        </LinkButtonPrimary>
       </Box>
     );
   }
 
-  return <MembershipData />;
+  if (
+    !organizationMembershipPermissionBillingCountsDataLoading &&
+    organizationMembershipPermissionBillingCountsData?.billingTier === BillingTier.Free
+  ) {
+    return (
+      <>
+        <Box>
+          <Paragraph>{t("membership.membershipLimitAdminText")}</Paragraph>
+
+          <LinkButtonSecondary
+            href={`mailto:?subject=${t("contactUs.mailtoUpgradeMembershipPlanSubjectText")}&body=${t(
+              "contactUs.mailtoUpgradeMembershipPlanEmailBodyText"
+            )}`}
+          >
+            {t("membership.membershipContactUs")}
+          </LinkButtonSecondary>
+        </Box>
+
+        <MembershipData />
+      </>
+    );
+  }
 };
