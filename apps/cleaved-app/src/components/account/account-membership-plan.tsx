@@ -6,10 +6,20 @@ import { Box, FONT_SIZES, HeadingWrapper, SectionHeader, SPACING } from "@cleave
 import { StyledRouterButton, OrganizationMembershipMenu } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { BillingTier } from "../../generated-types/graphql";
-import { useOrganizationMembershipPermissionBillingCounts, useTranslator } from "../../hooks";
+import {
+  useMembershipUserLimitHit,
+  useOrganizationMembershipPermissionBillingCounts,
+  useTranslator,
+} from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
-const StyledBox = styled(Box)`
+type AccountMembershipPlanType = {
+  membershipUserLimitHit: boolean;
+};
+
+const StyledAccountMembershipPlanWrapper = styled(Box)<AccountMembershipPlanType>`
+  ${(props) => (props.membershipUserLimitHit ? `background-color: ${props.theme.colors.always_red_color};` : null)}
+  ${(props) => (props.membershipUserLimitHit ? `color: ${props.theme.colors.always_white_color};` : null)}
   display: flex;
   flex-direction: column;
 `;
@@ -18,10 +28,15 @@ const StyledCurrentPlan = styled.div`
   margin-bottom: ${SPACING.SMALL};
 `;
 
-const StyledCurrentPlanLabel = styled.div`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
+const StyledCurrentPlanLabel = styled.div<AccountMembershipPlanType>`
+  color: ${(props) =>
+    props.membershipUserLimitHit ? props.theme.colors.always_white_color : props.theme.colors.baseSubText_color}
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.BASE};
+`;
+
+const StyledMembershipLimitHitMessage = styled.div`
+  margin-bottom: ${SPACING.MEDIUM};
 `;
 
 const StyledRouterButtonInline = styled(StyledRouterButton)`
@@ -34,22 +49,32 @@ export const AccountMembershipPlan: FunctionComponent = () => {
     organizationMembershipPermissionBillingCountsData,
     organizationMembershipPermissionBillingCountsDataLoading,
   } = useOrganizationMembershipPermissionBillingCounts();
+  const membershipUserLimitHit = useMembershipUserLimitHit(
+    organizationMembershipPermissionBillingCountsData?.billingTier,
+    organizationMembershipPermissionBillingCountsData?.memberCount
+  );
 
   const { t } = useTranslator();
 
   return (
-    <StyledBox>
+    <StyledAccountMembershipPlanWrapper membershipUserLimitHit={membershipUserLimitHit}>
       <HeadingWrapper>
         <SectionHeader>{t("membership.membership")}</SectionHeader>
 
         <OrganizationMembershipMenu />
       </HeadingWrapper>
 
+      {membershipUserLimitHit && (
+        <StyledMembershipLimitHitMessage>{t("membership.membershipLimitNonAdminText")}</StyledMembershipLimitHitMessage>
+      )}
+
       {!organizationMembershipPermissionBillingCountsDataLoading &&
         organizationMembershipPermissionBillingCountsData &&
         organizationMembershipPermissionBillingCountsData.billingTier && (
           <>
-            <StyledCurrentPlanLabel>{t("membership.currentPlan")}</StyledCurrentPlanLabel>
+            <StyledCurrentPlanLabel membershipUserLimitHit={membershipUserLimitHit}>
+              {t("membership.currentPlan")}
+            </StyledCurrentPlanLabel>
             <StyledCurrentPlan>{organizationMembershipPermissionBillingCountsData.billingTier}</StyledCurrentPlan>
           </>
         )}
@@ -64,6 +89,6 @@ export const AccountMembershipPlan: FunctionComponent = () => {
             {t("membership.upgradeMembership")}
           </StyledRouterButtonInline>
         )}
-    </StyledBox>
+    </StyledAccountMembershipPlanWrapper>
   );
 };

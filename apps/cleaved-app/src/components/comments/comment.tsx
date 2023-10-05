@@ -1,7 +1,6 @@
 import React, { Dispatch, FunctionComponent } from "react";
 import styled from "styled-components";
-
-import dayjs from "dayjs";
+import { format } from "date-fns";
 
 import { getTimeSinceDate } from "@cleaved/helpers";
 import {
@@ -152,7 +151,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
             </StyledCommentReplyButton>
           </>
         )}
-        <StyledTooltipDark tooltip={dayjs(reply.date).format("MMMM DD, YYYY")}>
+        <StyledTooltipDark tooltip={format(new Date(reply.date), "MMMM dd, yyyy")}>
           <StyledCommentDateTime>{getTimeSinceDate(reply.date)}</StyledCommentDateTime>
         </StyledTooltipDark>
       </StyledCommentFooterWrapper>

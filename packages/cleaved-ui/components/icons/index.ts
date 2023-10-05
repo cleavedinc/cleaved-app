@@ -1,4 +1,5 @@
 export * from "./archive";
+export * from "./arrow-right";
 export * from "./award";
 export * from "./bars-progress";
 export * from "./celebration";

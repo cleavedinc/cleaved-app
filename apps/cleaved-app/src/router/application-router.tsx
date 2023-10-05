@@ -11,7 +11,6 @@ import { HomeRouting } from "../pages/home/home-routing";
 import { ProfessionalShareLinkRegistration } from "../pages/professional/professional-share-link-registration";
 import { Login } from "../pages/login/login";
 import { Membership } from "../pages/membership/membership";
-import { MembershipLimit } from "../pages/membership/membership-limit";
 import { MembershipPlans } from "../pages/membership/membership-plans";
 import { PrivacyPolicy } from "../pages/agreements/privacy-policy";
 import { Professional } from "../pages/professional/professional";
@@ -48,11 +47,6 @@ export const ApplicationRouter: FunctionComponent = () => (
     />
 
     <PageProtector path={`:orgId${routeConstantsCleavedApp.membership.route}`} renderedPage={<Membership />} />
-
-    <PageProtector
-      path={`:orgId${routeConstantsCleavedApp.membershipLimit.route}`}
-      renderedPage={<MembershipLimit />}
-    />
 
     <PageProtector
       path={`:orgId${routeConstantsCleavedApp.membershipPlans.route}`}

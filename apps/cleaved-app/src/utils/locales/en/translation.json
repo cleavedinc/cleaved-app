@@ -18,10 +18,6 @@
     "reply": "Reply"
   },
   "companyName": "Cleaved",
-  "contactUs": {
-    "mailtoUpgradeMembershipPlanSubjectText": "Please upgrade my cleaved account",
-    "mailtoUpgradeMembershipPlanEmailBodyText": "Hey Chris, my company (Your company name) needs to add more users and projects. We would ideally like (Your ideal number) users and (Your ideal number) projects. Thank you."
-  },
   "data": {
     "loadingData": "Loading...",
     "loadMoreComments": "Load more comments",
@@ -72,9 +68,6 @@
     "membershipAlt": "A woman pointing to three subscription options.",
     "membershipHeader": "Upgrading is easy",
     "membershipText": "Upgrading to get more vallue is as quick as a few clicks.",
-    "membershipLimitAlt": "Multiple fireworks exploding",
-    "membershipLimitHeader": "You're Awesome",
-    "membershipLimitText": "It looks like you are at the limit of this membership plan. Luckily, we made upgrading easy.",
     "membershipPlansAlt": "A woman pointing to three subscription options.",
     "membershipPlansHeader": "Membership Plan",
     "membershipPlansText": "As you grow your company, we'll grow with you.",
@@ -116,21 +109,16 @@
     "signInMessage": "Create a new account, or log in to an existing one."
   },
   "membership": {
-    "changeMembership": "Change membership",
     "currentPlan": "Current membership:",
     "membership": "Membership",
-    "membershipContactUs": "Contact us to upgrade your membership.",
-    "membershipContactUsText": "We're still figuring out our next membership plan. Until then, email us your needs and we'll take care of you.",
     "membershipDetails": "Membership Details",
-    "membershipLimitAdminText": "You have hit your membership limit. Please upgrade your account below, or contact us if you need more than our membership plan offers.",
-    "membershipLimitNonAdminText": "You're membership limit has been hit. Please ask your admin to upgrade your plan for more awesomeness.",
+    "membershipLimitNonAdminText": "You're membership limit has been hit. Please upgrade your plan for more awesomeness.",
     "manageMembership": "Manage membership",
     "upgradeMembership": "Upgrade membership"
   },
   "menuLinkNames": {
     "account": "Account",
     "accountOrganizations": "Organizations",
-    "accountPersonalInformation": "Personal Information",
     "accountProfessionalInformation": "Professional Information",
     "home": "Home",
     "profile": "Profile",
@@ -184,6 +172,11 @@
     "removeProfessional": "Remove user",
     "setUserPermission": "Edit user permission",
     "viewAllPeople": "View all"
+  },
+  "permission": {
+    "admin": "Admin",
+    "updater": "Updater",
+    "viewer": "View only"
   },
   "pleaseWaitDots": "Please wait...",
   "post": {
@@ -280,6 +273,7 @@
   },
   "projectForm": {
     "addNewProjectHelperText": "It's a great feeling when you start something new.",
+    "calendar": "Calendar",
     "project": "Project",
     "projectFormSubmitButton": "Save",
     "projectName": "Project name",
@@ -288,6 +282,8 @@
     "projectDetails": "Project details",
     "projectDetailsRequired": "Project details required",
     "projectDetailsPlaceholder": "Project details...",
+    "projectDate": "Project date",
+    "projectDateNotSet": "No start date",
     "startNewProject": "Start a new project"
   },
   "projectProgressOptions": {

@@ -9,6 +9,9 @@ export const useMembershipUserLimitHit = (
     case BillingTier.Professional:
       return memberCount ? memberCount >= membershipLimits.professionalPlan.userlimit : false;
       break;
+    case BillingTier.Growth:
+      return memberCount ? memberCount >= membershipLimits.growthPlan.userlimit : false;
+      break;
     case BillingTier.Free:
     default:
       return memberCount ? memberCount >= membershipLimits.freePlan.userlimit : false;

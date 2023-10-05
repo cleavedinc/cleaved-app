@@ -18,10 +18,6 @@
     "reply": "Responder"
   },
   "companyName": "Cleaved",
-  "contactUs": {
-    "mailtoUpgradeMembershipPlanSubjectText": "Por favor, actualiza mi cuenta de Cleaved",
-    "mailtoUpgradeMembershipPlanEmailBodyText": "Hola Chris, mi empresa (nombre de tu empresa) necesita agregar más usuarios y proyectos. Idealmente, nos gustaría tener (tu número ideal) usuarios y (tu número ideal) proyectos. Gracias."
-  },
   "data": {
     "loadingData": "Cargando...",
     "loadMoreComments": "Cargar más comentarios",
@@ -72,9 +68,6 @@
     "membershipAlt": "Una mujer señalando tres opciones de suscripción",
     "membershipHeader": "La actualización es fácil",
     "membershipText": "Mejorar para obtener más valor es tan rápido como unos pocos clics.",
-    "membershipLimitAlt": "Varios fuegos artificiales explotando",
-    "membershipLimitHeader": "Eres Increíble",
-    "membershipLimitText": "Parece que estás en el límite de este plan de membresía. Afortunadamente, hemos facilitado la actualización.",
     "membershipPlansAlt": "Una mujer señalando tres opciones de suscripción",
     "membershipPlansHeader": "Plan de membresía",
     "membershipPlansText": "A medida que haces crecer tu empresa, nosotros creceremos contigo.",
@@ -116,21 +109,16 @@
     "signInMessage": "Crea una nueva cuenta o inicia sesión en una existente."
   },
   "membership": {
-    "changeMembership": "Cambiar membresía",
     "currentPlan": "Membresía actual:",
     "membership": "Membresía",
-    "membershipContactUs": "Contáctanos para mejorar tu membresía.",
-    "membershipContactUsText": "Aún estamos ideando nuestro próximo plan de membresía. Mientras tanto, envíanos un correo electrónico con tus necesidades y nos encargaremos de ti.",
     "membershipDetails": "Detalles de Membresía",
-    "membershipLimitAdminText": "Has alcanzado el límite de tu membresía. Por favor, actualiza tu cuenta a continuación o contáctanos si necesitas más de lo que ofrece nuestro plan de membresía.",
-    "membershipLimitNonAdminText": "Has alcanzado el límite de tu membresía. Por favor, solicita a tu administrador que actualice tu plan para obtener más funcionalidades increíbles.",
+    "membershipLimitNonAdminText": "Has alcanzado el límite de tu membresía. Por favor, actualiza tu plan para obtener más funcionalidades increíbles.",
     "manageMembership": "Administrar membresía",
     "upgradeMembership": "Mejorar membresía"
   },
   "menuLinkNames": {
     "account": "Cuenta",
     "accountOrganizations": "Organizaciones",
-    "accountPersonalInformation": "Información Personal",
     "accountProfessionalInformation": "Información Profesional",
     "home": "Inicio",
     "profile": "Perfil",
@@ -184,6 +172,11 @@
     "removeProfessional": "Eliminar usuario",
     "setUserPermission": "Editar permiso de usuario",
     "viewAllPeople": "Ver todos"
+  },
+  "permission": {
+    "admin": "Administrador",
+    "updater": "Actualizador",
+    "viewer": "Solo lectura"
   },
   "pleaseWaitDots": "Por favor espera...",
   "post": {
@@ -280,6 +273,7 @@
   },
   "projectForm": {
     "addNewProjectHelperText": "Es una gran sensación cuando comienzas algo nuevo.",
+    "calendar": "Calendario",
     "project": "Proyecto",
     "projectFormSubmitButton": "Guardar",
     "projectName": "Nombre del proyecto",
@@ -288,6 +282,8 @@
     "projectDetails": "Detalles del proyecto",
     "projectDetailsRequired": "Detalles del proyecto requeridos",
     "projectDetailsPlaceholder": "Detalles del proyecto...",
+    "projectDate": "Fecha del proyecto",
+    "projectDateNotSet": "Sin fecha de inicio",
     "startNewProject": "Comenzar un nuevo proyecto"
   },
   "projectProgressOptions": {

@@ -44,7 +44,7 @@ const StyledPeopleCardWrapper = styled.div`
 `;
 
 export const PeopleListDataWrapper: FunctionComponent = () => {
-  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
   const { organizationSeekMembersData, organizationSeekMembersDataLoading } = useOrganizationSeekMembers(null, 500); // If we need to change this to a higher # or lazy load users, we're doing alright!!!
   const { t } = useTranslator();

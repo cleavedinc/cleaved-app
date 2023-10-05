@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
-import dayjs from "dayjs";
+import { format } from "date-fns";
 import styled, { useTheme } from "styled-components";
 
 import { BarsProgressIcon, Box, CommentIcon, FilePost, FONT_SIZES, SPACING } from "@cleaved/ui";
@@ -80,7 +80,7 @@ const StyledProjectLink = styled(Link)`
 
 const StyledProjectProgress = styled.div`
   color: ${({ theme }) => theme.colors.baseText_color};
-  font-size: ${FONT_SIZES.SMALL};
+  /* font-size: ${FONT_SIZES.SMALL}; */
 `;
 
 export const ProjectCard: FunctionComponent<ProjectCardProps> = (props) => {
@@ -134,7 +134,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = (props) => {
 
         {project && (
           <StyledCommentInfo title={projectProgressLabel}>
-            <StyledBarsProgressIcon iconSize={FONT_SIZES.SMALL} color={theme.colors.baseIcon_color} />
+            <StyledBarsProgressIcon color={theme.colors.baseIcon_color} />
             <StyledProjectProgress>{projectProgress.label}</StyledProjectProgress>
           </StyledCommentInfo>
         )}
@@ -143,7 +143,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = (props) => {
       <StyledDateCreated title={projectDateCreatedLabel}>
         <StyledDateCreatedLabel>{projectDateCreatedLabel}</StyledDateCreatedLabel>
 
-        {dayjs(project.createdAt).format("MMMM DD, YYYY")}
+        {format(new Date(project.createdAt), "MMMM dd, yyyy")}
       </StyledDateCreated>
     </StyledProjectCardBox>
   );

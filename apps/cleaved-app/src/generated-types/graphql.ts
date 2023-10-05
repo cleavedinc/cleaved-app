@@ -67,8 +67,8 @@ export type AccountPublicView = {
 };
 
 export enum BillingTier {
-  Enterprise = 'ENTERPRISE',
   Free = 'FREE',
+  Growth = 'GROWTH',
   Professional = 'PROFESSIONAL'
 }
 
@@ -368,11 +368,9 @@ export enum PostReactionType {
   NoReaction = 'NO_REACTION'
 }
 
-/** Some properties on this are only available for 'admin' access. Be careful. */
 export type PrivateOrganizationView = {
   __typename?: 'PrivateOrganizationView';
   activeProjectCount: Scalars['Int']['output'];
-  /** billingTier is only available for 'admin' access */
   billingTier: BillingTier;
   id: Scalars['ID']['output'];
   memberCount: Scalars['Int']['output'];
