@@ -277,6 +277,8 @@
     "projectDetails": "Project details",
     "projectDetailsRequired": "Project details required",
     "projectDetailsPlaceholder": "Project details...",
+    "projectDate": "Project date",
+    "projectDateNotSet": "No dates set",
     "startNewProject": "Start a new project"
   },
   "projectProgressOptions": {
