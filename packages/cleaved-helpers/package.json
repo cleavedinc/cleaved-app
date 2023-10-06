@@ -9,7 +9,6 @@
   "dependencies": {
     "@apollo/client": "3.8.4",
     "@cleaved/ui": "*",
-    "dayjs": "1.11.10",
     "formik": "2.2.9",
     "javascript-time-ago": "2.5.9",
     "js-cookie": "3.0.5",

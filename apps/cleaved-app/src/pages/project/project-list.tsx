@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, MainColumnWrapper } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { Header } from "../../components";
-import { ProjectListDataWrapper } from "../../data-wrappers";
+import { AsideProjectListDataWrapper, ProjectListDataWrapper } from "../../data-wrappers";
 
 export const ProjectList: FunctionComponent = () => {
   return (
@@ -11,9 +11,13 @@ export const ProjectList: FunctionComponent = () => {
       <Header />
 
       <ContentWrapper>
-        <MainColumnWrapper>
+        <LeftColumnWrapper>
+          <AsideProjectListDataWrapper />
+        </LeftColumnWrapper>
+
+        <MainColumnMaxWidthWrapper>
           <ProjectListDataWrapper />
-        </MainColumnWrapper>
+        </MainColumnMaxWidthWrapper>
       </ContentWrapper>
     </>
   );

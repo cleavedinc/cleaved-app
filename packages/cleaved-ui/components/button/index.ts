@@ -5,6 +5,7 @@ export * from "./button-disabled";
 export * from "./button-link-load-more";
 export * from "./button-link";
 export * from "./button-primary-base";
+export * from "./button-secondary-base";
 export * from "./button-primary";
 export * from "./button-secondary";
 export * from "./button-secondary-warning";

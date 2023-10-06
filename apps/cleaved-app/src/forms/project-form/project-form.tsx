@@ -15,14 +15,9 @@ import { authTokenContext } from "../../contexts";
 import { useProjectById, useProductEngagementLogEvent, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
 
-import { ProjectStartNewFormFormikTextarea } from "./components";
+import { DateRangePicker, ProjectStartNewFormFormikTextarea } from "./components";
+import { ProjectFormType } from "./types";
 import { PROJECT_CREATE, PROJECT_UPDATE } from "./gql";
-
-type ProjectFormType = {
-  projectDetails: string;
-  projectName: string;
-  projectProgress: string;
-};
 
 type ProjectFormProps = {
   projectId?: string;
@@ -59,7 +54,7 @@ const StyledProjectFormWrapper = styled.div`
   flex-direction: column;
 `;
 
-const StyledProjectSelectFormWrapper = styled.div`
+const StyledFormInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: ${SPACING.MEDIUM};
@@ -121,31 +116,35 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
           projectName: projectData.projectByIdData?.name ?? "",
           projectDetails: projectData.projectByIdData?.projectDetails ?? "",
           projectProgress: projectData.projectByIdData?.projectProgress ?? "",
+          projectStartDate: { from: null, to: null },
         }}
         onSubmit={(values: ProjectFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
-          if (projectId) {
-            projectUpdate({
-              variables: {
-                organizationId: preferredOrgId,
-                projectId,
-                projectDetail: values.projectDetails,
-                projectName: values.projectName,
-                projectProgress: values.projectProgress,
-              },
-            });
-          } else {
-            projectCreate({
-              variables: {
-                projectName: values.projectName,
-                organizationId: preferredOrgId,
-                projectId: newProjectGuid,
-                projectDetail: values.projectDetails,
-                projectProgress: values.projectProgress,
-              },
-            });
-          }
+          // TODO: FIX page refresh resets form inputs
+          console.log("values", values);
+
+          // if (projectId) {
+          //   projectUpdate({
+          //     variables: {
+          //       organizationId: preferredOrgId,
+          //       projectId,
+          //       projectDetail: values.projectDetails,
+          //       projectName: values.projectName,
+          //       projectProgress: values.projectProgress,
+          //     },
+          //   });
+          // } else {
+          //   projectCreate({
+          //     variables: {
+          //       projectName: values.projectName,
+          //       organizationId: preferredOrgId,
+          //       projectId: newProjectGuid,
+          //       projectDetail: values.projectDetails,
+          //       projectProgress: values.projectProgress,
+          //     },
+          //   });
+          // }
 
           resetForm({});
         }}
@@ -154,6 +153,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
           projectName: yup.string().required(),
           projectDetails: yup.string(),
           projectProgress: yup.string(),
+          projectStartDate: yup.mixed(),
         })}
       >
         {({ dirty, isSubmitting, isValid, values, setFieldTouched, setFieldValue }) => {
@@ -169,6 +169,12 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
                 />
               </StyledProjectFormWrapper>
 
+              <StyledFormInputWrapper>
+                <StyledProjectFormLabel htmlFor="projectName">{t("projectForm.projectDate")}</StyledProjectFormLabel>
+
+                <DateRangePicker name="projectStartDate" />
+              </StyledFormInputWrapper>
+
               <StyledProjectFormWrapper>
                 <StyledProjectFormLabel htmlFor="projectDetails">
                   {t("projectForm.projectDetails")}
@@ -180,7 +186,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
                 />
               </StyledProjectFormWrapper>
 
-              <StyledProjectSelectFormWrapper>
+              <StyledFormInputWrapper>
                 <StyledProjectFormLabel htmlFor="projectProgress">{projectProgress}</StyledProjectFormLabel>
 
                 <Select
@@ -203,7 +209,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
                     },
                   })}
                 />
-              </StyledProjectSelectFormWrapper>
+              </StyledFormInputWrapper>
 
               <StyledButtonPrimaryWrapper>
                 <StyledButtonLink onClick={() => navigate(-1)} type="button">

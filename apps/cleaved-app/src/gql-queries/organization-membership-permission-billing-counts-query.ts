@@ -1,13 +1,12 @@
 import { graphql } from "../generated-types";
 
-export const ADMIN_ONLY_ORGANIZATION_MEMBERSHIPS = graphql(`
-  query adminOnlyOrganizationMemberships {
+export const ORGANIZATION_MEMBERSHIP_PERMISSION_BILLING_COUNTS = graphql(`
+  query organizationMembershipPermissionBillingCounts {
     organizationMemberships {
       id
-      name
       userPermissionInOrg
+      memberCount
       projectCount
-      activeProjectCount
       billingTier
     }
   }

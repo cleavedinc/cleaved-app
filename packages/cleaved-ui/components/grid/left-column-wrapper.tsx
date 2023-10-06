@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { mediaQueries } from "../../theme";
 
 export const LeftColumnWrapper = styled.div`
-  display: none;
+  flex-grow: 1;
+  margin-left: 1%;
+  margin-right: 1%;
 
   ${mediaQueries.SM} {
-    display: block;
-    flex-grow: 1;
-    min-width: 300px;
+    min-width: 275px;
     max-width: 300px;
   }
 `;
