@@ -67,10 +67,10 @@
     "manageUpText": "Una de las mejores cosas que puedes hacer es compartir tus metas y lo que te importa con otros. Esto ayuda a que otros apoyen tu éxito.",
     "membershipAlt": "Una mujer señalando tres opciones de suscripción",
     "membershipHeader": "La actualización es fácil",
-    "membershipText": "Actualizar para obtener más usuarios es tan rápido como unos cuantos clics. Simple.",
+    "membershipText": "Mejorar para obtener más valor es tan rápido como unos pocos clics.",
     "membershipPlansAlt": "Una mujer señalando tres opciones de suscripción",
-    "membershipPlansHeader": "Planes de membresía",
-    "membershipPlansText": "Elige el plan de membresía para ti y tu equipo directivo. A medida que haces crecer tu empresa, nosotros creceremos contigo.",
+    "membershipPlansHeader": "Plan de membresía",
+    "membershipPlansText": "A medida que haces crecer tu empresa, nosotros creceremos contigo.",
     "organizationRegisterAlt": "Flechas que apuntan al formulario de registro de una organización",
     "organizationRegisterHeader": "Registrar una organización",
     "organizationRegisterText": "Así es como se organizan tus proyectos, equipos y todo lo demás. Probablemente solo tendrás una aquí, a menos que tengas mucho en marcha.",
@@ -109,17 +109,16 @@
     "signInMessage": "Crea una nueva cuenta o inicia sesión en una existente."
   },
   "membership": {
-    "changeMembership": "Cambiar membresía",
     "currentPlan": "Membresía actual:",
     "membership": "Membresía",
     "membershipDetails": "Detalles de Membresía",
+    "membershipLimitNonAdminText": "Has alcanzado el límite de tu membresía. Por favor, actualiza tu plan para obtener más funcionalidades increíbles.",
     "manageMembership": "Administrar membresía",
     "upgradeMembership": "Mejorar membresía"
   },
   "menuLinkNames": {
     "account": "Cuenta",
     "accountOrganizations": "Organizaciones",
-    "accountPersonalInformation": "Información Personal",
     "accountProfessionalInformation": "Información Profesional",
     "home": "Inicio",
     "profile": "Perfil",
@@ -173,6 +172,11 @@
     "removeProfessional": "Eliminar usuario",
     "setUserPermission": "Editar permiso de usuario",
     "viewAllPeople": "Ver todos"
+  },
+  "permission": {
+    "admin": "Administrador",
+    "updater": "Actualizador",
+    "viewer": "Solo lectura"
   },
   "pleaseWaitDots": "Por favor espera...",
   "post": {
@@ -269,6 +273,7 @@
   },
   "projectForm": {
     "addNewProjectHelperText": "Es una gran sensación cuando comienzas algo nuevo.",
+    "calendar": "Calendario",
     "project": "Proyecto",
     "projectFormSubmitButton": "Guardar",
     "projectName": "Nombre del proyecto",
@@ -277,6 +282,8 @@
     "projectDetails": "Detalles del proyecto",
     "projectDetailsRequired": "Detalles del proyecto requeridos",
     "projectDetailsPlaceholder": "Detalles del proyecto...",
+    "projectDate": "Fecha del proyecto",
+    "projectDateNotSet": "Sin fecha de inicio",
     "startNewProject": "Comenzar un nuevo proyecto"
   },
   "projectProgressOptions": {

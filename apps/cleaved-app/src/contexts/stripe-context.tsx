@@ -1,5 +1,6 @@
 import React, { FunctionComponent, createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { loadStripe, Stripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { Stripe } from "@stripe/stripe-js/types";
 
 type StripeProviderType = {
   children: ReactNode;

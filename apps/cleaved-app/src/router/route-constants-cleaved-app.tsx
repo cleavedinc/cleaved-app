@@ -5,9 +5,6 @@ export const routeConstantsCleavedApp = {
   accountOrganizationRegister: {
     route: "/account-organizations/register-organization",
   },
-  accountPersonalInformation: {
-    route: "/account-personal-information",
-  },
   accountProfessionalInformation: {
     route: "/account-professional-information",
   },

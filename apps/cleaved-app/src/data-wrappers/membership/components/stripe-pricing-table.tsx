@@ -15,7 +15,7 @@ export const StripePricingTable: FunctionComponent = () => {
       <Box>
         <stripe-pricing-table
           client-reference-id={organizationId}
-          pricing-table-id="prctbl_1NubPzGP3PYNtNs6InzO5Njp"
+          pricing-table-id={process.env.STRIPE_PRICING_TABLE_ID}
           publishable-key={process.env.STRIPE_PUBLISHABLE_KEY}
         />
       </Box>

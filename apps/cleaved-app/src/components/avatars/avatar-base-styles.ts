@@ -26,6 +26,11 @@ export const avatarBaseSize = css`
   width: 48px;
 `;
 
+export const avatarSizeMedium = css`
+  height: 75px;
+  width: 75px;
+`;
+
 export const avatarSizeLarge = css`
   height: 100px;
   width: 100px;

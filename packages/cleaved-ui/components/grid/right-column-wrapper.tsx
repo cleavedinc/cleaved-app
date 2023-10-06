@@ -4,6 +4,8 @@ import { mediaQueries } from "../../theme";
 
 export const RightColumnWrapper = styled.div`
   display: none;
+  margin-left: 1%;
+  margin-right: 1%;
 
   ${mediaQueries.LG} {
     display: block;

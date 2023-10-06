@@ -67,10 +67,10 @@
     "manageUpText": "One of the best things you can do is sharing your goals and what you care about with others. This helps others support your success.",
     "membershipAlt": "A woman pointing to three subscription options.",
     "membershipHeader": "Upgrading is easy",
-    "membershipText": "Upgrading to get more users is as quick as a few clicks. Simple.",
+    "membershipText": "Upgrading to get more vallue is as quick as a few clicks.",
     "membershipPlansAlt": "A woman pointing to three subscription options.",
-    "membershipPlansHeader": "Membership Plans",
-    "membershipPlansText": "Choose the membership plan for you and your leadership team. As you grow your company, we'll grow with you.",
+    "membershipPlansHeader": "Membership Plan",
+    "membershipPlansText": "As you grow your company, we'll grow with you.",
     "organizationRegisterAlt": "Arrows pointing to the register an organization form",
     "organizationRegisterHeader": "Register an organization",
     "organizationRegisterText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
@@ -109,17 +109,16 @@
     "signInMessage": "Create a new account, or log in to an existing one."
   },
   "membership": {
-    "changeMembership": "Change membership",
     "currentPlan": "Current membership:",
     "membership": "Membership",
     "membershipDetails": "Membership Details",
+    "membershipLimitNonAdminText": "You're membership limit has been hit. Please upgrade your plan for more awesomeness.",
     "manageMembership": "Manage membership",
     "upgradeMembership": "Upgrade membership"
   },
   "menuLinkNames": {
     "account": "Account",
     "accountOrganizations": "Organizations",
-    "accountPersonalInformation": "Personal Information",
     "accountProfessionalInformation": "Professional Information",
     "home": "Home",
     "profile": "Profile",
@@ -173,6 +172,11 @@
     "removeProfessional": "Remove user",
     "setUserPermission": "Edit user permission",
     "viewAllPeople": "View all"
+  },
+  "permission": {
+    "admin": "Admin",
+    "updater": "Updater",
+    "viewer": "View only"
   },
   "pleaseWaitDots": "Please wait...",
   "post": {
@@ -269,6 +273,7 @@
   },
   "projectForm": {
     "addNewProjectHelperText": "It's a great feeling when you start something new.",
+    "calendar": "Calendar",
     "project": "Project",
     "projectFormSubmitButton": "Save",
     "projectName": "Project name",
@@ -277,6 +282,8 @@
     "projectDetails": "Project details",
     "projectDetailsRequired": "Project details required",
     "projectDetailsPlaceholder": "Project details...",
+    "projectDate": "Project date",
+    "projectDateNotSet": "No start date",
     "startNewProject": "Start a new project"
   },
   "projectProgressOptions": {

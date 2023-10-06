@@ -5,14 +5,12 @@ import styled, { useTheme } from "styled-components";
 import { mediaQueries, SPACING } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
-import { HelperInfoHeaderTextImageRightBox, StyledRouterButton, StyledRouterButtonLink } from "../../components";
+import { StyledRouterButton, StyledRouterButtonLink } from "../../components";
 
 import { OrgPermissionLevel, ProjectStatus } from "../../generated-types/graphql";
 import { useProjectsInOrganizationSeek, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
-
-import projectHelperImage from "../../media/helper-info/project-helper-image.svg";
 
 import { ProjectCard } from "./components";
 
@@ -45,21 +43,12 @@ const StyledProjectCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-
-  ${mediaQueries.SM} {
-    flex-direction: row;
-    margin-right: -10px;
-  }
 `;
 
 const StyledProjectListHeader = styled.div`
   align-items: center;
   display: flex;
-  margin: ${SPACING.XLARGE} 0 ${SPACING.MEDIUM};
-
-  ${mediaQueries.RESPONSIVE_TABLE} {
-    margin: ${SPACING.LARGE} ${SPACING.SMALL} ${SPACING.MEDIUM} 0;
-  }
+  margin: 0 0 ${SPACING.MEDIUM};
 `;
 
 export const ProjectListDataWrapper: FunctionComponent = () => {
@@ -86,14 +75,6 @@ export const ProjectListDataWrapper: FunctionComponent = () => {
 
   return (
     <>
-      <HelperInfoHeaderTextImageRightBox
-        helperInfoImageAltText={t("helperInformationBoxes.projectslistImageAlt")}
-        helperInfoImageUrl={projectHelperImage}
-        helperInfoText={t("helperInformationBoxes.projectslistText")}
-        helperInfoTextHeader={t("helperInformationBoxes.projectslistHeader")}
-        width={"250px"}
-      />
-
       {hasPermission && (
         <StyledProjectListHeader>
           <Select
