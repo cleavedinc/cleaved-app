@@ -28,7 +28,7 @@ module.exports = merge(common, {
       "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("http://localhost:8080/graphql"),
       "process.env.MEDIA_ENDPOINT": JSON.stringify("http://localhost:8080"),
       "process.env.STRIPE_PUBLISHABLE_KEY": JSON.stringify("pk_test_VX53iabGnIXBis1UmYQsWQ7B00yqMWnlmT"),
-      "process.env.STRIPE_PRICING_TABLE_ID": JSON.stringify("prctbl_1NwnesGP3PYNtNs6tsnTKCSM"),
+      "process.env.STRIPE_PRICING_TABLE_ID": JSON.stringify("prctbl_1NyLmtGP3PYNtNs6bOB55EcH"),
       "process.env.STRIPE_SUBSCRIPTION_PORTAL_URL": JSON.stringify(
         "https://billing.stripe.com/p/login/test_aEU4jH2hj9Niek0288"
       ),

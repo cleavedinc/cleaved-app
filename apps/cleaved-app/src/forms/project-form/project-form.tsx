@@ -116,7 +116,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
           projectName: projectData.projectByIdData?.name ?? "",
           projectDetails: projectData.projectByIdData?.projectDetails ?? "",
           projectProgress: projectData.projectByIdData?.projectProgress ?? "",
-          projectStartDate: { from: new Date(), to: null },
+          projectStartDate: { from: null, to: null },
         }}
         onSubmit={(values: ProjectFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
