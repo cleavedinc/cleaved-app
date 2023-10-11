@@ -7,6 +7,8 @@ export const PROJECT_CREATE = graphql(`
     $projectId: ID
     $projectDetail: String
     $projectProgress: ProjectProgress
+    $projectStartDate: String
+    $projectEndDate: String
   ) {
     projectCreate(
       projectName: $projectName
@@ -14,6 +16,8 @@ export const PROJECT_CREATE = graphql(`
       projectId: $projectId
       projectDetail: $projectDetail
       projectProgress: $projectProgress
+      projectStartDate: $projectStartDate
+      projectEndDate: $projectEndDate
     )
   }
 `);

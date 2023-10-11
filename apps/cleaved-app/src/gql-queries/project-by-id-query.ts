@@ -7,6 +7,10 @@ export const PROJECT_BY_ID_QUERY = graphql(`
       name
       projectProgress
       projectDetails
+      projectDates {
+        startDate
+        endDate
+      }
       totalRootPostCount
       totalResponseCount
     }
