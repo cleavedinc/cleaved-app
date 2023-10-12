@@ -13,6 +13,10 @@ export const PROJECTS_IN_ORGANIZATION = graphql(`
       name
       projectProgress
       status
+      projectDates {
+        startDate
+        endDate
+      }
       totalResponseCount
       totalRootPostCount
     }

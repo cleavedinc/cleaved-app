@@ -1,6 +1,8 @@
+// import { StartEndDates } from "../../../generated-types/graphql";
+
 export type ProjectFormType = {
   projectDetails: string;
   projectName: string;
   projectProgress: string;
-  projectStartDate: { from: Date | undefined | null; to: Date | undefined | null };
+  projectDates: { from: Date | undefined | null; to: Date | undefined | null };
 };

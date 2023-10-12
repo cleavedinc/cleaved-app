@@ -42,10 +42,14 @@
     "goalsPlaceholder": "¿Cuáles son los objetivos hacia los que estás trabajando?",
     "lastName": "Apellido",
     "lastNamePlaceholder": "¿Cuál es tu apellido?",
+    "linkedinUrlPlaceholder": "https://www.linkedin.com/in/your-profile",
+    "linkedinUrlTitle": "LinkedIn",
     "professionalEmail": "Correo electrónico",
     "professionalEmailPlaceholder": "micorreoelectrónico@empresaincreíble.com",
     "professionalTitle": "Mi cargo",
-    "professionalTitlePlaceholder": "C..., VP..., Director..., Gerente..."
+    "professionalTitlePlaceholder": "C..., VP..., Director..., Gerente...",
+    "xUrlPlaceholder": "https://twitter.com/your-profile",
+    "xUrlTitle": "X (twitter)"
   },
   "formValidationMessages": {
     "aboutProfessionalCharactorLimit": "Acerca de tiene un límite máximo de 250 caracteres",
@@ -96,7 +100,8 @@
   "hTags": {
     "professionalInformation": "Información Profesional",
     "profile": "Perfil",
-    "generalSettings": "Configuración general"
+    "generalSettings": "Configuración general",
+    "socialLinks": "Red Social"
   },
   "language": {
     "english": "Inglés",
@@ -219,7 +224,8 @@
   "privacyPolicy": "Política de privacidad",
   "professional": {
     "about": "Me importa:",
-    "goals": "Mis objetivos empresariales"
+    "goals": "Mis objetivos empresariales",
+    "socialMedia": "Red Social"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Omitir incorporación",
@@ -328,6 +334,8 @@
     "readWriteOnlyDescription": "Proporciona al usuario acceso para crear, ver e interactuar con el contenido del proyecto.",
     "shareLink": "Enlace compartido"
   },
+  "showLess": "Mostrar menos",
+  "showMore": "Mostrar más",
   "submit": "Enviar",
   "termsOfService": {
     "acceptTermsOfService": "Acepto los términos del servicio",

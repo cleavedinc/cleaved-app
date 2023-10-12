@@ -7,6 +7,8 @@ export const PROJECT_UPDATE = graphql(`
     $projectDetail: String
     $projectName: String!
     $projectProgress: ProjectProgress
+    $projectStartDate: String
+    $projectEndDate: String
   ) {
     projectUpdate(
       organizationId: $organizationId
@@ -14,6 +16,8 @@ export const PROJECT_UPDATE = graphql(`
       projectDetail: $projectDetail
       projectName: $projectName
       projectProgress: $projectProgress
+      projectStartDate: $projectStartDate
+      projectEndDate: $projectEndDate
     )
   }
 `);

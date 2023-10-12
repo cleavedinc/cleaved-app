@@ -12,8 +12,6 @@ import FocusTrap from "focus-trap-react";
 
 import { useTranslator } from "../../../hooks";
 
-import { ProjectFormType } from "../types";
-
 import "react-day-picker/dist/style.css";
 import { t } from "i18next";
 
@@ -45,15 +43,15 @@ const StyledPopinWrapper = styled.div`
 `;
 
 export const DateRangePicker: FunctionComponent<DateRangePickerProps> = ({ name }) => {
-  const { setFieldValue, values } = useFormikContext<ProjectFormType>();
+  const { setFieldValue, values } = useFormikContext<{ projectDates: { from: Date | null; to: Date | null } }>();
   const projectStartDate =
-    values && values?.projectStartDate && values?.projectStartDate?.from
-      ? format(new Date(values.projectStartDate.from), "dd MMMM, yyyy")
+    values && values?.projectDates && values?.projectDates?.from
+      ? format(new Date(values.projectDates.from), "dd MMMM, yyyy")
       : null;
 
   const projectEndDate =
-    values && values?.projectStartDate && values?.projectStartDate?.to
-      ? format(new Date(values.projectStartDate.to), "dd MMMM, yyyy")
+    values && values?.projectDates && values?.projectDates?.to
+      ? format(new Date(values.projectDates.to), "dd MMMM, yyyy")
       : null;
 
   const { i18n } = useTranslator();

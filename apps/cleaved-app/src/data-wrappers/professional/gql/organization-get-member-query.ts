@@ -11,6 +11,10 @@ export const ORGANIZATION_GET_MEMBER_QUERY = graphql(`
       lastName
       currentAvatar
       jobTitle
+      socialMedia {
+        twitter
+        linkedin
+      }
     }
   }
 `);

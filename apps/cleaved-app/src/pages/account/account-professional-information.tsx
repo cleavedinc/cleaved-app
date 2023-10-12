@@ -9,7 +9,7 @@ import {
   AccountOrganizationListDataWrapper,
   AsideAccountDataWrapper,
 } from "../../data-wrappers";
-import { PersonalInformationForm, ProfesionalInformationForm } from "../../forms";
+import { PersonalInformationForm, ProfesionalInformationForm, SocialNetworksForm } from "../../forms";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useOrganizationPermission } from "../../permissions";
 
@@ -44,6 +44,10 @@ export const AccountProfessionalInformation: FunctionComponent = () => {
             <StyledLineSeperator />
 
             <ProfesionalInformationForm />
+
+            <StyledLineSeperator />
+
+            <SocialNetworksForm />
           </StyledBox>
 
           <AccountGeneralSettingsDataWrapper />
