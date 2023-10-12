@@ -19,22 +19,24 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const routeParams = useRouteParams();
   const projectId = routeParams.projectId;
-  const projectData = useProjectById(projectId);
+  const { projectByIdData, projectByIdDataLoading } = useProjectById(projectId);
 
   return (
     <BoxNoPadding>
       <div>
         <WidgetHeadingWrapper>
-          <StyledWidgetHeader>{projectData && projectData.projectByIdData?.name}</StyledWidgetHeader>
+          {!projectByIdDataLoading && projectByIdData?.name && (
+            <StyledWidgetHeader>{projectByIdData?.name}</StyledWidgetHeader>
+          )}
 
           {hasPermission && <WidgetProjectDetailsMenu />}
         </WidgetHeadingWrapper>
 
-        {projectData && <ProjectCardMetaData projectData={projectData?.projectByIdData} />}
+        {!projectByIdDataLoading && projectByIdData && <ProjectCardMetaData projectData={projectByIdData} />}
       </div>
 
-      {projectData && projectData.projectByIdData && projectData.projectByIdData?.projectDetails && (
-        <StyledProjectDetails>{projectData.projectByIdData?.projectDetails}</StyledProjectDetails>
+      {!projectByIdDataLoading && projectByIdData && projectByIdData?.projectDetails && (
+        <StyledProjectDetails>{projectByIdData?.projectDetails}</StyledProjectDetails>
       )}
     </BoxNoPadding>
   );

@@ -12,7 +12,6 @@ export const AsideHomeDataWrapper: FunctionComponent = () => {
 
   return (
     <StickUnderHeaderDesktopOnly>
-      {/* Something like this is also on the main home page, but only shows for mobile width */}
       <AsideHelperInfoHeaderTextImageBox
         helperInfoImageAltText={t("helperInformationBoxes.collaborativeTimelineAlt")}
         helperInfoImageUrl={decisionsHelperImage}
