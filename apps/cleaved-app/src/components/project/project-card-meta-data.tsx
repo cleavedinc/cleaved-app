@@ -79,8 +79,6 @@ export const ProjectCardMetaData: FunctionComponent<ProjectCardMetaDataProps> = 
   const totalComments = t("post.totalComments") ? t("post.totalComments") : "";
   const projectProgressLabel = t("project.progress") ? t("project.progress") : "";
 
-  console.log("projectData", projectData);
-
   return (
     <>
       {projectData && projectData?.projectDates.startDate && (

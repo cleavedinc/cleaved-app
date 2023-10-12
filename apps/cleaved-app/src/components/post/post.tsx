@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useState } from "react";
+import React, { FunctionComponent, useEffect, useContext, useRef, useState } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
@@ -84,6 +84,11 @@ const StyledReactPhotoCollage = styled(PhotoCollage)`
 
 const StyledReactReactionTypesAndTotalCountWrapper = styled.div`
   margin: ${SPACING.SMALL} ${SPACING.MEDIUM};
+`;
+
+const StyledScrollToRefContainer = styled.div`
+  opacity: 0;
+  height: 0;
 `;
 
 export const Post: FunctionComponent<PostProps> = (props) => {
@@ -173,6 +178,20 @@ export const Post: FunctionComponent<PostProps> = (props) => {
     );
   };
 
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      if (bottomRef.current) {
+        bottomRef.current.scrollIntoView(false);
+      }
+    }, 300);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [post]);
+
   return (
     <StyledProjectPostBox key={post.id}>
       {postContent()}
@@ -201,6 +220,8 @@ export const Post: FunctionComponent<PostProps> = (props) => {
               parentPostId={post.id}
               triggerGetComments={triggerGetComments}
             />
+
+            <StyledScrollToRefContainer ref={bottomRef}>bottom of comment list</StyledScrollToRefContainer>
           </StyledCommentListWrapper>
         </>
       </ModalPostComments>

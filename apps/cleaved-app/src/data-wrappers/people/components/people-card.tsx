@@ -12,6 +12,12 @@ type PeopleCardProps = {
   member: OrganizationSeekMembersQuery["organizationSeekMembers"][0];
 };
 
+const StyledEmailAddress = styled.div`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  font-size: ${FONT_SIZES.XSMALL};
+  margin-bottom: ${SPACING.MEDIUM};
+`;
+
 const StyledPermissionLabel = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
@@ -71,6 +77,8 @@ export const PeopleCard: FunctionComponent<PeopleCardProps> = (props) => {
             <div>{member?.jobTitle}</div>
           </StyledProfessionalJobTitle>
         )}
+
+        {member && member?.jobTitle && <StyledEmailAddress>{member?.emailAddress}</StyledEmailAddress>}
 
         {member && member?.permissionInOrg && (
           <StyledPermissionLabel>{convertPermissionInOrgReadable(member?.permissionInOrg, t)}</StyledPermissionLabel>

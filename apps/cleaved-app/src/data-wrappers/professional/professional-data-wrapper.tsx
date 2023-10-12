@@ -79,26 +79,28 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
                 {data.organizationGetMember.firstName} {data.organizationGetMember.lastName}
               </StyledProfileName>
 
-              <StyledJobTitle>{data.organizationGetMember.jobTitle}</StyledJobTitle>
+              {data.organizationGetMember.jobTitle && (
+                <StyledJobTitle>{data.organizationGetMember.jobTitle}</StyledJobTitle>
+              )}
 
               <StyledEmailAddress>{data.organizationGetMember.emailAddress}</StyledEmailAddress>
             </StyledProfessionalInformationWrapper>
 
-            <StyledProfessionalAboutWrapper>
-              <StyledAboutLabel>{t("professional.about")}</StyledAboutLabel>
+            {data.organizationGetMember.about && (
+              <StyledProfessionalAboutWrapper>
+                <StyledAboutLabel>{t("professional.about")}</StyledAboutLabel>
 
-              {data.organizationGetMember.about && (
                 <StyledProfessionalAbout>{data.organizationGetMember.about}</StyledProfessionalAbout>
-              )}
-            </StyledProfessionalAboutWrapper>
+              </StyledProfessionalAboutWrapper>
+            )}
 
-            <StyledProfessionalAboutWrapper>
-              <StyledAboutLabel>{t("professional.goals")}</StyledAboutLabel>
+            {data.organizationGetMember.goals && (
+              <StyledProfessionalAboutWrapper>
+                <StyledAboutLabel>{t("professional.goals")}</StyledAboutLabel>
 
-              {data.organizationGetMember.goals && (
                 <StyledProfessionalAbout>{data.organizationGetMember.goals}</StyledProfessionalAbout>
-              )}
-            </StyledProfessionalAboutWrapper>
+              </StyledProfessionalAboutWrapper>
+            )}
           </Box>
         )}
       </StickUnderHeaderDesktopOnly>
