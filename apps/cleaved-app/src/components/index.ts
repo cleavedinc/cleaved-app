@@ -11,5 +11,6 @@ export * from "./modal";
 export * from "./onboarding";
 export * from "./post";
 export * from "./post-form";
+export * from "./project";
 export * from "./reactions";
 export * from "./separators";

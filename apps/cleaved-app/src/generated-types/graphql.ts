@@ -20,6 +20,7 @@ export type Scalars = {
   ISODateTime: { input: any; output: any; }
   ImagePath: { input: any; output: any; }
   ProjectProgress: { input: any; output: any; }
+  URL: { input: any; output: any; }
   /** The `Upload` scalar type represents a file upload. */
   Upload: { input: any; output: any; }
   Void: { input: any; output: any; }
@@ -52,6 +53,7 @@ export type AccountPrivateView = {
   lastName?: Maybe<Scalars['String']['output']>;
   middleName?: Maybe<Scalars['String']['output']>;
   preferredName?: Maybe<Scalars['String']['output']>;
+  socialMedia: SocialMediaLinks;
 };
 
 export type AccountPublicView = {
@@ -118,6 +120,7 @@ export type Mutation = {
   removeOrganizationShareLink?: Maybe<Scalars['Void']['output']>;
   setAccountAvatar?: Maybe<Scalars['Void']['output']>;
   setAccountEmail?: Maybe<Scalars['Void']['output']>;
+  setAccountSocialMediaLinks?: Maybe<Scalars['Void']['output']>;
   setMyAbout?: Maybe<Scalars['Void']['output']>;
   setMyGoals?: Maybe<Scalars['Void']['output']>;
   setMyJobTitle?: Maybe<Scalars['Void']['output']>;
@@ -275,6 +278,11 @@ export type MutationSetAccountAvatarArgs = {
 
 export type MutationSetAccountEmailArgs = {
   newEmail: Scalars['String']['input'];
+};
+
+
+export type MutationSetAccountSocialMediaLinksArgs = {
+  socialLinks: Array<SocialMediaSetInput>;
 };
 
 
@@ -542,10 +550,26 @@ export enum RequestSource {
   Web = 'WEB'
 }
 
+export enum Social_Media_Type {
+  Linkedin = 'LINKEDIN',
+  Twitter = 'TWITTER'
+}
+
 export enum Scope {
   Organization = 'ORGANIZATION',
   Project = 'PROJECT'
 }
+
+export type SocialMediaLinks = {
+  __typename?: 'SocialMediaLinks';
+  linkedin?: Maybe<Scalars['URL']['output']>;
+  twitter?: Maybe<Scalars['URL']['output']>;
+};
+
+export type SocialMediaSetInput = {
+  link?: InputMaybe<Scalars['URL']['input']>;
+  media?: InputMaybe<Social_Media_Type>;
+};
 
 export type StartEndDates = {
   __typename?: 'StartEndDates';

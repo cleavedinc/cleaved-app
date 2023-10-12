@@ -109,8 +109,6 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
 
   const projectProgress = t("project.progress") ? t("project.progress") : "";
 
-  console.log("projectData", projectData);
-
   return (
     <>
       <Formik
@@ -135,6 +133,7 @@ export const ProjectForm: FunctionComponent<ProjectFormProps> = (props) => {
             values?.projectDates?.from && format(Number(values?.projectDates?.from), "MM/dd/yyyy");
           const projectEndDate = values?.projectDates?.to && format(Number(values?.projectDates?.to), "MM/dd/yyyy");
 
+          console.log("values", values);
           if (projectId) {
             projectUpdate({
               variables: {
