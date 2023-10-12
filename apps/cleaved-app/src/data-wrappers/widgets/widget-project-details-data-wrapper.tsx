@@ -1,12 +1,16 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 
-import { BoxNoPadding, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
+import { BoxNoPadding, ButtonLink, SPACING, WidgetHeadingWrapper } from "@cleaved/ui";
 
 import { ProjectCardMetaData, WidgetProjectDetailsMenu } from "../../components";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
-import { useProjectById, useRouteParams } from "../../hooks";
+import { useProjectById, useRouteParams, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
+
+const StyledButtonLink = styled(ButtonLink)`
+  margin-left: ${SPACING.SMALL};
+`;
 
 const StyledProjectDetails = styled.div`
   padding: ${SPACING.SMALL};
@@ -20,6 +24,11 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
   const routeParams = useRouteParams();
   const projectId = routeParams.projectId;
   const { projectByIdData, projectByIdDataLoading } = useProjectById(projectId);
+  const [showMoreProjectDescription, setShowMoreProjectDescription] = useState(false);
+  const projectDetailsText = projectByIdData?.projectDetails;
+  const projectDetailsMaxChars = 200;
+  const projectDetailsTextShowAll = projectDetailsText && projectDetailsText?.length <= projectDetailsMaxChars;
+  const { t } = useTranslator();
 
   return (
     <BoxNoPadding>
@@ -35,8 +44,22 @@ export const WidgetProjectDetailsDataWrapper: FunctionComponent = () => {
         {!projectByIdDataLoading && projectByIdData && <ProjectCardMetaData projectData={projectByIdData} />}
       </div>
 
-      {!projectByIdDataLoading && projectByIdData && projectByIdData?.projectDetails && (
-        <StyledProjectDetails>{projectByIdData?.projectDetails}</StyledProjectDetails>
+      {!projectByIdDataLoading && projectByIdData && projectDetailsText && (
+        <StyledProjectDetails>
+          {projectDetailsTextShowAll && <>{projectDetailsText}</>}
+
+          {!projectDetailsTextShowAll && (
+            <>
+              {showMoreProjectDescription
+                ? projectDetailsText
+                : `${projectDetailsText?.substring(0, projectDetailsMaxChars)}`}
+
+              <StyledButtonLink onClick={() => setShowMoreProjectDescription(!showMoreProjectDescription)}>
+                {showMoreProjectDescription ? t("showLess") : t("showMore")}
+              </StyledButtonLink>
+            </>
+          )}
+        </StyledProjectDetails>
       )}
     </BoxNoPadding>
   );

@@ -42,10 +42,14 @@
     "goalsPlaceholder": "What are the goals you are working towards?",
     "lastName": "Last name",
     "lastNamePlaceholder": "What is your last name?",
+    "linkedinUrlPlaceholder": "https://www.linkedin.com/in/your-profile",
+    "linkedinUrlTitle": "LinkedIn",
     "professionalEmail": "Email",
     "professionalEmailPlaceholder": "myemail@awesomecompany.com",
     "professionalTitle": "My job title",
-    "professionalTitlePlaceholder": "C..., VP..., Director..., Manager..."
+    "professionalTitlePlaceholder": "C..., VP..., Director..., Manager...",
+    "xUrlPlaceholder": "https://twitter.com/your-profile",
+    "xUrlTitle": "X (twitter)"
   },
   "formValidationMessages": {
     "aboutProfessionalCharactorLimit": "About has a maximum limit of 250 characters",
@@ -96,7 +100,8 @@
   "hTags": {
     "professionalInformation": "Professional Information",
     "profile": "Profile",
-    "generalSettings": "General Settings"
+    "generalSettings": "General Settings",
+    "socialLinks": "Social Network"
   },
   "language": {
     "english": "English",
@@ -219,7 +224,8 @@
   "privacyPolicy": "Privacy Policy",
   "professional": {
     "about": "I care about:",
-    "goals": "My company goals"
+    "goals": "My company goals",
+    "socialMedia": "Social network"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Skip onboarding",
@@ -328,6 +334,8 @@
     "readWriteOnlyDescription": "Gives the user access to create, view and interact with project content.",
     "shareLink": "Share link"
   },
+  "showLess": "Show less",
+  "showMore": "Show more",
   "submit": "Submit",
   "termsOfService": {
     "acceptTermsOfService": "I accept the terms of service",

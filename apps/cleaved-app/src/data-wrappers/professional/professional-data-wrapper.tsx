@@ -1,9 +1,18 @@
 import React, { FunctionComponent } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { logQueryError } from "@cleaved/helpers";
-import { Box, FONT_SIZES, SectionHeader, SPACING, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import {
+  Box,
+  FONT_SIZES,
+  Link,
+  LinkedinIcon,
+  SectionHeader,
+  SPACING,
+  StickUnderHeaderDesktopOnly,
+  XTwitterIcon,
+} from "@cleaved/ui";
 
 import { AsideAvatar } from "../../components";
 import { OrganizationGetMemberQuery } from "../../generated-types/graphql";
@@ -11,11 +20,10 @@ import { useLoginGuard, useRouteParams, useTranslator } from "../../hooks";
 
 import { ORGANIZATION_GET_MEMBER_QUERY } from "./gql";
 
-const StyledProfessionalInformationWrapper = styled.div`
-  text-align: center;
+const StyledAboutLabel = styled.label`
+  color: ${({ theme }) => theme.colors.baseSubText_color};
+  font-size: ${FONT_SIZES.XSMALL};
 `;
-
-const StyledProfessionalAboutWrapper = styled.div``;
 
 const StyledEmailAddress = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
@@ -29,6 +37,18 @@ const StyledJobTitle = styled.div`
   margin-bottom: ${SPACING.BASE};
 `;
 
+const StyledProfessionalAbout = styled.div`
+  color: ${({ theme }) => theme.colors.baseText_color};
+  margin-bottom: ${SPACING.MEDIUM};
+  white-space: pre-line;
+`;
+
+const StyledProfessionalAboutWrapper = styled.div``;
+
+const StyledProfessionalInformationWrapper = styled.div`
+  text-align: center;
+`;
+
 const StyledProfileName = styled(SectionHeader)`
   color: ${({ theme }) => theme.colors.baseText_color};
   cursor: pointer;
@@ -38,15 +58,10 @@ const StyledProfileName = styled(SectionHeader)`
   }
 `;
 
-const StyledProfessionalAbout = styled.div`
-  color: ${({ theme }) => theme.colors.baseText_color};
-  margin-bottom: ${SPACING.MEDIUM};
-  white-space: pre-line;
-`;
-
-const StyledAboutLabel = styled.label`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
-  font-size: ${FONT_SIZES.XSMALL};
+const StyledSocialLink = styled(Link)`
+  :not(:last-child) {
+    margin-right: ${SPACING.SMALL};
+  }
 `;
 
 export const ProfessionalDataWrapper: FunctionComponent = () => {
@@ -54,6 +69,7 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
   const routeParams = useRouteParams();
   const organizationId = routeParams.orgId;
   const professionalId = routeParams.professionalId;
+  const theme = useTheme();
 
   const { data, loading } = useQuery<OrganizationGetMemberQuery>(ORGANIZATION_GET_MEMBER_QUERY, {
     fetchPolicy: "cache-and-network",
@@ -66,6 +82,9 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
   });
 
   const { t } = useTranslator();
+
+  console.log("linkedin", data?.organizationGetMember?.socialMedia.linkedin);
+  console.log("twitter", data?.organizationGetMember?.socialMedia.twitter);
 
   return (
     <>
@@ -101,6 +120,27 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
                 <StyledProfessionalAbout>{data.organizationGetMember.goals}</StyledProfessionalAbout>
               </StyledProfessionalAboutWrapper>
             )}
+
+            {data &&
+              (data.organizationGetMember.socialMedia.linkedin || data.organizationGetMember.socialMedia.twitter) && (
+                <StyledProfessionalAboutWrapper>
+                  <StyledAboutLabel>{t("professional.socialMedia")}</StyledAboutLabel>
+
+                  <StyledProfessionalAbout>
+                    {data.organizationGetMember.socialMedia.linkedin && (
+                      <StyledSocialLink href={data.organizationGetMember.socialMedia.linkedin} target="_blank">
+                        <LinkedinIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+                      </StyledSocialLink>
+                    )}
+
+                    {data.organizationGetMember.socialMedia.twitter && (
+                      <StyledSocialLink href={data.organizationGetMember.socialMedia.twitter} target="_blank">
+                        <XTwitterIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+                      </StyledSocialLink>
+                    )}
+                  </StyledProfessionalAbout>
+                </StyledProfessionalAboutWrapper>
+              )}
           </Box>
         )}
       </StickUnderHeaderDesktopOnly>

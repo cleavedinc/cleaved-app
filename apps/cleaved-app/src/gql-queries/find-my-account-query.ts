@@ -11,6 +11,10 @@ export const FIND_MY_ACCOUNT = graphql(`
       id
       jobTitle
       lastName
+      socialMedia {
+        twitter
+        linkedin
+      }
     }
   }
 `);
