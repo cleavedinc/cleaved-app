@@ -569,7 +569,7 @@ export type SocialMediaLinks = {
 
 export type SocialMediaSetInput = {
   link?: InputMaybe<Scalars['URL']['input']>;
-  media?: InputMaybe<Social_Media_Type>;
+  media: Social_Media_Type;
 };
 
 export type StartEndDates = {
