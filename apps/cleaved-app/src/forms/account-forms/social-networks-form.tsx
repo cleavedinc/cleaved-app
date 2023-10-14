@@ -76,6 +76,7 @@ export const SocialNetworksForm: FunctionComponent = () => {
       }
     },
     onError: (error) => {
+      console.log("error", error);
       logQueryError(error);
     },
   });
@@ -90,21 +91,20 @@ export const SocialNetworksForm: FunctionComponent = () => {
       onSubmit={(values: SocialNetworksFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
 
-        if (values.linkedinUrl) {
-          setAccountSocialMediaLinks({
-            variables: {
-              socialLinks: [{ link: values.linkedinUrl, media: Social_Media_Type.Linkedin }],
-            },
-          });
-        }
+        const linkedinUrl = values?.linkedinUrl?.length === 0 ? null : values.linkedinUrl;
+        const XUrl = values?.xUrl?.length === 0 ? null : values.linkedinUrl;
 
-        if (values.xUrl) {
-          setAccountSocialMediaLinks({
-            variables: {
-              socialLinks: [{ link: values.xUrl, media: Social_Media_Type.Twitter }],
-            },
-          });
-        }
+        setAccountSocialMediaLinks({
+          variables: {
+            socialLinks: [{ link: linkedinUrl, media: Social_Media_Type.Linkedin }],
+          },
+        });
+
+        setAccountSocialMediaLinks({
+          variables: {
+            socialLinks: [{ link: XUrl, media: Social_Media_Type.Twitter }],
+          },
+        });
 
         resetForm({ values });
       }}
