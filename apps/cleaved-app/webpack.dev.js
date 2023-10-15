@@ -20,12 +20,18 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       "process.env.DOMAIN": JSON.stringify("localhost:4000"),
+      "process.env.AMPLITUDE_API_KEY": JSON.stringify("a2f344672df634b57ddd17188b6da8b7"),
       "process.env.GOOGLE_CLIENT_ID": JSON.stringify(
         "1005196783589-i01f4cj4cfg9i7ukgl80t9e8sgnab1fl.apps.googleusercontent.com"
       ),
-      // "process.env.GOOGLE_TAG_MANAGER_ID": JSON.stringify("XXX-XXXXX"),
+      "process.env.GOOGLE_TAG_MANAGER_ID": JSON.stringify("GTM-PF2PGRP"),
       "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("http://localhost:8080/graphql"),
       "process.env.MEDIA_ENDPOINT": JSON.stringify("http://localhost:8080"),
+      "process.env.STRIPE_PUBLISHABLE_KEY": JSON.stringify("pk_test_VX53iabGnIXBis1UmYQsWQ7B00yqMWnlmT"),
+      "process.env.STRIPE_PRICING_TABLE_ID": JSON.stringify("prctbl_1NyLmtGP3PYNtNs6bOB55EcH"),
+      "process.env.STRIPE_SUBSCRIPTION_PORTAL_URL": JSON.stringify(
+        "https://billing.stripe.com/p/login/test_aEU4jH2hj9Niek0288"
+      ),
     }),
     new webpack.HotModuleReplacementPlugin(),
     // new BundleAnalyzerPlugin()

@@ -24,7 +24,7 @@ export const TermsOfServiceInformation: FunctionComponent = () => {
           <Bold>This Agreement governs your relationship with Cleaved</Bold> and your use of and access to all services
           and products provided by Cleaved (collectively, the Services). You agree that by accessing or using any part
           of the Services you are bound by the terms of this Agreement (the Terms), including the applicable{" "}
-          <Link href={routeConstantsShared.privacyPolicy.route}>{routeConstantsShared.privacyPolicy.name}</Link>
+          <Link href={routeConstantsShared.privacyPolicy.route}>Privacy Policy</Link>
           incorporated herein.
         </OrderedListItemCounters>
 

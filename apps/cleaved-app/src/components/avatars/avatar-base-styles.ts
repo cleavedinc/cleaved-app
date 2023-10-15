@@ -11,6 +11,11 @@ export const avatartBase = css`
   object-position: top;
 `;
 
+export const avatarXSmall = css`
+  height: 30px;
+  width: 30px;
+`;
+
 export const avatarSmall = css`
   height: 40px;
   width: 40px;
@@ -19,6 +24,11 @@ export const avatarSmall = css`
 export const avatarBaseSize = css`
   height: 48px;
   width: 48px;
+`;
+
+export const avatarSizeMedium = css`
+  height: 75px;
+  width: 75px;
 `;
 
 export const avatarSizeLarge = css`

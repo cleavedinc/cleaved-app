@@ -1,7 +1,6 @@
 import React, { Dispatch, FunctionComponent } from "react";
 import styled from "styled-components";
-
-import dayjs from "dayjs";
+import { format } from "date-fns";
 
 import { getTimeSinceDate } from "@cleaved/helpers";
 import {
@@ -14,6 +13,7 @@ import {
   StyledTooltipDark,
 } from "@cleaved/ui";
 
+import { DisplayMarkdown } from "../../components";
 import { OrgPermissionLevel, PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { useNavigateToProfile, useTranslator } from "../../hooks";
 import { useOrganizationPermission } from "../../permissions";
@@ -51,10 +51,6 @@ const StyledCommentBody = styled.div`
   border-radius: ${RADIUS.MEDIUM};
   margin-bottom: ${SPACING_PX.ONE};
   padding: ${SPACING.MEDIUM};
-`;
-
-const StyledCommentBodyText = styled.div`
-  white-space: pre-line;
 `;
 
 const StyledCommentWrapper = styled.div`
@@ -123,7 +119,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
           </PostCommentHeaderDataWrapper>
         </PostCommentHeaderWrapper>
 
-        <StyledCommentBodyText>{reply.body}</StyledCommentBodyText>
+        <DisplayMarkdown message={reply.body} />
       </StyledCommentBody>
 
       <StyledCommentFooterWrapper>
@@ -155,7 +151,7 @@ export const Comment: FunctionComponent<CommentProps> = (props) => {
             </StyledCommentReplyButton>
           </>
         )}
-        <StyledTooltipDark tooltip={dayjs(reply.date).format("MMMM DD, YYYY")}>
+        <StyledTooltipDark tooltip={format(new Date(reply.date), "MMMM dd, yyyy")}>
           <StyledCommentDateTime>{getTimeSinceDate(reply.date)}</StyledCommentDateTime>
         </StyledTooltipDark>
       </StyledCommentFooterWrapper>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { ButtonLinkLoadMore, FONT_SIZES, SPACING } from "@cleaved/ui";
 
+import { commentPageSize } from "../../constants";
 import { PostProjectRepliesQuery } from "../../generated-types/graphql";
 import { usePostProjectReplies, useTranslator } from "../../hooks";
 
@@ -40,7 +41,6 @@ export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
   const { commentLevel, commentRepliesCount, parentPostId, triggerGetComments } = props;
   const { t } = useTranslator();
   const [hideLoadMoreButton, setHideLoadMoreButton] = useState<boolean>(false);
-  const commentPageSize = 1000;
 
   const {
     postProjectRepliesData,
@@ -53,7 +53,7 @@ export const CommentsList: FunctionComponent<CommentsListProps> = (props) => {
     if (triggerGetComments && triggerGetComments > 0 && postProjectRepliesDataRefetch) {
       postProjectRepliesDataRefetch();
     }
-  }, [triggerGetComments]);
+  }, [triggerGetComments, postProjectRepliesDataRefetch]);
 
   const handleLoadMoreCommentData = (lastCommentIdArg: string | undefined) => {
     postProjectRepliesDataFetchMore({

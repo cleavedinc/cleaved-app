@@ -15,8 +15,8 @@ export const AsideProjectStartNewDataWrapper: FunctionComponent = () => {
       <AsideHelperInfoHeaderTextImageBox
         helperInfoImageAltText={t("helperInformationBoxes.projectStartNewImageAlt")}
         helperInfoImageUrl={newProjectHelperImage}
-        helperInfoText={t("helperInformationBoxes.projectStartNewText")}
-        helperInfoTextHeader={t("helperInformationBoxes.projectStartNewHeader")}
+        helperInfoText={t("helperInformationBoxes.projectText")}
+        helperInfoTextHeader={t("helperInformationBoxes.projectHeader")}
       />
     </StickUnderHeaderDesktopOnly>
   );

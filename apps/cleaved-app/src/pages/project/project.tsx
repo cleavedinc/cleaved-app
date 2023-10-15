@@ -2,7 +2,8 @@ import React, { FunctionComponent } from "react";
 
 import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper, RightColumnWrapper } from "@cleaved/ui";
 
-import { PostsContextProvider } from "../../contexts";
+import { Header } from "../../components";
+import { PostFormContextProvider, PostsContextProvider } from "../../contexts";
 import {
   AsideProjectDataWrapper,
   ProjectDataWrapper,
@@ -11,20 +12,26 @@ import {
 
 export const Project: FunctionComponent = () => {
   return (
-    <ContentWrapper>
-      <PostsContextProvider>
-        <LeftColumnWrapper>
-          <AsideProjectDataWrapper />
-        </LeftColumnWrapper>
+    <>
+      <Header />
 
-        <MainColumnMaxWidthWrapper>
-          <ProjectDataWrapper />
-        </MainColumnMaxWidthWrapper>
-      </PostsContextProvider>
+      <ContentWrapper>
+        <PostsContextProvider pinnedFirst={true}>
+          <PostFormContextProvider>
+            <LeftColumnWrapper>
+              <AsideProjectDataWrapper />
+            </LeftColumnWrapper>
 
-      <RightColumnWrapper>
-        <AsideProjectOrganizationMembersDataWrapper />
-      </RightColumnWrapper>
-    </ContentWrapper>
+            <MainColumnMaxWidthWrapper>
+              <ProjectDataWrapper />
+            </MainColumnMaxWidthWrapper>
+          </PostFormContextProvider>
+        </PostsContextProvider>
+
+        <RightColumnWrapper>
+          <AsideProjectOrganizationMembersDataWrapper />
+        </RightColumnWrapper>
+      </ContentWrapper>
+    </>
   );
 };

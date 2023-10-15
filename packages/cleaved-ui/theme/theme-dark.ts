@@ -5,15 +5,20 @@ export const themeDark = {
   borders: {
     baseLink_color: COLORS_BASE.BLUE_500,
     primary_color: COLORS_DARK.GRAY_100,
-    white_always_color: COLORS_DARK.WHITE,
+    primary_white: COLORS_DARK.WHITE,
   },
   colors: {
+    always_white_color: COLORS_BASE.ALWAYS_WHITE,
+    always_green_color: COLORS_BASE.ALWAYS_GREEN,
+    always_red_color: COLORS_BASE.RED_500,
+
     baseAlert_color: COLORS_BASE.RED_500,
     baseApproved_color: COLORS_BASE.GREEN_500,
     baseBordersAndShadows_color: COLORS_DARK.GRAY_100,
     baseBox_backgroundColor: COLORS_DARK.WHITE,
     baseButtonAndIcon_backgroundColorHover: COLORS_DARK.GRAY_50,
     baseButtonLink_color: COLORS_DARK.GRAY_500,
+    baseButtonSecondaryLink_color: COLORS_DARK.GRAY_100,
     baseDropdownMenu_backgroundColor: COLORS_DARK.WHITE,
     baseIcon_color: COLORS_DARK.GRAY_500,
     baseIconAlt_color: COLORS_DARK.WHITE,
@@ -36,11 +41,9 @@ export const themeDark = {
     iconlikeColor: COLORS_BASE.BLUE_500,
     iconLikeInactiveColor: COLORS_DARK.GRAY_500,
     iconLoveColor: COLORS_BASE.RED_500,
-    iconCelebrateColor: COLORS_BASE.HONEY_YELLOW_500,
+    iconCelebrateColor: COLORS_BASE.ALWAYS_GREEN,
 
     helperInfoBoxWrapper_backgroundColor: COLORS_DARK.TAN_300,
-
-    white_always_color: COLORS_BASE.WHITE_ALWAYS,
   },
 };
 

@@ -1,17 +1,23 @@
 import React, { FunctionComponent } from "react";
 
-import { Box, StickUnderHeaderDesktopOnly } from "@cleaved/ui";
+import { StickUnderHeaderDesktopOnly } from "@cleaved/ui";
 
-import { AccountPageMenu } from "../../components";
+import { AsideHelperInfoHeaderTextImageBox } from "../../components";
+import { useTranslator } from "../../hooks";
+
+import manageUpImage from "../../media/helper-info/manage-up-image.svg";
 
 export const AsideAccountDataWrapper: FunctionComponent = () => {
+  const { t } = useTranslator();
+
   return (
-    <>
-      <StickUnderHeaderDesktopOnly>
-        <Box>
-          <AccountPageMenu />
-        </Box>
-      </StickUnderHeaderDesktopOnly>
-    </>
+    <StickUnderHeaderDesktopOnly>
+      <AsideHelperInfoHeaderTextImageBox
+        helperInfoImageAltText={t("helperInformationBoxes.manageUpAlt")}
+        helperInfoImageUrl={manageUpImage}
+        helperInfoText={t("helperInformationBoxes.manageUpText")}
+        helperInfoTextHeader={t("helperInformationBoxes.manageUpHeader")}
+      />
+    </StickUnderHeaderDesktopOnly>
   );
 };

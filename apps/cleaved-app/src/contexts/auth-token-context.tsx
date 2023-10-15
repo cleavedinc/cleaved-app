@@ -10,8 +10,8 @@ import { DeleteCookie, GetCookie, logQueryError, SetCookie } from "@cleaved/help
 
 import { apolloClient } from "../client";
 import { RefreshLogInMutation } from "../generated-types/graphql";
-
 import { REFRESH_LOGIN_MUTATION } from "../components/login/gql";
+import { routeConstantsCleavedApp } from "../router";
 
 type AuthTokenContextProviderType = {
   children: ReactNode;
@@ -29,6 +29,7 @@ type AuthTokenContextType = {
   refreshLogin: (action?: () => void | null | undefined) => Promise<void>;
   loading: boolean;
   preferredOrgId: string;
+  saveAccessToken: (catToken: string, callback?: any) => void; // eslint-disable-line
   setPreferredOrgIdOnContext: (orgId: string | null | undefined) => void;
 };
 
@@ -42,6 +43,7 @@ export const authTokenContext = createContext<AuthTokenContextType>({
   refreshLogin: async () => {},
   loading: true,
   preferredOrgId: "",
+  saveAccessToken: () => {},
   setPreferredOrgIdOnContext: () => {},
 });
 
@@ -58,11 +60,12 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
   const logOut = useCallback(() => {
     setLoggedIn(false);
     DeleteCookie("_CRT_");
-    navigate(`/login`);
     // clear apollo cache to ensure new user gets fresh data
     apolloClient.resetStore();
     apolloClient.cache.reset();
     googleLogout();
+    setPreferredOrgId("");
+    navigate(`/login`);
   }, [setLoggedIn, DeleteCookie, navigate, apolloClient, googleLogout]);
 
   const setOrgId = useCallback(
@@ -72,11 +75,19 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     [setPreferredOrgId]
   );
 
+  const saveAccessToken = (catToken: string, callback?: () => void) => {
+    (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
+
+    if (callback) {
+      callback();
+    }
+  };
+
   const saveAuthorizationTokens = useCallback(
     (catToken: string, crtToken: string) => {
       const oneYearFromNow: string = dayjs().add(1, "year").utc().format();
 
-      (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
+      saveAccessToken(catToken);
 
       SetCookie("_CRT_", crtToken, {
         expires: new Date(oneYearFromNow),
@@ -129,6 +140,31 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
   }, [loggedIn]);
 
   useEffect(() => {
+    setRefreshInProgress(true);
+    const currentPathParts = window.location.pathname.split("/")[1];
+    const refreshAction = refreshRequested.refreshAction;
+    const crt = GetCookie("_CRT_");
+
+    if (crt) {
+      getRefreshLogIn({
+        variables: { refreshToken: crt },
+        onCompleted: (r: RefreshLogInMutation) => {
+          refreshOnComplete(r, refreshAction);
+          setRefreshInProgress(false);
+        },
+        onError: () => {
+          setRefreshInProgress(false);
+        },
+      });
+      setRefreshRequested({ refreshRequested: false, refreshAction: null });
+    } else if (`/${currentPathParts}` === routeConstantsCleavedApp.professionalShareLinkRegistration.route) {
+      return;
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
+  useEffect(() => {
     if (!refreshInProgress && refreshRequested.refreshRequested) {
       setRefreshInProgress(true);
       const refreshAction = refreshRequested.refreshAction;
@@ -153,6 +189,7 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     logOut,
     loggedIn,
     preferredOrgId,
+    saveAccessToken,
     setPreferredOrgIdOnContext: (orgId: string | null | undefined) => {
       setOrgId(orgId);
     },

@@ -33,10 +33,12 @@ export const AsideHelperInfoHeaderTextImageBox: FunctionComponent<AsideHelperInf
 
   return (
     <StyledAsideHelperInfoBoxWrapper backgroundColor={backgroundColor} className={className}>
-      <StyledHelperInfoTextWrapper>
-        <StyledHelperInfoTextHeader>{helperInfoTextHeader}</StyledHelperInfoTextHeader>
-        <StyledHelperInfoText>{helperInfoText}</StyledHelperInfoText>
-      </StyledHelperInfoTextWrapper>
+      {helperInfoTextHeader || helperInfoText ? (
+        <StyledHelperInfoTextWrapper>
+          <StyledHelperInfoTextHeader>{helperInfoTextHeader}</StyledHelperInfoTextHeader>
+          <StyledHelperInfoText>{helperInfoText}</StyledHelperInfoText>
+        </StyledHelperInfoTextWrapper>
+      ) : null}
 
       {helperInfoImageUrl && (
         <StyledAsideHelperInfoImage

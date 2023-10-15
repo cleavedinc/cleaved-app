@@ -7,13 +7,13 @@ type StyledHelperInfoBoxWrapperProps = {
 };
 
 export const StyledHelperInfoBoxWrapper = styled(BoxHelperInfo)<StyledHelperInfoBoxWrapperProps>`
-  align-items: center;
-  background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : ({ theme }) => theme.colors.helperInfoBoxWrapper_backgroundColor};
-  display: flex;
-  flex-direction: column;
+  display: none;
 
   ${mediaQueries.SM} {
+    align-items: center;
+    background-color: ${(props) =>
+      props.backgroundColor ? props.backgroundColor : ({ theme }) => theme.colors.helperInfoBoxWrapper_backgroundColor};
+    display: flex;
     flex-direction: row;
   }
 `;

@@ -86,11 +86,11 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
   const { projectsInOrganizationSeekData, projectsInOrganizationSeekDataLoading } = useProjectsInOrganizationSeek(
     null,
     5,
-    ProjectStatus.Active
+    [ProjectStatus.Active]
   );
 
   const projectListLinkName = t("menuLinkNames.projectList") ? t("menuLinkNames.projectList") : "";
-  const projectStartNewLinkName = t("menuLinkNames.projectStartNew") ? t("menuLinkNames.projectStartNew") : "";
+  const projectStartNewLinkName = t("menuLinkNames.projectForm") ? t("menuLinkNames.projectForm") : "";
   const totalPosts = t("post.totalPosts") ? t("post.totalPosts") : "";
 
   return (
@@ -108,7 +108,7 @@ export const WidgetProjectListDataWrapper: FunctionComponent = () => {
             <StyledEmptyWidgetText>{t("widget.projectsListEmptyListText")}</StyledEmptyWidgetText>
 
             <StyledRouterButtonLeft
-              to={`/${preferredOrgId}${routeConstantsCleavedApp.projectStartNew.route}`}
+              to={`/${preferredOrgId}${routeConstantsCleavedApp.project.route}${routeConstantsCleavedApp.projectForm.route}`}
               title={projectStartNewLinkName}
             >
               {projectStartNewLinkName}

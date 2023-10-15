@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
 import { Field, Formik, Form } from "formik";
@@ -35,22 +35,24 @@ const StyledCheckboxLabel = styled.label``;
 
 export const TermsOfServiceAgreementForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const { preferredOrgId, refreshLogin } = useContext(authTokenContext);
+  const { preferredOrgId, saveAccessToken } = useContext(authTokenContext);
 
-  const [acceptTerms] = useMutation(ACCEPT_TERMS_MUTATION, {
-    onCompleted: async () => {
-      refreshLogin(() => {
-        if (!preferredOrgId) {
-          navigate(routeConstantsCleavedApp.professionalOnboarding.route);
-        } else {
-          navigate(routeConstantsCleavedApp.home.route);
-        }
-      });
-    },
-    onError: (error) => {
+  const [acceptTerms, { data, loading, error }] = useMutation(ACCEPT_TERMS_MUTATION);
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+
+    if (error) {
       logQueryError(error);
-    },
-  });
+      return;
+    }
+
+    if (data) {
+      saveAccessToken(data.acceptTerms, () => navigate(routeConstantsCleavedApp.homeRouting.route));
+    }
+  }, [data, error, loading, preferredOrgId, saveAccessToken]);
 
   const acceptTermsOfServiceIsRequired = t("termsOfService.acceptTermsOfServiceIsRequired")
     ? t("termsOfService.acceptTermsOfServiceIsRequired")

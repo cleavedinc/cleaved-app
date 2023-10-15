@@ -6,7 +6,7 @@ import { Box, FONT_SIZES, SPACING } from "@cleaved/ui";
 import { GoogleLoginWrapper } from "../../components/login/google-login";
 import { useTranslator } from "../../hooks";
 
-const StyledCompanyName = styled.div`
+const StyledCompanyName = styled.h1`
   font-size: ${FONT_SIZES.XLARGE};
   margin-bottom: ${SPACING.MEDIUM};
   text-align: center;

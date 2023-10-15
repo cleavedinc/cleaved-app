@@ -12,7 +12,7 @@ export type TextboxProps = Pick<
   | "onChange"
   | "onClick"
   | "onInput"
-  | "onKeyPress"
+  | "onKeyDown"
   | "onFocus"
   | "placeholder"
   | "readOnly"
@@ -65,7 +65,7 @@ export const Textbox: FunctionComponent<TextboxProps> = ({
   onClick,
   onInput,
   onFocus,
-  onKeyPress,
+  onKeyDown,
   placeholder,
   readOnly,
   renderLeft,
@@ -88,7 +88,7 @@ export const Textbox: FunctionComponent<TextboxProps> = ({
           onClick={onClick}
           onFocus={onFocus}
           onInput={onInput}
-          onKeyPress={onKeyPress}
+          onKeyDown={onKeyDown}
           placeholder={placeholder}
           readOnly={readOnly}
           ref={inputRef}
@@ -108,7 +108,7 @@ export const Textbox: FunctionComponent<TextboxProps> = ({
           onClick={onClick}
           onFocus={onFocus}
           onInput={onInput}
-          onKeyPress={onKeyPress}
+          onKeyDown={onKeyDown}
           placeholder={placeholder}
           readOnly={readOnly}
           type={type}

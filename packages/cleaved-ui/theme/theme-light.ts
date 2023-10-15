@@ -5,15 +5,20 @@ export const themeLight = {
   borders: {
     baseLink_color: COLORS_BASE.BLUE_500,
     primary_color: COLORS_LIGHT.GRAY_100,
-    white_always_color: COLORS_LIGHT.WHITE,
+    primary_white: COLORS_LIGHT.WHITE,
   },
   colors: {
+    always_white_color: COLORS_BASE.ALWAYS_WHITE,
+    always_green_color: COLORS_BASE.ALWAYS_GREEN,
+    always_red_color: COLORS_BASE.RED_500,
+
     baseAlert_color: COLORS_BASE.RED_500,
     baseApproved_color: COLORS_BASE.GREEN_500,
     baseBordersAndShadows_color: COLORS_LIGHT.GRAY_100,
     baseBox_backgroundColor: COLORS_LIGHT.WHITE,
     baseButtonAndIcon_backgroundColorHover: COLORS_LIGHT.GRAY_50,
     baseButtonLink_color: COLORS_LIGHT.GRAY_500,
+    baseButtonSecondaryLink_color: COLORS_LIGHT.GRAY_100,
     baseDropdownMenu_backgroundColor: COLORS_LIGHT.WHITE,
     baseIcon_color: COLORS_LIGHT.GRAY_500,
     baseIconAlt_color: COLORS_LIGHT.WHITE,
@@ -36,21 +41,10 @@ export const themeLight = {
     iconlikeColor: COLORS_BASE.BLUE_500,
     iconLikeInactiveColor: COLORS_LIGHT.GRAY_500,
     iconLoveColor: COLORS_BASE.RED_500,
-    iconCelebrateColor: COLORS_BASE.HONEY_YELLOW_500,
+    iconCelebrateColor: COLORS_BASE.ALWAYS_GREEN,
 
     helperInfoBoxWrapper_backgroundColor: COLORS_LIGHT.TAN_300,
-
-    white_always_color: COLORS_BASE.WHITE_ALWAYS,
   },
 };
 
 export type ThemeLightType = typeof themeLight;
-
-// color: ${COLORS_LIGHT.WHITE};
-// color: ${({ theme }) => theme.borders.white_always_color};
-
-//   const theme = useTheme();
-// theme.colors.baseIcon_color
-
-// FINAL CHECK:
-// COLORS_LIGHT

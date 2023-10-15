@@ -1,16 +1,17 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { Box, ButtonPrimary, ButtonSecondary, Modal, SPACING } from "@cleaved/ui";
+import { Box, Modal } from "@cleaved/ui";
 
 import {
+  AreYouSureModal,
   HelperInfoHeaderTextImageRightBox,
   PostProjectList,
   ProjectPostButtonAvatar,
   StyledPostFormButton,
   StyledPostFormButtonText,
 } from "../../components";
-import { PostsContext } from "../../contexts";
+import { PostFormContext, PostsContext } from "../../contexts";
 import { ProjectPostForm } from "../../forms";
 import { OrgPermissionLevel } from "../../generated-types/graphql";
 import { useFindMyAccount, useTranslator } from "../../hooks";
@@ -18,42 +19,30 @@ import { useOrganizationPermission } from "../../permissions";
 
 import arrowPointingUpTowardRight from "../../media/helper-info/arrow-pointing-up-toward-right.svg";
 
-const StyledActionWrapper = styled.div`
-  display: flex;
-  padding: ${SPACING.XXLARGE} 0 0;
-`;
-
-const StyledActionText = styled.div``;
-
-const StyledButtonPrimary = styled(ButtonPrimary)`
-  display: flex;
-  margin-left: auto;
-`;
-
 const StyledProjectPostBox = styled(Box)`
   display: flex;
 `;
 
 export const ProjectDataWrapper: FunctionComponent = () => {
-  const { projectPostFormIsDirty, projectPostFormImageUploadIsDirty } = useContext(PostsContext);
+  const { projectPostFormIsDirty, projectPostFormImageUploadIsDirty } = useContext(PostFormContext);
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { postProjectSeekData, postProjectSeekDataLoading } = useContext(PostsContext);
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData } = useFindMyAccount();
   const [isContentFeedFormModalOpen, setIsContentFeedFormModalOpen] = useState(false);
-  const [isConfirmDiscardChangesModalOpen, setIsConfirmDiscardChangesModalOpen] = useState(false);
+  const [isAreYouSureModalOpen, setIsAreYouSureModalOpen] = useState(false);
   const [closeRequested, setCloseRequested] = useState(false);
 
   const { t } = useTranslator();
 
-  const handleCloseBothModals = () => {
+  const handleConfirmAction = () => {
     setIsContentFeedFormModalOpen(false);
-    setIsConfirmDiscardChangesModalOpen(false);
+    setIsAreYouSureModalOpen(false);
   };
 
   useEffect(() => {
     if (closeRequested) {
       if (projectPostFormIsDirty || projectPostFormImageUploadIsDirty) {
-        setIsConfirmDiscardChangesModalOpen(true);
+        setIsAreYouSureModalOpen(true);
       }
 
       if (!projectPostFormIsDirty && !projectPostFormImageUploadIsDirty) {
@@ -64,22 +53,36 @@ export const ProjectDataWrapper: FunctionComponent = () => {
     }
   }, [projectPostFormIsDirty, projectPostFormImageUploadIsDirty, closeRequested]);
 
+  const areYouSureConfirmButtonText = t("post.areYouSureDiscardPostButtonText")
+    ? t("post.areYouSureDiscardPostButtonText")
+    : undefined;
+
+  const areYouSureRejectButtonText = t("post.areYouSureKeepPostButtonText")
+    ? t("post.areYouSureKeepPostButtonText")
+    : undefined;
+
+  const areYouSureDiscardPostModalText = t("post.areYouSureDiscardPostModalText")
+    ? t("post.areYouSureDiscardPostModalText")
+    : undefined;
+
   const areYouSureDiscardPostModalTitle = t("post.areYouSureDiscardPostModalTitle")
     ? t("post.areYouSureDiscardPostModalTitle")
     : undefined;
+
   const postAProjectUpdate = t("post.createProjectPost") ? t("post.createProjectPost") : undefined;
 
   return (
     <>
       {hasPermission && (
         <StyledProjectPostBox>
-          <ProjectPostButtonAvatar account={accountQuery.data?.findMyAccount} />
+          <ProjectPostButtonAvatar account={findMyAccountData} />
 
           <StyledPostFormButton onClick={() => setIsContentFeedFormModalOpen(true)} type="button">
             <StyledPostFormButtonText>
-              {t("post.createProjectPostWithName", { name: accountQuery.data?.findMyAccount.firstName })}
+              {t("post.createProjectPostWithName", { name: findMyAccountData?.firstName })}
             </StyledPostFormButtonText>
           </StyledPostFormButton>
+
           <Modal
             open={isContentFeedFormModalOpen}
             onCloseRequested={() => {
@@ -93,29 +96,22 @@ export const ProjectDataWrapper: FunctionComponent = () => {
               }}
             />
           </Modal>
-          <Modal
-            open={isConfirmDiscardChangesModalOpen}
-            onCloseRequested={() => setIsConfirmDiscardChangesModalOpen(false)}
-            title={`${areYouSureDiscardPostModalTitle}`}
-          >
-            <StyledActionText>{t("post.areYouSureDiscardPostModalText")}</StyledActionText>
 
-            <StyledActionWrapper>
-              <ButtonSecondary type="button" onClick={() => handleCloseBothModals()}>
-                {t("post.areYouSureDiscardPostButtonText")}
-              </ButtonSecondary>
-
-              <StyledButtonPrimary type="button" onClick={() => setIsConfirmDiscardChangesModalOpen(false)}>
-                {t("post.areYouSureKeepPostButtonText")}
-              </StyledButtonPrimary>
-            </StyledActionWrapper>
-          </Modal>
+          <AreYouSureModal
+            areYouSureConfirmButtonText={areYouSureConfirmButtonText}
+            areYouSureRejectButtonText={areYouSureRejectButtonText}
+            areYouSureDescription={areYouSureDiscardPostModalText}
+            areYouSureTitle={areYouSureDiscardPostModalTitle}
+            handleConfirmAction={handleConfirmAction}
+            isAreYouSureModalOpen={isAreYouSureModalOpen}
+            setIsAreYouSureModalOpen={setIsAreYouSureModalOpen}
+          />
         </StyledProjectPostBox>
       )}
 
-      <PostProjectList />
+      <PostProjectList showPinnedMenuButton={true} showPinnedStatus={true} />
 
-      {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length <= 0 && (
+      {!postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length === 0 && (
         <>
           <HelperInfoHeaderTextImageRightBox
             backgroundColor={"transparent"}

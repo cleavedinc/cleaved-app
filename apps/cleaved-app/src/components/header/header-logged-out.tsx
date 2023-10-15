@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from "react";
 import { Link } from "@reach/router";
 import styled from "styled-components";
 
-import { ButtonLink, Logo, SPACING, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
+import { ButtonLink, Logo, NavigationButtonWrapper, NavigationWrapper } from "@cleaved/ui";
 
 import { authTokenContext } from "../../contexts";
 import { useTranslator } from "../../hooks";
@@ -22,8 +22,10 @@ const StyledLogoWrapper = styled.div`
   display: flex;
 `;
 
-const StyledLoggedoutStickyHeader = styled(StyledStickyHeader)`
-  padding: 0.75rem ${SPACING.MEDIUM};
+const StyledLoggedoutStickyHeader = styled(StyledStickyHeader)``;
+
+const StyledNavigationWrapper = styled(NavigationWrapper)`
+  min-height: 35px;
 `;
 
 export const HeaderLoggedOut: FunctionComponent = () => {
@@ -33,13 +35,13 @@ export const HeaderLoggedOut: FunctionComponent = () => {
   const signUpLogIn = t("buttonLabels.signUpLogIn") ? t("buttonLabels.signUpLogIn") : "";
 
   return (
-    <StyledLoggedoutStickyHeader hasBoxShadow>
-      <NavigationWrapper>
+    <StyledLoggedoutStickyHeader>
+      <StyledNavigationWrapper>
         <StyledLogoWrapper>
           <Logo
             companyName={t("companyName")}
             height="15px"
-            isLogoTextVisible
+            logoTextVisible="true"
             margin={`0 0.3rem 0 0`}
             url={"/"}
             width="15px"
@@ -59,7 +61,7 @@ export const HeaderLoggedOut: FunctionComponent = () => {
             </StyledLoginLink>
           </NavigationButtonWrapper>
         )}
-      </NavigationWrapper>
+      </StyledNavigationWrapper>
     </StyledLoggedoutStickyHeader>
   );
 };

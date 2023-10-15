@@ -5,6 +5,7 @@ import { Waypoint } from "react-waypoint";
 import { SPACING } from "@cleaved/ui";
 
 import { StyledRouterButtonLink } from "../../components";
+import { postPageSize } from "../../constants";
 import { authTokenContext, PostsContext } from "../../contexts";
 import { OrgPermissionLevel, PostProjectSeekQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
@@ -12,6 +13,11 @@ import { useOrganizationPermission } from "../../permissions";
 import { routeConstantsCleavedApp } from "../../router";
 
 import { Post } from "./post";
+
+type PostProjectListProps = {
+  showPinnedMenuButton?: boolean;
+  showPinnedStatus?: boolean;
+};
 
 const StyledWaypointTriggerMessage = styled.div`
   margin: ${SPACING.MEDIUM};
@@ -36,10 +42,10 @@ const StyledPostListWrapper = styled.div`
   }
 `;
 
-export const PostProjectList: FunctionComponent = () => {
+export const PostProjectList: FunctionComponent<PostProjectListProps> = (props) => {
+  const { showPinnedMenuButton, showPinnedStatus } = props;
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const pageSize = 20;
   const { postProjectSeekData, postProjectSeekDataLoading, postProjectSeekFetchMore } = useContext(PostsContext);
   const lastPostId = postProjectSeekData && postProjectSeekData[postProjectSeekData.length - 1]?.id;
   const { t } = useTranslator();
@@ -70,12 +76,12 @@ export const PostProjectList: FunctionComponent = () => {
           {postProjectSeekData.map((post) => {
             return (
               <StyledPostListWrapper key={post.id}>
-                <Post post={post} />
+                <Post post={post} showPinnedMenuButton={showPinnedMenuButton} showPinnedStatus={showPinnedStatus} />
               </StyledPostListWrapper>
             );
           })}
 
-          {!postProjectSeekDataLoading && postProjectSeekData.length >= pageSize && (
+          {!postProjectSeekDataLoading && postProjectSeekData.length >= postPageSize && (
             <Waypoint onEnter={() => handleLoadMoreData()}>
               <StyledWaypointTriggerMessage />
             </Waypoint>
@@ -85,13 +91,13 @@ export const PostProjectList: FunctionComponent = () => {
 
       {hasPermission && !postProjectSeekDataLoading && postProjectSeekData && postProjectSeekData.length >= 3 && (
         <StyledEndTimelineWrapper>
-          <StyledAddPeopleText>{t("teams.addNewTeamMemberHelperText")}</StyledAddPeopleText>
+          <StyledAddPeopleText>{t("people.addNewUserHelperText")}</StyledAddPeopleText>
 
           <StyledRouterButtonLink
             to={`/${preferredOrgId}${routeConstantsCleavedApp.professionalInvite.route}`}
             title={professionalInviteLinkName}
           >
-            {t("teams.addNewTeamMember")}
+            {t("people.addNewUser")}
           </StyledRouterButtonLink>
         </StyledEndTimelineWrapper>
       )}

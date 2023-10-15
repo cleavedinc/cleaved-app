@@ -2,11 +2,12 @@
   "account": {
     "save": "Save"
   },
+  "active": "Active",
   "alerts": {
     "copiedTextToClipboard": "Copied!"
   },
   "buttonLabels": {
-    "giveFeedback": "Give feedback",
+    "giveFeedback": "Let us know",
     "goHome": "Go home",
     "logOut": "Log out",
     "signUpLogIn": "Sign up / Log in"
@@ -33,18 +34,22 @@
     "selectAnImageToUpload": "Select an image/gif to upload"
   },
   "formLabels": {
-    "about": "About",
-    "aboutPlaceholder": "Tell everyone a litle about you",
+    "about": "What I care about",
+    "aboutPlaceholder": "Share what you care about with others.",
     "firstName": "First name",
-    "firstNamePlaceholder": "First name",
+    "firstNamePlaceholder": "What is your first name?",
+    "goals": "My company goals",
+    "goalsPlaceholder": "What are the goals you are working towards?",
     "lastName": "Last name",
-    "lastNamePlaceholder": "Last name",
-    "middleName": "Middle",
-    "middleNamePlaceholder": "Middle",
-    "professionalEmail": "Professional email",
-    "professionalEmailPlaceholder": "Professional email",
-    "professionalTitle": "Professional title",
-    "professionalTitlePlaceholder": "Professional title"
+    "lastNamePlaceholder": "What is your last name?",
+    "linkedinUrlPlaceholder": "https://www.linkedin.com/in/your-profile",
+    "linkedinUrlTitle": "LinkedIn",
+    "professionalEmail": "Email",
+    "professionalEmailPlaceholder": "myemail@awesomecompany.com",
+    "professionalTitle": "My job title",
+    "professionalTitlePlaceholder": "C..., VP..., Director..., Manager...",
+    "xUrlPlaceholder": "https://twitter.com/your-profile",
+    "xUrlTitle": "X (twitter)"
   },
   "formValidationMessages": {
     "aboutProfessionalCharactorLimit": "About has a maximum limit of 250 characters",
@@ -53,6 +58,7 @@
     "youMustHaveAValidEmailAddress": "You must have a valid email address"
   },
   "helperInformationBoxes": {
+    "asideOrganizationMembersEmptyStateAlt": "People working",
     "collaborativeTimelineAlt": "Person pointing to a chart with some information on it",
     "collaborativeTimelineHeader": "Collaborative Timeline",
     "collaborativeTimelineText": "Get project insights and provide feedback, all in one place.",
@@ -60,17 +66,21 @@
     "homePageEmptyStateHeader": "We know you're working hard",
     "homePageEmptyStateText": "When you have a minute, post your update or idea to your project. Getting feedback and keeping people updated is important.",
     "inviteProfessionalToOrganizationAlt": "Arrow pointing to the invite professional form",
-    "inviteProfessionalToOrganizationHeader": "Invite your leaders into your organization",
-    "inviteProfessionalToOrganizationText": "Invite your leaders to come join you on all your projects.",
-    "organizationsAlt": "Three buildings in a row of various sizes",
-    "organizationsHeader": "Organizations, companies or clients",
-    "organizationsText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "manageUpAlt": "Two thin gray arrows arching in a half circle, pointing at a pie chart. Two dotted half circles below the arrows.",
+    "manageUpHeader": "Build your profile, it's important",
+    "manageUpText": "One of the best things you can do is sharing your goals and what you care about with others. This helps others support your success.",
+    "membershipAlt": "A woman pointing to three subscription options.",
+    "membershipHeader": "Upgrading is easy",
+    "membershipText": "Upgrading to get more vallue is as quick as a few clicks.",
+    "membershipPlansAlt": "A woman pointing to three subscription options.",
+    "membershipPlansHeader": "Membership Plan",
+    "membershipPlansText": "As you grow your company, we'll grow with you.",
     "organizationRegisterAlt": "Arrows pointing to the register an organization form",
     "organizationRegisterHeader": "Register an organization",
     "organizationRegisterText": "This is how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
     "professionalOnboardingAlt": "Three buildings in a row of various sizes",
     "professionalOnboardingHeader": "Before you run, we walk",
-    "professionalOnboardingText": "Just a few set up steps first. It will only take a couple minutes, promise.",
+    "professionalOnboardingText": "Let's create your organization, first project and invite your coworkers. It will take about a minutes, promise.",
     "professionalShareLinkRegistrationAlt": "Two people standing, holding a large red circle with two link symbols about to connect.",
     "professionalShareLinkRegistrationHeader": "Welcome to cleaved",
     "professionalShareLinkRegistrationText": "You are lucky enough to be invited by someone who values you. Be sure to pay it forward.",
@@ -81,16 +91,17 @@
     "projectslistHeader": "Projects are where magic happens",
     "projectslistText": "Creating a new project provides you with a platform to share decisions, receive feedback, and demonstrate progress.",
     "projectStartNewImageAlt": "Arrow pointing to the start a new project form",
-    "projectStartNewHeader": "Start a new project",
-    "projectStartNewText": "Creating a new project provides you with a platform to share decisions, receive feedback, and demonstrate progress.",
-    "teamsAlt": "Two people holding pieces of a project",
-    "teamsHeader": "Leaders make it happen",
-    "teamsText": "Invite your leaders to provide feedback and share their opinions on crucial decisions, and keep them informed about key project milestones and deadlines."
+    "projectHeader": "Let's go!",
+    "projectText": "Projects provides you with a platform to share decisions, receive feedback, and demonstrate progress.",
+    "peopleAlt": "Two people holding pieces of a project",
+    "peopleHeader": "Invite your coworkers into your organization",
+    "peopleText": "Receive feedback and keep those you care about up to date on all your projects."
   },
   "hTags": {
-    "personalInformation": "Personal information",
-    "professionalInformation": "Professional information",
-    "theme": "Theme"
+    "professionalInformation": "Professional Information",
+    "profile": "Profile",
+    "generalSettings": "General Settings",
+    "socialLinks": "Social Network"
   },
   "language": {
     "english": "English",
@@ -98,21 +109,32 @@
     "spanish": "Spanish"
   },
   "loginPage": {
+    "errorSingleOrgJoinLimit": "Only 1 email can be associated with a cleaved account.",
     "signInHeader": "Sign up / Log in",
     "signInMessage": "Create a new account, or log in to an existing one."
   },
+  "membership": {
+    "currentPlan": "Current membership:",
+    "membership": "Membership",
+    "membershipDetails": "Membership Details",
+    "membershipLimitNonAdminText": "You're membership limit has been hit. Please upgrade your plan for more awesomeness.",
+    "manageMembership": "Manage membership",
+    "upgradeMembership": "Upgrade membership"
+  },
   "menuLinkNames": {
     "account": "Account",
-    "accountMembership": "Membership",
     "accountOrganizations": "Organizations",
-    "accountPersonalInformation": "Personal Information",
     "accountProfessionalInformation": "Professional Information",
     "home": "Home",
+    "profile": "Profile",
     "projectList": "Projects",
-    "projectStartNew": "Start a new project",
+    "projectForm": "Start a new project",
     "professionalInvite": "Professional Invite",
     "organizationRegister": "Register a new organization",
-    "teamsList": "Team"
+    "peopleList": "People"
+  },
+  "notFound": {
+    "pageMessage": "Oops, looks like we took a wrong turn! Use the menu at the top to try again."
   },
   "organizations": {
     "areYouSureKeepButtonText": "Stay in organization",
@@ -125,30 +147,51 @@
     "edit": "Edit",
     "manageOrganizations": "Manage organizations",
     "organizations": "Organizations",
-    "organizationName": "Organization",
+    "organization": "Organization",
+    "organizationMenu": "Organization menu",
     "organizationNamePlaceholder": "Organization name",
     "organizationRegister": "Register organization",
-    "removeOrganization": "Remove organization",
-    "setDefaultOrganization": "Set as active organization"
+    "removeOrganization": "Remove me from organization"
   },
   "organizationsStartNew": {
     "registerNewOrganization": "Register a new organization"
   },
   "people": {
-    "addPerson": "Add a leader",
-    "teamListHeader": "Active leaders",
-    "teamListHeaderHome": "Leaders",
+    "addNewUser": "Add user",
+    "addNewUserHelperText": "It's always better with more people.",
+    "addPerson": "Add user",
+    "areYouSureKeepButtonText": "Keep this user",
+    "areYouSureRemoveButtonText": "Remove this user from organization",
+    "areYouSureRemoveMemberModalHeader": "Are you sure?",
+    "areYouSureRemoveMemberModalText": "If you remove this user from your organization, they will not be able to access any of your projects again. Just remember, you can always invite tehm back.",
+    "edit": "Edit",
+    "editPermission": "Edit Permission",
+    "jobTitle": "Job title",
+    "peopleListHeader": "Active People",
+    "peopleListHeaderHome": "People",
+    "peopleListHelperInfoText": "As people interact with this project, they will appear in this list.",
+    "peopleListMenu": "People list menu",
+    "professionalName": "Name",
+    "professionalPermissions": "Permissions",
+    "professionalTitle": "Job title",
+    "removeProfessional": "Remove user",
+    "setUserPermission": "Edit user permission",
     "viewAllPeople": "View all"
+  },
+  "permission": {
+    "admin": "Admin",
+    "updater": "Updater",
+    "viewer": "View only"
   },
   "pleaseWaitDots": "Please wait...",
   "post": {
     "areYouSureDiscardPostModalTitle": "Are you sure?",
-    "areYouSureDiscardPostModalText": "We don't keep drafts yet, so your content will be lost.",
+    "areYouSureDiscardPostModalText": "We don't keep drafts, so your content will be lost.",
     "areYouSureDiscardPostButtonText": "Discard post",
     "areYouSureKeepPostButtonText": "Stay and keep writing",
     "areYouSureRemovePostModalHeader": "Are you sure?",
-    "areYouSureRemovePostModalText": "If you remove this post, it will be gone forever. No turning back.",
-    "areYouSureRemoveButtonText": "Remove post",
+    "areYouSureRemovePostModalText": "If you delete this post, it will be gone forever. No turning back.",
+    "areYouSureRemoveButtonText": "Delete post",
     "areYouSureKeepButtonText": "Keep my post",
     "comment": "Comment",
     "comments": "Comments",
@@ -160,23 +203,29 @@
     "createProjectPostWithName": "Create a post {{name}}",
     "createProjectPost": "Create post",
     "editProjectPost": "Edit post",
+    "pinned": "Pinned",
+    "pinPost": "Pin to the project",
     "photoViewerToolbarMessage": "Posted by {{firstName}} {{lastName}} on ",
     "post": "Post",
     "postImageBasicAlt": "Post Image",
-    "removeAllImages": "Remove all images",
-    "removePost": "Remove Post",
+    "removeAllImages": "Delete all images",
+    "removePost": "Delete Post",
     "submitPost": "Post",
-    "totalComments": "Total comments",
-    "totalPosts": "Total posts"
+    "totalComments": "Total responses",
+    "totalPosts": "Total posts",
+    "unpinPost": "Unpin from the project"
   },
   "postFileUpload": {
-    "addMoreImages": "Add more images",
     "errorFileExceedsFileSize": "One file exceeded {{fileSize}}mb in size and was not uploaded.",
     "errorFileIncorrectType": "One file is not an accepted file type.",
+    "errorTooManyFilesType": "Too many files. The upload limit is {{maxFileUploadlimit}}",
     "dragDropAreaHelperText": "Drag and drop up to {{imageUploadLimit}} images, or click to select."
   },
+  "privacyPolicy": "Privacy Policy",
   "professional": {
-    "emailLinkText": "Email"
+    "about": "I care about:",
+    "goals": "My company goals",
+    "socialMedia": "Social network"
   },
   "professionalOnboarding": {
     "alreadyHasOrganizationLink": "Skip onboarding",
@@ -184,7 +233,7 @@
     "finishOnboarding": "Take me to my new project",
     "registerOrganizationCelebrateImageAlt": "Two people high-fiving with fireworks around them",
     "registerOrganizationHelperInfoImageAlt": "A single building",
-    "registerOrganizationHelperInfoText": "Organizations are how your projects, teams, and everything else are organized. You'll probably have only one here, unless you have a lot going on.",
+    "registerOrganizationHelperInfoText": "Organizations are how your projects, teams, and everything else are organized.",
     "registerOrganizationFormHeader": "Register your organization",
     "registerOrganizationFormHeaderOrgCreated": "Organization created",
     "startNewProjectCelebrateImageAlt": "Two people jumping and high-fiving with fireworks around them",
@@ -193,11 +242,11 @@
     "startNewProjectFormHeader": "Start your first project",
     "startNewProjectFormHeaderProjectCreated": "Project Created",
     "invitePeopleHelperInfoImageAlt": "Two people holding project cards with a plus sign between them",
-    "invitePeopleHelperInfoText": "Invite your leaders to come join you on all your projects.",
-    "invitePeopleFormHeader": "Invite your leaders",
+    "invitePeopleHelperInfoText": "Invite your coworkers to come join you on all your projects.",
+    "invitePeopleFormHeader": "Invite your coworkers",
     "mailtoLinkEmailSubjectText": "Invitation to join Cleaved",
-    "mailtoLinkEmailBodyText": "I just joined Cleaved and set up a new project. Come join me.",
-    "mailtoLink": "Invita a tus líderes",
+    "mailtoLinkEmailBodyText": "I joined Cleaved, a leadership platform for our company. I want you to join me so we can collaborate together. Use this link to get in:",
+    "mailtoLink": "Invite your coworkers",
     "navigateBackwardStep": "Previous",
     "navigateForwardStep": "Next"
   },
@@ -218,21 +267,36 @@
     "dateCreated": "Date created",
     "owner": "Owner",
     "posts": "Posts",
+    "progress": "Project progress",
     "edit": "Edit",
+    "editProject": "Edit Project",
     "editStatus": "Edit Status",
+    "projectStatusSelect": "Project status select",
+    "setProjectStatus": "Set project status",
     "stateActive": "Active",
     "stateInactive": "Inactive",
     "stateArchive": "Archive"
   },
-  "projectStartNew": {
+  "projectForm": {
     "addNewProjectHelperText": "It's a great feeling when you start something new.",
-    "startNewProject": "Start a new project",
+    "calendar": "Calendar",
+    "project": "Project",
+    "projectFormSubmitButton": "Save",
     "projectName": "Project name",
     "projectNamePlaceholder": "Project name...",
     "projectNameRequired": "Project name required",
     "projectDetails": "Project details",
     "projectDetailsRequired": "Project details required",
-    "projectDetailsPlaceholder": "Project details..."
+    "projectDetailsPlaceholder": "Project details...",
+    "projectDate": "Project date",
+    "projectDateNotSet": "No dates set",
+    "startNewProject": "Start a new project"
+  },
+  "projectProgressOptions": {
+    "complete": "Complete",
+    "kickOff": "Kick Off",
+    "notStarted": "Not Started",
+    "prePlanning": "Pre-Planning"
   },
   "projects": {
     "active": "Active",
@@ -249,35 +313,30 @@
     "darkMode": "Dark mode"
   },
   "shareLinks": {
-    "areYouSureRemoveButtonText": "Remove share link",
+    "admin": "Admin permission",
+    "adminDescription": "Gives the user access to manage people, account and billing information.",
+    "areYouSureRemoveButtonText": "Delete share link",
     "areYouSureKeepButtonText": "Keep my share link",
     "areYouSureRemoveSharelinkModalHeader": "Are you sure?",
-    "areYouSureRemoveSharelinkModalText": "If you remove this share link, it will be gone forever. No turning back.",
-    "createAdminShareLink": "Create admin link",
-    "createReadShareLink": "Create view only link",
-    "createWriteShareLink": "Create read/write link",
+    "areYouSureRemoveSharelinkModalText": "If you delete this share link, it will be gone forever. No turning back.",
+    "createAdminShareLink": "Create an admin share link",
+    "createReadShareLink": "Create a read only share link",
+    "createWriteShareLink": "Create a read and write share link",
+    "createWriteShareLinkText": "Create a share link that will allow your coworkers to create projects and give feedback.",
     "editMenuGenerateNewShareLink": "Generate a new {{shareLinkPermission}} share link",
-    "editMenuRemoveShareLink": "Remove {{shareLinkPermission}} share link",
+    "editMenuRemoveShareLink": "Delete {{shareLinkPermission}} share link",
     "manage": "Manage",
+    "permission": "permission",
     "permissionLevel": "Role",
-    "professionalInviteEmptyState": "To invite your leaders, you can create a share link and then share it with them.",
+    "readOnly": "Read only permission",
+    "readOnlyDescription": "Gives the user access to only view project content.",
+    "readWriteOnly": "Read and write permission",
+    "readWriteOnlyDescription": "Gives the user access to create, view and interact with project content.",
     "shareLink": "Share link"
   },
+  "showLess": "Show less",
+  "showMore": "Show more",
   "submit": "Submit",
-  "teams": {
-    "addNewTeamMember": "Invite a leader",
-    "addNewTeamMemberHelperText": "It's always better with more people.",
-    "areYouSureKeepButtonText": "Keep this user",
-    "areYouSureRemoveButtonText": "Remove this user from organization",
-    "areYouSureRemoveMemberModalHeader": "Are you sure?",
-    "areYouSureRemoveMemberModalText": "If you remove this user from your organization, they will not be able to access any of your projects again. Just remember, you can always invite tehm back.",
-    "edit": "Edit",
-    "professionalName": "Name",
-    "professionalPermissions": "Permissions",
-    "professionalTitle": "Job title",
-    "removeProfessional": "Remove user",
-    "setUserPermission": "Edit user permission"
-  },
   "termsOfService": {
     "acceptTermsOfService": "I accept the terms of service",
     "acceptTermsOfServiceIsRequired": "Accept Terms & Conditions is required",
@@ -285,10 +344,12 @@
     "firstParagraph": "Before you are able to use our services, you must agree to our",
     "acceptTermsHeader": "Welcome aboard!",
     "acceptTermsImageAlt": "Picture about accepting terms and conditions",
-    "acceptTermsText": "First things first, you need to accept the terms, then you can get down to business."
+    "acceptTermsText": "First things first, you need to accept the terms, then you can get down to business.",
+    "termsOfService": "Terms of Service"
   },
   "tryAgain": "Try again",
   "widget": {
+    "editProjectDetailsMenu": "Edit project details menu",
     "projectDetailsEdit": "Edit project",
     "projectsList": "Projects List",
     "projectsListEmptyListText": "Awe shucks, no project yet. Let's go create one!",

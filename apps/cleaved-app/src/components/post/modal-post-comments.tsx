@@ -73,7 +73,7 @@ const StyledContentWrapper = styled.div`
   }
 
   ${mediaQueries.SM} {
-    max-height: 550px;
+    max-height: 40vh;
   }
 `;
 
@@ -93,21 +93,6 @@ const StyledModalPostCommentsContentWrapper = styled.div<ModalPostCommentsBackgr
     transform: translate(-50%, 0%);
     width: 550px;
   }
-`;
-
-const StyledModalPostCommentsHeaderWrapper = styled.div<ModalPostCommentsBackgroundProps>`
-  align-items: center;
-  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  display: flex;
-  justify-content: center;
-  margin-bottom: ${SPACING.MEDIUM};
-  padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM} ${SPACING.SMALL};
-  position: sticky;
-  top: 0;
-`;
-
-const StyledModalPostCommentsTitle = styled.div`
-  font-size: ${FONT_SIZES.LARGE};
 `;
 
 const StyledModalPostCommentsWrapper = styled.div`
@@ -139,6 +124,20 @@ const StyledPostCommentFormWrapper = styled.div`
 
 const StyledScrollLock = styled(ScrollLock)`
   display: flex;
+`;
+
+const StyledModalPostCommentsHeaderWrapper = styled.div<ModalPostCommentsBackgroundProps>`
+  align-items: center;
+  border-bottom: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+  display: flex;
+  justify-content: center;
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
+  position: sticky;
+  top: 0;
+`;
+
+const StyledModalPostCommentsTitle = styled.div`
+  font-size: ${FONT_SIZES.MEDIUM};
 `;
 
 const ModalPostCommentsHeader: FunctionComponent<ModalPostCommentsHeaderProps> = ({
@@ -174,7 +173,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
   useOnOutsideClick = true,
 }) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData } = useFindMyAccount();
 
   if (!open) {
     return null;
@@ -186,7 +185,7 @@ export const ModalPostComments: FunctionComponent<ModalPostCommentsProps> = ({
       <StyledContentWrapper>{children}</StyledContentWrapper>
       {hasPermission && (
         <StyledPostCommentFormWrapper>
-          <PostCommentAvatar account={accountQuery.data?.findMyAccount} />
+          <PostCommentAvatar account={findMyAccountData} />
 
           <StyledCommentForm
             postOrPostReplyId={postOrPostReplyId}

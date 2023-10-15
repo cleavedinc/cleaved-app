@@ -4,8 +4,8 @@ import { mediaQueries, SPACING } from "../../theme";
 
 export const MainColumnWrapper = styled.div`
   flex-grow: 1;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
   margin-top: ${SPACING.SMALL};
 
   ${mediaQueries.SM} {

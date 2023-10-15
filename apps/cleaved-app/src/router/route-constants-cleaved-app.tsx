@@ -2,14 +2,8 @@ export const routeConstantsCleavedApp = {
   account: {
     route: "/account",
   },
-  accountMembership: {
-    route: "/account-membership",
-  },
   accountOrganizationRegister: {
     route: "/account-organizations/register-organization",
-  },
-  accountPersonalInformation: {
-    route: "/account-personal-information",
   },
   accountProfessionalInformation: {
     route: "/account-professional-information",
@@ -20,8 +14,20 @@ export const routeConstantsCleavedApp = {
   home: {
     route: "/home",
   },
+  homeRouting: {
+    route: "/home",
+  },
   login: {
     route: "/login",
+  },
+  membership: {
+    route: "/membership",
+  },
+  membershipPlans: {
+    route: "/membership-plans",
+  },
+  peopleList: {
+    route: "/people-list",
   },
   project: {
     route: "/project",
@@ -32,11 +38,11 @@ export const routeConstantsCleavedApp = {
   projectList: {
     route: "/project-list",
   },
-  projectStartNew: {
-    route: "/project-list/start-new-project",
+  projectForm: {
+    route: "/project-form",
   },
   professionalInvite: {
-    route: "/teams-list/professional-invite",
+    route: "/people-list/professional-invite",
   },
   professionalShareLinkRegistration: {
     route: "/professional-share-link-registration",
@@ -44,11 +50,17 @@ export const routeConstantsCleavedApp = {
   professionalOnboarding: {
     route: "/professional-onboarding",
   },
+  professionalOnboardingCreateFirstProject: {
+    route: "/create-first-project",
+  },
+  professionalOnboardingInviteUsers: {
+    route: "/invite-users",
+  },
+  professionalOnboardingRegisterOrganization: {
+    route: "/register-organization",
+  },
   professionalOnboardingHasOrganization: {
     route: "/professional-onboarding-has-organization",
-  },
-  teamsList: {
-    route: "/teams-list",
   },
   termsOfServiceAgreement: {
     route: "/terms-of-service-agreement",

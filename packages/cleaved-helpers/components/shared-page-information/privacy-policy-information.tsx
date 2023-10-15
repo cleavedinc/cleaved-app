@@ -16,7 +16,7 @@ export const PrivacyPolicyInformation: FunctionComponent = () => {
         share information from our users ("Users," "you," and/or "your") to facilitate your commenting, feedback, and
         networking experience. By using our Services, you agree to the collection, use, disclosure, and procedures this
         Privacy Policy describes. Beyond the Privacy Policy, your use of our Services is also subject to our{" "}
-        <Link href={routeConstantsShared.termsOfService.route}>{routeConstantsShared.termsOfService.name}</Link>
+        <Link href={routeConstantsShared.termsOfService.route}>Terms of Service</Link>
       </Paragraph>
 
       <Paragraph>

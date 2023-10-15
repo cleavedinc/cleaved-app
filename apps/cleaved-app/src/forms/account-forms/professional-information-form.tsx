@@ -21,11 +21,11 @@ import {
 import { useFindMyAccount, useTranslator } from "../../hooks";
 
 import { ProfessionalInformationFormFormikTextarea } from "./components";
-import { SET_ACCOUNT_EMAIL_MUTATION, SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION } from "./gql";
+import { SET_JOB_TITLE_MUTATION, SET_ABOUT_MUTATION, SET_GOALS_MUTATION } from "./gql";
 
 type ProfesionalInformationFormType = {
   about?: string;
-  accountEmail?: string;
+  goals?: string;
   jobTitle?: string;
 };
 
@@ -62,33 +62,17 @@ const StyledSubmitButton = styled(ButtonPrimary)`
 
 export const ProfesionalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData, findMyAccountDataRefetch } = useFindMyAccount();
 
   const professionalTitlePlaceholder = t("formLabels.professionalTitlePlaceholder")
     ? t("formLabels.professionalTitlePlaceholder")
     : undefined;
 
-  const professionalEmailPlaceholder = t("formLabels.professionalEmailPlaceholder")
-    ? t("formLabels.professionalEmailPlaceholder")
-    : undefined;
-
-  const aboutProfessionalCharactorLimit = t("formValidationMessages.aboutProfessionalCharactorLimit")
-    ? t("formValidationMessages.aboutProfessionalCharactorLimit")
-    : undefined;
-
-  const youMustHaveAValidEmailAddress = t("formValidationMessages.youMustHaveAValidEmailAddress")
-    ? t("formValidationMessages.youMustHaveAValidEmailAddress")
-    : undefined;
-
-  const [setAccountEmail] = useMutation(SET_ACCOUNT_EMAIL_MUTATION, {
-    onError: (error) => {
-      logQueryError(error);
-    },
-  });
-
   const [setJobTitle] = useMutation(SET_JOB_TITLE_MUTATION, {
     onCompleted: () => {
-      accountQuery.refetch();
+      if (findMyAccountDataRefetch) {
+        findMyAccountDataRefetch();
+      }
     },
     onError: (error) => {
       logQueryError(error);
@@ -101,22 +85,22 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
     },
   });
 
+  const [setGoals] = useMutation(SET_GOALS_MUTATION, {
+    onError: (error) => {
+      logQueryError(error);
+    },
+  });
+
   return (
     <Formik
       enableReinitialize
       initialValues={{
-        about: accountQuery.data?.findMyAccount.about || "",
-        accountEmail: accountQuery.data?.findMyAccount.emailAddress || "",
-        jobTitle: accountQuery.data?.findMyAccount.jobTitle || "",
+        about: findMyAccountData?.about || "",
+        goals: findMyAccountData?.goals || "",
+        jobTitle: findMyAccountData?.jobTitle || "",
       }}
       onSubmit={(values: ProfesionalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
-
-        setAccountEmail({
-          variables: {
-            newEmail: values.accountEmail ? values.accountEmail : "",
-          },
-        });
 
         setJobTitle({
           variables: {
@@ -130,11 +114,17 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
           },
         });
 
+        setGoals({
+          variables: {
+            goals: values.goals ? values.goals : "",
+          },
+        });
+
         resetForm({ values });
       }}
       validationSchema={yup.object().shape<Record<keyof ProfesionalInformationFormType, yup.AnySchema>>({
-        about: yup.string().max(250, aboutProfessionalCharactorLimit),
-        accountEmail: yup.string().email(youMustHaveAValidEmailAddress),
+        about: yup.string(),
+        goals: yup.string(),
         jobTitle: yup.string(),
       })}
     >
@@ -156,19 +146,20 @@ export const ProfesionalInformationForm: FunctionComponent = () => {
                 </StyledProjectFormWrapper>
 
                 <StyledProjectFormWrapper>
-                  <StyledProjectFormLabel htmlFor="accountEmail">
-                    {t("formLabels.professionalEmail")}
-                  </StyledProjectFormLabel>
-
-                  <StyledField id="accountEmail" name="accountEmail" placeholder={professionalEmailPlaceholder} />
-                </StyledProjectFormWrapper>
-
-                <StyledProjectFormWrapper>
                   <StyledProjectFormLabel htmlFor="about">{t("formLabels.about")}</StyledProjectFormLabel>
 
                   <ProfessionalInformationFormFormikTextarea
                     name="about"
                     placeholder={t("formLabels.aboutPlaceholder")}
+                  />
+                </StyledProjectFormWrapper>
+
+                <StyledProjectFormWrapper>
+                  <StyledProjectFormLabel htmlFor="goals">{t("formLabels.goals")}</StyledProjectFormLabel>
+
+                  <ProfessionalInformationFormFormikTextarea
+                    name="goals"
+                    placeholder={t("formLabels.goalsPlaceholder")}
                   />
                 </StyledProjectFormWrapper>
 

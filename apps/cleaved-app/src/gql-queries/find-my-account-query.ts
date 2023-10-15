@@ -7,10 +7,14 @@ export const FIND_MY_ACCOUNT = graphql(`
       currentAvatar
       emailAddress
       firstName
+      goals
       id
       jobTitle
       lastName
-      middleName
+      socialMedia {
+        twitter
+        linkedin
+      }
     }
   }
 `);

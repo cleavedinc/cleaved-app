@@ -51,7 +51,7 @@ const StyledPhotoThumb = styled.img`
 
 const StyledTotalPhotosNotSeen = styled.div`
   position: absolute;
-  color: ${({ theme }) => theme.colors.white_always_color};
+  color: ${({ theme }) => theme.colors.always_white_color};
   font-size: 35px;
   left: 50%;
   top: 50%;
@@ -94,7 +94,7 @@ export const PhotoCollageRow: FunctionComponent<RowPhotosProps> = (props) => {
                 </>
               )}
 
-              <StyledPhotoThumb src={data.source} />
+              <StyledPhotoThumb alt={data?.source} src={data.source} />
             </StyledPhotoGrid>
           );
         })}

@@ -1,20 +1,7 @@
 import React, { FunctionComponent, ReactNode, useContext } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import {
-  blockquote,
-  blockquoteBefore,
-  blockquoteP,
-  FONTS,
-  FONT_WEIGHTS,
-  scrollbar,
-  scrollbarThumb,
-  scrollbarThumbHover,
-  scrollbarTrack,
-  SPACING,
-  themeDark,
-  themeLight,
-} from "@cleaved/ui";
+import { blockquote, blockquoteBefore, blockquoteP, FONTS, FONT_WEIGHTS, themeDark, themeLight } from "@cleaved/ui";
 
 import { ThemeContext } from "../contexts";
 
@@ -164,9 +151,7 @@ div {
   overflow-wrap: anywhere;
 }
 
-p {
-  margin-bottom: ${SPACING.MEDIUM};
-}
+p {}
 
 a{
   color: ${({ theme }) => theme.colors.baseLink_color};

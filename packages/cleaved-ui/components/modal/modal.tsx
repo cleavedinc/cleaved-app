@@ -66,18 +66,13 @@ const StyledModalContentWrapper = styled.div<ModalBackgroundProps>`
 const StyledModalHeaderWrapper = styled.div<ModalBackgroundProps>`
   align-items: center;
   display: flex;
-  margin-bottom: ${SPACING.SMALL};
-  padding: ${SPACING.MEDIUM};
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
   position: sticky;
   top: 0;
 `;
 
 const StyledModalTitle = styled.div`
-  font-size: ${FONT_SIZES.LARGE};
-
-  ${mediaQueries.XS_LANDSCAPE} {
-    font-size: ${FONT_SIZES.XLARGE};
-  }
+  font-size: ${FONT_SIZES.MEDIUM};
 `;
 
 const StyledModalWrapper = styled.div`
@@ -105,7 +100,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({ hidden, onCloseReque
     <StyledModalHeaderWrapper>
       <StyledModalTitle>{title}</StyledModalTitle>
       <StyledModalCloseButton onClick={onCloseRequested} type="button">
-        <CloseIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+        <CloseIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.XLARGE} />
       </StyledModalCloseButton>
     </StyledModalHeaderWrapper>
   );

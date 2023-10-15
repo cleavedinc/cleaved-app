@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
-import { mediaQueries } from "../../theme";
+import { mediaQueries, SPACING } from "../../theme";
 
 export const LeftColumnWrapper = styled.div`
-  display: none;
+  flex-grow: 1;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-top: ${SPACING.SMALL};
 
   ${mediaQueries.SM} {
-    display: block;
-    flex-grow: 1;
-    min-width: 300px;
+    margin-top: ${SPACING.MEDIUM_LARGE};
+    min-width: 275px;
     max-width: 300px;
   }
 `;

@@ -4,6 +4,7 @@ export const ORGANIZATION_SEEK_MEMBERS_QUERY = graphql(`
   query organizationSeekMembers($organizationId: ID!, $seekKey: ID, $pageSize: Int) {
     organizationSeekMembers(organizationId: $organizationId, seekKey: $seekKey, pageSize: $pageSize) {
       id
+      emailAddress
       firstName
       lastName
       currentAvatar

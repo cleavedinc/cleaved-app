@@ -1,15 +1,24 @@
 import React, { FunctionComponent } from "react";
 
-import { ContentWrapper, MainColumnWrapper } from "@cleaved/ui";
+import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
-import { ProjectListDataWrapper } from "../../data-wrappers";
+import { Header } from "../../components";
+import { AsideProjectListDataWrapper, ProjectListDataWrapper } from "../../data-wrappers";
 
 export const ProjectList: FunctionComponent = () => {
   return (
-    <ContentWrapper>
-      <MainColumnWrapper>
-        <ProjectListDataWrapper />
-      </MainColumnWrapper>
-    </ContentWrapper>
+    <>
+      <Header />
+
+      <ContentWrapper>
+        <LeftColumnWrapper>
+          <AsideProjectListDataWrapper />
+        </LeftColumnWrapper>
+
+        <MainColumnMaxWidthWrapper>
+          <ProjectListDataWrapper />
+        </MainColumnMaxWidthWrapper>
+      </ContentWrapper>
+    </>
   );
 };

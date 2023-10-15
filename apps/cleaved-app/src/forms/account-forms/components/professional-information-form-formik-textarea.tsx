@@ -33,10 +33,9 @@ const StyledTextarea = styled.textarea`
   color: ${({ theme }) => theme.colors.baseText_color};
   font-family: ${FONTS.SANS_SERIF_1};
   font-size: ${FONT_SIZES.MEDIUM};
-  min-height: 100px;
+  min-height: 250px;
   outline: none;
   padding: ${SPACING.SMALL} ${SPACING.MEDIUM};
-  resize: none;
   width: 100%;
 
   &::placeholder {
@@ -52,13 +51,12 @@ export const ProfessionalInformationFormFormikTextarea: FunctionComponent<
 > = ({ hideLabel = false, ...props }) => {
   const [field, { touched, error }] = useField(props);
   const {
-    autoFocus,
     backgroundColor,
     hasBorder,
     hint,
     label,
     minHeight,
-    onKeyPress,
+    onKeyDown,
     onKeyUp,
     placeholder,
     tag,
@@ -77,12 +75,11 @@ export const ProfessionalInformationFormFormikTextarea: FunctionComponent<
     <StyledFormikTextarea hasError={hasError}>
       <StyledTextarea
         {...rest}
-        autoFocus={false}
         aria-label={ariaLabel}
         name={field.name}
         onBlur={field.onBlur}
         onChange={field.onChange}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
         placeholder={placeholder}
         ref={textAreaRef}

@@ -52,6 +52,7 @@ const StyledField = styled(Field)`
 const StyledFirstLastNameWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   ${mediaQueries.XS_LANDSCAPE} {
     width: 100%;
@@ -79,7 +80,7 @@ const StyledSubmitButton = styled(ButtonPrimary)`
 
 export const PersonalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();
-  const accountQuery = useFindMyAccount();
+  const { findMyAccountData, findMyAccountDataRefetch } = useFindMyAccount();
 
   const firstNameIsRequired = t("formValidationMessages.firstNameIsRequired")
     ? t("formValidationMessages.firstNameIsRequired")
@@ -95,7 +96,9 @@ export const PersonalInformationForm: FunctionComponent = () => {
 
   const [updateAccount] = useMutation(UPDATE_ACCOUNT_MUTATION, {
     onCompleted: () => {
-      accountQuery.refetch();
+      if (findMyAccountDataRefetch) {
+        findMyAccountDataRefetch();
+      }
     },
     onError: (error) => {
       logQueryError(error);
@@ -106,8 +109,8 @@ export const PersonalInformationForm: FunctionComponent = () => {
     <Formik
       enableReinitialize
       initialValues={{
-        firstName: accountQuery.data?.findMyAccount.firstName ?? "",
-        lastName: accountQuery.data?.findMyAccount.lastName ?? "",
+        firstName: findMyAccountData?.firstName ?? "",
+        lastName: findMyAccountData?.lastName ?? "",
       }}
       onSubmit={(values: PersonalInformationFormType, { resetForm, setSubmitting }) => {
         setSubmitting(false);
@@ -128,17 +131,15 @@ export const PersonalInformationForm: FunctionComponent = () => {
         return (
           <>
             <HeadingWrapper>
-              <SectionHeader>{t("hTags.personalInformation")}</SectionHeader>
+              <SectionHeader>{t("hTags.profile")}</SectionHeader>
             </HeadingWrapper>
 
             <StyledFormWrapper>
-              <Form>
-                <StyledAvatarNameWrapper>
-                  <EditAccountAvatar
-                    account={accountQuery.data?.findMyAccount}
-                    refetchAccountData={accountQuery.refetch}
-                  />
+              <StyledAvatarNameWrapper>
+                <EditAccountAvatar account={findMyAccountData} refetchAccountData={findMyAccountDataRefetch} />
 
+                {/* Only add form elements within the Form wrapper, or it will break safari form submission */}
+                <Form>
                   <StyledFirstLastNameWrapper>
                     <StyledProjectFormWrapper>
                       <StyledProjectFormLabel htmlFor="firstName">{t("formLabels.firstName")}</StyledProjectFormLabel>
@@ -157,8 +158,8 @@ export const PersonalInformationForm: FunctionComponent = () => {
                       <Spinner visible={isSubmitting} />
                     </StyledSubmitButton>
                   </StyledFirstLastNameWrapper>
-                </StyledAvatarNameWrapper>
-              </Form>
+                </Form>
+              </StyledAvatarNameWrapper>
             </StyledFormWrapper>
           </>
         );
