@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2017"],
+    "jsx": "react",
+    "module": "commonjs",
+    "outDir": "./build",
+    "target": "es2017",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@root/*": ["./*"]
+    }
+  }
+}

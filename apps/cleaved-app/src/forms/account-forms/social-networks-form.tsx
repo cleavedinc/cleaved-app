@@ -76,7 +76,6 @@ export const SocialNetworksForm: FunctionComponent = () => {
       }
     },
     onError: (error) => {
-      console.log("error", error);
       logQueryError(error);
     },
   });
