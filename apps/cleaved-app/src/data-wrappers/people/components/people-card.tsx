@@ -4,18 +4,29 @@ import styled from "styled-components";
 
 import { Box, FONT_SIZES, SPACING } from "@cleaved/ui";
 
-import { PeopleCardAvatar } from "../../../components";
+import { PeopleCardAvatar, PeopleEditMenu } from "../../../components";
 import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../../generated-types/graphql";
 import { useNavigateToProfile, useTranslator } from "../../../hooks";
+import { convertPermissionInOrgReadable, useOrganizationPermission } from "../../../permissions";
 
 type PeopleCardProps = {
   member: OrganizationSeekMembersQuery["organizationSeekMembers"][0];
+  refetchData: (() => void) | undefined;
 };
 
 const StyledEmailAddress = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.MEDIUM};
+`;
+
+const StyledHeadingWrapper = styled.div`
+  display: flex;
+  margin-bottom: ${SPACING.BASE};
+`;
+
+const StyledMenuContentEdit = styled.div`
+  margin-left: auto;
 `;
 
 const StyledPermissionLabel = styled.div`
@@ -26,6 +37,7 @@ const StyledPermissionLabel = styled.div`
 
 const StyledPeopleInfoWrapper = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   margin-bottom: ${SPACING.BASE};
 `;
@@ -45,32 +57,27 @@ const StyledProfessionalLink = styled(Link)`
 `;
 
 export const PeopleCard: FunctionComponent<PeopleCardProps> = (props) => {
-  const { member } = props;
+  const { member, refetchData } = props;
   const { profilePath } = useNavigateToProfile(member?.id);
+  const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { t } = useTranslator();
-
-  const convertPermissionInOrgReadable = (permission: OrgPermissionLevel, translate: any): string => {
-    switch (permission) {
-      case OrgPermissionLevel.Admin:
-        return translate("permission.admin");
-        break;
-      case OrgPermissionLevel.Updater:
-        return translate("permission.updater");
-        break;
-      case OrgPermissionLevel.Viewer:
-      default:
-        return translate("permission.viewer");
-    }
-  };
 
   return (
     <StyledPeopleCardBox>
       <PeopleCardAvatar account={member} />
 
       <StyledPeopleInfoWrapper>
-        <StyledProfessionalLink to={profilePath} title={`${member?.firstName} ${member?.lastName}`}>
-          {member?.firstName} {member?.lastName}
-        </StyledProfessionalLink>
+        <StyledHeadingWrapper>
+          <StyledProfessionalLink to={profilePath} title={`${member?.firstName} ${member?.lastName}`}>
+            {member?.firstName} {member?.lastName}
+          </StyledProfessionalLink>
+
+          {hasPermission && (
+            <StyledMenuContentEdit>
+              <PeopleEditMenu member={member} refetchData={refetchData} />
+            </StyledMenuContentEdit>
+          )}
+        </StyledHeadingWrapper>
 
         {member && member?.jobTitle && (
           <StyledProfessionalJobTitle>

@@ -48,7 +48,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = (props) => {
         </StyledProjectLink>
 
         {hasPermission && (
-          <StyledMenuContentEdit role="cell">
+          <StyledMenuContentEdit>
             <ProjectsEditMenu
               projectId={project.id}
               projectStatus={project.status}

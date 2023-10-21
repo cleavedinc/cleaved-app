@@ -180,7 +180,7 @@
   },
   "permission": {
     "admin": "Administrador",
-    "updater": "Actualizador",
+    "updater": "Actualizar",
     "viewer": "Solo lectura"
   },
   "pleaseWaitDots": "Por favor espera...",
