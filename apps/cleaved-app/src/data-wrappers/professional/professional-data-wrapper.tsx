@@ -82,9 +82,6 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
 
   const { t } = useTranslator();
 
-  console.log("linkedin", data?.organizationGetMember?.socialMedia.linkedin);
-  console.log("twitter", data?.organizationGetMember?.socialMedia.twitter);
-
   return (
     <>
       <StickUnderHeaderDesktopOnly>
