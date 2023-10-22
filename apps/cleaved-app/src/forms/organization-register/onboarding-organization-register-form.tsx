@@ -7,8 +7,14 @@ import { useMutation } from "@apollo/react-hooks";
 import { v4 as uuidv4 } from "uuid";
 
 import { logError, logQueryError, RollbarLogLevels } from "@cleaved/helpers";
-import { BORDERS, ButtonPrimary, FONT_SIZES, RADIUS, SPACING, SPACING_PX, Spinner } from "@cleaved/ui";
+import { Spinner } from "@cleaved/ui";
 
+import {
+  inputFieldStyles,
+  StyledProjectFormLabel,
+  StyledProjectFormWrapper,
+  StyledSubmitButton,
+} from "../../components";
 import { authTokenContext } from "../../contexts";
 import { useProductEngagementLogEvent, useTranslator } from "../../hooks";
 import { routeConstantsCleavedApp } from "../../router";
@@ -24,32 +30,7 @@ const StyledButtonPrimaryWrapper = styled.div`
 `;
 
 const StyledField = styled(Field)`
-  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.MEDIUM};
-  color: ${({ theme }) => theme.colors.baseText_color};
-  font-size: ${FONT_SIZES.MEDIUM};
-  margin-bottom: ${SPACING.MEDIUM};
-  outline: none;
-  padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
-  width: 100%;
-`;
-
-const StyledPostButton = styled(ButtonPrimary)`
-  font-size: ${FONT_SIZES.MEDIUM};
-  margin-left: auto;
-  margin-top: ${SPACING_PX.ONE};
-`;
-
-const StyledProjectFormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledProjectFormLabel = styled.label`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
-  font-size: ${FONT_SIZES.XSMALL};
-  margin-bottom: ${SPACING_PX.ONE};
+  ${inputFieldStyles}
 `;
 
 export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
@@ -130,10 +111,10 @@ export const OnboardingOrganizationRegisterForm: FunctionComponent = () => {
                 </StyledProjectFormWrapper>
 
                 <StyledButtonPrimaryWrapper>
-                  <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
+                  <StyledSubmitButton disabled={!(isValid && dirty) || isSubmitting} type="submit">
                     {isSubmitting ? t("pleaseWaitDots") : t("organizations.organizationRegister")}
                     <Spinner visible={isSubmitting} />
-                  </StyledPostButton>
+                  </StyledSubmitButton>
                 </StyledButtonPrimaryWrapper>
               </Form>
             </>

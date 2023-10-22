@@ -46,7 +46,8 @@ const StyledPeopleCardWrapper = styled.div`
 export const PeopleListDataWrapper: FunctionComponent = () => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin, OrgPermissionLevel.Updater]);
   const { preferredOrgId } = useContext(authTokenContext);
-  const { organizationSeekMembersData, organizationSeekMembersDataLoading } = useOrganizationSeekMembers(null, 500); // If we need to change this to a higher # or lazy load users, we're doing alright!!!
+  const { organizationSeekMembersData, organizationSeekMembersDataLoading, organizationSeekMembersDataRefetch } =
+    useOrganizationSeekMembers(null, 500); // If we need to change this to a higher # or lazy load users, we're doing alright!!!
   const { t } = useTranslator();
 
   const professionalInviteLinkName = t("menuLinkNames.professionalInvite") ? t("menuLinkNames.professionalInvite") : "";
@@ -69,7 +70,7 @@ export const PeopleListDataWrapper: FunctionComponent = () => {
           organizationSeekMembersData &&
           organizationSeekMembersData?.length > 0 &&
           organizationSeekMembersData.map((member) => {
-            return <PeopleCard key={member.id} member={member} />;
+            return <PeopleCard key={member.id} member={member} refetchData={organizationSeekMembersDataRefetch} />;
           })}
       </StyledPeopleCardWrapper>
 

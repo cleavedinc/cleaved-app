@@ -9,7 +9,7 @@ import { AreYouSureModal } from "../../components";
 import { authTokenContext } from "../../contexts";
 import { OrgPermissionLevel, OrganizationSeekMembersQuery } from "../../generated-types/graphql";
 import { useTranslator } from "../../hooks";
-import { useOrganizationPermission } from "../../permissions";
+import { convertPermissionInOrgReadable, useOrganizationPermission } from "../../permissions";
 
 import {
   StyledBasicItemRed,
@@ -26,7 +26,7 @@ import "@szhsin/react-menu/dist/index.css";
 
 type PeopleEditMenuProps = {
   member: OrganizationSeekMembersQuery["organizationSeekMembers"][0];
-  organizationSeekMembersDataRefetch?: () => void;
+  refetchData?: () => void;
 };
 
 const StyledPermission = styled.div`
@@ -39,7 +39,7 @@ const StyledPermission = styled.div`
 
 export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) => {
   const hasPermission = useOrganizationPermission([OrgPermissionLevel.Admin]);
-  const { member, organizationSeekMembersDataRefetch } = props;
+  const { member, refetchData } = props;
   const { preferredOrgId } = useContext(authTokenContext);
   const [isConfirmRemoveModalOpen, setIsConfirmRemoveModalOpen] = useState(false);
   const theme = useTheme();
@@ -47,8 +47,8 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
 
   const [organizationRemoveUser] = useMutation(ORGANIZATION_REMOVE_USER_MUTATION, {
     onCompleted: () => {
-      if (organizationSeekMembersDataRefetch) {
-        organizationSeekMembersDataRefetch();
+      if (refetchData) {
+        refetchData();
       }
     },
 
@@ -59,8 +59,8 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
 
   const [organizationSetUserPermissionLevel] = useMutation(ORGANIZATION_SET_USER_PERMISSION_LEVEL_MUTATION, {
     onCompleted: () => {
-      if (organizationSeekMembersDataRefetch) {
-        organizationSeekMembersDataRefetch();
+      if (refetchData) {
+        refetchData();
       }
     },
 
@@ -130,15 +130,15 @@ export const PeopleEditMenu: FunctionComponent<PeopleEditMenuProps> = (props) =>
                 }
               >
                 <StyledRadioGroupBasicItem type="radio" value={OrgPermissionLevel.Viewer}>
-                  <StyledPermission>{OrgPermissionLevel.Viewer}</StyledPermission>
+                  <StyledPermission>{convertPermissionInOrgReadable(OrgPermissionLevel.Viewer, t)}</StyledPermission>
                 </StyledRadioGroupBasicItem>
 
                 <StyledRadioGroupBasicItem type="radio" value={OrgPermissionLevel.Updater}>
-                  <StyledPermission>{OrgPermissionLevel.Updater}</StyledPermission>
+                  <StyledPermission>{convertPermissionInOrgReadable(OrgPermissionLevel.Updater, t)}</StyledPermission>
                 </StyledRadioGroupBasicItem>
 
                 <StyledRadioGroupBasicItem type="radio" value={OrgPermissionLevel.Admin}>
-                  <StyledPermission>{OrgPermissionLevel.Admin}</StyledPermission>
+                  <StyledPermission>{convertPermissionInOrgReadable(OrgPermissionLevel.Admin, t)}</StyledPermission>
                 </StyledRadioGroupBasicItem>
               </StyledMenuRadioGroupNoBorder>
             </StyledSubMenu>
