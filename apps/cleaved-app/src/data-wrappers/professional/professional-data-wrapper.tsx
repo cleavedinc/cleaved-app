@@ -125,13 +125,13 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
                   <StyledProfessionalAbout>
                     {data.organizationGetMember.socialMedia.linkedin && (
                       <StyledSocialLink href={data.organizationGetMember.socialMedia.linkedin} target="_blank">
-                        <LinkedinIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+                        <LinkedinIcon color={theme.colors.baseLink_color} iconSize={FONT_SIZES.LARGE} />
                       </StyledSocialLink>
                     )}
 
                     {data.organizationGetMember.socialMedia.twitter && (
                       <StyledSocialLink href={data.organizationGetMember.socialMedia.twitter} target="_blank">
-                        <XTwitterIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.LARGE} />
+                        <XTwitterIcon color={theme.colors.baseLink_color} iconSize={FONT_SIZES.LARGE} />
                       </StyledSocialLink>
                     )}
                   </StyledProfessionalAbout>
