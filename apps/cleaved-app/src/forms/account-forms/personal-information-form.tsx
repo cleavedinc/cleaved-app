@@ -5,20 +5,15 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  FONT_SIZES,
-  HeadingWrapper,
-  mediaQueries,
-  RADIUS,
-  SectionHeader,
-  SPACING,
-  SPACING_PX,
-  Spinner,
-} from "@cleaved/ui";
+import { HeadingWrapper, mediaQueries, SectionHeader, Spinner } from "@cleaved/ui";
 
-import { EditAccountAvatar } from "../../components";
+import {
+  EditAccountAvatar,
+  inputFieldStyles,
+  StyledProjectFormLabel,
+  StyledProjectFormWrapper,
+  StyledSubmitButton,
+} from "../../components";
 import { useFindMyAccount, useTranslator } from "../../hooks";
 
 import { UPDATE_ACCOUNT_MUTATION } from "./gql";
@@ -38,15 +33,7 @@ const StyledAvatarNameWrapper = styled.div`
 `;
 
 const StyledField = styled(Field)`
-  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.MEDIUM};
-  color: ${({ theme }) => theme.colors.baseText_color};
-  font-size: ${FONT_SIZES.MEDIUM};
-  margin-bottom: ${SPACING.MEDIUM};
-  outline: none;
-  padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
-  width: 100%;
+  ${inputFieldStyles}
 `;
 
 const StyledFirstLastNameWrapper = styled.div`
@@ -60,23 +47,6 @@ const StyledFirstLastNameWrapper = styled.div`
 `;
 
 const StyledFormWrapper = styled.div``;
-
-const StyledProjectFormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledProjectFormLabel = styled.label`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
-  font-size: ${FONT_SIZES.XSMALL};
-  margin-bottom: ${SPACING_PX.ONE};
-`;
-
-const StyledSubmitButton = styled(ButtonPrimary)`
-  font-size: ${FONT_SIZES.MEDIUM};
-  margin-left: auto;
-  margin-top: ${SPACING_PX.ONE};
-`;
 
 export const PersonalInformationForm: FunctionComponent = () => {
   const { t } = useTranslator();

@@ -6,18 +6,14 @@ import * as yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
 import { logQueryError } from "@cleaved/helpers";
-import {
-  BORDERS,
-  ButtonPrimary,
-  FONT_SIZES,
-  HeadingWrapper,
-  RADIUS,
-  SectionHeader,
-  SPACING,
-  SPACING_PX,
-  Spinner,
-} from "@cleaved/ui";
+import { HeadingWrapper, SectionHeader, Spinner } from "@cleaved/ui";
 
+import {
+  inputFieldStyles,
+  StyledProjectFormLabel,
+  StyledProjectFormWrapper,
+  StyledSubmitButton,
+} from "../../components";
 import { Social_Media_Type } from "../../generated-types/graphql";
 import { useFindMyAccount, useTranslator } from "../../hooks";
 
@@ -31,32 +27,7 @@ type SocialNetworksFormType = {
 const StyledFormWrapper = styled.div``;
 
 const StyledField = styled(Field)`
-  background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
-  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
-  border-radius: ${RADIUS.MEDIUM};
-  color: ${({ theme }) => theme.colors.baseText_color};
-  font-size: ${FONT_SIZES.MEDIUM};
-  margin-bottom: ${SPACING.MEDIUM};
-  outline: none;
-  padding: ${SPACING.MEDIUM_SMALL} ${SPACING.MEDIUM};
-  width: 100%;
-`;
-
-const StyledProjectFormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledProjectFormLabel = styled.label`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
-  font-size: ${FONT_SIZES.XSMALL};
-  margin-bottom: ${SPACING_PX.ONE};
-`;
-
-const StyledSubmitButton = styled(ButtonPrimary)`
-  font-size: ${FONT_SIZES.MEDIUM};
-  margin-left: auto;
-  margin-top: ${SPACING_PX.ONE};
+  ${inputFieldStyles}
 `;
 
 export const SocialNetworksForm: FunctionComponent = () => {
@@ -76,7 +47,6 @@ export const SocialNetworksForm: FunctionComponent = () => {
       }
     },
     onError: (error) => {
-      console.log("error", error);
       logQueryError(error);
     },
   });

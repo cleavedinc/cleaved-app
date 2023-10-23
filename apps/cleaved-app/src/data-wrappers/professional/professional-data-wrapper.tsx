@@ -14,21 +14,20 @@ import {
   XTwitterIcon,
 } from "@cleaved/ui";
 
-import { AsideAvatar } from "../../components";
+import { AsideAvatar, lableStyles } from "../../components";
 import { OrganizationGetMemberQuery } from "../../generated-types/graphql";
 import { useLoginGuard, useRouteParams, useTranslator } from "../../hooks";
 
 import { ORGANIZATION_GET_MEMBER_QUERY } from "./gql";
 
-const StyledAboutLabel = styled.label`
-  color: ${({ theme }) => theme.colors.baseSubText_color};
-  font-size: ${FONT_SIZES.XSMALL};
-`;
-
 const StyledEmailAddress = styled.div`
   color: ${({ theme }) => theme.colors.baseSubText_color};
   font-size: ${FONT_SIZES.XSMALL};
   margin-bottom: ${SPACING.MEDIUM};
+`;
+
+const StyledLabel = styled.div`
+  ${lableStyles}
 `;
 
 const StyledJobTitle = styled.div`
@@ -83,9 +82,6 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
 
   const { t } = useTranslator();
 
-  console.log("linkedin", data?.organizationGetMember?.socialMedia.linkedin);
-  console.log("twitter", data?.organizationGetMember?.socialMedia.twitter);
-
   return (
     <>
       <StickUnderHeaderDesktopOnly>
@@ -107,7 +103,7 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
 
             {data.organizationGetMember.about && (
               <StyledProfessionalAboutWrapper>
-                <StyledAboutLabel>{t("professional.about")}</StyledAboutLabel>
+                <StyledLabel>{t("professional.about")}</StyledLabel>
 
                 <StyledProfessionalAbout>{data.organizationGetMember.about}</StyledProfessionalAbout>
               </StyledProfessionalAboutWrapper>
@@ -115,7 +111,7 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
 
             {data.organizationGetMember.goals && (
               <StyledProfessionalAboutWrapper>
-                <StyledAboutLabel>{t("professional.goals")}</StyledAboutLabel>
+                <StyledLabel>{t("professional.goals")}</StyledLabel>
 
                 <StyledProfessionalAbout>{data.organizationGetMember.goals}</StyledProfessionalAbout>
               </StyledProfessionalAboutWrapper>
@@ -124,7 +120,7 @@ export const ProfessionalDataWrapper: FunctionComponent = () => {
             {data &&
               (data.organizationGetMember.socialMedia.linkedin || data.organizationGetMember.socialMedia.twitter) && (
                 <StyledProfessionalAboutWrapper>
-                  <StyledAboutLabel>{t("professional.socialMedia")}</StyledAboutLabel>
+                  <StyledLabel>{t("professional.socialMedia")}</StyledLabel>
 
                   <StyledProfessionalAbout>
                     {data.organizationGetMember.socialMedia.linkedin && (

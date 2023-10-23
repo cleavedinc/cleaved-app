@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "outDir": "./build",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@root/*": ["./*"]
+    },
+    "resolveJsonModule": true,
+  },
+  "exclude":[
+    "build/",
+    "webpack.config.js"
+  ]
+}
