@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Box, FONT_SIZES, SPACING } from "@cleaved/ui";
 
-// import { GoogleLoginWrapper } from "../../components/login/google-login";
+import { GoogleLoginWrapper } from "../../components/login/google-login";
 
 const StyledCompanyName = styled.h1`
   font-size: ${FONT_SIZES.XLARGE};
@@ -32,7 +32,7 @@ export const LoginDataWrapper: FunctionComponent = () => {
 
       <StyledSignInMessage>Let's help some people</StyledSignInMessage>
 
-      {/* <GoogleLoginWrapper /> */}
+      <GoogleLoginWrapper />
     </StyledLogInWrapper>
   );
 };

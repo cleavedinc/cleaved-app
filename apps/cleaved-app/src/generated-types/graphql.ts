@@ -69,6 +69,14 @@ export type AccountPublicView = {
   preferredName?: Maybe<Scalars['String']['output']>;
 };
 
+export type AdminLogInResultView = {
+  __typename?: 'AdminLogInResultView';
+  authorizationToken: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  refreshToken: Scalars['String']['output'];
+  tokenType: Scalars['String']['output'];
+};
+
 export enum BillingTier {
   Free = 'FREE',
   Growth = 'GROWTH',
@@ -97,6 +105,8 @@ export type LogInResultWithJoinOrgView = {
 export type Mutation = {
   __typename?: 'Mutation';
   acceptTerms: Scalars['AccessToken']['output'];
+  cleavedAdminRefreshLogin: AdminLogInResultView;
+  cleavedAdminSSO: AdminLogInResultView;
   generateOrganizationShareLink: Scalars['ID']['output'];
   googleSSO: LogInResultView;
   googleSSOWithShareLink: LogInResultWithJoinOrgView;
@@ -127,6 +137,16 @@ export type Mutation = {
   setMyJobTitle?: Maybe<Scalars['Void']['output']>;
   setPreferredOrgId?: Maybe<Scalars['Void']['output']>;
   updateAccount?: Maybe<Scalars['Void']['output']>;
+};
+
+
+export type MutationCleavedAdminRefreshLoginArgs = {
+  refreshToken: Scalars['String']['input'];
+};
+
+
+export type MutationCleavedAdminSsoArgs = {
+  token: Scalars['String']['input'];
 };
 
 
