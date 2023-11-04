@@ -20,7 +20,10 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       "process.env.DOMAIN": JSON.stringify("localhost:5000"),
-      "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("http://localhost:9000/graphql"),
+      "process.env.GOOGLE_CLIENT_ID": JSON.stringify(
+        "121617899254-b2639tb2t4r7ifvlmmh5m2la38jskss2.apps.googleusercontent.com"
+      ),
+      "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("http://localhost:8080/graphql"),
     }),
     new webpack.HotModuleReplacementPlugin(),
     // new BundleAnalyzerPlugin()

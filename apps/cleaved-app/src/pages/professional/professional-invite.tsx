@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import styled from "styled-components";
 
-import { Box, ContentWrapper, LeftColumnWrapper, MainColumnWrapper, SPACING } from "@cleaved/ui";
+import { Box, ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper, SPACING } from "@cleaved/ui";
 
 import { Header, StyledRouterButton } from "../../components";
 import { authTokenContext } from "../../contexts";
@@ -47,7 +47,7 @@ export const PeopleListProfessionalInvite: FunctionComponent = () => {
           <AsideSharelinkInviteDataWrapper />
         </LeftColumnWrapper>
 
-        <MainColumnWrapper>
+        <MainColumnMaxWidthWrapper>
           {!organizationMembershipPermissionBillingCountsDataLoading && membershipUserLimitHit && (
             <>
               <StyledMembershipLimitBox>
@@ -66,7 +66,7 @@ export const PeopleListProfessionalInvite: FunctionComponent = () => {
           )}
 
           <PeopleListProfessionalInviteDataWrapper />
-        </MainColumnWrapper>
+        </MainColumnMaxWidthWrapper>
       </ContentWrapper>
     </>
   );
