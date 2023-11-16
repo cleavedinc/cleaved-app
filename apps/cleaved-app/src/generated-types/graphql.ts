@@ -476,6 +476,7 @@ export type Query = {
   getNotifications: NotificationPagedResponse;
   organizationGetMember?: Maybe<AccountMemberView>;
   organizationGetMembership: PrivateOrganizationView;
+  organizationListAdmin: Array<PrivateOrganizationView>;
   organizationMemberships: Array<PrivateOrganizationView>;
   organizationSeekMembers: Array<AccountMemberView>;
   organizationShareLinks: Array<OrganizationShareLink>;
@@ -508,6 +509,12 @@ export type QueryOrganizationGetMemberArgs = {
 
 export type QueryOrganizationGetMembershipArgs = {
   organizationId: Scalars['ID']['input'];
+};
+
+
+export type QueryOrganizationListAdminArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
 };
 
 

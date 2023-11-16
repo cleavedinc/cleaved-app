@@ -7,7 +7,7 @@
     "lint": "eslint -c configs/.eslintrc.js . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@apollo/client": "3.8.4",
+    "@apollo/client": "3.8.7",
     "@cleaved/ui": "*",
     "formik": "2.2.9",
     "javascript-time-ago": "2.5.9",

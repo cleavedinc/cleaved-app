@@ -12,6 +12,12 @@ export const MainNavigationLinks: FunctionComponent = () => {
           <NavigationButtonLabel>Home</NavigationButtonLabel>
         </NavigationButton>
       </Link>
+
+      <Link getProps={isMenuItemActive} to={`/${routeConstantsCleavedApp.organizations.route}`} title="Organizations">
+        <NavigationButton>
+          <NavigationButtonLabel>Organizations</NavigationButtonLabel>
+        </NavigationButton>
+      </Link>
     </>
   );
 };

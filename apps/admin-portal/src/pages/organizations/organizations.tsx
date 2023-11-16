@@ -3,9 +3,9 @@ import React, { FunctionComponent } from "react";
 import { ContentWrapper, LeftColumnWrapper, MainColumnMaxWidthWrapper } from "@cleaved/ui";
 
 import { Header } from "../../components";
-import { AsideHomeDataWrapper, HomeDataWrapper } from "../../data-wrappers";
+import { AsideHomeDataWrapper, OrganizationsDataWrapper } from "../../data-wrappers";
 
-export const Home: FunctionComponent = () => {
+export const Organizations: FunctionComponent = () => {
   return (
     <>
       <Header />
@@ -16,7 +16,7 @@ export const Home: FunctionComponent = () => {
         </LeftColumnWrapper>
 
         <MainColumnMaxWidthWrapper>
-          <HomeDataWrapper />
+          <OrganizationsDataWrapper />
         </MainColumnMaxWidthWrapper>
       </ContentWrapper>
     </>
