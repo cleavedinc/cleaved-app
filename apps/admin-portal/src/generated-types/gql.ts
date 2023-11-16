@@ -15,6 +15,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  mutation cleavedAdminRefreshLogin($refreshToken: String!) {\n    cleavedAdminRefreshLogin(refreshToken: $refreshToken) {\n      id\n      authorizationToken\n      refreshToken\n      tokenType\n    }\n  }\n": types.CleavedAdminRefreshLoginDocument,
     "\n  mutation cleavedAdminSSO($token: String!) {\n    cleavedAdminSSO(token: $token) {\n      id\n      authorizationToken\n      refreshToken\n      tokenType\n    }\n  }\n": types.CleavedAdminSsoDocument,
+    "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      goals\n      id\n      jobTitle\n      lastName\n      socialMedia {\n        twitter\n        linkedin\n      }\n    }\n  }\n": types.FindMyAccountDocument,
+    "\n  query organizationListAdmin($page: Int, $limit: Int) {\n    organizationListAdmin(page: $page, limit: $limit) {\n      id\n      name\n      userPermissionInOrg\n      memberCount\n      projectCount\n      activeProjectCount\n      billingTier\n    }\n  }\n": types.OrganizationListAdminDocument,
 };
 
 /**
@@ -39,6 +41,14 @@ export function graphql(source: "\n  mutation cleavedAdminRefreshLogin($refreshT
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation cleavedAdminSSO($token: String!) {\n    cleavedAdminSSO(token: $token) {\n      id\n      authorizationToken\n      refreshToken\n      tokenType\n    }\n  }\n"): (typeof documents)["\n  mutation cleavedAdminSSO($token: String!) {\n    cleavedAdminSSO(token: $token) {\n      id\n      authorizationToken\n      refreshToken\n      tokenType\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      goals\n      id\n      jobTitle\n      lastName\n      socialMedia {\n        twitter\n        linkedin\n      }\n    }\n  }\n"): (typeof documents)["\n  query findMyAccount {\n    findMyAccount {\n      about\n      currentAvatar\n      emailAddress\n      firstName\n      goals\n      id\n      jobTitle\n      lastName\n      socialMedia {\n        twitter\n        linkedin\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query organizationListAdmin($page: Int, $limit: Int) {\n    organizationListAdmin(page: $page, limit: $limit) {\n      id\n      name\n      userPermissionInOrg\n      memberCount\n      projectCount\n      activeProjectCount\n      billingTier\n    }\n  }\n"): (typeof documents)["\n  query organizationListAdmin($page: Int, $limit: Int) {\n    organizationListAdmin(page: $page, limit: $limit) {\n      id\n      name\n      userPermissionInOrg\n      memberCount\n      projectCount\n      activeProjectCount\n      billingTier\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
