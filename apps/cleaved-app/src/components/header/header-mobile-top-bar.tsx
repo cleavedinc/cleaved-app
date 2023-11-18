@@ -19,7 +19,6 @@ const StyledHeaderMobileTopBarStickyHeader = styled(StyledStickyHeader)`
 const StyledLogoWrapper = styled.div`
   align-items: center;
   display: flex;
-  width: 100%;
 `;
 
 export const HeaderMobileTopBar: FunctionComponent<HeaderMobileTopBarProps> = (props) => {

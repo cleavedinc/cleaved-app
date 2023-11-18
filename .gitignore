@@ -6,6 +6,7 @@ coverage
 node_modules/
 .DS_Store
 .vscode/
+.idea/
 build/
 **/**/neo-data
 **/**/neo-plugins

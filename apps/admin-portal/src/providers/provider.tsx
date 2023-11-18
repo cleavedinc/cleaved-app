@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode, useContext } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import { blockquote, blockquoteBefore, blockquoteP, FONTS, FONT_WEIGHTS, themeDark, themeLight } from "@cleaved/ui";
+import { FONTS, FONT_WEIGHTS, themeDark, themeLight } from "@cleaved/ui";
 
 import { ThemeContext } from "../contexts";
 
@@ -130,19 +130,6 @@ section {
   display: block;
 }
 
-/* These styles are duplicated in the post-form-editor due to ReactQuill not being able to handle the styled component theme prop */
-blockquote {
-  ${blockquote}
-}
-
-blockquote:before {
-  ${blockquoteBefore}
-}
-
-blockquote p {
-  ${blockquoteP}
-}
-
 body {
   background-color: ${({ theme }) => theme.colors.body_backgroundColor};
 }
@@ -179,63 +166,6 @@ ol,
 ul {
   list-style: none;
 }
-
-/* overrides package style for image carousel */
-.react-images__blanket {
-  background-color: ${({ theme }) => theme.colors.baseOverlay_backgroundColor} !important;
-}
-
-.react-images__container {
-  background-color: transparent !important;
-
-  .react-images__header {
-    background: linear-gradient(180deg, ${({ theme }) =>
-      theme.colors.baseBordersAndShadows_color}, transparent) !important;
-
-    span {
-      button:first-child {
-        display: none;
-      }
-
-      button {
-        color: ${({ theme }) => theme.colors.baseIcon_color};
-      }
-  }
-  }
-
-  .react-images__pager{
-    .react-images__navigation {
-      button {
-        background-color: ${({ theme }) => theme.colors.baseButtonAndIcon_backgroundColorHover};
-        
-        svg {
-          fill: ${({ theme }) => theme.colors.baseIcon_color};
-        }
-      }
-    }
-  }
-  
-
-  .react-images__footer {
-    color: ${({ theme }) => theme.colors.baseIcon_color};
-    background: linear-gradient(0deg, ${({ theme }) =>
-      theme.colors.baseBordersAndShadows_color}, transparent) !important;
-  }
-}
-
-/* OLD blockquote styles
-blockquote,
-q {
-  quotes: none;
-} */
-
-/* blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-} */
 
 table {
   border-collapse: collapse;

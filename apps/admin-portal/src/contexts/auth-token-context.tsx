@@ -9,9 +9,8 @@ import utc from "dayjs/plugin/utc";
 import { DeleteCookie, GetCookie, logQueryError, SetCookie } from "@cleaved/helpers";
 
 import { apolloClient } from "../client";
-// import { RefreshLogInMutation } from "../generated-types/graphql";
-// import { REFRESH_LOGIN_MUTATION } from "../components/login/gql";
-// import { routeConstantsCleavedApp } from "../router";
+import { CleavedAdminRefreshLoginMutation } from "../generated-types/graphql";
+import { CLEAVED_ADMIN_REFRESH_LOGIN_MUTATION } from "../components/login/gql";
 
 type AuthTokenContextProviderType = {
   children: ReactNode;
@@ -28,9 +27,7 @@ type AuthTokenContextType = {
   setAuthorizationTokens: (cat: string, crt: string) => void;
   refreshLogin: (action?: () => void | null | undefined) => Promise<void>;
   loading: boolean;
-  preferredOrgId: string;
   saveAccessToken: (catToken: string, callback?: any) => void; // eslint-disable-line
-  setPreferredOrgIdOnContext: (orgId: string | null | undefined) => void;
 };
 
 // extending dayjs with utc plugin to format correctly for cookie expiration
@@ -42,15 +39,12 @@ export const authTokenContext = createContext<AuthTokenContextType>({
   setAuthorizationTokens: () => {},
   refreshLogin: async () => {},
   loading: true,
-  preferredOrgId: "",
   saveAccessToken: () => {},
-  setPreferredOrgIdOnContext: () => {},
 });
 
 export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProviderType> = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [firstLoginComplete, setFirstLoginComplete] = useState(false);
-  const [preferredOrgId, setPreferredOrgId] = useState<string>("");
   const [refreshInProgress, setRefreshInProgress] = useState(false);
   const [refreshRequested, setRefreshRequested] = useState<RefreshRequest>({
     refreshRequested: false,
@@ -64,16 +58,8 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     apolloClient.resetStore();
     apolloClient.cache.reset();
     googleLogout();
-    setPreferredOrgId("");
     navigate(`/login`);
   }, [setLoggedIn, DeleteCookie, navigate, apolloClient, googleLogout]);
-
-  const setOrgId = useCallback(
-    (orgIdArg: string | null | undefined) => {
-      setPreferredOrgId(orgIdArg ?? "");
-    },
-    [setPreferredOrgId]
-  );
 
   const saveAccessToken = (catToken: string, callback?: () => void) => {
     (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token = catToken ?? "";
@@ -99,100 +85,100 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     [SetCookie, setLoggedIn, setFirstLoginComplete]
   );
 
-  // const [getRefreshLogIn, { loading: refreshLoading }] = useMutation(REFRESH_LOGIN_MUTATION, {
-  //   onError: (error) => {
-  //     setFirstLoginComplete(true);
-  //     logQueryError(error);
-  //     logOut();
-  //   },
-  // });
+  const [getRefreshLogIn, { loading: refreshLoading }] = useMutation(CLEAVED_ADMIN_REFRESH_LOGIN_MUTATION, {
+    onError: (error) => {
+      setFirstLoginComplete(true);
+      logQueryError(error);
+      logOut();
+    },
+  });
 
-  // const refreshOnComplete = useCallback(
-  //   (r: RefreshLogInMutation, postLoginRefreshAction?: (() => void) | null | undefined) => {
-  //     saveAuthorizationTokens(r.refreshLogIn.authorizationToken, r.refreshLogIn.refreshToken);
-  //     setOrgId(r.refreshLogIn.preferredOrgId);
+  const refreshOnComplete = useCallback(
+    (r: CleavedAdminRefreshLoginMutation, postLoginRefreshAction?: (() => void) | null | undefined) => {
+      saveAuthorizationTokens(r.cleavedAdminRefreshLogin.authorizationToken, r.cleavedAdminRefreshLogin.refreshToken);
 
-  //     if (postLoginRefreshAction) {
-  //       postLoginRefreshAction();
-  //     }
-  //   },
-  //   [saveAuthorizationTokens, setOrgId]
-  // );
+      if (postLoginRefreshAction) {
+        postLoginRefreshAction();
+      }
+    },
+    [saveAuthorizationTokens]
+  );
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     const ival = setInterval(() => {
-  //       const intervalCrt = GetCookie("_CRT_");
+  useEffect(() => {
+    if (loggedIn) {
+      const ival = setInterval(() => {
+        const intervalCrt = GetCookie("_CRT_");
 
-  //       if (intervalCrt) {
-  //         getRefreshLogIn({
-  //           variables: { refreshToken: intervalCrt },
-  //           onCompleted: (r: RefreshLogInMutation) =>
-  //             saveAuthorizationTokens(r.refreshLogIn.authorizationToken, r.refreshLogIn.refreshToken),
-  //         });
-  //       }
-  //     }, 30000);
+        if (intervalCrt) {
+          getRefreshLogIn({
+            variables: { refreshToken: intervalCrt },
+            onCompleted: (r: CleavedAdminRefreshLoginMutation) =>
+              saveAuthorizationTokens(
+                r.cleavedAdminRefreshLogin.authorizationToken,
+                r.cleavedAdminRefreshLogin.refreshToken
+              ),
+          });
+        }
+      }, 30000);
 
-  //     return () => {
-  //       clearInterval(ival);
-  //     };
-  //   }
-  // }, [loggedIn]);
+      return () => {
+        clearInterval(ival);
+      };
+    }
+  }, [loggedIn]);
 
-  // useEffect(() => {
-  //   setRefreshInProgress(true);
-  //   const refreshAction = refreshRequested.refreshAction;
-  //   const crt = GetCookie("_CRT_");
+  useEffect(() => {
+    setRefreshInProgress(true);
+    const refreshAction = refreshRequested.refreshAction;
+    const crt = GetCookie("_CRT_");
 
-  //   if (crt) {
-  //     getRefreshLogIn({
-  //       variables: { refreshToken: crt },
-  //       onCompleted: (r: RefreshLogInMutation) => {
-  //         refreshOnComplete(r, refreshAction);
-  //         setRefreshInProgress(false);
-  //       },
-  //       onError: () => {
-  //         setRefreshInProgress(false);
-  //       },
-  //     });
-  //     setRefreshRequested({ refreshRequested: false, refreshAction: null });
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // }, []);
+    if (crt) {
+      console.log("HAS CRT");
+      getRefreshLogIn({
+        variables: { refreshToken: crt },
+        onCompleted: (r: CleavedAdminRefreshLoginMutation) => {
+          refreshOnComplete(r, refreshAction);
+          setRefreshInProgress(false);
+        },
+        onError: () => {
+          setRefreshInProgress(false);
+        },
+      });
+      setRefreshRequested({ refreshRequested: false, refreshAction: null });
+    } else {
+      console.log("ROUTE TO LOGIN PAGE");
 
-  // useEffect(() => {
-  //   if (!refreshInProgress && refreshRequested.refreshRequested) {
-  //     setRefreshInProgress(true);
-  //     const refreshAction = refreshRequested.refreshAction;
-  //     const crt = GetCookie("_CRT_");
-  //     if (crt) {
-  //       getRefreshLogIn({
-  //         variables: { refreshToken: crt },
-  //         onCompleted: (r: RefreshLogInMutation) => {
-  //           refreshOnComplete(r, refreshAction);
-  //           setRefreshInProgress(false);
-  //         },
-  //         onError: () => {
-  //           setRefreshInProgress(false);
-  //         },
-  //       });
-  //       setRefreshRequested({ refreshRequested: false, refreshAction: null });
-  //     }
-  //   }
-  // }, [refreshRequested, refreshInProgress]);
+      navigate("/login");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!refreshInProgress && refreshRequested.refreshRequested) {
+      setRefreshInProgress(true);
+      const refreshAction = refreshRequested.refreshAction;
+      const crt = GetCookie("_CRT_");
+      if (crt) {
+        getRefreshLogIn({
+          variables: { refreshToken: crt },
+          onCompleted: (r: CleavedAdminRefreshLoginMutation) => {
+            refreshOnComplete(r, refreshAction);
+            setRefreshInProgress(false);
+          },
+          onError: () => {
+            setRefreshInProgress(false);
+          },
+        });
+        setRefreshRequested({ refreshRequested: false, refreshAction: null });
+      }
+    }
+  }, [refreshRequested, refreshInProgress]);
 
   const output: AuthTokenContextType = {
     logOut,
     loggedIn,
-    preferredOrgId,
     saveAccessToken,
-    setPreferredOrgIdOnContext: (orgId: string | null | undefined) => {
-      setOrgId(orgId);
-    },
     setAuthorizationTokens: saveAuthorizationTokens,
     loading: false || !firstLoginComplete,
-    // loading: refreshLoading || !firstLoginComplete, // I added false above to make this work until gql is hooked up
     refreshLogin: async (postLoginRefreshAction?: (() => void) | null | undefined) => {
       setRefreshRequested({ refreshRequested: true, refreshAction: postLoginRefreshAction });
     },

@@ -13,7 +13,7 @@
     "compile": "tsc"
   },
   "dependencies": {
-    "@apollo/client": "3.8.4",
+    "@apollo/client": "3.8.7",
     "@apollo/react-hooks": "4.0.0",
     "@cleaved/helpers": "*",
     "@cleaved/ui": "*",

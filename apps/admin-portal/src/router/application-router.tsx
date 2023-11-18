@@ -7,6 +7,7 @@ import { mediaQueries } from "@cleaved/ui";
 import { Home } from "../pages/home/home";
 import { HomeRouting } from "../pages/home/home-routing";
 import { Login } from "../pages/login/login";
+import { Organizations } from "../pages/organizations/organizations";
 import { routeConstantsCleavedApp } from "../router";
 
 import { PageProtector } from "./page-protector";
@@ -25,7 +26,9 @@ export const ApplicationRouter: FunctionComponent = () => (
   <StyledRouter primary={false}>
     <PageProtector default path={`${routeConstantsCleavedApp.homeRouting.route}`} renderedPage={<HomeRouting />} />
 
-    <PageProtector path={`/portal${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
+    <PageProtector path={`${routeConstantsCleavedApp.home.route}`} renderedPage={<Home />} />
+
+    <PageProtector path={`${routeConstantsCleavedApp.organizations.route}`} renderedPage={<Organizations />} />
 
     <PageProtector path={routeConstantsCleavedApp.login.route} renderedPage={<Login />} isNotProtected />
   </StyledRouter>

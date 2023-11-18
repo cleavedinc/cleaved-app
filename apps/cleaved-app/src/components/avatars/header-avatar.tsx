@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
+import { SPACING } from "@cleaved/ui";
+
 import { HeaderMenuAvatar } from "../../components";
 import { useFindMyAccount } from "../../hooks";
 
@@ -24,6 +26,10 @@ const AvatarWrapper = styled.button`
   }
 `;
 
+const StyledAccountName = styled.div`
+  margin-right: ${SPACING.SMALL};
+`;
+
 export const HeaderAvatar: FunctionComponent<HeaderAvatarProps> = (props) => {
   const { onClick } = props;
   const { findMyAccountData, findMyAccountDataLoading } = useFindMyAccount();
@@ -32,6 +38,9 @@ export const HeaderAvatar: FunctionComponent<HeaderAvatarProps> = (props) => {
     <>
       {!findMyAccountDataLoading && findMyAccountData && (
         <AvatarWrapper type="button" onClick={onClick}>
+          {findMyAccountData && findMyAccountData?.firstName && (
+            <StyledAccountName>{findMyAccountData?.firstName}</StyledAccountName>
+          )}
           <HeaderMenuAvatar account={findMyAccountData} />
         </AvatarWrapper>
       )}

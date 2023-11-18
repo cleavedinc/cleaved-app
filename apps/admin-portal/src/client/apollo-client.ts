@@ -25,9 +25,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ extensions }) => {
       // navigate users to the TOS page it not accepted
-      if (extensions.code === "TERMS_NOT_ACCEPTED") {
-        navigate(routeConstantsCleavedApp.termsOfServiceAgreement.route);
-      }
+      // if (extensions.code === "TERMS_NOT_ACCEPTED") {
+      //   navigate(routeConstantsCleavedApp.termsOfServiceAgreement.route);
+      // }
     });
   }
 

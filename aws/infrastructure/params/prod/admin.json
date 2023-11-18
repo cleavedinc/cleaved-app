@@ -1,0 +1,9 @@
+{
+  "Parameters": {
+    "HostedZoneId": "Z0425717178TU8MYLUW2D",
+    "RecordSetName": "admin.cleaved.com"
+  },
+  "Tags": {
+    "production": "true"
+  }
+}

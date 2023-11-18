@@ -1,19 +1,9 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import styled from "styled-components";
-// import { Link } from "@reach/router";
 
-// import { routeConstantsCleavedApp } from "../../router";
-import {
-  BORDERS,
-  FONT_SIZES,
-  // isMenuItemActive,
-  // NavigationButtonLabel,
-  NavigationButton,
-  OnOutsideClick,
-  SPACING,
-  DropdownMenu,
-} from "@cleaved/ui";
+import { BORDERS, FONT_SIZES, NavigationButton, OnOutsideClick, SPACING, DropdownMenu } from "@cleaved/ui";
 
+import { HeaderAvatar } from "../avatars";
 import { authTokenContext } from "../../contexts";
 
 const StyledMenuUnorderedList = styled.ul`
@@ -61,6 +51,7 @@ const StyledOnOutsideClick = styled(OnOutsideClick)`
 
 export const HeaderAccountDropdownMenu: FunctionComponent = () => {
   const [isAccountMenuActive, setIsAccountMenuActive] = useState(false);
+  const onAccountMenuClick = () => setIsAccountMenuActive(!isAccountMenuActive);
   const handleCloseMenu = () => setIsAccountMenuActive(false);
   const { logOut } = useContext(authTokenContext);
 
@@ -76,17 +67,13 @@ export const HeaderAccountDropdownMenu: FunctionComponent = () => {
       }}
     >
       <>
+        <HeaderAvatar onClick={onAccountMenuClick} />
+
         <DropdownMenu className={`${isAccountMenuActive ? "active" : ""}`}>
           <StyledMenuUnorderedList>
-            {/* <StyledDropdownMenuNavigationButton>
-              <Link getProps={isMenuItemActive} onClick={handleCloseMenu} title={profileLinkName} to={profilePath}>
-                <NavigationButtonLabel>{profileLinkName}</NavigationButtonLabel>
-              </Link>
-            </StyledDropdownMenuNavigationButton> */}
-
             <StyledDropdownMenuNavigationButton>
               <StyledLogoutButton type="button" onClick={handleLogout}>
-                log out
+                Log out
               </StyledLogoutButton>
             </StyledDropdownMenuNavigationButton>
           </StyledMenuUnorderedList>
