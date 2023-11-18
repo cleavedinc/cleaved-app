@@ -8,14 +8,19 @@ phases:
   pre_build:
     commands:
       - yarn install
-      - eval "artifact_dir=\$CODEBUILD_SRC_DIR_deploy" && cd $artifact_dir && BUCKET=$(jq -r .Bucket outputs.json)
+      - eval "artifact_dir=\$CODEBUILD_SRC_DIR_app" && cd $artifact_dir && APP_BUCKET=$(jq -r .Bucket outputs.json) && APP_DISTRIBUTION=$(jq -r .Distribution $CODEBUILD_SRC_DIR_app/outputs.json)
+      - eval "artifact_dir=\$CODEBUILD_SRC_DIR_admin" && cd $artifact_dir && ADMIN_BUCKET=$(jq -r .Bucket outputs.json) && ADMIN_DISTRIBUTION=$(jq -r .Distribution $CODEBUILD_SRC_DIR_admin/outputs.json)
   build:
     commands:
       - cd $CODEBUILD_SRC_DIR/apps/cleaved-app
       - yarn prod:us
       - cp -R public build/
+      - cd $CODEBUILD_SRC_DIR/apps/admin-portal
+      - yarn prod:us
+      - cp -R public build/
   post_build:
     commands:
-      - aws s3 sync $CODEBUILD_SRC_DIR/apps/cleaved-app/build s3://$BUCKET --delete
-      - DISTRIBUTION=$(jq -r .Distribution $CODEBUILD_SRC_DIR_deploy/outputs.json)
-      - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION --paths "/*"
+      - aws s3 sync $CODEBUILD_SRC_DIR/apps/cleaved-app/build s3://$APP_BUCKET --delete
+      - aws cloudfront create-invalidation --distribution-id $APP_DISTRIBUTION --paths "/*"
+      - aws s3 sync $CODEBUILD_SRC_DIR/apps/admin-portal/build s3://$ADMIN_BUCKET --delete
+      - aws cloudfront create-invalidation --distribution-id $ADMIN_DISTRIBUTION --paths "/*"
