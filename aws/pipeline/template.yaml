@@ -184,7 +184,7 @@ Resources:
                 ActionMode: CREATE_UPDATE
                 RoleArn: !GetAtt DeployRole.Arn
                 Capabilities: CAPABILITY_NAMED_IAM
-                StackName: !Select [ 0, !Split [ '-pipeline', !Ref AWS::StackName ] ]
+                StackName: cleaved-admin
                 TemplatePath: source::aws/infrastructure/templates/main.yaml
                 TemplateConfiguration: source::aws/infrastructure/params/prod/admin.json
                 OutputFileName: outputs.json
