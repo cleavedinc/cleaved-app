@@ -20,7 +20,7 @@ import {
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
 import { ImagesControl } from "../action-controls";
-import { htmlToMarkdown, markdownToHtml, MarkdownEditor, markdownStylesBase } from "../markdown";
+import { htmlToMarkdown, markdownToHtml, MarkdownEditorLexical, markdownStylesBase } from "../markdown";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
 
 type ProjectPostFormProps = {
@@ -113,23 +113,18 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         initialValues={{
           organizationId,
           projectId: projectId,
-          body:
-            (!postProjectGetByIdDataLoading && postProjectGetByIdData && markdownToHtml(postProjectGetByIdData.body)) ||
-            "", // convert markdown into html for the editor
+          body: (!postProjectGetByIdDataLoading && postProjectGetByIdData && postProjectGetByIdData.body) || "",
           imageUrls: (!postProjectGetByIdDataLoading && postProjectGetByIdData?.images) || null,
         }}
         onSubmit={(values: PostProjectCreateMutationVariables, { resetForm, setSubmitting }) => {
           setSubmitting(false);
-
-          // convert editor html to markdown to be saved
-          const bodyMarkdown = htmlToMarkdown(values.body);
 
           if (postId) {
             updatePost({
               variables: {
                 organizationId: values.organizationId,
                 postId: postId,
-                body: bodyMarkdown,
+                body: values.body,
                 imageUrls: values.imageUrls,
               },
             });
@@ -138,7 +133,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
               variables: {
                 organizationId: values.organizationId,
                 projectId: values.projectId,
-                body: bodyMarkdown,
+                body: values.body,
                 imageUrls: values.imageUrls,
               },
             });
@@ -178,7 +173,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
           return (
             <Form>
               <StyledMarkdownEditorWrapper>
-                <MarkdownEditor name="body" placeholder={createProjectPostWithNamePlaceholder} />
+                <MarkdownEditorLexical name="body" placeholder={createProjectPostWithNamePlaceholder} />
               </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionsWrapper>
