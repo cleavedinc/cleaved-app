@@ -113,6 +113,8 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         initialValues={{
           organizationId,
           projectId: projectId,
+          // body: "",
+          // body: "**CAMPBELL TEST HERE**",
           body: (!postProjectGetByIdDataLoading && postProjectGetByIdData && postProjectGetByIdData.body) || "",
           imageUrls: (!postProjectGetByIdDataLoading && postProjectGetByIdData?.images) || null,
         }}

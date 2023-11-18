@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect, useRef } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 
 import { $createTextNode, $getRoot } from "lexical";
@@ -23,7 +23,7 @@ import { logError, RollbarLogLevels } from "@cleaved/helpers";
 
 import { PostFormContext } from "../../contexts";
 
-import { OnChangePlugin, ToolbarPlugin } from "./plugins";
+import { InsertMarkdown, OnChangePlugin, ToolbarPlugin } from "./plugins";
 import { basicTheme } from "./themes";
 
 type MarkdownEditorLexicalProps = {
@@ -45,6 +45,7 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
   const { className, name, placeholder } = props;
   const { projectPostFormIsDirty, setProjectPostFormIsDirty } = useContext(PostFormContext);
   const { dirty, isValid, isValidating, setFieldValue, status, values } = useFormikContext();
+  const [inputEditValue, setInputEditValue] = useState("");
 
   const onChange = (editorState) => {
     editorState.read(() => {
@@ -64,6 +65,17 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
     }
   }, [isValid, isValidating, dirty, projectPostFormIsDirty, setProjectPostFormIsDirty, status, values]);
 
+  // Set Edit input value
+  useEffect(() => {
+    console.log("00000 values.body", values.body);
+
+    if (values && values.body) {
+      console.log("111111 values.body", values.body);
+
+      setInputEditValue(values.body);
+    }
+  }, [values]);
+
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
@@ -76,6 +88,7 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
           />
           <HistoryPlugin />
           <AutoFocusPlugin />
+          <InsertMarkdown markdown={inputEditValue} />
           <OnChangePlugin onChange={onChange} />
         </div>
       </div>
