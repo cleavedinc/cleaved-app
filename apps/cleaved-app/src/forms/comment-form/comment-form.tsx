@@ -11,7 +11,7 @@ import { PostsContext } from "../../contexts";
 import { POST_PROJECT_REPLY } from "../../gql-mutations";
 import { useProductEngagementLogEvent, useRouteParams, useTranslator } from "../../hooks";
 
-import { htmlToMarkdown, MarkdownEditor, markdownStylesBase } from "../markdown";
+import { MarkdownEditorLexical } from "../markdown";
 
 type CommentFormType = {
   organizationId: string;
@@ -35,14 +35,6 @@ const StyledAdditionalActionButtonWrapper = styled.div`
 const StyledCommentForm = styled.div`
   background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   width: 100%;
-`;
-
-const StyledMarkdownEditorWrapper = styled.div`
-  ${markdownStylesBase}
-
-  .ql-container {
-    max-height: 20vh;
-  }
 `;
 
 const StyledPostButton = styled(ButtonPrimary)`
@@ -108,14 +100,11 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
         onSubmit={(values: CommentFormType, { resetForm, setSubmitting }) => {
           setSubmitting(false);
 
-          // convert editor html to markdown to be saved
-          const bodyMarkdown = htmlToMarkdown(values.body);
-
           postProjectReply({
             variables: {
               organizationId: values.organizationId,
               postOrPostReplyId: values.postOrPostReplyId,
-              body: bodyMarkdown,
+              body: values.body,
             },
           });
 
@@ -143,7 +132,7 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
           return (
             <Form>
               <StyledMarkdownEditorWrapper>
-                <MarkdownEditor name="body" placeholder={leaveCommentPlaceholder} />
+                <MarkdownEditorLexical name="body" placeholder={leaveCommentPlaceholder} />
               </StyledMarkdownEditorWrapper>
 
               <StyledAdditionalActionButtonWrapper>

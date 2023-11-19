@@ -1,6 +1,24 @@
 import { css } from "styled-components";
 import { FONTS, FONT_SIZES, RADIUS, scrollbar, SPACING } from "@cleaved/ui";
 
+// this was wrapping the editor on the form (main post form)
+// const StyledMarkdownEditorWrapper = styled.div`
+//   ${markdownStylesBase}
+
+//   .ql-container {
+//     max-height: 40vh;
+//   }
+// `;
+
+// this was wrapping the editor (comment form)
+// const StyledMarkdownEditorWrapper = styled.div`
+//   ${markdownStylesBase}
+
+//   .ql-container {
+//     max-height: 20vh;
+//   }
+// `;
+
 export const markdownStylesBase = css`
   .ql-container {
     background-color: transparent;

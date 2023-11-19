@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $convertFromMarkdownString, TRANSFORMERS } from "@lexical/markdown";
 
-export const InsertMarkdown = (markdown: { markdown: any }) => {
+export const InsertMarkdown = (markdown: { markdown: string }) => {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export const InsertMarkdown = (markdown: { markdown: any }) => {
         $convertFromMarkdownString(markdown?.markdown, TRANSFORMERS);
       }
     });
-  }, [editor, markdown.markdown]);
+  }, [editor]); // TODO: FIX THIS - note: do not add markdown to this dep array. It will cause an infinate loop
 
   return null;
 };

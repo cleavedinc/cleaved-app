@@ -20,7 +20,7 @@ import {
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
 import { ImagesControl } from "../action-controls";
-import { htmlToMarkdown, markdownToHtml, MarkdownEditorLexical, markdownStylesBase } from "../markdown";
+import { MarkdownEditorLexical } from "../markdown";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
 
 type ProjectPostFormProps = {
@@ -43,14 +43,6 @@ const StyledAdditionalActionButtonWrapper = styled.div`
   align-items: center;
   display: flex;
   margin-top: ${SPACING_PX.ONE};
-`;
-
-const StyledMarkdownEditorWrapper = styled.div`
-  ${markdownStylesBase}
-
-  .ql-container {
-    max-height: 40vh;
-  }
 `;
 
 const StyledPostButton = styled(ButtonPrimary)`
@@ -113,8 +105,6 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
         initialValues={{
           organizationId,
           projectId: projectId,
-          // body: "",
-          // body: "**CAMPBELL TEST HERE**",
           body: (!postProjectGetByIdDataLoading && postProjectGetByIdData && postProjectGetByIdData.body) || "",
           imageUrls: (!postProjectGetByIdDataLoading && postProjectGetByIdData?.images) || null,
         }}
@@ -174,9 +164,7 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
 
           return (
             <Form>
-              <StyledMarkdownEditorWrapper>
-                <MarkdownEditorLexical name="body" placeholder={createProjectPostWithNamePlaceholder} />
-              </StyledMarkdownEditorWrapper>
+              <MarkdownEditorLexical name="body" placeholder={createProjectPostWithNamePlaceholder} />
 
               <StyledAdditionalActionsWrapper>
                 {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
