@@ -155,7 +155,7 @@ Resources:
               RunOrder: 1
         - Name: Deploy
           Actions:
-            - Name: Deploy
+            - Name: App
               ActionTypeId:
                 Category: Deploy
                 Owner: AWS
@@ -167,12 +167,31 @@ Resources:
                 Capabilities: CAPABILITY_NAMED_IAM
                 StackName: !Select [ 0, !Split [ '-pipeline', !Ref AWS::StackName ] ]
                 TemplatePath: source::aws/infrastructure/templates/main.yaml
-                TemplateConfiguration: source::aws/infrastructure/params/prod.json
+                TemplateConfiguration: source::aws/infrastructure/params/prod/app.json
                 OutputFileName: outputs.json
               InputArtifacts:
                 - Name: source
               OutputArtifacts:
-                - Name: deploy
+                - Name: app
+              RunOrder: 1
+            - Name: Admin
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: CloudFormation
+                Version: 1
+              Configuration:
+                ActionMode: CREATE_UPDATE
+                RoleArn: !GetAtt DeployRole.Arn
+                Capabilities: CAPABILITY_NAMED_IAM
+                StackName: !Select [ 0, !Split [ '-pipeline', !Ref AWS::StackName ] ]
+                TemplatePath: source::aws/infrastructure/templates/main.yaml
+                TemplateConfiguration: source::aws/infrastructure/params/prod/admin.json
+                OutputFileName: outputs.json
+              InputArtifacts:
+                - Name: source
+              OutputArtifacts:
+                - Name: admin
               RunOrder: 1
             - Name: Yarn
               ActionTypeId:
@@ -185,5 +204,6 @@ Resources:
                 PrimarySource: source
               InputArtifacts:
                 - Name: source
-                - Name: deploy
+                - Name: app
+                - Name: admin
               RunOrder: 2

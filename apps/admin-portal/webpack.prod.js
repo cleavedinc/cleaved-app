@@ -9,11 +9,11 @@ module.exports = merge(common, {
 
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.DOMAIN": JSON.stringify("adminportal.cleaved.com"),
+      "process.env.DOMAIN": JSON.stringify("admin.cleaved.com"),
       "process.env.GOOGLE_CLIENT_ID": JSON.stringify(
         "547881876983-0hfc5llu7ctmpqnp9uqanqt6diintenk.apps.googleusercontent.com"
       ),
-      "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("https://api.app.cleaved.com/graphql"),
+      "process.env.GOOGLE_SSO_CLIENT_ID_ADMIN_PORTAL": JSON.stringify("https://api.app.cleaved.com/graphql"),
     }),
     new CopyPlugin({
       patterns: [{ from: "public", to: "public" }],
