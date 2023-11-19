@@ -1,13 +1,13 @@
 import { ApolloClient, ApolloLink, concat, from, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { onError } from "@apollo/client/link/error";
-import { navigate } from "@reach/router";
+// import { navigate } from "@reach/router";
 
 import { logError, RollbarLogLevels } from "@cleaved/helpers";
 
-import { routeConstantsCleavedApp } from "../router";
+// import { routeConstantsCleavedApp } from "../router";
 
-const httpLink = createUploadLink({ uri: process.env.GRAPHQL_API_SERVICE_URL, credentials: "omit" });
+const httpLink = createUploadLink({ uri: process.env.GOOGLE_SSO_CLIENT_ID_ADMIN_PORTAL, credentials: "omit" });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   const token = (window as unknown as { _cleaved_cat_token: null | string | undefined })._cleaved_cat_token;
@@ -23,12 +23,12 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach(({ extensions }) => {
-      // navigate users to the TOS page it not accepted
-      // if (extensions.code === "TERMS_NOT_ACCEPTED") {
-      //   navigate(routeConstantsCleavedApp.termsOfServiceAgreement.route);
-      // }
-    });
+    // graphQLErrors.forEach(({ extensions }) => {
+    // navigate users to the TOS page it not accepted
+    // if (extensions.code === "TERMS_NOT_ACCEPTED") {
+    //   navigate(routeConstantsCleavedApp.termsOfServiceAgreement.route);
+    // }
+    // });
   }
 
   if (networkError) {
