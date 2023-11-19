@@ -133,7 +133,6 @@ export const AuthTokenContextProvider: FunctionComponent<AuthTokenContextProvide
     const crt = GetCookie("_CRT_");
 
     if (crt) {
-      console.log("HAS CRT");
       getRefreshLogIn({
         variables: { refreshToken: crt },
         onCompleted: (r: CleavedAdminRefreshLoginMutation) => {

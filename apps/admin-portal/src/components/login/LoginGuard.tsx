@@ -9,7 +9,6 @@ export const LoginGuard: FunctionComponent<LoginGuardType> = ({ children }) => {
   const { isLoggedIn } = useLoginGuard();
 
   if (!isLoggedIn) {
-    console.log("HI THERE");
     return null;
   }
 

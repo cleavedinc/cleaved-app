@@ -23,7 +23,7 @@ module.exports = merge(common, {
       "process.env.GOOGLE_CLIENT_ID": JSON.stringify(
         "121617899254-b2639tb2t4r7ifvlmmh5m2la38jskss2.apps.googleusercontent.com"
       ),
-      "process.env.GRAPHQL_API_SERVICE_URL": JSON.stringify("http://localhost:8080/graphql"),
+      "process.env.GOOGLE_SSO_CLIENT_ID_ADMIN_PORTAL": JSON.stringify("http://localhost:8080/graphql"),
     }),
     new webpack.HotModuleReplacementPlugin(),
     // new BundleAnalyzerPlugin()
