@@ -11,11 +11,6 @@ type HeaderMenuAvatarProps = {
   account: FindMyAccountQuery["findMyAccount"] | undefined;
 };
 
-const StyledAvatarImage = styled.img`
-  ${avatartBase}
-  ${avatarXSmall}
-`;
-
 const StyledAvatarInitials = styled.div`
   ${avatartBase}
   ${avatarXSmall}
@@ -29,10 +24,6 @@ export const HeaderMenuAvatar: FunctionComponent<HeaderMenuAvatarProps> = (props
 
   return (
     <>
-      {account && account?.currentAvatar && (
-        <StyledAvatarImage src={`${process.env.MEDIA_ENDPOINT}/${account?.currentAvatar}`} alt="profile avatar" />
-      )}
-
       {account && !account?.currentAvatar && (
         <StyledAvatarInitials>
           {firstNameInitial}
