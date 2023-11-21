@@ -11,7 +11,7 @@ import { PostsContext } from "../../contexts";
 import { POST_PROJECT_REPLY } from "../../gql-mutations";
 import { useProductEngagementLogEvent, useRouteParams, useTranslator } from "../../hooks";
 
-import { MarkdownEditorLexical } from "../markdown";
+import { markdownStylesBase, MarkdownEditorLexical } from "../markdown";
 
 type CommentFormType = {
   organizationId: string;
@@ -35,6 +35,14 @@ const StyledAdditionalActionButtonWrapper = styled.div`
 const StyledCommentForm = styled.div`
   background-color: ${({ theme }) => theme.colors.baseBox_backgroundColor};
   width: 100%;
+`;
+
+const StyledMarkdownEditorLexicalWrapper = styled.div`
+  ${markdownStylesBase}
+
+  .editor-input {
+    max-height: 20vh;
+  }
 `;
 
 const StyledPostButton = styled(ButtonPrimary)`
@@ -131,9 +139,9 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
         {({ dirty, isSubmitting, isValid }) => {
           return (
             <Form>
-              <StyledMarkdownEditorWrapper>
+              <StyledMarkdownEditorLexicalWrapper>
                 <MarkdownEditorLexical name="body" placeholder={leaveCommentPlaceholder} />
-              </StyledMarkdownEditorWrapper>
+              </StyledMarkdownEditorLexicalWrapper>
 
               <StyledAdditionalActionButtonWrapper>
                 <StyledPostButton disabled={!(isValid && dirty) || isSubmitting} type="submit">

@@ -2,6 +2,7 @@ export * from "./button-active";
 export * from "./button-base";
 export * from "./button-danger";
 export * from "./button-disabled";
+export * from "./button-editor-format";
 export * from "./button-link-load-more";
 export * from "./button-link";
 export * from "./button-primary-base";

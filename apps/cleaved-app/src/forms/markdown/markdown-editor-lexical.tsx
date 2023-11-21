@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext, useEffect } from "react";
 import { useFormikContext } from "formik";
 
 import { CodeNode } from "@lexical/code";
-import { LinkNode } from "@lexical/link";
+import { AutoLinkNode, LinkNode } from "@lexical/link";
 import { ListItemNode, ListNode } from "@lexical/list";
 import { $convertToMarkdownString, TRANSFORMERS } from "@lexical/markdown";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
@@ -11,6 +11,7 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 
@@ -21,7 +22,7 @@ import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 
 import { PostFormContext } from "../../contexts";
 
-import { InsertMarkdown, ToolbarPlugin } from "./plugins";
+import { AutoLinkPlugin, InsertMarkdown, ToolbarPlugin } from "./plugins";
 import { basicTheme } from "./themes";
 
 type MarkdownEditorLexicalProps = {
@@ -36,7 +37,16 @@ const editorConfig = {
   onError(error: any) {
     // logError(RollbarLogLevels.error, "Error: Markdown editor error", error);
   },
-  nodes: [HeadingNode, QuoteNode, CodeNode, ListNode, ListItemNode, LinkNode],
+  nodes: [AutoLinkNode, CodeNode, HeadingNode, ListItemNode, LinkNode, ListNode, QuoteNode],
+};
+
+type PlaceholderProps = {
+  placeholderText: string | undefined;
+};
+
+const Placeholder = (props: PlaceholderProps) => {
+  const { placeholderText } = props;
+  return <div className="editor-placeholder">{placeholderText}</div>;
 };
 
 export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps> = (props) => {
@@ -69,11 +79,13 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
         <div className="editor-inner">
           <RichTextPlugin
             contentEditable={<ContentEditable className="editor-input" />}
-            placeholder={<div>{placeholder}</div>}
+            placeholder={<Placeholder placeholderText={placeholder} />}
             ErrorBoundary={LexicalErrorBoundary}
           />
           <HistoryPlugin />
           <AutoFocusPlugin />
+          <LinkPlugin />
+          <AutoLinkPlugin />
           {values && values?.body && <InsertMarkdown markdown={values?.body} />}
           <OnChangePlugin onChange={onChange} />
         </div>

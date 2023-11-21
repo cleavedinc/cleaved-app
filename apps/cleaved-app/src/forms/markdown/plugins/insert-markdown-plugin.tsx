@@ -7,8 +7,6 @@ export const InsertMarkdown = (markdown: { markdown: string }) => {
 
   useEffect(() => {
     editor.update(() => {
-      console.log("InsertMarkdown", markdown.markdown);
-
       if (markdown && markdown?.markdown) {
         $convertFromMarkdownString(markdown?.markdown, TRANSFORMERS);
       }

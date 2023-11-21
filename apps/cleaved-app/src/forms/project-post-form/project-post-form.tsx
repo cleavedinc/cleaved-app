@@ -20,7 +20,7 @@ import {
 import { ImageUploadAndPreviewForm } from "../image-upload-and-preview-form";
 
 import { ImagesControl } from "../action-controls";
-import { MarkdownEditorLexical } from "../markdown";
+import { markdownStylesBase, MarkdownEditorLexical } from "../markdown";
 import { POST_PROJECT_CREATE, POST_PROJECT_UPDATE } from "./gql";
 
 type ProjectPostFormProps = {
@@ -43,6 +43,14 @@ const StyledAdditionalActionButtonWrapper = styled.div`
   align-items: center;
   display: flex;
   margin-top: ${SPACING_PX.ONE};
+`;
+
+const StyledMarkdownEditorLexicalWrapper = styled.div`
+  ${markdownStylesBase}
+
+  .editor-input {
+    max-height: 40vh;
+  }
 `;
 
 const StyledPostButton = styled(ButtonPrimary)`
@@ -164,7 +172,9 @@ export const ProjectPostForm: FunctionComponent<ProjectPostFormProps> = (props) 
 
           return (
             <Form>
-              <MarkdownEditorLexical name="body" placeholder={createProjectPostWithNamePlaceholder} />
+              <StyledMarkdownEditorLexicalWrapper>
+                <MarkdownEditorLexical name="body" placeholder={createProjectPostWithNamePlaceholder} />
+              </StyledMarkdownEditorLexicalWrapper>
 
               <StyledAdditionalActionsWrapper>
                 {isImageUploadWrapperActive && <ImageUploadAndPreviewForm images={postProjectGetByIdData?.images} />}
