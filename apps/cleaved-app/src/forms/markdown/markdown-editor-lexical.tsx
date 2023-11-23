@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 
 import { CodeNode } from "@lexical/code";
@@ -15,14 +15,10 @@ import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 
-// import styled, { useTheme } from "styled-components";
-
-// import { SPACING, ThemeLightType, ThemeDarkType } from "@cleaved/ui";
-// import { logError, RollbarLogLevels } from "@cleaved/helpers";
-
 import { PostFormContext } from "../../contexts";
 
-import { AutoLinkPlugin, InsertMarkdown, ToolbarPlugin } from "./plugins";
+import { AutoLinkPlugin, FloatingLinkEditorPlugin, InsertMarkdown, ToolbarPlugin } from "./plugins";
+import { Placeholder } from "./placeholder";
 import { basicTheme } from "./themes";
 
 type MarkdownEditorLexicalProps = {
@@ -40,19 +36,18 @@ const editorConfig = {
   nodes: [AutoLinkNode, CodeNode, HeadingNode, ListItemNode, LinkNode, ListNode, QuoteNode],
 };
 
-type PlaceholderProps = {
-  placeholderText: string | undefined;
-};
-
-const Placeholder = (props: PlaceholderProps) => {
-  const { placeholderText } = props;
-  return <div className="editor-placeholder">{placeholderText}</div>;
-};
-
 export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps> = (props) => {
   const { name, placeholder } = props;
   const { projectPostFormIsDirty, setProjectPostFormIsDirty } = useContext(PostFormContext);
   const { dirty, isValid, isValidating, setFieldValue, status, values } = useFormikContext();
+  const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null);
+  const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
+
+  const onRef = (_floatingAnchorElem: HTMLDivElement) => {
+    if (_floatingAnchorElem !== null) {
+      setFloatingAnchorElem(_floatingAnchorElem);
+    }
+  };
 
   const onChange = (editorState) => {
     editorState.read(() => {
@@ -78,7 +73,13 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
         <ToolbarPlugin />
         <div className="editor-inner">
           <RichTextPlugin
-            contentEditable={<ContentEditable className="editor-input" />}
+            contentEditable={
+              <div className="editor-scroller">
+                <div className="editor" ref={onRef}>
+                  <ContentEditable className="editor-input" />
+                </div>
+              </div>
+            }
             placeholder={<Placeholder placeholderText={placeholder} />}
             ErrorBoundary={LexicalErrorBoundary}
           />
@@ -88,6 +89,25 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
           <AutoLinkPlugin />
           {values && values?.body && <InsertMarkdown markdown={values?.body} />}
           <OnChangePlugin onChange={onChange} />
+          {floatingAnchorElem && (
+            <>
+              {/* <DraggableBlockPlugin anchorElem={floatingAnchorElem} /> */}
+              {/* <CodeActionMenuPlugin anchorElem={floatingAnchorElem} /> */}
+
+              {/* 
+              editor: LexicalEditor;
+              setIsLink: Dispatch<boolean>;
+              */}
+
+              <FloatingLinkEditorPlugin
+                anchorElem={floatingAnchorElem}
+                isLinkEditMode={isLinkEditMode}
+                setIsLinkEditMode={setIsLinkEditMode}
+              />
+              {/* <TableCellActionMenuPlugin anchorElem={floatingAnchorElem} cellMerge={true} /> */}
+              {/* <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} /> */}
+            </>
+          )}
         </div>
       </div>
     </LexicalComposer>

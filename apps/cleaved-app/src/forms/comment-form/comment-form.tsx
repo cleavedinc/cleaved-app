@@ -63,10 +63,6 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
   const organizationId = routeParams.orgId;
   const logEvent = useProductEngagementLogEvent();
 
-  const notContainOnlyBlankSpaces = t("post.notContainOnlyBlankSpaces")
-    ? t("post.notContainOnlyBlankSpaces")
-    : undefined;
-
   const leaveCommentPlaceholder = t("comment.leaveCommentPlaceholder")
     ? t("comment.leaveCommentPlaceholder")
     : undefined;
@@ -124,12 +120,11 @@ export const CommentForm: FunctionComponent<CommentFormProps> = (props) => {
             is: (imageUrls: string[]) => !imageUrls || imageUrls.length === 0,
             then: yup
               .string()
-              .matches(/^(?=.*[a-zA-Z0-9]).+$/, notContainOnlyBlankSpaces)
               .test("empty-body", "Body cannot be empty", (value) => {
-                if (value && value.replace(/<[^>]+>/g, "").trim().length === 0) {
-                  return false; // Invalid if value is present but only contains empty HTML elements
+                if (value && value.trim().length === 0) {
+                  return false;
                 }
-                return true; // Valid if value is empty or contains non-empty text
+                return true;
               })
               .required(),
             otherwise: yup.string().notRequired(),
