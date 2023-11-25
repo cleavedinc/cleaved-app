@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useRef, useState } from "react";
+import React, { Dispatch, FunctionComponent, useCallback, useEffect, useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
@@ -40,7 +40,13 @@ function getSelectedNode(selection) {
   }
 }
 
-export const ToolbarPlugin: FunctionComponent = () => {
+type ToolbarPluginProps = {
+  setIsLinkEditMode: Dispatch<boolean>;
+};
+
+export const ToolbarPlugin: FunctionComponent<ToolbarPluginProps> = (props) => {
+  const { setIsLinkEditMode } = props;
+
   const [editor] = useLexicalComposerContext();
   const toolbarRef = useRef(null);
   const [isLink, setIsLink] = useState(false);
@@ -62,12 +68,21 @@ export const ToolbarPlugin: FunctionComponent = () => {
       const node = getSelectedNode(selection);
       const parent = node.getParent();
       if ($isLinkNode(parent) || $isLinkNode(node)) {
+        // opens floating link editor
         setIsLink(true);
       } else {
+        // closes floating link editor
         setIsLink(false);
       }
     }
   }, [editor]);
+
+  const insertLink = useCallback(() => {
+    if (!isLink) {
+      setIsLinkEditMode(true);
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
+    }
+  }, [editor, isLink]);
 
   useEffect(() => {
     return mergeRegister(
@@ -86,14 +101,6 @@ export const ToolbarPlugin: FunctionComponent = () => {
       )
     );
   }, [editor, updateToolbar]);
-
-  const insertLink = useCallback(() => {
-    if (!isLink) {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
-    } else {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-    }
-  }, [editor, isLink]);
 
   return (
     <StyledToolbarWrapper ref={toolbarRef}>

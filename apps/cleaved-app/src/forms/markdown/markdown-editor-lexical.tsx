@@ -70,7 +70,7 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
-        <ToolbarPlugin />
+        <ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />
         <div className="editor-inner">
           <RichTextPlugin
             contentEditable={
@@ -90,23 +90,11 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
           {values && values?.body && <InsertMarkdown markdown={values?.body} />}
           <OnChangePlugin onChange={onChange} />
           {floatingAnchorElem && (
-            <>
-              {/* <DraggableBlockPlugin anchorElem={floatingAnchorElem} /> */}
-              {/* <CodeActionMenuPlugin anchorElem={floatingAnchorElem} /> */}
-
-              {/* 
-              editor: LexicalEditor;
-              setIsLink: Dispatch<boolean>;
-              */}
-
-              <FloatingLinkEditorPlugin
-                anchorElem={floatingAnchorElem}
-                isLinkEditMode={isLinkEditMode}
-                setIsLinkEditMode={setIsLinkEditMode}
-              />
-              {/* <TableCellActionMenuPlugin anchorElem={floatingAnchorElem} cellMerge={true} /> */}
-              {/* <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} /> */}
-            </>
+            <FloatingLinkEditorPlugin
+              anchorElem={floatingAnchorElem}
+              isLinkEditMode={isLinkEditMode}
+              setIsLinkEditMode={setIsLinkEditMode}
+            />
           )}
         </div>
       </div>
