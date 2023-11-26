@@ -1,20 +1,31 @@
-const VERTICAL_GAP = 10;
+const VERTICAL_GAP = 15;
 const HORIZONTAL_OFFSET = 5;
 
 export function setFloatingElemPositionForLinkEditor(
   targetRect: DOMRect | null,
   floatingElem: HTMLElement,
   anchorElem: HTMLElement,
+  isLink: boolean,
   verticalGap: number = VERTICAL_GAP,
   horizontalOffset: number = HORIZONTAL_OFFSET
 ): void {
   const scrollerElem = anchorElem.parentElement;
 
   if (targetRect === null || !scrollerElem) {
+    return;
+  }
+
+  if (!isLink) {
+    console.log("1111");
     floatingElem.style.opacity = "0";
     floatingElem.style.transform = "translate(-10000px, -10000px)";
     return;
   }
+
+  console.log("222");
+  console.log("isLink", isLink);
+  console.log("targetRect", targetRect);
+  console.log("scrollerElem", scrollerElem);
 
   const floatingElemRect = floatingElem.getBoundingClientRect();
   const anchorElementRect = anchorElem.getBoundingClientRect();
@@ -34,6 +45,10 @@ export function setFloatingElemPositionForLinkEditor(
   top -= anchorElementRect.top;
   left -= anchorElementRect.left;
 
-  floatingElem.style.opacity = "1";
-  floatingElem.style.transform = `translate(${left}px, ${top}px)`;
+  if (isLink) {
+    console.log("333");
+
+    floatingElem.style.opacity = "1";
+    floatingElem.style.transform = `translate(${left}px, ${top}px)`;
+  }
 }

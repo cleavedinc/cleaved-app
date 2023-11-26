@@ -40,6 +40,7 @@ const StyledCommentForm = styled.div`
 const StyledMarkdownEditorLexicalWrapper = styled.div`
   ${markdownStylesBase}
 
+  /* all styles for editor-input are in markdown-styles-base.tsx */
   .editor-input {
     max-height: 20vh;
   }

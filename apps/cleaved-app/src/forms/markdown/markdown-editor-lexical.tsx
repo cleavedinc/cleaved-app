@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { useFormikContext } from "formik";
+import styled from "styled-components";
 
 import { CodeNode } from "@lexical/code";
 import { AutoLinkNode, LinkNode } from "@lexical/link";
@@ -26,6 +27,10 @@ type MarkdownEditorLexicalProps = {
   name: string;
   placeholder?: string;
 };
+
+const StyledEditorInner = styled.div`
+  position: relative;
+`;
 
 const editorConfig = {
   namespace: "MarkdownEditorLexical",
@@ -71,11 +76,13 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
         <ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />
-        <div className="editor-inner">
+
+        <StyledEditorInner className="editor-inner">
           <RichTextPlugin
             contentEditable={
               <div className="editor-scroller">
                 <div className="editor" ref={onRef}>
+                  {/* Keep .editor-input class as it's referenced across multiple components */}
                   <ContentEditable className="editor-input" />
                 </div>
               </div>
@@ -83,12 +90,8 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
             placeholder={<Placeholder placeholderText={placeholder} />}
             ErrorBoundary={LexicalErrorBoundary}
           />
-          <HistoryPlugin />
-          <AutoFocusPlugin />
-          <LinkPlugin />
-          <AutoLinkPlugin />
           {values && values?.body && <InsertMarkdown markdown={values?.body} />}
-          <OnChangePlugin onChange={onChange} />
+
           {floatingAnchorElem && (
             <FloatingLinkEditorPlugin
               anchorElem={floatingAnchorElem}
@@ -96,7 +99,13 @@ export const MarkdownEditorLexical: FunctionComponent<MarkdownEditorLexicalProps
               setIsLinkEditMode={setIsLinkEditMode}
             />
           )}
-        </div>
+
+          <HistoryPlugin />
+          <AutoFocusPlugin />
+          <LinkPlugin />
+          <AutoLinkPlugin />
+          <OnChangePlugin onChange={onChange} />
+        </StyledEditorInner>
       </div>
     </LexicalComposer>
   );

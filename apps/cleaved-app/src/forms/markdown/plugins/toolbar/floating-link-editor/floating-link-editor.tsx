@@ -1,11 +1,11 @@
-import { $isAutoLinkNode, $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import React, { Dispatch, useCallback, useEffect, useRef, useState } from "react";
+
+import styled, { useTheme } from "styled-components";
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { $findMatchingParent, mergeRegister } from "@lexical/utils";
 import {
   $getSelection,
   $isRangeSelection,
-  CLICK_COMMAND,
-  COMMAND_PRIORITY_CRITICAL,
   COMMAND_PRIORITY_HIGH,
   COMMAND_PRIORITY_LOW,
   GridSelection,
@@ -15,13 +15,83 @@ import {
   RangeSelection,
   SELECTION_CHANGE_COMMAND,
 } from "lexical";
-import { Dispatch, useCallback, useEffect, useRef, useState } from "react";
-import * as React from "react";
-import { createPortal } from "react-dom";
 
-import { getSelectedNode, sanitizeUrl, setFloatingElemPositionForLinkEditor } from "../../utils";
+import {
+  BORDERS,
+  buttonPrimaryBase,
+  CloseIcon,
+  FONT_SIZES,
+  RADIUS,
+  removeDefaultButtonStyles,
+  SPACING,
+  TrashIcon,
+} from "@cleaved/ui";
 
-function FloatingLinkEditor({
+import { useTranslator } from "../../../../../hooks";
+
+import { getSelectedNode, sanitizeUrl, setFloatingElemPositionForLinkEditor } from "../../../utils";
+
+const StyledButtonWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+`;
+
+const StyledButtonPrimary = styled.button`
+  ${buttonPrimaryBase}
+  align-items: center;
+  border-radius: ${RADIUS.MEDIUM};
+  cursor: pointer;
+  display: inline-flex;
+  font-size: ${FONT_SIZES.SMALL};
+  justify-content: center;
+  padding: ${SPACING.BASE} ${SPACING.SMALL};
+`;
+
+const StyledCloseIcon = styled(CloseIcon)``;
+
+const StyledLinkEditor = styled.div`
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.baseDropdownMenu_backgroundColor};
+  border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+  border-radius: ${RADIUS.MEDIUM};
+  display: flex;
+  font-size: ${FONT_SIZES.SMALL};
+  left: 0;
+  max-width: 400px;
+  opacity: 0;
+  padding: ${SPACING.BASE};
+  position: absolute;
+  top: 0;
+  transition: opacity 0.5s;
+  width: 100%;
+  z-index: 10;
+
+  .link-input {
+    background-color: ${({ theme }) => theme.colors.baseInput_backgroundColor};
+    border: ${BORDERS.SOLID_1PX} ${({ theme }) => theme.borders.primary_color};
+    border-radius: ${RADIUS.MEDIUM};
+    display: flex;
+    flex-grow: 1;
+    margin-right: ${SPACING.SMALL};
+    padding: ${SPACING.BASE} ${SPACING.SMALL};
+  }
+`;
+
+const StyledLinkHref = styled.a`
+  margin-left: ${SPACING.SMALL};
+`;
+
+const StyledIconLinkButton = styled.button`
+  ${removeDefaultButtonStyles}
+  display: flex;
+  margin-left: ${SPACING.SMALL};
+  padding: ${SPACING.BASE};
+`;
+
+const StyledTrashIcon = styled(TrashIcon)``;
+
+export function FloatingLinkEditor({
   editor,
   isLink,
   setIsLink,
@@ -43,6 +113,9 @@ function FloatingLinkEditor({
   const [editedLinkUrl, setEditedLinkUrl] = useState(https);
   const [lastSelection, setLastSelection] = useState<RangeSelection | GridSelection | NodeSelection | null>(null);
   const [isCreatingNewLink, setIsCreatingNewLink] = useState(true);
+
+  const theme = useTheme();
+  const { t } = useTranslator();
 
   const updateLinkEditor = useCallback(() => {
     const selection = $getSelection();
@@ -92,13 +165,13 @@ function FloatingLinkEditor({
 
       if (domRect) {
         domRect.y += 40;
-        setFloatingElemPositionForLinkEditor(domRect, editorElem, anchorElem);
+        setFloatingElemPositionForLinkEditor(domRect, editorElem, anchorElem, isLink);
       }
 
       setLastSelection(selection);
     } else if (!activeElement || activeElement.className !== "link-input") {
       if (rootElement !== null) {
-        setFloatingElemPositionForLinkEditor(null, editorElem, anchorElem);
+        setFloatingElemPositionForLinkEditor(null, editorElem, anchorElem, isLink);
       }
 
       setLastSelection(null);
@@ -157,7 +230,7 @@ function FloatingLinkEditor({
         scrollerElem.removeEventListener("scroll", update);
       }
     };
-  }, [anchorElem.parentElement, editor, updateLinkEditor]);
+  }, [anchorElem.parentElement, editor, isLink, updateLinkEditor]);
 
   useEffect(() => {
     return mergeRegister(
@@ -203,8 +276,11 @@ function FloatingLinkEditor({
     }
   }, [isLinkEditMode, isLink]);
 
+  const linkAdd = t("post.linkAdd") ? t("post.linkAdd") : undefined;
+  const linkEdit = t("post.linkEdit") ? t("post.linkEdit") : undefined;
+
   return (
-    <div ref={editorRef} className="link-editor">
+    <StyledLinkEditor className="link-editor" ref={editorRef}>
       {isLink && isLinkEditMode && (
         <>
           <input
@@ -218,24 +294,13 @@ function FloatingLinkEditor({
               monitorInputInteraction(event);
             }}
           />
-          <div>
-            {/* <button
-              className="link-cancel"
-              onClick={() => {
-                setIsLinkEditMode(false);
-              }}
-              tabIndex={0}
-              type="button"
-            >
-              cancel
-            </button> */}
 
-            <button className="link-confirm" onClick={handleLinkSubmission} tabIndex={0} type="button">
-              confirm
-            </button>
+          <StyledButtonWrapper>
+            <StyledButtonPrimary onClick={handleLinkSubmission} tabIndex={0} type="button">
+              {linkAdd}
+            </StyledButtonPrimary>
 
-            <button
-              className="link-trash"
+            <StyledIconLinkButton
               onClick={() => {
                 if (isCreatingNewLink) {
                   // if you create a new link and cancel, remove the link
@@ -251,135 +316,43 @@ function FloatingLinkEditor({
               tabIndex={0}
               type="button"
             >
-              cancel
-            </button>
-          </div>
+              <StyledCloseIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.MEDIUM} />
+            </StyledIconLinkButton>
+          </StyledButtonWrapper>
         </>
       )}
 
       {isLink && !isLinkEditMode && (
-        <div className="link-view">
-          <a href={sanitizeUrl(linkUrl)} target="_blank" rel="noopener noreferrer">
+        <>
+          <StyledLinkHref href={sanitizeUrl(linkUrl)} target="_blank" rel="noopener noreferrer">
             {linkUrl}
-          </a>
+          </StyledLinkHref>
 
-          <button
-            className="link-edit"
-            onClick={() => {
-              setIsLinkEditMode(true);
-              setIsCreatingNewLink(false);
-              setEditedLinkUrl(linkUrl);
-            }}
-            tabIndex={0}
-            type="button"
-          >
-            edit
-          </button>
+          <StyledButtonWrapper>
+            <StyledButtonPrimary
+              onClick={() => {
+                setIsLinkEditMode(true);
+                setIsCreatingNewLink(false);
+                setEditedLinkUrl(linkUrl);
+              }}
+              tabIndex={0}
+              type="button"
+            >
+              {linkEdit}
+            </StyledButtonPrimary>
 
-          <button
-            className="link-trash"
-            onClick={() => {
-              removeLink();
-            }}
-            tabIndex={0}
-            type="button"
-          >
-            trash
-          </button>
-        </div>
+            <StyledIconLinkButton
+              onClick={() => {
+                removeLink();
+              }}
+              tabIndex={0}
+              type="button"
+            >
+              <StyledTrashIcon color={theme.colors.baseIcon_color} iconSize={FONT_SIZES.MEDIUM} />
+            </StyledIconLinkButton>
+          </StyledButtonWrapper>
+        </>
       )}
-    </div>
+    </StyledLinkEditor>
   );
 }
-
-function useFloatingLinkEditorToolbar(
-  editor: LexicalEditor,
-  anchorElem: HTMLElement,
-  isLinkEditMode: boolean,
-  setIsLinkEditMode: Dispatch<boolean>
-): JSX.Element | null {
-  const [activeEditor, setActiveEditor] = useState(editor);
-  const [isLink, setIsLink] = useState(false);
-
-  useEffect(() => {
-    function updateToolbar() {
-      const selection = $getSelection();
-
-      if ($isRangeSelection(selection)) {
-        const node = getSelectedNode(selection);
-        const linkParent = $findMatchingParent(node, $isLinkNode);
-        const autoLinkParent = $findMatchingParent(node, $isAutoLinkNode);
-
-        // We don't want this menu to open for auto links.
-        if (linkParent !== null && autoLinkParent === null) {
-          setIsLink(true);
-        } else {
-          setIsLink(false);
-        }
-      }
-    }
-
-    return mergeRegister(
-      editor.registerUpdateListener(({ editorState }) => {
-        editorState.read(() => {
-          updateToolbar();
-        });
-      }),
-      editor.registerCommand(
-        SELECTION_CHANGE_COMMAND,
-        (_payload, newEditor) => {
-          updateToolbar();
-          setActiveEditor(newEditor);
-
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL
-      ),
-      editor.registerCommand(
-        CLICK_COMMAND,
-        (payload) => {
-          const selection = $getSelection();
-          if ($isRangeSelection(selection)) {
-            const node = getSelectedNode(selection);
-            const linkNode = $findMatchingParent(node, $isLinkNode);
-
-            if ($isLinkNode(linkNode) && (payload.metaKey || payload.ctrlKey)) {
-              window.open(linkNode.getURL(), "_blank");
-
-              return true;
-            }
-          }
-
-          return false;
-        },
-        COMMAND_PRIORITY_LOW
-      )
-    );
-  }, [editor]);
-
-  return createPortal(
-    <FloatingLinkEditor
-      editor={activeEditor}
-      isLink={isLink}
-      anchorElem={anchorElem}
-      setIsLink={setIsLink}
-      isLinkEditMode={isLinkEditMode}
-      setIsLinkEditMode={setIsLinkEditMode}
-    />,
-    anchorElem
-  );
-}
-
-export const FloatingLinkEditorPlugin = ({
-  anchorElem = document.body,
-  isLinkEditMode,
-  setIsLinkEditMode,
-}: {
-  anchorElem?: HTMLElement;
-  isLinkEditMode: boolean;
-  setIsLinkEditMode: Dispatch<boolean>;
-}): JSX.Element | null => {
-  const [editor] = useLexicalComposerContext();
-
-  return useFloatingLinkEditorToolbar(editor, anchorElem, isLinkEditMode, setIsLinkEditMode);
-};
