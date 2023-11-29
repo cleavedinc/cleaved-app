@@ -16,16 +16,10 @@ export function setFloatingElemPositionForLinkEditor(
   }
 
   if (!isLink) {
-    console.log("1111");
     floatingElem.style.opacity = "0";
     floatingElem.style.transform = "translate(-10000px, -10000px)";
     return;
   }
-
-  console.log("222");
-  console.log("isLink", isLink);
-  console.log("targetRect", targetRect);
-  console.log("scrollerElem", scrollerElem);
 
   const floatingElemRect = floatingElem.getBoundingClientRect();
   const anchorElementRect = anchorElem.getBoundingClientRect();
@@ -46,8 +40,6 @@ export function setFloatingElemPositionForLinkEditor(
   left -= anchorElementRect.left;
 
   if (isLink) {
-    console.log("333");
-
     floatingElem.style.opacity = "1";
     floatingElem.style.transform = `translate(${left}px, ${top}px)`;
   }
