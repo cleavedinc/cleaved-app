@@ -131,12 +131,14 @@ export function FloatingLinkEditor({
         setLinkUrl(linkParent.getURL());
 
         if (isLinkEditMode) {
+          console.log("333");
           setEditedLinkUrl(linkParent.getURL());
         }
       } else if ($isLinkNode(node)) {
         setLinkUrl(node.getURL());
       } else {
         setLinkUrl("");
+        console.log("777");
 
         // TODO: fix this later
         // Close editor if user clicks outside of the link they were editing
@@ -164,9 +166,11 @@ export function FloatingLinkEditor({
     } else if (!activeElement || activeElement.className !== "link-input") {
       if (rootElement !== null) {
         setFloatingElemPositionForLinkEditor(null, editorElem, anchorElem, isLink);
+        return;
       }
 
       setIsLinkEditMode(false);
+      console.log("111");
       setLinkUrl("");
     }
 
@@ -174,14 +178,13 @@ export function FloatingLinkEditor({
   }, [anchorElem, editor, isLink, isLinkEditMode, setIsLinkEditMode]);
 
   const handleLinkSubmission = () => {
-    console.log("handleLinkSubmission");
-
     if (linkUrl !== "") {
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
     }
 
     setEditedLinkUrl(https);
     setIsLinkEditMode(false);
+    console.log("222");
   };
 
   const monitorInputInteraction = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -191,6 +194,7 @@ export function FloatingLinkEditor({
     } else if (event.key === "Escape") {
       event.preventDefault();
       setIsLinkEditMode(false);
+      console.log("888");
     }
   };
 
@@ -264,6 +268,7 @@ export function FloatingLinkEditor({
 
   useEffect(() => {
     if (isLinkEditMode && inputRef.current) {
+      console.log("444");
       inputRef.current.focus();
     }
   }, [isLinkEditMode, isLink]);
